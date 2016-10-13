@@ -14,7 +14,7 @@ export class RRFCandidateListService {
 
     //Get RRf Specific Candidates by RRFID - API will return list of Candidates
     getCandidatesForRRF(RRFID: string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?RRFID=' + RRFID);
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateProfilesByRRF?RRFID=' + RRFID);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
         return this.authHttp.get(url)
