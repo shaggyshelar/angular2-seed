@@ -11,7 +11,7 @@ import { enableProdMode } from '@angular/core';
 //import { APP_ROUTER_PROVIDERS } from './app.routes';
 ////import { AppComponent } from './app.component';
 //import { HTTP_PROVIDERS } from '@angular/http';
-import {ToastOptions} from  'ng2-toastr/ng2-toastr';
+import { ToastOptions } from 'ng2-toastr/ng2-toastr';
 
 // The browser platform with a compiler
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -22,7 +22,7 @@ import { AppModule } from './app.module';
 if (String('<%= ENV %>') === 'prod') { enableProdMode(); }
 
 // Compile and launch the module
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule/*, options*/);
 
 // =======26 sep
 // >>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec
@@ -57,6 +57,8 @@ bootstrap(AppComponent, [
 import { enableProdMode } from '@angular/core';
 // The browser platform with a compiler
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+// Load i18n providers
+// import { TranslationProviders } from './i18n.providers';
 
 // The app module
 import { AppModule } from './app.module';
@@ -65,7 +67,7 @@ if (String('<%= ENV %>') === 'prod') { enableProdMode(); }
 
 // Compile and launch the module
 platformBrowserDynamic().bootstrapModule(AppModule);
->>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec*/
+
 
 // In order to start the Service Worker located at "./worker.js"
 // uncomment this line. More about Service Workers here
@@ -77,3 +79,10 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 //     .catch((err: any) =>
 //       console.log('ServiceWorker registration failed: ', err));
 // }
+// Compile and launch the module with i18n providers
+// let TP = new TranslationProviders();
+// TP.getTranslationFile().then((providers: any) => {
+  // const options: any = { providers };
+  
+// });
+

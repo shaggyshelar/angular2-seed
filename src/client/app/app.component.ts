@@ -14,6 +14,7 @@ import { HomeComponent } from './home/index';
 //import { HTTP_PROVIDERS } from '@angular/http';
 
 import { Config } from './shared/index';
+import './operators';
 //import { Config, NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 //>>>>>>> 80ccc9aadc3699bf89f1be2216ccfe1d91fa9bf5
 
@@ -22,8 +23,6 @@ import { Config } from './shared/index';
 //--import { Error400Component, Error500Component } from './errorPages/index';
 /*=======26 sep
 import { Component } from '@angular/core';
-import { Config} from './shared/index';
->>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec*/
 
 /**
  * This class represents the main application component. Within the @Routes annotation is the configuration of the
