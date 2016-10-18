@@ -123,7 +123,7 @@ export class Skills {
   public CandidateID: MasterData = new MasterData();
   public ExpInSkill: string;
   public AnyFunctionalExp: string;
-  public AnyFunctionalExpFlag:boolean;
+  public AnyFunctionalExpFlag: boolean;
   public PrimarySkills: string;
   public SecondarySkills: string;
   public OtherSkills: string;
@@ -147,6 +147,8 @@ export class SalaryDetails {
   public CTCIncludeVariable: any;
   public HowMuchVariable: number;
   public Allowance: number;
+  public AllowanceInHand: number;
+  public IncentiveInHand: number;
   public Incentive: number;
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
@@ -156,6 +158,7 @@ export class OtherDetails {
   public CandidateID: MasterData = new MasterData();
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
+  public BondContractDetails: string;
   public Visa: MasterData = new MasterData();
   public NoticePeriod: string = '';
   public RoleExpected: string;

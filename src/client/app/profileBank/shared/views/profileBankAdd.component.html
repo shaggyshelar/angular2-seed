@@ -233,8 +233,9 @@
                                                     <div class="profile-userpic">
                                                         <!--[src]="profilePhoto"-->
 
-                                                        <img class="img-responsive pic-bordered"  style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" alt="" src="data:image/jpeg;base64,{{profilePic?profilePic._body:'N/A'}}">
-                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic===null" class="img-responsive pic-bordered"  style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
+                                                        <img class="img-responsive pic-bordered" style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
+                                                            alt="" src="data:image/jpeg;base64,{{profilePic?profilePic._body:'N/A'}}">
+                                                        <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic===null" class="img-responsive pic-bordered" style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
                                                             alt="">
                                                     </div>
                                                     <!-- END SIDEBAR USERPIC -->
@@ -1254,7 +1255,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-1">
@@ -1274,7 +1275,7 @@
                                                             <label class="control-label">Allowance if any</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" (blur)='onSaveSalaryDetails()'
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.AllowanceInHand" (blur)='onSaveSalaryDetails()'
                                                                     />
                                                                 </div>
                                                             </div>
@@ -1297,14 +1298,14 @@
                                                             <label class="control-label">Incentive if any</label>
                                                             <div class="row">
                                                                 <div class="col-md-10">
-                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" (blur)='onSaveSalaryDetails()'
+                                                                    <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.IncentiveInHand" (blur)='onSaveSalaryDetails()'
                                                                     />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                               
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -1913,7 +1914,7 @@
                                                         </div>
                                                         <hr>
                                                         <form role="form" (submit)="onSaveTeamManagementDetails()">
-                                                           
+
                                                             <div class="row">
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">

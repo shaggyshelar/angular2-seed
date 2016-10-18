@@ -34,6 +34,7 @@ import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruiters
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
 import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
 import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
+import { ReqruiterDashboardComponent } from '../../Dashboard/Reqruiter/component/reqruiterDashboard.component';
 
 @Component({
     moduleId: module.id,
@@ -70,9 +71,10 @@ import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/fe
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
-    { path: '/NotificationSetting' , component: PushNotificationComponent},
-    { path: '/RRF/InterviewsAvailability' , component: InterviewerAvalabilityComponent},
-    { path : '/RRF/FeedbackPending', component : FeedbackPendingComponent}
+    { path: '/NotificationSetting', component: PushNotificationComponent },
+    { path: '/RRF/InterviewsAvailability', component: InterviewerAvalabilityComponent },
+    { path: '/RRF/FeedbackPending', component: FeedbackPendingComponent },
+    { path: '/Dashboard/Reqruiter', component: ReqruiterDashboardComponent }
 
 
 ])

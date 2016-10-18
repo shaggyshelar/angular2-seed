@@ -13,8 +13,17 @@ export class RRFCandidateListService {
         private _spinnerService: SpinnerService) { }
 
     //Get RRf Specific Candidates by RRFID - API will return list of Candidates
-    getCandidatesForRRF(RRFID: string) {
+    getCandidateProfilesByRRF(RRFID: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateProfilesByRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    getCandidatesForRRF(RRFID: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?RRFID=' + RRFID);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
         return this.authHttp.get(url)

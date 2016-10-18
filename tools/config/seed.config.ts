@@ -300,6 +300,7 @@ export class SeedConfig {
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/core': `${this.APP_BASE}node_modules/@angular/core/core.umd.js`,
+      '@angular/forms': `${this.APP_BASE}node_modules/@angular/forms/forms.umd.js`,
       '@angular/common': `${this.APP_BASE}node_modules/@angular/common/common.umd.js`,
       '@angular/compiler': `${this.APP_BASE}node_modules/@angular/compiler/compiler.umd.js`,
       '@angular/http': `${this.APP_BASE}node_modules/@angular/http/http.umd.js`,
@@ -337,7 +338,11 @@ export class SeedConfig {
       '*': 'node_modules/*'
     },
     packages: {
-      '@angular/core': {
+       '@angular/core': {
+        main: 'index.js',
+        defaultExtension: 'js'
+      },
+      '@angular/forms': {
         main: 'index.js',
         defaultExtension: 'js'
       },
