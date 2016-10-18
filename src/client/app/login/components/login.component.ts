@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthInfo} from '../models/AuthInfo';
+import { AuthInfo } from '../models/AuthInfo';
 import { LoginService } from '../../shared/services/login.service';
 import { Router } from '@angular/router';
 
@@ -23,7 +23,7 @@ export class LoginComponent {
                 this.getLoggedInUserPermission();
             },
             error => {
-            this.errorMessage = <any>error;
+                this.errorMessage = <any>error;
                 this.LoginFailed = true;
             });
     }
@@ -31,11 +31,12 @@ export class LoginComponent {
         this._loginService.getLoggedInUserPermission()
             .subscribe(
             results => {
-                this._router.navigate(['/App']);
+                console.log('User Logged in Sucessfully From LoginComponent...!');
+                //this._router.navigate(['App']);
             },
             error => this.errorMessage = <any>error);
     }
-    closeAlert(){
+    closeAlert() {
         this.LoginFailed = false;
     }
 }

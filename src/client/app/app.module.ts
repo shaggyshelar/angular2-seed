@@ -9,18 +9,30 @@ import { routes } from './app.routes';
 import { AboutModule } from './about/about.module';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './shared/shared.module';
-import { NavbarComponent, ToolbarComponent } from './shared/index';
+import { LoginComponent } from './login/index';
+import { Error400Component, Error500Component } from './errorPages/index';
+import { AuthHttp } from './shared/services/authHttp.service';
+import { CommonService } from './shared/services/common.service';
+//import { NavbarComponent, ToolbarComponent } from './shared/index';
+
 
 
 @NgModule({
   imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes), AboutModule, HomeModule, SharedModule.forRoot()],
-  declarations: [AppComponent, NavbarComponent, ToolbarComponent],
+  declarations: [AppComponent, LoginComponent, Error400Component, Error500Component],
   providers: [{
     provide: APP_BASE_HREF,
     useValue: '<%= APP_BASE %>'
-  }],
+  },
+    AuthHttp,
+    CommonService
+  ],
   bootstrap: [AppComponent]
 
 })
 
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    console.log('I am AppModule');
+  }
+}

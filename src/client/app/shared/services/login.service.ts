@@ -1,10 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Response, Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import {AuthInfo} from '../../login/models/AuthInfo';
+import { AuthInfo } from '../../login/models/AuthInfo';
 import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
-import {CommonService} from '../../shared/services/common.service';
+import { CommonService } from '../../shared/services/common.service';
 
 
 @Injectable()
@@ -16,7 +16,7 @@ export class LoginService {
     authenticate(credentials: AuthInfo) {
         let authenticateUrl = Config.GetURL('/api/Authentication/GetToken');
         let headers = new Headers();
-        let credentialString : string = 'grant_type=password&username='+credentials.UserName+'&password='+credentials.Password;
+        let credentialString: string = 'grant_type=password&username=' + credentials.UserName + '&password=' + credentials.Password;
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let options = new RequestOptions({ headers: headers });
         return this.http.post(authenticateUrl, credentialString, options)

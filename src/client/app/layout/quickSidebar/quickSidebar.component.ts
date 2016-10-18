@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import {ToDoListService} from './services/myToDoList.service'
+import {ToDoListService} from './services/myToDoList.service';
 import {TODOList} from './model/ToDoList';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MasterData, ResponseFromAPI} from  './../../shared/model/index';

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" manifest="manifest.appcache">
 
 <head>
@@ -49,6 +50,7 @@
 	<!-- inject:css -->
 	<!-- endinject -->
 	<link rel="shortcut icon" href="assets/global/img/social/favicon.ico" />
+
 	<link rel="manifest" href="manifest.json">
 
 </head>
@@ -193,7 +195,7 @@
 	<script src="assets/calendar/scheduler.min.js"></script>
 	<!--<script src="node_modules/fullcalendar/dist/fullcalendar.min.js"></script>-->
 
-	<script>
+	<!--<script>
   // function.name (all IE)
   // Remove once https://github.com/angular/angular/issues/6501 is fixed.
   /*! @source http://stackoverflow.com/questions/6903762/function-name-not-supported-in-ie*/
@@ -209,11 +211,11 @@
       }
     });
   } 
-    </script>
+    </script>-->
 
 	<script src="propel-client.js"></script>
 
-	<script>
+	<!--<script>
     var PropelClient = window.goog.propel.PropelClient;
     var propelClient
     if ('serviceWorker ' in navigator) {
@@ -226,7 +228,7 @@
          console.log('Registration failed with ' + error);
         })
     }
-    </script>
+    </script>-->
 
 	<script>
         // Fixes undefined module function in SystemJS bundle
@@ -241,7 +243,7 @@
         <script>System.config(<%=JSON.stringify(SYSTEM_CONFIG, null, 2)%>)</script>
         <% } %> -->
 	<!--======= -->
-	<% if (ENV === 'dev ') { %>
+	<% if (ENV === 'dev') { %>
 		<script src="<%= APP_BASE %>app/system-config.js"></script>
 		<% } %>
 			<!-- libs:js -->
@@ -249,17 +251,18 @@
 
 			<!-- inject:js -->
 			<!-- endinject -->
-
-			<% if (ENV === 'dev ') { %>
+			<% if (ENV === 'dev') { %>
 				<script>
                 System.import('<%= BOOTSTRAP_MODULE %>')
+				.then(function (shop) {
+					console.log('Bootstrap Module imported'); 
+					})
                     .catch(function (e) {
                         console.error(e,
                             'Report this error at https://github.com/mgechev/angular2-seed/issues');
                     });
                 </script>
 				<% } %>
-
 </body>
 
 </html>

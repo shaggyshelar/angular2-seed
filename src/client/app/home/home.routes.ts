@@ -33,7 +33,9 @@ import { PushNotificationComponent } from '../settings/index';
 
 
 export const HomeRoutes: Route[] = [
-  { path: '', component: HomeComponent }
+  { path: 'home', component: HomeComponent }
+  //, { path: 'home', component: MyDashboardComponent }
+
   // ,{ path: '/Admin/Feature', component: FeatureComponent },
   // { path: '/Admin/Practice', component: PracticeComponent },
   // { path: '/Admin/Skill', component: SkillComponent },

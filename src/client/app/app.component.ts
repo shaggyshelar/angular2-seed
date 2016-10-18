@@ -17,9 +17,9 @@ import { Config } from './shared/index';
 import './operators';
 //import { Config, NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
 //>>>>>>> 80ccc9aadc3699bf89f1be2216ccfe1d91fa9bf5
-
-//--import { LoginComponent } from './login/index';
-////import { LoginService } from './shared/services/login.service';
+import { AuthHttp } from './shared/services/authHttp.service';
+import { LoginComponent } from './login/index';
+import { LoginService } from './shared/services/login.service';
 //--import { Error400Component, Error500Component } from './errorPages/index';
 /*=======26 sep
 import { Component } from '@angular/core';
@@ -35,7 +35,7 @@ import { Component } from '@angular/core';
   //<<<<<<< HEAD
   //directives: [ROUTER_DIRECTIVES, NavbarComponent, ToolbarComponent],
   providers: [
-    ////LoginService
+    LoginService
   ]
 })
 //<<<<<<< HEAD
@@ -62,36 +62,36 @@ export class AppComponent implements OnInit {
  
 >>>>>>> eb8c13ee984e8a813ed6f6b8c4bf68dba52a49ec*/
 export class AppComponent implements OnInit {
-  constructor(private _router: Router) {
-    console.log('@component');
+  constructor(private _router: Router,
+    private _loginService: LoginService,
+    private authHttp: AuthHttp, ) {
     console.log('Environment config', Config);
   }
 
 
   ngOnInit() {
     console.log('I am app.component ');
-    /*
-        if (this._loginService.isAuthenticated()) {
-          this.getLoggedInUserPermission();
-        } else {
-          this._router.navigate(['/Login']);
-        }*/
-  }
 
-  /*
-    getLoggedInUserPermission(): void {
-      this._loginService.getLoggedInUserPermission()
-        .subscribe(
-        results => {
-          this._router.navigate(['/App']);
-        }, error => {
-          localStorage.clear();
-          this._router.navigate(['/Login']);
-        });
-      //=======
-      //export class AppComponent {
-      //constructor() {
-      //console.log('Environment config', Config);
-      // >>>>>>> 80ccc9aadc3699bf89f1be2216ccfe1d91fa9bf5
-    }*/
+    if (this._loginService.isAuthenticated()) {
+      this.getLoggedInUserPermission();
+    } else {
+      this._router.navigate(['/Login']);
+    }
+  }
+  getLoggedInUserPermission(): void {
+    this._loginService.getLoggedInUserPermission()
+      .subscribe(
+      results => {
+        console.log('User Logged in Sucessfully...!');
+        this._router.navigate(['/home']);
+      }, error => {
+        localStorage.clear();
+        this._router.navigate(['/Login']);
+      });
+    //=======
+    //export class AppComponent {
+    //constructor() {
+    //console.log('Environment config', Config);
+    // >>>>>>> 80ccc9aadc3699bf89f1be2216ccfe1d91fa9bf5
+  }
 }

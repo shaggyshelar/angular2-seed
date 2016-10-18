@@ -6,9 +6,14 @@ import { LoginComponent } from './login/index';
 import { Error400Component, Error500Component } from './errorPages/index';
 
 export const routes: Routes = [
-  { path: '/Login', component: LoginComponent },
-  { path: '/404', component: Error400Component },
-  { path: '/500', component: Error500Component },
+  {
+    path: '',
+    redirectTo: '/Login',
+    pathMatch: 'full'
+  },
   ...HomeRoutes,
-  ...AboutRoutes
+  ...AboutRoutes,
+  { path: 'Login', component: LoginComponent },
+  { path: '404', component: Error400Component },
+  { path: '500', component: Error500Component }
 ];
