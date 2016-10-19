@@ -29,7 +29,7 @@ export class AnimatedPieComponent implements OnInit {
       'pullOutRadius': -50,
       'marginTop': 30,
       'titles': [{
-        'text': 'South African Economy'
+        'text': 'Candidate joinings this month'
       }],
       'allLabels': [{
         'y': '54%',

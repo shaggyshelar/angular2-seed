@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Routes, RouteSegment, RouteTree } from '@angular/router';
+import { ROUTER_DIRECTIVES, Routes, RouteSegment, RouteTree,Router } from '@angular/router';
 import { FooterComponent } from '../../layout/footer/footer.component';
 import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
 import { PageActionsComponent } from '../../layout/pageActions/pageActions.component';
@@ -79,7 +79,10 @@ import { ReqruiterDashboardComponent } from '../../Dashboard/Reqruiter/component
 
 ])
 export class HomeComponent implements OnInit {
+    constructor(private _router: Router) {
+  }
     ngOnInit(): void {
+        this._router.navigate(['/App/Dashboard/Reqruiter']);
         App.init();
         Layout.init();
         Demo.init();

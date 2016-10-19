@@ -35,6 +35,8 @@ export class GraphComponent implements OnInit {
             // this single line makes the chart a bar chart
             chart.rotate = false;
 
+            // add click listener
+            chart.addListener('clickGraphItem', handleClick);
             // AXES
             // Category
             var categoryAxis = chart.categoryAxis;
@@ -80,6 +82,9 @@ export class GraphComponent implements OnInit {
 
             // WRITE
             chart.write('chartdivforCol');
+        }
+        function handleClick(event:any) {
+            alert(event.item.category + ': ' + event.item.values.value);
         }
     }
 }
