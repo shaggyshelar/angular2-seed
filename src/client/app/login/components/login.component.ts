@@ -32,7 +32,7 @@ export class LoginComponent {
             .subscribe(
             results => {
                 console.log('User Logged in Sucessfully From LoginComponent...!');
-                //this._router.navigate(['App']);
+                this._router.navigate(['Home']);
             },
             error => this.errorMessage = <any>error);
     }

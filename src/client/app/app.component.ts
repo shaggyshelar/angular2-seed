@@ -83,7 +83,7 @@ export class AppComponent implements OnInit {
       .subscribe(
       results => {
         console.log('User Logged in Sucessfully...!');
-        this._router.navigate(['/home']);
+        this._router.navigate(['/Home']);
       }, error => {
         localStorage.clear();
         this._router.navigate(['/Login']);

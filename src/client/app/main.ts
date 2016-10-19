@@ -11,7 +11,7 @@ import { enableProdMode } from '@angular/core';
 //import { APP_ROUTER_PROVIDERS } from './app.routes';
 ////import { AppComponent } from './app.component';
 //import { HTTP_PROVIDERS } from '@angular/http';
-import { ToastOptions } from 'ng2-toastr/ng2-toastr';
+//import { ToastOptions } from 'ng2-toastr/ng2-toastr';
 
 // The browser platform with a compiler
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

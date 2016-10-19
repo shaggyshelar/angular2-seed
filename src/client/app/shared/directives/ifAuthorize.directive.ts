@@ -1,19 +1,26 @@
-import {Directive, ElementRef, OnInit, Input} from '@angular/core';
-import {CommonService} from '../../shared/services/common.service';
-@Directive({
-    selector: '[ifAuthorize]'
-})
-export class IfAuthorizeDirective implements OnInit {
+import { Directive, ElementRef, HostListener, Input, Renderer, OnInit } from '@angular/core';
+import { CommonService } from '../../shared/services/common.service';
 
-    @Input() ifAuthorize: Array<string>;
+@Directive({ selector: '[ifAuthorize]' })
+
+export class IfAuthorizeDirective implements OnInit {
+    @Input() ifAuthorize: string[];
+    //@Input('ifAuthorize') authorizationPermission: string;
+    private defaultDisplayStyle: string = 'none';
     private _element: HTMLElement;
 
-    constructor(_element: ElementRef, private commonService: CommonService) {
+    constructor(_element: ElementRef,
+        private commonService: CommonService,
+        private renderer: Renderer
+    ) {
+        console.log('I am @ authorization');
         this._element = _element.nativeElement;
+        renderer.setElementStyle(_element.nativeElement, 'backgroundColor', 'yellow');
     }
 
-    ngOnInit() {
 
+    ngOnInit() {
+        console.log('I am @ authorization INit');
         let userHasPermissions = false;
         let loggedInUserPermission = this.commonService.getLoggedInUserPermission();
         if (loggedInUserPermission.length > 0) {
@@ -25,10 +32,10 @@ export class IfAuthorizeDirective implements OnInit {
                 }
             }
             if (!userHasPermissions) {
-                this._element.style.display = 'none';
+                this._element.style.display = this.defaultDisplayStyle;
             }
         } else {
-            this._element.style.display = 'none';
+            this._element.style.display = this.defaultDisplayStyle;
         }
     }
 }

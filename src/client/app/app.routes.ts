@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-
+import { MyDashboardComponent } from './home/index';
 import { AboutRoutes } from './about/index';
 import { HomeRoutes } from './home/index';
 import { LoginComponent } from './login/index';
@@ -13,6 +13,7 @@ export const routes: Routes = [
   },
   ...HomeRoutes,
   ...AboutRoutes,
+  { path: 'Home', component: MyDashboardComponent },
   { path: 'Login', component: LoginComponent },
   { path: '404', component: Error400Component },
   { path: '500', component: Error500Component }

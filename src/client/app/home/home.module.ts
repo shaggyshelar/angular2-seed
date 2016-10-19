@@ -1,24 +1,28 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-//import { SpinnerComponent } from '../shared/index';
+import { LayoutModule } from '../layout/layout.module';
+
 import { HomeComponent } from './home.component';
-//import { MyDashboardComponent } from './components/myDashboard.component';
+import { MyDashboardComponent } from './components/myDashboard.component';
 import { NameListService } from '../shared/name-list/index';
-//import { TopNavigationBarComponent, SideBarComponent, QuickSidebarComponent } from '../layout/index';
+import { TopNavigationBarComponent, SideBarComponent, QuickSidebarComponent } from '../layout/index';
+//import { QuickSidebarComponent } from './components/quick_Sidebar.component';
+import { IfAuthorizeDirective } from '../shared/index';
 
 
 @NgModule({
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, LayoutModule],
   declarations: [
     HomeComponent
-    //, MyDashboardComponent
-    // TopNavigationBarComponent,
-    // SideBarComponent,
-    // QuickSidebarComponent
-    //,SpinnerComponent
+    , MyDashboardComponent
+    , IfAuthorizeDirective
+    // , TopNavigationBarComponent
+    // , SideBarComponent
+    // , QuickSidebarComponent
+    //, SpinnerComponent
   ],
   exports: [HomeComponent],
-  providers: [NameListService]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeModule { }

@@ -14,11 +14,17 @@ import { Error400Component, Error500Component } from './errorPages/index';
 import { AuthHttp } from './shared/services/authHttp.service';
 import { CommonService } from './shared/services/common.service';
 //import { NavbarComponent, ToolbarComponent } from './shared/index';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 
 
+let options = <ToastOptions>{
+  animate: 'flyRight',
+  positionClass: 'toast-top-right',
+};
 
 @NgModule({
-  imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes), AboutModule, HomeModule, SharedModule.forRoot()],
+  imports: [ToastModule, BrowserModule, HttpModule, RouterModule.forRoot(routes), AboutModule,
+    HomeModule, SharedModule.forRoot(), ToastModule.forRoot(options)],
   declarations: [AppComponent, LoginComponent, Error400Component, Error500Component],
   providers: [{
     provide: APP_BASE_HREF,

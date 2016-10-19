@@ -1,13 +1,13 @@
 import { Route } from '@angular/router';
-import { HomeComponent } from './index';
+import { HomeComponent, MyDashboardComponent } from './index';
 
 import { DashboardComponent } from '../Dashboard/component/dashboard.component';
 import { SpinnerComponent, SpinnerService } from '../shared/components/spinner/spinner';
-/**Layout */
+/**Layout 
 import {
   FooterComponent, TopNavigationBarComponent, PageActionsComponent, SideBarComponent,
   QuickSidebarComponent
-} from '../layout/index';
+} from '../layout/index';*/
 /**Admin */
 import {
   FeatureComponent, PracticeComponent, SkillComponent, RoleComponent, UserComponent, TechnologyComponent,
@@ -33,9 +33,7 @@ import { PushNotificationComponent } from '../settings/index';
 
 
 export const HomeRoutes: Route[] = [
-  { path: 'home', component: HomeComponent }
-  //, { path: 'home', component: MyDashboardComponent }
-
+  { path: '', component: HomeComponent },
   // ,{ path: '/Admin/Feature', component: FeatureComponent },
   // { path: '/Admin/Practice', component: PracticeComponent },
   // { path: '/Admin/Skill', component: SkillComponent },
