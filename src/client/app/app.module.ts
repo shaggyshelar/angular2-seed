@@ -23,7 +23,7 @@ let options = <ToastOptions>{
 };
 
 @NgModule({
-  imports: [ToastModule, BrowserModule, HttpModule, RouterModule.forRoot(routes), AboutModule,
+  imports: [ToastModule, BrowserModule, HttpModule, RouterModule.forRoot(routes, { enableTracing: false }), AboutModule,
     HomeModule, SharedModule.forRoot(), ToastModule.forRoot(options)],
   declarations: [AppComponent, LoginComponent, Error400Component, Error500Component],
   providers: [{
