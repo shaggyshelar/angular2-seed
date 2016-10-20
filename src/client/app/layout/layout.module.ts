@@ -5,7 +5,7 @@ import { SpinnerComponent, SpinnerService, MastersService } from '../shared/inde
 import { TopNavigationBarComponent, SideBarComponent, QuickSidebarComponent } from '../layout/index';
 import { ToDoListService } from './index';
 import { ProfileBankService } from '../profileBank/index';
-import { IfAuthorizeDirective } from '../shared/index';
+
 @NgModule({
     imports: [CommonModule, SharedModule],
     declarations: [
@@ -13,12 +13,10 @@ import { IfAuthorizeDirective } from '../shared/index';
         , SideBarComponent
         , QuickSidebarComponent
         , SpinnerComponent
-        , IfAuthorizeDirective
     ],
     exports: [
         TopNavigationBarComponent
         , SideBarComponent
-        , IfAuthorizeDirective
         , QuickSidebarComponent
         , SpinnerComponent
     ],

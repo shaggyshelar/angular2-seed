@@ -8,3 +8,5 @@ export * from './topNavigationBar/topNavigationBar.component';
 export * from './quickSidebar/services/myToDoList.service';
 export * from './quickSidebar/model/ToDoList';
 
+export * from './layout.module';
+

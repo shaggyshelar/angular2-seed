@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
-import { IfAuthorizeDirective, MastersService } from '../shared/index';
+import { MastersService } from '../shared/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {
     RRFGridRowComponent,
     PanelsAvailablityComponent,
     FeedbackDataComponent,
-    ViewRRFComponent } from './shared/index';
+    ViewRRFComponent
+} from './shared/index';
 import { InterviewApprovalComponent } from '../recruitmentCycle/index';
 @NgModule({
     imports: [CommonModule, SharedModule],
     declarations: [
-        IfAuthorizeDirective
-        , MastersService
-        , RRFGridRowComponent
+        RRFGridRowComponent
         , FeedbackDataComponent
         , PanelsAvailablityComponent
         , InterviewApprovalComponent
@@ -25,6 +24,6 @@ import { InterviewApprovalComponent } from '../recruitmentCycle/index';
         , FeedbackDataComponent
         , PanelsAvailablityComponent
     ],
-    providers: [ToastsManager]
+    providers: [MastersService, ToastsManager]
 })
 export class RRFModule { }

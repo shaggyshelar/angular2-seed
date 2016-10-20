@@ -3,37 +3,44 @@ import { HomeComponent, MyDashboardComponent } from './index';
 
 import { DashboardComponent } from '../Dashboard/component/dashboard.component';
 import { SpinnerComponent, SpinnerService } from '../shared/components/spinner/spinner';
-/**Layout 
+/*************************Layout 
 import {
   FooterComponent, TopNavigationBarComponent, PageActionsComponent, SideBarComponent,
   QuickSidebarComponent
 } from '../layout/index';*/
-/**Admin */
-import {
-  FeatureComponent, PracticeComponent, SkillComponent, RoleComponent, UserComponent, TechnologyComponent,
-  QualificationComponent, InterviewRoundComponent, DesignationComponent, OwnerTypeComponent
-} from '../admin/index';
-/**ProfileBank */
-import {//CompanyProfilesComponent, 
-  AllProfilesComponent, BlackListedProfilesComponent, MyProfilesComponent, RecentProfilesComponent, IncompleteProfilesComponent,
-  AdvanceSearchComponent
-} from '../profileBank/index';
-/**RRF */
-import {
-  MyRRFComponent, RRFApprovalComponent, RRFDashboardComponent, FeedbackPendingComponent,
-  InterviewerAvalabilityComponent
-} from '../RRF/index';
-/**Recruitment Cycle */
-import {
-  ShowScheduleInterviewsComponent, ScheduleInterviewComponent, InterviewrsComponent,
-  RecruitmentInterviewerCalenderComponent
-} from '../recruitmentCycle/index';
-/**Settings */
+/*************************Admin */
+// // import {
+// //   FeatureComponent, PracticeComponent, SkillComponent, RoleComponent, UserComponent, TechnologyComponent,
+// //   QualificationComponent, InterviewRoundComponent, DesignationComponent, OwnerTypeComponent
+// // } from '../admin/index';
+/*************************ProfileBank */
+// // import {//CompanyProfilesComponent, 
+// //   AllProfilesComponent, BlackListedProfilesComponent, MyProfilesComponent, RecentProfilesComponent, IncompleteProfilesComponent,
+// //   AdvanceSearchComponent
+// // } from '../profileBank/index';
+import { ProfileBankRoutes } from '../profileBank/index';
+/*************************RRF */
+// // import {
+// //   MyRRFComponent, RRFApprovalComponent, RRFDashboardComponent, FeedbackPendingComponent,
+// //   InterviewerAvalabilityComponent
+// // } from '../RRF/index';
+import { RRFRoutes } from '../RRF/index';
+/*************************Recruitment Cycle */
+// // import {
+// //   ShowScheduleInterviewsComponent, ScheduleInterviewComponent, InterviewrsComponent,
+// //   RecruitmentInterviewerCalenderComponent
+// // } from '../recruitmentCycle/index';
+import { RecruitmentCycleRoutes } from '../recruitmentCycle/index';
+/*************************Settings */
 import { PushNotificationComponent } from '../settings/index';
 
 
 export const HomeRoutes: Route[] = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent }
+  //, ...ProfileBankRoutes
+  , ...RRFRoutes
+  //, ...RecruitmentCycleRoutes
+
   // ,{ path: '/Admin/Feature', component: FeatureComponent },
   // { path: '/Admin/Practice', component: PracticeComponent },
   // { path: '/Admin/Skill', component: SkillComponent },

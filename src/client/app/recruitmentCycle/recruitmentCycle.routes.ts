@@ -1,12 +1,12 @@
 import { Route } from '@angular/router';
-
+import { ScheduleInterviewsForRecruitersComponent } from './recruitersTab/index';
+import { ScheduleCandidateInterviewComponent } from './scheduleInterview/index';
+import { RecruitmentIEFComponent } from './shared/index';
 import {
     RecruitmentInterviewAvailabilityComponent,
     RecruitmentInterviewScheduleComponent,
-    RecruitmentInterviewerCalenderComponent} from './interviewersTab/index';
-import { ScheduleInterviewsForRecruitersComponent} from './recruitersTab/index';
-import { ScheduleCandidateInterviewComponent} from './scheduleInterview/index';
-import { RecruitmentIEFComponent} from './shared/index';
+    RecruitmentInterviewerCalenderComponent
+} from './interviewersTab/index';
 
 
 export const RecruitmentCycleRoutes: Route[] = [

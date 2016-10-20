@@ -7,15 +7,27 @@ import { ToolbarComponent } from './toolbar/index';
 import { NavbarComponent } from './navbar/index';
 import { NameListService } from './name-list/index';
 
+import { IfAuthorizeDirective } from './directives/ifAuthorize.directive';
+
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent],
-  exports: [ToolbarComponent, NavbarComponent,
-    CommonModule, FormsModule, RouterModule]
+  declarations: [
+    ToolbarComponent
+    , NavbarComponent
+    , IfAuthorizeDirective
+  ],
+  exports: [
+    ToolbarComponent
+    , NavbarComponent
+    , CommonModule
+    , FormsModule
+    , IfAuthorizeDirective
+    , RouterModule
+  ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

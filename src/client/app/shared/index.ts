@@ -13,3 +13,5 @@ export * from './components/calendar/fullCalendar';
 export * from './components/treeview/treeview.component';
 export * from './components/spinner/spinner.component';
 export * from './components/spinner/spinner.service';
+
+export * from './shared.module';

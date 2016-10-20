@@ -1,29 +1,31 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CandidateProfile,
+import {
+    CandidateProfile,
     ResumeMeta,
     AddCandidateResponse,
     AllCandidateProfiles,
     CareerProfile,
-    MailDetails } from '../../shared/model/myProfilesInfo';
+    MailDetails
+} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-//import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { CollapseDirective, TooltipDirective } from 'ng2-bootstrap';
+import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
-import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import { APIResult } from '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 //import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
-import { RRFDetails } from  '../../../RRF/myRRF/index';
-import {AssignRRFService} from '../../shared/services/assignRRF.service';
-import {RRFCandidateListService} from '../../../RRF/RRFDashboard/services/RRFCandidatesList.service';
-import {ViewRRFComponent} from '../../../RRF/shared/components/viewRRF/viewRRF.component';
+import { RRFDetails } from '../../../RRF/myRRF/index';
+import { AssignRRFService } from '../../shared/services/assignRRF.service';
+import { RRFCandidateListService } from '../../../RRF/RRFDashboard/services/RRFCandidatesList.service';
+import { ViewRRFComponent } from '../../../RRF/shared/components/viewRRF/viewRRF.component';
 
 @Component({
     moduleId: module.id,

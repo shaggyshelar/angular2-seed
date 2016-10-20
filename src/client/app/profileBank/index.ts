@@ -8,3 +8,6 @@ export * from './myProfiles/index'
 export * from './profilesEsplHistory/index'
 export * from './recentProfiles/index'
 export * from './shared/index'
+
+export * from './profileBank.routes'
+export * from './profileBank.module'

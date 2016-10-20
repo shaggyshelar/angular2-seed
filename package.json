@@ -137,6 +137,7 @@
     "@angular/router": "^3.1.0",
     "core-js": "^2.4.1",
     "es-module-loader": "^1.0.0",
+    "ng2-bootstrap": "^1.1.14",
     "ng2-charts": "^1.4.0",
     "ng2-select": "^1.1.1",
     "ng2-toastr": "^1.2.0",
