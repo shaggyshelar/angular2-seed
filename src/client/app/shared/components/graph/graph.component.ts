@@ -1,3 +1,4 @@
+///<reference path="../graph/AmCharts.d.ts" />
 import { Component, Input, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 //import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
@@ -7,8 +8,7 @@ import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
     moduleId: module.id,
     selector: 'am-chart',
     templateUrl: 'graph.component.html',
-    directives: [ROUTER_DIRECTIVES],
-    //styleUrls: ['../../css/RRF.component.css']
+    directives: [ROUTER_DIRECTIVES]
 })
 
 export class GraphComponent implements OnInit {
@@ -17,13 +17,13 @@ export class GraphComponent implements OnInit {
     ngOnInit() {
         this.data = this.chartData;
         var chart: any;
-        if (AmCharts.isReady) {
+        //if (AmCharts.isReady) {
             createChart(this.chartData);
-        } else {
-            AmCharts.ready(function () {
-                createChart(this.chartData);
-            });
-        }
+        //} else {
+            ///AmCharts.ready(function () {
+            //    createChart(this.chartData);
+           // });
+       // }
         function createChart(chartData: any) {
             // SERIAL CHART
             chart = new AmCharts.AmSerialChart();

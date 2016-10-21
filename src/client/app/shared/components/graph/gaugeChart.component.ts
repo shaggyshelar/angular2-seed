@@ -8,7 +8,7 @@ import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
     selector: 'gauge-chart',
     templateUrl: 'gaugeChart.component.html',
     directives: [ROUTER_DIRECTIVES],
-    styleUrls: ['/css/piechart.component.css']
+    styleUrls: ['piechart.component.css']
 })
 
 export class GaugeChartComponent implements OnInit {

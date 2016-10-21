@@ -1,14 +1,9 @@
 import { Component, Input, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
-//import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
-//import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAvailablity.component';
 
 @Component({
   moduleId: module.id,
   selector: 'animated-pie-chart',
   templateUrl: 'animatedPieChart.component.html',
-  directives: [ROUTER_DIRECTIVES],
-  //styleUrls: ['../../css/RRF.component.css']
 })
 
 export class AnimatedPieComponent implements OnInit {
@@ -58,7 +53,7 @@ export class AnimatedPieComponent implements OnInit {
             return data;
           }
 
-          function loop() {
+           function loop() {
             chart.allLabels[0].text = currentYear;
             var data = getCurrentData(data1);
             chart.animateData(data, {
@@ -69,7 +64,7 @@ export class AnimatedPieComponent implements OnInit {
             });
           }
 
-          loop();
+           loop();
         }
       }],
       'export': {

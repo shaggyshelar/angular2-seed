@@ -1,3 +1,4 @@
+///<reference path="../graph/AmCharts.d.ts" />
 import { Component, Input, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 //import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
@@ -8,7 +9,7 @@ import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
   selector: 'pie-chart',
   templateUrl: 'piechart.component.html',
   directives: [ROUTER_DIRECTIVES],
-  styleUrls: ['/css/piechart.component.css']
+  styleUrls: ['piechart.component.css']
 })
 
 export class PiechartComponent implements OnInit {
