@@ -13,16 +13,16 @@ import { InterviewApprovalComponent } from '../recruitmentCycle/index';
 @NgModule({
     imports: [CommonModule, SharedModule],
     declarations: [
-        RRFGridRowComponent
-        , FeedbackDataComponent
-        , PanelsAvailablityComponent
-        , InterviewApprovalComponent
-        , ViewRRFComponent
+        InterviewApprovalComponent
+        //RRFGridRowComponent
+        // , FeedbackDataComponent
+        // , PanelsAvailablityComponent
+        // , ViewRRFComponent
     ],
     exports: [
-        RRFGridRowComponent
-        , FeedbackDataComponent
-        , PanelsAvailablityComponent
+        //RRFGridRowComponent
+        // , FeedbackDataComponent
+        // , PanelsAvailablityComponent
     ],
     providers: [MastersService, ToastsManager]
 })

@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, AfterViewInit} from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RRFDetails} from '../../../myRRF/models/rrfDetails';
+import { RRFDetails } from '../../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../../myRRF/services/myRRF.service';
-import { MasterData} from '../../../../shared/model/common.model';
+import { MasterData } from '../../../../shared/model/common.model';
 import { RRFGridRowComponent } from '../RRFGridRow/RRFGridRow.component';
 import { RRFCandidateListService } from '../../../RRFDashboard/services/RRFCandidatesList.service';
-import {RRFSpecificCandidateList} from '../../../RRFDashboard/model/RRFCandidateList';
-import {FeedbackDataComponent} from '../feedbackData/feedbackData.component';
+import { RRFSpecificCandidateList } from '../../../RRFDashboard/model/RRFCandidateList';
+import { FeedbackDataComponent } from '../feedbackData/feedbackData.component';
 
 
 

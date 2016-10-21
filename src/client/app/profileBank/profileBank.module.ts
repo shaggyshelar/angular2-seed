@@ -35,63 +35,63 @@ import {
   RecentProfilesListComponent,
   RecentProfilesViewComponent
 } from './recentProfiles/index';
-import { ProfileBankService, DetailProfileComponent, ProfileBankAssignRRFComponent } from './shared/index';
+import { ProfileBankService, DetailProfileComponent, ProfileBankAssignRRFComponent, ProfileBankPipe } from './shared/index';
 import { ViewRRFComponent } from '../RRF/shared/index';
-import { CollapseDirective, TooltipDirective } from 'ng2-bootstrap';
+
+import { RRFGridRowComponent } from '../RRF/index';
 
 
 @NgModule({
   imports: [CommonModule, SharedModule],
   declarations: [
-    // ProfileBankAssignRRFComponent,
-    // DetailProfileComponent,
-    // AllProfilesAddComponent,
-    // TransferOwnershipComponent,
-    // AllProfilesListComponent,
-    // AllProfilesViewComponent,
-    // AdvanceSearchListComponent,
-    // BlackListedProfilesAddComponent,
-    // BlackListedProfilesListComponent,
-    // BlackListedProfilesViewComponent,
-    // CompanyProfilesAddComponent,
-    // CompanyProfilesListComponent,
-    // CompanyProfilesViewComponent,
-    // IncompleteProfilesListComponent,
-    // MyProfilesAddComponent,
-    MyProfilesListComponent,
-    // MyProfilesViewComponent,
-    // ProfileEsplHistoryListComponent,
-    // RecentProfilesAddComponent,
-    // RecentProfilesListComponent,
-    // RecentProfilesViewComponent,
-    CollapseDirective,
-    IEFGridRowComponent,
-    TooltipDirective,
-    ViewRRFComponent
+    ProfileBankPipe
+    , DetailProfileComponent
+    // ,ProfileBankAssignRRFComponent
+    ////, RRFGridRowComponent
+    // ,AllProfilesAddComponent
+    // ,TransferOwnershipComponent
+    // ,AllProfilesListComponent
+    // ,AllProfilesViewComponent
+    // ,AdvanceSearchListComponent
+    // ,BlackListedProfilesAddComponent
+    // ,BlackListedProfilesListComponent
+    // ,BlackListedProfilesViewComponent
+    // ,CompanyProfilesAddComponent
+    // ,CompanyProfilesListComponent
+    // ,CompanyProfilesViewComponent
+    // ,IncompleteProfilesListComponent
+    // ,MyProfilesAddComponent
+    , MyProfilesListComponent
+    //, MyProfilesViewComponent
+    //, ProfileEsplHistoryListComponent
+    //, RecentProfilesAddComponent
+    //, RecentProfilesListComponent
+    //, RecentProfilesViewComponent
+    , IEFGridRowComponent
   ],
   exports: [
-    // ProfileBankAssignRRFComponent,
-    // DetailProfileComponent,
-    // AllProfilesAddComponent,
-    // TransferOwnershipComponent,
-    // AllProfilesListComponent,
-    // AllProfilesViewComponent,
-    // AdvanceSearchListComponent,
-    // BlackListedProfilesAddComponent,
-    // BlackListedProfilesListComponent,
-    // BlackListedProfilesViewComponent,
-    // CompanyProfilesAddComponent,
-    // CompanyProfilesListComponent,
-    // CompanyProfilesViewComponent,
-    // IncompleteProfilesListComponent, 
-    // MyProfilesAddComponent,
-    MyProfilesListComponent
-    // MyProfilesViewComponent,
-    // ProfileEsplHistoryListComponent,
-    // RecentProfilesAddComponent,
-    // RecentProfilesListComponent,
-    // RecentProfilesViewComponent,
-    // ViewRRFComponent
+    //DetailProfileComponent
+    ////, RRFGridRowComponent
+    //, ProfileBankAssignRRFComponent
+    //, AllProfilesAddComponent
+    //, TransferOwnershipComponent
+    //, AllProfilesListComponent
+    //, AllProfilesViewComponent
+    //, AdvanceSearchListComponent
+    //, BlackListedProfilesAddComponent
+    //, BlackListedProfilesListComponent
+    //, BlackListedProfilesViewComponent
+    //, CompanyProfilesAddComponent
+    //, CompanyProfilesListComponent
+    //, CompanyProfilesViewComponent
+    //, IncompleteProfilesListComponent 
+    //, MyProfilesAddComponent
+    // , MyProfilesListComponent
+    //, MyProfilesViewComponent
+    //, ProfileEsplHistoryListComponent
+    //, RecentProfilesAddComponent
+    //, RecentProfilesListComponent
+    //, RecentProfilesViewComponent
   ],
   providers: [MyProfilesService, MastersService, ToastsManager, ProfileBankService]
 })

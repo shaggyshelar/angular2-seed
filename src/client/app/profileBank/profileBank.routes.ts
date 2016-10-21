@@ -30,9 +30,9 @@ import {
 import { IncompleteProfilesListComponent } from './incompleteProfiles/index';
 
 export const ProfileBankRoutes: Route[] = [
-    { path: 'Profiles', component: MyProfilesListComponent },
+    { path: 'ProfileBank', component: MyProfilesListComponent },
     /**My Profiles */
-    // { path: 'MyProfiles', component: MyProfilesListComponent },
+    // { path: 'ProfileBank/MyProfiles', component: MyProfilesListComponent },
     // { path: 'MyProfiles/Edit/:id', component: MyProfilesAddComponent },
     // { path: 'MyProfiles/View/:id', component: MyProfilesViewComponent },
     // { path: 'MyProfiles/Assign', component: ProfileBankAssignRRFComponent },
