@@ -386,7 +386,7 @@
                                 <div class="col-md-2 col-sm-2">
                                     <label class="col-md-2 control-label">RRF: </label>
                                     <div class="col-md-6" [hidden]="RRFList.length == 0">
-                                        <select class="form-control" required (change)='onSelectRRF($event.target.value)' style="width:328px;">
+                                        <select class="form-control" required (change)='onSelectRRF($event.target.value)' style="width:357px;">
                                      <option></option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 </select>

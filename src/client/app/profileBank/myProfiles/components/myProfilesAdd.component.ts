@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience, EmploymentHistory} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience,
+    EmploymentHistory, Skills, SalaryDetails} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 //import * as  _ from 'lodash';
@@ -42,6 +43,10 @@ export class MyProfilesAddComponent implements OnActivate {
     selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
     TITLE: string = 'Profiles';
+    /*Candidate Salary Details */
+    CandidateSalaryDetails: SalaryDetails = new SalaryDetails();
+    /*Candidate Skills */
+    CandidateSkills: Skills = new Skills();
     /**Candidate Experience */
     CandidateExperiences: CandidateExperience = new CandidateExperience();
     /**Employment History*/
@@ -205,9 +210,9 @@ export class MyProfilesAddComponent implements OnActivate {
 
     onSameAddressChecked(value: boolean) {
         if (value) {
-            this.profile.PermanentAddress = this.profile.CurrentAddress;
+            this.profile.CurrentAddress = this.profile.PermanentAddress;
         } else {
-            this.profile.PermanentAddress = '';
+            this.profile.CurrentAddress = '';
         }
     }
     onSavePrimaryInfo(): void {
@@ -657,6 +662,9 @@ export class MyProfilesAddComponent implements OnActivate {
     onOutstationedClick(isChecked: any) {
         if (isChecked === false) {
             this.readyToRelocateFlag = true;
+            if (this.profile.ReadyToRelocate === true) {
+                this.reasonToRelocateFlag = true;
+            }
         } else {
             this.readyToRelocateFlag = false;
             this.reasonToRelocateFlag = false;
