@@ -50,7 +50,9 @@ export class IncompleteProfilesListComponent implements OnActivate {
                 (results: any) => {
                     if (results.Profiles !== undefined && results.Profiles.length > 0) {
                         this.incompleteProfilesList = <AllCandidateProfiles>results;
-                    } else { this.NORECORDSFOUND = true; }
+                    } else {
+                        this.incompleteProfilesList = new AllCandidateProfiles(); 
+                        this.NORECORDSFOUND = true; }
                 },
                 error => this.errorMessage = <any>error);
         } catch (error) {

@@ -68,6 +68,9 @@ export class MyProfilesAddComponent implements OnActivate {
     AllowanceFlag: boolean = false;
     IncentiveFlag: boolean = false;
     FunctionalExp: boolean = false;
+    // For Duplicate Records
+    //isExist: boolean = false;
+    //existedProfile: CandidateProfile;
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -675,6 +678,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.reasonToRelocateFlag = true;
         } else {
             this.reasonToRelocateFlag = false;
+            this.profile.ReasonToRelocate = '';
         }
     }
     onOfferInHand(isChecked: any) {
@@ -682,6 +686,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.OfferInHand = true;
         } else {
             this.OfferInHand = false;
+            this.profile.CandidateOtherDetails.OfferDetails = '';
         }
     }
     onVariableCTC(isChecked: any) {
@@ -689,6 +694,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.VariableCTC = true;
         } else {
             this.VariableCTC = false;
+            this.profile.CandidateSalaryDetails.HowMuchVariable = 0;
         }
     }
     onAllowance(isChecked: any) {
@@ -696,6 +702,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.AllowanceFlag = true;
         } else {
             this.AllowanceFlag = false;
+            this.profile.CandidateSalaryDetails.AllowanceInHand = 0;
         }
     }
     onIncentive(isChecked: any) {
@@ -703,6 +710,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.IncentiveFlag = true;
         } else {
             this.IncentiveFlag = false;
+            this.profile.CandidateSalaryDetails.IncentiveInHand = 0;
         }
     }
     onFunctionalExp(isChecked: any) {
@@ -710,6 +718,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.FunctionalExp = true;
         } else {
             this.FunctionalExp = false;
+            this.profile.CandidateSkills.AnyFunctionalExp = '';
         }
     }
     nextTab() {
@@ -718,4 +727,22 @@ export class MyProfilesAddComponent implements OnActivate {
     previousTab() {
         $('.nav-tabs > .active').prev('li').find('a').trigger('click');
     }
+    /** Check is current information is already exist in database.*/
+    // IsExist() {
+    //     this._myProfilesService.isExist(this.profile)
+    //         .subscribe(
+    //         (results: any) => {
+    //             if (results.isExist) {
+    //                 if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
+    //                     this.existedProfile = <any>results.profileBankObjects;
+    //                     this.isExist = <any>results.isExist;
+    //                     this.toastr.error('Profile already exist');
+    //                 }
+    //             } else {
+    //                 this.isExist = false;
+    //                 this.onSavePrimaryInfo();
+    //             }
+    //         },
+    //         error => this.toastr.error(<any>error));
+    // }
 }
