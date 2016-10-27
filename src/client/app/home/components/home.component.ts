@@ -25,7 +25,7 @@ import { AdvanceSearchComponent } from '../../profileBank/advanceSearch/index';
 import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
-import { PendingRequestComponent } from '../../RRF/PendingRequest/index';
+//import { PendingRequestComponent } from '../../RRF/PendingRequest/index';
 import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
 import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
 import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
@@ -66,7 +66,7 @@ import { ReqruiterDashboardComponent } from '../../Dashboard/Reqruiter/component
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
-    { path: '/RRF/PendingRequest', component: PendingRequestComponent },
+    //{ path: '/RRF/PendingRequest', component: PendingRequestComponent },
     { path: '/AllInterviews/showInterviews', component: ShowScheduleInterviewsComponent },
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },

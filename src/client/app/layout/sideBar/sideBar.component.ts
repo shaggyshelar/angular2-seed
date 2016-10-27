@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import {IfAuthorizeDirective} from '../../shared/directives/ifAuthorize.directive';
+import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 
 @Component({
   moduleId: module.id,
@@ -9,4 +9,4 @@ import {IfAuthorizeDirective} from '../../shared/directives/ifAuthorize.directiv
   directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective]
 })
 export class SideBarComponent {
- }
+}
