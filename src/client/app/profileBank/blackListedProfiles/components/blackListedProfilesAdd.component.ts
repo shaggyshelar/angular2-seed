@@ -1,7 +1,7 @@
 import {Component } from '@angular/core';
 import { Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
-import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, Qualification, CandidateExperience, EmploymentHistory } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
@@ -47,6 +47,13 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     IsSuccess: boolean = false;
     currentUser: MasterData = new MasterData();
     TITLE: string = 'BlackListed Profiles';
+    /**Candidate Experience */
+    CandidateExperiences: CandidateExperience = new CandidateExperience();
+    /**Employment History*/
+    EmployersInformation: EmploymentHistory = new EmploymentHistory();
+    /**Employment History collection */
+    EmployersInformationList: Array<EmploymentHistory> = new Array<EmploymentHistory>();
+    EmploymentDetailsAction: string = 'Add';
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
@@ -73,6 +80,8 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];
             this.getCandidateProfileById(this.CandidateID.Value);
+            this.GetEmployersInformationList(this.CandidateID);
+            this.GetCandidateExperience(this.CandidateID);
         }
         var date = new Date();
         this.CurrentYear = date.getFullYear();
@@ -174,9 +183,9 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
     onSelectVisa(visaId: string) {
         //this.profile.CandidateOtherDetails.Visa.Id = parseInt(visaId);
-        for(var i=0;i < this.VisaType.length;i++) {
-            if ( this.VisaType[i].Id === parseInt(visaId))
-              this.profile.CandidateOtherDetails.Visa = this.VisaType[i];
+        for (var i = 0; i < this.VisaType.length; i++) {
+            if (this.VisaType[i].Id === parseInt(visaId))
+                this.profile.CandidateOtherDetails.Visa = this.VisaType[i];
         }
     }
 
@@ -191,7 +200,32 @@ export class BlackListedProfilesAddComponent implements OnActivate {
             this.profile.PermanentAddress = '';
         }
     }
+    /**Function to fetch candidate EXPERIENCE details */
+    GetCandidateExperience(candidateID: MasterData) {
+        this._profileBankService.getCandidateExperience(candidateID)
+            .subscribe(
+            results => {
+                this.CandidateExperiences = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**Bind candidate's all employment related information */
+    GetEmployersInformationList(_candidateID: MasterData) {
+        this._profileBankService.getCandidateEmploymentHistory(_candidateID)
+            .subscribe(
+            results => {
+                this.EmployersInformationList = <any>results;
+                this.EmploymentDetailsAction = 'Add';
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
 
+    }
     onSavePrimaryInfo(): void {
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
             this.profile.CommentsUpdated = true;
@@ -418,15 +452,15 @@ export class BlackListedProfilesAddComponent implements OnActivate {
 
     getCandidateQualification() {
         this._profileBankService.getCandidateQualifications(this.CandidateID.Value)
-                .subscribe(
-                results => {
-                    this.profile.CandidateQualification = new Array<Qualification>();
-                    this.profile.CandidateQualification = <any>results;
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+            .subscribe(
+            results => {
+                this.profile.CandidateQualification = new Array<Qualification>();
+                this.profile.CandidateQualification = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
     }
 
     editQualidficationData(QID: string) {

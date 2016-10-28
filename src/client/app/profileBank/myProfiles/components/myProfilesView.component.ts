@@ -86,4 +86,9 @@ export class MyProfilesViewComponent implements OnActivate {
     Back() {
         this._router.navigate(['/App/ProfileBank/MyProfiles']);
     }
+    getCandidateHistory(_candidateID: MasterData) {
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
+        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+    }
 }

@@ -80,5 +80,8 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
         }
         return response;
     }
+    redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+    }
 
 }

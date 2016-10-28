@@ -40,10 +40,10 @@
                                             <a href="#tab_1_1" data-toggle="tab" (click)='onPersonalInfoTabClick()'>Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_3" data-toggle="tab">Skills</a>
+                                            <a href="#tab_1_3" data-toggle="tab" (click)="onSkillTabClick()">Skills</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_7" data-toggle="tab">Professional Info</a>
+                                            <a href="#tab_1_7" data-toggle="tab" (click)="onProfessionalInfoTabClick()">Professional Info</a>
                                         </li>
                                         <!--<li>
                                             <a href="#tab_1_2" data-toggle="tab">Qualification</a>
@@ -55,7 +55,7 @@
                                             <a href="#tab_1_6" data-toggle="tab">Team Mgt</a>
                                         </li>-->
                                         <li>
-                                            <a href="#tab_1_5" data-toggle="tab">Salary Details</a>
+                                            <a href="#tab_1_5" data-toggle="tab" (click)="onSalaryTabClick()">Salary Details</a>
                                         </li>
 
                                     </ul>
@@ -70,6 +70,56 @@
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a class="btn green " (click)='nextTab()'>
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
+                                                    </div>
+                                                </div>
+                                                <div class="container-fluid">
+                                                    <div class="row" style="margin-top:34px;" *ngIf="isExist">
+                                                        <!--*ngIf="existedProfile.length != 0"-->
+                                                        <div class="col-md-3 inlineForm">
+                                                            <div class="form-group">
+                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                    tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3  inlineForm">
+                                                            <div class="form-group ">
+                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
+                                                                    tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3  inlineForm">
+                                                            <div class="form-group ">
+                                                                <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                    tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 inlineForm">
+                                                            <div class="form-group ">
+                                                                <div class="col-md-7 inlineForm">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                                </div>
+
+                                                                <!--<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                        (click)='redirectToView(existedProfile.CandidateID)'>
+                                                                        <i class="glyphicon glyphicon-user"> </i>
+                                                                    </a>-->
+
+
+                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-left:45px;" data-toggle="tooltip" data-placement="top"
+                                                                    title="View Interview History" tooltip="View Interview History"
+                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                    (click)='getCandidateHistory(existedProfile.CandidateID)'>
+                                                                    <i class="fa fa-history"> </i>
+                                                                </a>
+                                                                <a href="javascript:;" class="btn btn-icon-only red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
+                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                    (click)='deleteCandidate(existedProfile.CandidateID)'>
+                                                                    <i class="fa fa-times"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -113,7 +163,7 @@
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="Last Name" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required=""
-                                                                        (blur)="onSavePrimaryInfo()" tabindex="4"/>
+                                                                        (blur)="onSavePrimaryInfo()" tabindex="4" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -123,7 +173,8 @@
                                                             <label>Email <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (blur)="onSavePrimaryInfo()" tabindex="5" />
+                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (blur)="IsExist()"
+                                                                        tabindex="5" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -138,7 +189,7 @@
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="Contact Number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
-                                                                        required="" (blur)="onSavePrimaryInfo()" tabindex="6"/>
+                                                                        required="" (blur)="IsExist()" tabindex="6" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -161,7 +212,8 @@
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <textarea class="form-control text-capitalize" rows="1" placeholder="Add Tags For E.g. Java, Sharepoint etc." style="resize:vertical"
-                                                                        [(ngModel)]="profile.Tag" required="" (blur)="onSavePrimaryInfo()" tabindex="8"></textarea>
+                                                                        [(ngModel)]="profile.Tag" required="" (blur)="onSavePrimaryInfo()"
+                                                                        tabindex="8"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -172,7 +224,8 @@
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <input type="number" placeholder="" class="form-control" placeholder="Notice Period" min="0" max="120" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
-                                                                        required="" (blur)="onSavePrimaryInfo()" tabindex="9"/>
+                                                                        required="" (blur)="onSavePrimaryInfo()" tabindex="9"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -185,7 +238,8 @@
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.CurrentSalary"
-                                                                        required="" (blur)="onSavePrimaryInfo()" tabindex="10"/>
+                                                                        required="" (blur)="onSavePrimaryInfo()" tabindex="10"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -196,7 +250,7 @@
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <input type="number" placeholder="" class="form-control" min="0" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary"
-                                                                        required (blur)="onSavePrimaryInfo()" tabindex="11"/>
+                                                                        required (blur)="onSavePrimaryInfo()" tabindex="11" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -208,7 +262,7 @@
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>-->
                                                 <div class="margiv-top-10 pull-right">
-                                                    <a class="btn green " (click)='nextTab()'  tabindex="12">
+                                                    <a class="btn green " (click)='nextTab()' tabindex="12">
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
@@ -228,7 +282,56 @@
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                     </div>
                                                 </div>
+                                                <div class="container-fluid">
+                                                    <div class="row" style="margin-top:34px;" *ngIf="isExist">
+                                                        <!--*ngIf="existedProfile.length != 0"-->
+                                                        <div class="col-md-3 inlineForm">
+                                                            <div class="form-group">
+                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                    tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3  inlineForm">
+                                                            <div class="form-group ">
+                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
+                                                                    tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3  inlineForm">
+                                                            <div class="form-group ">
+                                                                <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                    tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 inlineForm">
+                                                            <div class="form-group ">
+                                                                <div class="col-md-7 inlineForm">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                                </div>
 
+                                                                <!--<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
+                                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                        (click)='redirectToView(existedProfile.CandidateID)'>
+                                                                        <i class="glyphicon glyphicon-user"> </i>
+                                                                    </a>-->
+
+
+                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-left:45px;" data-toggle="tooltip" data-placement="top"
+                                                                    title="View Interview History" tooltip="View Interview History"
+                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                    (click)='getCandidateHistory(existedProfile.CandidateID)'>
+                                                                    <i class="fa fa-history"> </i>
+                                                                </a>
+                                                                <a href="javascript:;" class="btn btn-icon-only red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
+                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                    (click)='deleteCandidate(existedProfile.CandidateID)'>
+                                                                    <i class="fa fa-times"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <!-- Profile Picture Option -->
                                                 <div class="col-md-3 col-md-3 portlet light profile-sidebar-portlet bordered">
                                                     <!-- SIDEBAR USERPIC -->
@@ -261,7 +364,8 @@
                                                             <div class="row ">
                                                                 <div class="col-md-10">
                                                                     <input type="text" id="txtFirstName" placeholder="First Name" class="form-control text-capitalize" [(ngModel)]="profile.FirstName"
-                                                                        required="" (blur)="onSavePersonalDetails()" tabindex="1"/>
+                                                                        required="" (blur)="onSavePersonalDetails()" tabindex="1"
+                                                                    />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -272,7 +376,7 @@
                                                             <div class="row ">
                                                                 <div class="col-md-10">
                                                                     <input type="text" placeholder="Middle Name" class="form-control text-capitalize" [(ngModel)]="profile.MiddleName" (keyup)="removeWhiteSpaces($event.target.value)"
-                                                                        (blur)="onSavePersonalDetails()" tabindex="2"/>
+                                                                        (blur)="onSavePersonalDetails()" tabindex="2" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -284,7 +388,7 @@
                                                             <div class="row ">
                                                                 <div class="col-md-10">
                                                                     <input type="text" placeholder="Last Name" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required=""
-                                                                        (blur)="onSavePersonalDetails()" tabindex="3"/>
+                                                                        (blur)="onSavePersonalDetails()" tabindex="3" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -295,7 +399,7 @@
                                                             <div class="row ">
                                                                 <div class="col-md-10">
                                                                     <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (blur)="onSavePersonalDetails()"
-                                                                    tabindex="4"/>
+                                                                        tabindex="4" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -315,7 +419,7 @@
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="Contact Number" class="form-control" [(ngModel)]="profile.PrimaryContact" required="" maxlength="10"
                                                                         minlength="10" pattern="^[0-9\-\+]{9,15}$" title="Contact Number"
-                                                                        (blur)="onSavePersonalDetails()" tabindex="5"/>
+                                                                        (blur)="onSavePersonalDetails()" tabindex="5" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -327,7 +431,7 @@
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="Contact Number" class="form-control" pattern="^[0-9\-\+]{9,15}$" title="Contact Number" maxlength="10"
                                                                         minlength="10" [(ngModel)]="profile.SecondaryContact"
-                                                                        (blur)="onSavePersonalDetails()" tabindex="6"/>
+                                                                        (blur)="onSavePersonalDetails()" tabindex="6" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -391,7 +495,7 @@
                                                             <div class="row ">
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="City" class="form-control" title="City" [(ngModel)]="profile.City" (blur)="onSavePersonalDetails()"
-                                                                    tabindex="12"/>
+                                                                        tabindex="12" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -410,7 +514,8 @@
                                                             <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number"
                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo"
                                                                 pattern="^[0-9\-\+]{9,15}$" title="Enter valid Aadhaar Card number For Eg. 123456789012"
-                                                                maxlength="12" (blur)="onSavePersonalDetails()" tabindex="13"/>
+                                                                maxlength="12" (blur)="IsExist()" tabindex="13"
+                                                            />
                                                         </div>
                                                     </div>
 
@@ -418,16 +523,16 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Pan Card No</label>
                                                             <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F"
-                                                                pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" (blur)="onSavePersonalDetails()" tabindex="14"
-                                                            />
+                                                                pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" (blur)="IsExist()"
+                                                                tabindex="14" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Passport No</label>
                                                             <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567"
-                                                                pattern="[A-Za-z]{1}[0-9]{7}" (blur)="onSavePersonalDetails()" tabindex="15"
-                                                            />
+                                                                pattern="[A-Za-z]{1}[0-9]{7}" (blur)="IsExist()"
+                                                                tabindex="15" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -505,7 +610,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Tagging</label>
                                                             <input type="text" placeholder="Add Tagging For E.g. ASP.Net, Salesforce" class="form-control text-capitalize" [(ngModel)]="profile.Tag"
-                                                                (blur)="onSavePersonalDetails()" tabindex="21"/>
+                                                                (blur)="onSavePersonalDetails()" tabindex="21" />
                                                         </div>
                                                     </div>
 
@@ -514,7 +619,8 @@
                                                             <label class="control-label">Follow Up Comments</label>
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Follow Up Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
                                                                 tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                tooltipEnable="!profile.FollowUpComments" (blur)="onSavePersonalDetails()" tabindex="22">
+                                                                tooltipEnable="!profile.FollowUpComments" (blur)="onSavePersonalDetails()"
+                                                                tabindex="22">
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -555,7 +661,7 @@
                                                                                     <option *ngFor="let year of years" [value]="year.Id">{{year.Value}}</option>
                                                                                 </select>-->
                                                                                     <input type="number" placeholder="YYYY" class="form-control" max="{{CurrentYear}}" maxlength="4" min="1950" [(ngModel)]="qualification.YearofPassing"
-                                                                                        required="" tabindex="24"/>
+                                                                                        required="" tabindex="24" />
 
                                                                                 </div>
                                                                             </div>
@@ -567,7 +673,8 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <!--<div *ngFor="let grd of qualification.Grade">-->
-                                                                                    <select (change)='onSelectGrade($event.target.value)' class="form-control" required [(ngModel)]="qualification.Grade.Id" tabindex="25">
+                                                                                    <select (change)='onSelectGrade($event.target.value)' class="form-control" required [(ngModel)]="qualification.Grade.Id"
+                                                                                        tabindex="25">
                                                                                     <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Value}}</option>
                                                                                 </select>
                                                                                     <!--</div>-->
@@ -581,7 +688,7 @@
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
                                                                                     <input type="number" placeholder="" class="form-control" max="100" maxlength="3" min="0" [(ngModel)]="qualification.Marks"
-                                                                                        required="" tabindex="26"/>
+                                                                                        required="" tabindex="26" />
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -779,7 +886,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Follow Up Comments" style="resize:vertical"
+                                                            <textarea class="form-control text-capitalize" id="txtFolloUpForSkill" rows="2" placeholder="Follow Up Comments" style="resize:vertical"
                                                                 [(ngModel)]="profile.FollowUpComments" tooltip="Follow Up Comments"
                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments"
                                                                 (blur)='onSaveSkillsDetails()' tabindex="1">
@@ -1203,7 +1310,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Follow Up Comments" style="resize:vertical"
+                                                            <textarea class="form-control text-capitalize" id="txtFolloUpForSal" rows="2" placeholder="Follow Up Comments" style="resize:vertical"
                                                                 [(ngModel)]="profile.FollowUpComments" tooltip="Follow Up Comments"
                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments"
                                                                 (blur)='onSaveSalaryDetails()' tabindex="1">
@@ -1267,7 +1374,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.HowMuchVariable" (blur)='onSaveSalaryDetails()'
-                                                                    tabindex="5"/>
+                                                                        tabindex="5" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1293,7 +1400,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.AllowanceInHand" (blur)='onSaveSalaryDetails()'
-                                                                    tabindex="7"/>
+                                                                        tabindex="7" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1316,7 +1423,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="" class="form-control" [(ngModel)]="profile.CandidateSalaryDetails.IncentiveInHand" (blur)='onSaveSalaryDetails()'
-                                                                    tabindex="9"/>
+                                                                        tabindex="9" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1456,7 +1563,7 @@
                                                             <div class="col-md-12">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Follow Up Comments</label>
-                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Follow Up Comments" style="resize:vertical"
+                                                                    <textarea class="form-control text-capitalize" id="txtFolloupForProf" rows="2" placeholder="Follow Up Comments" style="resize:vertical"
                                                                         [(ngModel)]="profile.FollowUpComments" tooltip="Follow Up Comments"
                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments"
                                                                         (blur)="onSaveProfessionalDetails()" tabindex="1">
@@ -1493,7 +1600,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label">Offer Details </label>
                                                                     <input type="text" placeholder="Offer Details" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.OfferDetails"
-                                                                        (blur)="onSaveProfessionalDetails()" tabindex="4"/>
+                                                                        (blur)="onSaveProfessionalDetails()" tabindex="4" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -1526,7 +1633,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label">Role Expected </label>
                                                                     <input type="text" placeholder="Role Expected" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.RoleExpected"
-                                                                        (blur)="onSaveProfessionalDetails()" tabindex="6"/>
+                                                                        (blur)="onSaveProfessionalDetails()" tabindex="6" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4">
@@ -1668,7 +1775,8 @@
                                                                         <div class="row text-center">
                                                                             <div class="col-md-12">
                                                                                 <input type="number" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience"
-                                                                                    (blur)='onSaveCareerProfileDetails()' tabindex="20"/>
+                                                                                    (blur)='onSaveCareerProfileDetails()' tabindex="20"
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1679,7 +1787,8 @@
                                                                         <div class="row text-center">
                                                                             <div class="col-md-12">
                                                                                 <input type="number" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience"
-                                                                                    (blur)='onSaveCareerProfileDetails()' tabindex="21"/>
+                                                                                    (blur)='onSaveCareerProfileDetails()' tabindex="21"
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1757,8 +1866,7 @@
                                                                                                 required="" tooltip="Company Name"
                                                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                                                 tooltipEnable="!EmployersInformation.Company"
-                                                                                                tabindex="22"
-                                                                                            />
+                                                                                                tabindex="22" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1774,8 +1882,7 @@
                                                                                                     required="" tooltip="Please enter Designation in specified company"
                                                                                                     tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                                                     tooltipEnable="!EmployersInformation.DesignationRole"
-                                                                                                    tabindex="23"
-                                                                                                />
+                                                                                                    tabindex="23" />
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -1791,8 +1898,7 @@
                                                                                                 required="" tooltip="Please enter working location for specified company"
                                                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                                                 tooltipEnable="!EmployersInformation.Location"
-                                                                                                tabindex="24"
-                                                                                            />
+                                                                                                tabindex="24" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1802,7 +1908,7 @@
                                                                                     <label class="control-label">From Date <span class="required"> * </span></label>
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
-                                                                                            <input type="date" name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" tabindex="25"/>
+                                                                                            <input type="date" name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" tabindex="25" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1813,7 +1919,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
                                                                                             <!--<p-calendar [(ngModel)]="date2"></p-calendar>-->
-                                                                                            <input type="date" name="bday" id="toDate" required="" [(ngModel)]="EmployersInformation.ToDate" tabindex="26"/>
+                                                                                            <input type="date" name="bday" id="toDate" required="" [(ngModel)]="EmployersInformation.ToDate" tabindex="26" />
                                                                                             <!--<datepicker [(ngModel)]="data.date" [expanded]="true"></datepicker>-->
                                                                                             <!--<date-picker [(ngModel)]="EmployersInformation.ToDate"></date-picker>-->
                                                                                         </div>
@@ -1844,8 +1950,8 @@
                                                                                             <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" [(ngModel)]="EmployersInformation.IsCurrentCompany"
                                                                                                 tooltip="Check for Adding filled details as current employer/employment Details"
                                                                                                 tooltipPlacement="bottom" tooltipTrigger="mouseenter"
-                                                                                                tooltipEnable="!EmployersInformation.IsCurrentCompany" tabindex="27"
-                                                                                            />
+                                                                                                tooltipEnable="!EmployersInformation.IsCurrentCompany"
+                                                                                                tabindex="27" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1946,7 +2052,8 @@
                                                                         <div class="row">
                                                                             <div class="col-md-8">
                                                                                 <input type="number" placeholder="0" class="form-control" min="0" [(ngModel)]="profile.CandidateTeamManagement.NoofTeamMembers"
-                                                                                    (blur)='onSaveTeamManagementDetails()' tabindex="30"/>
+                                                                                    (blur)='onSaveTeamManagementDetails()' tabindex="30"
+                                                                                />
                                                                             </div>
                                                                         </div>
                                                                     </div>

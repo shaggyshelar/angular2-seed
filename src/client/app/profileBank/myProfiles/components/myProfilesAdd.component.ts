@@ -69,8 +69,8 @@ export class MyProfilesAddComponent implements OnActivate {
     IncentiveFlag: boolean = false;
     FunctionalExp: boolean = false;
     // For Duplicate Records
-    //isExist: boolean = false;
-    //existedProfile: CandidateProfile;
+    isExist: boolean = false;
+    existedProfile: CandidateProfile;
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -132,13 +132,13 @@ export class MyProfilesAddComponent implements OnActivate {
                 if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === true) {
                     this.VariableCTC = true;
                 }
-                if(this.profile.CandidateSalaryDetails.Allowance === true){
+                if (this.profile.CandidateSalaryDetails.Allowance === true) {
                     this.AllowanceFlag = true;
                 }
-                if(this.profile.CandidateSalaryDetails.Incentive === true){
+                if (this.profile.CandidateSalaryDetails.Incentive === true) {
                     this.IncentiveFlag = true;
                 }
-                if(this.profile.CandidateSkills.AnyFunctionalExpFlag === true){
+                if (this.profile.CandidateSkills.AnyFunctionalExpFlag === true) {
                     this.FunctionalExp = true;
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
@@ -739,22 +739,48 @@ export class MyProfilesAddComponent implements OnActivate {
     onPersonalInfoTabClick() {
         $('#txtFirstName').focus();
     }
+    onSkillTabClick() {
+        $('#txtFolloUpForSkill').focus();
+    }
+    onProfessionalInfoTabClick() {
+        $('#txtFolloupForProf').focus();
+    }
+    onSalaryTabClick() {
+        $('#txtFolloUpForSal').focus();
+    }
     /** Check is current information is already exist in database.*/
-    // IsExist() {
-    //     this._myProfilesService.isExist(this.profile)
-    //         .subscribe(
-    //         (results: any) => {
-    //             if (results.isExist) {
-    //                 if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
-    //                     this.existedProfile = <any>results.profileBankObjects;
-    //                     this.isExist = <any>results.isExist;
-    //                     this.toastr.error('Profile already exist');
-    //                 }
-    //             } else {
-    //                 this.isExist = false;
-    //                 this.onSavePrimaryInfo();
-    //             }
-    //         },
-    //         error => this.toastr.error(<any>error));
-    // }
+    IsExist() {
+        this._myProfilesService.isExist(this.profile)
+            .subscribe(
+            (results: any) => {
+                if (results.isExist) {
+                    if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
+                        this.existedProfile = <any>results.profileBankObjects;
+                        this.isExist = <any>results.isExist;
+                        this.toastr.error('Profile already exist');
+                    }
+                } else {
+                    this.isExist = false;
+                    this.onSavePrimaryInfo();
+                }
+            },
+            error => this.toastr.error(<any>error));
+    }
+    /**Redirecting to candidate's all interview history page */
+    getCandidateHistory(_candidateID: MasterData) {
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
+        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+    }
+     /** Delete Prfile will be available only to the Recruitment Head*/
+    deleteCandidate(CandidateID: MasterData) {
+        this._profileBankService.deleteProfile(CandidateID)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+                //this.getMyProfiles();
+            },
+            error => this.toastr.error(<any>error));
+    }
 }

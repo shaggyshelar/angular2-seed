@@ -18,10 +18,19 @@
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-11">
                             <h4>{{historyOfCandidate.Value}} history with Eternus</h4>
                         </div>
+                        <div class="col-md-1">
+                            <a href="javascript:;" class="btn btn-icon-only green pull-right" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
+                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(historyOfCandidate)'>
+                                <i class="glyphicon glyphicon-user"> </i>
+                            </a>
+
+                        </div>
                     </div>
+
+
                 </div>
                 <div class="portlet-body">
 
@@ -146,8 +155,10 @@
                                                             <td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
                                                             <!--<td> {{getDate(candidateHistory.InterviewDate)}}</td>-->
                                                             <td> {{candidateHistory.InterviewDate}}
-                                                                <br>Time:{{candidateHistory.InterviewFromTime ? candidateHistory.InterviewFromTime : "N/A" }}
-                                                                <br>Actual Time:{{candidateHistory.InterviewActualTime ? candidateHistory.InterviewActualTime : "N/A" }}
+                                                                <br>Time:{{candidateHistory.InterviewFromTime ? candidateHistory.InterviewFromTime
+                                                                : "N/A" }}
+                                                                <br>Actual Time:{{candidateHistory.InterviewActualTime ?
+                                                                candidateHistory.InterviewActualTime : "N/A" }}
                                                             </td>
                                                             <td> {{candidateHistory.Status}}</td>
                                                             <td>
