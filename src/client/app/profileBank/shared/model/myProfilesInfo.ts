@@ -123,7 +123,7 @@ export class Skills {
   public CandidateID: MasterData = new MasterData();
   public ExpInSkill: string;
   public AnyFunctionalExp: string;
-  public AnyFunctionalExpFlag: boolean = false;
+  public AnyFunctionalExpFlag: boolean;
   public PrimarySkills: string;
   public SecondarySkills: string;
   public OtherSkills: string;

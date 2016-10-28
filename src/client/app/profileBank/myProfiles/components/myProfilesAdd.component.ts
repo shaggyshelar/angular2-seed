@@ -132,6 +132,15 @@ export class MyProfilesAddComponent implements OnActivate {
                 if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === true) {
                     this.VariableCTC = true;
                 }
+                if(this.profile.CandidateSalaryDetails.Allowance === true){
+                    this.AllowanceFlag = true;
+                }
+                if(this.profile.CandidateSalaryDetails.Incentive === true){
+                    this.IncentiveFlag = true;
+                }
+                if(this.profile.CandidateSkills.AnyFunctionalExpFlag === true){
+                    this.FunctionalExp = true;
+                }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
                     this.getStates(results.Country.Id);
@@ -726,6 +735,9 @@ export class MyProfilesAddComponent implements OnActivate {
     }
     previousTab() {
         $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+    }
+    onPersonalInfoTabClick() {
+        $('#txtFirstName').focus();
     }
     /** Check is current information is already exist in database.*/
     // IsExist() {
