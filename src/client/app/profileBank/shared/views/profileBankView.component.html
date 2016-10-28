@@ -12,12 +12,17 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li><span class="active">View</span>
-</li>
-</ul>
-<div class="row">
+            </li>
+        </ul>
+        <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
                     <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+                    <a href="javascript:;" class="btn btn-icon-only purple pull-right" data-toggle="tooltip" data-placement="top" title="View Interview History"
+                        tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                        (click)='getCandidateHistory(CandidateID)'>
+                        <i class="fa fa-history"> </i>
+                    </a>
                     <div *ngIf="profile!==null" class="details">
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
