@@ -312,7 +312,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     isOfferGenerationVisible(lastInterviewRound: string, status: string) {
-        if (lastInterviewRound.toLowerCase().includes('hr') && status.toLowerCase() != 'awaiting approval') {
+        if (lastInterviewRound.toLowerCase().includes('hr') && status.toLowerCase() !== 'awaiting approval') {
             return false;
         } else { return true; }
     }

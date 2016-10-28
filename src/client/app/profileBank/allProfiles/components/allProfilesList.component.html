@@ -1,66 +1,66 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
-    <div class="page-content" style="margin-left: 203px;margin-right: -15px;">
+	<!-- BEGIN CONTENT BODY -->
+	<div class="page-content" style="margin-left: 203px;margin-right: -15px;">
 
-        <!--BEGIN breadcrumb -->
-        <ul style="display:none" class="page-breadcrumb breadcrumb">
-            <li>
-                <a [routerLink]="['/App']"> Home </a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <span class="active">All Profile</span>
-            </li>
-        </ul>
-        <!--End Breadcrumb>-->
-        <div class="row">
-            <div class="col-md-12">
-                <div class="portlet light bordered">
-                    <div class="portlet-title">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div>
-                                    <h4><i class="fa fa-list"></i> All Profiles</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="dt-buttons pull-right">
-                                    <button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
+		<!--BEGIN breadcrumb -->
+		<ul style="display:none" class="page-breadcrumb breadcrumb">
+			<li>
+				<a [routerLink]="['/App']"> Home </a>
+				<i class="fa fa-circle"></i>
+			</li>
+			<li>
+				<span class="active">All Profile</span>
+			</li>
+		</ul>
+		<!--End Breadcrumb>-->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="row">
+							<div class="col-md-4">
+								<div>
+									<h4><i class="fa fa-list"></i> All Profiles</h4>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="dt-buttons pull-right">
+									<button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
                                               <i class="fa fa-angle-down"></i>
                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
+									<ul class="dropdown-menu" role="menu">
+										<li>
+											<button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
                                                 <i class="fa fa-envelope-o"></i>   Send Mails </button>
-                                        </li>
-                                        <li class="divider" [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "> </li>
-                                        <li>
-                                            <button class="btn btn-default btnLink" [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " [disabled]='!selectedRowCount'
-                                                (click)='transferOwnerShipClick()'>
+										</li>
+										<li class="divider" [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "> </li>
+										<li>
+											<button class="btn btn-default btnLink" [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] " [disabled]='!selectedRowCount'
+												(click)='transferOwnerShipClick()'>
                                                 <i class="fa fa-share"></i>     Transfer Ownership
                                             </button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
 
-                    </div>
-                    <div class="portlet-body">
-                        <div class="table-toolbar">
+					</div>
+					<div class="portlet-body">
+						<div class="table-toolbar">
 
-                            <div id="updateRow" *ngIf='isCollapsed'>
-                                <span class="header font-green sbold uppercase">Blacklist: {{currentCandidate}}</span>
-                                <hr style="margin:0px 0px !important" />
-                                <form role="form" (submit)="onUpdateStauts()">
-                                    <div class="row" style="margin-top: 10px">
-                                        <!--<div class="col-md-3">
+							<div id="updateRow" *ngIf='isCollapsed'>
+								<span class="header sbold">You are blacklisting <span class="font-red uppercase">{{currentCandidate}}</span> !</span>
+								<hr style="margin:0px 0px !important" />
+								<form role="form" (submit)="onUpdateStauts()">
+									<div class="row" style="margin-top: 10px;margin-left: 0px;">
+										<!--<div class="col-md-3">
                                             <div class="form-group">
                                                 <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
                                             </div>
                                         </div>-->
-                                        <!--<div class="col-md-3">
+										<!--<div class="col-md-3">
                                             <div class="form-group">
                                                 (change)='onSelectStatus($event.target.value)' 
                                                 <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
@@ -69,34 +69,34 @@
                                                 </select>
                                             </div>
                                         </div>-->
-                                        <div class="col-md-9">
-                                            <div class="form-group">
-                                                <div class="edit-content"></div>
-                                                <textarea class="form-control" rows="1" placeholder="Enter reason" style="resize:vertical width:100%" [(ngModel)]="profile.Comments"
-                                                    required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                    tooltipEnable="!profile.Comments">
+										<div class="col-md-9">
+											<div class="form-group">
+												<div class="edit-content"></div>
+												<textarea class="form-control red sbold statusComments" rows="1" placeholder="Enter reason" style="resize:vertical; width:100%"
+													[(ngModel)]="profile.Comments" required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
+													tooltipEnable="!profile.Comments">
                                                 </textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button type="submit" class="btn btn-info updatebtn"> Update </button> &nbsp;
-                                            <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
-                                        </div>
-                                        <!--<div class="col-md-1">
+											</div>
+										</div>
+										<div class="col-md-3">
+											<button type="submit" class="btn btn-info updatebtn"> Update </button> &nbsp;
+											<a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
+										</div>
+										<!--<div class="col-md-1">
                                             <button type="submit" class="btn btn-info "> Update </button>
                                         </div>
                                         <div class="col-md-1">
                                             <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
                                         </div>-->
-                                    </div>
-                                </form>
-                                <hr style="margin:8px 0px !important" />
-                            </div>
+									</div>
+								</form>
+								<hr style="margin:8px 0px !important" />
+							</div>
 
-                            <div class="row" *ngIf="!NORECORDSFOUND">
-                                <div class="col-md-3 col-sm-3">
-                                    <div class="dataTables_length" id="sample_1_length">
-                                        <label>Show :
+							<div class="row" *ngIf="!NORECORDSFOUND">
+								<div class="col-md-3 col-sm-3">
+									<div class="dataTables_length" id="sample_1_length">
+										<label>Show :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
                                             [(ngModel)]="allProfilesList.GrdOperations.PerPageCount" 
                                             (ngModelChange)="onChange()">
@@ -106,10 +106,10 @@
                                                 <option value="200">200</option>
                                             </select>
                                         </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-3">
-                                    <label>Sort By :
+									</div>
+								</div>
+								<div class="col-md-3 col-sm-3">
+									<label>Sort By :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
                                             [(ngModel)]="allProfilesList.GrdOperations.OrderBy"
                                             (ngModelChange)="onChange()" >
@@ -120,9 +120,9 @@
                                                 
                                             </select>
                                         </label>
-                                </div>
-                                <div class="col-md-3 col-sm-3">
-                                    <label>Order By :
+								</div>
+								<div class="col-md-3 col-sm-3">
+									<label>Order By :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" 
                                             [(ngModel)]="allProfilesList.GrdOperations.Order"  
                                             (ngModelChange)='onChange()'>
@@ -130,80 +130,76 @@
                                                 <option value="desc">Descending</option>
                                             </select> 
                                             </label>
-                                </div>
-                                <div class="col-md-3 col-sm-4">
-                                    <div id="sample_1_filter" class="dataTables_filter">
-                                        <label>Search :
+								</div>
+								<div class="col-md-3 col-sm-4">
+									<div id="sample_1_filter" class="dataTables_filter">
+										<label>Search :
                                             <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
                                             </label>
-                                    </div>
-                                </div>
-                            </div>
+									</div>
+								</div>
+							</div>
 
-                            <div class="table">
-                                <table class="table table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid"
-                                    aria-describedby="sample_1_info">
-                                    <thead class="thead">
-                                        <tr>
-                                            <td>
-                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+							<div class="table">
+								<table class="table table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid"
+									aria-describedby="sample_1_info">
+									<thead class="thead">
+										<tr>
+											<td>
+												<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" (change)="onAllSelect($event)"
                                                      [(ngModel)]='allChecked'/><span></span>
                                                 </label>
-                                            </td>
-                                            <th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Candidates</th>
-                                            <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+											</td>
+											<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Candidates</th>
+											<!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
-                                            <!--<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>-->
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!--CandidateProfiles   allProfilesList.Profiles-->
-                                        <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" class="" *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString ">
-                                            <td>
-                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+											<!--<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>-->
+										</tr>
+									</thead>
+									<tbody>
+										<!--CandidateProfiles   allProfilesList.Profiles-->
+										<tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" class="" *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString ">
+											<td>
+												<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='profile.CandidateID' [(ngModel)]='profile.IsChecked' (change)="onStateChange($event)"/>
                                                     <span></span>
                                                 </label>
-                                            </td>
-                                            <td>
-                                                <div class="row portlet-title" style="width:100%">
-                                                    <div class="actions pull-right">
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditProfile(profile.CandidateID)'
-                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                                            title="Edit Profile" [disabled]='getEditAccess(profile.Owner)'>
+											</td>
+											<td>
+												<div class="row portlet-title" style="width:100%">
+													<div class="actions pull-right">
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditProfile(profile.CandidateID)'
+															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Edit Profile" [disabled]='getEditAccess(profile.Owner)'>
                                                             <i class="fa fa-edit "></i><!-- Edit Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
-                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile"
-                                                            tooltipEnable="true">
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
+															tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile" tooltipEnable="true">
                                                             <i class="fa fa-search"></i> <!--View Profile-->
                                                         </button>
 
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='getCandidateHistory(profile.CandidateID)'
-                                                            tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                            title="View Interview History" tooltipEnable="true">
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='getCandidateHistory(profile.CandidateID)'
+															tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History"
+															tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Blacklist Profile"
-                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                                            title="Blacklist Profile" [disabled]='getEditAccess(profile.Owner)'>
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Blacklist Profile"
+															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile" [disabled]='getEditAccess(profile.Owner)'>
                                                             <i class="icon-flag"></i> <!--Blacklist Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
-                                                            tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                            title="Delete Profile" tooltipEnable="true">
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
+															tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true">
                                                             <i class="fa fa-remove "></i> <!--Delete Profile-->
                                                         </button>
 
-                                                    </div>
-                                                </div>
-                                                <detail-profile [selectedProfile]="profile"></detail-profile>
-                                            </td>
-                                            <!-- ng Binding -->
-                                            <!--<td>
+													</div>
+												</div>
+												<detail-profile [selectedProfile]="profile"></detail-profile>
+											</td>
+											<!-- ng Binding -->
+											<!--<td>
                                                 <tr>
                                                     <td style="float: left;">&nbsp; {{profile.Candidate}}</td>
                                                 </tr>
@@ -235,68 +231,68 @@
                                                 
                                                 <a (click)='getResume(profile.CandidateID)'><i class="fa fa-download" aria-hidden="true" ></i>{{profile.Resume_ID}}</a>
                                             </td>-->
-                                            <!-- ng Binding -->
+											<!-- ng Binding -->
 
-                                            <td style="width:8%; Display:none;">
-                                                <div class="btn-group">
-                                                    <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+											<td style="width:8%; Display:none;">
+												<div class="btn-group">
+													<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                             <i class="fa fa-angle-down"></i>
                                                         </button>
-                                                    <ul class="dropdown-menu pull-right" role="menu">
-                                                        <li>
-                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='redirectToEditProfile(profile.CandidateID)'>
+													<ul class="dropdown-menu pull-right" role="menu">
+														<li>
+															<button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='redirectToEditProfile(profile.CandidateID)'>
                                                                  <i class="icon-user"></i> Edit Profile 
                                                              </button>
-                                                        </li>
-                                                        <li class="divider"> </li>
+														</li>
+														<li class="divider"> </li>
 
-                                                        <li>
-                                                            <button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)'>
+														<li>
+															<button class="btn btn-default btnLink" [disabled]='getEditAccess(profile.Owner)' (click)='SaveCandidateID(profile.CandidateID)'>
                                                                   <i class="icon-flag"></i> Blacklist Profile </button>
-                                                        </li>
-                                                        <li class="divider"> </li>
-                                                        <li>
-                                                            <a (click)='redirectToView(profile.CandidateID)'>
-                                                                <i class="fa fa-search-plus"></i>View Profile</a>
-                                                        </li>
-                                                        <!-- TODO:: update Delete Permission once recive from backend -->
-                                                        <li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
-                                                            <a (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
-                                                                <i class="fa fa-remove"></i>Delete Profile</a>
-                                                        </li>
-                                                        <li>
-                                                            <a (click)='getCandidateHistory(profile.CandidateID)'>
-                                                                <i class="fa fa-history"></i>View Interview History</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
+														</li>
+														<li class="divider"> </li>
+														<li>
+															<a (click)='redirectToView(profile.CandidateID)'>
+																<i class="fa fa-search-plus"></i>View Profile</a>
+														</li>
+														<!-- TODO:: update Delete Permission once recive from backend -->
+														<li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+															<a (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+																<i class="fa fa-remove"></i>Delete Profile</a>
+														</li>
+														<li>
+															<a (click)='getCandidateHistory(profile.CandidateID)'>
+																<i class="fa fa-history"></i>View Interview History</a>
+														</li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
 
-                            </div>
-                            <div class="row" *ngIf="!NORECORDSFOUND">
-                                <div class="col-md-10">
-                                </div>
-                                <div class="col-md-2 ">
-                                    <button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+							</div>
+							<div class="row" *ngIf="!NORECORDSFOUND">
+								<div class="col-md-10">
+								</div>
+								<div class="col-md-2 ">
+									<button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
                                         &laquo; Prev</button> &nbsp;&nbsp;
-                                    <button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+									<button type="button" class="btn btn-default" [disabled]="!allProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
                                         Next &raquo;</button>
-                                </div>
-                            </div>
-                            <div>
-                                <!--<rms-grid [meta]="meta"></rms-grid>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END PAGE BASE CONTENT -->
-            </div>
-            <!-- END CONTENT BODY -->
-        </div>
-        <!-- END CONTENT -->
-    </div>
+								</div>
+							</div>
+							<div>
+								<!--<rms-grid [meta]="meta"></rms-grid>-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE BASE CONTENT -->
+			</div>
+			<!-- END CONTENT BODY -->
+		</div>
+		<!-- END CONTENT -->
+	</div>
 </div>

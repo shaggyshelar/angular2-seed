@@ -53,7 +53,7 @@ export class MyRRFAddComponent implements OnActivate {
     isDisabled: boolean = false;
     feedbackComment: string = '';
     previousExpectedDateValue: Date;
-    navagateBackPath: string ='';
+    navagateBackPath: string = '';
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -211,9 +211,9 @@ export class MyRRFAddComponent implements OnActivate {
 
         let res: any;
         res = confirm(
-            "Data will be lost if you leave the page, are you sure?"
+            'Data will be lost if you leave the page, are you sure?'
         );
-        if (res == true) {
+        if (res === true) {
             if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
                 this._router.navigate(['/App/RRF/FeedbackPending/']);
             } else {

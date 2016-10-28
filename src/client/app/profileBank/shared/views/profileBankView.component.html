@@ -165,7 +165,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-8 "><b>Total Experience :</b></label>
                                                         <div class="col-md-3">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.TotalExperience?profile.CandidateCareerProfile.TotalExperience:"N/A":"N/A"}}
+                                                            {{profile.TotalExperience?profile.TotalExperience:"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -173,7 +173,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-8 "><b>Relevant Experience:</b></label>
                                                         <div class="col-md-2">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.RelevantExperience?profile.CandidateCareerProfile.RelevantExperience:"N/A":"N/A"}}
+                                                            {{profile.RelevantExperience?profile.RelevantExperience:"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -182,7 +182,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Current Company:</b></label>
                                                         <div class="col-md-6">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentCompany?profile.CandidateCareerProfile.CurrentCompany:"N/A":"N/A"}}
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile[0].CurrentCompany?profile.CandidateCareerProfile[0].CurrentCompany:"N/A":"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,7 +194,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-4 "><b>Current Designation & Role:</b></label>
                                                         <div class="col-md-8">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A":"N/A"}}
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile[0].CurrentDesignationRole?profile.CandidateCareerProfile[0].CurrentDesignationRole:"N/A":"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -202,7 +202,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-7 "><b>Time Spent In Current Company:</b></label>
                                                         <div class="col-md-2">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.TimeSpentInCurrentCompany?profile.CandidateCareerProfile.TimeSpentInCurrentCompany:"N/A":"N/A"}}
+                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile[0].TimeSpentInCurrentCompany?profile.CandidateCareerProfile[0].TimeSpentInCurrentCompany:"N/A":"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>

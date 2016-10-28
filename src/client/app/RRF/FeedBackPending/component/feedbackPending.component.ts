@@ -1,22 +1,23 @@
-import {Component} from '@angular/core';
-import {OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
-import { RRFFeedback} from '../../myRRF/models/rrfDetails';
+import { Component } from '@angular/core';
+import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { RRFFeedback } from '../../myRRF/models/rrfDetails';
 import { FeedbackPendingService } from '../services/feedbackPending.service';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ResponseFromAPI, GrdOptions, MasterData, SortingMasterData } from '../../../shared/model/common.model';
-import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
-import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { RRFPipe } from '../../shared/Filters/RRFFilter.component';
+import { RRFGridRowComponent } from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { MastersService } from '../../../shared/services/masters.service';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
-import {FeedbackDataComponent} from '../../shared/components/feedbackData/feedbackData.component';
-import { FeedBackpending} from '../models/feedbackPending';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
+import { FeedbackDataComponent } from '../../shared/components/feedbackData/feedbackData.component';
+import { FeedBackpending } from '../models/feedbackPending';
+import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-feedbackPending',
     templateUrl: 'feedbackPending.component.html',
-    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent, IfAuthorizeDirective, FeedbackDataComponent],
+    directives: [ROUTER_DIRECTIVES, RRFGridRowComponent, IfAuthorizeDirective, TOOLTIP_DIRECTIVES, FeedbackDataComponent],
     styleUrls: ['../../shared/css/RRF.component.css'],
     providers: [ToastsManager, FeedbackPendingService, MastersService],
     pipes: [RRFPipe],
@@ -207,7 +208,7 @@ export class FeedbackPendingComponent implements OnActivate {
     allowEditRRF(rrf: FeedBackpending) {
         try {
             if (rrf.RaisedBy.Id === this.logedInUser.Id) {
-                if (rrf.FeedbackStatus.toLowerCase()=== 'update needed') {
+                if (rrf.FeedbackStatus.toLowerCase() === 'update needed') {
                     return true;
                 } else {
                     return false;
