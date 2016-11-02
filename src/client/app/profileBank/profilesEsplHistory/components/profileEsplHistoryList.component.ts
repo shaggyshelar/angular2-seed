@@ -38,7 +38,6 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     }
     /**Function to get candidates interviews history with ESPL */
     getProfilesHistory(_candidateID: MasterData) {
-        /** TODO:: write service call for history  getProfilesInterviewHistory*/
         this.profilesHistoryService.getProfilesInterviewHistory(_candidateID)
             .subscribe(
             (results: any) => {
@@ -82,6 +81,9 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     }
     redirectToView(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+    }
+    Back() {
+        this._router.navigate(['/App/ProfileBank/MyProfiles']);
     }
 
 }

@@ -65,7 +65,7 @@ export class MyRRFAddComponent implements OnActivate {
 
     routerOnActivate(segment: RouteSegment): void {
         window.onbeforeunload = function () {
-            return "Data will be lost if you leave the page, are you sure?";
+            return 'Data will be lost if you leave the page, are you sure?';
         };
         this.navagateBackPath = sessionStorage.getItem('navigationPath');
         this.setMinDateToCalender();
