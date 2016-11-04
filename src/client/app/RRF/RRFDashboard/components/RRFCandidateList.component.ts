@@ -265,10 +265,10 @@ export class RRFCandidateListComponent implements OnActivate {
                         this.AllCandidatesForRRF[index].isInterviewScheduled = false;
                         break;
                     case 'scheduled':
-                    //case 're-scheduled':
-                    // case 'Cancelled':
-                    //     this.AllCandidatesForRRF[index].isInterviewScheduled = true;
-                    //     break;
+                        //case 're-scheduled':
+                        // case 'Cancelled':
+                        this.AllCandidatesForRRF[index].isInterviewScheduled = true;
+                        break;
                     case 'declined':
                         this.AllCandidatesForRRF[index].isInterviewScheduled = false;
                         break;
