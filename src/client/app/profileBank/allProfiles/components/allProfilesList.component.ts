@@ -119,7 +119,7 @@ export class AllProfilesListComponent implements OnActivate {
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
-        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/BlackListedProfiles');
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/AllProfiles');
         this._router.navigate(['/App/ProfileBank/AllProfiles/History']);
     }
 

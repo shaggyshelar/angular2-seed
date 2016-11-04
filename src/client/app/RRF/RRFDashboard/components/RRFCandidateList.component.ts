@@ -9,7 +9,8 @@ import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
 import { CandidateProfile, BarChartData } from  '../../../profileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import { InterviewMode } from  '../../../shared/constantValue/index';
-//import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
+import {CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
 import {RRFSpecificCandidateList, TransferInterview} from '../model/RRFCandidateList';
 import {Interview} from '../../../recruitmentCycle/shared/model/interview';
@@ -19,7 +20,7 @@ import { RRFDetails } from '../../myRRF/models/rrfDetails';
     moduleId: module.id,
     selector: 'rrf-candidate-list',
     templateUrl: 'RRFCandidateList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES],
     styleUrls: ['RRFDashboard.component.css'],
     providers: [ToastsManager]
 })
@@ -351,6 +352,8 @@ export class RRFCandidateListComponent implements OnActivate {
                 },
                 error => this.errorMessage = <any>error);
         }
+        var cnfrmbx: any = $('#prcedfrOffrgenration');
+        cnfrmbx.modal('hide');
     }
     /**---------BEGING Transfer candidate functionality-------------*/
     /**Transfer candidat from current RRF to other Open RRF */
@@ -474,7 +477,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.setActualTimeForm = false;
     }
     nevigateToInitiateRRF() {
-        sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard/Candidates/'+ this.RRFID.Value);
+        sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard/Candidates/' + this.RRFID.Value);
         this._router.navigate(['App/RRF/MyRRF/Add']);
     }
 }

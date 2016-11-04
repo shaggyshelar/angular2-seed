@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import { ProfileInterviewHistory, AllInterviewsHistory }from '../models/profileEsplHistoryModel';
 import { MasterData } from  '../../../shared/model/index';
@@ -25,6 +25,7 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     historyOfCandidate: MasterData;
     errorMessage: string;
     NORECORDSFOUND: boolean = false;
+    returnPath: string;
     constructor(private _router: Router,
         public toastr: ToastsManager,
         private profilesHistoryService: ProfileEsplHistoryService) {
@@ -33,7 +34,8 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
 
     routerOnActivate() {
         /** */
-        this.historyOfCandidate = this.getSessionOf<MasterData>('HistoryOfCandidate');
+        this.historyOfCandidate = this.getSessionOf<MasterData>('HistoryOfCandidate', true);
+        this.returnPath = this.getSessionOf<string>('onReturnPath', false);
         this.getProfilesHistory(this.historyOfCandidate);
     }
     /**Function to get candidates interviews history with ESPL */
@@ -68,10 +70,11 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     // }
 
     /**Get data from session */
-    getSessionOf<T>(variableName: string): T {
+    getSessionOf<T>(variableName: string, isJson: Boolean): T {
         var _requestedIef = sessionStorage.getItem(variableName);
+        //var response: any;
         if (_requestedIef !== null) {
-            var response = JSON.parse(_requestedIef);
+            var response = isJson ? JSON.parse(_requestedIef) : _requestedIef;
             sessionStorage.setItem(variableName, '');
         } else {
             /** If no information found from Session then it will redirected to existing page */
@@ -83,7 +86,7 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     Back() {
-        this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        this._router.navigate([this.returnPath]);
     }
 
 }
