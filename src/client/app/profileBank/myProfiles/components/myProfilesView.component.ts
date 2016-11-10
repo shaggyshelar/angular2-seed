@@ -3,7 +3,7 @@ import { ROUTER_DIRECTIVES, RouteSegment, Router, OnActivate} from '@angular/rou
 import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
@@ -18,16 +18,19 @@ export class MyProfilesViewComponent implements OnActivate {
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
     errorMessage: string;
-    TITLE:string ='Profiles';
+    returnPath: string;
+    TITLE: string = 'Profiles';
     count: number = 0;
     constructor(private _profileBankService: ProfileBankService,
-        private _router: Router) {
+        private _router: Router,
+        public toastr: ToastsManager) {
         this.profile = new CandidateProfile();
     }
     routerOnActivate(segment: RouteSegment) {
         this.params = segment.getParam('id');
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
+        this.returnPath = this.getSessionOf<string>('onProfilesReturnPath', false);
 
         this._profileBankService.getCandidateProfile(this.CandidateID.Value)
             .subscribe(
@@ -39,7 +42,19 @@ export class MyProfilesViewComponent implements OnActivate {
             error => this.errorMessage = <any>error);
 
     }
-
+    /**Get data from session */
+    getSessionOf<T>(variableName: string, isJson: Boolean): T {
+        var _requestedIef = sessionStorage.getItem(variableName);
+        //var response: any;
+        if (_requestedIef !== null) {
+            var response = isJson ? JSON.parse(_requestedIef) : _requestedIef;
+            sessionStorage.setItem(variableName, '');
+        } else {
+            /** If no information found from Session then it will redirected to existing page */
+            this.toastr.error('Somthing went wrong..!');
+        }
+        return response;
+    }
     convertCheckboxesValues() {
         if (this.profile.IsCurrentSameAsPermanent === true) {
             this.profile.IsCurrentSameAsPermanent = 'Yes';
@@ -84,7 +99,11 @@ export class MyProfilesViewComponent implements OnActivate {
         }
     }
     Back() {
-        this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        if (this.returnPath) {
+            this._router.navigate([this.returnPath]);
+        } else {
+            this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        }
     }
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));

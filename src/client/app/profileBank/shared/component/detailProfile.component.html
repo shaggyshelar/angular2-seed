@@ -30,10 +30,7 @@
         <div class="col-md-10">
             <div class="row message">
                 <div class="col-md-8 profile-info">
-                    <h3 class="font-green sbold uppercase">{{profile.Candidate}}</h3>
-                    <!--<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet
-                        dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
-                    </p>-->
+                    <h3 class="font-green sbold uppercase">{{profile.Candidate}} <small> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"":"-"}} </small></h3>
                     <!--<p>
                         <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
                     </p>-->
@@ -92,7 +89,8 @@
                             <li>
                                 <!--notice period-->
                                 <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
-                                    <i class="fa fa-hourglass-half"></i> NP: {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+" days":"N/A"}}
+                                    <i class="fa fa-hourglass-half"></i> NP: {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+"
+                                    days":"N/A"}}
                                 </div>
 
                             </li>

@@ -193,6 +193,7 @@
                                                         </button>
                                                         <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
                                                             tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                            [disabled]="profile.Status.Value.toLowerCase() !== 'Open'.toLowerCase() && profile.Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()"
                                                             title="Delete Profile" tooltipEnable="true">
                                                             <i class="fa fa-remove "></i> <!--Delete Profile-->
                                                         </button>

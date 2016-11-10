@@ -196,7 +196,7 @@
                                                         </button>
 													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "
 														tooltip="View Candidates" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Candidates" tooltipEnable="true"
-														(click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+														(click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf)'>
                                                             <i class="fa fa-users "></i> <!--View Candidates-->
                                                         </button>
 													<button class="btn btn-circle btn-icon-only btn-default btn-xs green" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval' || rrf.Status.Value ==='Rejected'"
@@ -246,8 +246,8 @@
 													</li>
 													<li class="divider " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "> </li>
 													<li>
-														<button class="btn btn-default btnLink " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)'
-															[disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+														<button class="btn btn-default btnLink " [ifAuthorize]="['RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)'
+															[disabled]='checkIfRRFClosed(rrf)'>
                                                             <i class="fa fa-users "></i> View Candidates
                                                         </button>
 													</li>

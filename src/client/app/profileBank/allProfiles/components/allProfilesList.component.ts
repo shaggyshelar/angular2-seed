@@ -4,7 +4,7 @@ import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfi
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { CollapseDirective, TOOLTIP_DIRECTIVES, BUTTON_DIRECTIVES } from 'ng2-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { MasterData, GrdOptions, ResponseFromAPI, SortingMasterData } from  '../../../shared/model/index';
@@ -19,7 +19,7 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
     templateUrl: 'allProfilesList.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective,
+    directives: [DetailProfileComponent, BUTTON_DIRECTIVES, ROUTER_DIRECTIVES, IfAuthorizeDirective, CollapseDirective,
         TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     pipes: [ProfileBankPipe]
@@ -104,6 +104,16 @@ export class AllProfilesListComponent implements OnActivate {
         //Changed as per Backend Request and Bug 
         this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
     }
+    /**Takes confirmation from end User to delete profile */
+    confirmDelete() {
+        let modl: any = $('#deleteProfile');
+        modl.modal('toggle');
+    }
+    /** OnRejection hide the confimation box and exit the delete process */
+    onClearSelection() {
+        let cnfrmBox: any = $('#deleteProfile');
+        cnfrmBox.modal('hide');
+    }
     /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {
         this._profileBankService.deleteProfile(CandidateID)
@@ -115,6 +125,7 @@ export class AllProfilesListComponent implements OnActivate {
                 this.getAllProfiles();
             },
             error => this.toastr.error(<any>error));
+        this.onClearSelection();
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
@@ -164,7 +175,7 @@ export class AllProfilesListComponent implements OnActivate {
 
     onUpdateStauts() {
         this.selectedStatus.Id = 0;
-        this.selectedStatus.Value = "Incomplete";
+        this.selectedStatus.Value = 'Incomplete';
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {

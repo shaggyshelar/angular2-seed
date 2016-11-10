@@ -188,6 +188,16 @@ export class MyProfilesListComponent implements OnActivate {
     redirectToView(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
+    /**Takes confirmation from end User to delete profile */
+    confirmDelete() {
+        let modl: any = $('#deleteProfile');
+        modl.modal('toggle');
+    }
+    /** OnRejection hide the confimation box and exit the delete process */
+    onClearSelection() {
+        let cnfrmBox: any = $('#deleteProfile');
+        cnfrmBox.modal('hide');
+    }
     /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {
         this._profileBankService.deleteProfile(CandidateID)
@@ -198,6 +208,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this.getMyProfiles();
             },
             error => this.toastr.error(<any>error));
+        this.onClearSelection();
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {

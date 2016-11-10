@@ -9,8 +9,8 @@ import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
 import { CandidateProfile, BarChartData } from  '../../../profileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import { InterviewMode } from  '../../../shared/constantValue/index';
-import {CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-
+import {CAROUSEL_DIRECTIVES, TOOLTIP_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
 import {RRFSpecificCandidateList, TransferInterview} from '../model/RRFCandidateList';
 import {Interview} from '../../../recruitmentCycle/shared/model/interview';
@@ -20,7 +20,7 @@ import { RRFDetails } from '../../myRRF/models/rrfDetails';
     moduleId: module.id,
     selector: 'rrf-candidate-list',
     templateUrl: 'RRFCandidateList.component.html',
-    directives: [ROUTER_DIRECTIVES, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, RRFGridRowComponent, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES],
     styleUrls: ['RRFDashboard.component.css'],
     providers: [ToastsManager]
 })
@@ -479,5 +479,9 @@ export class RRFCandidateListComponent implements OnActivate {
     nevigateToInitiateRRF() {
         sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard/Candidates/' + this.RRFID.Value);
         this._router.navigate(['App/RRF/MyRRF/Add']);
+    }
+    redirectToView(CandidateID: MasterData) {
+        sessionStorage.setItem('onProfilesReturnPath', '/App/RRF/RRFDashboard/Candidates/' + this.RRFID.Value + 'ID' + this.RRFID.Id);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 }

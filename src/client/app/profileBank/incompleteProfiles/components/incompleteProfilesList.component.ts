@@ -84,7 +84,16 @@ export class IncompleteProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
     /** END Pagination and sorting functionality */
-
+  /**Takes confirmation from end User to delete profile */
+    confirmDelete() {
+        let modl: any = $('#deleteProfile');
+        modl.modal('toggle');
+    }
+    /** OnRejection hide the confimation box and exit the delete process */
+    onClearSelection() {
+        let cnfrmBox: any = $('#deleteProfile');
+        cnfrmBox.modal('hide');
+    }
     //Delete candidate Profile
     onDeleteProfile(CandidateID: MasterData) {
         this._profileBankService.deleteProfile(CandidateID)

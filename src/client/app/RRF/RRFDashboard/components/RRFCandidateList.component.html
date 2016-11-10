@@ -23,14 +23,15 @@
 					<div class="portlet light bordered">
 						<div class="portlet-title">
 							<div class="caption">
-								<span class="caption-subject bold uppercase">RRF Details</span>
+								<span class="caption-subject bold uppercase">Tagged Candidates Status</span>
 							</div>
 
 						</div>
 						<div class="portlet-body">
 							<div class="row">
 								<div class="col-lg-12">
-									<table class="table table-striped table-bordered table-hover table-checkable order-column">
+									<RRFGridRow [RRFData]=selectedRRF></RRFGridRow>
+									<!--<table class="table table-striped table-bordered table-hover table-checkable order-column">
 										<thead style="word-wrap: break-word;">
 											<tr>
 												<td> <b>Raised by/Date</b> </td>
@@ -73,9 +74,10 @@
 												</td>
 											</tr>
 										</tbody>
-									</table>
+									</table>-->
 								</div>
 							</div>
+							<hr>
 							<div class="portlet-title">
 								<div class="caption">
 									<span class="caption-subject bold">Candidate Details</span>
@@ -90,29 +92,35 @@
 												<tr>
 													<th> # </th>
 													<th>Candidate</th>
+													<!--<th>Last Round</th>-->
+													<th>Interview </th>
 													<th>Status</th>
-													<th>Last Round</th>
-													<th>Interview Mode</th>
 													<th>Actions</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr *ngFor="let selectedcandidate of AllCandidatesForRRF; let index = index">
 													<td> {{index+1}} </td>
-													<td> <a (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'> {{selectedcandidate.Candidate}}</a></td>
-
-													<td> {{selectedcandidate.InterviewDetails.Status}} </td>
-													<td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
+													<td> <a data-toggle="tooltip" data-placement="top" tooltip="Click for Complete profile" tooltipPlacement="top"
+															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(selectedcandidate.CandidateID)'> 
+															{{selectedcandidate.Candidate}}</a>
+													</td>
 													<td>
-														<div> {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</div>
+
+														<div>Round: <strong>{{selectedcandidate.InterviewDetails.Round.Value}}</strong>
+															<br>Mode: {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</div>
 														<div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}</div>
 														<div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}</div>
 													</td>
+													<td> <a data-toggle="tooltip" data-placement="top"  tooltip="Click for interves rounds history" tooltipPlacement="top"
+															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'>
+															{{selectedcandidate.InterviewDetails.Status}}</a></td>
 													<td>
 														<div class="btn-group">
 															<div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Transferred'.toLowerCase()">Not allowed</div>
 															<div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Not suitable'.toLowerCase()">Not allowed</div>
-															<button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Not suitable'.toLowerCase()"
+															<div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Unfit'.toLowerCase()">Not allowed</div>
+															<button class="btn btn-xs green dropdown-toggle" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Not suitable'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Unfit'.toLowerCase()"
 																type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                                 <i class="fa fa-angle-down"></i>
                                                             </button>
@@ -131,11 +139,21 @@
 																</li>
 																<li class="divider"> </li>
 																<li>
-																	<button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)' (click)='onCancelInterviewClick(selectedcandidate)'>
-                                                                        <i class="fa fa-times"></i>Cancel Interview</button>
+																	<button class="btn btn-default btnLink " (click)='onCancelInterviewClick(selectedcandidate)'>
+                                                                        <i class="fa fa-history"></i> View Espl History</button>
+																</li>
+																<li>
+																	<button class="btn btn-default btnLink " (click)='onCancelInterviewClick(selectedcandidate)'>
+                                                                        <i class="fa fa-search"></i> View Profile</button>
 																</li>
 																<li class="divider"> </li>
 																<li>
+																	<button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)' (click)='onCancelInterviewClick(selectedcandidate)'>
+                                                                        <i class="fa fa-times"></i>Cancel Interview</button>
+																</li>
+																<li class="divider" *ngIf='!isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'>
+																</li>
+																<li *ngIf='!isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'>
 																	<button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'
 																		(click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
                                                                         <i class="fa fa-paper-plane-o"></i>Generate Offer</button>
@@ -143,10 +161,7 @@
 
 															</ul>
 														</div>
-														<!--<a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="!selectedcandidate.isInterviewScheduled"
-                                                            (click)='onScheduleInterviewClick(selectedcandidate)'> Schedule </a>
 
-                                                        <a class="btn blue btn-outline btn-circle btn-sm active" *ngIf="selectedcandidate.isInterviewScheduled" (click)='onReScheduleInterviewClick(selectedcandidate)'> Re-Schedule </a>-->
 													</td>
 												</tr>
 											</tbody>
@@ -345,7 +360,7 @@
 									</div>
 								</div>
 							</div>
-							
+
 						</div>
 					</div>
 				</div>

@@ -3,18 +3,18 @@ import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount  } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-import {RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
+import { CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+import { RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFStatus, RRFAssignStatus} from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI, GrdOptions, SortingMasterData} from '../../../shared/model/common.model';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
-import {RRFPipe } from '../../shared/Filters/RRFFilter.component';
-import {ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
-import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { RRFPipe } from '../../shared/Filters/RRFFilter.component';
+import { ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
+import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
-import {InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
+import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
@@ -71,7 +71,6 @@ export class RRFDashboardListComponent implements OnActivate {
         private _mastersService: MastersService) {
         this.currentView = 'myRRF';
     }
-
     routerOnActivate() {
         this.getLoggedInUser();
         this.getMyRRFData();
@@ -368,9 +367,18 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
 
-    checkIfRRFClosed(statusId: number) {
+    checkIfRRFClosed(selectedRrf: RRFDetails) {
         try {
-            if (statusId === RRFStatus.Closed) {
+            var assignedInfo = selectedRrf.AssignedData;
+            var showCandidate = false;
+            if (assignedInfo.length > 0)
+                assignedInfo.forEach(rrf => {
+                    if (rrf.AssignedTo.Value === this.logedInUser.Value)
+                        console.log(selectedRrf.RRFCODE + '---' + rrf.AssignedTo.Value);
+                    showCandidate = true;
+                });
+            var statusId = selectedRrf.Status.Id ? selectedRrf.Status.Id : '';
+            if (statusId === RRFStatus.Closed || !showCandidate) {
                 return true;
             } else {
                 return false;
