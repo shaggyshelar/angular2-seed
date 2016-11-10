@@ -3,7 +3,7 @@
 	<!-- BEGIN CONTENT BODY -->
 	<div class="page-content">
 		<!--BEGIN breadcrumb -->
-		<ul class="page-breadcrumb breadcrumb">
+		<ul style="display:none" class="page-breadcrumb breadcrumb">
 			<li>
 				<a [routerLink]="['/App']"> Home </a>
 				<i class="fa fa-circle"></i>
@@ -20,10 +20,10 @@
 		<div class="row">
 			<div class="portlet-body">
 				<div class="col-lg-12">
-					<div class="portlet light bordered">
+					<div class="portlet light bordered" style="margin-left: -32px;">
 						<div class="portlet-title">
 							<div class="caption">
-								<span class="caption-subject bold uppercase">Tagged Candidates Status</span>
+								<span class="caption-subject bold uppercase">Tagged candidates for {{selectedRRF.PositionTitle}}</span>
 							</div>
 
 						</div>
@@ -101,7 +101,7 @@
 											<tbody>
 												<tr *ngFor="let selectedcandidate of AllCandidatesForRRF; let index = index">
 													<td> {{index+1}} </td>
-													<td> <a data-toggle="tooltip" data-placement="top" tooltip="Click for Complete profile" tooltipPlacement="top"
+													<td> <a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top"
 															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(selectedcandidate.CandidateID)'> 
 															{{selectedcandidate.Candidate}}</a>
 													</td>
@@ -112,7 +112,7 @@
 														<div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}</div>
 														<div *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}</div>
 													</td>
-													<td> <a data-toggle="tooltip" data-placement="top"  tooltip="Click for interves rounds history" tooltipPlacement="top"
+													<td> <a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top"
 															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'>
 															{{selectedcandidate.InterviewDetails.Status}}</a></td>
 													<td>
@@ -136,15 +136,6 @@
 																	<button class="btn btn-default btnLink " *ngIf="selectedcandidate.isInterviewScheduled" (click)='onReScheduleInterviewClick(selectedcandidate)'>
                                                                         <i class="fa fa-calendar-check-o"></i> Re-Schedule
                                                                     </button>
-																</li>
-																<li class="divider"> </li>
-																<li>
-																	<button class="btn btn-default btnLink " (click)='onCancelInterviewClick(selectedcandidate)'>
-                                                                        <i class="fa fa-history"></i> View Espl History</button>
-																</li>
-																<li>
-																	<button class="btn btn-default btnLink " (click)='onCancelInterviewClick(selectedcandidate)'>
-                                                                        <i class="fa fa-search"></i> View Profile</button>
 																</li>
 																<li class="divider"> </li>
 																<li>
