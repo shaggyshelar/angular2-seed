@@ -86,7 +86,12 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     Back() {
-        this._router.navigate([this.returnPath]);
+        if (this.returnPath.includes('Edit')) {
+            this._router.navigate([this.returnPath + this.historyOfCandidate.Value]);
+        } else {
+            this._router.navigate([this.returnPath]);
+        }
+
     }
 
 }
