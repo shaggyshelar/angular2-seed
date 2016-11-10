@@ -234,22 +234,73 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             this.profile.CommentsUpdated = false;
         }
+        if (this.validatePrimaryInfo()) {
+            this._profileBankService.editCandidateProfile(this.profile)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
 
-        this._profileBankService.editCandidateProfile(this.profile)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
+
+    }
+    validatePrimaryInfo(): boolean {
+        var submitFlag: boolean = true;
+        if (this.profile.FirstName === '') {
+            this.toastr.error('Please enter first name');
+            submitFlag = false;
+        } else {
+            if (this.profile.LastName === '') {
+                this.toastr.error('Please enter last name');
+                submitFlag = false;
+            } else {
+                if (this.profile.Email === '') {
+                    this.toastr.error('Please enter email');
+                    submitFlag = false;
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
+                    if (this.profile.PrimaryContact === '') {
+                        this.toastr.error('Please enter contact no.');
+                        submitFlag = false;
+                    } else {
+                        if (this.profile.CandidateSkills.PrimarySkills === '') {
+                            this.toastr.error('Please enter skills');
+                            submitFlag = false;
+                        } else {
+                            if (this.profile.Tag === '') {
+                                this.toastr.error('Please enter Tag');
+                                submitFlag = false;
+                            } else {
+                                if (this.profile.CandidateOtherDetails.NoticePeriod === '') {
+                                    this.toastr.error('Please enter notice period');
+                                    submitFlag = false;
+                                } else {
+                                    if (this.profile.CandidateSalaryDetails.CurrentSalary === '') {
+                                        this.toastr.error('Please enter current salary');
+                                        submitFlag = false;
+                                    } else {
+                                        if (this.profile.CandidateSalaryDetails.ExpectedSalary === '') {
+                                            this.toastr.error('Please enter expected salary');
+                                            submitFlag = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+            }
+        }
 
+        return submitFlag;
     }
 
     onSavePersonalDetails(): void {
@@ -259,23 +310,55 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             this.profile.CommentsUpdated = false;
         }
-        this._profileBankService.editCandidatePersonalDetails(this.profile)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (this.validatePersonalInfo()) {
+            this._profileBankService.editCandidatePersonalDetails(this.profile)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+
 
     }
 
+    validatePersonalInfo(): boolean {
+        var submitFlag: boolean = true;
+        if (this.profile.FirstName === '') {
+            this.toastr.error('Please enter first name');
+            submitFlag = false;
+        } else {
+            if (this.profile.LastName === '') {
+                this.toastr.error('Please enter last name');
+                submitFlag = false;
+            } else {
+                if (this.profile.Email === '') {
+                    this.toastr.error('Please enter email');
+                    submitFlag = false;
+                } else {
+                    if (this.profile.PrimaryContact === '') {
+                        this.toastr.error('Please enter primary contact');
+                        submitFlag = false;
+                    } else {
+                        if (this.profile.PermanentAddress === '') {
+                            this.toastr.error('Please enter permanent address');
+                            submitFlag = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return submitFlag;
+    }
     onSaveProfessionalDetails(): void {
         //Check For Comments Updated
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
@@ -753,32 +836,36 @@ export class MyProfilesAddComponent implements OnActivate {
         this._myProfilesService.isExist(this.profile)
             .subscribe(
             (results: any) => {
-                if (results.isExist) {
-                    if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
-                        this.existedProfile = <any>results.profileBankObjects;
-                        this.isExist = <any>results.isExist;
-                        this.toastr.error('Profile already exist');
+                if (results.profileBankObjects.CandidateID.Value !== this.profile.CandidateID.Value) {
+                    if (results.isExist) {
+                        if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
+                            this.existedProfile = <any>results.profileBankObjects;
+                            this.isExist = <any>results.isExist;
+                            this.toastr.error('Profile already exist');
+                        }
                     }
                 } else {
                     this.isExist = false;
                     this.onSavePrimaryInfo();
                 }
+
             },
             error => this.toastr.error(<any>error));
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
-        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles/Edit/');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
     }
-     /** Delete Prfile will be available only to the Recruitment Head*/
+    /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {
         this._profileBankService.deleteProfile(CandidateID)
             .subscribe(
             (results: any) => {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
+                this._location.back();
                 //this.getMyProfiles();
             },
             error => this.toastr.error(<any>error));

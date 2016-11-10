@@ -235,7 +235,7 @@ export class CompanyProfilesListComponent implements OnActivate {
             this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-            sessionStorage.setItem('returnPath', '/App/ProfileBank/CompanyProfiles');
+            sessionStorage.setItem('returnPathToSchedule', '/App/ProfileBank/CompanyProfiles');
             this._router.navigate(['/App/ProfileBank/CompanyProfiles/Assign']);
         }
 

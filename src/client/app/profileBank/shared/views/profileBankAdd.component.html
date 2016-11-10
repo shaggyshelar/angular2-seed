@@ -67,13 +67,24 @@
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" class="todo-tasklist-item todo-tasklist-item-border-yellow" (submit)="onSavePrimaryInfo()">
                                                 <div class="row">
+
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
+                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                    (click)='deleteCandidate(profile.CandidateID)' *ngIf="isExist">
+                                                                    <i class="fa fa-times"></i>
+                                                                Delete {{profile.FirstName}} {{profile.LastName}}</a>
                                                         <a class="btn green " (click)='nextTab()'>
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                     </div>
                                                 </div>
-                                                <div class="container-fluid">
-                                                    <div class="row" style="margin-top:34px;" *ngIf="isExist">
+                                                <div class="container-fluid" *ngIf="isExist">
+                                                    <div class="row" >
+                                                        <label style="color:red">This information already exist with following candidate:</label>
+                                                    </div>
+                                                    <hr style="margin-top:1px;">
+                                                    <div class="col-md-10">
+  <div class="row" style="margin-top:-9px; border:solid; border-color:red; margin-left:155px; text-align:center; border-width:2px; height:35px;" >
                                                         <!--*ngIf="existedProfile.length != 0"-->
                                                         <div class="col-md-3 inlineForm">
                                                             <div class="form-group">
@@ -107,22 +118,22 @@
                                                                     </a>-->
 
 
-                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-left:45px;" data-toggle="tooltip" data-placement="top"
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                  <div class="col-md-1">
+
+                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-top:-9px;" data-toggle="tooltip" data-placement="top"
                                                                     title="View Interview History" tooltip="View Interview History"
                                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
                                                                     (click)='getCandidateHistory(existedProfile.CandidateID)'>
                                                                     <i class="fa fa-history"> </i>
                                                                 </a>
-                                                                <a href="javascript:;" class="btn btn-icon-only red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
-                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-                                                                    (click)='deleteCandidate(existedProfile.CandidateID)'>
-                                                                    <i class="fa fa-times"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                                </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row" style="margin-top:8px;">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
@@ -275,6 +286,11 @@
                                             <form role="form" (submit)="onSavePersonalDetails()">
                                                 <div class="row">
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
+                                                        <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
+                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                                    (click)='deleteCandidate(profile.CandidateID)' *ngIf="isExist">
+                                                                    <i class="fa fa-times"></i>
+                                                                Delete {{profile.FirstName}} {{profile.LastName}}</a>
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                         </a>
@@ -282,8 +298,13 @@
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                     </div>
                                                 </div>
-                                                <div class="container-fluid">
-                                                    <div class="row" style="margin-top:34px;" *ngIf="isExist">
+                                                <div class="container-fluid" *ngIf="isExist">
+                                                    <div class="row" >
+                                                        <label style="color:red">This information already exist with following candidate:</label>
+                                                    </div>
+                                                    <hr style="margin-top:1px;">
+                                                    <div class="col-md-10">
+  <div class="row" style="margin-top:-9px; border:solid; border-color:red; margin-left:155px; text-align:center; border-width:2px; height:35px;" >
                                                         <!--*ngIf="existedProfile.length != 0"-->
                                                         <div class="col-md-3 inlineForm">
                                                             <div class="form-group">
@@ -317,23 +338,23 @@
                                                                     </a>-->
 
 
-                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-left:45px;" data-toggle="tooltip" data-placement="top"
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                  <div class="col-md-1">
+
+                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-top:-9px;" data-toggle="tooltip" data-placement="top"
                                                                     title="View Interview History" tooltip="View Interview History"
                                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
                                                                     (click)='getCandidateHistory(existedProfile.CandidateID)'>
                                                                     <i class="fa fa-history"> </i>
                                                                 </a>
-                                                                <a href="javascript:;" class="btn btn-icon-only red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
-                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-                                                                    (click)='deleteCandidate(existedProfile.CandidateID)'>
-                                                                    <i class="fa fa-times"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                                </div>
                                                 </div>
                                                 <!-- Profile Picture Option -->
-                                                <div class="col-md-3 col-md-3 portlet light profile-sidebar-portlet bordered">
+                                                <div class="col-md-3 col-md-3 portlet light profile-sidebar-portlet bordered" style="margin-top:8px;">
                                                     <!-- SIDEBAR USERPIC -->
                                                     <div class="profile-userpic">
                                                         <!--[src]="profilePhoto"-->
@@ -398,7 +419,7 @@
                                                             <label>Email <span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-10">
-                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (blur)="onSavePersonalDetails()"
+                                                                    <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (blur)="IsExist()"
                                                                         tabindex="4" />
                                                                 </div>
                                                             </div>
@@ -419,7 +440,7 @@
                                                                 <div class="col-md-12">
                                                                     <input type="text" placeholder="Contact Number" class="form-control" [(ngModel)]="profile.PrimaryContact" required="" maxlength="10"
                                                                         minlength="10" pattern="^[0-9\-\+]{9,15}$" title="Contact Number"
-                                                                        (blur)="onSavePersonalDetails()" tabindex="5" />
+                                                                        (blur)="IsExist()" tabindex="5" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -514,8 +535,7 @@
                                                             <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number"
                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo"
                                                                 pattern="^[0-9\-\+]{9,15}$" title="Enter valid Aadhaar Card number For Eg. 123456789012"
-                                                                maxlength="12" (blur)="IsExist()" tabindex="13"
-                                                            />
+                                                                maxlength="12" (blur)="IsExist()" tabindex="13" />
                                                         </div>
                                                     </div>
 
@@ -523,16 +543,16 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Pan Card No</label>
                                                             <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F"
-                                                                pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" (blur)="IsExist()"
-                                                                tabindex="14" />
+                                                                pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}" (blur)="IsExist()" tabindex="14"
+                                                            />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Passport No</label>
                                                             <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567"
-                                                                pattern="[A-Za-z]{1}[0-9]{7}" (blur)="IsExist()"
-                                                                tabindex="15" />
+                                                                pattern="[A-Za-z]{1}[0-9]{7}" (blur)="IsExist()" tabindex="15"
+                                                            />
                                                         </div>
                                                     </div>
                                                 </div>

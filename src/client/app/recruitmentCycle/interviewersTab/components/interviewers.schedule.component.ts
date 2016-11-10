@@ -13,14 +13,16 @@ import { GrdOptions } from '../../../shared/model/common.model';
 import { IEFGridRowComponent } from '../../shared/component/IEFGridRow/IEFGridRow.component';
 import { MyScheduleInterview } from '../model/myScheduleInterview';
 import { ProfileBankService } from '../../../profileBank/index';
-
+import {RRFGridRowComponent} from '../../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
+import { RRFDetails} from '../../../RRF/myRRF/models/rrfDetails';
+import { MyRRFService } from '../../../RRF/myRRF/services/myRRF.service';
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
-    directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
-    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService]
+    directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent, RRFGridRowComponent],
+    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService, MyRRFService]
 })
 
 export class RecruitmentInterviewScheduleComponent implements OnActivate {
@@ -41,15 +43,20 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         right: 'month,agendaWeek,agendaDay'
     };
 
+    RRFData: RRFDetails = new RRFDetails();
+    isHover: boolean = false;
+    RRFID: Array<Interview> = new Array<Interview>();
     InterviewHistory: MyScheduleInterview[] = [];
     grdOptionsIntwHistory: GrdOptions = new GrdOptions();
     viewIEFText: string = 'View IEF';
     hideIEFText: string = 'Hide IEF';
     IEFButtonText: string = '';
+    
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersScheduleService,
-        private _profileBankService: ProfileBankService) {
+        private _profileBankService: ProfileBankService,
+        private _myRRFService: MyRRFService) {
         this.InterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
         /**Commenting as this functionality is deprecated */
@@ -247,5 +254,29 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
             time[0] = +time[0] % 12 || 12; // Adjust hours
         }
         return time.join('');
+    }
+    showPopOver(RRFCode: any, index: string) {
+        let skillDetails:string = '';
+        let rowId: any = 'candidate' + index;
+        let row: any = $('#' + rowId);
+        //service to get RRFDetails
+        this._myRRFService.getRRFByID(RRFCode.Value)
+            .subscribe(
+            (results: RRFDetails) => {
+                this.RRFData = results;
+                for(var index = 0;index < this.RRFData.SkillsRequired.length;index++){
+                    skillDetails = skillDetails + '"' + this.RRFData.SkillsRequired[index].Value + '"';
+                }
+                row.popover({
+                    placement: 'bottom',
+                    toggle: 'popover',
+                    title: 'RRF Details',
+                    html: true,
+                    //trigger: 'hover',
+                    //content: $('#myPopoverContent').html()
+                    content:'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :'+ this.RRFData.RaisedBy.Value + '<br/>'+ '\nSkills :' +  skillDetails + '<br/>' + '\nJob Description :' + this.RRFData.Description
+                });
+            },
+            error => this.errorMessage = <any>error);
     }
 }
