@@ -22,6 +22,7 @@ import { CompanyProfilesComponent } from '../../profileBank/companyProfiles/inde
 import { RecentProfilesComponent } from '../../profileBank/recentProfiles/index';
 import { IncompleteProfilesComponent } from '../../profileBank/incompleteProfiles/index';
 import { AdvanceSearchComponent } from '../../profileBank/advanceSearch/index';
+import { AdvanceSearchInSidebarComponent } from '../../profileBank/advanceSearch/index';
 import { MyRRFComponent } from '../../RRF/myRRF/index';
 import { RRFApprovalComponent } from '../../RRF/RRFApproval/index';
 import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
@@ -63,6 +64,7 @@ import { ReqruiterDashboardComponent } from '../../Dashboard/Reqruiter/component
     { path: '/ProfileBank/RecentProfiles', component: RecentProfilesComponent },
     { path: '/ProfileBank/IncompleteProfiles', component: IncompleteProfilesComponent },
     { path: '/ProfileBank/AdvanceSearch', component: AdvanceSearchComponent },
+    { path: '/ProfileBank/AdvanceSearchInSidebar', component: AdvanceSearchInSidebarComponent },
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },

@@ -26,6 +26,7 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     errorMessage: string;
     NORECORDSFOUND: boolean = false;
     returnPath: string;
+    candidateIdForReturnPath :string;
     constructor(private _router: Router,
         public toastr: ToastsManager,
         private profilesHistoryService: ProfileEsplHistoryService) {
@@ -36,6 +37,7 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
         /** */
         this.historyOfCandidate = this.getSessionOf<MasterData>('HistoryOfCandidate', true);
         this.returnPath = this.getSessionOf<string>('onReturnPath', false);
+        this.candidateIdForReturnPath = sessionStorage.getItem('CandidateIdForReturnPath');
         this.getProfilesHistory(this.historyOfCandidate);
     }
     /**Function to get candidates interviews history with ESPL */
@@ -87,7 +89,7 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
     }
     Back() {
         if (this.returnPath.includes('Edit')) {
-            this._router.navigate([this.returnPath + this.historyOfCandidate.Value]);
+            this._router.navigate([this.returnPath + this.candidateIdForReturnPath]);
         } else {
             this._router.navigate([this.returnPath]);
         }

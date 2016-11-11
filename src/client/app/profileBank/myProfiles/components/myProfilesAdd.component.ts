@@ -854,6 +854,7 @@ export class MyProfilesAddComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
+        sessionStorage.setItem('CandidateIdForReturnPath',this.CandidateID.Value);
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles/Edit/');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);

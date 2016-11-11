@@ -182,13 +182,13 @@
                                 </thead>
                                 <tbody>
                                     <!-- NgBinding-->
-                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewInformation; let index = index " (mouseover)='showPopOver(_myInterview.RRFID,index+1)'
-                                    id="candidate{{index+1}}">
+                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewInformation; let index = index " 
+                                    id="">
                                         <td> {{_myInterview.CandidatePrimaryDetails.FullName}}
                                         </td>
                                         <td class="center"> {{_myInterview.CandidatePrimaryDetails.Contact}} </td>
                                         <td>
-                                             <a>{{_myInterview.RRFCODE}}</a>
+                                             <a (click)='showPopOver(_myInterview.RRFID,index+1)' id="candidate{{index+1}}">{{_myInterview.RRFCODE}}</a>
                                         </td>
                                         <td>
                                             <div> {{_myInterview.InterviewMode.Value}}</div>
