@@ -8,19 +8,22 @@ import {
   AllProfilesAddComponent,
   AllProfilesViewComponent,
   TransferOwnershipComponent,
-  AllProfilesListComponent
+  AllProfilesListComponent,
+  AllProfilesService
 } from './allProfiles/index';
 import {
   BlackListedProfilesAddComponent,
   BlackListedProfilesListComponent,
-  BlackListedProfilesViewComponent
+  BlackListedProfilesViewComponent,
+  BlackListedProfilesService
 } from './blackListedProfiles/index';
 import { AdvanceSearchListComponent } from './advanceSearch/index';
 import {
-  //TransferOwnershipComponent,//Need to check Error
   CompanyProfilesAddComponent,
   CompanyProfilesListComponent,
-  CompanyProfilesViewComponent
+  CompanyProfilesViewComponent,
+  DataSharedService,
+  CompanyProfilesService
 } from './companyProfiles/index';
 import { IncompleteProfilesListComponent } from './incompleteProfiles/index';
 import {
@@ -35,7 +38,12 @@ import {
   RecentProfilesListComponent,
   RecentProfilesViewComponent
 } from './recentProfiles/index';
-import { ProfileBankService, DetailProfileComponent, ProfileBankAssignRRFComponent, ProfileBankPipe } from './shared/index';
+import {
+  ProfileBankService,
+  DetailProfileComponent,
+  ProfileBankAssignRRFComponent,
+  ProfileBankPipe
+} from './shared/index';
 import { ViewRRFComponent } from '../RRF/shared/index';
 
 import { RRFGridRowComponent } from '../RRF/index';
@@ -46,27 +54,27 @@ import { RRFGridRowComponent } from '../RRF/index';
   declarations: [
     ProfileBankPipe
     , DetailProfileComponent
-    // ,ProfileBankAssignRRFComponent
-    ////, RRFGridRowComponent
-    // ,AllProfilesAddComponent
-    // ,TransferOwnershipComponent
-    // ,AllProfilesListComponent
-    // ,AllProfilesViewComponent
-    // ,AdvanceSearchListComponent
-    // ,BlackListedProfilesAddComponent
-    // ,BlackListedProfilesListComponent
-    // ,BlackListedProfilesViewComponent
-    // ,CompanyProfilesAddComponent
-    // ,CompanyProfilesListComponent
-    // ,CompanyProfilesViewComponent
-    // ,IncompleteProfilesListComponent
-    // ,MyProfilesAddComponent
+    , ProfileBankAssignRRFComponent
+    , RRFGridRowComponent
+    , AllProfilesAddComponent
+    , TransferOwnershipComponent
+    , AllProfilesListComponent
+    , AllProfilesViewComponent
+    , AdvanceSearchListComponent
+    , BlackListedProfilesAddComponent
+    , BlackListedProfilesListComponent
+    , BlackListedProfilesViewComponent
+    , CompanyProfilesAddComponent
+    , CompanyProfilesListComponent
+    , CompanyProfilesViewComponent
+    , IncompleteProfilesListComponent
+    , MyProfilesAddComponent
     , MyProfilesListComponent
-    //, MyProfilesViewComponent
-    //, ProfileEsplHistoryListComponent
-    //, RecentProfilesAddComponent
-    //, RecentProfilesListComponent
-    //, RecentProfilesViewComponent
+    , MyProfilesViewComponent
+    , ProfileEsplHistoryListComponent
+    , RecentProfilesAddComponent
+    , RecentProfilesListComponent
+    , RecentProfilesViewComponent
     , IEFGridRowComponent
   ],
   exports: [
@@ -86,13 +94,22 @@ import { RRFGridRowComponent } from '../RRF/index';
     //, CompanyProfilesViewComponent
     //, IncompleteProfilesListComponent 
     //, MyProfilesAddComponent
-    // , MyProfilesListComponent
+    //, MyProfilesListComponent
     //, MyProfilesViewComponent
     //, ProfileEsplHistoryListComponent
     //, RecentProfilesAddComponent
     //, RecentProfilesListComponent
     //, RecentProfilesViewComponent
   ],
-  providers: [MyProfilesService, MastersService, ToastsManager, ProfileBankService]
+  providers: [
+    MyProfilesService,
+    MastersService,
+    ToastsManager,
+    ProfileBankService,
+    BlackListedProfilesService,
+    DataSharedService,
+    AllProfilesService,
+    CompanyProfilesService
+  ]
 })
 export class ProfileBankModule { }

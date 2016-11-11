@@ -4,3 +4,5 @@ export * from './components/companyProfilesList.component';
 export * from './components/companyProfilesView.component';
 export * from './components/companyProfilesTransferOwnership.component';
 export * from '../shared/services/profileBank.service';
+export * from './services/companyProfiles.service';
+export * from '../shared/services/dataShared.service';

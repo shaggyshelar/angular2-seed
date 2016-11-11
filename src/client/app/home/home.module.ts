@@ -9,6 +9,7 @@ import { ProfileBankModule } from '../profileBank/index';
 import { RecruitmentCycleModule } from '../recruitmentCycle/index';
 import { RRFModule } from '../RRF/index';
 
+import { AllProfilesListComponent } from '../profileBank/allProfiles/index';
 
 @NgModule({
   imports: [

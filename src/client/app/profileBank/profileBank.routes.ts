@@ -32,35 +32,35 @@ import { IncompleteProfilesListComponent } from './incompleteProfiles/index';
 export const ProfileBankRoutes: Route[] = [
     { path: 'ProfileBank', component: MyProfilesListComponent },
     /**My Profiles */
-    // { path: 'ProfileBank/MyProfiles', component: MyProfilesListComponent },
+    { path: 'ProfileBank/MyProfiles', component: MyProfilesListComponent },
     // { path: 'MyProfiles/Edit/:id', component: MyProfilesAddComponent },
     // { path: 'MyProfiles/View/:id', component: MyProfilesViewComponent },
     // { path: 'MyProfiles/Assign', component: ProfileBankAssignRRFComponent },
     // { path: 'MyProfiles/History', component: ProfileEsplHistoryListComponent },
 
     // /**All Profiles */
-    // { path: 'ProfileBank/', component: AllProfilesListComponent },
+    //{ path: 'AllProfiles', component: AllProfilesListComponent },
     // { path: 'ProfileBank/Edit/:id', component: MyProfilesAddComponent },
     // { path: 'ProfileBank/View/:id', component: AllProfilesViewComponent },
     // { path: 'ProfileBank/Transfer', component: TransferOwnershipComponent },
     // { path: 'ProfileBank/History', component: ProfileEsplHistoryListComponent },
 
     // /**Blacklisted Profiles */
-    // { path: '/', component: BlackListedProfilesListComponent },
+    { path: 'BlackListedProfiles', component: BlackListedProfilesListComponent },
     // { path: '/Edit/:id', component: BlackListedProfilesAddComponent },
     // { path: '/View/:id', component: BlackListedProfilesViewComponent },
     // { path: '/History', component: ProfileEsplHistoryListComponent },
 
     // /**Company Profiles */
-    // { path: '/', component: CompanyProfilesListComponent },
+    { path: 'CompanyProfiles', component: CompanyProfilesListComponent },
     // { path: '/Edit/:id', component: CompanyProfilesAddComponent },
     // { path: '/View/:id', component: CompanyProfilesViewComponent },
     // { path: '/Transfer', component: TransferOwnershipComponent },
     // { path: '/Assign', component: ProfileBankAssignRRFComponent },
-    // { path: '/History', component: ProfileEsplHistoryListComponent },
+    //{ path: 'History', component: ProfileEsplHistoryListComponent },
 
     // /**Incomplete Profiles */
-    // { path: '/', component: IncompleteProfilesListComponent },
+     { path: 'IncompleteProfiles', component: IncompleteProfilesListComponent },
     // { path: '/Edit/:id', component: MyProfilesAddComponent },
 
     // /**Profiles Espl Histoy */

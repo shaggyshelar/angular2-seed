@@ -1,18 +1,18 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, AllCandidateProfiles } from '../../shared/model/myProfilesInfo';
 import { Candidate } from '../../shared/model/RRF';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 //import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
+import { APIResult } from '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { DataSharedService } from '../../shared/services/dataShared.service';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 
 @Component({

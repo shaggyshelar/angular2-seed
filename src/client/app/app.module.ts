@@ -23,8 +23,15 @@ let options = <ToastOptions>{
 };
 
 @NgModule({
-  imports: [BrowserModule, HttpModule, RouterModule.forRoot(routes, { enableTracing: true }), AboutModule,
-    HomeModule, SharedModule.forRoot(), ToastModule.forRoot(options)],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    AboutModule,
+    HomeModule,
+    SharedModule.forRoot(),
+    ToastModule.forRoot(options),
+    RouterModule.forRoot(routes, { enableTracing: true })
+  ],
   declarations: [AppComponent, LoginComponent, Error400Component, Error500Component],
   providers: [{
     provide: APP_BASE_HREF,
