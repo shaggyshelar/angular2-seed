@@ -374,8 +374,7 @@ export class RRFDashboardListComponent implements OnActivate {
             if (assignedInfo.length > 0)
                 assignedInfo.forEach(rrf => {
                     if (rrf.AssignedTo.Value === this.logedInUser.Value)
-                        console.log(selectedRrf.RRFCODE + '---' + rrf.AssignedTo.Value);
-                    showCandidate = true;
+                        showCandidate = true;
                 });
             var statusId = selectedRrf.Status.Id ? selectedRrf.Status.Id : '';
             if (statusId === RRFStatus.Closed || !showCandidate) {
