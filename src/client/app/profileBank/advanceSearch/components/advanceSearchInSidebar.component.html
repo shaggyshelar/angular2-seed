@@ -29,7 +29,16 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Skills</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Skills,Designation,Componies">
+
+                                <select id="cmbSkills" class="form-control " required="" multiple>
+                                                            <option value="-1" disabled="true" [selected]="selected">--Skills,Designation,Componies--</option>
+                                                            <option *ngFor="let skill of skills " [value]="skill.Id ">{{skill.Value}}</option>
+                                                        </select>
+                                <span class="input-group-btn ">
+                                           
+                                                        </span>
+
+                                <!--<input type="text" class="form-control" placeholder="Skills,Designation,Componies">-->
                                 <!--<span class="help-block"> A block of help text. </span>-->
                             </div>
                         </div>
@@ -37,7 +46,16 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Location</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Enter the cities you want to work in">
+
+                                <select id="cmbLocation" class="form-control " required="" multiple>
+                                        <option value="-1" disabled="true" [selected]="selected">--Enter the cities you want to work in--</option>
+                                                            <option *ngFor="let skill of skills " [value]="skill.Id ">{{skill.Value}}</option>
+                                                        </select>
+                                <span class="input-group-btn ">
+                                           
+                                                        </span>
+
+                                <!--<input type="text" class="form-control" placeholder="Enter the cities you want to work in">-->
                             </div>
                         </div>
                         <div class="form-group">
@@ -104,7 +122,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Education</label>
                             <div class="col-md-6">
-                                    <input type="text" class="form-control" placeholder="Enter your education"> 
+                                <input type="text" class="form-control" placeholder="Enter your education">
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,14 +137,13 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Visa</label>
                             <div class="col-md-3">
-                                <select  class="form-control"
-                                    tabindex="25">
+                                <select class="form-control" tabindex="25">
                                           <option  [value]="L1">H1</option>
                                           <option  [value]="H1">L1</option>
                                  </select>
-                               
+
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="form-actions">

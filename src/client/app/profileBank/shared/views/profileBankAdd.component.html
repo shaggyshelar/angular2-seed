@@ -69,69 +69,67 @@
                                                 <div class="row">
 
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
-                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
-                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-                                                                    (click)='deleteCandidate(profile.CandidateID)' *ngIf="isExist">
-                                                                    <i class="fa fa-times"></i>
-                                                                Delete {{profile.FirstName}} {{profile.LastName}}</a>
+                                                        <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                            (click)='deleteCandidate(profile.CandidateID)' *ngIf="isExist">
+                                                            <i class="fa fa-times"></i> Delete {{profile.FirstName}} {{profile.LastName}}</a>
                                                         <a class="btn green " (click)='nextTab()'>
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                     </div>
                                                 </div>
                                                 <div class="container-fluid" *ngIf="isExist">
-                                                    <div class="row" >
+                                                    <div class="row">
                                                         <label style="color:red">This information already exist with following candidate:</label>
                                                     </div>
                                                     <hr style="margin-top:1px;">
                                                     <div class="col-md-10">
-  <div class="row" style="margin-top:-9px; border:solid; border-color:red; margin-left:155px; text-align:center; border-width:2px; height:35px;" >
-                                                        <!--*ngIf="existedProfile.length != 0"-->
-                                                        <div class="col-md-3 inlineForm">
-                                                            <div class="form-group">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                    tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
-                                                                    tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                    tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3 inlineForm">
-                                                            <div class="form-group ">
-                                                                <div class="col-md-7 inlineForm">
-                                                                    <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                        <div class="row" style="margin-top:-9px; border:solid; border-color:red; margin-left:155px; text-align:center; border-width:2px; height:35px;">
+                                                            <!--*ngIf="existedProfile.length != 0"-->
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
                                                                 </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
+                                                                        tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <div class="col-md-7 inlineForm">
+                                                                        <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                            tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                                    </div>
 
-                                                                <!--<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
+                                                                    <!--<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
                                                                         (click)='redirectToView(existedProfile.CandidateID)'>
                                                                         <i class="glyphicon glyphicon-user"> </i>
                                                                     </a>-->
 
 
+                                                                </div>
+
                                                             </div>
-                                                            
                                                         </div>
                                                     </div>
-                                                    </div>
-                                                  <div class="col-md-1">
+                                                    <div class="col-md-1">
 
-                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-top:-9px;" data-toggle="tooltip" data-placement="top"
-                                                                    title="View Interview History" tooltip="View Interview History"
-                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-                                                                    (click)='getCandidateHistory(existedProfile.CandidateID)'>
-                                                                    <i class="fa fa-history"> </i>
-                                                                </a>
-                                                                </div>
+                                                        <a href="javascript:;" class="btn btn-icon-only purple" style="margin-top:-9px;" data-toggle="tooltip" data-placement="top"
+                                                            title="View Interview History" tooltip="View Interview History" tooltipPlacement="top"
+                                                            tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidateHistory(existedProfile.CandidateID)'>
+                                                            <i class="fa fa-history"> </i>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                                 <div class="row" style="margin-top:8px;">
                                                     <div class="col-md-12">
@@ -273,7 +271,7 @@
                                                     <a href="javascript:;" class="btn default" (click)='Back()'> Cancel </a>
                                                 </div>-->
                                                 <div class="margiv-top-10 pull-right">
-                                                    <a class="btn green " (click)='nextTab()' tabindex="12">
+                                                    <a class="btn green " (click)='nextTab()' (keypress)="nextTabKeyPressed($event)" tabindex="12">
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
@@ -287,10 +285,9 @@
                                                 <div class="row">
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
-                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-                                                                    (click)='deleteCandidate(profile.CandidateID)' *ngIf="isExist">
-                                                                    <i class="fa fa-times"></i>
-                                                                Delete {{profile.FirstName}} {{profile.LastName}}</a>
+                                                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                                                            (click)='deleteCandidate(profile.CandidateID)' *ngIf="isExist">
+                                                            <i class="fa fa-times"></i> Delete {{profile.FirstName}} {{profile.LastName}}</a>
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                         </a>
@@ -299,59 +296,58 @@
                                                     </div>
                                                 </div>
                                                 <div class="container-fluid" *ngIf="isExist">
-                                                    <div class="row" >
+                                                    <div class="row">
                                                         <label style="color:red">This information already exist with following candidate:</label>
                                                     </div>
                                                     <hr style="margin-top:1px;">
                                                     <div class="col-md-10">
-  <div class="row" style="margin-top:-9px; border:solid; border-color:red; margin-left:155px; text-align:center; border-width:2px; height:35px;" >
-                                                        <!--*ngIf="existedProfile.length != 0"-->
-                                                        <div class="col-md-3 inlineForm">
-                                                            <div class="form-group">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                    tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
-                                                                    tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                    tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3 inlineForm">
-                                                            <div class="form-group ">
-                                                                <div class="col-md-7 inlineForm">
-                                                                    <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                        <div class="row" style="margin-top:-9px; border:solid; border-color:red; margin-left:155px; text-align:center; border-width:2px; height:35px;">
+                                                            <!--*ngIf="existedProfile.length != 0"-->
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
                                                                 </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
+                                                                        tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <div class="col-md-7 inlineForm">
+                                                                        <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                            tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                                    </div>
 
-                                                                <!--<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
+                                                                    <!--<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
                                                                         (click)='redirectToView(existedProfile.CandidateID)'>
                                                                         <i class="glyphicon glyphicon-user"> </i>
                                                                     </a>-->
 
 
+                                                                </div>
+
                                                             </div>
-                                                            
                                                         </div>
                                                     </div>
-                                                    </div>
-                                                  <div class="col-md-1">
+                                                    <div class="col-md-1">
 
-                                                                <a href="javascript:;" class="btn btn-icon-only purple" style="margin-top:-9px;" data-toggle="tooltip" data-placement="top"
-                                                                    title="View Interview History" tooltip="View Interview History"
-                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-                                                                    (click)='getCandidateHistory(existedProfile.CandidateID)'>
-                                                                    <i class="fa fa-history"> </i>
-                                                                </a>
-                                                                </div>
+                                                        <a href="javascript:;" class="btn btn-icon-only purple" style="margin-top:-9px;" data-toggle="tooltip" data-placement="top"
+                                                            title="View Interview History" tooltip="View Interview History" tooltipPlacement="top"
+                                                            tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidateHistory(existedProfile.CandidateID)'>
+                                                            <i class="fa fa-history"> </i>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                                 <!-- Profile Picture Option -->
                                                 <div class="col-md-3 col-md-3 portlet light profile-sidebar-portlet bordered" style="margin-top:8px;">
@@ -471,11 +467,18 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label"> Is Current Address Same As Permanent</label>
-                                                            <div class="mt-checkbox-inline ">
+                                                            <!--<div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline" tabindex="8">
                                                                     <input type="checkbox" id="inlineCheckbox1" (change)='onSameAddressChecked($event.target.checked)' [(ngModel)]="profile.IsCurrentSameAsPermanent" />
                                                                     <span></span>
                                                                 </label>
+                                                            </div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.IsCurrentSameAsPermanent"
+                                                                        tabindex="8" (change)="onSameAddressChecked($event.target.checked)"
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -566,22 +569,36 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label"> Outstationed Candidate</label>
-                                                            <div class="mt-checkbox-inline ">
+                                                            <!--<div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline" tabindex="16">
                                                                     <input type="checkbox" id="chkOutstationedCandidate" [(ngModel)]="profile.OutstationedCandidate" (change)="onOutstationedClick(profile.OutstationedCandidate)" >
                                                                     <span></span>
                                                                 </label>
+                                                            </div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkOutstationedCandidate" [(ngModel)]="profile.OutstationedCandidate"
+                                                                        tabindex="16" (change)="onOutstationedClick(profile.OutstationedCandidate)"
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3" *ngIf="readyToRelocateFlag">
                                                         <div class="form-group">
                                                             <label class="control-label"> Ready To Relocate </label>
-                                                            <div class="mt-checkbox-inline ">
+                                                            <!--<div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline" tabindex="17">
                                                                     <input type="checkbox" id="chkReadyToRelocate" [(ngModel)]="profile.ReadyToRelocate" (change)="onReadyToRelocate(profile.ReadyToRelocate)" />
                                                                     <span></span>
                                                                 </label>
+                                                            </div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkReadyToRelocate" [(ngModel)]="profile.ReadyToRelocate"
+                                                                        tabindex="17" (change)="onReadyToRelocate(profile.ReadyToRelocate)"
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -759,10 +776,10 @@
                                                 </div>-->
 
                                                 <div class="margiv-top-10 pull-right">
-                                                    <a class="btn green " (click)='previousTab()' tabindex="28">
+                                                    <a class="btn green " (click)='previousTab()' (keypress)="prevTabKeyPressed($event)" tabindex="28">
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                     </a>
-                                                    <a class="btn green " (click)='nextTab()' tabindex="29">
+                                                    <a class="btn green " (click)='nextTab()' (keypress)="nextTabKeyPressed($event)" tabindex="29">
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
@@ -940,11 +957,18 @@
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Functional Experience</label>
-                                                            <div class="mt-checkbox-inline ">
+                                                            <!--<div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline" tabindex="4">
                                                                     <input type="checkbox" id="chkFunctionalExp" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExpFlag" (change)="onFunctionalExp(profile.CandidateSkills.AnyFunctionalExpFlag)" />
                                                                     <span></span>
                                                                 </label>
+                                                            </div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkFunctionalExp" [(ngModel)]="profile.CandidateSkills.AnyFunctionalExpFlag"
+                                                                        tabindex="4" (change)="onFunctionalExp(profile.CandidateSkills.AnyFunctionalExpFlag)"
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1026,10 +1050,10 @@
                                                 </div>-->
 
                                                 <div class="margiv-top-10 pull-right">
-                                                    <a class="btn green " (click)='previousTab()' tabindex="11">
+                                                    <a class="btn green " (click)='previousTab()' (keypress)="prevTabKeyPressed($event)" tabindex="11">
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                     </a>
-                                                    <a class="btn green " (click)='nextTab()' tabindex="12">
+                                                    <a class="btn green " (click)='nextTab()' (keypress)="nextTabKeyPressed($event)" tabindex="12">
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                 </div>
                                             </form>
@@ -1379,11 +1403,18 @@
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label class="control-label">CTC Include Variable</label>
-                                                            <div class="mt-checkbox-inline ">
+                                                            <!--<div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline" tabindex="4">
                                                                     <input type="checkbox" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSalaryDetails.CTCIncludeVariable" (change)="onVariableCTC(profile.CandidateSalaryDetails.CTCIncludeVariable)" />
                                                                     <span></span>
                                                                 </label>
+                                                            </div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkCTCIncludeVariable" [(ngModel)]="profile.CandidateSalaryDetails.CTCIncludeVariable"
+                                                                        tabindex="4" (change)="onVariableCTC(profile.CandidateSalaryDetails.CTCIncludeVariable)"
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1405,11 +1436,18 @@
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label class="control-label">Allowance</label>
-                                                            <div class="mt-checkbox-inline ">
+                                                            <!--<div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline" tabindex="6">
                                                                     <input type="checkbox" id="chkCTCAllowance" [(ngModel)]="profile.CandidateSalaryDetails.Allowance" (change)="onAllowance(profile.CandidateSalaryDetails.Allowance)" />
                                                                     <span></span>
                                                                 </label>
+                                                            </div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkCTCAllowance" [(ngModel)]="profile.CandidateSalaryDetails.Allowance"
+                                                                        tabindex="6" (change)="onAllowance(profile.CandidateSalaryDetails.Allowance)"
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1428,11 +1466,18 @@
                                                     <div class="col-md-1">
                                                         <div class="form-group">
                                                             <label class="control-label">Incentive</label>
-                                                            <div class="mt-checkbox-inline ">
+                                                            <!--<div class="mt-checkbox-inline ">
                                                                 <label class="mt-checkbox  mt-checkbox-outline" tabindex="8">
                                                                     <input type="checkbox" id="chkCTCIncentives" [(ngModel)]="profile.CandidateSalaryDetails.Incentive" (change)="onIncentive(profile.CandidateSalaryDetails.Incentive)" />
                                                                     <span></span>
                                                                 </label>
+                                                            </div>-->
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkCTCIncentives" [(ngModel)]="profile.CandidateSalaryDetails.Incentive"
+                                                                        tabindex="8" (change)="onIncentive(profile.CandidateSalaryDetails.Incentive)"
+                                                                    />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1470,7 +1515,7 @@
                                                 </div>-->
 
                                                 <div class="margiv-top-10 pull-right">
-                                                    <a class="btn green " (click)='previousTab()' tabindex="11">
+                                                    <a class="btn green " (click)='previousTab()' (keypress)="prevTabKeyPressed($event)" tabindex="11">
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                     </a>
                                                     <!--<a class="btn green " (click)='nextTab()'>
@@ -1558,7 +1603,7 @@
                                                 </div>-->
 
                                                 <div class="margiv-top-10 pull-right">
-                                                    <a class="btn green " (click)='previousTab()'>
+                                                    <a class="btn green " (click)='previousTab()' (keypress)="prevTabKeyPressed($event)">
                                                         <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
                                                     </a>
                                                 </div>
@@ -1595,24 +1640,38 @@
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Applied Earlier</label>
-                                                                    <div class="mt-checkbox-inline ">
+                                                                    <!--<div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline" tabindex="2">
                                                                             <input type="checkbox" id="chkAppliedEarlier" [(ngModel)]="profile.CandidateOtherDetails.AppliedEarlier">
-                                                                            <!--TeamMgmt-->
+                                                                            
                                                                             <span></span>
                                                                         </label>
+                                                                    </div>-->
+                                                                    <div class="row">
+                                                                        <div class="col-md-1">
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkAppliedEarlier" [(ngModel)]="profile.CandidateOtherDetails.AppliedEarlier"
+                                                                                tabindex="2" (change)="onSaveProfessionalDetails()"
+                                                                            />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Offer In Hand</label>
-                                                                    <div class="mt-checkbox-inline ">
+                                                                    <!--<div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline" tabindex="3">
                                                                             <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)">
-                                                                            <!--TeamMgmt-->
+                                                                            
                                                                             <span></span>
                                                                         </label>
+                                                                    </div>-->
+                                                                    <div class="row">
+                                                                        <div class="col-md-1">
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand"
+                                                                                tabindex="3" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)"
+                                                                            />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -2055,15 +2114,24 @@
                                                             <div class="row">
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
-                                                                        <label class="control-label">Team Management</label>
+                                                                        <!--<label class="control-label">Team Management</label>
                                                                         <div class="mt-checkbox-inline ">
                                                                             <label class="mt-checkbox  mt-checkbox-outline" tabindex="29">
                                                                     <input type="checkbox" id="chkTeamManagement" [(ngModel)]="profile.CandidateTeamManagement.TeamMgmt" (change)='onSaveTeamManagementDetails()'>
-                                                                    <!--TeamMgmt-->
+                                                                   
                                                                     <span></span>
                                                                 </label>
+                                                                        </div>-->
+                                                                        <label class="control-label">Team Management </label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-1">
+                                                                                <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" [(ngModel)]="profile.CandidateTeamManagement.TeamMgmt"
+                                                                                    tabindex="29" (change)='onSaveTeamManagementDetails()'
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
@@ -2118,9 +2186,9 @@
                                                             </div>
                                                         </form>
                                                         <div class="margiv-top-10 pull-right">
-                                                            <a class="btn green " (click)='previousTab()' tabindex="34">
+                                                            <a class="btn green " (click)='previousTab()' (keypress)="prevTabKeyPressed($event)" tabindex="34">
                                                                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                Prev </a>
-                                                            <a class="btn green " (click)='nextTab()' tabindex="35">
+                                                            <a class="btn green " (click)='nextTab()' (keypress)="nextTabKeyPressed($event)" tabindex="35">
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                         </div>
                                                     </form>

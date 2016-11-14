@@ -23,25 +23,45 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
     directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     pipes: [ProfileBankPipe],
-    providers:[AdvanceSearchService,ProfileBankService,MastersService,ToastsManager]
+    providers: [AdvanceSearchService, ProfileBankService, MastersService, ToastsManager]
 })
 
 export class AdvanceSearchInSidebarComponent implements OnActivate {
-   
-
+    skills: MasterData[];
+    district: MasterData[];
+    errorMessage: string = '';
     constructor(private _advanceSearchService: AdvanceSearchService,
         private http: Http,
         private _router: Router,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
-        
+
     }
 
     routerOnActivate(segment: RouteSegment) {
-        console.log("hi");
+        $('#cmbSkills').select2();
+        $('#cmbLocation').select2();
+        this.getSkills();
+        this.getDistrict();
     }
-   
+    getSkills(): void {
+        this._masterService.getSkills()
+            .subscribe(
+            results => {
+                this.skills = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    getDistrict(): void {
+        //To Do: Update fuction name getDistricts
+        this._masterService.getSkills()
+            .subscribe(
+            results => {
+                this.district = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
 }
 
 

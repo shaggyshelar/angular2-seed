@@ -67,7 +67,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     setPaginationValues() {
         //this.CandidateProfiles.GrdOperations.
         this.blacklistedProfilesList.GrdOperations.ButtonClicked = 0;
-        this.blacklistedProfilesList.GrdOperations.PerPageCount = 3;
+        this.blacklistedProfilesList.GrdOperations.PerPageCount =50;
     }
 
     getBlacklistedProfiles() {

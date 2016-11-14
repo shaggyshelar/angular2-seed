@@ -813,6 +813,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CandidateSkills.AnyFunctionalExp = '';
         }
     }
+    nextTabKeyPressed (e: any) {
+        if(e.keyCode === 13) {
+            this.nextTab();
+        }
+    }
+    prevTabKeyPressed (e: any) {
+        if(e.keyCode === 13) {
+            this.previousTab();
+        }
+    }
     nextTab() {
         $('.nav-tabs > .active').next('li').find('a').trigger('click');
     }
