@@ -1,13 +1,19 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
+import {
+    CandidateProfile,
+    ResumeMeta,
+    AddCandidateResponse,
+    AllCandidateProfiles,
+    CareerProfile,
+    MailDetails } from '../../shared/model/myProfilesInfo';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
+//import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 //import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
@@ -99,7 +105,7 @@ export class AdvanceSearchListComponent implements OnActivate {
         }
     }
     // This function will get all profiles according to search string
-    getAdvanceSearchResult(insputString:string){
+    getAdvanceSearchResult(insputString: string) {
         this._advanceSearchService.getAdvanceSearch(insputString)
             .subscribe(
             (results: any) => {
@@ -108,7 +114,7 @@ export class AdvanceSearchListComponent implements OnActivate {
 
                 } else { this.NORECORDSFOUND = true; }
             },
-            error => this.errorMessage = <any>error); 
+            error => this.errorMessage = <any>error);
     }
 }
 

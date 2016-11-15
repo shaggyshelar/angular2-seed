@@ -567,6 +567,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                 case 'rescheduled':
                     this.ScheduleInterView.Status = 'Rescheduled';
                     break;
+                case 'fitment issue':
+                    this.ScheduleInterView.Status = 'Scheduled';
+                    break;
+                case 'declined':
+                    this.ScheduleInterView.Status = 'Scheduled';
+                    break;
             }
         }
 
