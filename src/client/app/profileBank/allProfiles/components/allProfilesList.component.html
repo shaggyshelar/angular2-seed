@@ -172,7 +172,7 @@
 												<div class="row portlet-title" style="width:100%">
 													<div class="actions pull-right">
 														<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditProfile(profile.CandidateID)'
-															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Edit Profile" [disabled]='getEditAccess(profile.Owner)'>
+															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile" [disabled]='getEditAccess(profile.Owner)'>
                                                             <i class="fa fa-edit "></i><!-- Edit Profile-->
                                                         </button>
 														<button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
