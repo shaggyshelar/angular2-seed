@@ -234,24 +234,24 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             this.profile.CommentsUpdated = false;
         }
-        if (this.validatePrimaryInfo()) {
-            this._profileBankService.editCandidateProfile(this.profile)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.CandidateID.Value);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+        if (!this.isExist) {
+            if (this.validatePrimaryInfo()) {
+                this._profileBankService.editCandidateProfile(this.profile)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.getCandidateProfileById(this.CandidateID.Value);
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.toastr.error(<any>error);
+                    });
+            }
         }
-
-
     }
     validatePrimaryInfo(): boolean {
         var submitFlag: boolean = true;
@@ -310,24 +310,24 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             this.profile.CommentsUpdated = false;
         }
-        if (this.validatePersonalInfo()) {
-            this._profileBankService.editCandidatePersonalDetails(this.profile)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.getCandidateProfileById(this.CandidateID.Value);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+        if (!this.isExist) {
+            if (this.validatePersonalInfo()) {
+                this._profileBankService.editCandidatePersonalDetails(this.profile)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.getCandidateProfileById(this.CandidateID.Value);
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.toastr.error(<any>error);
+                    });
+            }
         }
-
-
     }
 
     validatePersonalInfo(): boolean {
@@ -370,20 +370,23 @@ export class MyProfilesAddComponent implements OnActivate {
         }
         this.profile.CandidateOtherDetails.CandidateID = this.CandidateID;
         //Save Data
-        this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (!this.isExist) {
+            this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+
 
     }
 
@@ -398,20 +401,23 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = false;
         }
-        this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (!this.isExist) {
+            this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+
+        }
 
     }
 
@@ -425,21 +431,22 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = false;
         }
         this.profile.CandidateTeamManagement.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateTeamManagementDetails(this.profile.CandidateTeamManagement)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
-
+        if (!this.isExist) {
+            this._profileBankService.editCandidateTeamManagementDetails(this.profile.CandidateTeamManagement)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
     }
 
     /**Function to fetch candidate EXPERIENCE details */
@@ -469,22 +476,25 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = false;
         }
         this.CandidateExperiences.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    // this.getCandidateProfileById(this.CandidateID.Value);
-                    this.GetCandidateExperience(this.CandidateID);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
+        if (!this.isExist) {
+            this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        // this.getCandidateProfileById(this.CandidateID.Value);
+                        this.GetCandidateExperience(this.CandidateID);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
                 }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            }
-            );
+                );
+        }
+
 
     }
 
@@ -497,20 +507,23 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CommentsUpdated = false;
         }
         this.profile.CandidateSalaryDetails.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (!this.isExist) {
+            this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+
 
     }
     /**START Candidate Employement History functionality (Candidate Employers Information) */
@@ -587,6 +600,12 @@ export class MyProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.EmployersInformation = <any>results;
+                this.EmployersInformation.FromDate = this.formatDate(this.EmployersInformation.FromDate);
+                if (this.EmployersInformation.IsCurrentCompany === true) {
+                    this.EmployersInformation.ToDate = this.formatDate(new Date());
+                } else {
+                    this.EmployersInformation.ToDate = this.formatDate(this.EmployersInformation.ToDate);
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -805,6 +824,26 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CandidateSalaryDetails.IncentiveInHand = 0;
         }
     }
+    onCurrent(isChecked: any) {
+        if (isChecked === false) {
+            this.EmployersInformation.ToDate = this.formatDate(new Date());
+        } else {
+            this.EmployersInformation.ToDate = ' ';
+        }
+    }
+    //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            h = '' + d.getHours(),
+            m = '' + d.getMinutes(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
     onFunctionalExp(isChecked: any) {
         if (isChecked === false) {
             this.FunctionalExp = true;
@@ -813,13 +852,13 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CandidateSkills.AnyFunctionalExp = '';
         }
     }
-    nextTabKeyPressed (e: any) {
-        if(e.keyCode === 13) {
+    nextTabKeyPressed(e: any) {
+        if (e.keyCode === 13) {
             this.nextTab();
         }
     }
-    prevTabKeyPressed (e: any) {
-        if(e.keyCode === 13) {
+    prevTabKeyPressed(e: any) {
+        if (e.keyCode === 13) {
             this.previousTab();
         }
     }
@@ -841,6 +880,38 @@ export class MyProfilesAddComponent implements OnActivate {
     onSalaryTabClick() {
         $('#txtFolloUpForSal').focus();
     }
+    validate(type: string, number: string) {
+        switch (type) {
+            case 'Aadhar': if (number.match('^[0-9\-\+]{9,15}$')) {
+                this.IsExist();
+            } else {
+                this.profile.AadharCardNo = '';
+                this.toastr.error('Enter valid Aadhaar Card number For Eg. 123456789012');
+            }
+                break;
+            case 'Pan': if (number.match('[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}')) {
+                this.IsExist();
+            } else {
+                this.profile.PANNumber = '';
+                this.toastr.error('Enter valid PAN number. For Eg. ABCDE1234F');
+            }
+                break;
+            case 'Passport': if (number.match('[A-Za-z]{1}[0-9]{7}')) {
+                this.IsExist();
+            } else {
+                this.profile.PassportNumber = '';
+                this.toastr.error('Enter valid passport number. For Eg. A1234567');
+            }
+                break;
+            case 'Email': if (number.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')) {
+                this.IsExist();
+            } else {
+                this.profile.Email = '';
+                this.toastr.error('Enter valid Email ID For Eg. abc@gmail.com');
+            }
+                break;
+        }
+    }
     /** Check is current information is already exist in database.*/
     IsExist() {
         this._myProfilesService.isExist(this.profile)
@@ -856,7 +927,8 @@ export class MyProfilesAddComponent implements OnActivate {
                     }
                 } else {
                     this.isExist = false;
-                    this.onSavePrimaryInfo();
+                    //this.onSavePrimaryInfo();
+                    this.onSavePersonalDetails();
                 }
 
             },
@@ -864,7 +936,7 @@ export class MyProfilesAddComponent implements OnActivate {
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
-        sessionStorage.setItem('CandidateIdForReturnPath',this.CandidateID.Value);
+        sessionStorage.setItem('CandidateIdForReturnPath', this.CandidateID.Value);
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles/Edit/');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
