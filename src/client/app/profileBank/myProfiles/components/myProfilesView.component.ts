@@ -51,7 +51,8 @@ export class MyProfilesViewComponent implements OnActivate {
             sessionStorage.setItem(variableName, '');
         } else {
             /** If no information found from Session then it will redirected to existing page */
-            this.toastr.error('Somthing went wrong..!');
+            //this.toastr.error('Somthing went wrong..!');
+            console.log('Following variable name is empty form session - ' + variableName);
         }
         return response;
     }
