@@ -677,6 +677,9 @@ export class MyProfilesListComponent implements OnActivate {
     }
     onSelectRRF(rrfID: string) {
         //this.rrfId = 'RRF6866237939ID76';
+        if (rrfID === '-1') {
+            this.getMyProfiles();
+        }
         this.viewDetailsRRFId = rrfID;
         this._rrfCandidatesList.getCandidateProfilesByRRF(rrfID)
             .subscribe(

@@ -57,7 +57,7 @@
 							<div class="row">
 								<div class="col-md-12 ">
 									<fieldset class="fsStyle">
-										<legend class="legendStyle row pull-right">
+										<legend class="legendStyle row">
 											<a data-toggle="collapse" class="btn btn-transparent red btn-outline btn-circle active" data-target="#demo"><i class="fa fa-plus-circle"></i> New Profile</a>
 										</legend>
 										<br>
@@ -323,15 +323,15 @@
 							</div>
 
 							<!-- Upload Resume END-->
-							<div class="row pull-right" [hidden]="RRFList.length == 0" *ngIf="!NORECORDSFOUND">
-								<label class="col-md-2 control-label">My RRF : </label>
-								<div class="col-md-6" [hidden]="RRFList.length == 0">
+							<div class="row " [hidden]="RRFList.length == 0" *ngIf="!NORECORDSFOUND">
+								<!--<label class="col-md-2 control-label">My RRF : </label>-->
+								<div class="col-md-2" [hidden]="RRFList.length == 0">
 									<select class="btn btn-xs dropdown-toggle" required (change)='onSelectRRF($event.target.value)'>
-                                     <option>select</option>
+                                     <option [value]="-1">Filter By My RRF</option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 </select>
 								</div>
-							</div>
+							</div><br>
 							<div class="row" *ngIf="!NORECORDSFOUND">
 								<div class="col-md-2 col-sm-2">
 									<div class="dataTables_length" id="sample_1_length">
