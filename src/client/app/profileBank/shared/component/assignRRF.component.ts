@@ -38,7 +38,7 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     }
 
     routerOnActivate() {
-        //this.returnPath = sessionStorage.getItem('returnPath');
+        this.returnPath = sessionStorage.getItem('returnPath');
         this.returnPathToSchedule = sessionStorage.getItem('returnPathToSchedule');
         if (this.returnPathToSchedule.includes('MyProfiles')) {
             this.Title = 'My Profiles';
@@ -78,7 +78,7 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
             sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
         }
         if (this.returnPathToSchedule !== undefined)
-            this._router.navigate([this.returnPathToSchedule]);
+            this._router.navigate([this.returnPath]);
     }
 
     onSelectRRF(RRFID: string) {
@@ -106,9 +106,13 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         if (this.returnPathToSchedule.toLowerCase().includes('schedule')) {
             sessionStorage.setItem('RRFID', JSON.stringify(this.selectedRRF.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
+            sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
         }
-        if (this.returnPathToSchedule !== undefined)
+        if (this.returnPathToSchedule !== undefined) {
             this._router.navigate([this.returnPathToSchedule]);
+        } else {
+            this._router.navigate([this.returnPath]);
+        }
     }
     onAssignRRF() {
         sessionStorage.removeItem('CandidateIDs');

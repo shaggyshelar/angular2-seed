@@ -31,6 +31,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     ScheduleInterView: Interview;
     resources: Array<Resource> = new Array<Resource>();
     errorMessage: string;
+    returnPath: string;
     // resource: Resource;
     InterviewModes: Array<MasterData>;
     InterviewTypes: Array<MasterData>;
@@ -99,6 +100,9 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.RRFID = JSON.parse(sessionStorage.getItem('RRFID'));
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
+        this.returnPath = sessionStorage.getItem('returnPath');
+        sessionStorage.removeItem('returnPath');
+
         this.ScheduleInterView.Status = sessionStorage.getItem('Status') !== null ? sessionStorage.getItem('Status') : 'Not Scheduled';
         this.clearSession('Status');
 
@@ -186,8 +190,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     redirectToPreviousView() {
         //Clear Session Values
         this.clearSession('RRFID');
-        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' +
-            this.ScheduleInterView.RRFID.Value + 'ID' + this.ScheduleInterView.RRFID.Id]);
+        if (this.returnPath === '') {
+            this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' +
+                this.ScheduleInterView.RRFID.Value + 'ID' + this.ScheduleInterView.RRFID.Id]);
+        } else {
+            this._router.navigate([this.returnPath]);
+        }
 
     }
 

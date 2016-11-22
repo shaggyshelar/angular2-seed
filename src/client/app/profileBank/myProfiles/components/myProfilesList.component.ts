@@ -627,6 +627,7 @@ export class MyProfilesListComponent implements OnActivate {
         if (selectedCandidate.Status.Value.toLowerCase() === 'in process') {
             sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFAssigned.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(selectedCandidate));
+            sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
             this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
         } else {
             if (selectedCandidate.Status.Value.toLowerCase() === 'open') {

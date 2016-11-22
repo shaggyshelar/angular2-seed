@@ -131,6 +131,7 @@ export class RRFCandidateListComponent implements OnActivate {
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
         sessionStorage.setItem('Status', Candidate.InterviewDetails.Status);
+        sessionStorage.setItem('returnPath', '/App/RRF/RRFDashboard/Candidates/' + this.RRFID.Value + 'ID' + this.RRFID.Id);
         this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
     }
 
@@ -233,6 +234,7 @@ export class RRFCandidateListComponent implements OnActivate {
     onReScheduleInterviewClick(Candidate: RRFSpecificCandidateList) {
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
+        sessionStorage.setItem('returnPath', '/App/RRF/RRFDashboard/Candidates/' + this.RRFID.Value + 'ID' + this.RRFID.Id);
         // sessionStorage.setItem('Status', Candidate.InterviewDetails.Status);
         sessionStorage.setItem('Status', 'Rescheduled');
         this._router.navigate(['/App/Recruitment Cycle/Schedule/' +
