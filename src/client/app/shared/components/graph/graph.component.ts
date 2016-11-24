@@ -18,20 +18,20 @@ export class GraphComponent implements OnInit {
         this.data = this.chartData;
         var chart: any;
         //if (AmCharts.isReady) {
-            createChart(this.chartData);
+        createChart(this.chartData);
         //} else {
-            ///AmCharts.ready(function () {
-            //    createChart(this.chartData);
-           // });
-       // }
+        ///AmCharts.ready(function () {
+        //    createChart(this.chartData);
+        // });
+        // }
         function createChart(chartData: any) {
             // SERIAL CHART
             chart = new AmCharts.AmSerialChart();
             chart.dataProvider = chartData;
-            chart.categoryField = 'year';
+            chart.categoryField = 'status';
             chart.startDuration = 1;
             chart.plotAreaBorderColor = '#DADADA';
-            chart.plotAreaBorderAlpha = 1;
+            chart.plotAreaBorderAlpha = 0.5;
             // this single line makes the chart a bar chart
             chart.rotate = false;
 
@@ -55,9 +55,9 @@ export class GraphComponent implements OnInit {
             // first graph
             var graph1 = new AmCharts.AmGraph();
             graph1.type = 'column';
-            graph1.title = 'Income';
-            graph1.valueField = 'income';
-            graph1.balloonText = 'Income:[[value]]';
+            graph1.title = 'Selected';
+            graph1.valueField = 'selectedVal';
+            graph1.balloonText = 'Selected candidates: [[value]]';
             graph1.lineAlpha = 0;
             graph1.fillColors = '#ADD981';
             graph1.fillAlphas = 1;
@@ -66,13 +66,35 @@ export class GraphComponent implements OnInit {
             // second graph
             var graph2 = new AmCharts.AmGraph();
             graph2.type = 'column';
-            graph2.title = 'Expenses';
-            graph2.valueField = 'expenses';
-            graph2.balloonText = 'Expenses:[[value]]';
+            graph2.title = 'Rejected';
+            graph2.valueField = 'rejectedVal';
+            graph2.balloonText = 'Rejected candidates are :[[value]]';
             graph2.lineAlpha = 0;
             graph2.fillColors = '#81acd9';
             graph2.fillAlphas = 1;
             chart.addGraph(graph2);
+
+            // third graph
+            var graph3 = new AmCharts.AmGraph();
+            graph3.type = 'column';
+            graph3.title = 'OnHold';
+            graph3.valueField = 'onHoldVal';
+            graph3.balloonText = 'On Hold candidates are :[[value]]';
+            graph3.lineAlpha = 0;
+            graph3.fillColors = '#48cga9';
+            graph3.fillAlphas = 1;
+            chart.addGraph(graph3);
+
+            // four graph
+            var graph4 = new AmCharts.AmGraph();
+            graph4.type = 'column';
+            graph4.title = 'FitmentIssue';
+            graph4.valueField = 'fitmentVal';
+            graph4.balloonText = 'Fitment issue candidates are :[[value]]';
+            graph4.lineAlpha = 0;
+            graph4.fillColors = '#01dcd9';
+            graph4.fillAlphas = 1;
+            chart.addGraph(graph4);
 
             // LEGEND
             var legend = new AmCharts.AmLegend();
@@ -83,7 +105,7 @@ export class GraphComponent implements OnInit {
             // WRITE
             chart.write('chartdivforCol');
         }
-        function handleClick(event:any) {
+        function handleClick(event: any) {
             alert(event.item.category + ': ' + event.item.values.value);
         }
     }

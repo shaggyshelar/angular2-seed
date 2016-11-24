@@ -35,6 +35,7 @@
             <!-- BEGIN PAGE CONTENT INNER -->
             <div class="page-content-inner">
                 <div class="mt-content-body">
+                    <!--BEGIN Top tiles -->
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
                             <div class="dashboard-stat2 bordered">
@@ -141,16 +142,19 @@
                             </div>
                         </div>
                     </div>
+                    <!--END Top tiles -->
+                    <!--BEGIN Chart 1-->
                     <div class="row">
+                        <!--BEGIN chart 1.1-->
                         <div class="col-md-6 col-sm-6" style="margin-right:inherit;margin-top:-5px;">
                             <div class="portlet light ">
                                 <div class="portlet-title">
                                     <div class="caption caption-md">
                                         <i class="icon-bar-chart font-dark hide"></i>
                                         <span class="caption-subject font-green-steel uppercase bold">Pending RRF</span>
-                                        <span class="caption-helper">78 pending</span>
+                                        <!--<span class="caption-helper">78 pending</span>-->
                                     </div>
-                                    <div class="actions">
+                                    <!--<div class="actions">
                                         <div class="btn-group btn-group-devided" data-toggle="buttons">
                                             <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active">
                                                                         <input type="radio" name="options" class="toggle" id="option1">Today</label>
@@ -159,22 +163,24 @@
                                             <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm">
                                                                         <input type="radio" name="options" class="toggle" id="option2">Month</label>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
-                                    <am-chart [chartData]='chartDataForColumnChart'></am-chart>
+                                    <pie-chart [chartData]='chartDataForPie'></pie-chart>
                                 </div>
                             </div>
                         </div>
+                        <!--END chart 1.1-->
+                        <!--BEGIN chart 1.2-->
                         <div class="col-md-6 col-sm-6" style="margin-top:-5px;">
                             <div class="portlet light ">
                                 <div class="portlet-title">
                                     <div class="caption caption-md">
                                         <i class="icon-bar-chart font-dark hide"></i>
                                         <span class="caption-subject font-green-steel bold uppercase">Open RRF</span>
-                                        <span class="caption-helper">134 open</span>
+                                        <!--<span class="caption-helper">134 open</span>-->
                                     </div>
-                                    <div class="actions">
+                                    <!--<div class="actions">
                                         <div class="btn-group btn-group-devided" data-toggle="buttons">
                                             <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm active">
                                                                         <input type="radio" name="options" class="toggle" id="option1">Today</label>
@@ -183,14 +189,17 @@
                                             <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm">
                                                                         <input type="radio" name="options" class="toggle" id="option2">Month</label>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
-                                    <pie-chart [chartData]='chartDataForPie'></pie-chart>
+                                    <am-chart [chartData]='chartDataForColumnChart'></am-chart>
                                 </div>
                             </div>
                         </div>
+                        <!--END chart 1.2-->
                     </div>
+                    <!--END Chart 1-->
+                    <!--BEGIN Chart 2-->
                     <div class="row">
                         <div class="col-md-6 col-sm-6" style="margin-right:inherit;margin-top:-5px;">
                             <div class="portlet light tasks-widget ">
@@ -198,9 +207,9 @@
                                     <div class="caption">
                                         <i class="icon-share font-dark hide"></i>
                                         <span class="caption-subject font-green-steel bold uppercase">Selected Candidates</span>
-                                        <span class="caption-helper">Candidates summary...</span>
+                                        <!--<span class="caption-helper">Candidates summary...</span>-->
                                     </div>
-                                    <div class="actions">
+                                    <!--<div class="actions">
                                         <div class="btn-group">
                                             <a class="btn blue-oleo btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
                                                                         <i class="fa fa-angle-down"></i>
@@ -237,7 +246,7 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
                                     <gauge-chart [chartData]='chartDataForAnimatedPie'></gauge-chart>
@@ -250,15 +259,15 @@
                                     <div class="caption caption-md">
                                         <i class="icon-bar-chart font-dark hide"></i>
                                         <span class="caption-subject font-green-steel bold uppercase">Candidates joining this months</span>
-                                        <span class="caption-helper">27 joining</span>
+                                        <!--<span class="caption-helper">27 joining</span>-->
                                     </div>
-                                    <div class="inputs">
+                                    <!--<div class="inputs">
                                         <div class="portlet-input input-inline input-small ">
                                             <div class="input-icon right">
                                                 <i class="icon-magnifier"></i>
                                                 <input type="text" class="form-control form-control-solid input-circle" placeholder="search...">                                                </div>
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
                                     <animated-pie-chart [chartData]='chartDataForAnimatedPie'></animated-pie-chart>
@@ -266,6 +275,8 @@
                             </div>
                         </div>
                     </div>
+                    <!--END Chart 2-->
+                    <!--BEGIN Chart 3-->
                     <div class="row">
                         <div class="col-md-6 col-sm-6" style="margin-right:inherit;margin-top:-5px;">
                             <!-- BEGIN REGIONAL STATS PORTLET-->
@@ -2436,6 +2447,7 @@
                             <!-- END PORTLET-->
                         </div>
                     </div>
+                    <!--END Chart 3-->
                 </div>
             </div>
             <!-- END PAGE CONTENT INNER -->

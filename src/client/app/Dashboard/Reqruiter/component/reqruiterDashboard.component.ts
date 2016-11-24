@@ -4,18 +4,23 @@ import { GraphComponent } from '../../../shared/components/graph/graph.component
 import { PiechartComponent } from '../../../shared/components/graph/piechart.component';
 import { GaugeChartComponent } from '../../../shared/components/graph/gaugeChart.component';
 import { AnimatedPieComponent } from '../../../shared/components/graph/AnimatedPieChart.component';
+import { RecruitersDashboardService } from '../index';
 
 @Component({
     moduleId: module.id,
     selector: 'reqruiterdashboard-component',
     templateUrl: 'recruiterDashboard.component.html',
     directives: [ROUTER_DIRECTIVES, GraphComponent, PiechartComponent, GaugeChartComponent, AnimatedPieComponent],
+    providers: [RecruitersDashboardService]
 })
 
 export class ReqruiterDashboardComponent implements OnActivate {
+    errorMessage: string;
     public chartDataForColumnChart: any[];
     public chartDataForPie: any = [];
     public chartDataForAnimatedPie: any = [];
+    piechartData: Array<PiechartData>;
+
     routerOnActivate() {
         $('.counter').counterUp({
             delay: 10,
@@ -24,61 +29,62 @@ export class ReqruiterDashboardComponent implements OnActivate {
         //Data send for Column chart
         this.chartDataForColumnChart = [
             {
-                'year': 2005,
-                'income': 23.5,
-                'expenses': 18.1
+                'status': 'Technical1',
+                'selectedVal': 23.5,
+                'rejectedVal': 29.5,
+                'fitmentVal': 18.1
             },
             {
-                'year': 2006,
-                'income': 26.2,
-                'expenses': 22.8
+                'status': 'Technical2',
+                'selectedVal': 26.2,
+                'rejectedVal': 29.5,
+                'fitmentVal': 2.5,
+                'onHoldVal': 22.8
             },
             {
-                'year': 2007,
-                'income': 30.1,
-                'expenses': 23.9
+                'status': 'Technical3',
+                'selectedVal': 30.1,
+                'rejectedVal': 25,
+                'onHoldVal': 23.9,
+                'fitmentVal': 25.1
             },
             {
-                'year': 2008,
-                'income': 29.5,
-                'expenses': 25.1
+                'status': 'HR1',
+                'selectedVal': 29.5,
+                'rejectedVal': 29.5,
+                'onHoldVal': 2.5,
+                'fitmentVal': 25.1
             },
             {
-                'year': 2009,
-                'income': 24.6,
-                'expenses': 25
+                'status': 'HR2',
+                'selectedVal': 24.6,
+                'rejectedVal': 25,
+                'onHoldVal': 25,
+                'fitmentVal': 25
             }
         ];
-
-        //Data send for Pie chart
-        this.chartDataForPie = [{
-            'country': 'Lithuania',
-            'litres': 501.9
-        }, {
-                'country': 'Czech Republic',
-                'litres': 301.9
-            }, {
-                'country': 'Ireland',
-                'litres': 201.1
-            }, {
-                'country': 'Germany',
-                'litres': 165.8
-            }, {
-                'country': 'Australia',
-                'litres': 139.9
-            }, {
-                'country': 'Austria',
-                'litres': 128.3
-            }, {
-                'country': 'UK',
-                'litres': 99
-            }, {
-                'country': 'Belgium',
-                'litres': 60
-            }, {
-                'country': 'The Netherlands',
-                'litres': 50
-            }];
+        /**TODO::Delete after Ingeration || Data send for Pie chart
+                this.chartDataForPie = [
+                    {
+                        'title': 'Open',
+                        'value': 51
+                    }, {
+                        'title': 'Closed',
+                        'value': 31
+                    }, {
+                        'title': 'InProcess',
+                        'value': 21
+                    }, {
+                        'title': 'Overdue',
+                        'value': 16
+                    }, {
+                        'title': 'Pending',
+                        'value': 39
+                    }, {
+                        'title': 'Pending',
+                        'value': 12
+                    }];
+        */
         // Data for Animated Pie chart
         this.chartDataForAnimatedPie = {
             '1995': [
@@ -263,4 +269,49 @@ export class ReqruiterDashboardComponent implements OnActivate {
                 { 'sector': 'Finance, real estate and business services', 'size': 26.5 }]
         };
     }
+    constructor(private dashboardSerivce: RecruitersDashboardService) {
+        this.GetAllRrfStatusCount();
+    }
+    /**Get all RRF's status wise count */
+    GetAllRrfStatusCount(): void {
+        this.dashboardSerivce.getAllStatusCount()
+            .subscribe(
+            results => {
+                this.chartDataForPie = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /**Get all RRF's status wise count */
+    GetTaggedCandidateStatusCount(_status: string): void {
+        this.dashboardSerivce.getTaggedCandidateStatusCount(_status)
+            .subscribe(
+            results => {
+                this.chartDataForColumnChart = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    /**
+    * Get all RRF's status wise count 
+    * This method used with promises keeping this commented method for future 
+    * referece, in case of any requirement.
+    * 
+   // GetAllRrfStatusCount() {
+   //     this.dashboardSerivce.getAllRRFStatusCount()
+   //         .then(
+   //         results => {
+   //             this.piechartData = <any>results;
+   //             this.chartDataForPie = this.piechartData;
+   //         },
+   //         error => this.errorMessage = <any>error);
+   // }
+   */
+}
+
+/**
+ * PiechartData
+ */
+class PiechartData {
+    title: string;
+    value: string;
 }
