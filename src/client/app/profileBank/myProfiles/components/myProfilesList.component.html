@@ -326,7 +326,7 @@
 							<div class="row " [hidden]="RRFList.length == 0" *ngIf="!NORECORDSFOUND">
 								<!--<label class="col-md-2 control-label">My RRF : </label>-->
 								<div class="col-md-2" [hidden]="RRFList.length == 0">
-									<select class="btn btn-xs dropdown-toggle" required (change)='onSelectRRF($event.target.value)'>
+									<select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
                                      <option [value]="-1">Filter By My RRF</option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 </select>
