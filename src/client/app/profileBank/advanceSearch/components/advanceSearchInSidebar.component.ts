@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
+import { AdvancedSearch, OtherDetails,Qualification,CandidateMaster, SalaryDetails,AllCandidateProfiles, CareerProfile, Skills } from '../../shared/model/advancedSearchInfo';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -27,6 +27,14 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
 })
 
 export class AdvanceSearchInSidebarComponent implements OnActivate {
+    candidateAdvancedSearch: AdvancedSearch;
+    AdvanceSearchList: AllCandidateProfiles = new AllCandidateProfiles();
+    CandidateSkillsDetails: Skills = new Skills();
+    CandidateOtherDetails: OtherDetails = new OtherDetails();
+    CandidateCareerDetails: CareerProfile = new CareerProfile ();
+    CandidateSalaryDetails: SalaryDetails = new SalaryDetails();
+    CandidateMasterDetails: CandidateMaster = new CandidateMaster();
+    CandidateQualification: Qualification = new Qualification();
     skills: MasterData[];
     district: MasterData[];
     errorMessage: string = '';
@@ -36,7 +44,7 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
-
+    this.candidateAdvancedSearch= new AdvancedSearch();
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -59,6 +67,14 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
             .subscribe(
             results => {
                 this.district = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    onAdvancedSearch(): void {
+        this._advanceSearchService.getAdvancedSearchInSidebar(this.candidateAdvancedSearch)
+            .subscribe(
+            results => {
+                //this.AdvanceSearchList = results;
             },
             error => this.errorMessage = <any>error);
     }

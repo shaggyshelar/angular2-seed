@@ -327,7 +327,7 @@
 								<!--<label class="col-md-2 control-label">My RRF : </label>-->
 								<div class="col-md-2" [hidden]="RRFList.length == 0">
 									<select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
-                                     <option [value]="-1">Filter By My RRF</option>
+                                     <option [value]="-1" [disabled]="true">Filter By My RRF</option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 </select>
 								</div>

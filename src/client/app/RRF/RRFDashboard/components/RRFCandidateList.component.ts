@@ -69,6 +69,7 @@ export class RRFCandidateListComponent implements OnActivate {
     showChangeStatus: boolean = false;
     setActualTimeForm: boolean = false;
     changeStatusCandidateID: MasterData = new MasterData();
+    IsBarchartDataShow: boolean = false;
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
         responsive: true
@@ -121,8 +122,11 @@ export class RRFCandidateListComponent implements OnActivate {
             (results: any) => {
                 barChartData = results;
                 if (barChartData.functions && barChartData.ratingsData) {
+                    this.IsBarchartDataShow = true;
                     this.barChartLabels = barChartData.functions;
                     this.barChartData = barChartData.ratingsData;
+                }else {
+                    this.IsBarchartDataShow = false;
                 }
             },
             error => this.errorMessage = <any>error);
@@ -349,7 +353,7 @@ export class RRFCandidateListComponent implements OnActivate {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                     } else {
-                        this.toastr.success((<ResponseFromAPI>results).ErrorMsg);
+                        this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
                 error => this.errorMessage = <any>error);

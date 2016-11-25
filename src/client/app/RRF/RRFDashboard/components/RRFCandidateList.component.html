@@ -163,9 +163,9 @@
 								<!-- Candidate List ENDS-->
 								<!-- Candidate Details -->
 								<div class="col-md-5" style="border-left:1px solid gray">
-									<span class="caption-subject bold" *ngIf="barChartData.length>0" style="font-size : 14px">{{selectedCandidate}} Interview Feedback History</span>
+									<span class="caption-subject bold" *ngIf="IsBarchartDataShow" style="font-size : 14px">{{selectedCandidate}} Interview Feedback History</span>
 									<div class="row">
-										<base-chart class="chart" *ngIf="barChartData.length>0" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
+										<base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
                                         " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
 											(chartClick)="chartClicked($event) "></base-chart>
 									</div>

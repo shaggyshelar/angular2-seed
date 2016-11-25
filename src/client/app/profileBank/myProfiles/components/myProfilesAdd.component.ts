@@ -882,7 +882,7 @@ export class MyProfilesAddComponent implements OnActivate {
     }
     validate(type: string, number: string) {
         switch (type) {
-            case 'Aadhar': if (number.match('^[0-9\-\+]{9,15}$')) {
+            case 'Aadhar': if (number.match('^[0-9\-\+]{9,15}$') && number.length === 12) {
                 this.IsExist();
             } else {
                 this.profile.AadharCardNo = '';
