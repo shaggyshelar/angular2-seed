@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { AdvancedSearch,CandidateProfile, ResumeMeta} from '../../shared/model/myProfilesInfo';
+import { AdvancedSearch} from '../../shared/model/advancedSearchInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -20,10 +20,10 @@ export class AdvanceSearchService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    getAdvancedSearchInSidebar(candidateAdvancedSearch: AdvancedSearch) {
+    getAdvancedSearchInSidebar(candidateAdvancedSearch: AdvancedSearch,candidateGrdOperations: GrdOptions) {
         let url = Config.GetURL('/api/Search/CandidateAdvancedSearch');
         this._spinnerService.show();
-        return this.authHttp.post(url, { candidateAdvancedSearch })
+        return this.authHttp.post(url, { candidateAdvancedSearch,candidateGrdOperations })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

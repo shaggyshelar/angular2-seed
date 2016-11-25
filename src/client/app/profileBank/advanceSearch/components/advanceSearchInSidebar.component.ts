@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
-import { AdvancedSearch, OtherDetails,Qualification,CandidateMaster, SalaryDetails,AllCandidateProfiles, CareerProfile, Skills } from '../../shared/model/advancedSearchInfo';
+import { AdvancedSearch, OtherDetails, Qualification, CandidateMaster, SalaryDetails, AllCandidateProfiles, CareerProfile, Skills } from '../../shared/model/advancedSearchInfo';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -28,23 +28,30 @@ import { DetailProfileComponent } from '../../shared/component/detailProfile.com
 
 export class AdvanceSearchInSidebarComponent implements OnActivate {
     candidateAdvancedSearch: AdvancedSearch;
+    candidateGrdOperations: GrdOptions = new GrdOptions();
     AdvanceSearchList: AllCandidateProfiles = new AllCandidateProfiles();
     CandidateSkillsDetails: Skills = new Skills();
     CandidateOtherDetails: OtherDetails = new OtherDetails();
-    CandidateCareerDetails: CareerProfile = new CareerProfile ();
+    CandidateCareerDetails: CareerProfile = new CareerProfile();
     CandidateSalaryDetails: SalaryDetails = new SalaryDetails();
     CandidateMasterDetails: CandidateMaster = new CandidateMaster();
     CandidateQualification: Qualification = new Qualification();
     skills: MasterData[];
     district: MasterData[];
     errorMessage: string = '';
+    visaTypes = ['H1', 'L1'];
+    CurrentType = [{ id: 'Yes', value: 'Current Employer' },
+        { id: 'No', value: 'Previous Employer' },
+        { id: 'Both', value: 'Current / Previous Employer' }];
     constructor(private _advanceSearchService: AdvanceSearchService,
         private http: Http,
         private _router: Router,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
-    this.candidateAdvancedSearch= new AdvancedSearch();
+        this.candidateAdvancedSearch = new AdvancedSearch();
+        this.candidateAdvancedSearch.CandidateOtherDetails.Visa = 'H1';
+        this.candidateAdvancedSearch.CandidateCareerDetails.IsCurrent = 'Yes';
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -71,12 +78,25 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     onAdvancedSearch(): void {
-        this._advanceSearchService.getAdvancedSearchInSidebar(this.candidateAdvancedSearch)
+        let Skillcmb: any = $('#cmbSkills');
+        let SkillValue = Skillcmb.val();
+        let Locationcmb: any = $('#cmbSkills');
+        let LoationValue = Locationcmb.val();
+        this._advanceSearchService.getAdvancedSearchInSidebar(this.candidateAdvancedSearch, this.candidateGrdOperations)
             .subscribe(
             results => {
                 //this.AdvanceSearchList = results;
             },
             error => this.errorMessage = <any>error);
+    }
+    onSelectVisa(visa: string) {
+        this.candidateAdvancedSearch.CandidateOtherDetails.Visa = visa;
+    }
+    onSelectCurrentCompony(current: string) {
+        this.candidateAdvancedSearch.CandidateCareerDetails.IsCurrent = current;
+    }
+    onSelectSkills(skills: string) {
+        this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = skills;
     }
 }
 

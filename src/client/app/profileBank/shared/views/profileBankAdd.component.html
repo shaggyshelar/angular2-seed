@@ -537,7 +537,7 @@
                                                             <label>Aadhaar Card No<small> (Eg. 123456789012)</small></label>
                                                             <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number"
                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo" title="Enter valid Aadhaar Card number For Eg. 123456789012"
-                                                                maxlength="12" (blur)="validate('Aadhar', profile.AadharCardNo)" tabindex="13" />
+                                                               minlength="12" maxlength="12" (blur)="validate('Aadhar', profile.AadharCardNo)" tabindex="13" />
                                                         </div>
                                                     </div>
 
@@ -545,7 +545,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Pan Card No<small> (Eg. ABCDE1234F)</small></label>
                                                             <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F"
-                                                                 (blur)="validate('Pan', profile.PANNumber)" tabindex="14"
+                                                               maxlength="10" (blur)="validate('Pan', profile.PANNumber)" tabindex="14"
                                                             />
                                                         </div>
                                                     </div>
@@ -553,7 +553,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Passport No<small> (Eg. A1234567)</small></label>
                                                             <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567"
-                                                                (blur)="validate('Passport', profile.PassportNumber)" tabindex="15"
+                                                                maxlength="8" (blur)="validate('Passport', profile.PassportNumber)" tabindex="15"
                                                             />
                                                         </div>
                                                     </div>

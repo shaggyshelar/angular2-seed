@@ -4,13 +4,14 @@ import { GraphComponent } from '../../../shared/components/graph/graph.component
 import { PiechartComponent } from '../../../shared/components/graph/piechart.component';
 import { GaugeChartComponent } from '../../../shared/components/graph/gaugeChart.component';
 import { AnimatedPieComponent } from '../../../shared/components/graph/AnimatedPieChart.component';
+import { StackedColumnComponent } from '../../../shared/components/graph/StackedColumnChart.component';
 import { RecruitersDashboardService } from '../index';
 
 @Component({
     moduleId: module.id,
     selector: 'reqruiterdashboard-component',
     templateUrl: 'recruiterDashboard.component.html',
-    directives: [ROUTER_DIRECTIVES, GraphComponent, PiechartComponent, GaugeChartComponent, AnimatedPieComponent],
+    directives: [ROUTER_DIRECTIVES, GraphComponent, PiechartComponent, GaugeChartComponent, AnimatedPieComponent, StackedColumnComponent],
     providers: [RecruitersDashboardService]
 })
 
@@ -19,6 +20,7 @@ export class ReqruiterDashboardComponent implements OnActivate {
     public chartDataForColumnChart: any[];
     public chartDataForPie: any = [];
     public chartDataForAnimatedPie: any = [];
+    public ChartDataForStackedColChart: any = [];
     piechartData: Array<PiechartData>;
 
     routerOnActivate() {
@@ -30,12 +32,12 @@ export class ReqruiterDashboardComponent implements OnActivate {
          * Data send for Column chart
        this.chartDataForColumnChart = [
            {
-               'status': 'Technical1',
-               'selectedVal': 23.5,
-               'rejectedVal': 29.5,
-               'scheduledVal': 0,
-               'fitmentIssueVal': 18.1,
-               'onHoldVal': 22.8
+               'JoinedVal': 0,
+               'inprocessVal': 2,
+               'offerAcceptedVal': 2,
+               'offeredVal': 0,
+               'openVal': 18,
+               'status': "R00001"
            },
            {
                'status': 'Technical2',
@@ -93,6 +95,30 @@ export class ReqruiterDashboardComponent implements OnActivate {
                         'value': 12
                     }];
         */
+
+        // Data for Stacked Column chart
+        // this.ChartDataForStackedColChart = [{
+        //        'status': "R00001",
+        //         'JoinedVal': 0,
+        //        'inprocessVal': 2,
+        //        'offerAcceptedVal': 2,
+        //        'offeredVal': 0,
+        //        'openVal': 18
+        //     }, {
+        //         'status': "R00002",
+        //         'JoinedVal': 4,
+        //        'inprocessVal': 5,
+        //        'offerAcceptedVal': 6,
+        //        'offeredVal': 7,
+        //        'openVal': 16
+        //     }, {
+        //         'status': "R00003",
+        //         'JoinedVal': 7,
+        //        'inprocessVal': 4,
+        //        'offerAcceptedVal': 2,
+        //        'offeredVal': 0,
+        //        'openVal': 18
+        //     }]
         // Data for Animated Pie chart
         this.chartDataForAnimatedPie = {
             '1995': [
@@ -297,7 +323,7 @@ export class ReqruiterDashboardComponent implements OnActivate {
             .subscribe(
             results => {
                 //this.chartDataForColumnChart = <any>results;
-                var _chartDataForColumnChart = <any>results;
+                this.ChartDataForStackedColChart = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
