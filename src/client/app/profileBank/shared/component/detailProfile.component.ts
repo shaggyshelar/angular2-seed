@@ -1,13 +1,16 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { CandidateProfile, MailDetails} from '../../shared/model/myProfilesInfo';
 import { MasterData, Resume } from  '../../../shared/model/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
+import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
     selector: 'detail-profile',
     templateUrl: 'detailProfile.component.html',
+    directives: [TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     providers: [ToastsManager, ProfileBankService]
 })
@@ -22,7 +25,7 @@ export class DetailProfileComponent implements OnInit {
     @Input() rrfID: string;
     // @Input() profilePic: any;
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
-    constructor(private toastr: ToastsManager, private _profileBankService: ProfileBankService) {
+    constructor(private toastr: ToastsManager, private _router: Router, private _profileBankService: ProfileBankService) {
         //console.log('In Contructor...');
     }
     ngOnInit() {
@@ -52,6 +55,10 @@ export class DetailProfileComponent implements OnInit {
                 } else { alert('Resume not available!'); }
             },
             error => this.errorMessage = <any>error);
+    }
+    /** Redirect user to view profiles page. */
+    viewProfiles(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /** Download crate file form binary and download in given fyle type */
     Download(binaryResume: string, ResumeName: string) {

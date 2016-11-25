@@ -24,8 +24,17 @@ export class RecruitersDashboardService {
             .finally(() => this._spinnerService.hide());
     }
     /**Get all RRF with candidate count for specific RRF status */
-    getTaggedCandidateStatusCount(status: string) {
-        let url = Config.GetURL(' /api/Dashboards/GetCandidatesForRRFsByRRFStatus?RRFStatus=' + status);
+    getRRFStatusCount(status: string) {
+        let url = Config.GetURL('/api/Dashboards/GetCandidatesForRRFsByRRFStatus?RRFStatus=' + status);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get all interview round wise candidate count for specific RRF */
+    getTaggedCandidateStatusCount(RrfCode: string) {
+        let url = Config.GetURL('/api/Dashboards/GetCandidatesInPipelineForSelectedRRF?RRFID=' + RrfCode);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

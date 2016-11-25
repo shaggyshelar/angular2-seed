@@ -30,10 +30,10 @@
         <div class="col-md-10">
             <div class="row message">
                 <div class="col-md-8 profile-info">
-                    <h3 class="font-green sbold uppercase">{{profile.Candidate}} <small> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"":"-"}} </small></h3>
+                    <h3 class="font-green sbold uppercase"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"":"-"}} </small></h3>
                     <!--<p>
                         <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
-                    </p>-->
+                        </p>-->
                     <div class="row">
                         <ul class="list-unstyled">
                             <li>
@@ -68,7 +68,7 @@
                         <ul class="list-inline sbold" style="color:#f16e50">
                             <li>
                                 <!--location-->
-                                <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
+                                <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <!--TODO:: Add Location once updated from Backend -->
                                     <i class="fa fa-map-marker"></i> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Location?profile.CandidateCurrentCompanyProfile.Location:"N/A":"N/A"}}
                                     <!--{{profile.District?profile.District:"N/A"}}-->
@@ -76,19 +76,19 @@
                             </li>
                             <li>
                                 <!--experience-->
-                                <div tooltip="Experience" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Experience">
+                                <div tooltip="Experience" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <i class="fa fa-briefcase"></i> {{profile.TotalExperience?profile.TotalExperience+" yr":"N/A"}}
                                 </div>
                             </li>
                             <li>
                                 <!--tag-->
-                                <div tooltip="Tag" class="uppercase" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="tag">
+                                <div tooltip="Tag" class="uppercase" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}}
                                 </div>
                             </li>
                             <li>
                                 <!--notice period-->
-                                <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
+                                <div tooltip="Notice period" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <i class="fa fa-hourglass-half"></i> NP: {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+"
                                     days":"N/A"}}
                                 </div>
@@ -110,7 +110,7 @@
                         <div class="portlet-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <h5 tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Owner" class="font-blue sbold uppercase">
+                                    <h5 tooltip="Owner" tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="true" class="font-blue sbold uppercase">
                                         <!--<i class="fa fa-user"></i>-->{{profile.Owner.Value?profile.Owner.Value:"N/A"}}</h5>
                                 </li>
                                 <li>

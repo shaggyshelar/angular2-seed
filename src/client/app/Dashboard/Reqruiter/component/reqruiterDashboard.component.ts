@@ -26,43 +26,51 @@ export class ReqruiterDashboardComponent implements OnActivate {
             delay: 10,
             time: 1000
         });
-        //Data send for Column chart
-        this.chartDataForColumnChart = [
-            {
-                'status': 'Technical1',
-                'selectedVal': 23.5,
-                'rejectedVal': 29.5,
-                'fitmentVal': 18.1
-            },
-            {
-                'status': 'Technical2',
-                'selectedVal': 26.2,
-                'rejectedVal': 29.5,
-                'fitmentVal': 2.5,
-                'onHoldVal': 22.8
-            },
-            {
-                'status': 'Technical3',
-                'selectedVal': 30.1,
-                'rejectedVal': 25,
-                'onHoldVal': 23.9,
-                'fitmentVal': 25.1
-            },
-            {
-                'status': 'HR1',
-                'selectedVal': 29.5,
-                'rejectedVal': 29.5,
-                'onHoldVal': 2.5,
-                'fitmentVal': 25.1
-            },
-            {
-                'status': 'HR2',
-                'selectedVal': 24.6,
-                'rejectedVal': 25,
-                'onHoldVal': 25,
-                'fitmentVal': 25
-            }
-        ];
+        /**TODO::Delete after Ingeration || Data send for Column chart
+         * Data send for Column chart
+       this.chartDataForColumnChart = [
+           {
+               'status': 'Technical1',
+               'selectedVal': 23.5,
+               'rejectedVal': 29.5,
+               'scheduledVal': 0,
+               'fitmentIssueVal': 18.1,
+               'onHoldVal': 22.8
+           },
+           {
+               'status': 'Technical2',
+               'selectedVal': 26.2,
+               'rejectedVal': 29.5,
+               'scheduledVal': 3,
+               'fitmentIssueVal': 2.5,
+               'onHoldVal': 22.8
+           },
+           {
+               'status': 'Technical3',
+               'selectedVal': 30.1,
+               'rejectedVal': 25,
+               'onHoldVal': 23.9,
+               'scheduledVal': 6,
+               'fitmentIssueVal': 25.1
+           },
+           {
+               'status': 'HR1',
+               'selectedVal': 29.5,
+               'rejectedVal': 29.5,
+               'onHoldVal': 2.5,
+               'scheduledVal': 30,
+               'fitmentIssueVal': 25.1
+           },
+           {
+               'status': 'HR2',
+               'selectedVal': 24.6,
+               'rejectedVal': 25,
+               'onHoldVal': 25,
+               'scheduledVal': 10,
+               'fitmentIssueVal': 25
+           }
+       ];
+       */
         /**TODO::Delete after Ingeration || Data send for Pie chart
                 this.chartDataForPie = [
                     {
@@ -271,6 +279,8 @@ export class ReqruiterDashboardComponent implements OnActivate {
     }
     constructor(private dashboardSerivce: RecruitersDashboardService) {
         this.GetAllRrfStatusCount();
+        this.GetRRFStatusCount('Open');
+        this.GetTaggedCandidateStatusCount('RRF6499265970');
     }
     /**Get all RRF's status wise count */
     GetAllRrfStatusCount(): void {
@@ -282,8 +292,18 @@ export class ReqruiterDashboardComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     /**Get all RRF's status wise count */
-    GetTaggedCandidateStatusCount(_status: string): void {
-        this.dashboardSerivce.getTaggedCandidateStatusCount(_status)
+    GetRRFStatusCount(_status: string): void {
+        this.dashboardSerivce.getRRFStatusCount(_status)
+            .subscribe(
+            results => {
+                //this.chartDataForColumnChart = <any>results;
+                var _chartDataForColumnChart = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /**Get all interview round wise candidate count for specific RRF*/
+    GetTaggedCandidateStatusCount(_rrfCode: string): void {
+        this.dashboardSerivce.getTaggedCandidateStatusCount(_rrfCode)
             .subscribe(
             results => {
                 this.chartDataForColumnChart = <any>results;
