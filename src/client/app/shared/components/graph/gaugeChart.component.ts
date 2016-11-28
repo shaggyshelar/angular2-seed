@@ -216,6 +216,7 @@ export class GaugeChartComponent implements OnInit {
                     'color': '#67b7dc',
                     'align': 'right'
                 }],
+            'startDuration': 1,
             'export': {
                 'enabled': true
             }

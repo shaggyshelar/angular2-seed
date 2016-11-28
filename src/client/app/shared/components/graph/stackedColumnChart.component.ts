@@ -31,11 +31,12 @@ export class StackedColumnComponent implements OnChanges {
                 'theme': 'light',
                 'legend': {
                     'horizontalGap': 10,
-                    'maxColumns': 1,
+                    'maxColumns': 4,
                     'position': 'right',
                     'useGraphSettings': true,
                     'markerSize': 10
                 },
+                'startDuration': 2,
                 'dataProvider': _chartData,
                 'valueAxes': [{
                     'stackType': 'regular',

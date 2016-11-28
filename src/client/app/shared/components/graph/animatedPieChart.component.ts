@@ -19,7 +19,7 @@ export class AnimatedPieComponent implements OnInit {
       'dataProvider': this.chartData,
       'valueField': 'size',
       'titleField': 'sector',
-      'startDuration': 0,
+      'startDuration': 1.5,
       'innerRadius': 40,
       'pullOutRadius': -50,
       'marginTop': 30,
