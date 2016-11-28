@@ -24,8 +24,6 @@ export class PiechartComponent implements OnChanges {
    */
   InitializePieChart(_chartData: any) {
     if (_chartData.length > 0) {
-      console.log('Initializing pie');
-      console.log(_chartData);
       var chart = AmCharts.makeChart('chartdivforPie', {
         'type': 'pie',
         'labelRadius': -5,
