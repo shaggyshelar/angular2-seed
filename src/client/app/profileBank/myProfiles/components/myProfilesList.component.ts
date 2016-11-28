@@ -680,6 +680,7 @@ export class MyProfilesListComponent implements OnActivate {
         //this.rrfId = 'RRF6866237939ID76';
         if (rrfID === '-1') {
             this.getMyProfiles();
+            this.NORECORDSFOUND = false;
         }
         this.viewDetailsRRFId = rrfID;
         this._rrfCandidatesList.getCandidateProfilesByRRF(rrfID)

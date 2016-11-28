@@ -143,6 +143,28 @@
                         </div>
                     </div>
                     <!--END Top tiles -->
+
+                    <!--BEGIN chart -1-->
+                    <div class="row">
+                        <!--BEGIN chart -1.1-->
+                        <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;">
+                            <div class="portlet light ">
+                                <div class="portlet-title">
+                                    <div class="caption caption-md">
+                                        <i class="icon-bar-chart font-dark hide"></i>
+                                        <span class="caption-subject font-green-steel uppercase bold">My RRF Timeline</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <stacked-bar-chart [chartData]='ChartDataForStackedColChartTest'></stacked-bar-chart>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END chart -1.1-->
+
+                    </div>
+                    <!--END chart -1-->
+
                     <!--BEGIN Chart 1-->
                     <div class="row">
                         <!--BEGIN chart 1.1-->
@@ -152,18 +174,7 @@
                                     <div class="caption caption-md">
                                         <i class="icon-bar-chart font-dark hide"></i>
                                         <span class="caption-subject font-green-steel uppercase bold">Pending RRF</span>
-                                        <!--<span class="caption-helper">78 pending</span>-->
                                     </div>
-                                    <!--<div class="actions">
-                                        <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                            <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm active">
-                                                                        <input type="radio" name="options" class="toggle" id="option1">Today</label>
-                                            <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm">
-                                                                        <input type="radio" name="options" class="toggle" id="option2">Week</label>
-                                            <label class="btn btn-transparent btn-no-border blue-oleo btn-outline btn-circle btn-sm">
-                                                                        <input type="radio" name="options" class="toggle" id="option2">Month</label>
-                                        </div>
-                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
                                     <pie-chart [chartData]='chartDataForPie'></pie-chart>
@@ -178,21 +189,12 @@
                                     <div class="caption caption-md">
                                         <i class="icon-bar-chart font-dark hide"></i>
                                         <span class="caption-subject font-green-steel bold uppercase">Open RRF</span>
-                                        <!--<span class="caption-helper">134 open</span>-->
                                     </div>
-                                    <!--<div class="actions">
-                                        <div class="btn-group btn-group-devided" data-toggle="buttons">
-                                            <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm active">
-                                                                        <input type="radio" name="options" class="toggle" id="option1">Today</label>
-                                            <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm">
-                                                                        <input type="radio" name="options" class="toggle" id="option2">Week</label>
-                                            <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm">
-                                                                        <input type="radio" name="options" class="toggle" id="option2">Month</label>
-                                        </div>
-                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
-                                    <am-chart [chartData]='chartDataForColumnChart'></am-chart>
+
+                                    <!--<stackedcol-chart [chartData]='ChartDataForStackedColChartTest'></stackedcol-chart>-->
+                                    <stackedcol-chart [chartData]='ChartDataForStackedColChart'></stackedcol-chart>
                                 </div>
                             </div>
                         </div>
@@ -207,49 +209,11 @@
                                     <div class="caption">
                                         <i class="icon-share font-dark hide"></i>
                                         <span class="caption-subject font-green-steel bold uppercase">Selected Candidates</span>
-                                        <!--<span class="caption-helper">Candidates summary...</span>-->
                                     </div>
-                                    <!--<div class="actions">
-                                        <div class="btn-group">
-                                            <a class="btn blue-oleo btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> More
-                                                                        <i class="fa fa-angle-down"></i>
-                                                                    </a>
-                                            <ul class="dropdown-menu pull-right">
-                                                <li>
-                                                    <a href="javascript:;"> All Project </a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;"> AirAsia </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Cruise </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> HSBC </a>
-                                                </li>
-                                                <li class="divider"> </li>
-                                                <li>
-                                                    <a href="javascript:;"> Pending
-                                                                                <span class="badge badge-danger"> 4 </span>
-                                                                            </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Completed
-                                                                                <span class="badge badge-success"> 12 </span>
-                                                                            </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:;"> Overdue
-                                                                                <span class="badge badge-warning"> 9 </span>
-                                                                            </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
-                                    <stackedcol-chart [chartData]='ChartDataForStackedColChart'></stackedcol-chart>
+                                    <am-chart [chartData]='chartDataForColumnChart'></am-chart>
+                                    <!--<stackedcol-chart [chartData]='ChartDataForStackedColChart'></stackedcol-chart>-->
                                     <!--<gauge-chart [chartData]='chartDataForAnimatedPie'></gauge-chart>-->
                                 </div>
                             </div>
@@ -262,13 +226,6 @@
                                         <span class="caption-subject font-green-steel bold uppercase">Candidates joining this months</span>
                                         <!--<span class="caption-helper">27 joining</span>-->
                                     </div>
-                                    <!--<div class="inputs">
-                                        <div class="portlet-input input-inline input-small ">
-                                            <div class="input-icon right">
-                                                <i class="icon-magnifier"></i>
-                                                <input type="text" class="form-control form-control-solid input-circle" placeholder="search...">                                                </div>
-                                        </div>
-                                    </div>-->
                                 </div>
                                 <div class="portlet-body">
                                     <animated-pie-chart [chartData]='chartDataForAnimatedPie'></animated-pie-chart>
@@ -279,7 +236,7 @@
                     <!--END Chart 2-->
                     <!--BEGIN Chart 3-->
                     <div class="row">
-                        <div class="col-md-6 col-sm-6" style="margin-right:inherit;margin-top:-5px;">
+                        <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;">
                             <!-- BEGIN REGIONAL STATS PORTLET-->
                             <div class="portlet light ">
                                 <div class="portlet-title">
@@ -302,7 +259,7 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                   
+
                                     <gauge-chart [chartData]='chartDataForAnimatedPie'></gauge-chart>
                                 </div>
                             </div>
@@ -328,7 +285,7 @@
                                 <div class="portlet-body">
                                     <!--BEGIN TABS-->
                                     <div class="tab-content" style="width:100%; height:400px">
-                                        <div class="tab-pane active" id="tab_1_1" >
+                                        <div class="tab-pane active" id="tab_1_1">
                                             <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 339px;">
                                                 <div class="scroller" style="height: 339px; overflow: hidden; width: auto;" data-always-visible="1" data-rail-visible="0"
                                                     data-initialized="1">

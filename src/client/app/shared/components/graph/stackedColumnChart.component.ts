@@ -43,51 +43,51 @@ export class StackedColumnComponent implements OnChanges {
                     'gridAlpha': 0
                 }],
                 'graphs': [{
-        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
-        'fillAlphas': 0.8,
-        'labelText': '[[value]]',
-        'lineAlpha': 0.3,
-        'title': 'Joined',
-        'type': 'column',
-		'color': '#000000',
-        'valueField': 'JoinedVal'
-    }, {
-        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
-        'fillAlphas': 0.8,
-        'labelText': '[[value]]',
-        'lineAlpha': 0.3,
-        'title': 'In Process',
-        'type': 'column',
-		'color': '#000000',
-        'valueField': 'inprocessVal'
-    }, {
-        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
-        'fillAlphas': 0.8,
-        'labelText': '[[value]]',
-        'lineAlpha': 0.3,
-        'title': 'Offer Accepted',
-        'type': 'column',
-		'color': '#000000',
-        'valueField': 'offerAcceptedVal'
-    }, {
-        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
-        'fillAlphas': 0.8,
-        'labelText': '[[value]]',
-        'lineAlpha': 0.3,
-        'title': 'Offered',
-        'type': 'column',
-		'color': '#000000',
-        'valueField': 'offeredVal'
-    }, {
-        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
-        'fillAlphas': 0.8,
-        'labelText': '[[value]]',
-        'lineAlpha': 0.3,
-        'title': 'Open',
-        'type': 'column',
-		'color': '#000000',
-        'valueField': 'openVal'
-    }],
+                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                    'fillAlphas': 0.8,
+                    'labelText': '[[value]]',
+                    'lineAlpha': 0.3,
+                    'title': 'Joined',
+                    'type': 'column',
+                    'color': '#000000',
+                    'valueField': 'JoinedVal'
+                }, {
+                        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                        'fillAlphas': 0.8,
+                        'labelText': '[[value]]',
+                        'lineAlpha': 0.3,
+                        'title': 'In Process',
+                        'type': 'column',
+                        'color': '#000000',
+                        'valueField': 'inprocessVal'
+                    }, {
+                        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                        'fillAlphas': 0.8,
+                        'labelText': '[[value]]',
+                        'lineAlpha': 0.3,
+                        'title': 'Offer Accepted',
+                        'type': 'column',
+                        'color': '#000000',
+                        'valueField': 'offerAcceptedVal'
+                    }, {
+                        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                        'fillAlphas': 0.8,
+                        'labelText': '[[value]]',
+                        'lineAlpha': 0.3,
+                        'title': 'Offered',
+                        'type': 'column',
+                        'color': '#000000',
+                        'valueField': 'offeredVal'
+                    }, {
+                        'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                        'fillAlphas': 0.8,
+                        'labelText': '[[value]]',
+                        'lineAlpha': 0.3,
+                        'title': 'Open',
+                        'type': 'column',
+                        'color': '#000000',
+                        'valueField': 'openVal'
+                    }],
                 'categoryField': 'status',
                 'categoryAxis': {
                     'gridPosition': 'start',

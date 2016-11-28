@@ -1,17 +1,30 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES} from '@angular/router';
-import { GraphComponent } from '../../../shared/components/graph/graph.component';
-import { PiechartComponent } from '../../../shared/components/graph/piechart.component';
-import { GaugeChartComponent } from '../../../shared/components/graph/gaugeChart.component';
-import { AnimatedPieComponent } from '../../../shared/components/graph/AnimatedPieChart.component';
-import { StackedColumnComponent } from '../../../shared/components/graph/StackedColumnChart.component';
+//import { StackedColumnComponent } from '../../../shared/components/graph/StackedColumnChart.component';
+import {
+    GraphComponent,
+    PiechartComponent,
+    GaugeChartComponent,
+    AnimatedPieComponent,
+    StackedColumnComponent,
+    StackedBarComponent
+} from '../../../shared/index';
+
+
 import { RecruitersDashboardService } from '../index';
 
 @Component({
     moduleId: module.id,
     selector: 'reqruiterdashboard-component',
     templateUrl: 'recruiterDashboard.component.html',
-    directives: [ROUTER_DIRECTIVES, GraphComponent, PiechartComponent, GaugeChartComponent, AnimatedPieComponent, StackedColumnComponent],
+    directives: [ROUTER_DIRECTIVES,
+        GraphComponent,
+        PiechartComponent,
+        GaugeChartComponent,
+        AnimatedPieComponent,
+        StackedColumnComponent,
+        StackedBarComponent
+    ],
     providers: [RecruitersDashboardService]
 })
 
@@ -21,6 +34,7 @@ export class ReqruiterDashboardComponent implements OnActivate {
     public chartDataForPie: any = [];
     public chartDataForAnimatedPie: any = [];
     public ChartDataForStackedColChart: any = [];
+    public ChartDataForStackedColChartTest: any[];
     piechartData: Array<PiechartData>;
 
     routerOnActivate() {
@@ -32,12 +46,12 @@ export class ReqruiterDashboardComponent implements OnActivate {
          * Data send for Column chart
        this.chartDataForColumnChart = [
            {
-               'JoinedVal': 0,
-               'inprocessVal': 2,
-               'offerAcceptedVal': 2,
+               'completedVal': 0,
+               'remainingVal': 2,
+               'overdueVal': 2,
                'offeredVal': 0,
                'openVal': 18,
-               'status': "R00001"
+               'status': 'R00001'
            },
            {
                'status': 'Technical2',
@@ -97,28 +111,22 @@ export class ReqruiterDashboardComponent implements OnActivate {
         */
 
         // Data for Stacked Column chart
-        // this.ChartDataForStackedColChart = [{
-        //        'status': "R00001",
-        //         'JoinedVal': 0,
-        //        'inprocessVal': 2,
-        //        'offerAcceptedVal': 2,
-        //        'offeredVal': 0,
-        //        'openVal': 18
-        //     }, {
-        //         'status': "R00002",
-        //         'JoinedVal': 4,
-        //        'inprocessVal': 5,
-        //        'offerAcceptedVal': 6,
-        //        'offeredVal': 7,
-        //        'openVal': 16
-        //     }, {
-        //         'status': "R00003",
-        //         'JoinedVal': 7,
-        //        'inprocessVal': 4,
-        //        'offerAcceptedVal': 2,
-        //        'offeredVal': 0,
-        //        'openVal': 18
-        //     }]
+        this.ChartDataForStackedColChartTest = [{
+            'status': 'R00008',
+            'completedVal': 0,
+            'remainingVal': 2,
+            'overdueVal': 2
+        }, {
+                'status': 'R00012',
+                'completedVal': 4,
+                'remainingVal': 5,
+                'overdueVal': 6
+            }, {
+                'status': 'R00033',
+                'completedVal': 7,
+                'remainingVal': 4,
+                'overdueVal': 2
+            }];
         // Data for Animated Pie chart
         this.chartDataForAnimatedPie = {
             '1995': [

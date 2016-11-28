@@ -105,7 +105,6 @@ export class GraphComponent implements OnChanges {
         // LEGEND
         var legend = new AmCharts.AmLegend();
         chart.addLegend(legend);
-
         chart.creditsPosition = 'top-right';
 
         // WRITE
