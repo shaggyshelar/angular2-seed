@@ -40,7 +40,7 @@ export class HeadDashboardComponent implements OnActivate {
     OfferedCandidateList: any[];
     CandidateJoiningList: any[];
     Overdue: any;
-    Offered: any;
+    OfferedCandidate: any;
     IncompleteProfile: any;
     CandidateJoining: any;
     piechartData: Array<PiechartData>;
@@ -375,7 +375,7 @@ export class HeadDashboardComponent implements OnActivate {
             results => {
                 //this.chartDataForColumnChart = <any>results;
                 this.OfferedCandidateList = <any>results;
-                this.Offered = this.OfferedCandidateList.value;
+                this.OfferedCandidate = this.OfferedCandidateList[1].value;
             },
             error => this.errorMessage = <any>error);
     }
