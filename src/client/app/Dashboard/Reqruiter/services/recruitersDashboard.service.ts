@@ -98,17 +98,15 @@ export class RecruitersDashboardService {
     }
     /**Get all Candidate Joining this month Count*/
     getCandidateJoining() {
-        //To Do: need to update API
-        let url = Config.GetURL('/api/Dashboards/GetIncompleteProfilesByRole');
+        let url = Config.GetURL('/api/Dashboards/GetCandidatesJoiningThisMonth');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-     /**Get all offered candidate count */
+    /**Get all offered candidate count */
     getAllOfferedCandidateCount() {
-        //To Do: need to update API
         let url = Config.GetURL('/api/Dashboards/GetAllCandidateStatus');
         this._spinnerService.show();
         return this.authHttp.get(url)

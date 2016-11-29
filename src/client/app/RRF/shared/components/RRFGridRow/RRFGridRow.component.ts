@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { RRFDetails} from '../../../myRRF/models/rrfDetails';
 import { RRFAssignStatus} from  '../../../../shared/constantValue/index';
@@ -13,7 +13,7 @@ import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.di
     styleUrls: ['../../css/RRF.component.css']
 })
 
-export class RRFGridRowComponent {
+export class RRFGridRowComponent implements OnInit {
     @Input() RRFData: RRFDetails = new RRFDetails();
     @Input() displayApproval: boolean = false;
     @Input() displayAssignedTo: boolean = false;
@@ -21,7 +21,11 @@ export class RRFGridRowComponent {
     @Input() displayFeedBackStatus: boolean = false;
 
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
-
+    ngOnInit() {
+        //console.log("RRF===="+this.RRFData);
+        // this.RRFData.CreatedDate = moment(this.RRFData.CreatedDate).format('DD/MM/YYYY');
+        // this.RRFData.ExpDateOfJoining = moment(this.RRFData.ExpDateOfJoining).format('DD/MM/YYYY');
+    }
     getPriorityClass(priority: string): string {
         return 'priority' + priority;
     }
@@ -29,6 +33,16 @@ export class RRFGridRowComponent {
     getStatusClass(statusID: number): string {
         return 'status' + statusID;
     }
+    //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
 
+        return [day, month, year].join('-');
+    }
 
 }

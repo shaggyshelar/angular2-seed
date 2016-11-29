@@ -21,10 +21,10 @@
                     Comment : {{RRFFeedback.Feedback}}
                 </div>
                 <div class="col-lg-3" *ngIf='RRFFeedback.PreviousValue'>
-                    Previous Date : {{RRFFeedback.PreviousValue}}
+                    Previous Date : {{formatDate(RRFFeedback.PreviousValue)}}
                 </div>
                 <div class="col-lg-3" *ngIf='RRFFeedback.UpdatedValue'>
-                    Updated Date : {{RRFFeedback.UpdatedValue}}
+                    Updated Date : {{formatDate(RRFFeedback.UpdatedValue)}}
                 </div>
 
             </div>

@@ -291,8 +291,16 @@ export class RRFCandidateListComponent implements OnActivate {
                 }
             } else {
                 CandidateDetails[index].InterviewDetails.Status = 'Not Scheduled';
-                if (CandidateDetails[index].InterviewDetails.Round.Value === null)
+                if (CandidateDetails[index].InterviewDetails.Round === null) {
+                        CandidateDetails[index].InterviewDetails.Round = {Id: 0 , Value : '--'};
+                } if(CandidateDetails[index].InterviewDetails.Round.Value === null) {
                     CandidateDetails[index].InterviewDetails.Round.Value = '--';
+                }
+                if (CandidateDetails[index].InterviewDetails.InterviewMode === null) {
+                        CandidateDetails[index].InterviewDetails.InterviewMode = {Id: 0 , Value : '--'};
+                } if(CandidateDetails[index].InterviewDetails.InterviewMode.Value === null) {
+                    CandidateDetails[index].InterviewDetails.InterviewMode.Value = '--';
+                }  
             }
         }
 

@@ -65,7 +65,7 @@
                                             <span *ngFor="let _skill of _rrf.SkillsRequired ">
                                             {{_skill.Value}}    
                                             </span>
-                                            <br>Date of Joining : {{_rrf.ExpDateOfJoining}}
+                                            <br>Date of Joining : {{formatDate(_rrf.ExpDateOfJoining)}}
                                             <br>Min.EXP : {{_rrf.MinExp}}
                                         </td>
                                         <td>{{_rrf.Priority.Value}}</td>

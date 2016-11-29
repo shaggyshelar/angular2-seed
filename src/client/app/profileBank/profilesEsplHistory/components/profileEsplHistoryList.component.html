@@ -108,7 +108,7 @@
 												<label class="control-label"><strong>By : </strong>{{profileHistory.RRFDetails.RaisedBy?profileHistory.RRFDetails.RaisedBy.Value:"N/A"}}</label>
 
 
-												<label class="control-label"><strong>Date : </strong>{{profileHistory.RRFDetails.CreatedDate?profileHistory.RRFDetails.CreatedDate:"N/A"}}</label>
+												<label class="control-label"><strong>Date : </strong>{{formatDate(profileHistory.RRFDetails.CreatedDate)}}</label>
 
 											</div>
 											<div class="col-md-4">
@@ -155,7 +155,7 @@
 															<td> {{candidateHistory.Round.Value}}</td>
 															<td> <span *ngFor="let interviewer of candidateHistory.InterviewerAvailability">{{interviewer.Interviewer.Value}} ,</span></td>
 															<!--<td> {{getDate(candidateHistory.InterviewDate)}}</td>-->
-															<td> {{candidateHistory.InterviewDate}}
+															<td> {{formatDate(candidateHistory.InterviewDate)}}
 																<br>Time:{{candidateHistory.InterviewFromTime ? candidateHistory.InterviewFromTime : "N/A" }}
 																<br>Actual Time:{{candidateHistory.InterviewActualTime ? candidateHistory.InterviewActualTime : "N/A" }}
 															</td>
