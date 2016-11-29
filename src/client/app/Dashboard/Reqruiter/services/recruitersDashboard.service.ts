@@ -86,6 +86,16 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    /**Get All RRF wise candidate status for Initiator*/
+    getRrfStatusForGuage() {
+        //To Do: need to update API
+        let url = Config.GetURL('/api/Dashboards/GetRRFwiseCandidateStatusForInitiator');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**Get all Candidate Joining this month Count*/
     getCandidateJoining() {
         //To Do: need to update API

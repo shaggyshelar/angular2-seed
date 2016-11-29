@@ -4,7 +4,10 @@
   <span id="chartdivforGauge3" class="col-md-6 col-sm-6" style="width:45%; height:200px;"></span>
   <span id="chartdivforGauge2" class="col-md-6 col-sm-6" style="width:45%; height:200px;"></span>
   <span id="chartdivforGauge4" class="col-md-6 col-sm-6" style="width:45%; height:200px;"></span>
-  <!--<div *ngFor="let count of counter">
-    <div id="chartdivforGauge{{count}}" class="col-md-6 col-sm-6" style="width:45%; height:200px;">data {{count}}</div>
-  </div>-->
+
+  <div **ngIf="guageChartData">
+    <div *ngFor="let count of guageChartData.length">
+      <div id="chartdivforGauge" class="col-md-6 col-sm-6" style="width:45%; height:200px;">11 - {{count}}</div>
+    </div>
+  </div>
 </div>
