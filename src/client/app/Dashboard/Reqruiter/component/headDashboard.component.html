@@ -42,10 +42,10 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-green-sharp">
-                                            <!--<span class="counter" data-counter="counterup" data-value="OpenRRF">{{OpenRRF}}</span>-->
-                                            {{OpenRRF}}
+                                            <!--<span class="counter" data-counter="counterup" data-value="78">78</span>-->
+                                            {{Overdue}}
                                         </h3>
-                                        <small>OPEN RRF</small>
+                                        <small>OVERDUE RRF</small>
                                     </div>
                                     <div class="icon">
                                         <i class="icon-pie-chart"></i>
@@ -65,10 +65,10 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-red-haze">
-                                            <!--<span class="counter" data-counter="counterup" data-value="">78</span>-->
-                                            {{OverdueRRF}}
+                                            <!--<span class="counter" data-counter="counterup" data-value="134">134</span>-->
+                                            {{Offered}}
                                         </h3>
-                                        <small>OVERDUE RRF</small>
+                                        <small>OFFERED CANDIDATE</small>
                                     </div>
                                     <div class="icon">
                                         <i class="icon-like"></i>
@@ -88,10 +88,10 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-blue-sharp">
-                                            <!--<span class="counter" data-counter="counterup" data-value="56"></span>-->
-                                            {{Incomplete}}
+                                            <!--<span class="counter" data-counter="counterup" data-value="56">56</span>-->
+                                            {{CandidateJoining}}
                                         </h3>
-                                        <small>INCOMPLETE PROFILE</small>
+                                        <small>JOINING CANDIDATES</small>
                                     </div>
                                     <div class="icon">
                                         <i class="icon-basket"></i>
@@ -111,10 +111,10 @@
                                 <div class="display">
                                     <div class="number">
                                         <h3 class="font-purple-soft">
-                                            <!--<span class="counter" data-counter="counterup" data-value="27"></span>-->
-                                            {{Joining}}
+                                            <!--<span class="counter" data-counter="counterup" data-value="27">27</span>-->
+                                            {{IncompleteProfile}}
                                         </h3>
-                                        <small>CANDIDATES JOINING</small>
+                                        <small>INCOMPLETE PROFILES</small>
                                     </div>
                                     <div class="icon">
                                         <i class="icon-user"></i>
@@ -144,7 +144,6 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div>{{OpenRRF}}</div>
                                     <stacked-bar-chart [chartData]='ChartDataForStackedColChartTest'></stacked-bar-chart>
                                 </div>
                             </div>
@@ -217,7 +216,6 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    
                                     <animated-pie-chart [chartData]='chartDataForAnimatedPie'></animated-pie-chart>
                                 </div>
                             </div>

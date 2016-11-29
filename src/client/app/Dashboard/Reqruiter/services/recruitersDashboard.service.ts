@@ -41,6 +41,71 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    /**Get status wise RRF Count for Initiator */
+    getStatusWiseRRFCount() {
+        let url = Config.GetURL('/api/Dashboards/GetAllRRFStatuswiseCountForInitiator');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get Pending Feedback for RRF count */
+    getPendingFeedbackCount() {
+        let url = Config.GetURL('/api/Dashboards/GetAllRRFFeedbackPendingCountForInitiator');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get Interview awaiting approval count*/
+    getInterviewAwaitingCount() {
+        let url = Config.GetURL('/api/Dashboards/GetAllInterviewAwaitingApprovalCountForInitiator');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get all Overdue RRF's count*/
+    getAllOverdueRRFCount() {
+        let url = Config.GetURL('/api/Dashboards/GetOverdueRRFCountByRole');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get all Incomplete Profile Count*/
+    getIncompleteProfileCount() {
+        let url = Config.GetURL('/api/Dashboards/GetIncompleteProfilesByRole');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get all Candidate Joining this month Count*/
+    getCandidateJoining() {
+        //To Do: need to update API
+        let url = Config.GetURL('/api/Dashboards/GetIncompleteProfilesByRole');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+     /**Get all offered candidate count */
+    getAllOfferedCandidateCount() {
+        //To Do: need to update API
+        let url = Config.GetURL('/api/Dashboards/GetAllCandidateStatus');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**
      * This method used with promises keeping this commented method for future 
      * referece, in case of any requirement.

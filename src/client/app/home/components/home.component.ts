@@ -35,7 +35,9 @@ import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruiters
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
 import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
 import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
-import { ReqruiterDashboardComponent } from '../../Dashboard/Reqruiter/component/reqruiterDashboard.component';
+import { HeadDashboardComponent } from '../../Dashboard/Reqruiter/component/headDashboard.component';
+import { InitiatorDashboardComponent } from '../../Dashboard/Reqruiter/component/initiatorDashboard.component';
+import { RecruiterDashboardComponent } from '../../Dashboard/Reqruiter/component/recruiterDashboard.component';
 
 @Component({
     moduleId: module.id,
@@ -76,7 +78,9 @@ import { ReqruiterDashboardComponent } from '../../Dashboard/Reqruiter/component
     { path: '/NotificationSetting', component: PushNotificationComponent },
     { path: '/RRF/InterviewsAvailability', component: InterviewerAvalabilityComponent },
     { path: '/RRF/FeedbackPending', component: FeedbackPendingComponent },
-    { path: '/Dashboard/Reqruiter', component: ReqruiterDashboardComponent }
+    { path: '/Dashboard/Head', component: HeadDashboardComponent },
+    { path: '/Dashboard/Initiator', component: InitiatorDashboardComponent },
+    { path: '/Dashboard/Recruiter', component: RecruiterDashboardComponent }
 
 
 ])
@@ -84,7 +88,7 @@ export class HomeComponent implements OnInit {
     constructor(private _router: Router) {
   }
     ngOnInit(): void {
-        this._router.navigate(['/App/Dashboard/Reqruiter']);
+        this._router.navigate(['/App/Dashboard/Recruiter']);
         App.init();
         Layout.init();
         Demo.init();

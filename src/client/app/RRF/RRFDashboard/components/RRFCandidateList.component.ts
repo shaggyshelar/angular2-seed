@@ -60,6 +60,7 @@ export class RRFCandidateListComponent implements OnActivate {
     isRoundHistoryPresent: boolean = false;
     selectedCandidate: string;
     InterviewID: MasterData = new MasterData();
+    CandidateID: MasterData = new MasterData();
     modeConstant: InterviewMode = InterviewMode;
     changedStatus: string = '';
     changesStatusComment: string = '';
@@ -342,12 +343,13 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     OnProceedForOfferGenerationClick(CandidateDetails: RRFSpecificCandidateList) {
         this.InterviewID = CandidateDetails.InterviewDetails.InterviewID;
+        this.CandidateID = CandidateDetails.CandidateID;
         var cnfrmbx: any = $('#prcedfrOffrgenration');
         cnfrmbx.modal();
     }
     proceedForOfferGeneration(InterviewID: MasterData) {
         if (InterviewID.Id !== null && InterviewID.Id !== undefined) {
-            this._rrfCandidatesList.proceedForOfferGeneration(InterviewID)
+            this._rrfCandidatesList.proceedForOfferGeneration(InterviewID,this.CandidateID,this.RRFID)
                 .subscribe(
                 (results: any) => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
