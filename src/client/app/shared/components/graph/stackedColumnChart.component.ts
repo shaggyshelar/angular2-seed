@@ -24,17 +24,17 @@ export class StackedColumnComponent implements OnChanges {
      */
     InitializeStackedChart(_chartData: any) {
         if (_chartData.length > 0) {
-            console.log('Initializing pie');
-            console.log(_chartData);
             var chart = AmCharts.makeChart('chartdivforStackedCol', {
                 'type': 'serial',
                 'theme': 'light',
                 'legend': {
-                    'horizontalGap': 10,
-                    'maxColumns': 4,
-                    'position': 'right',
-                    'useGraphSettings': true,
-                    'markerSize': 10
+                    //'horizontalGap': 10,
+                    'maxColumns': 3,
+                    'position': 'top',
+                    'useGraphSettings': false,
+                    'markerSize': 10,
+                    'autoMargins': true,
+                    'equalWidths': true
                 },
                 'startDuration': 2,
                 'dataProvider': _chartData,

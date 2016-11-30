@@ -25,8 +25,10 @@ export class GraphComponent implements OnChanges {
         chart.dataProvider = chartData;
         chart.categoryField = 'status';
         chart.startDuration = 1;
+        chart.startEffect = 'bounce';
         chart.plotAreaBorderColor = '#DADADA';
         chart.plotAreaBorderAlpha = 0.5;
+
         // this single line makes the chart a bar chart
         chart.rotate = false;
 
@@ -104,8 +106,12 @@ export class GraphComponent implements OnChanges {
 
         // LEGEND
         var legend = new AmCharts.AmLegend();
+        legend.maxColumns = 4;
+        legend.position = 'absolute';
+        legend.autoMargins = true;
+        legend.equalWidths = true;
         chart.addLegend(legend);
-        chart.creditsPosition = 'top-right';
+        chart.creditsPosition = 'bottom-right';
 
         // WRITE
         chart.write('chartdivforCol');

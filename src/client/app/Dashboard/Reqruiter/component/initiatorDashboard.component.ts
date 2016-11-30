@@ -1,12 +1,15 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES} from '@angular/router';
-import { GraphComponent } from '../../../shared/components/graph/graph.component';
-import { PiechartComponent } from '../../../shared/components/graph/piechart.component';
-import { GaugeChartComponent } from '../../../shared/components/graph/gaugeChart.component';
-import { AnimatedPieComponent } from '../../../shared/components/graph/AnimatedPieChart.component';
-import { StackedColumnComponent } from '../../../shared/components/graph/StackedColumnChart.component';
+import {
+    GraphComponent,
+    PiechartComponent,
+    GaugeChartComponent,
+    AnimatedPieComponent,
+    StackedColumnComponent } from '../../../shared/index';
 import { RecruitersDashboardService } from '../index';
 import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
+import { PiechartData} from '../../index';
+
 @Component({
     moduleId: module.id,
     selector: 'initiatordashboard-component',
@@ -110,10 +113,4 @@ export class InitiatorDashboardComponent implements OnActivate {
    */
 }
 
-/**
- * PiechartData
- */
-class PiechartData {
-    title: string;
-    value: string;
-}
+

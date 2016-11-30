@@ -89,7 +89,6 @@ export class GaugeChartComponent implements OnChanges {
             }
     }
     InitializeChart(_bandData: Array<any>, _count: number) {
-        console.log(_bandData);
         this.gaugeChart = AmCharts.makeChart('chartdivforGauge' + _count, {
             'type': 'gauge',
             'theme': 'light',

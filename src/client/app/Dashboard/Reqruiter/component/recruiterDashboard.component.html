@@ -133,7 +133,7 @@
                     </div>
                     <!--END Top tiles -->
 
-                    <!--BEGIN chart -1-->
+                    <!--BEGIN Timeline chart-->
                     <div class="row">
                         <!--BEGIN chart -1.1-->
                         <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width:98.5%;">
@@ -145,7 +145,6 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div>{{OpenRRF}}</div>
                                     <stacked-bar-chart [chartData]='ChartDataForStackedColChartTest'></stacked-bar-chart>
                                 </div>
                             </div>
@@ -153,6 +152,27 @@
                         <!--END chart -1.1-->
 
                     </div>
+                    <!--END Timeline chart-->
+                    <!--BEGIN Gauge chart-->
+                    <div class="row">
+                        <!--BEGIN chart -1.1-->
+                        <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width:98.5%;">
+                            <div class="portlet light ">
+                                <div class="portlet-title">
+                                    <div class="caption caption-md">
+                                        <i class="icon-bar-chart font-dark hide"></i>
+                                        <span class="caption-subject font-green-steel uppercase bold">RRF Status</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                       <gauge-chart [chartData]='guageData'></gauge-chart>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END chart -1.1-->
+
+                    </div>
+                    <!--END Gauge chart-->
                 </div>
             </div>
             <!-- END PAGE CONTENT INNER -->

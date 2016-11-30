@@ -4,7 +4,6 @@ import {OnActivate, ROUTER_DIRECTIVES} from '@angular/router';
 import {
     GraphComponent,
     PiechartComponent,
-    GaugeChartComponent,
     AnimatedPieComponent,
     StackedColumnComponent,
     StackedBarComponent
@@ -20,7 +19,6 @@ import { RecruitersDashboardService } from '../index';
     directives: [ROUTER_DIRECTIVES,
         GraphComponent,
         PiechartComponent,
-        GaugeChartComponent,
         AnimatedPieComponent,
         StackedColumnComponent,
         StackedBarComponent

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES} from '@angular/router';
 //import { StackedColumnComponent } from '../../../shared/components/graph/StackedColumnChart.component';
+import { GuageChartData } from '../../index';
 import {
     GraphComponent,
     PiechartComponent,
@@ -44,7 +45,7 @@ export class RecruiterDashboardComponent implements OnActivate {
     Incomplete: any;
     Joining: any;
     piechartData: Array<PiechartData>;
-
+    guageData: GuageChartData;
 
     routerOnActivate() {
         $('.counter').counterUp({
@@ -55,6 +56,7 @@ export class RecruiterDashboardComponent implements OnActivate {
         this.GetAllOverdueRRFCount();
         this.GetIncompleteProfileCount();
         this.GetCandidateJoining();
+        this.GetRrfStatusForGuage();
         /**TODO::Delete after Ingeration || Data send for Column chart
          * Data send for Column chart
        this.chartDataForColumnChart = [
@@ -324,13 +326,10 @@ export class RecruiterDashboardComponent implements OnActivate {
                 { 'sector': 'Finance, real estate and business services', 'size': 26.5 }]
         };
     }
-    constructor(private dashboardSerivce: RecruitersDashboardService) {
-
-
-    }
+    constructor(private dashboardService: RecruitersDashboardService) { }
     /**Get all Open RRF's count */
     GetAllOpenRRFCount(): void {
-        this.dashboardSerivce.getAllStatusCount()
+        this.dashboardService.getAllStatusCount()
             .subscribe(
             results => {
                 this.OpenRRFList = <any>results;
@@ -342,7 +341,7 @@ export class RecruiterDashboardComponent implements OnActivate {
     }
     /**Get all Overdue RRF's count */
     GetAllOverdueRRFCount(): void {
-        this.dashboardSerivce.getAllOverdueRRFCount()
+        this.dashboardService.getAllOverdueRRFCount()
             .subscribe(
             results => {
                 //this.chartDataForColumnChart = <any>results;
@@ -353,7 +352,7 @@ export class RecruiterDashboardComponent implements OnActivate {
     }
     /**Get all Incomplete Profile Count*/
     GetIncompleteProfileCount(): void {
-        this.dashboardSerivce.getIncompleteProfileCount()
+        this.dashboardService.getIncompleteProfileCount()
             .subscribe(
             results => {
                 this.IncompleteProfileList = <any>results;
@@ -364,7 +363,7 @@ export class RecruiterDashboardComponent implements OnActivate {
     /**Get all Candidate Joining this month Count*/
     GetCandidateJoining(): void {
         //TO DO: need to update API in Service
-        this.dashboardSerivce.getCandidateJoining()
+        this.dashboardService.getCandidateJoining()
             .subscribe(
             results => {
                 this.CandidateJoiningList = <any>results;
@@ -372,22 +371,15 @@ export class RecruiterDashboardComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-
-    /**
-    * Get all RRF's status wise count 
-    * This method used with promises keeping this commented method for future 
-    * referece, in case of any requirement.
-    * 
-   // GetAllRrfStatusCount() {
-   //     this.dashboardSerivce.getAllRRFStatusCount()
-   //         .then(
-   //         results => {
-   //             this.piechartData = <any>results;
-   //             this.chartDataForPie = this.piechartData;
-   //         },
-   //         error => this.errorMessage = <any>error);
-   // }
-   */
+    /**Get status wise RRF Count for Initiator*/
+    GetRrfStatusForGuage(): void {
+        this.dashboardService.getRrfStatusForGuage()
+            .subscribe(
+            results => {
+                this.guageData = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
 }
 
 /**
