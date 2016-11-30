@@ -325,11 +325,19 @@
 							<!-- Upload Resume END-->
 							<div class="row " [hidden]="RRFList.length == 0" *ngIf="!NORECORDSFOUND">
 								<!--<label class="col-md-2 control-label">My RRF : </label>-->
-								<div class="col-md-2" [hidden]="RRFList.length == 0">
+								<!--<div class="col-md-2" [hidden]="RRFList.length == 0">
 									<select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
                                      <option [value]="-1" >All RRF</option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 </select>
+								</div>-->
+								<div class="col-md-2 col-sm-2" [hidden]="RRFList.length == 0">
+									<div class="dataTables_length" id="sample_1_length_1">
+                                           <select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
+                                     			<option [value]="-1" >All RRF</option>
+                                     			<option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
+                                		   </select>
+									</div>
 								</div>
 							</div><br>
 							<div class="row" *ngIf="!NORECORDSFOUND">

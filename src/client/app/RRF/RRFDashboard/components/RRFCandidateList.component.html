@@ -170,7 +170,65 @@
 											(chartClick)="chartClicked($event) "></base-chart>
 									</div>
 									<span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
+									<div class="pull-right" *ngIf="IsHRConducted">
+										<button class="btn btn-icon-only grey-cascade" (click)='onGenerateOffer()' tooltip="Generate Offer" tooltipPlacement="top"
+											tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true">
+                                                            <i class="fa fa-link"></i> 
+                                                        </button>
+										<button class="btn btn-icon-only red" (click)='onUpdateStatus()' tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+											title="Update Status" tooltipEnable="true">
+                                                            <i class="fa fa-edit"></i> 
+                                                        </button>
+									</div>
 									<br/>
+									<hr>
+									<!--offer generation form-->
+									<div class="row" style="margin-top:20px;" *ngIf="IsOfferGenerate">
+										<form (submit)="saveOffer(ExpDateOfJoining);">
+											<div class="form-group col-md-7">
+												<label class="col-md-6 control-label align" style="margin-left:-12px;">Joining Date: </label>
+												<div class="col-md-2">
+													<input type="date" [min]="mindate" name="bday" id="expectedDateOfJoining" required="" [(ngModel)]="ExpDateOfJoining" tooltip="Date Of Joining"
+														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" style="margin-left: -20px;" />
+												</div>
+											</div>
+
+											<div class="col-md-5">
+												<div class="pull-right">
+													<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelOffer()'>Cancel</button>													&nbsp;
+													<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+												</div>
+											</div>
+										</form>
+									</div>
+									<hr *ngIf="IsOfferGenerate">
+									<!--status update form-->
+									<div class="row" style="margin-top:20px;" *ngIf="IsUpdateStatus">
+										<form (submit)="saveUpdateStatus(UpdatedStatus);">
+											<div class="form-group col-md-7">
+												<div class="dataTables_length" id="sample_1_length">
+													<label>Status:
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+                                             [(ngModel)]="UpdatedStatus" required=""
+											 >
+                                                <option value="Offered">Offered</option>
+                                                <option value="Offered Accepted">Offered Accepted</option>
+                                                <option value="Absconded">Absconded</option>
+                                                <option value="Absconded">Joined</option>
+                                            </select>
+                                        </label>
+												</div>
+											</div>
+
+											<div class="col-md-5">
+												<div class="pull-right">
+													<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button>													&nbsp;
+													<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+												</div>
+											</div>
+										</form>
+									</div>
+									<hr *ngIf="IsUpdateStatus">
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -197,7 +255,7 @@
 													<span *ngIf="candidateHistory.InterviewActualTime != ''">Actual Time:{{getTime(candidateHistory.InterviewActualTime)}}</span>
 													<br>
 													<span *ngIf="candidateHistory.InterviewActualTime == '' && (candidateHistory.Status.toLowerCase() == 'Rejected'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'Selected'.toLowerCase() ||
-        candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase())"><a (click)='setActualTime(candidateHistory.InterviewID)'> Actual Time</a></span>
+        candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase())"><a (click)='setActualTime(candidateHistory)'> Actual Time</a></span>
 												</td>
 												<!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
 												<td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() && candidateHistory.Status.toLowerCase() != 'Fitment Issue'.toLowerCase()">
@@ -216,6 +274,9 @@
 									<hr/>
 									<form (submit)='onSetActualTime()' *ngIf='setActualTimeForm'>
 										<div class="row">
+											<label style="margin-left:30px;"><b>Schedule Interview: {{getDate(CandidateHistoryForActualTime.InterviewDate)}} on {{getTime(CandidateHistoryForActualTime.InterviewFromTime)}} for {{CandidateHistoryForActualTime.Round.Value}}</b></label>
+										</div>
+										<div class="row" style="margin-top:10px;">
 											<div class="form-group col-md-7">
 												<label class="col-md-6 control-label align">Actual Time </label>
 												<div class="col-md-2">
