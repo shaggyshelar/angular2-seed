@@ -22,7 +22,7 @@ import { ProfileBankService} from  '../../../profileBank/shared/services/profile
     templateUrl: 'RRFCandidateList.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, RRFGridRowComponent, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES],
     styleUrls: ['RRFDashboard.component.css'],
-    providers: [ProfileBankService,ToastsManager]
+    providers: [ProfileBankService, ToastsManager]
 })
 
 export class RRFCandidateListComponent implements OnActivate {
@@ -122,6 +122,8 @@ export class RRFCandidateListComponent implements OnActivate {
         //TODO : Call API to get Candidates Specific to SelectedRRF
         this.getCanidatesForRRF();
         this.getRRFDetails();
+        // Uncomment once API ready
+        //this.getUpdateStatus();
     }
     /**Bind candidtes rating in chart */
     BindRatingChart(candidateID: MasterData, rrfID: MasterData) {
@@ -155,6 +157,15 @@ export class RRFCandidateListComponent implements OnActivate {
     chartHovered(e: any): void {
         console.log(e);
     }
+    // Get Updated status
+    getUpdateStatus() {
+        //TO DO : Update API
+        this._mastersService.getCandidateStatuses()
+            .subscribe(
+            results => {
+            },
+            error => this.errorMessage = <any>error);
+    }
     //Get All Canidate List Along with Interview Data 
     getCanidatesForRRF() {
         this._rrfCandidatesList.getCandidatesForRRF(this.RRFID.Value)
@@ -182,6 +193,8 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string) {
+        this.IsOfferGenerate = false;
+        this.IsUpdateStatus = false;
         this.showChangeStatus = false;
         this.resetTransferOperation();
         this.TransferInterviewDetails = new TransferInterview();
@@ -196,6 +209,7 @@ export class RRFCandidateListComponent implements OnActivate {
                     for (var index = 0; index < this.CandidateRoundHistory.length; index++) {
                         if (this.CandidateRoundHistory[index].InterviewType.Value === 'HR') {
                             this.IsHRConducted = true;
+                            break;
                         } else {
                             this.IsHRConducted = false;
                         }
@@ -519,10 +533,12 @@ export class RRFCandidateListComponent implements OnActivate {
     onGenerateOffer() {
         this.IsUpdateStatus = false;
         this.IsOfferGenerate = true;
+        this.ExpDateOfJoining = 'mm/dd/yyyy';
     }
     onUpdateStatus() {
         this.IsOfferGenerate = false;
         this.IsUpdateStatus = true;
+        this.UpdatedStatus = '';
     }
     onCancelStatus() {
         this.IsUpdateStatus = false;
