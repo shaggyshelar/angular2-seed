@@ -121,7 +121,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-
+    getUpdateStatus(candidateID: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateStatusSequentially?CandidateID=' + candidateID);
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     GetRecruiter() {
         let url = Config.GetURL('/api/Masters/GetRecruiters');
         return this.authHttp.get(url)

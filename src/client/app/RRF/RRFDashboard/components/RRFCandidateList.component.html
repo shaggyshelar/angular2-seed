@@ -144,11 +144,11 @@
 																</li>
 																<li class="divider" *ngIf='!isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'>
 																</li>
-																<li *ngIf='!isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'>
+																<!--<li *ngIf='!isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'>
 																	<button class="btn btn-default btnLink " [disabled]='isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'
 																		(click)='OnProceedForOfferGenerationClick(selectedcandidate)'>
                                                                         <i class="fa fa-paper-plane-o"></i>Generate Offer</button>
-																</li>
+																</li>-->
 
 															</ul>
 														</div>
@@ -171,11 +171,11 @@
 									</div>
 									<span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
 									<div class="pull-right" *ngIf="IsHRConducted">
-										<button class="btn btn-icon-only grey-cascade" (click)='onGenerateOffer()' tooltip="Generate Offer" tooltipPlacement="top"
+										<button class="btn btn-circle btn-icon-only grey-cascade" (click)='onGenerateOffer()' tooltip="Generate Offer" tooltipPlacement="top"
 											tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true">
                                                             <i class="fa fa-link"></i> 
                                                         </button>
-										<button class="btn btn-icon-only red" (click)='onUpdateStatus()' tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+										<button class="btn btn-circle btn-icon-only red" (click)='onUpdateStatus()' tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
 											title="Update Status" tooltipEnable="true">
                                                             <i class="fa fa-edit"></i> 
                                                         </button>
@@ -188,7 +188,7 @@
 											<div class="form-group col-md-7">
 												<label class="col-md-6 control-label align" style="margin-left:-12px;">Joining Date: </label>
 												<div class="col-md-2">
-													<input type="date" [min]="mindate" name="bday" id="expectedDateOfJoining" required="" [(ngModel)]="ExpDateOfJoining" tooltip="Date Of Joining"
+													<input type="date" [min]="mindate" name="bday" id="ExpDateOfJoining" required="" [(ngModel)]="ExpDateOfJoining" tooltip="Date Of Joining"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" style="margin-left: -20px;" />
 												</div>
 											</div>
@@ -205,17 +205,18 @@
 									<hr *ngIf="IsOfferGenerate">
 									<!--status update form-->
 									<div class="row" style="margin-top:20px;" *ngIf="IsUpdateStatus">
-										<form (submit)="saveUpdateStatus(UpdatedStatus);">
+										<form (submit)="saveUpdateStatus();">
 											<div class="form-group col-md-7">
 												<div class="dataTables_length" id="sample_1_length">
 													<label>Status:
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
-                                             [(ngModel)]="UpdatedStatus" required="" style="width: 159px!important;"
+                                             [(ngModel)]="selectedStatus" required="" style="width: 159px!important;"
 											 >
-                                                <option value="Offered">Offered</option>
+											 <option *ngFor="let status of CandidateUpdatedStatus" [value]="status.Value">{{status.Value}}</option>
+                                                <!--<option value="Offered">Offered</option>
                                                 <option value="Offered Accepted">Offered Accepted</option>
                                                 <option value="Absconded">Absconded</option>
-                                                <option value="Absconded">Joined</option>
+                                                <option value="Absconded">Joined</option>-->
                                             </select>
                                         </label>
 												</div>
@@ -276,7 +277,7 @@
 									<hr/>
 									<form (submit)='onSetActualTime()' *ngIf='setActualTimeForm'>
 										<div class="row">
-											<label style="margin-left:30px;"><b>Schedule Interview: {{getDate(CandidateHistoryForActualTime.InterviewDate)}} on {{getTime(CandidateHistoryForActualTime.InterviewFromTime)}} for {{CandidateHistoryForActualTime.Round.Value}}</b></label>
+											<label style="margin-left:30px;"><b>{{CandidateHistoryForActualTime.Round.Value}} interview schedule at {{getDate(CandidateHistoryForActualTime.InterviewDate)}} {{getTime(CandidateHistoryForActualTime.InterviewFromTime)}}</b></label>
 										</div>
 										<div class="row" style="margin-top:10px;">
 											<div class="form-group col-md-7">

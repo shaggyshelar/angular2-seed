@@ -73,11 +73,12 @@ export class RRFCandidateListComponent implements OnActivate {
     changeStatusCandidateID: MasterData = new MasterData();
     IsBarchartDataShow: boolean = false;
     IsHRConducted: boolean = false;
-    ExpDateOfJoining: any;
+    ExpDateOfJoining: Date;
     IsOfferGenerate: boolean = false;
     IsUpdateStatus: boolean = false;
     UpdatedStatus: any;
     selectedStatus = new MasterData();
+    CandidateUpdatedStatus:MasterData = new MasterData();
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
         responsive: true
@@ -122,8 +123,6 @@ export class RRFCandidateListComponent implements OnActivate {
         //TODO : Call API to get Candidates Specific to SelectedRRF
         this.getCanidatesForRRF();
         this.getRRFDetails();
-        // Uncomment once API ready
-        //this.getUpdateStatus();
     }
     /**Bind candidtes rating in chart */
     BindRatingChart(candidateID: MasterData, rrfID: MasterData) {
@@ -158,11 +157,12 @@ export class RRFCandidateListComponent implements OnActivate {
         console.log(e);
     }
     // Get Updated status
-    getUpdateStatus() {
+    getUpdateStatus(candidateID:any) {
         //TO DO : Update API
-        this._mastersService.getCandidateStatuses()
+        this._mastersService.getUpdateStatus(candidateID)
             .subscribe(
             results => {
+                this.CandidateUpdatedStatus = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -206,6 +206,7 @@ export class RRFCandidateListComponent implements OnActivate {
             (results: any) => {
                 if (results !== null && results.length > 0) {
                     this.CandidateRoundHistory = <any>results;
+                    this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
                     for (var index = 0; index < this.CandidateRoundHistory.length; index++) {
                         if (this.CandidateRoundHistory[index].InterviewType.Value === 'HR') {
                             this.IsHRConducted = true;
@@ -386,7 +387,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     proceedForOfferGeneration(InterviewID: MasterData) {
         if (InterviewID.Id !== null && InterviewID.Id !== undefined) {
-            this._rrfCandidatesList.proceedForOfferGeneration(InterviewID, this.CandidateID, this.RRFID)
+            this._rrfCandidatesList.proceedForOfferGeneration(InterviewID, this.CandidateID, this.RRFID,new Date())
                 .subscribe(
                 (results: any) => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -533,7 +534,7 @@ export class RRFCandidateListComponent implements OnActivate {
     onGenerateOffer() {
         this.IsUpdateStatus = false;
         this.IsOfferGenerate = true;
-        this.ExpDateOfJoining = 'mm/dd/yyyy';
+        //this.ExpDateOfJoining = 'mm/dd/yyyy';
     }
     onUpdateStatus() {
         this.IsOfferGenerate = false;
@@ -546,27 +547,31 @@ export class RRFCandidateListComponent implements OnActivate {
     onCancelOffer() {
         this.IsOfferGenerate = false;
     }
-    saveOffer(joiningDate: any) {
+    saveOffer(joiningDate: Date) {
+        joiningDate = moment(joiningDate).format('MM-DD-YYYY');
         this._rrfCandidatesList.proceedForOfferGeneration(this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewID,
-            this.CandidateRoundHistory[0].CandidateID, this.RRFID)
+            this.CandidateRoundHistory[0].CandidateID, this.RRFID ,joiningDate)
             .subscribe(
             (results: any) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.IsOfferGenerate = false;
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
             },
             error => this.errorMessage = <any>error);
     }
-    saveUpdateStatus(updatedStatus: any) {
-        this.selectedStatus.Id = 0;
-        this.selectedStatus.Value = updatedStatus;
+    saveUpdateStatus() {
+        //this.selectedStatus.Id = 0;
+        //this.selectedStatus.Value = updatedStatus;
         this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, '')
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.IsUpdateStatus = false;
+                    this.getCanidatesForRRF();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
