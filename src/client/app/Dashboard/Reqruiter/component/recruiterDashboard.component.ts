@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {OnActivate, ROUTER_DIRECTIVES} from '@angular/router';
 //import { StackedColumnComponent } from '../../../shared/components/graph/StackedColumnChart.component';
-import { GuageChartData } from '../../index';
+import { GuageChartData, PiechartData } from '../../index';
 import {
     GraphComponent,
     PiechartComponent,
@@ -40,6 +40,7 @@ export class RecruiterDashboardComponent implements OnActivate {
     OverdueRRFList: any[];
     IncompleteProfileList: any[];
     CandidateJoiningList: any[];
+    rrfTimeline: any;
     OpenRRF: any;
     OverdueRRF: any;
     Incomplete: any;
@@ -380,12 +381,15 @@ export class RecruiterDashboardComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+    /**Get all RRF with its status time remains to complete OR Overdue days */
+    GetRrfTimeline(): void {
+        this.dashboardService.getRrfTimeline()
+            .subscribe(
+            results => {
+                //this.chartDataForColumnChart = <any>results;
+                this.rrfTimeline = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
 }
 
-/**
- * PiechartData
- */
-class PiechartData {
-    title: string;
-    value: string;
-}

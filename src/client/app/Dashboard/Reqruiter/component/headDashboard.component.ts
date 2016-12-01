@@ -38,6 +38,7 @@ export class HeadDashboardComponent implements OnActivate {
     OfferedCandidateList: any[];
     CandidateJoiningList: any[];
     Overdue: any;
+    rrfTimeline: any;
     OfferedCandidate: any;
     IncompleteProfile: any;
     CandidateJoining: any;
@@ -325,6 +326,7 @@ export class HeadDashboardComponent implements OnActivate {
         this.GetAllOfferedCandidateCount();
         this.GetIncompleteProfileCount();
         this.GetCandidateJoining();
+        this.GetRrfTimeline();
     }
     /**Get all RRF's status wise count */
     GetAllRrfStatusCount(): void {
@@ -342,6 +344,16 @@ export class HeadDashboardComponent implements OnActivate {
             results => {
                 //this.chartDataForColumnChart = <any>results;
                 this.ChartDataForStackedColChart = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /**Get all RRF with its status time remains to complete OR Overdue days */
+    GetRrfTimeline(): void {
+        this.dashboardSerivce.getRrfTimeline()
+            .subscribe(
+            results => {
+                //this.chartDataForColumnChart = <any>results;
+                this.rrfTimeline = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

@@ -32,6 +32,15 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    /**Get all RRF with its status time remains to complete OR Overdue days */
+    getRrfTimeline() {
+        let url = Config.GetURL('/api/Dashboards/GetRRFTimelinesByRole');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**Get all interview round wise candidate count for specific RRF */
     getTaggedCandidateStatusCount(RrfCode: string) {
         let url = Config.GetURL('/api/Dashboards/GetCandidatesInPipelineForSelectedRRF?RRFID=' + RrfCode);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Routes, RouteSegment, RouteTree,Router } from '@angular/router';
+import { ROUTER_DIRECTIVES, Routes, RouteSegment, RouteTree, Router } from '@angular/router';
 import { FooterComponent } from '../../layout/footer/footer.component';
 import { TopNavigationBarComponent } from '../../layout/topNavigationBar/topNavigationBar.component';
 import { PageActionsComponent } from '../../layout/pageActions/pageActions.component';
@@ -48,7 +48,7 @@ import { RecruiterDashboardComponent } from '../../Dashboard/Reqruiter/component
     providers: [SpinnerService],
 })
 @Routes([
-    //{ path: '/', component: DashboardComponent },
+    { path: '/', component: DashboardComponent },
     { path: '/Admin/Feature', component: FeatureComponent },
     { path: '/Admin/Practice', component: PracticeComponent },
     { path: '/Admin/Skill', component: SkillComponent },
@@ -80,15 +80,16 @@ import { RecruiterDashboardComponent } from '../../Dashboard/Reqruiter/component
     { path: '/RRF/FeedbackPending', component: FeedbackPendingComponent },
     { path: '/Dashboard/Head', component: HeadDashboardComponent },
     { path: '/Dashboard/Initiator', component: InitiatorDashboardComponent },
-    { path: '/Dashboard/Recruiter', component: RecruiterDashboardComponent }
+    { path: '/Dashboard/Recruiter', component: RecruiterDashboardComponent },
+    { path: '/Dashboard', component: DashboardComponent }
 
 
 ])
 export class HomeComponent implements OnInit {
     constructor(private _router: Router) {
-  }
+    }
     ngOnInit(): void {
-        this._router.navigate(['/App/Dashboard/Recruiter']);
+        this._router.navigate(['/App/Dashboard']);
         App.init();
         Layout.init();
         Demo.init();
