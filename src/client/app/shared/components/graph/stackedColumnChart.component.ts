@@ -30,10 +30,11 @@ export class StackedColumnComponent implements OnChanges {
                 'legend': {
                     //'horizontalGap': 10,
                     'maxColumns': 3,
-                    'position': 'top',
-                    'useGraphSettings': false,
-                    'markerSize': 10,
+                    'position': 'right',
+                    //'useGraphSettings': false,
+                    'markerSize': 6,
                     'autoMargins': true,
+                    'totalText': '[[total]]',
                     'equalWidths': true
                 },
                 'startDuration': 2,
