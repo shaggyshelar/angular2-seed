@@ -320,7 +320,7 @@ export class HeadDashboardComponent implements OnActivate {
     }
     constructor(private dashboardSerivce: RecruitersDashboardService) {
         this.GetAllRrfStatusCount();
-        this.GetRRFStatusCount('Open');
+        this.GetRRFStatusCount('Pending Approval');
         this.GetTaggedCandidateStatusCount('RRF6499265970');
         this.GetAllOverdueRRFCount();
         this.GetAllOfferedCandidateCount();

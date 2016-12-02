@@ -37,7 +37,7 @@ export class StackedColumnComponent implements OnChanges {
                     'totalText': '[[total]]',
                     'equalWidths': true
                 },
-                'startDuration': 2,
+                'startDuration': 1,
                 'dataProvider': _chartData,
                 'valueAxes': [{
                     'stackType': 'regular',

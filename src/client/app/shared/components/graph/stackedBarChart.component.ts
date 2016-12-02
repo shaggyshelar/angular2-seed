@@ -23,6 +23,7 @@ export class StackedBarComponent implements OnChanges {
         var chart = AmCharts.makeChart('barChartDiv', {
             'type': 'serial',
             'theme': 'light',
+            'creditsPosition': 'top-right',
             'legend': {
                 'horizontalGap': 10,
                 'maxColumns': 3,

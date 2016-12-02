@@ -81,17 +81,23 @@ export class GaugeChartComponent implements OnChanges {
                 var count: number = 0;
                 this.guageChartData.forEach(data => {
                     var tempData = data.bands;
-                    this.InitializeChart(tempData, count);
+                    this.InitializeChart(tempData, count, data.rrfCode);
                     count++;
                 });
             } else {
                 console.info('No data for Guage!');
             }
     }
-    InitializeChart(_bandData: Array<any>, _count: number) {
+    InitializeChart(_bandData: Array<any>, _count: number, _chartTitle: string) {
         this.gaugeChart = AmCharts.makeChart('chartdivforGauge' + _count, {
             'type': 'gauge',
             'theme': 'light',
+            'startDuration': 2,
+            'startEffect': 'bounce',
+            'creditsPosition': 'bottom-right',
+            // 'titles': [{
+            //     'text': _chartTitle
+            // }],
             'axes': [{
                 'axisAlpha': 0,
                 'tickAlpha': 0,

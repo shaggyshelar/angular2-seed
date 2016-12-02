@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES} from '@angular/router';
 import { RecruitersDashboardService } from '../Reqruiter/index';
+import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 import {
     GuageChartData,
     PiechartData } from '../index';
@@ -22,7 +23,8 @@ import {
         GaugeChartComponent,
         AnimatedPieComponent,
         StackedColumnComponent,
-        StackedBarComponent
+        StackedBarComponent,
+        InterviewApprovalComponent
     ],
     providers: [RecruitersDashboardService]
 })
