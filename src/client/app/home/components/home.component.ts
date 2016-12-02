@@ -38,13 +38,13 @@ import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/fe
 import { HeadDashboardComponent } from '../../Dashboard/Reqruiter/component/headDashboard.component';
 import { InitiatorDashboardComponent } from '../../Dashboard/Reqruiter/component/initiatorDashboard.component';
 import { RecruiterDashboardComponent } from '../../Dashboard/Reqruiter/component/recruiterDashboard.component';
-
+import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 @Component({
     moduleId: module.id,
     templateUrl: 'home.component.html',
     styleUrls: ['home.component.css'],
     directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
-        SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent],
+        SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent, IfAuthorizeDirective],
     providers: [SpinnerService],
 })
 @Routes([
@@ -93,6 +93,7 @@ export class HomeComponent implements OnInit {
         App.init();
         Layout.init();
         Demo.init();
+        QuickNav.init();
     }
     routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
         console.info(segment);
