@@ -22,7 +22,6 @@ export class RRFGridRowComponent implements OnInit {
 
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
     ngOnInit() {
-        //console.log("RRF===="+this.RRFData);
         // this.RRFData.CreatedDate = moment(this.RRFData.CreatedDate).format('DD/MM/YYYY');
         // this.RRFData.ExpDateOfJoining = moment(this.RRFData.ExpDateOfJoining).format('DD/MM/YYYY');
     }

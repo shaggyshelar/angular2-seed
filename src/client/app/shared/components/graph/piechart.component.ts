@@ -77,7 +77,7 @@ export class PiechartComponent implements OnChanges {
         wedge.parentNode.appendChild(wedge);
       }
     } else {
-      console.log('WARN :: No data to intiate pie chart!');
+      console.info('No data to intiate pie chart!');
     }
   }
 

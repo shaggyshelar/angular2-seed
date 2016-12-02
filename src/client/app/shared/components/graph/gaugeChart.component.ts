@@ -85,7 +85,7 @@ export class GaugeChartComponent implements OnChanges {
                     count++;
                 });
             } else {
-                console.log('zero record Guage chart');
+                console.info('No data for Guage!');
             }
     }
     InitializeChart(_bandData: Array<any>, _count: number) {

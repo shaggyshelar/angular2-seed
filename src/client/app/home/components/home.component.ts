@@ -95,6 +95,6 @@ export class HomeComponent implements OnInit {
         Demo.init();
     }
     routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
-        console.log(segment);
+        console.info(segment);
     }
 }

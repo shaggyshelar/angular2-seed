@@ -52,7 +52,7 @@ export class MyProfilesViewComponent implements OnActivate {
         } else {
             /** If no information found from Session then it will redirected to existing page */
             //this.toastr.error('Somthing went wrong..!');
-            console.log('Following variable name is empty form session - ' + variableName);
+            console.info('Following variable name is empty form session - ' + variableName);
         }
         return response;
     }

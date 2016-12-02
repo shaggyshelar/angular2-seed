@@ -25,7 +25,6 @@ export class IEFFunctionComponent implements OnActivate {
         /** */
     }
     onUpdate() {
-        //console.log(this.functionsCollection[this.recordCount]);
         this.functionUpdate.emit(this.functionsCollection);
     }
 }

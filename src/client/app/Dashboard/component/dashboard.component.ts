@@ -320,8 +320,8 @@ export class DashboardComponent implements OnInit {
             results => {
                 this.StatusWiseRrfCount = <any>results;
                 if (this.StatusWiseRrfCount.length > 0) {
-                    this.Pending = this.StatusWiseRrfCount[1].value;
-                    this.Open = this.StatusWiseRrfCount[0].value;
+                    this.Pending = this.StatusWiseRrfCount[1] ? this.StatusWiseRrfCount[1].value : '0';
+                    this.Open = this.StatusWiseRrfCount[0] ? this.StatusWiseRrfCount[0].value : '0';
                 }
             },
             error => this.errorMessage = <any>error);
@@ -390,8 +390,6 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             results => {
                 this.OfferedCandidate = <any>results;
-                console.log('this.OfferedCandidate');
-                console.log(this.OfferedCandidate);
             },
             error => this.errorMessage = <any>error);
     }

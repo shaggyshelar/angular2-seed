@@ -26,14 +26,12 @@ export class DetailProfileComponent implements OnInit {
     // @Input() profilePic: any;
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
     constructor(private toastr: ToastsManager, private _router: Router, private _profileBankService: ProfileBankService) {
-        //console.log('In Contructor...');
     }
     ngOnInit() {
         /** */
         this.profile = this.selectedProfile;
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
-        //console.log(this.profilePic);
     }
     getEmail(EmailCode: any) {
         this.profile.CandidateMailDetails = new MailDetails();

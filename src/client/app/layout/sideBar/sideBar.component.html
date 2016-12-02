@@ -14,16 +14,16 @@
         <ul class="page-sidebar-menu" aria-expanded="true" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200"
             style="margin-bottom: 40%;">
             <li class="nav-item start ">
-                <!--<a [routerLink]="['/App/Dashboard']" class="nav-link ">
+                <!--<a [routerLink]="['/App/Dashboard']" class="nav-link">
                     <i class="icon-graph"></i>
                     <span class="title">Dashboard</span>
                 </a>-->
-                <a href="javascript:;" class="nav-link nav-toggle">
-                    <i class="fa fa-bank"></i>
+                <a [routerLink]="['/App/Dashboard']" class="nav-link">
+                    <i class="fa fa-dashboard"></i>
                     <span class="title"> Dashboard</span>
                     <span class="arrow"></span>
                 </a>
-                <ul class="sub-menu always-open">
+                <!--<ul class="sub-menu always-open">
                     <li class="nav-item start " [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
                         <a [routerLink]="['/App/Dashboard/Initiator/']" class="nav-link ">
                             <i class="fa fa-dashboard"></i>
@@ -42,7 +42,7 @@
                             <span class="title">Dashboard</span>
                         </a>
                     </li>
-                    </ul>
+                </ul>-->
             </li>
             <li class="nav-item start open" [ifAuthorize]="['PROFILEBANK.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
