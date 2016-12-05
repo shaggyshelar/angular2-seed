@@ -1,5 +1,5 @@
 ///<reference path="../graph/AmCharts.d.ts" />
-import { Component, Input, OnChanges, OnInit} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, EventEmitter, Output} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 //import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
 //import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAvailablity.component';
@@ -13,30 +13,37 @@ import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 
 export class GraphComponent implements OnChanges {
     @Input() chartData: any;
+    @Output() CandidateDetailInput: EventEmitter<any> = new EventEmitter<any>();
+    chart: any;
     data: any;
     ngOnChanges() {
         /** */
-        this.createChart(this.chartData);
+        this.createChart(this.chartData, this.CandidateDetailInput);
     }
-    createChart(chartData: any) {
-        var chart: any;
+    createChart(chartData: any, CandidateDetailInput: any) {
+        //var chart: any;
         // SERIAL CHART
-        chart = new AmCharts.AmSerialChart();
-        chart.dataProvider = chartData;
-        chart.categoryField = 'status';
-        chart.startDuration = 1;
-        chart.startEffect = 'bounce';
-        chart.plotAreaBorderColor = '#DADADA';
-        chart.plotAreaBorderAlpha = 0.5;
+        this.chart = new AmCharts.AmSerialChart();
+        this.chart.dataProvider = chartData;
+        this.chart.categoryField = 'status';
+        this.chart.startDuration = 1;
+        this.chart.startEffect = 'bounce';
+        this.chart.plotAreaBorderColor = '#DADADA';
+        this.chart.plotAreaBorderAlpha = 0.5;
 
         // this single line makes the chart a bar chart
-        chart.rotate = false;
+        this.chart.rotate = false;
 
         // add click listener
-        chart.addListener('clickGraphItem', this.handleClick);
+        this.chart.addListener('clickGraphItem', function(event: any){
+            CandidateDetailInput.emit({
+            'inputstring': event.target.title,
+            'message': 'FromAmChart'
+        });
+        });
         // AXES
         // Category
-        var categoryAxis = chart.categoryAxis;
+        var categoryAxis = this.chart.categoryAxis;
         categoryAxis.gridPosition = 'start';
         categoryAxis.gridAlpha = 0.1;
         categoryAxis.axisAlpha = 0;
@@ -46,7 +53,7 @@ export class GraphComponent implements OnChanges {
         valueAxis.axisAlpha = 0;
         valueAxis.gridAlpha = 0.1;
         valueAxis.position = 'top';
-        chart.addValueAxis(valueAxis);
+        this.chart.addValueAxis(valueAxis);
 
         // GRAPHS
         // first graph
@@ -58,7 +65,7 @@ export class GraphComponent implements OnChanges {
         graph1.lineAlpha = 0;
         graph1.fillColors = '#2cb344';
         graph1.fillAlphas = 1;
-        chart.addGraph(graph1);
+        this.chart.addGraph(graph1);
 
         // second graph
         var graph2 = new AmCharts.AmGraph();
@@ -69,7 +76,7 @@ export class GraphComponent implements OnChanges {
         graph2.lineAlpha = 0;
         graph2.fillColors = '#81acd9';
         graph2.fillAlphas = 1;
-        chart.addGraph(graph2);
+        this.chart.addGraph(graph2);
 
         // third graph
         var graph3 = new AmCharts.AmGraph();
@@ -80,7 +87,7 @@ export class GraphComponent implements OnChanges {
         graph3.lineAlpha = 0;
         graph3.fillColors = '#ADD981';
         graph3.fillAlphas = 1;
-        chart.addGraph(graph3);
+        this.chart.addGraph(graph3);
 
         // four graph
         var graph4 = new AmCharts.AmGraph();
@@ -91,7 +98,7 @@ export class GraphComponent implements OnChanges {
         graph4.lineAlpha = 0;
         graph4.fillColors = '#01dcd9';
         graph4.fillAlphas = 1;
-        chart.addGraph(graph4);
+        this.chart.addGraph(graph4);
 
         // five graph
         var graph5 = new AmCharts.AmGraph();
@@ -102,7 +109,7 @@ export class GraphComponent implements OnChanges {
         graph5.lineAlpha = 0;
         graph5.fillColors = '#a22b2b';
         graph5.fillAlphas = 1;
-        chart.addGraph(graph5);
+        this.chart.addGraph(graph5);
 
         // LEGEND
         var legend = new AmCharts.AmLegend();
@@ -110,13 +117,18 @@ export class GraphComponent implements OnChanges {
         legend.position = 'absolute';
         legend.autoMargins = true;
         legend.equalWidths = true;
-        chart.addLegend(legend);
-        chart.creditsPosition = 'bottom-right';
+        this.chart.addLegend(legend);
+        this.chart.creditsPosition = 'bottom-right';
 
         // WRITE
-        chart.write('chartdivforCol');
+        this.chart.write('chartdivforCol');
     }
-    handleClick(event: any) {
-        alert(event.item.category + ': ' + event.item.values.value);
-    }
+    // handleClick(event: any) {
+    //     alert(event.item.category + ': ' + event.item.values.value);
+    //     CandidateDetailInput.emit({
+    //         'inputstring': event.item.category,
+    //         'message': 'FromAmChart'
+    //     });
+    // };
+
 }

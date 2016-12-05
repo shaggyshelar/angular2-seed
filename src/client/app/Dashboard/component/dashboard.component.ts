@@ -12,8 +12,10 @@ import {
     GaugeChartComponent,
     AnimatedPieComponent,
     StackedColumnComponent,
-    StackedBarComponent} from '../../shared/index';
-
+    StackedBarComponent,
+    CandidateDetailComponent} from '../../shared/index';
+//import {RRFCandidateListService} from '../../RRF/RRFDashboard/services/RRFCandidatesList.service';
+//import {RRFSpecificCandidateList, TransferInterview} from '../../RRF/RRFDashboard/model/RRFCandidateList';
 @Component({
     moduleId: module.id,
     selector: 'dashboard-component',
@@ -26,12 +28,22 @@ import {
         StackedColumnComponent,
         StackedBarComponent,
         InterviewApprovalComponent,
-        IfAuthorizeDirective
+        IfAuthorizeDirective,
+        CandidateDetailComponent
     ],
     providers: [RecruitersDashboardService]
 })
 
 export class DashboardComponent implements OnInit {
+    onNotify(InputString: any): void {
+        switch (InputString.message) {
+            case 'FromPieChart': this.GetRRFStatusCount(InputString.inputstring);
+                break;
+            case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring);
+                break;
+        }
+
+    }
     errorMessage: string;
     /************BEGIN RECRUITER'S DASHBOARD properties */
     OpenRRF: any[];
@@ -39,6 +51,8 @@ export class DashboardComponent implements OnInit {
     OverdueRRF: any[];
     Incomplete: any[];
     CandidateJoining: any[];
+    //AllCandidatesForRRF: RRFSpecificCandidateList[];
+    isNull: boolean = false;
     /************END RECRUITER'S DASHBOARD properties */
     /************BEGIN INITIATOR DASHBOARD properties */
     Open: string = '0';
@@ -237,7 +251,8 @@ export class DashboardComponent implements OnInit {
     };
     /************END RECRUITER HEAD DASHBOARD properties */
 
-    constructor(private dashboardService: RecruitersDashboardService) { }
+    constructor(private dashboardService: RecruitersDashboardService
+    ) { }
 
     ngOnInit() {
 
@@ -252,6 +267,7 @@ export class DashboardComponent implements OnInit {
         this.GetCandidateJoining();
         this.GetRrfStatusForGuage();
         this.GetRrfTimeline();
+        // this.getCanidatesForRRF();
         //Initiator
         this.GetStatusWiseRRFCount();
         this.GetPendingFeedbackCount();
@@ -268,6 +284,65 @@ export class DashboardComponent implements OnInit {
     }
 
     /************BEGIN RECRUITER'S DATA************/
+    //Get All Canidate List Along with Interview Data 
+    // getCanidatesForRRF() {
+    //     this._rrfCandidatesList.getCandidatesForRRF('RRF6499265970')
+    //         .subscribe(
+    //         (results: any) => {
+    //             if (results.length !== undefined) {
+    //                 // this.AllCandidatesForRRF = results;
+    //                 this.CheckInterviewStatus(results);
+    //             } else {
+    //                 //If No data present
+    //                 this.isNull = true;
+    //             }
+    //         },
+    //         error => this.errorMessage = <any>error);
+    // }
+    // CheckInterviewStatus(CandidateDetails: Array<RRFSpecificCandidateList>) {
+    //     this.AllCandidatesForRRF = CandidateDetails;
+    //     for (var index = 0; index < CandidateDetails.length; index++) {
+    //         if (CandidateDetails[index].InterviewDetails.Status !== null) {
+    //             switch (CandidateDetails[index].InterviewDetails.Status.toLowerCase()) {
+    //                 case 'selected':
+    //                 case 'on-hold':
+    //                 case 'rejected':
+    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = false;
+    //                     break;
+    //                 case 'scheduled':
+    //                     //case 're-scheduled':
+    //                     // case 'Cancelled':
+    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = true;
+    //                     break;
+    //                 case 'declined':
+    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = false;
+    //                     break;
+    //                 case 'rescheduled':
+    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = true;
+    //                     break;
+    //                 case 'awaiting approval':
+    //                     this.AllCandidatesForRRF[index].isAwaitingApproval = true;
+    //                     break;
+    //                 default:
+    //                     this.AllCandidatesForRRF[index].isAwaitingApproval = false;
+    //                     break;
+    //             }
+    //         } else {
+    //             CandidateDetails[index].InterviewDetails.Status = 'Not Scheduled';
+    //             if (CandidateDetails[index].InterviewDetails.Round === null) {
+    //                 CandidateDetails[index].InterviewDetails.Round = { Id: 0, Value: '--' };
+    //             } if (CandidateDetails[index].InterviewDetails.Round.Value === null) {
+    //                 CandidateDetails[index].InterviewDetails.Round.Value = '--';
+    //             }
+    //             if (CandidateDetails[index].InterviewDetails.InterviewMode === null) {
+    //                 CandidateDetails[index].InterviewDetails.InterviewMode = { Id: 0, Value: '--' };
+    //             } if (CandidateDetails[index].InterviewDetails.InterviewMode.Value === null) {
+    //                 CandidateDetails[index].InterviewDetails.InterviewMode.Value = '--';
+    //             }
+    //         }
+    //     }
+
+    // }
     /**Get all Open RRF's count */
     GetAllOpenRRFCount(): void {
         this.dashboardService.getAllStatusCount()

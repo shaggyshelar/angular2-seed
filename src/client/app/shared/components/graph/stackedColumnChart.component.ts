@@ -1,5 +1,5 @@
 ///<reference path="../graph/AmCharts.d.ts" />
-import { Component, Input, OnChanges, OnInit} from '@angular/core';
+import { Component, Input, Output, OnChanges, OnInit, EventEmitter} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 //import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
 //import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAvailablity.component';
@@ -14,17 +14,19 @@ import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 
 export class StackedColumnComponent implements OnChanges {
     @Input() chartData: any;
+    @Output() amChartInput: EventEmitter<any> = new EventEmitter<any>();
     data: any;
+    chart: any;
     ngOnChanges() {
-        this.InitializeStackedChart(this.chartData);
+        this.InitializeStackedChart(this.chartData, this.amChartInput);
     }
     /** - Creates chart as per data 
      *  - If data is null or empty will not create instance (Chart)
      *  - If data is preset create instance and shows chart
      */
-    InitializeStackedChart(_chartData: any) {
+    InitializeStackedChart(_chartData: any, amChartInput: any) {
         if (_chartData.length > 0) {
-            var chart = AmCharts.makeChart('chartdivforStackedCol', {
+            this.chart = AmCharts.makeChart('chartdivforStackedCol', {
                 'type': 'serial',
                 'theme': 'light',
                 'legend': {
@@ -102,6 +104,14 @@ export class StackedColumnComponent implements OnChanges {
                 }
 
             });
+            this.chart.addListener("clickGraphItem", handleClick)
+
+            function handleClick(val: any) {
+                amChartInput.emit({
+                    'inputstring': val.item.category,
+                    'message': 'FromStackedColChart'
+                });
+            }
         }
     }
 
