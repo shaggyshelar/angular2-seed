@@ -11,3 +11,4 @@ export *  from './components/graph/graph.component';
 export *  from './components/graph/piechart.component';
 export *  from './components/graph/gaugeChart.component';
 export *  from './components/graph/AnimatedPieChart.component';
+export *  from './components/graph/candidateDetailList.component';
