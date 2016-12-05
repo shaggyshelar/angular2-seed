@@ -18,7 +18,7 @@
                     <!--_____BEGIN TILES -->
                     <section>
                         <!--BEGIN HEAD Top TILES -->
-                        <div class="row">
+                        <div [ifAuthorize]="['DB.COUNTERS.1.READ']" class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
@@ -115,7 +115,7 @@
                         <!--END HEAD Top TILES -->
 
                         <!--BEGIN INITIATOR TILE -->
-                        <div class="row">
+                        <div [ifAuthorize]="['DB.COUNTERS.3.READ']" class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
@@ -228,7 +228,7 @@
                         <!--END INITIATOR TILE -->
 
                         <!--BEGIN RECRUITERS TILES -->
-                        <div class="row">
+                        <div [ifAuthorize]="['DB.COUNTERS.2.READ']" class="row">
                             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
@@ -340,7 +340,7 @@
                         <!--BEGIN HEAD TIMELINE CHART  -1-->
                         <div class="row">
                             <!--BEGIN chart -1.1-->
-                            <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width:98.5%;">
+                            <div [ifAuthorize]="['DB.GRAPH.2.READ']" class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width:98.5%;">
                                 <div class="portlet light ">
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
@@ -363,7 +363,7 @@
                     <!--_____BEGIN HEAD SECTION -->
                     <section>
                         <!--BEGIN HEAD CHART SECTION 1-->
-                        <div class="row">
+                        <div [ifAuthorize]="['DB.GRAPH.1.READ']" class="row">
                             <!--BEGIN HEAD PENDING RRF CHART 1.1-->
                             <div class="col-md-6 col-sm-6" style="margin-right:inherit;margin-top:-5px;">
                                 <div class="portlet light ">
@@ -400,7 +400,7 @@
                         <!--END HEAD CHART SECTION 1-->
 
                         <!--BEGIN HEAD CHART SECTION 2-->
-                        <div class="row">
+                        <div [ifAuthorize]="['DB.GRAPH.1.READ']" class="row">
                             <!--BEGIN HEAD SELECTED CANDIDATE CHART 1.1-->
                             <div class="col-md-6 col-sm-6" style="margin-right:inherit;margin-top:-5px;">
                                 <div class="portlet light tasks-widget ">
@@ -435,7 +435,7 @@
                         <!--END HEAD CHART SECTION 2-->
 
                         <!--BEGIN HEAD CHART SECTION 3-->
-                        <div class="row">
+                        <div [ifAuthorize]="['DB.GRAPH.1.READ']" class="row">
                             <div class="col-md-6 col-sm-6" style="margin-top:-5px;">
                                 <!-- BEGIN PORTLET
                                 <div class="portlet light ">
@@ -1000,7 +1000,7 @@
                     <!--_____BEGIN GENERAL SECTION -->
                     <section>
                         <!--BEGIN INITIATOR REGIONAL STATS PORTLET CHART 3-->
-                        <div class="row">
+                        <div [ifAuthorize]="['DB.GRAPH.4.READ']" class="row">
                             <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width: 98.5%;">
                                 <!-- BEGIN REGIONAL STATS PORTLET-->
                                 <div class="portlet light ">

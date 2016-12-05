@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES} from '@angular/router';
 import { RecruitersDashboardService } from '../Reqruiter/index';
 import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
+import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 import {
     GuageChartData,
     PiechartData } from '../index';
@@ -24,7 +25,8 @@ import {
         AnimatedPieComponent,
         StackedColumnComponent,
         StackedBarComponent,
-        InterviewApprovalComponent
+        InterviewApprovalComponent,
+        IfAuthorizeDirective
     ],
     providers: [RecruitersDashboardService]
 })
