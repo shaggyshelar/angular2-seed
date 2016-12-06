@@ -4,6 +4,8 @@ import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 //import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
 //import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAvailablity.component';
 import { RecruitersDashboardService } from '../../../Dashboard/Reqruiter/services/recruitersDashboard.service';
+import { InterviewMode } from  '../../../shared/constantValue/index';
+import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
 @Component({
   moduleId: module.id,
   selector: 'candidate-details',
@@ -12,17 +14,33 @@ import { RecruitersDashboardService } from '../../../Dashboard/Reqruiter/service
   //styleUrls: ['piechart.component.css']
 })
 
-export class CandidateDetailComponent implements OnInit {
-  @Input() chartData: any;
-  @Output() stackColChartInput:EventEmitter<any> = new EventEmitter<any>();
+export class CandidateDetailComponent implements OnChanges {
+  @Input() CandidateData: any;
+  @Output() BarchartInput:EventEmitter<any> = new EventEmitter<any>();
   data: any;
   chart: any;
+  modeConstant: InterviewMode = InterviewMode;
   public ChartDataForStackedColChart: any = [];
   errorMessage: string;
-  ngOnInit() {
+  ngOnChanges() {
+    console.log(this.CandidateData);
   }
   constructor(private dashboardSerivce: RecruitersDashboardService) {
   }
-  
-  
+  getCandidatesRoundHistory(CandidateID: MasterData) {
+      this.BarchartInput.emit({
+        'inputstring': CandidateID,
+        'message':'FromCandidateDetails'
+      })
+  }
+  getDate(interviewDate: string) {
+        var d = new Date(interviewDate),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
+    }
 }

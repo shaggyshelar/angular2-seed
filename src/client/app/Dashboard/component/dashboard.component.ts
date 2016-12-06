@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES} from '@angular/router';
+import {CAROUSEL_DIRECTIVES, TOOLTIP_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { RecruitersDashboardService } from '../Reqruiter/index';
 import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
@@ -14,8 +15,13 @@ import {
     StackedColumnComponent,
     StackedBarComponent,
     CandidateDetailComponent} from '../../shared/index';
-//import {RRFCandidateListService} from '../../RRF/RRFDashboard/services/RRFCandidatesList.service';
-//import {RRFSpecificCandidateList, TransferInterview} from '../../RRF/RRFDashboard/model/RRFCandidateList';
+import { MasterData, ResponseFromAPI} from '../../shared/model/common.model';
+import {Interview} from '../../recruitmentCycle/shared/model/interview';
+import { CandidateProfile, BarChartData } from  '../../profileBank/shared/model/myProfilesInfo';
+import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+
+import {RRFCandidateListService} from '../../RRF/RRFDashboard/services/RRFCandidatesList.service';
+import {RRFSpecificCandidateList, TransferInterview} from '../../RRF/RRFDashboard/model/RRFCandidateList';
 @Component({
     moduleId: module.id,
     selector: 'dashboard-component',
@@ -29,9 +35,10 @@ import {
         StackedBarComponent,
         InterviewApprovalComponent,
         IfAuthorizeDirective,
-        CandidateDetailComponent
+        CandidateDetailComponent,
+        CHART_DIRECTIVES
     ],
-    providers: [RecruitersDashboardService]
+    providers: [RecruitersDashboardService, RRFCandidateListService]
 })
 
 export class DashboardComponent implements OnInit {
@@ -40,6 +47,8 @@ export class DashboardComponent implements OnInit {
             case 'FromPieChart': this.GetRRFStatusCount(InputString.inputstring);
                 break;
             case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring);
+                break;
+            case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring);
                 break;
         }
 
@@ -51,8 +60,21 @@ export class DashboardComponent implements OnInit {
     OverdueRRF: any[];
     Incomplete: any[];
     CandidateJoining: any[];
-    //AllCandidatesForRRF: RRFSpecificCandidateList[];
+    AllCandidatesForRRF: RRFSpecificCandidateList[];
     isNull: boolean = false;
+    IsBarchartDataShow: boolean = false;
+    CandidateRoundHistory: Array<Interview>;
+    changeStatusCandidateID: MasterData = new MasterData();
+    public barChartLabels: string[] = new Array<string>();
+    public barChartType: string = 'bar';
+    public barChartLegend: boolean = true;
+    public barChartData: any[] = new Array<string>();
+    public barChartOptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: true
+    };
+    RRFID: MasterData = new MasterData();
+    candidateID:MasterData = new MasterData();
     /************END RECRUITER'S DASHBOARD properties */
     /************BEGIN INITIATOR DASHBOARD properties */
     Open: string = '0';
@@ -251,7 +273,8 @@ export class DashboardComponent implements OnInit {
     };
     /************END RECRUITER HEAD DASHBOARD properties */
 
-    constructor(private dashboardService: RecruitersDashboardService
+    constructor(private dashboardService: RecruitersDashboardService,
+        private _rrfCandidatesList: RRFCandidateListService
     ) { }
 
     ngOnInit() {
@@ -267,16 +290,18 @@ export class DashboardComponent implements OnInit {
         this.GetCandidateJoining();
         this.GetRrfStatusForGuage();
         this.GetRrfTimeline();
-        // this.getCanidatesForRRF();
+        this.getCanidatesForRRF();
         //Initiator
         this.GetStatusWiseRRFCount();
         this.GetPendingFeedbackCount();
         this.GetInterviewAwaitingCount();
         //Head
+        this.candidateID.Value = 'C6644364709';
         this.GetAllRrfStatusCount();
-        this.GetRRFStatusCount('Open');
-        this.GetTaggedCandidateStatusCount('RRF6499265970');
+        //this.GetRRFStatusCount('Open');
+        //this.GetTaggedCandidateStatusCount('RRF6499265970');
         this.GetAllOfferedCandidateCount();
+        this.GetCandidatesRoundHistory(this.candidateID);
         //this.GetAllOverdueRRFCount();
         //this.GetIncompleteProfileCount();
         //this.GetCandidateJoining();
@@ -284,65 +309,71 @@ export class DashboardComponent implements OnInit {
     }
 
     /************BEGIN RECRUITER'S DATA************/
-    //Get All Canidate List Along with Interview Data 
-    // getCanidatesForRRF() {
-    //     this._rrfCandidatesList.getCandidatesForRRF('RRF6499265970')
-    //         .subscribe(
-    //         (results: any) => {
-    //             if (results.length !== undefined) {
-    //                 // this.AllCandidatesForRRF = results;
-    //                 this.CheckInterviewStatus(results);
-    //             } else {
-    //                 //If No data present
-    //                 this.isNull = true;
-    //             }
-    //         },
-    //         error => this.errorMessage = <any>error);
-    // }
-    // CheckInterviewStatus(CandidateDetails: Array<RRFSpecificCandidateList>) {
-    //     this.AllCandidatesForRRF = CandidateDetails;
-    //     for (var index = 0; index < CandidateDetails.length; index++) {
-    //         if (CandidateDetails[index].InterviewDetails.Status !== null) {
-    //             switch (CandidateDetails[index].InterviewDetails.Status.toLowerCase()) {
-    //                 case 'selected':
-    //                 case 'on-hold':
-    //                 case 'rejected':
-    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = false;
-    //                     break;
-    //                 case 'scheduled':
-    //                     //case 're-scheduled':
-    //                     // case 'Cancelled':
-    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = true;
-    //                     break;
-    //                 case 'declined':
-    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = false;
-    //                     break;
-    //                 case 'rescheduled':
-    //                     this.AllCandidatesForRRF[index].isInterviewScheduled = true;
-    //                     break;
-    //                 case 'awaiting approval':
-    //                     this.AllCandidatesForRRF[index].isAwaitingApproval = true;
-    //                     break;
-    //                 default:
-    //                     this.AllCandidatesForRRF[index].isAwaitingApproval = false;
-    //                     break;
-    //             }
-    //         } else {
-    //             CandidateDetails[index].InterviewDetails.Status = 'Not Scheduled';
-    //             if (CandidateDetails[index].InterviewDetails.Round === null) {
-    //                 CandidateDetails[index].InterviewDetails.Round = { Id: 0, Value: '--' };
-    //             } if (CandidateDetails[index].InterviewDetails.Round.Value === null) {
-    //                 CandidateDetails[index].InterviewDetails.Round.Value = '--';
-    //             }
-    //             if (CandidateDetails[index].InterviewDetails.InterviewMode === null) {
-    //                 CandidateDetails[index].InterviewDetails.InterviewMode = { Id: 0, Value: '--' };
-    //             } if (CandidateDetails[index].InterviewDetails.InterviewMode.Value === null) {
-    //                 CandidateDetails[index].InterviewDetails.InterviewMode.Value = '--';
-    //             }
-    //         }
-    //     }
+    getCanidatesForRRF() {
+        this._rrfCandidatesList.getCandidatesForRRF('RRF6499265970')
+            .subscribe(
+            (results: any) => {
+                if (results.length !== undefined) {
+                    // this.AllCandidatesForRRF = results;
+                    this.CheckInterviewStatus(results);
+                } else {
+                    //If No data present
+                    this.isNull = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    CheckInterviewStatus(CandidateDetails: Array<RRFSpecificCandidateList>) {
+        this.AllCandidatesForRRF = CandidateDetails;
+        for (var index = 0; index < CandidateDetails.length; index++) {
+            if (CandidateDetails[index].InterviewDetails.Status !== null) {
+                switch (CandidateDetails[index].InterviewDetails.Status.toLowerCase()) {
+                    case 'selected':
+                    case 'on-hold':
+                    case 'rejected':
+                        this.AllCandidatesForRRF[index].isInterviewScheduled = false;
+                        break;
+                    case 'scheduled':
+                        //case 're-scheduled':
+                        // case 'Cancelled':
+                        this.AllCandidatesForRRF[index].isInterviewScheduled = true;
+                        break;
+                    case 'declined':
+                        this.AllCandidatesForRRF[index].isInterviewScheduled = false;
+                        break;
+                    case 'rescheduled':
+                        this.AllCandidatesForRRF[index].isInterviewScheduled = true;
+                        break;
+                    case 'awaiting approval':
+                        this.AllCandidatesForRRF[index].isAwaitingApproval = true;
+                        break;
+                    default:
+                        this.AllCandidatesForRRF[index].isAwaitingApproval = false;
+                        break;
+                }
+            } else {
+                CandidateDetails[index].InterviewDetails.Status = 'Not Scheduled';
+                if (CandidateDetails[index].InterviewDetails.Round === null) {
+                    CandidateDetails[index].InterviewDetails.Round = { Id: 0, Value: '--' };
+                } if (CandidateDetails[index].InterviewDetails.Round.Value === null) {
+                    CandidateDetails[index].InterviewDetails.Round.Value = '--';
+                }
+                if (CandidateDetails[index].InterviewDetails.InterviewMode === null) {
+                    CandidateDetails[index].InterviewDetails.InterviewMode = { Id: 0, Value: '--' };
+                } if (CandidateDetails[index].InterviewDetails.InterviewMode.Value === null) {
+                    CandidateDetails[index].InterviewDetails.InterviewMode.Value = '--';
+                }
+            }
+        }
 
-    // }
+    }
+    chartClicked(e: any): void {
+        console.log(e);
+    }
+
+    chartHovered(e: any): void {
+        console.log(e);
+    }
     /**Get all Open RRF's count */
     GetAllOpenRRFCount(): void {
         this.dashboardService.getAllStatusCount()
@@ -389,6 +420,41 @@ export class DashboardComponent implements OnInit {
             },
             error => this.errorMessage = <any>error);
     }
+    /**Bind candidtes rating in chart */
+    BindRatingChart(candidateID: MasterData, rrfID: MasterData) {
+        var barChartData = new BarChartData();
+        this._rrfCandidatesList.GetCandidatesRatingsforChart(candidateID, rrfID)
+            .subscribe(
+            (results: any) => {
+                barChartData = results;
+                if (barChartData.functions && barChartData.ratingsData) {
+                    this.IsBarchartDataShow = true;
+                    this.barChartLabels = barChartData.functions;
+                    this.barChartData = barChartData.ratingsData;
+                } else {
+                    this.IsBarchartDataShow = false;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    // get Interview history of candidate
+    GetCandidatesRoundHistory(CandidateID: MasterData) {
+        this.CandidateRoundHistory = new Array<Interview>();
+        this.changeStatusCandidateID = CandidateID;
+        this.RRFID.Value = 'RRF6499265970';
+        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
+            .subscribe(
+            (results: any) => {
+                if (results !== null && results.length > 0) {
+                    this.CandidateRoundHistory = <any>results;
+                    this.BindRatingChart(CandidateID, this.CandidateRoundHistory[0].RRFID);
+                } else {
+
+                }
+            },
+            error => this.errorMessage = <any>error);
+
+    }
     /************END RECRUITER'S DATA */
 
     /************BEGIN INITIATOR DATA*************/
@@ -430,8 +496,13 @@ export class DashboardComponent implements OnInit {
     GetAllRrfStatusCount(): void {
         this.dashboardService.getAllStatusCount()
             .subscribe(
-            results => {
-                this.chartDataForPie = results;
+            (results: any) => {
+                if (results.length > 0) {
+                    this.chartDataForPie = results;
+                    var _status = this.chartDataForPie[0].title !== null ? this.chartDataForPie[0].title : "";
+                    this.GetRRFStatusCount(_status);
+                }
+
             },
             error => this.errorMessage = <any>error);
     }
@@ -439,9 +510,14 @@ export class DashboardComponent implements OnInit {
     GetRRFStatusCount(_status: string): void {
         this.dashboardService.getRRFStatusCount(_status)
             .subscribe(
-            results => {
+            (results: any) => {
                 //this.chartDataForColumnChart = <any>results;
-                this.ChartDataForStackedColChart = <any>results;
+                if (results.length > 0) {
+                    this.ChartDataForStackedColChart = <any>results;
+                    var _rrfid = this.ChartDataForStackedColChart[0].RRFID.Value !== null ? this.ChartDataForStackedColChart[0].RRFID.Value : 0;
+                    this.GetTaggedCandidateStatusCount(_rrfid);
+                }
+
             },
             error => this.errorMessage = <any>error);
     }
