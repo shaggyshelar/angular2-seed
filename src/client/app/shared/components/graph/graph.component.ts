@@ -40,7 +40,8 @@ export class GraphComponent implements OnChanges {
                 CandidateDetailInput.emit({
                     'inputstring': event.item.category,
                     'message': 'FromAmChart',
-                'inputstring2' : rrfId
+                'inputstring2' : rrfId,
+                'inputstring3' : event.target.title
             });
         });
         // AXES

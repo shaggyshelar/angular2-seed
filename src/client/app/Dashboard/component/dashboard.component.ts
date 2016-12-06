@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
                 break;
             case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring,InputString.inputstring2);
                 break;
-            case 'FromAmChart': this.getCanidatesForRRF(InputString.inputstring,InputString.inputstring2);
+            case 'FromAmChart': this.getCanidatesForRRF(InputString.inputstring,InputString.inputstring2,InputString.inputstring3);
                 break;
         }
 
@@ -309,8 +309,8 @@ export class DashboardComponent implements OnInit {
     }
 
     /************BEGIN RECRUITER'S DATA************/
-    getCanidatesForRRF(round:any,rrfid:any) {
-        this._rrfCandidatesList.getCandidatesForSelectedRRF(round,rrfid)
+    getCanidatesForRRF(round:any,rrfid:any,status: any) {
+        this._rrfCandidatesList.getCandidatesForSelectedRRF(round,rrfid,status)
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined) {
