@@ -14,7 +14,7 @@ import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
   //styleUrls: ['piechart.component.css']
 })
 
-export class CandidateDetailComponent implements OnChanges {
+export class CandidateDetailComponent implements OnChanges,OnInit {
   @Input() CandidateData: any;
   @Output() BarchartInput:EventEmitter<any> = new EventEmitter<any>();
   data: any;
@@ -24,6 +24,16 @@ export class CandidateDetailComponent implements OnChanges {
   errorMessage: string;
   ngOnChanges() {
     console.log(this.CandidateData);
+   
+  }
+  ngOnInit(){
+    if(this.CandidateData !== undefined) {
+      this.BarchartInput.emit({
+        'inputstring': this.CandidateData[0].CandidateID,
+        'message':'FromCandidateDetails'
+       })
+    }
+     
   }
   constructor(private dashboardSerivce: RecruitersDashboardService) {
   }
