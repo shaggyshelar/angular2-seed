@@ -30,17 +30,19 @@ export class CandidateDetailComponent implements OnChanges,OnInit {
     if(this.CandidateData !== undefined) {
       this.BarchartInput.emit({
         'inputstring': this.CandidateData[0].CandidateID,
-        'message':'FromCandidateDetails'
+        'message':'FromCandidateDetails',
+        'inputstring2': this.CandidateData[0].InterviewDetails.RRFID
        })
     }
      
   }
   constructor(private dashboardSerivce: RecruitersDashboardService) {
   }
-  getCandidatesRoundHistory(CandidateID: MasterData) {
+  getCandidatesRoundHistory(Candidate:any) {
       this.BarchartInput.emit({
-        'inputstring': CandidateID,
-        'message':'FromCandidateDetails'
+        'inputstring': Candidate.CandidateID,
+        'message':'FromCandidateDetails',
+        'inputstring2': Candidate.InterviewDetails.RRFID
       })
   }
   getDate(interviewDate: string) {

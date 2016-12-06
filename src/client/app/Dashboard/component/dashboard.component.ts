@@ -48,7 +48,9 @@ export class DashboardComponent implements OnInit {
                 break;
             case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring);
                 break;
-            case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring);
+            case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring,InputString.inputstring2);
+                break;
+            case 'FromAmChart': this.getCanidatesForRRF(InputString.inputstring,InputString.inputstring2);
                 break;
         }
 
@@ -74,7 +76,6 @@ export class DashboardComponent implements OnInit {
         responsive: true
     };
     RRFID: MasterData = new MasterData();
-    candidateID:MasterData = new MasterData();
     /************END RECRUITER'S DASHBOARD properties */
     /************BEGIN INITIATOR DASHBOARD properties */
     Open: string = '0';
@@ -88,6 +89,7 @@ export class DashboardComponent implements OnInit {
     OfferedCandidate: any;
     public chartDataForPie: any = [];
     public chartDataForColumnChart: any[];
+    public rrfCode: any;
     public ChartDataForStackedColChart: any = [];
     public chartDataForAnimatedPie: any = {
         '1995': [
@@ -290,18 +292,16 @@ export class DashboardComponent implements OnInit {
         this.GetCandidateJoining();
         this.GetRrfStatusForGuage();
         this.GetRrfTimeline();
-        this.getCanidatesForRRF();
+        //this.getCanidatesForRRF();
         //Initiator
         this.GetStatusWiseRRFCount();
         this.GetPendingFeedbackCount();
         this.GetInterviewAwaitingCount();
         //Head
-        this.candidateID.Value = 'C6644364709';
         this.GetAllRrfStatusCount();
         //this.GetRRFStatusCount('Open');
         //this.GetTaggedCandidateStatusCount('RRF6499265970');
         this.GetAllOfferedCandidateCount();
-        this.GetCandidatesRoundHistory(this.candidateID);
         //this.GetAllOverdueRRFCount();
         //this.GetIncompleteProfileCount();
         //this.GetCandidateJoining();
@@ -309,8 +309,8 @@ export class DashboardComponent implements OnInit {
     }
 
     /************BEGIN RECRUITER'S DATA************/
-    getCanidatesForRRF() {
-        this._rrfCandidatesList.getCandidatesForRRF('RRF6499265970')
+    getCanidatesForRRF(round:any,rrfid:any) {
+        this._rrfCandidatesList.getCandidatesForSelectedRRF(round,rrfid)
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined) {
@@ -438,11 +438,10 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     // get Interview history of candidate
-    GetCandidatesRoundHistory(CandidateID: MasterData) {
+    GetCandidatesRoundHistory(CandidateID: MasterData,RRFID:MasterData) {
         this.CandidateRoundHistory = new Array<Interview>();
         this.changeStatusCandidateID = CandidateID;
-        this.RRFID.Value = 'RRF6499265970';
-        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
+        this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, RRFID)
             .subscribe(
             (results: any) => {
                 if (results !== null && results.length > 0) {
@@ -535,7 +534,10 @@ export class DashboardComponent implements OnInit {
         this.dashboardService.getTaggedCandidateStatusCount(_rrfCode)
             .subscribe(
             results => {
+                this.rrfCode = _rrfCode;
                 this.chartDataForColumnChart = <any>results;
+                var round = this.chartDataForColumnChart[0].status !== null ? this.chartDataForColumnChart[0].status : "";
+                this.getCanidatesForRRF(round ,this.rrfCode)
             },
             error => this.errorMessage = <any>error);
     }

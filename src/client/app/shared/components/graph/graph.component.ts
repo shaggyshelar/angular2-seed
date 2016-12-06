@@ -13,14 +13,15 @@ import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 
 export class GraphComponent implements OnChanges {
     @Input() chartData: any;
+    @Input() rrfId: any;
     @Output() CandidateDetailInput: EventEmitter<any> = new EventEmitter<any>();
     chart: any;
     data: any;
     ngOnChanges() {
         /** */
-        this.createChart(this.chartData, this.CandidateDetailInput);
+        this.createChart(this.chartData, this.CandidateDetailInput, this.rrfId);
     }
-    createChart(chartData: any, CandidateDetailInput: any) {
+    createChart(chartData: any, CandidateDetailInput: any, rrfId: any) {
         //var chart: any;
         // SERIAL CHART
         this.chart = new AmCharts.AmSerialChart();
@@ -35,11 +36,12 @@ export class GraphComponent implements OnChanges {
         this.chart.rotate = false;
 
         // add click listener
-        this.chart.addListener('clickGraphItem', function(event: any){
+        this.chart.addListener('clickGraphItem', function (event: any) {
             CandidateDetailInput.emit({
-            'inputstring': event.target.title,
-            'message': 'FromAmChart'
-        });
+                'inputstring': event.item.category,
+                'message': 'FromAmChart',
+                'inputstring2' : rrfId
+            });
         });
         // AXES
         // Category

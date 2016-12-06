@@ -433,7 +433,7 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
-                                        <am-chart [chartData]='chartDataForColumnChart'></am-chart>
+                                        <am-chart [chartData]='chartDataForColumnChart' [rrfId]='rrfCode' (CandidateDetailInput)='onNotify($event)'></am-chart>
                                     </div>
                                 </div>
                             </div>

@@ -31,6 +31,16 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    
+     getCandidatesForSelectedRRF(round:any,rrfid:any) {
+        let url = Config.GetURL('/api/Dashboards/GetCandidatesForSelectedRRFAndInterviewStatus?RRFID='+rrfid +'&InterviewRound='+round);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     //This Method is used to get Interview rounds history by passing CandidateID and RRFID
     getInterviewRoundHistorybyCandidateId(CandidateID: MasterData, RRFID: MasterData) {
         //ASK backend team - IS API READY? Change URL
