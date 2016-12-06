@@ -141,13 +141,13 @@
                             <span class="title">Interviewers Availability</span>
                         </a>
                     </li>
-                    <li class="nav-item start ">
+                    <li [ifAuthorize]="['RRF.FEEDBACK.MANAGE']" class="nav-item start ">
                         <a [routerLink]="['/App/RRF/FeedbackPending']" class="nav-link ">
                             <i class="fa fa-check-square-o"></i>
                             <span class="title">RRF Feedback</span>
                         </a>
                     </li>
-                    <li class="nav-item start ">
+                    <li [ifAuthorize]="['ADVANCEDSEARCH.MANAGE']" class="nav-item start ">
                         <a [routerLink]="['/App/ProfileBank/AdvanceSearchInSidebar']" class="nav-link ">
                             <i class="fa fa-check-square-o"></i>
                             <span class="title">Advance Search</span>
