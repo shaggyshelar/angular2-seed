@@ -35,11 +35,11 @@ export class GraphComponent implements OnChanges {
         // this single line makes the chart a bar chart
         this.chart.rotate = false;
 
-        // add click listener
+        // add click listener    
         this.chart.addListener('clickGraphItem', function (event: any) {
-            CandidateDetailInput.emit({
-                'inputstring': event.item.category,
-                'message': 'FromAmChart',
+                CandidateDetailInput.emit({
+                    'inputstring': event.item.category,
+                    'message': 'FromAmChart',
                 'inputstring2' : rrfId
             });
         });
@@ -49,6 +49,7 @@ export class GraphComponent implements OnChanges {
         categoryAxis.gridPosition = 'start';
         categoryAxis.gridAlpha = 0.1;
         categoryAxis.axisAlpha = 0;
+        categoryAxis.labelRotation = 45;
 
         // Value
         var valueAxis = new AmCharts.ValueAxis();
@@ -65,7 +66,7 @@ export class GraphComponent implements OnChanges {
         graph1.valueField = 'selectedVal';
         graph1.balloonText = 'Selected : [[value]]';
         graph1.lineAlpha = 0;
-        graph1.fillColors = '#2cb344';
+        graph1.fillColors = '#84b761';
         graph1.fillAlphas = 1;
         this.chart.addGraph(graph1);
 
@@ -76,7 +77,7 @@ export class GraphComponent implements OnChanges {
         graph2.valueField = 'rejectedVal';
         graph2.balloonText = 'Rejected :[[value]]';
         graph2.lineAlpha = 0;
-        graph2.fillColors = '#81acd9';
+        graph2.fillColors = '#cc4748';
         graph2.fillAlphas = 1;
         this.chart.addGraph(graph2);
 
@@ -87,7 +88,7 @@ export class GraphComponent implements OnChanges {
         graph3.valueField = 'onHoldVal';
         graph3.balloonText = 'On Hold :[[value]]';
         graph3.lineAlpha = 0;
-        graph3.fillColors = '#ADD981';
+        graph3.fillColors = '#cd82ad';
         graph3.fillAlphas = 1;
         this.chart.addGraph(graph3);
 
@@ -98,7 +99,7 @@ export class GraphComponent implements OnChanges {
         graph4.valueField = 'fitmentIssueVal';
         graph4.balloonText = 'In Fitment :[[value]]';
         graph4.lineAlpha = 0;
-        graph4.fillColors = '#01dcd9';
+        graph4.fillColors = '#67b7dc';
         graph4.fillAlphas = 1;
         this.chart.addGraph(graph4);
 
@@ -109,7 +110,7 @@ export class GraphComponent implements OnChanges {
         graph5.valueField = 'scheduledVal';
         graph5.balloonText = 'Scheduled :[[value]]';
         graph5.lineAlpha = 0;
-        graph5.fillColors = '#a22b2b';
+        graph5.fillColors = '#fdd400';
         graph5.fillAlphas = 1;
         this.chart.addGraph(graph5);
 

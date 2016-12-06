@@ -367,6 +367,8 @@
                     <!--_____BEGIN HEAD SECTION -->
                     <section>
                         <!--BEGIN HEAD CHART SECTION 1-->
+
+
                         <!--[ifAuthorize]="['DB.GRAPH.1.READ']"-->
                         <div [ifAuthorize]="['DB.GRAPH.1.READ']" class="row">
                             <!--BEGIN HEAD PENDING RRF CHART 1.1-->
@@ -375,7 +377,7 @@
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
                                             <i class="icon-bar-chart font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel uppercase bold">Pending RRF</span>
+                                            <span class="caption-subject font-green-steel uppercase bold">Recruitment status</span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -383,22 +385,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--END HEAD PENDING RRF CHART 1.1-->
                             <!-- candidate Joining this month chart -->
                             <div class="col-md-6 col-sm-6" style="margin-top:-5px;">
                                 <div class="portlet light ">
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
                                             <i class="icon-bar-chart font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel bold uppercase">Candidates joining this months</span>
+                                            <span class="caption-subject font-green-steel bold uppercase">Recruitment Statestics</span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
-
                                         <animated-pie-chart [chartData]='chartDataForAnimatedPie'></animated-pie-chart>
                                     </div>
                                 </div>
                             </div>
+                            <!--END HEAD PENDING RRF CHART 1.1-->
 
                         </div>
                         <!--END HEAD CHART SECTION 1-->
@@ -412,7 +413,7 @@
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
                                             <i class="icon-bar-chart font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel bold uppercase">Open RRF</span>
+                                            <span class="caption-subject font-green-steel bold uppercase">RRF Statastics</span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -429,7 +430,7 @@
                                     <div class="portlet-title">
                                         <div class="caption">
                                             <i class="icon-share font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel bold uppercase">Selected Candidates</span>
+                                            <span class="caption-subject font-green-steel bold uppercase">Round Statastics</span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
@@ -443,30 +444,29 @@
                         <!--END HEAD CHART SECTION 2-->
 
                         <!--BEGIN HEAD CHART SECTION 3-->
-                        <!--[ifAuthorize]="['DB.GRAPH.1.READ']"-->
-                        <div class="row">
+                        <div class="row" [ifAuthorize]="['DB.GRAPH.1.READ']">
                             <!--BEGIN CANDIDATE JOINING CHART 1.1-->
                             <div class="col-md-12 col-sm-12" style="margin-top:-5px;">
                                 <div class="portlet light bordered">
                                     <div class="portlet-title tabbable-line">
                                         <div class="caption">
                                             <i class=" icon-social-twitter font-dark hide"></i>
-                                            <span class="caption-subject font-dark bold uppercase">Quick Actions</span>
+                                            <span class="caption-subject font-dark bold uppercase">Candidates List  {{rrfId?"for "+ rrfId:""}} </span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
                                         <div class="row">
-                                        <div class="col-md-6 col-sm-6">
-                                            <candidate-details [CandidateData]='AllCandidatesForRRF' (BarchartInput)='onNotify($event)'></candidate-details>
-                                        </div>
-                                          <!--<div class="row">-->
-                                        <div class="col-md-6 col-sm-6">
-                                            <base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-                                                [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
-                                                (chartClick)="chartClicked($event)" style="display: block; width: 100% !important;"></base-chart>
+                                            <div class="col-md-6 col-sm-6 slimScrollDiv" style="max-height: 300px;overflow-y:auto;">
+                                                <candidate-details [CandidateData]='AllCandidatesForRRF' (BarchartInput)='onNotify($event)'></candidate-details>
+                                            </div>
+                                            <!--<div class="row">-->
+                                            <div class="col-md-6 col-sm-6">
+                                                <base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                                                    [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
+                                                    (chartClick)="chartClicked($event)" style="display: block; width: 100% !important;"></base-chart>
                                                 <span *ngIf="!IsBarchartDataShow"><center>No Data Found</center></span>
-                                        </div>
-                                        <!--</div>-->
+                                            </div>
+                                            <!--</div>-->
                                         </div>
                                     </div>
                                 </div>

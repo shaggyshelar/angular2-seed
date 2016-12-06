@@ -14,45 +14,43 @@ import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
   //styleUrls: ['piechart.component.css']
 })
 
-export class CandidateDetailComponent implements OnChanges,OnInit {
+export class CandidateDetailComponent implements OnChanges, OnInit {
   @Input() CandidateData: any;
-  @Output() BarchartInput:EventEmitter<any> = new EventEmitter<any>();
+  @Output() BarchartInput: EventEmitter<any> = new EventEmitter<any>();
   data: any;
   chart: any;
   modeConstant: InterviewMode = InterviewMode;
   public ChartDataForStackedColChart: any = [];
   errorMessage: string;
-  ngOnChanges() {
-    console.log(this.CandidateData);
-   
-  }
-  ngOnInit(){
-    if(this.CandidateData !== undefined) {
-      this.BarchartInput.emit({
-        'inputstring': this.CandidateData[0].CandidateID,
-        'message':'FromCandidateDetails',
-        'inputstring2': this.CandidateData[0].InterviewDetails.RRFID
-       })
-    }
-     
-  }
   constructor(private dashboardSerivce: RecruitersDashboardService) {
   }
-  getCandidatesRoundHistory(Candidate:any) {
+  ngOnChanges() {
+    /** */
+  }
+  ngOnInit() {
+    if (this.CandidateData !== undefined) {
       this.BarchartInput.emit({
-        'inputstring': Candidate.CandidateID,
-        'message':'FromCandidateDetails',
-        'inputstring2': Candidate.InterviewDetails.RRFID
-      })
+        'inputstring': this.CandidateData[0].CandidateID,
+        'message': 'FromCandidateDetails',
+        'inputstring2': this.CandidateData[0].InterviewDetails.RRFID
+      });
+    }
+  }
+  getCandidatesRoundHistory(Candidate: any) {
+    this.BarchartInput.emit({
+      'inputstring': Candidate.CandidateID,
+      'message': 'FromCandidateDetails',
+      'inputstring2': Candidate.InterviewDetails.RRFID
+    });
   }
   getDate(interviewDate: string) {
-        var d = new Date(interviewDate),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
+    var d = new Date(interviewDate),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
 
-        return [day, month, year].join('-');
-    }
+    return [day, month, year].join('-');
+  }
 }

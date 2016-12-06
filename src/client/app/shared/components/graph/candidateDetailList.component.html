@@ -18,11 +18,14 @@
                         </div>
                         <div class="mt-action-datetime " style="padding-right: 40px;">
                             <span class="mt-action-date">{{Candidate.InterviewDetails.InterviewDate === null ?"NA" :getDate(Candidate.InterviewDetails.InterviewDate)}}</span>
+                            <br><span class="mt=action-time">{{Candidate.InterviewDetails.InterviewFromTime === null ?"NA" : Candidate.InterviewDetails.InterviewFromTime}}-{{Candidate.InterviewDetails.InterviewToTime === null ?"NA" : Candidate.InterviewDetails.InterviewToTime}}</span>
                             <span class="mt-action-dot bg-green"></span>
-                            <span class="mt=action-time">{{Candidate.InterviewDetails.InterviewFromTime === null ?"NA" : Candidate.InterviewDetails.InterviewFromTime}}-{{Candidate.InterviewDetails.InterviewToTime === null ?"NA" : Candidate.InterviewDetails.InterviewToTime}}</span>
+                            <span class="mt=action-time">{{Candidate.InterviewDetails.Status === null ?"NA" : Candidate.InterviewDetails.Status}}</span>
                         </div>
                         <div class="mt-action-buttons ">
-                            <button type="button" class="btn btn-outline green btn-sm" (click)='getCandidatesRoundHistory(Candidate)'>Show</button>
+                            <div class="btn-group btn-group-circle">
+                                <button type="button" class="btn btn-outline green btn-sm" (click)='getCandidatesRoundHistory(Candidate)'>Show</button>
+                            </div>
                         </div>
                     </div>
                 </div>
