@@ -6,15 +6,28 @@ export class ProfileBankPipe implements PipeTransform {
     transform(value: CandidateProfile[], stringToSearh: string): CandidateProfile[] {
         return stringToSearh ? value.filter(profile =>
             (
-                profile.Candidate.search(new RegExp(stringToSearh, 'i')) !== -1||
+                profile.Candidate.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 profile.Status.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
-                profile.Tag.search(new RegExp(stringToSearh, 'i')) !== -1||
-                profile.Email.search(new RegExp(stringToSearh, 'i'))!== -1 ||
-                profile.PrimaryContact.search(new RegExp(stringToSearh, 'i')) !== -1||
-                profile.CandidateOtherDetails.NoticePeriod.search(new RegExp(stringToSearh, 'i'))!== -1 ||
-                profile.CandidateSalaryDetails.ExpectedSalary.search(new RegExp(stringToSearh, 'i'))!== -1 ||
+                profile.Tag.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                profile.Email.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                profile.PrimaryContact.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                profile.CandidateOtherDetails.NoticePeriod.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                profile.CandidateSalaryDetails.ExpectedSalary.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                (profile.CandidateSkills.PrimarySkills !== null ?
+                    (profile.CandidateSkills.PrimarySkills.search(new RegExp(stringToSearh, 'i')) !== -1)
+                    : false) ||
+                (profile.CandidateCurrentCompanyProfile.Company !== null ?
+                    profile.CandidateCurrentCompanyProfile.Company.search(new RegExp(stringToSearh, 'i')) !== -1
+                    : false) ||
+                (profile.CandidateCurrentCompanyProfile.DesignationRole !== null ?
+                    (profile.CandidateCurrentCompanyProfile.DesignationRole.search(new RegExp(stringToSearh, 'i')) !== -1)
+                    : false) ||
+                (profile.CandidateCurrentCompanyProfile.Location !== null ?
+                    (profile.CandidateCurrentCompanyProfile.Location.search(new RegExp(stringToSearh, 'i')) !== -1)
+                    : false) ||
+                //profile.TotalExperience.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 profile.CandidateSalaryDetails.CurrentSalary.search(new RegExp(stringToSearh, 'i')) !== -1
-               // this.checkForSkill(profile, stringToSearh)
+                // this.checkForSkill(profile, stringToSearh)
             )
         ) : value;
     }
