@@ -65,16 +65,16 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             .subscribe(
             results => {
                 this.selectedRRF = <any>results;
-                this.selectedRRF.assignedData = new Array();
+                this.selectedRRF.AssignedData = new Array();
                 for (var index = 0; index < results.AssignedData.length; index++) {
                     if(results.AssignedData[index].Status.Value === 'Assigned'){
-                        this.selectedRRF.assignedData.push(results.AssignedData[index]);
+                        this.selectedRRF.AssignedData.push(results.AssignedData[index]);
                     }
                 }
-                if (this.selectedRRF.assignedData === undefined) {
+                if (this.selectedRRF.AssignedData === undefined) {
                     var assignmentDetails: AssignmentDetails = new AssignmentDetails();
-                    this.selectedRRF.assignedData = new Array();
-                    this.selectedRRF.assignedData.push(assignmentDetails);
+                    this.selectedRRF.AssignedData = new Array();
+                    this.selectedRRF.AssignedData.push(assignmentDetails);
                 }
                 this.GetRecruiter();
             },
