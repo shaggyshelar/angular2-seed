@@ -24,7 +24,7 @@
                         <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
                 </div>-->
                 <div *ngIf='displayFeedBackStatus' style="color: #217ebd;" align='right'>
-                    <b>Feedback Status </b>: {{RRFData.FeedbackStatus}}
+                    <b>Feedback Status </b>: {{RRFData.FeedbackStatus === null ? "NA" : RRFData.FeedbackStatus}}
                 </div>
             </div>
         </div>
