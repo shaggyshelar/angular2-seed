@@ -187,7 +187,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Current Company:</b></label>
                                                         <div class="col-md-6">
-                                                            {{profile.CandidateCareerProfile[0]? profile.CandidateCareerProfile[0].CurrentCompany? profile.CandidateCareerProfile[0].CurrentCompany:"N/A"
+                                                            {{profile.CandidateCareerProfile[0] && profile.CandidateCareerProfile[0].IsCurrentCompany ? profile.CandidateCareerProfile[0].Company ? profile.CandidateCareerProfile[0].Company:"N/A"
                                                             :"N/A"}}
                                                         </div>
                                                     </div>
@@ -200,7 +200,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-4 "><b>Current Designation & Role:</b></label>
                                                         <div class="col-md-8">
-                                                            {{profile.CandidateCareerProfile[0]?profile.CandidateCareerProfile[0].CurrentDesignationRole?profile.CandidateCareerProfile[0].CurrentDesignationRole:"N/A":"N/A"}}
+                                                            {{profile.CandidateCareerProfile[0] && profile.CandidateCareerProfile[0].IsCurrentCompany ? profile.CandidateCareerProfile[0].DesignationRole ? profile.CandidateCareerProfile[0].DesignationRole:"N/A":"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -208,7 +208,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-7 "><b>Time Spent In Current Company:</b></label>
                                                         <div class="col-md-2">
-                                                            {{profile.CandidateCareerProfile[0]?profile.CandidateCareerProfile[0].TimeSpentInCurrentCompany?profile.CandidateCareerProfile[0].TimeSpentInCurrentCompany:"N/A":"N/A"}}
+                                                            {{profile.CandidateCareerProfile[0] && profile.CandidateCareerProfile[0].IsCurrentCompany ? profile.CandidateCareerProfile[0].TimeSpentInCompany ? profile.CandidateCareerProfile[0].TimeSpentInCompany:"N/A":"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>

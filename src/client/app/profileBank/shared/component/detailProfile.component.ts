@@ -33,6 +33,10 @@ export class DetailProfileComponent implements OnInit {
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
+    onViewCandidateClick(rrfID: MasterData) {
+        // rrfID = 'RRF6866237939ID76';
+        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
+    }
     getEmail(EmailCode: any) {
         this.profile.CandidateMailDetails = new MailDetails();
         this._profileBankService.getEmail(EmailCode)

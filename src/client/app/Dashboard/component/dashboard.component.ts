@@ -368,11 +368,11 @@ export class DashboardComponent implements OnInit {
 
     }
     chartClicked(e: any): void {
-        console.log(e);
+        //console.log(e);
     }
 
     chartHovered(e: any): void {
-        console.log(e);
+        //console.log(e);
     }
     /**Get all Open RRF's count */
     GetAllOpenRRFCount(): void {
