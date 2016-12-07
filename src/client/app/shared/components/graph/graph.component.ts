@@ -37,6 +37,12 @@ export class GraphComponent implements OnChanges {
 
         // add click listener    
         this.chart.addListener('clickGraphItem', function (event: any) {
+            if(event.target.title === 'FitmentIssue') {
+                event.target.title = 'Fitment Issue';
+            }
+            if(event.target.title === 'OnHold') {
+                event.target.title = 'On Hold';
+            }
                 CandidateDetailInput.emit({
                     'inputstring': event.item.category,
                     'message': 'FromAmChart',
