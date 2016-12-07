@@ -60,7 +60,7 @@
 										<legend class="legendStyle row">
 											<a data-toggle="collapse" class="btn btn-transparent red btn-outline btn-circle active" data-target="#demo"><i class="fa fa-plus-circle"></i> New Profile</a>
 										</legend>
-										<br>
+										<!--<br>-->
 										<div class="collapse row" id="demo">
 											<div class="add-new-panel">
 												<form role="form" (submit)="OnSubmitCandidate()" style="background: #f6fbfc;padding: 10px;margin-bottom: 15px;overflow: hidden;border-left: #d4ad38 2px solid;">
@@ -333,7 +333,7 @@
 								</div>-->
 								<div class="col-md-2 col-sm-2" [hidden]="RRFList.length == 0">
 									<div class="dataTables_length" id="sample_1_length_1">
-                                           <select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
+										<select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
                                      			<option [value]="-1" >All RRF</option>
                                      			<option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 		   </select>
@@ -390,7 +390,7 @@
 						</div>
 
 						<!-- My Profile Grid Starts-->
-						<div class="table">
+						<div class="table" *ngIf="!NORECORDSFOUND">
 							<!--table-bordered-->
 							<table class="table  table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
 								<thead class="thead">

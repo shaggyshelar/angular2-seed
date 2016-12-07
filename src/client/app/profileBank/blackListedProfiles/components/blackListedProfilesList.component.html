@@ -123,8 +123,8 @@
                             </div>
                             <div class="table">
                                 <!--table-bordered-->
-                                <table class="table  table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid"
-                                    aria-describedby="sample_1_info">
+                                <table *ngIf="!NORECORDSFOUND" class="table  table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                                    role="grid" aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
                                             <th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Candidates</th>

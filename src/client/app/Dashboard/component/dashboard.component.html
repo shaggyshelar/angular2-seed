@@ -49,7 +49,7 @@
                                         <div class="number">
                                             <h3 class="font-red-haze">
                                                 <!--<span class="counter" data-counter="counterup" data-value="134">134</span>-->
-                                                {{OfferedCandidate?OfferedCandidate[2].value:'0'}}
+                                                {{OfferedCandidate?OfferedCandidate[2]?OfferedCandidate[2].value:'0':'0'}}
                                             </h3>
                                             <small>OFFERED CANDIDATE</small>
                                         </div>
