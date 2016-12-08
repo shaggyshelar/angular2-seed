@@ -218,6 +218,7 @@ export class RRFCandidateListComponent implements OnActivate {
                     this.isRoundHistoryPresent = false;
                 } else {
                     this.isRoundHistoryPresent = true;
+                    this.IsHRConducted = false;
                 }
             },
             error => this.errorMessage = <any>error);
