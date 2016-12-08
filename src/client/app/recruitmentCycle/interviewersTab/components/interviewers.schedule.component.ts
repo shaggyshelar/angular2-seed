@@ -51,7 +51,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     viewIEFText: string = 'View IEF';
     hideIEFText: string = 'Hide IEF';
     IEFButtonText: string = '';
-    
+
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersScheduleService,
@@ -157,13 +157,18 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 this.grdOptionsIntwHistory = results.GrdOperations;
-                if (results.AllInterviews !== undefined && results.AllInterviews.length > 0) {
-                    this.InterviewHistory = results.AllInterviews;
-                    for (var index = 0; index < this.InterviewHistory.length; index++) {
-                        this.InterviewHistory[index].showIEF = false;
-                        this.InterviewHistory[index].IEFButtonText = this.viewIEFText;
+                if (results.AllInterviews) {
+                    if (results.AllInterviews.length > 0) {
+                        this.InterviewHistory = results.AllInterviews;
+                        for (var index = 0; index < this.InterviewHistory.length; index++) {
+                            this.InterviewHistory[index].showIEF = false;
+                            this.InterviewHistory[index].IEFButtonText = this.viewIEFText;
+                        }
+                        this.HISTORYRECORDSNOTFOUND = false;
+                    } else {
+                        this.HISTORYRECORDSNOTFOUND = true;
+                        this.InterviewHistory = [];
                     }
-                    this.HISTORYRECORDSNOTFOUND = false;
                 } else {
                     this.HISTORYRECORDSNOTFOUND = true;
                     this.InterviewHistory = [];
@@ -256,7 +261,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         return time.join('');
     }
     showPopOver(RRFCode: any, index: string) {
-        let skillDetails:string = '';
+        let skillDetails: string = '';
         let rowId: any = 'candidate' + index;
         let row: any = $('#' + rowId);
         //service to get RRFDetails
@@ -264,7 +269,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
             .subscribe(
             (results: RRFDetails) => {
                 this.RRFData = results;
-                for(var index = 0;index < this.RRFData.SkillsRequired.length;index++){
+                for (var index = 0; index < this.RRFData.SkillsRequired.length; index++) {
                     skillDetails = skillDetails + '"' + this.RRFData.SkillsRequired[index].Value + '"';
                 }
                 row.popover({
@@ -274,7 +279,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                     html: true,
                     //trigger: 'hover',
                     //content: $('#myPopoverContent').html()
-                    content:'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :'+ this.RRFData.RaisedBy.Value + '<br/>'+ '\nSkills :' +  skillDetails + '<br/>' + '\nJob Description :' + this.RRFData.Description
+                    content: 'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :' + this.RRFData.RaisedBy.Value + '<br/>' + '\nSkills :' + skillDetails + '<br/>' + '\nJob Description :' + this.RRFData.Description
                 });
             },
             error => this.errorMessage = <any>error);
