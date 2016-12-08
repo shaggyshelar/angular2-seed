@@ -238,7 +238,7 @@
                                         <div class="number">
                                             <h3 class="font-green-sharp">
                                                 <!--<span class="counter" data-counter="counterup" data-value="OpenRRF">{{OpenRRF}}</span>-->
-                                                {{OpenRRF?OpenRRF[0].value:'0'}}
+                                                {{OpenRRF?OpenRRF[0]?OpenRRF[0].value:'0':'0'}}
                                             </h3>
                                             <small>OPEN RRF</small>
                                         </div>

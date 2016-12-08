@@ -101,7 +101,7 @@
                                 </div>
                             </div>
 
-                            <div id="updateRow" [collapse]='!isCollapsed'>
+                            <div id="updateRow" *ngIf="!NORECORDSFOUND" [collapse]='!isCollapsed'>
                                 <span class="header">Update Status</span>
                                 <hr style="margin:0px 0px !important" />
                                 <form role="form" (submit)="onUpdateStauts()">
