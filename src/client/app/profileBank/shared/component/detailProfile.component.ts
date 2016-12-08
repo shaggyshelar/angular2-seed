@@ -1,20 +1,20 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { OnActivate, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { CandidateProfile, MailDetails} from '../../shared/model/myProfilesInfo';
 import { MasterData, Resume } from  '../../../shared/model/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-
+import { RRFDashboardService } from '../../../RRF/RRFDashboard/services/rrfDashboard.service';
 @Component({
     moduleId: module.id,
     selector: 'detail-profile',
     templateUrl: 'detailProfile.component.html',
     directives: [TOOLTIP_DIRECTIVES],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    providers: [ToastsManager, ProfileBankService]
+    providers: [ToastsManager, ProfileBankService, RRFDashboardService]
 })
-export class DetailProfileComponent implements OnInit {
+export class DetailProfileComponent implements OnInit{
     profile: CandidateProfile;
     binaryResume: Resume;
     emailDetails: any;
@@ -25,10 +25,15 @@ export class DetailProfileComponent implements OnInit {
     @Input() rrfID: string;
     // @Input() profilePic: any;
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
-    constructor(private toastr: ToastsManager, private _router: Router, private _profileBankService: ProfileBankService) {
+    logedInUser: MasterData = new MasterData();
+    loginflag : boolean = false;
+    constructor(private toastr: ToastsManager, private _router: Router, private _profileBankService: ProfileBankService,
+        private _rrfDashboardService: RRFDashboardService) {
+        this.getLoggedInUser();
     }
     ngOnInit() {
         /** */
+
         this.profile = this.selectedProfile;
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
@@ -68,5 +73,33 @@ export class DetailProfileComponent implements OnInit {
         link.download = ResumeName;
         link.href = 'data:application/octet-stream;charset=utf-8;base64,' + binaryResume;
         link.click();
+    }
+    checkOwner(owner: string,isRRFAssigned:any) {
+        if (isRRFAssigned) {
+            if (this.loginflag) {
+                if (owner.toLowerCase() === this.logedInUser.Value.toLowerCase()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+
+
+    }
+    getLoggedInUser() {
+        this._rrfDashboardService.getCurrentLoggedInUser()
+            .subscribe(
+            (results: MasterData) => {
+                this.logedInUser = results;
+                this.loginflag = true;
+            },
+            error => this.errorMessage = <any>error);
+
     }
 }

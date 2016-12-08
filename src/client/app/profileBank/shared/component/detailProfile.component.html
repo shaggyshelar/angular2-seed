@@ -114,7 +114,7 @@
                                         <!--<i class="fa fa-user"></i>-->{{profile.Owner.Value?profile.Owner.Value:"N/A"}}</h5>
                                 </li>
                                 <li>
-                                    <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}} <span *ngIf="profile.RRFAssigned.IsRRFAssigned"><a (click)='onViewCandidateClick(profile.RRFAssigned.RRFID)' style="color:gray">{{profile.RRFAssigned.RRFID.Value}}</a></span>
+                                    <span class="mt-action-dot color{{profile.Status.Id}}"> </span><strong>{{profile.Status.Value}}</strong><span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><a (click)='onViewCandidateClick(profile.RRFAssigned.RRFID)' style="color:black"><small>&nbsp;with&nbsp;{{profile.RRFAssigned.RRFID.Value}}</small></a></span>
                                 </li>
                                 <li>
                                     <div class="tools">
