@@ -147,18 +147,18 @@
                                                             tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile">
                                                             <i class="fa fa-edit "></i><!-- Edit Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" [disabled]='getEditAccess(blacklistedProfile.Owner)'
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" [disabled]='getEditAccess(blacklistedProfile.Owner)'
                                                             (click)='SaveCandidateID(blacklistedProfile.CandidateID)' tooltip="Update Status"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
                                                             title="Update Status">
                                                             <i class="icon-flag"></i> <!--Update Status-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='redirectToView(blacklistedProfile.CandidateID)'
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(blacklistedProfile.CandidateID)'
                                                             tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                             title="View Profile" tooltipEnable="true">
                                                             <i class="fa fa-search-plus"></i> <!--View Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(blacklistedProfile.CandidateID)'
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow-soft" (click)='getCandidateHistory(blacklistedProfile.CandidateID)'
                                                             tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                             title="View Interview History" tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->

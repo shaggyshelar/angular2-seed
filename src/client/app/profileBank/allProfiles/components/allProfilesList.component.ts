@@ -41,6 +41,7 @@ export class AllProfilesListComponent implements OnActivate {
     selectedRowCount: number = 0;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
+    isUpdateStatusCollapsed: boolean = false;
     isAuthourized: boolean = false;
     currentUser: MasterData = new MasterData();
     url: any;
@@ -50,7 +51,6 @@ export class AllProfilesListComponent implements OnActivate {
     public maxSize: number = 3;
     NORECORDSFOUND: boolean = false;
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
-
     constructor(private _allProfilesService: AllProfilesService,
         private _dataSharedService: DataSharedService,
         private _router: Router,
@@ -155,8 +155,40 @@ export class AllProfilesListComponent implements OnActivate {
         window.scrollTo(0, 40);
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
     }
+    onUpdateStatusClick(id: MasterData) {
+        this.seletedCandidateID = id;
 
+        var index = _.findIndex(this.allProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
+        this.currentCandidate = this.allProfilesList.Profiles[index].Candidate;
+        this.getUpdateStatus(this.seletedCandidateID.Value);
+        this._profileBankService.getStatusById(id.Value)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+
+        //Auto Scroll up
+        window.scrollTo(0, 40);
+        if (this.isUpdateStatusCollapsed === false)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
+        if (this.isCollapsed === true)
+            this.isCollapsed = !this.isCollapsed;
+    }
+    getUpdateStatus(candidateID: any) {
+        //TO DO : Update API
+        this.statusList = Array<MasterData>();
+        this._masterService.getUpdateStatus(candidateID)
+            .subscribe(
+            results => {
+                this.statusList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
     getCandidateStatuses() {
         this._masterService.getCandidateStatuses()
             .subscribe(
@@ -174,13 +206,14 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        this.selectedStatus.Id = 0;
-        this.selectedStatus.Value = 'Incomplete';
+        //this.selectedStatus.Id = 0;
+        //this.selectedStatus.Value = 'Incomplete';
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
                 if (results.StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.getAllProfiles();
                 } else {
@@ -193,6 +226,9 @@ export class AllProfilesListComponent implements OnActivate {
 
     closeUpdatePanel() {
         this.isCollapsed = false;
+    }
+    closeUpdateStatus() {
+        this.isUpdateStatusCollapsed = false;
     }
     onStateChange(e: any): void {
         if (e.target.checked) {
@@ -254,6 +290,19 @@ export class AllProfilesListComponent implements OnActivate {
     getEditAccess(Owner: MasterData) {
         try {
             if (Owner.Id === this.currentUser.Id) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
+
+    }
+    getUpdateStatusAccess(Owner: MasterData,Status:MasterData ) {
+        try {
+            if (Owner.Id === this.currentUser.Id && (Status.Value.toLocaleLowerCase() === 'offered' || 
+            Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
+            Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave')) {
                 return false;
             } else { return true; }
         } catch (error) {

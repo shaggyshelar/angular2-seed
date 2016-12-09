@@ -56,6 +56,43 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
+                             <div id="updateRow" *ngIf="!NORECORDSFOUND" [collapse]='!isCollapsed'>
+                                <span class="header sbold font-red uppercase">{{currentCandidate}}</span>
+                                <hr style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onUpdateStauts()">
+                                    <div class="row" style="margin-top: 10px">
+
+                                        <!--<div class="col-md-3">
+                                            <div class="form-group">
+                                                <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
+                                            </div>
+                                        </div>-->
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <!--(change)='onSelectStatus($event.target.value)' -->
+                                                <select class="form-control"  [(ngModel)]="selectedStatus" tooltip="Status"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
+                                                   <option *ngFor="let status of statusList" [value]="status.Value">{{status.Value}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="edit-content"></div>
+                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.Comments" required=""
+                                                    tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
+                                                </textarea>
+                                            </div>
+                                        </div>-->
+                                        <div class="col-md-1">
+                                            <button type="submit" class="btn btn-info "> Update </button>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             <!--Hide Pagination / sorting / filtering if No records found-->
                             <div class="row" *ngIf="!NORECORDSFOUND">
                                 <div class="col-md-3 col-sm-3">
@@ -101,43 +138,7 @@
                                 </div>
                             </div>
 
-                            <div id="updateRow" *ngIf="!NORECORDSFOUND" [collapse]='!isCollapsed'>
-                                <span class="header">Update Status</span>
-                                <hr style="margin:0px 0px !important" />
-                                <form role="form" (submit)="onUpdateStauts()">
-                                    <div class="row" style="margin-top: 10px">
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <!--(change)='onSelectStatus($event.target.value)' -->
-                                                <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
-                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="edit-content"></div>
-                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.Comments" required=""
-                                                    tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <button type="submit" class="btn btn-info "> Update </button>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                           
 
                             <div class="table" *ngIf="!NORECORDSFOUND">
                                 <!--table-bordered-->
@@ -175,9 +176,9 @@
                                                             <i class="fa fa-edit "></i>
                                                             <!-- Edit Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Update Status"
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Update Status"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                                            title="Update Status">
+                                                            title="Update Status" [disabled]='getUpdateStatusAccess(profile.Status)'>
                                                             <i class="icon-flag"></i> <!--Update Status-->
                                                         </button>
                                                         <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
@@ -186,7 +187,7 @@
                                                             <i class="fa fa-search"></i> <!--View Profile-->
                                                         </button>
 
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(profile.CandidateID)' tooltip="View Interview History"
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow-soft" (click)='getCandidateHistory(profile.CandidateID)' tooltip="View Interview History"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History"
                                                             tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->

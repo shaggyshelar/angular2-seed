@@ -115,6 +115,7 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.seletedCandidateID = this.companyProfilesList.Profiles[index].CandidateID;
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
+        this.getUpdateStatus(this.seletedCandidateID.Value);
         this.currentCandidate = this.companyProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
@@ -127,6 +128,16 @@ export class CompanyProfilesListComponent implements OnActivate {
         window.scrollTo(0, 40);
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
+    }
+    getUpdateStatus(candidateID: any) {
+        //TO DO : Update API
+        this.statusList = Array<MasterData>();
+        this._masterService.getUpdateStatus(candidateID)
+            .subscribe(
+            results => {
+                this.statusList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
     getCandidateStatuses() {
         this._masterService.getCandidateStatuses()
@@ -145,7 +156,7 @@ export class CompanyProfilesListComponent implements OnActivate {
 
     onUpdateStauts() {
         if (this.selectedStatus.Id === undefined)
-            this.selectedStatus = this.profile.Status;
+            this.selectedStatus = this.selectedStatus;
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
@@ -262,5 +273,18 @@ export class CompanyProfilesListComponent implements OnActivate {
                 this.ColumnList = results;
             },
             error => this.toastr.error(<any>error));
+    }
+    getUpdateStatusAccess(Status:MasterData ) {
+        try {
+            if (Status.Value.toLocaleLowerCase() === 'offered' || 
+            Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
+            Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave') {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
+
     }
 }

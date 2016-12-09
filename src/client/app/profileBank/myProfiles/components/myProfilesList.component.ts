@@ -49,6 +49,7 @@ export class MyProfilesListComponent implements OnActivate {
     selectedRowCount: number = 0;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
+    isUpdateStatusCollapsed: boolean = false;
     IsSuccess: boolean = false;
     resumeMeta: ResumeMeta;
     fileUploaded: boolean = false;
@@ -82,7 +83,6 @@ export class MyProfilesListComponent implements OnActivate {
     viewRRFDetails: MasterData = new MasterData();
     isViewRFF: Boolean = false;
     isViewRRFGrid: boolean = true;
-
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
         private _router: Router,
@@ -144,7 +144,47 @@ export class MyProfilesListComponent implements OnActivate {
             this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
         if (this.isUploadPanelCollapsed === true)
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
+
         window.scrollTo(0, 40);
+    }
+    onUpdateStatusClick(id: MasterData) {
+        this.seletedCandidateID = id;
+
+        var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
+        // this.profile.Comments = this.allProfilesList[index].Comments;
+        // this.profile.Status = this.allProfilesList[index].Status;
+        this.getUpdateStatus(this.seletedCandidateID.Value);
+        this.currentCandidate = this.myProfilesList.Profiles[index].Candidate;
+        this._profileBankService.getStatusById(id.Value)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+        if (this.isUpdateStatusCollapsed === false)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
+        if (this.isCollapsed === true)
+            this.isCollapsed = !this.isCollapsed;
+        if (this.isCommentsPanelCollapsed === true)
+            this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+        if (this.isUploadPanelCollapsed === true)
+            this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+
+        window.scrollTo(0, 40);
+    }
+     // Get Updated status
+    getUpdateStatus(candidateID:any) {
+        //TO DO : Update API
+        this.statusList = Array<MasterData>();
+        this._masterService.getUpdateStatus(candidateID)
+            .subscribe(
+            results => {
+                this.statusList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
     /** Check is current information is already exist in database.*/
     IsExist() {
@@ -336,13 +376,14 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        this.selectedStatus.Id = 0;
-        this.selectedStatus.Value = "Incomplete";
+        //this.selectedStatus.Id = 0;
+        //this.selectedStatus.Value = "Incomplete";
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     this.getMyProfiles();
@@ -357,6 +398,9 @@ export class MyProfilesListComponent implements OnActivate {
 
     closeUpdatePanel() {
         this.isCollapsed = false;
+    }
+    closeUpdateStatus() {
+        this.isUpdateStatusCollapsed = false;
     }
 
     onStateChange(e: any): void {
@@ -425,6 +469,8 @@ export class MyProfilesListComponent implements OnActivate {
             this.isCollapsed = !this.isCollapsed;
         if (this.isUploadPanelCollapsed === true)
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
     }
 
     closeCommentsPanel() {
@@ -567,6 +613,8 @@ export class MyProfilesListComponent implements OnActivate {
             this.isCollapsed = !this.isCollapsed;
         if (this.isCommentsPanelCollapsed === true)
             this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
 
     }
 
@@ -713,6 +761,19 @@ export class MyProfilesListComponent implements OnActivate {
         this.viewDetailsRRFId = '';
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
+    }
+    getUpdateStatusAccess(Status:MasterData ) {
+        try {
+            if (Status.Value.toLocaleLowerCase() === 'offered' || 
+            Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
+            Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave') {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
+
     }
 }
 

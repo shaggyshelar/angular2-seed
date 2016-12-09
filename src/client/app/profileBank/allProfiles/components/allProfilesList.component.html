@@ -92,7 +92,38 @@
 								</form>
 								<hr style="margin:8px 0px !important" />
 							</div>
+							<!-- update status-->
+							<div id="updateRow" *ngIf="!NORECORDSFOUND" [collapse]='!isUpdateStatusCollapsed'>
+								<span class="header sbold font-red uppercase">{{currentCandidate}}</span>
+								<hr style="margin:0px 0px !important" />
+								<form role="form" (submit)="onUpdateStauts()">
+									<div class="row" style="margin-top: 10px">
 
+										<!--<div class="col-md-3">
+											<div class="form-group">
+												<span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
+											</div>
+										</div>-->
+										<div class="col-md-3">
+											<div class="form-group">
+												<!--(change)='onSelectStatus($event.target.value)' -->
+												<select class="form-control" [(ngModel)]="selectedStatus" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+													tooltipEnable="!currentStatus">
+                                                   <option *ngFor="let status of statusList" [value]="status.Value">{{status.Value}}</option>
+                                                </select>
+											</div>
+										</div>
+										<div class="col-md-1">
+											<button type="submit" class="btn btn-info "> Update </button>
+										</div>
+										<div class="col-md-1">
+											<a class="btn btn-info " (click)='closeUpdateStatus()'> Cancel </a>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<!-- update status end-->
 							<div class="row" *ngIf="!NORECORDSFOUND">
 								<div class="col-md-3 col-sm-3">
 									<div class="dataTables_length" id="sample_1_length">
@@ -180,10 +211,14 @@
                                                             <i class="fa fa-search"></i> <!--View Profile-->
                                                         </button>
 
-														<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='getCandidateHistory(profile.CandidateID)'
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow-soft" (click)='getCandidateHistory(profile.CandidateID)'
 															tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History"
 															tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
+                                                        </button>
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='onUpdateStatusClick(profile.CandidateID)'
+															tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" [disabled]='getUpdateStatusAccess(profile.Owner,profile.Status)'>
+                                                            <i class="fa fa-edit"></i> <!--Update Status-->
                                                         </button>
 														<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Blacklist Profile"
 															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile" [disabled]='getEditAccess(profile.Owner)'>

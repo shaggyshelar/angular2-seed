@@ -220,7 +220,39 @@
 							</div>
 							<!-- Add New Profile END-->
 
-							<!-- Update Stauts-->
+							<!-- update status-->
+							<div id="updateRow" *ngIf="!NORECORDSFOUND" [collapse]='!isUpdateStatusCollapsed'>
+								<span class="header sbold font-red uppercase">{{currentCandidate}}</span>
+								<hr style="margin:0px 0px !important" />
+								<form role="form" (submit)="onUpdateStauts()">
+									<div class="row" style="margin-top: 10px">
+
+										<!--<div class="col-md-3">
+											<div class="form-group">
+												<span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
+											</div>
+										</div>-->
+										<div class="col-md-3">
+											<div class="form-group">
+												<!--(change)='onSelectStatus($event.target.value)' -->
+												<select class="form-control" [(ngModel)]="selectedStatus" tooltip="Status"
+													tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
+                                                   <option *ngFor="let status of statusList" [value]="status.Value">{{status.Value}}</option>
+                                                </select>
+											</div>
+										</div>
+										<div class="col-md-1">
+											<button type="submit" class="btn btn-info "> Update </button>
+										</div>
+										<div class="col-md-1">
+											<a class="btn btn-info " (click)='closeUpdateStatus()'> Cancel </a>
+										</div>
+									</div>
+								</form>
+							</div>
+
+							<!-- update status end-->
+							<!-- Blacklist profile-->
 
 							<div id="updateRow" *ngIf='isCollapsed'>
 								<span class="header sbold">You are blacklisting <span class="font-red uppercase">{{currentCandidate}}</span> !</span>
@@ -257,7 +289,7 @@
 								<hr class="red" style="margin:8px 0px !important" />
 							</div>
 
-							<!-- Update Status END-->
+							<!-- Black List Profile END-->
 							<!-- FollowUP Comments-->
 
 							<div id="CommentsRow" *ngIf='isCommentsPanelCollapsed'>
@@ -434,22 +466,26 @@
 														tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Schedule Interview" tooltipEnable="true">
                                                             <i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
                                                         </button>
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='onClickFollowUpComments(myprofile.CandidateID)'
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs green-jungle" (click)='onClickFollowUpComments(myprofile.CandidateID)'
 														tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Follow Up Comments" tooltipEnable="true">
                                                             <i class="fa fa-comments "></i> <!--Follow Up Comments-->
                                                         </button>
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='onClickUploadResume(myprofile.CandidateID)'
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='onClickUploadResume(myprofile.CandidateID)'
 														tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Upload Resume" tooltipEnable="true">
                                                             <i class="fa fa-upload"></i> <!--Upload Resume-->
                                                         </button>
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile"
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile" tooltipEnable="true">
                                                             <i class="fa fa-search"></i> <!--View Profile-->
                                                         </button>
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(myprofile.CandidateID)'
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow-soft" (click)='getCandidateHistory(myprofile.CandidateID)'
 														tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History"
 														tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
+                                                        </button>
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='onUpdateStatusClick(myprofile.CandidateID)'
+														tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" [disabled]='getUpdateStatusAccess(myprofile.Status)'>
+                                                            <i class="fa fa-edit"></i> <!--Update Status-->
                                                         </button>
 													<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile">
