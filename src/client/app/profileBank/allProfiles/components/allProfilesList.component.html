@@ -217,8 +217,8 @@
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
                                                         </button>
 														<button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='onUpdateStatusClick(profile.CandidateID)'
-															tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" [disabled]='getUpdateStatusAccess(profile.Owner,profile.Status)'>
-                                                            <i class="fa fa-edit"></i> <!--Update Status-->
+															tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" *ngIf='!getUpdateStatusAccess(profile.Owner,profile.Status)'>
+                                                            <i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
                                                         </button>
 														<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Blacklist Profile"
 															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile" [disabled]='getEditAccess(profile.Owner)'>

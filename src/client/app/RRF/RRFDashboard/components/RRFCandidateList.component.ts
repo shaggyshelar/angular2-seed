@@ -78,7 +78,7 @@ export class RRFCandidateListComponent implements OnActivate {
     IsUpdateStatus: boolean = false;
     UpdatedStatus: any;
     selectedStatus = new MasterData();
-    CandidateUpdatedStatus:MasterData = new MasterData();
+    CandidateUpdatedStatus: MasterData = new MasterData();
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
         responsive: true
@@ -157,7 +157,7 @@ export class RRFCandidateListComponent implements OnActivate {
         console.log(e);
     }
     // Get Updated status
-    getUpdateStatus(candidateID:any) {
+    getUpdateStatus(candidateID: any) {
         //TO DO : Update API
         this._mastersService.getUpdateStatus(candidateID)
             .subscribe(
@@ -207,13 +207,10 @@ export class RRFCandidateListComponent implements OnActivate {
                 if (results !== null && results.length > 0) {
                     this.CandidateRoundHistory = <any>results;
                     this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
-                    for (var index = 0; index < this.CandidateRoundHistory.length; index++) {
-                        if (this.CandidateRoundHistory[index].InterviewType.Value === 'HR') {
-                            this.IsHRConducted = true;
-                            break;
-                        } else {
-                            this.IsHRConducted = false;
-                        }
+                    if (this.CandidateRoundHistory[this.CandidateRoundHistory.length-1].InterviewType.Value === 'HR' && this.CandidateRoundHistory[this.CandidateRoundHistory.length-1].Status.toLowerCase() === 'selected') {
+                        this.IsHRConducted = true;
+                    } else {
+                        this.IsHRConducted = false;
                     }
                     this.isRoundHistoryPresent = false;
                 } else {
@@ -388,7 +385,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     proceedForOfferGeneration(InterviewID: MasterData) {
         if (InterviewID.Id !== null && InterviewID.Id !== undefined) {
-            this._rrfCandidatesList.proceedForOfferGeneration(InterviewID, this.CandidateID, this.RRFID,new Date())
+            this._rrfCandidatesList.proceedForOfferGeneration(InterviewID, this.CandidateID, this.RRFID, new Date())
                 .subscribe(
                 (results: any) => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -551,7 +548,7 @@ export class RRFCandidateListComponent implements OnActivate {
     saveOffer(joiningDate: Date) {
         joiningDate = moment(joiningDate).format('MM-DD-YYYY');
         this._rrfCandidatesList.proceedForOfferGeneration(this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewID,
-            this.CandidateRoundHistory[0].CandidateID, this.RRFID ,joiningDate)
+            this.CandidateRoundHistory[0].CandidateID, this.RRFID, joiningDate)
             .subscribe(
             (results: any) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
