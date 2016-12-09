@@ -24,12 +24,16 @@ export class GrdOptions {
                  iii.Prev - (-1)
              PerPageCount = No of items shown per page
                  */
-    public NextButton: boolean;
-    public PreviousButton: boolean;
+    public NextButton: boolean = true;
+    public PreviousButton: boolean = false;
     public PerPageCount: number = 50;
     public OrderBy: string = 'Modified';
     public Order: string = 'desc';
     public NextPageUrl: string[] = [];
+    public CamlString:string = '';
+    public NextPageID:number = 0;
+    public PreviousPageID:number = 0;
+    public PagingEvent:string = '';
 }
 
 export class SortingMasterData {
