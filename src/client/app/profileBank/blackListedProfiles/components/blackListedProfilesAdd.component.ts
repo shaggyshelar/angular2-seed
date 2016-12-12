@@ -9,6 +9,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { CommonService } from  '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profile-add',
@@ -57,6 +58,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
+        private _commonService: CommonService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
@@ -90,12 +92,7 @@ export class BlackListedProfilesAddComponent implements OnActivate {
     }
 
     getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
+       this.currentUser = this._commonService.getLoggedInUser();
 
     }
 

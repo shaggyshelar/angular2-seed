@@ -3,8 +3,10 @@ import {ToDoListService} from './services/myToDoList.service'
 import {TODOList} from './model/ToDoList';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { MasterData, ResponseFromAPI} from  './../../shared/model/index';
+import { CommonService} from  './../../shared/index';
 import { MastersService } from '../../shared/services/masters.service';
 import { APIResult } from  '../../shared/constantValue/index';
+
 @Component({
   moduleId: module.id,
   selector: 'quick-sidebar',
@@ -23,7 +25,9 @@ export class QuickSidebarComponent implements OnInit {
     this.getLoggedInUser();
     this.getMyToDoList();
   }
-  constructor(private _todoservice: ToDoListService, private _masterService: MastersService,
+  constructor(private _todoservice: ToDoListService,
+    private _masterService: MastersService,
+    private _commonService: CommonService,
     private toastr: ToastsManager) { }
 
   getMyToDoList() {
@@ -41,12 +45,7 @@ export class QuickSidebarComponent implements OnInit {
   }
 
   getLoggedInUser() {
-    this._masterService.getCurrentLoggedInUser()
-      .subscribe(
-      (results: MasterData) => {
-        this.currentUser = results;
-      },
-      error => this.errorMessage = <any>error);
+    this.currentUser = this._commonService.getLoggedInUser();
   }
 
   setCurrentTask(task: TODOList) {

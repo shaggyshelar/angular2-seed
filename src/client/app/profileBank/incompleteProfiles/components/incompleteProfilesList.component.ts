@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, AllCandidateProfiles, MailDetails} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../../allProfiles/services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -31,6 +31,7 @@ export class IncompleteProfilesListComponent implements OnActivate {
     NORECORDSFOUND: boolean = false;
     errorMessage: any;
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    candidateMailDetails = new MailDetails();
     constructor(private _allProfilesService: AllProfilesService,
         private _dataSharedService: DataSharedService,
         private _router: Router,
@@ -41,6 +42,15 @@ export class IncompleteProfilesListComponent implements OnActivate {
     }
     routerOnActivate() {
         this.getIncompleteProfiles();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
+    }
+    getEmail(EmailCode: any) {
+        this._profileBankService.getEmail(EmailCode)
+            .subscribe(
+            results => {
+                this.candidateMailDetails = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
     /** Get ALL incomplte profiles to bind */
     getIncompleteProfiles() {
@@ -51,8 +61,9 @@ export class IncompleteProfilesListComponent implements OnActivate {
                     if (results.Profiles !== undefined && results.Profiles.length > 0) {
                         this.incompleteProfilesList = <AllCandidateProfiles>results;
                     } else {
-                        this.incompleteProfilesList = new AllCandidateProfiles(); 
-                        this.NORECORDSFOUND = true; }
+                        this.incompleteProfilesList = new AllCandidateProfiles();
+                        this.NORECORDSFOUND = true;
+                    }
                 },
                 error => this.errorMessage = <any>error);
         } catch (error) {
@@ -84,7 +95,7 @@ export class IncompleteProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
     }
     /** END Pagination and sorting functionality */
-  /**Takes confirmation from end User to delete profile */
+    /**Takes confirmation from end User to delete profile */
     confirmDelete() {
         let modl: any = $('#deleteProfile');
         modl.modal('toggle');

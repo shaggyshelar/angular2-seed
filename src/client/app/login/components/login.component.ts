@@ -21,9 +21,10 @@ export class LoginComponent {
             .subscribe(
             results => {
                 this.getLoggedInUserPermission();
+                this.getLoggedInUser();
             },
             error => {
-            this.errorMessage = <any>error;
+                this.errorMessage = <any>error;
                 this.LoginFailed = true;
             });
     }
@@ -35,7 +36,12 @@ export class LoginComponent {
             },
             error => this.errorMessage = <any>error);
     }
-    closeAlert(){
+    getLoggedInUser(): void {
+        this._loginService.getCurrentLoggedInUser()
+            .subscribe(
+            error => this.errorMessage = <any>error);
+    }
+    closeAlert() {
         this.LoginFailed = false;
     }
 }

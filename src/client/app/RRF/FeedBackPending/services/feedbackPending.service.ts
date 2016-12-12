@@ -23,17 +23,6 @@ export class FeedbackPendingService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    //get logIn user Details
-    getCurrentLoggedInUser() {
-
-        let url = Config.GetURL('/api/authentication/getCurrentUserName');
-        this._spinnerService.show();
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
-    }
-
     //Freeze RRF
     freezeRRF(RRFFeedbacks: RRFFeedback[]) {
         let url = Config.GetURL('/api/RRF/FreezeRRF');

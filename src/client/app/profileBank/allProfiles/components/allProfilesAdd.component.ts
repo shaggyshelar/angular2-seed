@@ -8,7 +8,7 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-
+import { CommonService } from  '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'allprofiles-add',
@@ -66,6 +66,7 @@ export class AllProfilesAddComponent implements OnActivate {
         private _router: Router,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
+        private _commonService: CommonService,
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
         this.createQualification();
@@ -94,12 +95,7 @@ export class AllProfilesAddComponent implements OnActivate {
     }
 
     getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
+        this.currentUser = this._commonService.getLoggedInUser();
 
     }
 
@@ -336,7 +332,7 @@ export class AllProfilesAddComponent implements OnActivate {
 
     }
     /**Function to fetch candidate EXPERIENCE details */
-      GetCandidateExperience(candidateID: MasterData) {
+    GetCandidateExperience(candidateID: MasterData) {
         this._profileBankService.getCandidateExperience(candidateID)
             .subscribe(
             results => {

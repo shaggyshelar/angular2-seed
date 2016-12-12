@@ -83,6 +83,7 @@ export class MyProfilesListComponent implements OnActivate {
     viewRRFDetails: MasterData = new MasterData();
     isViewRFF: Boolean = false;
     isViewRRFGrid: boolean = true;
+    candidateMailDetails = new MailDetails();
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
         private _router: Router,
@@ -112,6 +113,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getMyOpenAssignedRRF() {
         this._assignRRFService.getMyOpenRRF()
@@ -175,8 +177,8 @@ export class MyProfilesListComponent implements OnActivate {
 
         window.scrollTo(0, 40);
     }
-     // Get Updated status
-    getUpdateStatus(candidateID:any) {
+    // Get Updated status
+    getUpdateStatus(candidateID: any) {
         //TO DO : Update API
         this.statusList = Array<MasterData>();
         this._masterService.getUpdateStatus(candidateID)
@@ -209,19 +211,15 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
-                    this.getEmail('RMS.RRF.NEEDAPPROVAL');
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
     getEmail(EmailCode: any) {
-        this.profile.CandidateMailDetails = new MailDetails();
         this._profileBankService.getEmail(EmailCode)
             .subscribe(
             results => {
-                for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
-                    this.myProfilesList.Profiles[index].CandidateMailDetails = <any>results;
-                }
+                this.candidateMailDetails = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -378,7 +376,7 @@ export class MyProfilesListComponent implements OnActivate {
     onUpdateStauts() {
         //this.selectedStatus.Id = 0;
         //this.selectedStatus.Value = "Incomplete";
-        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -444,7 +442,7 @@ export class MyProfilesListComponent implements OnActivate {
                 mailsubject = this.myProfilesList.Profiles[index].CandidateMailDetails.Subject;
                 mailbody = this.myProfilesList.Profiles[index].CandidateMailDetails.Body;
                 mailbody += window.location.href;
-                mailbody += ">";
+                mailbody += '>';
                 this.myProfilesList.Profiles[index].IsChecked = false;
             }
             this.selectedRowCount = 0;
@@ -762,11 +760,11 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
     }
-    getUpdateStatusAccess(Status:MasterData ) {
+    getUpdateStatusAccess(Status: MasterData) {
         try {
-            if (Status.Value.toLocaleLowerCase() === 'offered' || 
-            Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
-            Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave') {
+            if (Status.Value.toLocaleLowerCase() === 'offered' ||
+                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
+                Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave') {
                 return false;
             } else { return true; }
         } catch (error) {

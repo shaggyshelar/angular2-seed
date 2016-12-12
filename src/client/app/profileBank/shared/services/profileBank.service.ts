@@ -14,13 +14,6 @@ export class ProfileBankService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
-
-    getCurrentLoggedInUser() {
-        let url = Config.GetURL('/api/authentication/getCurrentUserName');
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
     //To DO need to change api
     getEmail(emailCode: any) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetEmailByEmailCode?emailCode=' + emailCode);
@@ -211,7 +204,16 @@ export class ProfileBankService {
     }
 
     updateCandidateStatus(CandidateID: MasterData, Status: MasterData, Comments: string) {
-        //let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        //let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+
+    }
+    blackListCandidate(CandidateID: MasterData, Status: MasterData, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })

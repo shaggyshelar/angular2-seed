@@ -207,7 +207,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 if (results !== null && results.length > 0) {
                     this.CandidateRoundHistory = <any>results;
                     this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
-                    if (this.CandidateRoundHistory[this.CandidateRoundHistory.length-1].InterviewType.Value === 'HR' && this.CandidateRoundHistory[this.CandidateRoundHistory.length-1].Status.toLowerCase() === 'selected') {
+                    if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewType.Value === 'HR' && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
                         this.IsHRConducted = true;
                     } else {
                         this.IsHRConducted = false;

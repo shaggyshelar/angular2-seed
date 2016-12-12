@@ -62,7 +62,7 @@
                         </ul>
                     </div>
                     <p>
-                        <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails.Cc}}&amp;subject={{profile.CandidateMailDetails.Subject}}&amp;body={{profile.CandidateMailDetails.Body}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
+                        <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
                     </p>
                     <div class="row">
                         <ul class="list-inline sbold" style="color:#f16e50">

@@ -12,3 +12,7 @@ export *  from './components/graph/piechart.component';
 export *  from './components/graph/gaugeChart.component';
 export *  from './components/graph/AnimatedPieChart.component';
 export *  from './components/graph/candidateDetailList.component';
+
+export *  from './services/common.service';
+export *  from './services/masters.service';
+export *  from './services/RBAC.service';

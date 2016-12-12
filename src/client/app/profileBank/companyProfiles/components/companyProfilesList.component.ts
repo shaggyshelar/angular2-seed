@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import { CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, AllCandidateProfiles, MailDetails} from '../../shared/model/myProfilesInfo';
 import { Candidate } from '../../shared/model/RRF';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -14,7 +14,7 @@ import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
-
+import { CommonService } from  '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
@@ -44,9 +44,11 @@ export class CompanyProfilesListComponent implements OnActivate {
     public isCollapsed: boolean = false;
     Candidate: Candidate;
     NORECORDSFOUND: boolean = false;
+    candidateMailDetails = new MailDetails();
     constructor(private _companyProfilesService: CompanyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
+        private _commonService: CommonService,
         private _dataSharedService: DataSharedService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
@@ -61,16 +63,18 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.getLoggedInUser();
         this.getcompanyProfiles();
         this.getCandidateStatuses();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
-
-    getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
+    getEmail(EmailCode: any) {
+        this._profileBankService.getEmail(EmailCode)
             .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
+            results => {
+                this.candidateMailDetails = <any>results;
             },
             error => this.errorMessage = <any>error);
-
+    }
+    getLoggedInUser() {
+        this.currentUser = this._commonService.getLoggedInUser();
     }
 
     getcompanyProfiles() {
@@ -157,7 +161,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     onUpdateStauts() {
         if (this.selectedStatus.Id === undefined)
             this.selectedStatus = this.selectedStatus;
-        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -274,11 +278,11 @@ export class CompanyProfilesListComponent implements OnActivate {
             },
             error => this.toastr.error(<any>error));
     }
-    getUpdateStatusAccess(Status:MasterData ) {
+    getUpdateStatusAccess(Status: MasterData) {
         try {
-            if (Status.Value.toLocaleLowerCase() === 'offered' || 
-            Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
-            Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave') {
+            if (Status.Value.toLocaleLowerCase() === 'offered' ||
+                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
+                Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave') {
                 return false;
             } else { return true; }
         } catch (error) {

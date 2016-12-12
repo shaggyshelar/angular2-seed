@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, OnActivate, Router } from '@angular/router';
-import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import {CandidateProfile, AllCandidateProfiles, MailDetails} from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -14,7 +14,7 @@ import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 // import { PanelsAvailablityComponent } from '../../../RRF/shared/index';
-
+import { CommonService } from  '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-allprofiles-list',
@@ -50,10 +50,12 @@ export class AllProfilesListComponent implements OnActivate {
     grdOptions = new GrdOptions();
     public maxSize: number = 3;
     NORECORDSFOUND: boolean = false;
+    candidateMailDetails = new MailDetails();
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
     constructor(private _allProfilesService: AllProfilesService,
         private _dataSharedService: DataSharedService,
         private _router: Router,
+        private _commonService: CommonService,
         public toastr: ToastsManager,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
@@ -66,6 +68,7 @@ export class AllProfilesListComponent implements OnActivate {
         this.getLoggedInUser();
         this.getAllProfiles();
         this.getCandidateStatuses();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
 
     setPaginationValues() {
@@ -73,14 +76,16 @@ export class AllProfilesListComponent implements OnActivate {
         this.CandidateProfiles.GrdOperations.ButtonClicked = 0;
         this.CandidateProfiles.GrdOperations.PerPageCount = 3;
     }
-
-    getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
+    getEmail(EmailCode: any) {
+        this._profileBankService.getEmail(EmailCode)
             .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
+            results => {
+                this.candidateMailDetails = <any>results;
             },
             error => this.errorMessage = <any>error);
+    }
+    getLoggedInUser() {
+        this.currentUser = this._commonService.getLoggedInUser();
     }
 
     getAllProfiles() {
@@ -208,7 +213,7 @@ export class AllProfilesListComponent implements OnActivate {
     onUpdateStauts() {
         //this.selectedStatus.Id = 0;
         //this.selectedStatus.Value = 'Incomplete';
-        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
                 if (results.StatusCode === APIResult.Success) {
@@ -298,11 +303,11 @@ export class AllProfilesListComponent implements OnActivate {
         }
 
     }
-    getUpdateStatusAccess(Owner: MasterData,Status:MasterData ) {
+    getUpdateStatusAccess(Owner: MasterData, Status: MasterData) {
         try {
-            if (Owner.Id === this.currentUser.Id && (Status.Value.toLocaleLowerCase() === 'offered' || 
-            Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
-            Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave')) {
+            if (Owner.Id === this.currentUser.Id && (Status.Value.toLocaleLowerCase() === 'offered' ||
+                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
+                Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave')) {
                 return false;
             } else { return true; }
         } catch (error) {

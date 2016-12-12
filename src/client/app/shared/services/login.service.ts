@@ -16,15 +16,22 @@ export class LoginService {
     authenticate(credentials: AuthInfo) {
         let authenticateUrl = Config.GetURL('/api/Authentication/GetToken');
         let headers = new Headers();
-        let credentialString : string = 'grant_type=password&username='+credentials.UserName+'&password='+credentials.Password;
+        let credentialString: string = 'grant_type=password&username=' + credentials.UserName + '&password=' + credentials.Password;
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         let options = new RequestOptions({ headers: headers });
         return this.http.post(authenticateUrl, credentialString, options)
             .map((res: Response) => { this.setToken(res); this.emitAuthEvent(true); })
             .catch(this.handleError);
     }
-
-
+    getCurrentLoggedInUser() {
+        let url = Config.GetURL('/api/authentication/getCurrentUserName');
+        return this.authHttp.get(url)
+            .map((res: Response) => {
+                this.commonService.setLoggedInUserName(res.json());
+                this.extractData(res);
+            })
+            .catch(this.handleError);
+    }
     getLoggedInUserPermission() {
         let url = Config.GetURL('/api/authentication/GetPermissionbyRole');
         return this.authHttp.get(url)

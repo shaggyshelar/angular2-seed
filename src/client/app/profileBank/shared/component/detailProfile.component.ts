@@ -6,6 +6,7 @@ import { MasterData, Resume } from  '../../../shared/model/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { RRFDashboardService } from '../../../RRF/RRFDashboard/services/rrfDashboard.service';
+import { CommonService } from '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'detail-profile',
@@ -14,7 +15,7 @@ import { RRFDashboardService } from '../../../RRF/RRFDashboard/services/rrfDashb
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
     providers: [ToastsManager, ProfileBankService, RRFDashboardService]
 })
-export class DetailProfileComponent implements OnInit{
+export class DetailProfileComponent implements OnInit {
     profile: CandidateProfile;
     binaryResume: Resume;
     emailDetails: any;
@@ -23,34 +24,34 @@ export class DetailProfileComponent implements OnInit{
     //Get profiles data
     @Input() selectedProfile: CandidateProfile;
     @Input() rrfID: string;
+    @Input() CandidateRecruitmentMailDetails: MailDetails;
     // @Input() profilePic: any;
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
-    logedInUser: MasterData = new MasterData();
-    loginflag : boolean = false;
-    constructor(private toastr: ToastsManager, private _router: Router, private _profileBankService: ProfileBankService,
+    CurrentUser: MasterData = new MasterData();
+    loginflag: boolean = false;
+    constructor(
+        private toastr: ToastsManager,
+        private _commonService: CommonService,
+        private _router: Router,
+        private _profileBankService: ProfileBankService,
         private _rrfDashboardService: RRFDashboardService) {
-        this.getLoggedInUser();
+        this.loginflag = this.getLoggedInUser();
     }
     ngOnInit() {
         /** */
 
         this.profile = this.selectedProfile;
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
-        this.getEmail('RMS.RRF.NEEDAPPROVAL');
+        if (this.profile) {
+            this.profile.CandidateMailDetails = this.profile ? this.CandidateRecruitmentMailDetails : new MailDetails();
+        }
+        //this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     onViewCandidateClick(rrfID: MasterData) {
         // rrfID = 'RRF6866237939ID76';
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
-    getEmail(EmailCode: any) {
-        this.profile.CandidateMailDetails = new MailDetails();
-        this._profileBankService.getEmail(EmailCode)
-            .subscribe(
-            results => {
-                this.profile.CandidateMailDetails = <any>results;
-            },
-            error => this.errorMessage = <any>error);
-    }
+
     /**Get resume by candidate code */
     getResume(candidateID: MasterData) {
         this._profileBankService.getResume(candidateID)
@@ -74,10 +75,10 @@ export class DetailProfileComponent implements OnInit{
         link.href = 'data:application/octet-stream;charset=utf-8;base64,' + binaryResume;
         link.click();
     }
-    checkOwner(owner: string,isRRFAssigned:any) {
+    checkOwner(owner: string, isRRFAssigned: any) {
         if (isRRFAssigned) {
             if (this.loginflag) {
-                if (owner.toLowerCase() === this.logedInUser.Value.toLowerCase()) {
+                if (owner.toLowerCase() === this.CurrentUser.Value.toLowerCase()) {
                     return true;
                 } else {
                     return false;
@@ -86,20 +87,14 @@ export class DetailProfileComponent implements OnInit{
                 return false;
             }
         }
-        else{
+        else {
             return false;
         }
 
 
     }
-    getLoggedInUser() {
-        this._rrfDashboardService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.logedInUser = results;
-                this.loginflag = true;
-            },
-            error => this.errorMessage = <any>error);
-
+    getLoggedInUser(): boolean {
+        this.CurrentUser = this._commonService.getLoggedInUser();
+        return this.CurrentUser ? true : false;
     }
 }

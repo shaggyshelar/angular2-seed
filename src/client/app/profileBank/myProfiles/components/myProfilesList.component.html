@@ -235,8 +235,8 @@
 										<div class="col-md-3">
 											<div class="form-group">
 												<!--(change)='onSelectStatus($event.target.value)' -->
-												<select class="form-control" [(ngModel)]="selectedStatus" tooltip="Status"
-													tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
+												<select class="form-control" [(ngModel)]="selectedStatus" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+													tooltipEnable="!currentStatus">
                                                    <option *ngFor="let status of statusList" [value]="status.Value">{{status.Value}}</option>
                                                 </select>
 											</div>
@@ -484,7 +484,8 @@
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
                                                         </button>
 													<button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='onUpdateStatusClick(myprofile.CandidateID)'
-														tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" *ngIf='!getUpdateStatusAccess(myprofile.Status)'>
+														tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"
+														*ngIf='!getUpdateStatusAccess(myprofile.Status)'>
                                                             <i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
                                                         </button>
 													<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile"
@@ -498,7 +499,7 @@
                                                         </button>
 												</div>
 											</div>
-											<detail-profile [selectedProfile]="myprofile" [rrfID]="viewDetailsRRFId"></detail-profile>
+											<detail-profile [selectedProfile]="myprofile" [CandidateRecruitmentMailDetails]="candidateMailDetails" [rrfID]="viewDetailsRRFId"></detail-profile>
 											<!-- START Delete Confirmation Model dailog -->
 											<div id="deleteProfile" class="modal fade">
 												<div class="modal-dialog">

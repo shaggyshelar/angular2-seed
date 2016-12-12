@@ -11,6 +11,7 @@ import { MastersService } from '../../../shared/services/masters.service';
 import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { FeedbackDataComponent } from '../../shared/components/feedbackData/feedbackData.component';
 import { FeedBackpending } from '../models/feedbackPending';
+import { CommonService } from '../../../shared/index';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
@@ -38,6 +39,7 @@ export class FeedbackPendingComponent implements OnActivate {
     constructor(private _feedbackPendingService: FeedbackPendingService,
         public toastr: ToastsManager,
         private _mastersService: MastersService,
+        private _commonService: CommonService,
         private _router: Router) {
     }
 
@@ -195,13 +197,7 @@ export class FeedbackPendingComponent implements OnActivate {
 
     //get currently logIn user Id ,name
     getLoggedInUser() {
-        this._feedbackPendingService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.logedInUser = results;
-            },
-            error => this.errorMessage = <any>error);
-
+        this.logedInUser = this._commonService.getLoggedInUser();
     }
 
     //Check can loggedIn user have authority to Edit RRF

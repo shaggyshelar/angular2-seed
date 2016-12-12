@@ -217,7 +217,8 @@
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
                                                         </button>
 														<button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='onUpdateStatusClick(profile.CandidateID)'
-															tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" *ngIf='!getUpdateStatusAccess(profile.Owner,profile.Status)'>
+															tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"
+															*ngIf='!getUpdateStatusAccess(profile.Owner,profile.Status)'>
                                                             <i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
                                                         </button>
 														<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Blacklist Profile"
@@ -232,7 +233,7 @@
 
 													</div>
 												</div>
-												<detail-profile [selectedProfile]="profile"></detail-profile>
+												<detail-profile [selectedProfile]="profile" [CandidateRecruitmentMailDetails]="candidateMailDetails"></detail-profile>
 												<!-- START Delete Confirmation Model dailog -->
 												<div id="deleteProfile" class="modal fade">
 													<div class="modal-dialog">

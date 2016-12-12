@@ -16,6 +16,7 @@ import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRo
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
 import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+import { CommonService} from '../../../shared/index';
 
 @Component({
     moduleId: module.id,
@@ -66,13 +67,15 @@ export class RRFDashboardListComponent implements OnActivate {
     SortByList: SortingMasterData[] = [];
 
     constructor(private _rrfDashboardService: RRFDashboardService,
-        private _myRRFService: MyRRFService, private _router: Router,
+        private _myRRFService: MyRRFService,
+        private _commonService: CommonService,
+        private _router: Router,
         public toastr: ToastsManager,
         private _mastersService: MastersService) {
         this.currentView = 'myRRF';
     }
     routerOnActivate() {
-        this.getLoggedInUser();
+        this.logedInUser = this.getLoggedInUser();
         this.getMyRRFData();
         this.getColumsForSorting('MYRRF');
         this.GetRecruiter();
@@ -441,13 +444,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     getLoggedInUser() {
-        this._rrfDashboardService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.logedInUser = results;
-            },
-            error => this.errorMessage = <any>error);
-
+        return this._commonService.getLoggedInUser();
     }
 
     GetRecruiter() {

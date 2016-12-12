@@ -5,11 +5,14 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import { MasterData, GrdOptions } from '../../../shared/model/common.model';
+import { CommonService } from '../../../shared/index';
+
 
 @Injectable()
 
 export class RRFDashboardService {
     constructor(private authHttp: AuthHttp,
+        private _commonService: CommonService,
         private _spinnerService: SpinnerService) { }
 
     getAllOpenRRF() {
@@ -101,13 +104,6 @@ export class RRFDashboardService {
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
-    }
-
-    getCurrentLoggedInUser() {
-        let url = Config.GetURL('/api/authentication/getCurrentUserName');
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError);
     }
 
     GetRRFAssignedToRecruiter(recruiter: MasterData, grdOptions: GrdOptions) {

@@ -4,6 +4,7 @@ import { LoginService } from '../../shared/services/login.service';
 //import { ProfileBankService } from '../../profilebank/shared/services/profileBank.service';
 import { ProfileBankService } from '../../profileBank/shared/services/profileBank.service';
 import { MasterData } from  '../../shared/model/index';
+import { CommonService } from  '../../shared/index';
 
 @Component({
     moduleId: module.id,
@@ -21,6 +22,7 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
     subscription: EventEmitter<boolean> = new EventEmitter<boolean>();;
     constructor(private loginService: LoginService,
         private _router: Router,
+        private _commonService: CommonService,
         private _profileBankService: ProfileBankService) {
         this.isAuthenticated = false;
     }
@@ -33,17 +35,11 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
 
     }
     getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
-
+        this.currentUser = this._commonService.getLoggedInUser();
     }
     // This function search profiles acoording to search string
-    advancedSearch(searchString:string){
-        alert("We Are working on searching");
+    advancedSearch(searchString: string) {
+        alert('We Are working on searching');
         //TO DO: uncomment below api after API get ready
         //this._router.navigate(['/App/ProfileBank/AdvanceSearch/' + searchString + 'searchString' + searchString]);
     }
@@ -57,7 +53,7 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
         this.subscription.unsubscribe();
     }
 
-    pushNotificationSettings(){
+    pushNotificationSettings() {
         this._router.navigate(['/App/NotificationSetting']);
     }
 }
