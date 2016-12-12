@@ -227,7 +227,8 @@ export class MyProfilesListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /**Takes confirmation from end User to delete profile */
-    confirmDelete() {
+    confirmDelete(ID: MasterData) {
+        this.CandidateID = ID;
         let modl: any = $('#deleteProfile');
         modl.modal('toggle');
     }
@@ -237,10 +238,11 @@ export class MyProfilesListComponent implements OnActivate {
         cnfrmBox.modal('hide');
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
-    deleteCandidate(CandidateID: MasterData) {
-        this._profileBankService.deleteProfile(CandidateID)
+    deleteCandidate() {
+        this._profileBankService.deleteProfile(this.CandidateID)
             .subscribe(
             (results: any) => {
+                this.toastr.success((<ResponseFromAPI>results).Message);
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
                 this.getMyProfiles();

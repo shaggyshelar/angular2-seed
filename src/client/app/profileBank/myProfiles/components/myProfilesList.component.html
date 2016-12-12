@@ -492,7 +492,7 @@
 														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile">
                                                             <i class="icon-flag"></i> <!--Blacklist Profile-->
                                                         </button>
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='confirmDelete()' tooltip="Delete Profile" tooltipPlacement="top"
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='confirmDelete(myprofile.CandidateID)' tooltip="Delete Profile" tooltipPlacement="top"
 														tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true" [disabled]="myprofile.Status.Value.toLowerCase() !== 'Open'.toLowerCase() && myprofile.Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()"
 														[ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']">
                                                             <i class="fa fa-remove "></i> <!--Delete Profile-->
