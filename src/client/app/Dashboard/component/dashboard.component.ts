@@ -48,9 +48,9 @@ export class DashboardComponent implements OnInit {
                 break;
             case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring);
                 break;
-            case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring,InputString.inputstring2);
+            case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring, InputString.inputstring2);
                 break;
-            case 'FromAmChart': this.getCanidatesForRRF(InputString.inputstring,InputString.inputstring2,InputString.inputstring3);
+            case 'FromAmChart': this.getCanidatesForRRF(InputString.inputstring, InputString.inputstring2, InputString.inputstring3);
                 break;
         }
 
@@ -309,16 +309,19 @@ export class DashboardComponent implements OnInit {
     }
 
     /************BEGIN RECRUITER'S DATA************/
-    getCanidatesForRRF(round:any,rrfid:any,status: any) {
-        this._rrfCandidatesList.getCandidatesForSelectedRRF(round,rrfid,status)
+    getCanidatesForRRF(round: any, rrfid: any, status: any) {
+        this._rrfCandidatesList.getCandidatesForSelectedRRF(round, rrfid, status)
             .subscribe(
             (results: any) => {
-                if (results.length !== undefined) {
+                if (results.length > 0) {
                     // this.AllCandidatesForRRF = results;
+                    this.isNull = true;
+                    //this.IsBarchartDataShow = true;
                     this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
-                    this.isNull = true;
+                    this.isNull = false;
+                    this.IsBarchartDataShow = false;
                 }
             },
             error => this.errorMessage = <any>error);
@@ -438,7 +441,7 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     // get Interview history of candidate
-    GetCandidatesRoundHistory(CandidateID: MasterData,RRFID:MasterData) {
+    GetCandidatesRoundHistory(CandidateID: MasterData, RRFID: MasterData) {
         this.CandidateRoundHistory = new Array<Interview>();
         this.changeStatusCandidateID = CandidateID;
         this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, RRFID)
@@ -533,11 +536,41 @@ export class DashboardComponent implements OnInit {
     GetTaggedCandidateStatusCount(_rrfCode: string): void {
         this.dashboardService.getTaggedCandidateStatusCount(_rrfCode)
             .subscribe(
-            results => {
+            (results: any) => {
                 this.rrfCode = _rrfCode;
-                this.chartDataForColumnChart = <any>results;
-                var round = this.chartDataForColumnChart[0].status !== null ? this.chartDataForColumnChart[0].status : "";
-                this.getCanidatesForRRF(round ,this.rrfCode)
+                if (results.length > 0) {
+                    this.chartDataForColumnChart = <any>results;
+                    for (var index = 0; index < this.chartDataForColumnChart.length; index++) {
+                        if (this.chartDataForColumnChart[index].fitmentIssueVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var status = 'Fitment Issue';
+                            break;
+                        }
+                        if (this.chartDataForColumnChart[index].onholdVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var status = 'On Hold';
+                            break;
+                        }
+                        if (this.chartDataForColumnChart[index].rejectedVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var status = 'Rejected';
+                            break;
+                        }
+                        if (this.chartDataForColumnChart[index].scheduledVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var status = 'Scheduled';
+                            break;
+                        }
+                        if (this.chartDataForColumnChart[index].selectedVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var status = 'Selected';
+                            break;
+                        }
+                    }
+
+                    this.getCanidatesForRRF(round, this.rrfCode, status)
+                }
+
             },
             error => this.errorMessage = <any>error);
     }
