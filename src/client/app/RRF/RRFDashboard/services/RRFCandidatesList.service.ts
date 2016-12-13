@@ -31,9 +31,17 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    
-     getCandidatesForSelectedRRF(round:any,rrfid:any,status:any) {
-        let url = Config.GetURL('/api/Dashboards/GetCandidatesForSelectedRRFAndInterviewStatus?RRFID='+rrfid+'&InterviewRound='+round+'&InterviewStatus='+status);
+    getOfferedCandidatesForRRF(RRFID: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewCompletedCandidatesForRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    getCandidatesForSelectedRRF(round: any, rrfid: any, status: any) {
+        let url = Config.GetURL('/api/Dashboards/GetCandidatesForSelectedRRFAndInterviewStatus?RRFID=' + rrfid + '&InterviewRound=' + round + '&InterviewStatus=' + status);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
         return this.authHttp.get(url)
@@ -68,10 +76,10 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    proceedForOfferGeneration(InterviewID: MasterData,CandidateID:MasterData,RRFID:MasterData , JoiningDate: Date) {
+    proceedForOfferGeneration(InterviewID: MasterData, CandidateID: MasterData, RRFID: MasterData, JoiningDate: Date) {
         let url = Config.GetURL('/api/RecruitmentCycle/ProceedForOfferGeneration');
         this._spinnerService.show();
-        return this.authHttp.post(url, { CandidateID,RRFID,InterviewID,JoiningDate })
+        return this.authHttp.post(url, { CandidateID, RRFID, InterviewID, JoiningDate })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

@@ -56,6 +56,7 @@ export class RRFCandidateListComponent implements OnActivate {
     errorMessage: string;
     Candidates: Array<CandidateProfile>;
     AllCandidatesForRRF: RRFSpecificCandidateList[];
+    OfferedCandidateForRRF: RRFSpecificCandidateList[];
     CandidateRoundHistory: Array<Interview>;
     CandidateHistoryForActualTime: Array<Interview>;
     isRoundHistoryPresent: boolean = false;
@@ -73,6 +74,7 @@ export class RRFCandidateListComponent implements OnActivate {
     changeStatusCandidateID: MasterData = new MasterData();
     IsBarchartDataShow: boolean = false;
     IsHRConducted: boolean = false;
+    IsOffered: boolean = false;
     ExpDateOfJoining: Date;
     IsOfferGenerate: boolean = false;
     IsUpdateStatus: boolean = false;
@@ -109,6 +111,7 @@ export class RRFCandidateListComponent implements OnActivate {
         public toastr: ToastsManager) {
         this.Candidates = new Array<CandidateProfile>();
         this.AllCandidatesForRRF = new Array<RRFSpecificCandidateList>();
+        this.OfferedCandidateForRRF = new Array<RRFSpecificCandidateList>();
         this.CandidateRoundHistory = new Array<Interview>();
     }
 
@@ -122,6 +125,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.selectedRRF = new RRFDetails();
         //TODO : Call API to get Candidates Specific to SelectedRRF
         this.getCanidatesForRRF();
+        this.getOfferedCanidatesForRRF();
         this.getRRFDetails();
     }
     /**Bind candidtes rating in chart */
@@ -181,7 +185,22 @@ export class RRFCandidateListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-
+    //Get All Canidate List whose status is offered
+    getOfferedCanidatesForRRF() {
+        this._rrfCandidatesList.getOfferedCandidatesForRRF(this.RRFID.Value)
+            .subscribe(
+            (results: any) => {
+                if (results.length !== undefined) {
+                    // this.AllCandidatesForRRF = results;
+                    this.OfferedCandidateForRRF = results;
+                    //this.CheckInterviewStatus(results);
+                } else {
+                    //If No data present
+                    this.isNull = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
     getRRFDetails() {
         //this.RRFID
         this._rrfCandidatesList.getRRFByID(this.RRFID.Value)
@@ -209,7 +228,12 @@ export class RRFCandidateListComponent implements OnActivate {
                     this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
                     if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewType.Value === 'HR' && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
                         this.IsHRConducted = true;
+                        this.IsOffered = false;
+                    } else if(this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'offered') {
+                        this.IsOffered = true;
+                        this.IsHRConducted = false;
                     } else {
+                        this.IsOffered = false;
                         this.IsHRConducted = false;
                     }
                     this.isRoundHistoryPresent = false;
