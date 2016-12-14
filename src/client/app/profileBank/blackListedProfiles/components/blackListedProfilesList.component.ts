@@ -136,8 +136,8 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        if (this.selectedStatus.Id === undefined)
-            this.selectedStatus = this.profile.Status;
+        //if (this.selectedStatus.Id === undefined)
+            //this.selectedStatus = this.profile.Status;
 
         this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(

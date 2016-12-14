@@ -69,6 +69,7 @@ export class MyProfilesListComponent implements OnActivate {
     selectedCandidates: Array<Candidate>;
     NORECORDSFOUND: boolean = false;
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    CandidateName: string;
     /***variables for Upload photo */
     uploadedPhoto: any;
     photoUploaded: boolean = false;
@@ -228,8 +229,12 @@ export class MyProfilesListComponent implements OnActivate {
     }
     /**Takes confirmation from end User to delete profile */
     confirmDelete(ID: MasterData) {
+<<<<<<< HEAD
         this.CandidateID = ID;
         let modl: any = $('#deleteProfile' + ID.Value);
+=======
+        let modl: any = $('#deleteProfile'+ID.Id);
+>>>>>>> b4b8b30a3fd4a1d346d4b6c45356a0812ef36077
         modl.modal('toggle');
     }
     /** OnRejection hide the confimation box and exit the delete process */
@@ -238,8 +243,8 @@ export class MyProfilesListComponent implements OnActivate {
         cnfrmBox.modal('hide');
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
-    deleteCandidate() {
-        this._profileBankService.deleteProfile(this.CandidateID)
+    deleteCandidate(CandidateID: MasterData) {
+        this._profileBankService.deleteProfile(CandidateID)
             .subscribe(
             (results: any) => {
                 this.toastr.success((<ResponseFromAPI>results).Message);
