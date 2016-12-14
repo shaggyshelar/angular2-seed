@@ -225,7 +225,7 @@
 															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile" [disabled]='getEditAccess(profile.Owner)'>
                                                             <i class="icon-flag"></i> <!--Blacklist Profile-->
                                                         </button>
-														<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='confirmDelete()' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='confirmDelete(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
 															tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true"
 															[disabled]="profile.Status.Value.toLowerCase() !== 'Open'.toLowerCase() && profile.Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()">
                                                             <i class="fa fa-remove "></i> <!--Delete Profile-->
@@ -235,7 +235,7 @@
 												</div>
 												<detail-profile [selectedProfile]="profile" [CandidateRecruitmentMailDetails]="candidateMailDetails"></detail-profile>
 												<!-- START Delete Confirmation Model dailog -->
-												<div id="deleteProfile" class="modal fade">
+												<div id="deleteProfile{{profile.CandidateID.Value}}" class="modal fade">
 													<div class="modal-dialog">
 														<div class="modal-content">
 															<div class="modal-header">
@@ -243,11 +243,11 @@
 																<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
 															</div>
 															<div id="modalBody" class="modal-body">
-																Are you sure you want to delete {{profile.Candidate}} profile ?
+																Are you sure you want to delete {{profile.Candidate}}'s profile ?
 															</div>
 															<div class="modal-footer">
 																<button type="button" icon="fa-check" class="btn btn-info" (click)="deleteCandidate(profile.CandidateID)" label="">Yes</button>
-																<button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection()" label="">No</button>
+																<button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection(profile.CandidateID)" label="">No</button>
 															</div>
 														</div>
 													</div>

@@ -229,12 +229,12 @@ export class MyProfilesListComponent implements OnActivate {
     /**Takes confirmation from end User to delete profile */
     confirmDelete(ID: MasterData) {
         this.CandidateID = ID;
-        let modl: any = $('#deleteProfile');
+        let modl: any = $('#deleteProfile' + ID.Value);
         modl.modal('toggle');
     }
     /** OnRejection hide the confimation box and exit the delete process */
-    onClearSelection() {
-        let cnfrmBox: any = $('#deleteProfile');
+    onClearSelection(ID: MasterData) {
+        let cnfrmBox: any = $('#deleteProfile' + ID.Value);
         cnfrmBox.modal('hide');
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
@@ -248,7 +248,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this.getMyProfiles();
             },
             error => this.toastr.error(<any>error));
-        this.onClearSelection();
+        this.onClearSelection(this.CandidateID);
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {

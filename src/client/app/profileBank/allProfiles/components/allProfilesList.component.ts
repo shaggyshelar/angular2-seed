@@ -67,7 +67,7 @@ export class AllProfilesListComponent implements OnActivate {
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getAllProfiles();
-        this.getCandidateStatuses();
+        // this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
 
@@ -110,13 +110,13 @@ export class AllProfilesListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
     }
     /**Takes confirmation from end User to delete profile */
-    confirmDelete() {
-        let modl: any = $('#deleteProfile');
+    confirmDelete(candidateId: MasterData) {
+        let modl: any = $('#deleteProfile' + candidateId.Value);
         modl.modal('toggle');
     }
     /** OnRejection hide the confimation box and exit the delete process */
-    onClearSelection() {
-        let cnfrmBox: any = $('#deleteProfile');
+    onClearSelection(_candidateId: MasterData) {
+        let cnfrmBox: any = $('#deleteProfile' + _candidateId.Value);
         cnfrmBox.modal('hide');
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
@@ -130,7 +130,7 @@ export class AllProfilesListComponent implements OnActivate {
                 this.getAllProfiles();
             },
             error => this.toastr.error(<any>error));
-        this.onClearSelection();
+        this.onClearSelection(CandidateID);
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {

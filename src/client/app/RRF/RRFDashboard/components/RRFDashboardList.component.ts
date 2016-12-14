@@ -78,18 +78,22 @@ export class RRFDashboardListComponent implements OnActivate {
         this.logedInUser = this.getLoggedInUser();
         this.getMyRRFData();
         this.getColumsForSorting('MYRRF');
-        this.GetRecruiter();
+        /**
+         * Removed from here and added to Assinged RRF redio button changed event
+        this.GetRecruiter(); */
         this.setDefaultcloseRRFID();
     }
 
     getMyRRFData() {
         this.getMyRRF();
-        this.getStatuswiseMyRRFCount();
+        /**called for Charts which is depricated */
+        //this.getStatuswiseMyRRFCount();
     }
 
     getAllRRFData() {
         this.getAllRRF();
-        this.getStatuswiseRRFCount();
+        /**called for Charts which is depricated */
+        //this.getStatuswiseRRFCount();
     }
 
     getAssignedRRFData() {
@@ -316,6 +320,7 @@ export class RRFDashboardListComponent implements OnActivate {
             this.currentView = 'assignRRF';
             this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
+            this.GetRecruiter();
         }
 
         this.viewWiseSetting();

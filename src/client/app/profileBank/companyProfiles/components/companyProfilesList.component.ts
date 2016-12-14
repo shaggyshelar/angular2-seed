@@ -62,7 +62,7 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getcompanyProfiles();
-        this.getCandidateStatuses();
+        //this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getEmail(EmailCode: any) {

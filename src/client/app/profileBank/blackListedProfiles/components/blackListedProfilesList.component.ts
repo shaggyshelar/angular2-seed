@@ -52,7 +52,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this.setPaginationValues();
         this.getLoggedInUser();
         this.getBlacklistedProfiles();
-        this.getCandidateStatuses();
+       // this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getEmail(EmailCode: any) {
