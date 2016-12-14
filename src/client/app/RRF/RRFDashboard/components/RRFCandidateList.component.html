@@ -122,7 +122,7 @@
 																		<br><span class="mt=action-time" *ngIf="selectedcandidate.InterviewDetails.InterviewFromTime !== null && selectedcandidate.InterviewDetails.InterviewToTime !== null">{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}</span>
 																		<span class="mt-action-dot bg-green"></span>
 																		<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top"
-															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'>
+															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,"Selected")'>
 															{{selectedcandidate.InterviewDetails.Status}}</a></span>
 																	</div>
 
@@ -199,12 +199,12 @@
 																		<br><span class="mt=action-time" *ngIf="selectedcandidate.InterviewDetails.InterviewFromTime !== null && selectedcandidate.InterviewDetails.InterviewToTime !== null">{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}</span>
 																		<span class="mt-action-dot bg-green"></span>
 																		<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top"
-															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'>
-															{{selectedcandidate.InterviewDetails.Status}}</a></span>
+															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>
+															{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}</a></span>
 																	</div>
 																	<div class="mt-action-buttons ">
 																		<div class="btn-group btn-group-circle">
-																			<button type="button" class="btn btn-outline green btn-sm" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate)'>Show</button>
+																			<button type="button" class="btn btn-outline green btn-sm" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>Show</button>
 																		</div>
 																	</div>
 																</div>

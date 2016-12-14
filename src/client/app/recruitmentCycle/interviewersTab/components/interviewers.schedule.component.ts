@@ -272,15 +272,23 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                 for (var index = 0; index < this.RRFData.SkillsRequired.length; index++) {
                     skillDetails = skillDetails + '"' + this.RRFData.SkillsRequired[index].Value + '"';
                 }
-                row.popover({
-                    placement: 'bottom',
-                    toggle: 'popover',
-                    title: 'RRF Details',
-                    html: true,
-                    //trigger: 'hover',
-                    //content: $('#myPopoverContent').html()
-                    content: 'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :' + this.RRFData.RaisedBy.Value + '<br/>' + '\nSkills :' + skillDetails + '<br/>' + '\nJob Description :' + this.RRFData.Description
-                });
+                if (row.hasClass('pop')) {
+                    row.popover('hide')
+                    row.removeClass('pop');
+                } else {
+                    row.popover({
+                        placement: 'bottom',
+                        toggle: 'popover',
+                        title: 'RRF Details',
+                        html: true,
+                        //trigger: 'hover',
+                        //content: $('#myPopoverContent').html()
+                        content: 'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :' + this.RRFData.RaisedBy.Value + '<br/>' + '\nSkills :' + skillDetails + '<br/>' + '\nJob Description :' + this.RRFData.Description
+                    });
+                    row.popover('show');
+                    row.addClass('pop');
+                }
+
             },
             error => this.errorMessage = <any>error);
     }

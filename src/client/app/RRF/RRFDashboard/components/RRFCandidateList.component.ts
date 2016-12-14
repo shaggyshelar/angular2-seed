@@ -211,7 +211,7 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string) {
+    getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string, status: string) {
         this.IsOfferGenerate = false;
         this.IsUpdateStatus = false;
         this.showChangeStatus = false;
@@ -226,20 +226,24 @@ export class RRFCandidateListComponent implements OnActivate {
                 if (results !== null && results.length > 0) {
                     this.CandidateRoundHistory = <any>results;
                     this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
-                    if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewType.Value === 'HR' && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
-                        this.IsHRConducted = true;
-                        this.IsOffered = false;
-                    } else if(this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'offered') {
+                    if (status.toLowerCase() === 'selected') {
+                        if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewType.Value === 'HR' && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
+                            this.IsHRConducted = true;
+                            this.IsOffered = false;
+                        } else {
+                            this.IsOffered = false;
+                            this.IsHRConducted = false;
+                        }
+                    }
+                    if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted') {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
-                    } else {
-                        this.IsOffered = false;
-                        this.IsHRConducted = false;
-                    }
+                    } 
                     this.isRoundHistoryPresent = false;
                 } else {
                     this.isRoundHistoryPresent = true;
                     this.IsHRConducted = false;
+                    this.IsOffered = false;
                 }
             },
             error => this.errorMessage = <any>error);
@@ -475,7 +479,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getCanidatesForRRF();
-                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate);
+                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate, '');
                     this.changeStatusInterviewID = new MasterData();
                     this.resetTransferOperation();
                     this.showChangeStatus = false;
@@ -509,7 +513,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getCanidatesForRRF();
-                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate);
+                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate, '');
                     this.changeStatusInterviewID = new MasterData();
                     this.showChangeStatus = false;
                 } else {
@@ -529,7 +533,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getCanidatesForRRF();
-                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate);
+                    this.getCandidatesRoundHistory(this.changeStatusCandidateID, this.selectedCandidate, '');
                     this.changeStatusInterviewID = new MasterData();
                     this.setActualTimeForm = false;
                 } else {
@@ -577,6 +581,8 @@ export class RRFCandidateListComponent implements OnActivate {
             (results: any) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.getCanidatesForRRF();
+                    this.getOfferedCanidatesForRRF();
                     this.IsOfferGenerate = false;
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
@@ -593,7 +599,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
-                    this.getCanidatesForRRF();
+                    this.getOfferedCanidatesForRRF();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
