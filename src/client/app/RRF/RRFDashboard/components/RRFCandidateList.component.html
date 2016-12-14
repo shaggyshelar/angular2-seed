@@ -271,7 +271,7 @@
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
                                              [(ngModel)]="selectedStatus" required="" style="width: 159px!important;"
 											 >
-											 <option *ngFor="let status of CandidateUpdatedStatus" [value]="status.Value">{{status.Value}}</option>
+											 <option *ngFor="let status of CandidateUpdatedStatus" [ngValue]="status">{{status.Value}}</option>
                                                 <!--<option value="Offered">Offered</option>
                                                 <option value="Offered Accepted">Offered Accepted</option>
                                                 <option value="Absconded">Absconded</option>
