@@ -235,11 +235,11 @@ export class RRFCandidateListComponent implements OnActivate {
                             this.IsHRConducted = false;
                         }
                     }
-                    if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' || 
-                    status.toLowerCase() === 'Joined' || status.toLowerCase() === 'absconded' || status.toLowerCase() === 'asked to leave') {
+                    if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
+                        status.toLowerCase() === 'Joined' || status.toLowerCase() === 'absconded' || status.toLowerCase() === 'asked to leave') {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
-                    } 
+                    }
                     this.isRoundHistoryPresent = false;
                 } else {
                     this.isRoundHistoryPresent = true;
@@ -600,6 +600,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
+                    this.IsOffered = false;
                     this.getOfferedCanidatesForRRF();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);

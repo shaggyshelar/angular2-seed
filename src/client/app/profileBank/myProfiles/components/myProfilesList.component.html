@@ -501,7 +501,7 @@
 											</div>
 											<detail-profile [selectedProfile]="myprofile" [CandidateRecruitmentMailDetails]="candidateMailDetails" [rrfID]="viewDetailsRRFId"></detail-profile>
 											<!-- START Delete Confirmation Model dailog -->
-											<div id="deleteProfile" class="modal fade">
+											<div id="deleteProfile{{myprofile.CandidateID.Id}}" class="modal fade">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -509,10 +509,10 @@
 															<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
 														</div>
 														<div id="modalBody" class="modal-body">
-															Are you sure you want to delete {{profile.Candidate}} profile ?
+															Are you sure you want to delete {{myprofile.Candidate}} profile ?
 														</div>
 														<div class="modal-footer">
-															<button type="button" icon="fa-check" class="btn btn-info" (click)="deleteCandidate(profile.CandidateID)" label="">Yes</button>
+															<button type="button" icon="fa-check" class="btn btn-info" (click)="deleteCandidate(myprofile.CandidateID)" label="">Yes</button>
 															<button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection()" label="">No</button>
 														</div>
 													</div>
