@@ -17,6 +17,7 @@
 			</li>
 		</ul>
 		<!--End Breadcrumb>-->
+
 		<div class="row">
 			<div class="portlet-body">
 				<div class="col-lg-12">
@@ -79,8 +80,9 @@
 							</div>
 							<hr>
 							<div class="row">
+								<!--BEGIN Cadidates list section -->
 								<div class="col-md-7">
-									<!-- Begin Tab -->
+									<!-- BEGIN Tabs -->
 									<div class="tabbable-line">
 										<ul class="nav nav-tabs ">
 											<li class="active">
@@ -92,38 +94,49 @@
 										</ul>
 									</div>
 									<div class="tab-content">
-										<!-- BEGIN Candidate Details List -->
 										<div class="tab-pane active" id="tab_Candidate_Details">
-											<div class="tab-content slimScrollDiv" style="max-height: 300px;overflow-y:auto;">
+											<!-- BEGIN Candidate Details List /TAB -->
+											<div class="tab-content slimScrollDiv" style="overflow-y:auto;">
 												<div class="tab-pane active" id="tab_actions_pending">
-													<!-- BEGIN: Actions -->
+													<!-- BEGIN: Tagged Candidate List -->
 													<div class="mt-actions" *ngFor="let selectedcandidate of AllCandidatesForRRF">
 														<div class="mt-action">
 															<div class="mt-action-img">
-																<img src="../assets/layouts/layout4/img/default-user.jpg" class="CandidateImg" *ngIf="selectedcandidate.BinaryImage === '' || selectedcandidate.BinaryImage === null">
-																<img src="data:image/jpeg;base64,{{selectedcandidate.BinaryImage?selectedcandidate.BinaryImage:''}}" class="CandidateImg" *ngIf="selectedcandidate.BinaryImage !== '' || selectedcandidate.BinaryImage !== null">
-																
+																<img src="../assets/layouts/layout4/img/default-user.jpg" class="CandidateImg" *ngIf="selectedcandidate.BinaryImage === ''">
+																<img src="data:image/jpeg;base64,{{selectedcandidate.BinaryImage?selectedcandidate.BinaryImage:''}}" class="CandidateImg"
+																	*ngIf="selectedcandidate.BinaryImage !== ''">
 															</div>
 															<div class="mt-action-body">
 																<div class="mt-action-row">
 																	<div class="mt-action-info ">
 																		<div class="mt-action-details ">
-																			<span class="mt-action-author"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top"
-															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(selectedcandidate.CandidateID)'> 
-															{{selectedcandidate.Candidate}}</a></span>
+																			<span class="mt-action-author">
+																				<a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
+																				(click)='redirectToView(selectedcandidate.CandidateID)'>{{selectedcandidate.Candidate}}</a>
+																				</span>
 																			<p class="mt-action-desc">Round: {{selectedcandidate.InterviewDetails.Round.Value}}</p>
 																			<p class="mt-action-desc">Mode: {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</p>
-																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">Skype ID:{{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}</p>
-																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">PassWord: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}</p>
+																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
+																				Skype ID:{{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}
+																			</p>
+																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
+																				PassWord: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}
+																			</p>
 																		</div>
 																	</div>
 																	<div class="mt-action-datetime " style="padding-right: 40px;">
 																		<span class="mt-action-date" *ngIf="selectedcandidate.InterviewDetails.InterviewDate !== null">{{selectedcandidate.InterviewDetails.InterviewDate === null ?"NA" :getDate(selectedcandidate.InterviewDetails.InterviewDate)}}</span>
-																		<br><span class="mt=action-time" *ngIf="selectedcandidate.InterviewDetails.InterviewFromTime !== null && selectedcandidate.InterviewDetails.InterviewToTime !== null">{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}</span>
+																		<br>
+																		<span class="mt=action-time" *ngIf="selectedcandidate.InterviewDetails.InterviewFromTime !== null && selectedcandidate.InterviewDetails.InterviewToTime !== null">
+																			{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : 
+																			selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" :
+																			 selectedcandidate.InterviewDetails.InterviewToTime}}
+																			 </span>
 																		<span class="mt-action-dot bg-green"></span>
-																		<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top"
-															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,"Selected")'>
-															{{selectedcandidate.InterviewDetails.Status}}</a></span>
+																		<span class="mt=action-time">
+																			<a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+																			 (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,"Selected")'>{{selectedcandidate.InterviewDetails.Status}}</a>
+																			 </span>
 																	</div>
 
 																	<div class="mt-action-buttons ">
@@ -133,30 +146,28 @@
 																				<div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Not suitable'.toLowerCase()">Not allowed</div>
 																				<div *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() == 'Unfit'.toLowerCase()">Not allowed</div>
 																				<button class="btn blue btn-outline btn-circle btn-sm" *ngIf="selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Transferred'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Not suitable'.toLowerCase() && selectedcandidate.InterviewDetails.Status.toLowerCase() != 'Unfit'.toLowerCase()"
-																					type="button" data-toggle="dropdown" aria-expanded="false"> Actions
-                                                                <i class="fa fa-angle-down"></i>
-                                                            </button>
+																					type="button" data-toggle="dropdown" aria-expanded="false"> Actions<i class="fa fa-angle-down"></i>
+																					</button>
 																				<ul class="dropdown-menu" style="position:relative !important; min-width:130px;" role="menu">
 																					<li *ngIf="!selectedcandidate.isInterviewScheduled && !selectedcandidate.isAwaitingApproval">
 																						<button class="btn btn-default btnLink " [disabled]='canScheduleInterview(selectedcandidate.InterviewDetails.Status)' (click)='onScheduleInterviewClick(selectedcandidate)'>
-                                                                        <i class="fa fa-calendar-check-o"></i> Schedule
-                                                                    </button>
+																							<i class="fa fa-calendar-check-o"></i> Schedule</button>
 																					</li>
 																					<li class="divider" *ngIf="selectedcandidate.isInterviewScheduled"> </li>
 
 																					<li>
 																						<button class="btn btn-default btnLink " *ngIf="selectedcandidate.isInterviewScheduled" (click)='onReScheduleInterviewClick(selectedcandidate)'>
-                                                                        <i class="fa fa-calendar-check-o"></i> Re-Schedule
-                                                                    </button>
+																							<i class="fa fa-calendar-check-o"></i> Re-Schedule
+																						</button>
 																					</li>
 																					<li class="divider"> </li>
 																					<li>
 																						<button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)' (click)='onCancelInterviewClick(selectedcandidate)'>
-                                                                        <i class="fa fa-times"></i>Cancel Interview</button>
+																							<i class="fa fa-times"></i>Cancel Interview
+																						</button>
 																					</li>
 																					<li class="divider" *ngIf='!isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'>
 																					</li>
-
 																				</ul>
 																			</div>
 																		</div>
@@ -165,42 +176,54 @@
 															</div>
 														</div>
 													</div>
-													<!-- END: Actions -->
+													<!-- END:  Tagged Candidate List -->
 												</div>
 											</div>
+											<!-- END Candidate Details List /TAB-->
 										</div>
-										<!-- END Candidate Details List -->
 
-										<!-- BEGIN Offered Candidate list -->
 										<div class="tab-pane" id="tab_Offered_Candidates">
-											<div class="tab-content slimScrollDiv" style="max-height: 300px;overflow-y:auto;">
+											<!-- BEGIN Offered Candidate list /TAB -->
+											<div class="tab-content slimScrollDiv" style="overflow-y:auto;">
 												<div class="tab-pane active" id="tab_actions_pending">
 													<!-- BEGIN: Actions -->
 													<div class="mt-actions" *ngFor="let selectedcandidate of OfferedCandidateForRRF">
 														<div class="mt-action">
 															<div class="mt-action-img">
-																<img src="../assets/pages/media/users/avatar10.jpg" class="CandidateImg" *ngIf="selectedcandidate.BinaryImage ==='' || selectedcandidate.BinaryImage === null">
-																<img src="{{selectedcandidate.BinaryImage}}" class="CandidateImg" *ngIf="selectedcandidate.BinaryImage !=='' || selectedcandidate.BinaryImage !== null"></div>
+																<img src="../assets/layouts/layout4/img/default-user.jpg" class="CandidateImg" *ngIf="selectedcandidate.BinaryImage === ''">
+																<img src="data:image/jpeg;base64,{{selectedcandidate.BinaryImage?selectedcandidate.BinaryImage:''}}" class="CandidateImg"
+																	*ngIf="selectedcandidate.BinaryImage !== ''">
+															</div>
 															<div class="mt-action-body">
 																<div class="mt-action-row">
 																	<div class="mt-action-info ">
 																		<div class="mt-action-details ">
-																			<span class="mt-action-author"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top"
-															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(selectedcandidate.CandidateID)'> 
-															{{selectedcandidate.Candidate}}</a></span>
+																			<span class="mt-action-author">
+																					<a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(selectedcandidate.CandidateID)'>{{selectedcandidate.Candidate}}</a>
+																					</span>
 																			<p class="mt-action-desc">Round: {{selectedcandidate.InterviewDetails.Round.Value}}</p>
 																			<p class="mt-action-desc">Mode: {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</p>
-																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">Skype ID:{{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}</p>
-																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">PassWord: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}</p>
+																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
+																				Skype ID:{{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}
+																			</p>
+																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
+																				PassWord: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}
+																			</p>
 																		</div>
 																	</div>
 																	<div class="mt-action-datetime " style="padding-right: 40px;">
-																		<span class="mt-action-date" *ngIf="selectedcandidate.InterviewDetails.InterviewDate !== null">{{selectedcandidate.InterviewDetails.InterviewDate === null ?"NA" :getDate(selectedcandidate.InterviewDetails.InterviewDate)}}</span>
-																		<br><span class="mt=action-time" *ngIf="selectedcandidate.InterviewDetails.InterviewFromTime !== null && selectedcandidate.InterviewDetails.InterviewToTime !== null">{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}</span>
+																		<span class="mt-action-date" *ngIf="selectedcandidate.InterviewDetails.InterviewDate !== null">
+																				{{selectedcandidate.InterviewDetails.InterviewDate === null ?"NA" :getDate(selectedcandidate.InterviewDetails.InterviewDate)}}
+																				</span>
+																		<br>
+																		<span class="mt=action-time" *ngIf="selectedcandidate.InterviewDetails.InterviewFromTime !== null && selectedcandidate.InterviewDetails.InterviewToTime !== null">
+																				{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}
+																				</span>
 																		<span class="mt-action-dot bg-green"></span>
-																		<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top"
-															tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>
-															{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}</a></span>
+																		<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
+																			(click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>
+																			{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}</a>
+																			</span>
 																	</div>
 																	<div class="mt-action-buttons ">
 																		<div class="btn-group btn-group-circle">
@@ -213,30 +236,27 @@
 													</div>
 													<!-- END: Actions -->
 												</div>
-
 											</div>
+											<!-- END Offered Candidate list /TAB-->
 										</div>
-										<!-- END Offered Candidate list -->
 									</div>
-									<!-- END tab -->
+									<!-- END Tabs -->
 								</div>
+								<!--END Cadidates list section -->
+
+								<!--BEGIN CANDIDATE HISTORY SECTION -->
 								<div class="col-md-5" style="border-left:1px solid gray">
 									<span class="caption-subject bold" *ngIf="IsBarchartDataShow" style="font-size : 14px">{{selectedCandidate}} Interview Feedback History</span>
 									<div class="row">
-										<base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
-                                        " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
-											(chartClick)="chartClicked($event) "></base-chart>
+										<base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions"
+											[legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
 									</div>
 									<span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
 									<div class="pull-right">
 										<button class="btn btn-circle btn-icon-only grey-cascade" *ngIf="IsHRConducted" (click)='onGenerateOffer()' tooltip="Generate Offer"
-											tooltipPlacement="top" tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true">
-                                                            <i class="fa fa-link"></i> 
-                                                        </button>
+											tooltipPlacement="top" tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true"><i class="fa fa-link"></i></button>
 										<button class="btn btn-circle btn-icon-only blue-dark" *ngIf="IsOffered" (click)='onUpdateStatus()' tooltip="Update Status"
-											tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true">
-                                                            <i class="glyphicon glyphicon-pencil"></i> 
-                                                        </button>
+											tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"><i class="glyphicon glyphicon-pencil"></i></button>
 									</div>
 									<br/>
 									<hr>
@@ -262,22 +282,18 @@
 									</div>
 									<hr *ngIf="IsOfferGenerate">
 									<!-- END offer generation form-->
+
 									<!-- BEGIN status update form-->
 									<div class="row" style="margin-top:20px;" *ngIf="IsUpdateStatus">
 										<form (submit)="saveUpdateStatus();">
 											<div class="form-group col-md-7">
 												<div class="dataTables_length" id="sample_1_length">
-													<label>Status:
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
-                                             [(ngModel)]="selectedStatus" required="" style="width: 159px!important;"
-											 >
-											 <option *ngFor="let status of CandidateUpdatedStatus" [ngValue]="status">{{status.Value}}</option>
-                                                <!--<option value="Offered">Offered</option>
-                                                <option value="Offered Accepted">Offered Accepted</option>
-                                                <option value="Absconded">Absconded</option>
-                                                <option value="Absconded">Joined</option>-->
-                                            </select>
-                                        </label>
+													<label>Status:</label>
+													<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="selectedStatus"
+														required="" style="width: 159px!important;">
+															<option *ngFor="let status of CandidateUpdatedStatus" [ngValue]="status">{{status.Value}}</option>
+															</select>
+
 												</div>
 											</div>
 
@@ -285,13 +301,13 @@
 												<div class="pull-right">
 													<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
 													<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button>													&nbsp;
-
 												</div>
 											</div>
 										</form>
 									</div>
 									<hr *ngIf="IsUpdateStatus">
 									<!-- END status update form-->
+
 									<!-- BEGIN Show interview round history -->
 									<table class="table table-hover">
 										<thead>
@@ -318,8 +334,7 @@
 													<br>
 													<span *ngIf="candidateHistory.InterviewActualTime != ''">Actual Time:{{getTime(candidateHistory.InterviewActualTime)}}</span>
 													<br>
-													<span *ngIf="candidateHistory.InterviewActualTime == '' && (candidateHistory.Status.toLowerCase() == 'Rejected'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'Selected'.toLowerCase() ||
-        candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase())"><a (click)='setActualTime(candidateHistory)'> Actual Time</a></span>
+													<span *ngIf="candidateHistory.InterviewActualTime == '' && (candidateHistory.Status.toLowerCase() == 'Rejected'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'Selected'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'Fitment Issue'.toLowerCase() || candidateHistory.Status.toLowerCase() == 'On Hold'.toLowerCase())"><a (click)='setActualTime(candidateHistory)'> Actual Time</a></span>
 												</td>
 												<!--<td> {{candidateHistory.InterviewMode.Value}} </td>-->
 												<td *ngIf="candidateHistory.Status.toLowerCase() != 'On Hold'.toLowerCase() && candidateHistory.Status.toLowerCase() != 'Fitment Issue'.toLowerCase()">
@@ -334,9 +349,9 @@
 										</tbody>
 									</table>
 									<span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>
-
 									<hr/>
 									<!-- END Show interview round history -->
+
 									<!-- BEGIN set actual time -->
 									<form (submit)='onSetActualTime()' *ngIf='setActualTimeForm'>
 										<div class="row">
@@ -354,12 +369,12 @@
 												<div class="pull-right">
 													<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
 													<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelActualTime()'>Cancel</button>													&nbsp;
-
 												</div>
 											</div>
 										</div>
 									</form>
 									<!-- END set actual time -->
+
 									<!-- BEGIN change Interview status-->
 									<form role="statusForm" (submit)='onChangeStatus()' *ngIf='showChangeStatus'>
 										<div>
@@ -373,11 +388,10 @@
 												<div class="col-lg-8">
 													<select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus" style="font-size: inherit;"
-														required>
-                                                        <!--<option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFID.Value}}</option>-->
-                                                        <option value="Selected"> Selected</option>
-                                                        <option value="Rejected"> Rejected</option>
-                                                    </select>
+														required><!--<option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFID.Value}}</option>-->
+															<option value="Selected"> Selected</option>
+															<option value="Rejected"> Rejected</option>
+															</select>
 												</div>
 											</div>
 											<br>
@@ -400,13 +414,12 @@
 												</div>
 
 											</div>
-
 										</div>
-
 										<hr style="margin-top: 50px;" />
 									</form>
 									<br/>
 									<!-- END change Interview status-->
+
 									<!--BEGIN Unfit functionality-->
 									<form role="candidateTransferForm" (submit)='transferCandidate()' *ngIf='IsAllowTransfer'>
 										<div>
@@ -420,8 +433,7 @@
 												<div class="col-lg-8">
 													<select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
 														[(ngModel)]='rrfToTrnasfer' tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" style="font-size: inherit;"
-														required>
-                                                        <option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFCODE}} - {{OpenRrf.Designation.Value}} - {{OpenRrf.RaisedBy.Value}}</option>
+														required><option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFCODE}} - {{OpenRrf.Designation.Value}} - {{OpenRrf.RaisedBy.Value}}</option>
                                                     </select>
 												</div>
 											</div>
@@ -445,49 +457,48 @@
 													<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelTransfer()'>Cancel</button>													&nbsp;
 													<button type="submit " class="btn blue " id="btnChangeStatus">Transfer</button>
 												</div>
-
 											</div>
-
 										</div>
-
 										<hr style="margin-top: 50px;" />
 									</form>
 									<!--END Unfit functionality-->
+
 									<br/>
 									<!--<div>
                                         <base-chart class="chart" *ngIf="barChartData.lent>0" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions
                                         " [legend]="barChartLegend " [chartType]="barChartType " (chartHover)="chartHovered($event) "
                                             (chartClick)="chartClicked($event) "></base-chart>
-                                    </div>-->
+										</div>-->
 
 								</div>
-							</div>
-							<!--Confirmation Box-->
-							<div id="prcedfrOffrgenration" class="modal fade">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<b>Proceed For Offer Generation</b>
-											<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-										</div>
-										<div id="modalBody" class="modal-body">
-											Do you really want to proceed for Offer Generation ?
-										</div>
-										<div class="modal-footer">
-											<button type="button" icon="fa-check" class="btn btn-info" (click)="proceedForOfferGeneration(InterviewID)" label="">Yes</button>
-											<button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label=" ">No</button>
+								<!--END CANDIDATE HISTORY SECTION -->
+
+								<!--BEGING CONFORMATION BOX FOR PROCEED OFFER GENERATION-->
+								<div id="prcedfrOffrgenration" class="modal fade">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<b>Proceed For Offer Generation</b>
+												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+											</div>
+											<div id="modalBody" class="modal-body">
+												Do you really want to proceed for Offer Generation ?
+											</div>
+											<div class="modal-footer">
+												<button type="button" icon="fa-check" class="btn btn-info" (click)="proceedForOfferGeneration(InterviewID)" label="">Yes</button>
+												<button type="button" icon="fa-check" class="btn btn-default" data-dismiss="modal" label=" ">No</button>
+											</div>
 										</div>
 									</div>
 								</div>
+								<!--END CONFORMATION BOX FOR PROCEED OFFER GENERATION-->
 							</div>
-
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- END PAGE BASE CONTENT -->
 		</div>
-		<!-- END PAGE BASE CONTENT -->
+		<!-- END CONTENT BODY -->
 	</div>
-	<!-- END CONTENT BODY -->
-</div>
-<!-- END CONTENT -->
+	<!-- END CONTENT -->

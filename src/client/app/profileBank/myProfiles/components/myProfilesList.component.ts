@@ -588,12 +588,10 @@ export class MyProfilesListComponent implements OnActivate {
                         this.resumeUploaded = true;
                         this.resumeName = FileList.item(i).name;
                     }
-                }
-                else {
+                } else {
                     this.toastr.error('Please upload document of type .doc, .docx, .pdf');
                 }
-            }
-            else {
+            } else {
                 this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
