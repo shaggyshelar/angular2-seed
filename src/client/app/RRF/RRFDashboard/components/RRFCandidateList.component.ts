@@ -16,11 +16,12 @@ import {RRFSpecificCandidateList, TransferInterview} from '../model/RRFCandidate
 import {Interview} from '../../../recruitmentCycle/shared/model/interview';
 import { RRFDetails } from '../../myRRF/models/rrfDetails';
 import { ProfileBankService} from  '../../../profileBank/shared/services/profileBank.service';
+import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 @Component({
     moduleId: module.id,
     selector: 'rrf-candidate-list',
     templateUrl: 'RRFCandidateList.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, RRFGridRowComponent, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, RRFGridRowComponent, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES,IfAuthorizeDirective],
     styleUrls: ['RRFDashboard.component.css'],
     providers: [ProfileBankService, ToastsManager]
 })
@@ -236,7 +237,7 @@ export class RRFCandidateListComponent implements OnActivate {
                         }
                     }
                     if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
-                        status.toLowerCase() === 'Joined' || status.toLowerCase() === 'absconded' || status.toLowerCase() === 'asked to leave') {
+                        status.toLowerCase() === 'joined' || status.toLowerCase() === 'absconded' || status.toLowerCase() === 'asked to leave') {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
                     }

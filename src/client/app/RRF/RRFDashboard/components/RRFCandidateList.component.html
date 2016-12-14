@@ -451,7 +451,7 @@
 											<br>
 											<div class="">
 												<div class="pull-left">
-													<a (click)="nevigateToInitiateRRF();"> Create New RRF</a>
+													<a [ifAuthorize]="['RRF.CREATERRFFORTRANSFER.MANAGE']" (click)="nevigateToInitiateRRF();"> Create New RRF</a>
 												</div>
 												<div class="pull-right">
 													<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelTransfer()'>Cancel</button>													&nbsp;
