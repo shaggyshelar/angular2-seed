@@ -229,12 +229,8 @@ export class MyProfilesListComponent implements OnActivate {
     }
     /**Takes confirmation from end User to delete profile */
     confirmDelete(ID: MasterData) {
-<<<<<<< HEAD
         this.CandidateID = ID;
         let modl: any = $('#deleteProfile' + ID.Value);
-=======
-        let modl: any = $('#deleteProfile'+ID.Id);
->>>>>>> b4b8b30a3fd4a1d346d4b6c45356a0812ef36077
         modl.modal('toggle');
     }
     /** OnRejection hide the confimation box and exit the delete process */
