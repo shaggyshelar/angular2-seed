@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, RouteSegment, Router, OnActivate} from '@angular/router';
-import { CandidateProfile,CareerProfile } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, CareerProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -21,10 +21,13 @@ export class MyProfilesViewComponent implements OnActivate {
     returnPath: string;
     TITLE: string = 'Profiles';
     count: number = 0;
-    CareerProfile :CareerProfile = new  CareerProfile();
+    CareerProfile: CareerProfile = new CareerProfile();
     CurrentCompony: string;
     Designation: string;
     TimeSpent: string;
+    ResumeText: string = 'Show Resume';
+    IsResumeShow: boolean = false;
+    ShowResume: boolean = false;
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router,
         public toastr: ToastsManager) {
@@ -35,15 +38,19 @@ export class MyProfilesViewComponent implements OnActivate {
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
         this.returnPath = this.getSessionOf<string>('onProfilesReturnPath', false);
-
+        this.getCandidateProfile();
+        this.getCandidateResume();
+    }
+    /**Get Candidate Profiles */
+    getCandidateProfile(){
         this._profileBankService.getCandidateProfile(this.CandidateID.Value)
             .subscribe(
             (results: CandidateProfile) => {
                 this.profile = results;
                 this.CareerProfile = this.profile.CandidateCareerProfile;
-                if(this.CareerProfile.length > 0){
-                    for(var index = 0; index < this.CareerProfile.length;index++){
-                        if(this.CareerProfile[index].IsCurrentCompany === true){
+                if (this.CareerProfile.length > 0) {
+                    for (var index = 0; index < this.CareerProfile.length; index++) {
+                        if (this.CareerProfile[index].IsCurrentCompany === true) {
                             this.CurrentCompony = this.CareerProfile[index].Company;
                             this.Designation = this.CareerProfile[index].DesignationRole;
                             this.TimeSpent = this.CareerProfile[index].TimeSpentInCompany;
@@ -54,7 +61,6 @@ export class MyProfilesViewComponent implements OnActivate {
                 this.convertCheckboxesValues();
             },
             error => this.errorMessage = <any>error);
-
     }
     /**Get data from session */
     getSessionOf<T>(variableName: string, isJson: Boolean): T {
@@ -124,5 +130,27 @@ export class MyProfilesViewComponent implements OnActivate {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+    }
+    showResume() {
+        if (this.ResumeText === 'Show Resume') {
+            this.ResumeText = 'Hide Resume';
+            this.IsResumeShow = true;
+        } else {
+            this.ResumeText = 'Show Resume';
+            this.IsResumeShow = false;
+        }
+    }
+    /** Get Candidate Resume */
+    getCandidateResume() {
+        this._profileBankService.getResume(this.CandidateID)
+            .subscribe(
+            (results: any) => {
+                if(results !== undefined){
+                    this.ShowResume = false;
+                }else{
+                    this.ShowResume = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
     }
 }

@@ -212,6 +212,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.NORECORDSFOUND = false;
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
@@ -733,11 +734,12 @@ export class MyProfilesListComponent implements OnActivate {
         this._rrfCandidatesList.getCandidateProfilesByRRF(rrfID)
             .subscribe(
             (results: any) => {
-                if (results.length !== undefined) {
+                if (results.length > 0) {
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     this.myProfilesList.Profiles = <any>results;
                     // this.AllCandidatesForRRF = results;
                     //this.CheckInterviewStatus(results);
+                    this.NORECORDSFOUND = false;;
                 } else {
                     //If No data present
                     //this.isNull = true;

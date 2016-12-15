@@ -228,14 +228,15 @@ export class MyProfilesAddComponent implements OnActivate {
         }
     }
     onSavePrimaryInfo(): void {
-        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-            this.profile.CommentsUpdated = true;
-            this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
-        } else {
-            this.profile.CommentsUpdated = false;
-        }
+
         if (!this.isExist) {
             if (this.validatePrimaryInfo()) {
+                if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                    this.profile.CommentsUpdated = true;
+                    this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+                } else {
+                    this.profile.CommentsUpdated = false;
+                }
                 this._profileBankService.editCandidateProfile(this.profile)
                     .subscribe(
                     results => {
@@ -271,11 +272,11 @@ export class MyProfilesAddComponent implements OnActivate {
                         this.toastr.error('Please enter contact no.');
                         submitFlag = false;
                     } else {
-                        if (this.profile.CandidateSkills.PrimarySkills === '') {
+                        if (this.profile.CandidateSkills.PrimarySkills === '' || this.profile.CandidateSkills.PrimarySkills === null) {
                             this.toastr.error('Please enter skills');
                             submitFlag = false;
                         } else {
-                            if (this.profile.Tag === '') {
+                            if (this.profile.Tag === '' || this.profile.CandidateSkills.PrimarySkills === null) {
                                 this.toastr.error('Please enter Tag');
                                 submitFlag = false;
                             } else {

@@ -17,12 +17,21 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
+
                     <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
-                    <a href="javascript:;" class="btn btn-icon-only purple pull-right" data-toggle="tooltip" data-placement="top" title="View Interview History"
-                        tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-                        (click)='getCandidateHistory(CandidateID)'>
-                        <i class="fa fa-history"> </i>
-                    </a>
+                    <div class="pull-right" style="margin-right:30px;">
+                        <a href="#ResumeId" class="btn blue" data-toggle="tooltip" data-placement="top" title="Candidate Resume" tooltip="Candidate Resume"
+                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+                            <i class="fa fa-file-o"></i> Resume
+                        </a>
+                        <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History"
+                            tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                            (click)='getCandidateHistory(CandidateID)'>
+                            <i class="fa fa-history"> </i>
+                        </a>
+                    </div>
+
+
                     <div *ngIf="profile!==null" class="details">
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
@@ -187,7 +196,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Current Company:</b></label>
                                                         <div class="col-md-6">
-                                                            {{CurrentCompony ? CurrentCompony  : "N/A"}}
+                                                            {{CurrentCompony ? CurrentCompony : "N/A"}}
                                                             <!--{{profile.CandidateCareerProfile[0] && profile.CandidateCareerProfile[0].IsCurrentCompany ? profile.CandidateCareerProfile[0].Company ? profile.CandidateCareerProfile[0].Company:"N/A"
                                                             :"N/A"}}-->
                                                         </div>
@@ -735,6 +744,35 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Candidate Resume -->
+                        <div class="portlet light nopadding topmargin" id="ResumeId">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Candidate Resume
+                                </div>
+                                <div class="caption pull-right" style="margin-right:30px;">
+                                    <a class="btn blue pull-right" data-toggle="tooltip" data-placement="top" title="Candidate Resume" tooltip="Candidate Resume"
+                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)="showResume();">
+                            {{ResumeText}} 
+                        </a>
+                                </div>
+                            </div>
+                            <div class="portlet-container" *ngIf="IsResumeShow">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                To Do: show resume
+                                            </div>
+                                            <span *ngIf="ShowResume">No resume found</span>
+                                        </div>
+                                    </form>
+                                    <!-- End FOrm -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Camdidate Resume End-->
                     </div>
                     <div *ngIf="profile===null">
                         <label class="control-label"> No profile information found..!</label>
