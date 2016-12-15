@@ -381,7 +381,8 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
-                                        <pie-chart [chartData]='chartDataForPie' (stackColChartInput)='onNotify($event)'></pie-chart>
+                                        <pie-chart [chartData]='chartDataForPie' *ngIf="IsPieChart" (stackColChartInput)='onNotify($event)'></pie-chart>
+                                        <span *ngIf="!IsPieChart"><center>No Data Found Recruitment status</center></span>
                                     </div>
                                 </div>
                             </div>
@@ -419,7 +420,8 @@
                                     <div class="portlet-body">
 
                                         <!--<stackedcol-chart [chartData]='ChartDataForStackedColChartTest'></stackedcol-chart>-->
-                                        <stackedcol-chart [chartData]='ChartDataForStackedColChart' (amChartInput)='onNotify($event)'></stackedcol-chart>
+                                        <stackedcol-chart [chartData]='ChartDataForStackedColChart' *ngIf="IsStackColChart" (amChartInput)='onNotify($event)'></stackedcol-chart>
+                                        <span *ngIf="!IsStackColChart"><center>No Data Found for {{status?status:""}} status</center></span>
                                     </div>
                                 </div>
                             </div>
@@ -434,7 +436,8 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
-                                        <am-chart [chartData]='chartDataForColumnChart' [rrfId]='rrfCode' (CandidateDetailInput)='onNotify($event)'></am-chart>
+                                        <am-chart [chartData]='chartDataForColumnChart' *ngIf="IsAmchart" [rrfId]='rrfCode' (CandidateDetailInput)='onNotify($event)'></am-chart>
+                                        <span *ngIf="!IsAmchart"><center>No Data Found for {{rrf?rrf:""}} RRF</center></span>
                                     </div>
                                 </div>
                             </div>
@@ -458,7 +461,7 @@
                                         <div class="row">
                                             <div class="col-md-6 col-sm-6 slimScrollDiv" style="max-height: 300px;overflow-y:auto;">
                                                 <candidate-details *ngIf="isNull" [CandidateData]='AllCandidatesForRRF' (BarchartInput)='onNotify($event)'></candidate-details>
-                                                <span *ngIf="!isNull"><center>No Data Found</center></span>
+                                                <span *ngIf="!isNull"><center>No Candidates found {{round?"for "+round : ""}}</center></span>
                                             </div>
                                             <!--<div class="row">-->
                                             <div class="col-md-6 col-sm-6">
