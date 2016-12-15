@@ -216,7 +216,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                     /**Get All Other selected Interviewers from multiselect Dropdown */
                     this.getOtherSelectedInterviewers(value);
                     /**Change Status According to Interview Schedule */
-                    this.changeStatus(this.ScheduleInterView.Status);
+                    //TODO:: Remove line once testing is sucessfull
+                    //this.changeStatus(this.ScheduleInterView.Status);
                     /**Check For Valid And Invalid Slots while scheduling interview */
                     var CheckOverlapping = this.checkAvailability();
 
@@ -266,6 +267,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     ScheduleCandidateInterView() {
         let cnfrmBox: any = $('#confirmSlot');
         cnfrmBox.modal('hide');
+        /**Change Status According to Interview Schedule */
+        this.changeStatus(this.ScheduleInterView.Status);
 
         if (this.isRejectedCandidate) {
             this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
@@ -380,7 +383,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
         return result;
     }
-    getNominatedInterviewersByRound(RoundId: string) {
+      getNominatedInterviewersByRound(RoundId: string) {
         if (this.CombinedInterviewRounds) {
             /**gets null incase of rescheduled */
             var selectedRound = this.CombinedInterviewRounds.find(x => x.InterviewRound.Id === parseInt(RoundId));
