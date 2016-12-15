@@ -65,8 +65,14 @@ export class DashboardComponent implements OnInit {
     AllCandidatesForRRF: RRFSpecificCandidateList[];
     isNull: boolean = false;
     IsBarchartDataShow: boolean = false;
+    IsStackColChart: boolean = false;
+    IsAmchart: boolean = false;
+    IsPieChart: boolean = false;
     CandidateRoundHistory: Array<Interview>;
     changeStatusCandidateID: MasterData = new MasterData();
+    status: string;
+    rrf: string;
+    round: string;
     public barChartLabels: string[] = new Array<string>();
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
@@ -322,6 +328,7 @@ export class DashboardComponent implements OnInit {
                     //If No data present
                     this.isNull = false;
                     this.IsBarchartDataShow = false;
+                    this.round = round;
                 }
             },
             error => this.errorMessage = <any>error);
@@ -501,8 +508,15 @@ export class DashboardComponent implements OnInit {
             (results: any) => {
                 if (results.length > 0) {
                     this.chartDataForPie = results;
+                    this.IsPieChart = true;
                     var _status = this.chartDataForPie[0].title !== null ? this.chartDataForPie[0].title : "";
                     this.GetRRFStatusCount(_status);
+                } else {
+                    this.IsPieChart = false;
+                    this.IsStackColChart = false;
+                    this.IsAmchart = false;
+                    this.isNull = false;
+                    this.IsBarchartDataShow
                 }
 
             },
@@ -516,8 +530,16 @@ export class DashboardComponent implements OnInit {
                 //this.chartDataForColumnChart = <any>results;
                 if (results.length > 0) {
                     this.ChartDataForStackedColChart = <any>results;
+                    this.IsStackColChart = true;
                     var _rrfid = this.ChartDataForStackedColChart[0].RRFID.Value !== null ? this.ChartDataForStackedColChart[0].RRFID.Value : 0;
                     this.GetTaggedCandidateStatusCount(_rrfid);
+                }
+                else {
+                    this.IsStackColChart = false;
+                    this.IsAmchart = false;
+                    this.isNull = false;
+                    this.IsBarchartDataShow =false;
+                    this.status = _status;
                 }
 
             },
@@ -540,6 +562,7 @@ export class DashboardComponent implements OnInit {
                 this.rrfCode = _rrfCode;
                 if (results.length > 0) {
                     this.chartDataForColumnChart = <any>results;
+                    this.IsAmchart = true;
                     for (var index = 0; index < this.chartDataForColumnChart.length; index++) {
                         if (this.chartDataForColumnChart[index].fitmentIssueVal > 0) {
                             var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
@@ -569,6 +592,11 @@ export class DashboardComponent implements OnInit {
                     }
 
                     this.getCanidatesForRRF(round, this.rrfCode, status)
+                } else {
+                    this.IsAmchart = false;
+                    this.isNull = false;
+                    this.IsBarchartDataShow = false;
+                    this.rrf = _rrfCode;
                 }
 
             },

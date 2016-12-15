@@ -26,8 +26,6 @@ export class CandidateDetailComponent implements OnChanges, OnInit {
   }
   ngOnChanges() {
     /** */
-  }
-  ngOnInit() {
     if (this.CandidateData !== undefined) {
       this.BarchartInput.emit({
         'inputstring': this.CandidateData[0].CandidateID,
@@ -35,6 +33,9 @@ export class CandidateDetailComponent implements OnChanges, OnInit {
         'inputstring2': this.CandidateData[0].InterviewDetails.RRFID
       });
     }
+  }
+  ngOnInit() {
+    
   }
   getCandidatesRoundHistory(Candidate: any) {
     this.BarchartInput.emit({
