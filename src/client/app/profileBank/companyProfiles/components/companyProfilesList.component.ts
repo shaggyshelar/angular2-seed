@@ -161,7 +161,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     onUpdateStauts() {
         if (this.selectedStatus.Id === undefined)
             this.selectedStatus = this.selectedStatus;
-        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

@@ -28,6 +28,7 @@ export class MyProfilesViewComponent implements OnActivate {
     ResumeText: string = 'Show Resume';
     IsResumeShow: boolean = false;
     ShowResume: boolean = false;
+    Resume:string;
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router,
         public toastr: ToastsManager) {
@@ -146,6 +147,7 @@ export class MyProfilesViewComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 if(results !== undefined){
+                    this.Resume=results.BinaryResume;
                     this.ShowResume = false;
                 }else{
                     this.ShowResume = true;

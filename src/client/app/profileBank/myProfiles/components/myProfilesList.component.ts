@@ -245,9 +245,10 @@ export class MyProfilesListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 this.toastr.success((<ResponseFromAPI>results).Message);
-                this.profile.Comments = results.Comments;
-                this.profile.Status = results.Status;
                 this.getMyProfiles();
+                // this.profile.Comments = results.Comments;
+                // this.profile.Status = results.Status;
+                
             },
             error => this.toastr.error(<any>error));
         this.onClearSelection(this.CandidateID);
@@ -380,7 +381,7 @@ export class MyProfilesListComponent implements OnActivate {
     onUpdateStauts() {
         //this.selectedStatus.Id = 0;
         //this.selectedStatus.Value = "Incomplete";
-        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -729,24 +730,26 @@ export class MyProfilesListComponent implements OnActivate {
         if (rrfID === '-1') {
             this.getMyProfiles();
             this.NORECORDSFOUND = false;
+        } else {
+            this.viewDetailsRRFId = rrfID;
+            this._rrfCandidatesList.getCandidateProfilesByRRF(rrfID)
+                .subscribe(
+                (results: any) => {
+                    if (results.length > 0) {
+                        this.myProfilesList.GrdOperations = new GrdOptions();
+                        this.myProfilesList.Profiles = <any>results;
+                        // this.AllCandidatesForRRF = results;
+                        //this.CheckInterviewStatus(results);
+                        this.NORECORDSFOUND = false;;
+                    } else {
+                        //If No data present
+                        //this.isNull = true;
+                        this.NORECORDSFOUND = true;
+                    }
+                },
+                error => this.errorMessage = <any>error);
         }
-        this.viewDetailsRRFId = rrfID;
-        this._rrfCandidatesList.getCandidateProfilesByRRF(rrfID)
-            .subscribe(
-            (results: any) => {
-                if (results.length > 0) {
-                    this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.myProfilesList.Profiles = <any>results;
-                    // this.AllCandidatesForRRF = results;
-                    //this.CheckInterviewStatus(results);
-                    this.NORECORDSFOUND = false;;
-                } else {
-                    //If No data present
-                    //this.isNull = true;
-                    this.NORECORDSFOUND = true;
-                }
-            },
-            error => this.errorMessage = <any>error);
+
     }
     showRRFDetails(rrfId: string) {
         //this.getRRFDetails(rrfId);

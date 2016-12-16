@@ -52,7 +52,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this.setPaginationValues();
         this.getLoggedInUser();
         this.getBlacklistedProfiles();
-       // this.getCandidateStatuses();
+        this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getEmail(EmailCode: any) {
@@ -139,7 +139,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         //if (this.selectedStatus.Id === undefined)
             //this.selectedStatus = this.profile.Status;
 
-        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

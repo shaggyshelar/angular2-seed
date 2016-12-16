@@ -213,7 +213,7 @@ export class AllProfilesListComponent implements OnActivate {
     onUpdateStauts() {
         //this.selectedStatus.Id = 0;
         //this.selectedStatus.Value = 'Incomplete';
-        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
                 if (results.StatusCode === APIResult.Success) {

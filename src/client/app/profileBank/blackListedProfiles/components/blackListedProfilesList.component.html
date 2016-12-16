@@ -152,7 +152,7 @@
                                                             tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile">
                                                             <i class="fa fa-edit "></i><!-- Edit Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" [disabled]='getEditAccess(blacklistedProfile.Owner)'
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" *ngIf='!getEditAccess(blacklistedProfile.Owner)'
                                                             (click)='SaveCandidateID(blacklistedProfile.CandidateID)' tooltip="Update Status"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
                                                             title="Update Status">
