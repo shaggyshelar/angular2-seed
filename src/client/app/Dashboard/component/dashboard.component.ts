@@ -89,8 +89,10 @@ export class DashboardComponent implements OnInit {
     StatusWiseRrfCount: any = [];
     PendingFeedback: any;
     InterviewAwaiting: any;
+    OpenRRFCount: any;
     /************END INITIATOR DASHBOARD properties */
     /************BEGIN RECRUITER HEAD DASHBOARD properties */
+    offeredCandidateCount: any;
     rrfTimeline: any;
     OfferedCandidate: any;
     public chartDataForPie: any = [];
@@ -390,6 +392,13 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             results => {
                 this.OpenRRF = <any>results;
+                if (this.OpenRRF.length > 0) {
+                    for (var index = 0; index < this.OpenRRF.length; index++) {
+                        if (this.OpenRRF[index].title.toLowerCase() === 'open') {
+                            this.OpenRRFCount = this.OpenRRF[index].value;
+                        }
+                    }
+                }
             },
             error => this.errorMessage = <any>error);
     }
@@ -474,8 +483,16 @@ export class DashboardComponent implements OnInit {
             results => {
                 this.StatusWiseRrfCount = <any>results;
                 if (this.StatusWiseRrfCount.length > 0) {
-                    this.Pending = this.StatusWiseRrfCount[1] ? this.StatusWiseRrfCount[1].value : '0';
-                    this.Open = this.StatusWiseRrfCount[0] ? this.StatusWiseRrfCount[0].value : '0';
+                    for (var index = 0; index < this.StatusWiseRrfCount.length; index++) {
+                        if (this.StatusWiseRrfCount[index].title.toLowerCase() === 'pending approval') {
+                            this.Pending = this.StatusWiseRrfCount[index].value;
+                        }
+                        if (this.StatusWiseRrfCount[index].title.toLowerCase() === 'open') {
+                            this.Open = this.StatusWiseRrfCount[index].value;
+                        }
+                    }
+
+
                 }
             },
             error => this.errorMessage = <any>error);
@@ -538,7 +555,7 @@ export class DashboardComponent implements OnInit {
                     this.IsStackColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;
-                    this.IsBarchartDataShow =false;
+                    this.IsBarchartDataShow = false;
                     this.status = _status;
                 }
 
@@ -608,6 +625,13 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             results => {
                 this.OfferedCandidate = <any>results;
+                if (this.OfferedCandidate.length > 0) {
+                    for (var index = 0; index < this.OfferedCandidate.length; index++) {
+                        if (this.OfferedCandidate[index].title.toLowerCase() === 'offered') {
+                            this.offeredCandidateCount = this.OfferedCandidate[index].value;
+                        }
+                    }
+                }
             },
             error => this.errorMessage = <any>error);
     }

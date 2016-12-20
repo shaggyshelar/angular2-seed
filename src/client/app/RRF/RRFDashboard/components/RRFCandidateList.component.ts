@@ -79,6 +79,7 @@ export class RRFCandidateListComponent implements OnActivate {
     ExpDateOfJoining: Date;
     IsOfferGenerate: boolean = false;
     IsUpdateStatus: boolean = false;
+    IsOfferedCandidate:boolean = false;
     UpdatedStatus: any;
     selectedStatus = new MasterData();
     CandidateUpdatedStatus: MasterData = new MasterData();
@@ -176,8 +177,9 @@ export class RRFCandidateListComponent implements OnActivate {
         this._rrfCandidatesList.getCandidatesForRRF(this.RRFID.Value)
             .subscribe(
             (results: any) => {
-                if (results.length !== undefined) {
+                if (results.length !== undefined && results.length > 0) {
                     // this.AllCandidatesForRRF = results;
+                    this.isNull = false;
                     this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
@@ -191,13 +193,14 @@ export class RRFCandidateListComponent implements OnActivate {
         this._rrfCandidatesList.getOfferedCandidatesForRRF(this.RRFID.Value)
             .subscribe(
             (results: any) => {
-                if (results.length !== undefined) {
+                if (results.length !== undefined && results.length > 0) {
                     // this.AllCandidatesForRRF = results;
                     this.OfferedCandidateForRRF = results;
+                    this.IsOfferedCandidate = false;
                     //this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
-                    this.isNull = true;
+                    this.IsOfferedCandidate = true;
                 }
             },
             error => this.errorMessage = <any>error);
@@ -228,7 +231,7 @@ export class RRFCandidateListComponent implements OnActivate {
                     this.CandidateRoundHistory = <any>results;
                     this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
                     if (status.toLowerCase() === 'selected') {
-                        if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewType.Value === 'HR' && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
+                        if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Round.Value.includes('HR') && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
                             this.IsHRConducted = true;
                             this.IsOffered = false;
                         } else {
@@ -236,9 +239,13 @@ export class RRFCandidateListComponent implements OnActivate {
                             this.IsHRConducted = false;
                         }
                     }
-                    if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
-                        status.toLowerCase() === 'joined' || status.toLowerCase() === 'absconded' || status.toLowerCase() === 'asked to leave') {
+                    else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
+                        status.toLowerCase() === 'joined') {
                         this.IsOffered = true;
+                        this.IsHRConducted = false;
+                    }
+                    else{
+                        this.IsOffered = false;
                         this.IsHRConducted = false;
                     }
                     this.isRoundHistoryPresent = false;
