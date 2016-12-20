@@ -281,8 +281,7 @@ export class CompanyProfilesListComponent implements OnActivate {
     getUpdateStatusAccess(Status: MasterData) {
         try {
             if (Status.Value.toLocaleLowerCase() === 'offered' ||
-                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined' ||
-                Status.Value.toLocaleLowerCase() === 'absconded' || Status.Value.toLocaleLowerCase() === 'ask to leave') {
+                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined') {
                 return false;
             } else { return true; }
         } catch (error) {

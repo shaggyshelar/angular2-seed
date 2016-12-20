@@ -49,7 +49,7 @@
                                         <div class="number">
                                             <h3 class="font-red-haze">
                                                 <!--<span class="counter" data-counter="counterup" data-value="134">134</span>-->
-                                                {{OfferedCandidate?OfferedCandidate[2]?OfferedCandidate[2].value:'0':'0'}}
+                                                {{offeredCandidateCount ? offeredCandidateCount : 0}}
                                             </h3>
                                             <small>OFFERED CANDIDATE</small>
                                         </div>
@@ -126,7 +126,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="78">{{Pending}}</span>-->
                                                 {{Pending?Pending:'0'}}
                                             </h3>
-                                            <small>PENDING FOR APPROVAL</small>
+                                            <small>PENDING RRF APPROVAL</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-pie-chart"></i>
@@ -153,7 +153,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="134">{{Open}}</span>-->
                                                 {{Open?Open:'0'}}
                                             </h3>
-                                            <small>OPEN</small>
+                                            <small>MY OPEN RRF</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-like"></i>
@@ -207,7 +207,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="27"></span>-->
                                                 {{InterviewAwaiting?InterviewAwaiting.value:'0'}}
                                             </h3>
-                                            <small>PENDING REQUEST </small>
+                                            <small>PENDING APPROVAL REQUEST </small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-user"></i>
@@ -238,9 +238,9 @@
                                         <div class="number">
                                             <h3 class="font-green-sharp">
                                                 <!--<span class="counter" data-counter="counterup" data-value="OpenRRF">{{OpenRRF}}</span>-->
-                                                {{OpenRRF?OpenRRF[0]?OpenRRF[0].value:'0':'0'}}
+                                                {{OpenRRFCount ? OpenRRFCount: 0}}
                                             </h3>
-                                            <small>OPEN RRF</small>
+                                            <small>ALL OPEN RRF</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-pie-chart"></i>
@@ -263,7 +263,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="">78</span>-->
                                                 {{OverdueRRF?OverdueRRF.value:'0'}}
                                             </h3>
-                                            <small>OVERDUE RRF</small>
+                                            <small>MY OVERDUE RRF</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-like"></i>
@@ -286,7 +286,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="27"></span>-->
                                                 {{CandidateJoining?CandidateJoining.value:'0'}}
                                             </h3>
-                                            <small>CANDIDATES JOINING</small>
+                                            <small>JOINING THIS MONTH</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-user-following"></i>
