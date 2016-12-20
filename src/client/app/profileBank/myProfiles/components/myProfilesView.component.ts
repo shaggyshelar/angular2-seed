@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, RouteSegment, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, CareerProfile } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, CareerProfile,EmploymentHistory } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -21,7 +21,6 @@ export class MyProfilesViewComponent implements OnActivate {
     returnPath: string;
     TITLE: string = 'Profiles';
     count: number = 0;
-    CareerProfile: CareerProfile = new CareerProfile();
     CurrentCompony: string;
     Designation: string;
     TimeSpent: string;
@@ -46,15 +45,14 @@ export class MyProfilesViewComponent implements OnActivate {
     getCandidateProfile(){
         this._profileBankService.getCandidateProfile(this.CandidateID.Value)
             .subscribe(
-            (results: CandidateProfile) => {
+            (results: any) => {
                 this.profile = results;
-                this.CareerProfile = this.profile.CandidateCareerProfile;
-                if (this.CareerProfile.length > 0) {
-                    for (var index = 0; index < this.CareerProfile.length; index++) {
-                        if (this.CareerProfile[index].IsCurrentCompany === true) {
-                            this.CurrentCompony = this.CareerProfile[index].Company;
-                            this.Designation = this.CareerProfile[index].DesignationRole;
-                            this.TimeSpent = this.CareerProfile[index].TimeSpentInCompany;
+                if (results.CandidateCareerProfile.length > 0){
+                    for (var index = 0; index < results.CandidateCareerProfile.length; index++) {
+                        if (results.CandidateCareerProfile[index].IsCurrentCompany === true) {
+                            this.CurrentCompony = results.CandidateCareerProfile[index].Company;
+                            this.Designation = results.CandidateCareerProfile[index].DesignationRole;
+                            this.TimeSpent = results.CandidateCareerProfile[index].TimeSpentInCompany;
                         }
                     }
                 }
