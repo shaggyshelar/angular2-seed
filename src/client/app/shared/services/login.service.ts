@@ -57,7 +57,7 @@ export class LoginService {
     }
 
     isAuthenticated() {
-        if (localStorage.getItem('access_token')) {
+        if (localStorage.getItem('access_token') !== null) {
             return true;
         } else {
             return false;

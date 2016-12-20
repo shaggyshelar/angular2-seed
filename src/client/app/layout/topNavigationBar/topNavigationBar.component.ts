@@ -32,6 +32,9 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
         this.subscription = this.loginService.getAuthEmitter()
             .subscribe((value: boolean) => { this.isAuthenticated = value; });
         this.getLoggedInUser();
+        if (!this.currentUser) {
+            this.logout();
+        }
 
     }
     getLoggedInUser() {

@@ -57,8 +57,18 @@
 							<div class="row">
 								<div class="col-md-12 ">
 									<fieldset class="fsStyle">
-										<legend class="legendStyle row">
-											<a data-toggle="collapse" class="btn btn-transparent red btn-outline btn-circle active" data-target="#demo"><i class="fa fa-plus-circle"></i> New Profile</a>
+										<legend class="legendStyle col-md-12 row">
+											<div class="col-md-6">
+											<a data-toggle="collapse" class="btn btn-transparent red btn-outline btn-circle active pull-left" data-target="#demo"><i class="fa fa-plus-circle"></i> New Profile</a>
+											</div>
+											<div class="col-md-6 pull-right" [hidden]="RRFList.length == 0">
+												<div  id="sample_1_length_1">
+													<select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
+															<option [value]="-1" >All My Profiles</option>
+															<option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
+													</select>
+												</div>
+											</div>
 										</legend>
 										<!--<br>-->
 										<div class="collapse row" id="demo">
@@ -363,15 +373,17 @@
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 </select>
 								</div>-->
-								<div class="col-md-2 col-sm-2" [hidden]="RRFList.length == 0">
+								<!--Test Comment-->
+								<!--<div class="col-md-2 col-sm-2" [hidden]="RRFList.length == 0">
 									<div class="dataTables_length" id="sample_1_length_1">
 										<select class="btn dropdown-toggle pull-right" required (change)='onSelectRRF($event.target.value)'>
-                                     			<option [value]="-1" >All RRF</option>
+                                     			<option [value]="-1" >All My Profiles</option>
                                      			<option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
                                 		   </select>
 									</div>
-								</div>
-							</div><br>
+								</div>-->
+							</div>
+							<!--<br>-->
 							<div class="row" *ngIf="!NORECORDSFOUND">
 								<div class="col-md-2 col-sm-2">
 									<div class="dataTables_length" id="sample_1_length">

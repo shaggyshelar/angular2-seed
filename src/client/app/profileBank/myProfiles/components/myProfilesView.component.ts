@@ -28,7 +28,7 @@ export class MyProfilesViewComponent implements OnActivate {
     ResumeText: string = 'Show Resume';
     IsResumeShow: boolean = false;
     ShowResume: boolean = false;
-    Resume:string;
+    Resume: string;
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router,
         public toastr: ToastsManager) {
@@ -40,10 +40,10 @@ export class MyProfilesViewComponent implements OnActivate {
         this.CandidateID.Value = this.params.split('ID')[0];
         this.returnPath = this.getSessionOf<string>('onProfilesReturnPath', false);
         this.getCandidateProfile();
-        this.getCandidateResume();
+
     }
     /**Get Candidate Profiles */
-    getCandidateProfile(){
+    getCandidateProfile() {
         this._profileBankService.getCandidateProfile(this.CandidateID.Value)
             .subscribe(
             (results: CandidateProfile) => {
@@ -136,6 +136,7 @@ export class MyProfilesViewComponent implements OnActivate {
         if (this.ResumeText === 'Show Resume') {
             this.ResumeText = 'Hide Resume';
             this.IsResumeShow = true;
+            this.getCandidateResume();
         } else {
             this.ResumeText = 'Show Resume';
             this.IsResumeShow = false;
@@ -146,10 +147,10 @@ export class MyProfilesViewComponent implements OnActivate {
         this._profileBankService.getResume(this.CandidateID)
             .subscribe(
             (results: any) => {
-                if(results !== undefined){
-                    this.Resume=results.BinaryResume;
+                if (results !== undefined) {
+                    this.Resume = results;
                     this.ShowResume = false;
-                }else{
+                } else {
                     this.ShowResume = true;
                 }
             },
