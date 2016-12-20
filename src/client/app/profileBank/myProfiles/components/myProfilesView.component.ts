@@ -40,7 +40,6 @@ export class MyProfilesViewComponent implements OnActivate {
         this.CandidateID.Value = this.params.split('ID')[0];
         this.returnPath = this.getSessionOf<string>('onProfilesReturnPath', false);
         this.getCandidateProfile();
-
     }
     /**Get Candidate Profiles */
     getCandidateProfile() {

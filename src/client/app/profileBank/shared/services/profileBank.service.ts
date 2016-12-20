@@ -297,7 +297,6 @@ export class ProfileBankService {
             .catch(this.handleError);
     }
     getResume(CandidateID: MasterData) {
-        // let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
         let url = Config.GetURL('/api/ProfileBank/GetCandidateResumeInHTMLFormat?candidateID=' + CandidateID.Value);
         this._spinnerService.show();
         return this.authHttp.get(url)

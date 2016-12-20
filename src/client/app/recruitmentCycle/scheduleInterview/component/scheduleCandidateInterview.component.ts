@@ -376,7 +376,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         }
         /**Find selected rounds object */
         var selectedRound = this.CombinedInterviewRounds.find(x => x.InterviewRound.Id === parseInt(_interviewRound));
-
         /**Find object of rounds whoes Sequence is prior (less) than selected round */
         var result = this.CombinedInterviewRounds
             .filter(y => parseFloat(y.Sequence) < parseFloat(selectedRound.Sequence))
