@@ -376,6 +376,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         }
         /**Find selected rounds object */
         var selectedRound = this.CombinedInterviewRounds.find(x => x.InterviewRound.Id === parseInt(_interviewRound));
+
         /**Find object of rounds whoes Sequence is prior (less) than selected round */
         var result = this.CombinedInterviewRounds
             .filter(y => parseFloat(y.Sequence) < parseFloat(selectedRound.Sequence))
@@ -383,7 +384,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
         return result;
     }
-      getNominatedInterviewersByRound(RoundId: string) {
+    getNominatedInterviewersByRound(RoundId: string) {
+        RoundId = RoundId.includes(':') ? RoundId.split(':')[1].trim() : RoundId;
         if (this.CombinedInterviewRounds) {
             /**gets null incase of rescheduled */
             var selectedRound = this.CombinedInterviewRounds.find(x => x.InterviewRound.Id === parseInt(RoundId));
