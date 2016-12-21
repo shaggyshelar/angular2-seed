@@ -7,13 +7,13 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI} from '../../../shared/model/common.model';
 import { CandidateProfile, BarChartData } from  '../../../profileBank/shared/model/myProfilesInfo';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+import { CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import { InterviewMode } from  '../../../shared/constantValue/index';
-import {CAROUSEL_DIRECTIVES, TOOLTIP_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import { CAROUSEL_DIRECTIVES, TOOLTIP_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
-import {RRFCandidateListService} from '../services/RRFCandidatesList.service';
-import {RRFSpecificCandidateList, TransferInterview} from '../model/RRFCandidateList';
-import {Interview} from '../../../recruitmentCycle/shared/model/interview';
+import { RRFCandidateListService} from '../services/RRFCandidatesList.service';
+import { RRFSpecificCandidateList, TransferInterview} from '../model/RRFCandidateList';
+import { Interview} from '../../../recruitmentCycle/shared/model/interview';
 import { RRFDetails } from '../../myRRF/models/rrfDetails';
 import { ProfileBankService} from  '../../../profileBank/shared/services/profileBank.service';
 import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
@@ -21,7 +21,14 @@ import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.dire
     moduleId: module.id,
     selector: 'rrf-candidate-list',
     templateUrl: 'RRFCandidateList.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, RRFGridRowComponent, CHART_DIRECTIVES, CAROUSEL_DIRECTIVES, BUTTON_DIRECTIVES,IfAuthorizeDirective],
+    directives: [ROUTER_DIRECTIVES,
+        TOOLTIP_DIRECTIVES,
+        RRFGridRowComponent,
+        CHART_DIRECTIVES,
+        CAROUSEL_DIRECTIVES,
+        BUTTON_DIRECTIVES,
+        IfAuthorizeDirective
+    ],
     styleUrls: ['RRFDashboard.component.css'],
     providers: [ProfileBankService, ToastsManager]
 })
@@ -79,7 +86,7 @@ export class RRFCandidateListComponent implements OnActivate {
     ExpDateOfJoining: Date;
     IsOfferGenerate: boolean = false;
     IsUpdateStatus: boolean = false;
-    IsOfferedCandidate:boolean = false;
+    IsOfferedCandidate: boolean = false;
     UpdatedStatus: any;
     selectedStatus = new MasterData();
     CandidateUpdatedStatus: MasterData = new MasterData();
@@ -94,11 +101,12 @@ export class RRFCandidateListComponent implements OnActivate {
 
     public barChartLabels: string[] = new Array<string>();
     public barChartData: any[] = new Array<string>();
-    // public barChartLabels: string[] = ['Business Logic', 'Technical Skills', 'Communication'];
+
+    // public barChartLabels: string[] = ['Business Logic', 'Technical Skills0', 'Technical Skills1', 'Technical Skills2', 'Technical Skills3', 'Technical Skills4', 'Communication Skil 2123456789'];
     // public barChartData: any[] = [
-    //     { data: [2, 5, 4], label: 'Technical 1' },
-    //     { data: [1, 3, 4], label: 'Technical 2' },
-    //     { data: [5, 3, 5], label: 'HR 1' }
+    //     { data: [2, 5, 2, 5, 2, 5, 4], label: 'Technical 1' },
+    //     { data: [1, 3, 2, 5, 2, 5, 4], label: 'Technical 2' },
+    //     { data: [5, 3, 2, 5, 2, 5, 5], label: 'HR 1' }
     // ];
     // public barChartLabels: string[] = ['No Data'];
     // public barChartData: any[] = [{ data: [0], label: 'No Data' }];
@@ -140,6 +148,10 @@ export class RRFCandidateListComponent implements OnActivate {
                 if (barChartData.functions && barChartData.ratingsData) {
                     this.IsBarchartDataShow = true;
                     this.barChartLabels = barChartData.functions;
+                    /** If function label goes beyond 25 char it update and add '...' @ the end of string.*/
+                    // this.barChartLabels = barChartData.functions.map(ele => {
+                    //     return ele.length > 25 ? ele.substring(0, 20) + '...' : ele;
+                    // });
                     this.barChartData = barChartData.ratingsData;
                 } else {
                     this.IsBarchartDataShow = false;
@@ -156,11 +168,11 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     chartClicked(e: any): void {
-        console.log(e);
+        //console.log(e);
     }
 
     chartHovered(e: any): void {
-        console.log(e);
+        //console.log(e);
     }
     // Get Updated status
     getUpdateStatus(candidateID: any) {
@@ -244,7 +256,7 @@ export class RRFCandidateListComponent implements OnActivate {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
                     }
-                    else{
+                    else {
                         this.IsOffered = false;
                         this.IsHRConducted = false;
                     }

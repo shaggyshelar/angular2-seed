@@ -110,11 +110,11 @@
 																<div class="mt-action-row">
 																	<div class="mt-action-info ">
 																		<div class="mt-action-details ">
-																			<span class="mt-action-author">
+																			<span class="mt-action-author text-capitalize">
 																				<a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
 																				(click)='redirectToView(selectedcandidate.CandidateID)'>{{selectedcandidate.Candidate}}</a>
 																				</span>
-																			<p class="mt-action-desc">Round: {{selectedcandidate.InterviewDetails.Round.Value}}</p>
+																			<p class="mt-action-desc">Round:<strong> {{selectedcandidate.InterviewDetails.Round.Value}}</strong></p>
 																			<p class="mt-action-desc">Mode: {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</p>
 																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
 																				Skype ID:{{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}
@@ -205,7 +205,7 @@
 																			<span class="mt-action-author">
 																					<a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(selectedcandidate.CandidateID)'>{{selectedcandidate.Candidate}}</a>
 																					</span>
-																			<p class="mt-action-desc">Round: {{selectedcandidate.InterviewDetails.Round.Value}}</p>
+																			<p class="mt-action-desc">Round:<strong> {{selectedcandidate.InterviewDetails.Round.Value}}</strong></p>
 																			<p class="mt-action-desc">Mode: {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</p>
 																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
 																				Skype ID:{{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}
