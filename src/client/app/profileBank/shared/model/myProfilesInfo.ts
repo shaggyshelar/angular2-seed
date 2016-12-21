@@ -25,6 +25,7 @@ export class CandidateProfile {
   public CandidateSkills = new Skills();
   public AadharCardNo: string = '';
   public CandidateTeamManagement = new TeamManagement();
+  public CandidateSocialInformation = new SocialInformation();
   public CandidateCareerProfile = new CareerProfile();
   public CandidateCurrentCompanyProfile = new EmploymentHistory();
   public CandidateMailDetails = new MailDetails();
@@ -98,6 +99,12 @@ export class TeamManagement {
   public TeamHandlingChallenges: string;
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
+}
+export class SocialInformation {
+  public FacebookID:string;
+  public TwitterID:string;
+  public GooglePlusID:string;
+  public LinkedinID:string;
 }
 export class MailDetails {
   //properties of candidate Mail Details

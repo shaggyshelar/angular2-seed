@@ -153,7 +153,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="134">{{Open}}</span>-->
                                                 {{Open?Open:'0'}}
                                             </h3>
-                                            <small>MY OPEN RRF</small>
+                                            <small>OPEN RRF</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-like"></i>
@@ -204,8 +204,11 @@
                                     <div class="display">
                                         <div class="number">
                                             <h3 class="font-purple-soft">
+                                                {{RRFAwaiting?RRFAwaiting.value:'0'}}
+                                                <small style="font-size: small;"> RRF</small>
                                                 <!--<span class="counter" data-counter="counterup" data-value="27"></span>-->
                                                 {{InterviewAwaiting?InterviewAwaiting.value:'0'}}
+                                                <small style="font-size: small;"> INTERVIEW</small>
                                             </h3>
                                             <small>PENDING APPROVAL REQUEST </small>
                                         </div>
@@ -240,7 +243,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="OpenRRF">{{OpenRRF}}</span>-->
                                                 {{OpenRRFCount ? OpenRRFCount: 0}}
                                             </h3>
-                                            <small>ALL OPEN RRF</small>
+                                            <small>ASSIGNED OPEN RRF</small>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-pie-chart"></i>

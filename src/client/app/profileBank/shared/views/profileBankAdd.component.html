@@ -34,16 +34,16 @@
                                     </div>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#tab_primaryInfo" data-toggle="tab">Quick Info</a>
+                                            <a href="#tab_primaryInfo" data-toggle="tab" id="btnQuick">Quick Info</a>
+                                        </li>
+                                        <li >
+                                            <a href="#tab_1_1" data-toggle="tab" (click)='onPersonalInfoTabClick()' id="BtnPersonal">Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_1" data-toggle="tab" (click)='onPersonalInfoTabClick()'>Personal Info</a>
+                                            <a href="#tab_1_3" data-toggle="tab" (click)="onSkillTabClick()" id="btnSkills">Skills</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_3" data-toggle="tab" (click)="onSkillTabClick()">Skills</a>
-                                        </li>
-                                        <li>
-                                            <a href="#tab_1_7" data-toggle="tab" (click)="onProfessionalInfoTabClick()">Professional Info</a>
+                                            <a href="#tab_1_7" data-toggle="tab" (click)="onProfessionalInfoTabClick()" id="btnProfessional">Professional Info</a>
                                         </li>
                                         <!--<li>
                                             <a href="#tab_1_2" data-toggle="tab">Qualification</a>
@@ -55,7 +55,7 @@
                                             <a href="#tab_1_6" data-toggle="tab">Team Mgt</a>
                                         </li>-->
                                         <li>
-                                            <a href="#tab_1_5" data-toggle="tab" (click)="onSalaryTabClick()">Salary Details</a>
+                                            <a href="#tab_1_5" data-toggle="tab" (click)="onSalaryTabClick()" id="btnSalary">Salary Details</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -134,10 +134,10 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label class="control-label">Follow Up Comments</label>
-                                                            <textarea class="form-control text-capitalize" rows="2" placeholder="Follow Up Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments"
-                                                                tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                tooltipEnable="!profile.FollowUpComments" (blur)="onSavePrimaryInfo()"
-                                                                autofocus tabindex="1">
+                                                            <textarea class="form-control text-capitalize" id="txtFollowUpForQuick" rows="2" placeholder="Follow Up Comments" style="resize:vertical"
+                                                                [(ngModel)]="profile.FollowUpComments" tooltip="Follow Up Comments"
+                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments"
+                                                                (blur)="onSavePrimaryInfo()" autofocus tabindex="1">
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -2187,49 +2187,54 @@
 
                                                             </div>
                                                         </form>
-                                                          <div class="portlet-title" style="margin-top:15px;">
-                                                                <div class="caption font-dark">
-                                                                    <span class="caption-subject bold uppercase">Social Information</span>
-                                                                </div>
+                                                        <div class="portlet-title" style="margin-top:15px;">
+                                                            <div class="caption font-dark">
+                                                                <span class="caption-subject bold uppercase">Social Information</span>
                                                             </div>
-                                                            <hr>
-                                                            <form>
+                                                        </div>
+                                                        <hr>
+                                                        <form>
                                                             <div class="row">
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
                                                                         <label>Facebook</label>
-                                                                        <input type="text" placeholder="Facebook Id" class="form-control" tooltip="Facebook Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            title="Enter Facebook id" tabindex="1" />
+                                                                        <!--[(ngModel)]="CandidateSocialInfo.FacebookID"-->
+                                                                        <input type="text" placeholder="Facebook Id" class="form-control" [(ngModel)]="CandidateSocialInfo.FacebookID" tooltip="Facebook Id"
+                                                                            tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                            title="Enter Facebook id" tabindex="34" />
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
                                                                         <label class="control-label">Twitter</label>
-                                                                        <input type="text" placeholder="Twitter Id" class="form-control" tooltip="Twitter Id" title="Enter Twitter id" tooltipPlacement="top"
-                                                                            tooltipTrigger="mouseenter" tabindex="2" />
+                                                                        <input type="text" placeholder="Twitter Id" class="form-control" [(ngModel)]="CandidateSocialInfo.TwitterID" tooltip="Twitter Id"
+                                                                            title="Enter Twitter id" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                            tabindex="35" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
                                                                         <label class="control-label">Google Plus</label>
-                                                                        <input type="text" placeholder="Google Plus" class="form-control" tooltip="Google Plus Id" title="Enter Google Plus id" tooltipPlacement="top"
-                                                                            tooltipTrigger="mouseenter" tabindex="3" />
+                                                                        <input type="text" placeholder="Google Plus" class="form-control" [(ngModel)]="CandidateSocialInfo.GooglePlusID" tooltip="Google Plus Id"
+                                                                            title="Enter Google Plus id" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" tabindex="36" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
                                                                         <label class="control-label">Linkedin</label>
-                                                                        <input type="text" placeholder="Linkedin" class="form-control" tooltip="Linkedin Id" title="Enter Linkedin id" tooltipPlacement="top"
-                                                                            tooltipTrigger="mouseenter" tabindex="4" />
+                                                                        <input type="text" placeholder="Linkedin" class="form-control" [(ngModel)]="CandidateSocialInfo.LinkedinID" tooltip="Linkedin Id"
+                                                                            title="Enter Linkedin id" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" tabindex="37" />
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            </form>
+                                                        </form>
                                                         <div class="margiv-top-10 pull-right">
-                                                            <a class="btn green " (click)='previousTab()' (keypress)="prevTabKeyPressed($event)" tabindex="34">
+                                                            <a class="btn green " (click)='previousTab()' (keypress)="prevTabKeyPressed($event)" tabindex="38">
                                                                 <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                Prev </a>
-                                                            <a class="btn green " (click)='nextTab()' (keypress)="nextTabKeyPressed($event)" tabindex="35">
+                                                            <a class="btn green " (click)='nextTab()' (keypress)="nextTabKeyPressed($event)" tabindex="39">
                                                          Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i> </a>
                                                         </div>
                                                     </form>

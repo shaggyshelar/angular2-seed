@@ -85,6 +85,7 @@ export class MyProfilesListComponent implements OnActivate {
     isViewRFF: Boolean = false;
     isViewRRFGrid: boolean = true;
     candidateMailDetails = new MailDetails();
+    IsDisable:boolean = true;
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
         private _router: Router,
@@ -205,6 +206,12 @@ export class MyProfilesListComponent implements OnActivate {
                 }
             },
             error => this.toastr.error(<any>error));
+    }
+    focusIn() {
+        this.IsDisable = true;
+    }
+    focusOut() {
+        this.IsDisable = false;
     }
     getMyProfiles() {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
