@@ -89,6 +89,7 @@ export class DashboardComponent implements OnInit {
     StatusWiseRrfCount: any = [];
     PendingFeedback: any;
     InterviewAwaiting: any;
+    RRFAwaiting: any;
     OpenRRFCount: any;
     /************END INITIATOR DASHBOARD properties */
     /************BEGIN RECRUITER HEAD DASHBOARD properties */
@@ -305,6 +306,7 @@ export class DashboardComponent implements OnInit {
         this.GetStatusWiseRRFCount();
         this.GetPendingFeedbackCount();
         this.GetInterviewAwaitingCount();
+        this.GetRRFAwaitingCount();
         //Head
         this.GetAllRrfStatusCount();
         //this.GetRRFStatusCount('Open');
@@ -512,6 +514,15 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             results => {
                 this.InterviewAwaiting = <any>results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /**Get RRF awaiting approval count*/
+    GetRRFAwaitingCount(): void {
+        this.dashboardService.getRRFAwaitingCount()
+            .subscribe(
+            results => {
+                this.RRFAwaiting = <any>results;
             },
             error => this.errorMessage = <any>error);
     }

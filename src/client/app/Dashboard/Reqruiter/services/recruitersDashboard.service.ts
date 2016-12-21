@@ -77,6 +77,15 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    // GET RRF Awaiting Count
+    getRRFAwaitingCount() {
+        let url = Config.GetURL('/api/Dashboards/GetPendingApprovalCountForApprover');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**Get all Overdue RRF's count*/
     getAllOverdueRRFCount() {
         let url = Config.GetURL('/api/Dashboards/GetOverdueRRFCountByRole');

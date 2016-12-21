@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
 import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience,
-    EmploymentHistory, Skills, SalaryDetails} from '../../shared/model/myProfilesInfo';
+    EmploymentHistory, Skills, SalaryDetails, SocialInformation} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 //import * as  _ from 'lodash';
@@ -51,6 +51,8 @@ export class MyProfilesAddComponent implements OnActivate {
     CandidateExperiences: CandidateExperience = new CandidateExperience();
     /**Employment History*/
     EmployersInformation: EmploymentHistory = new EmploymentHistory();
+    /**Social Information */
+    CandidateSocialInfo: SocialInformation = new SocialInformation();
     /**Employment History collection */
     EmployersInformationList: Array<EmploymentHistory> = new Array<EmploymentHistory>();
     /**Variables for Upload photo */
@@ -863,14 +865,36 @@ export class MyProfilesAddComponent implements OnActivate {
             this.previousTab();
         }
     }
+    setFocus() {
+        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnQuick'){
+            $('#txtFollowUpForQuick').focus();
+        }
+        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'BtnPersonal'){
+            $('#txtFirstName').focus();
+        }
+        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSkills'){
+            $('#txtFolloUpForSkill').focus();
+        }
+        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnProfessional'){
+            $('#txtFolloupForProf').focus();
+        }
+        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSalary'){
+            $('#txtFolloUpForSal').focus();
+        }
+    }
     nextTab() {
         $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        this.setFocus();
     }
+    
     previousTab() {
         $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+        this.setFocus();
     }
     onPersonalInfoTabClick() {
+        
         $('#txtFirstName').focus();
+       
     }
     onSkillTabClick() {
         $('#txtFolloUpForSkill').focus();
