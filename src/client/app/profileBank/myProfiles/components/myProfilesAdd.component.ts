@@ -453,7 +453,6 @@ export class MyProfilesAddComponent implements OnActivate {
     }
     onSaveSocialInfo(): void {
         this.profile.CandidateSocialInformation.CandidateID = this.CandidateID;
-        //TODO:need to change API
         if (!this.isExist) {
             this._profileBankService.editCandidateSocialInfo(this.profile.CandidateSocialInformation)
                 .subscribe(

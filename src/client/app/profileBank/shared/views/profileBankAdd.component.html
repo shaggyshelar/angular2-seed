@@ -671,40 +671,44 @@
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <form (submit)="onSaveSocialInfo();">
+                                                        <form>
                                                             <div class="row">
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
+                                                                        <i class="fa fa-facebook-official"></i>
                                                                         <label>Facebook</label>
                                                                         <!--[(ngModel)]="CandidateSocialInfo.FacebookID"-->
-                                                                        <input type="text" placeholder="Facebook Id" class="form-control" [(ngModel)]="CandidateSocialInfo.FacebookID" tooltip="Facebook Id"
+                                                                        <input type="text" placeholder="Facebook Link" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.FacebookID" tooltip="Facebook Link"
                                                                             tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            title="Enter Facebook id" tabindex="27" />
+                                                                            title="Enter Facebook link" (blur)="onSaveSocialInfo()" tabindex="27" />
                                                                     </div>
                                                                 </div>
 
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
+                                                                        <i class="fa fa-twitter"></i>
                                                                         <label class="control-label">Twitter</label>
-                                                                        <input type="text" placeholder="Twitter Id" class="form-control" [(ngModel)]="CandidateSocialInfo.TwitterID" tooltip="Twitter Id"
-                                                                            title="Enter Twitter id" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                                                        <input type="text" placeholder="Twitter Link" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.TwitterID" tooltip="Twitter Link"
+                                                                            title="Enter Twitter link" tooltipPlacement="top" tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()"
                                                                             tabindex="28" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
+                                                                        <i class="fa fa-google-plus-square"></i>
                                                                         <label class="control-label">Google Plus</label>
-                                                                        <input type="text" placeholder="Google Plus" class="form-control" [(ngModel)]="CandidateSocialInfo.GooglePlusID" tooltip="Google Plus Id"
-                                                                            title="Enter Google Plus id" tooltipPlacement="top"
-                                                                            tooltipTrigger="mouseenter" tabindex="29" />
+                                                                        <input type="text" placeholder="Google Plus Link" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.GooglePlusID" tooltip="Google Plus Link"
+                                                                            title="Enter Google Plus link" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()" tabindex="29" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <div class="form-group">
+                                                                        <i class="fa fa-linkedin-square"></i>
                                                                         <label class="control-label">Linkedin</label>
-                                                                        <input type="text" placeholder="Linkedin" class="form-control" [(ngModel)]="CandidateSocialInfo.LinkedinID" tooltip="Linkedin Id"
-                                                                            title="Enter Linkedin id" tooltipPlacement="top"
-                                                                            tooltipTrigger="mouseenter" tabindex="30" />
+                                                                        <input type="text" placeholder="Linkedin Link" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.LinkedinID" tooltip="Linkedin link"
+                                                                            title="Enter Linkedin link" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()" tabindex="30" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1609,7 +1613,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="control-label">Total Team Management Experience</label>
-                                                            <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical"
+                                                            <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience" style="resize:vertical"
                                                                 [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"
                                                                 (blur)='onSaveTeamManagementDetails()'></textarea>
                                                         </div>

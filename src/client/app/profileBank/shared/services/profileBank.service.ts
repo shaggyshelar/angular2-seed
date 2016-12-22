@@ -130,11 +130,10 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    editCandidateSocialInfo(CandidateSocialInfo: SocialInformation) {
-        //TODO:need to change API
-        let url = Config.GetURL('/api/ProfileBank/AddCandidateTeamManagementDetails');
+    editCandidateSocialInfo(CandidateSocialInformation: SocialInformation) {
+        let url = Config.GetURL('/api/ProfileBank/UpdateCandidateSocialInfo');
         this._spinnerService.show();
-        return this.authHttp.post(url, { CandidateSocialInfo })
+        return this.authHttp.post(url, { CandidateSocialInformation })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
