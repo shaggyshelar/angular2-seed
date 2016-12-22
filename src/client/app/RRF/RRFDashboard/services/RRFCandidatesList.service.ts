@@ -40,6 +40,16 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    getOtherCandidatesForRRF(RRFID: string) {
+        //TODO: need to change API
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewCompletedCandidatesForRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     getCandidatesForSelectedRRF(round: any, rrfid: any, status: any) {
         let url = Config.GetURL('/api/Dashboards/GetCandidatesForSelectedRRFAndInterviewStatus?RRFID=' + rrfid + '&InterviewRound=' + round + '&InterviewStatus=' + status);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');

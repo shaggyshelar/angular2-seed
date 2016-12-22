@@ -86,10 +86,13 @@
 									<div class="tabbable-line">
 										<ul class="nav nav-tabs ">
 											<li class="active">
-												<a href="#tab_Candidate_Details" data-toggle="tab" aria-expanded="true"> Candidate Details </a>
+												<a href="#tab_Candidate_Details" data-toggle="tab" aria-expanded="true"> Inprocess Candidates </a>
 											</li>
 											<li class="">
-												<a href="#tab_Offered_Candidates" data-toggle="tab" aria-expanded="false"> Offered Candidates </a>
+												<a href="#tab_Offered_Candidates" data-toggle="tab" aria-expanded="false" (click)="getOfferedCanidatesForRRF();"> Offered Candidates </a>
+											</li>
+											<li class="">
+												<a href="#tab_Other_Candidates" data-toggle="tab" aria-expanded="false" (click)="getOtherCanidatesForRRF();"> Other Candidates </a>
 											</li>
 										</ul>
 									</div>
@@ -176,8 +179,8 @@
 															</div>
 														</div>
 													</div>
-													<div *ngIf="!AllCandidatesForRRF.length>0"> 
-														<label class="form-control" > No candidate tagged yet..!</label>
+													<div *ngIf="!AllCandidatesForRRF.length>0">
+														<label class="form-control"> No candidate tagged yet..!</label>
 													</div>
 
 													<!-- END:  Tagged Candidate List -->
@@ -239,8 +242,8 @@
 														</div>
 													</div>
 
-													<div *ngIf="!OfferedCandidateForRRF.length>0"> 
-														<label class="form-control" > No candidate got offer yet..!</label>
+													<div *ngIf="!OfferedCandidateForRRF.length>0">
+														<label class="form-control"> No candidate got offer yet..!</label>
 													</div>
 
 													<!-- END: Actions -->
@@ -248,6 +251,70 @@
 											</div>
 											<!-- END Offered Candidate list /TAB-->
 										</div>
+
+										<div class="tab-pane" id="tab_Other_Candidates">
+											<!-- BEGIN Offered Candidate list /TAB -->
+											<div class="tab-content slimScrollDiv" style="overflow-y:auto;">
+												<div class="tab-pane active" id="tab_actions_pending">
+													<!-- BEGIN: Actions -->
+													<div class="mt-actions" *ngFor="let selectedcandidate of OtherCandidateForRRF">
+														<div class="mt-action">
+															<div class="mt-action-img">
+																<img src="../assets/layouts/layout4/img/default-user.jpg" class="CandidateImg" *ngIf="selectedcandidate.BinaryImage === ''">
+																<img src="data:image/jpeg;base64,{{selectedcandidate.BinaryImage?selectedcandidate.BinaryImage:''}}" class="CandidateImg"
+																	*ngIf="selectedcandidate.BinaryImage !== ''">
+															</div>
+															<div class="mt-action-body">
+																<div class="mt-action-row">
+																	<div class="mt-action-info ">
+																		<div class="mt-action-details ">
+																			<span class="mt-action-author">
+																					<a data-toggle="tooltip" data-placement="top" tooltip="Click to view complete profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(selectedcandidate.CandidateID)'>{{selectedcandidate.Candidate}}</a>
+																					</span>
+																			<p class="mt-action-desc">Round:<strong> {{selectedcandidate.InterviewDetails.Round.Value}}</strong></p>
+																			<p class="mt-action-desc">Mode: {{selectedcandidate.InterviewDetails.InterviewMode.Value}}</p>
+																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
+																				Skype ID:{{selectedcandidate.InterviewDetails.SkypeID?selectedcandidate.InterviewDetails.SkypeID.Value:"N/A"}}
+																			</p>
+																			<p class="mt-action-desc" *ngIf="selectedcandidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">
+																				PassWord: {{selectedcandidate.InterviewDetails.SkypePassword?selectedcandidate.InterviewDetails.SkypePassword:"N/A"}}
+																			</p>
+																		</div>
+																	</div>
+																	<div class="mt-action-datetime " style="padding-right: 40px;">
+																		<span class="mt-action-date" *ngIf="selectedcandidate.InterviewDetails.InterviewDate !== null">
+																				{{selectedcandidate.InterviewDetails.InterviewDate === null ?"NA" :getDate(selectedcandidate.InterviewDetails.InterviewDate)}}
+																				</span>
+																		<br>
+																		<span class="mt=action-time" *ngIf="selectedcandidate.InterviewDetails.InterviewFromTime !== null && selectedcandidate.InterviewDetails.InterviewToTime !== null">
+																				{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}
+																				</span>
+																		<span class="mt-action-dot bg-green"></span>
+																		<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
+																			(click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>
+																			{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}</a>
+																			</span>
+																	</div>
+																	<div class="mt-action-buttons ">
+																		<div class="btn-group btn-group-circle">
+																			<button type="button" class="btn btn-outline green btn-sm" (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>Show</button>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													<div *ngIf="!OfferedCandidateForRRF.length>0">
+														<label class="form-control"> No candidate got offer yet..!</label>
+													</div>
+
+													<!-- END: Actions -->
+												</div>
+											</div>
+											<!-- END Offered Candidate list /TAB-->
+										</div>
+
 									</div>
 									<!-- END Tabs -->
 								</div>

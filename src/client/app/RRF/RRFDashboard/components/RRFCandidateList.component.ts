@@ -65,6 +65,7 @@ export class RRFCandidateListComponent implements OnActivate {
     Candidates: Array<CandidateProfile>;
     AllCandidatesForRRF: RRFSpecificCandidateList[];
     OfferedCandidateForRRF: RRFSpecificCandidateList[];
+    OtherCandidateForRRF: RRFSpecificCandidateList[];
     CandidateRoundHistory: Array<Interview>;
     CandidateHistoryForActualTime: Array<Interview>;
     isRoundHistoryPresent: boolean = false;
@@ -122,6 +123,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.Candidates = new Array<CandidateProfile>();
         this.AllCandidatesForRRF = new Array<RRFSpecificCandidateList>();
         this.OfferedCandidateForRRF = new Array<RRFSpecificCandidateList>();
+        this.OtherCandidateForRRF = new Array<RRFSpecificCandidateList>();
         this.CandidateRoundHistory = new Array<Interview>();
     }
 
@@ -135,7 +137,8 @@ export class RRFCandidateListComponent implements OnActivate {
         this.selectedRRF = new RRFDetails();
         //TODO : Call API to get Candidates Specific to SelectedRRF
         this.getCanidatesForRRF();
-        this.getOfferedCanidatesForRRF();
+        //this.getOfferedCanidatesForRRF();
+        //this.getOtherCanidatesForRRF();
         this.getRRFDetails();
     }
     /**Bind candidtes rating in chart */
@@ -200,7 +203,7 @@ export class RRFCandidateListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    //Get All Canidate List whose status is offered
+    //Get All Candidate List whose status is offered
     getOfferedCanidatesForRRF() {
         this._rrfCandidatesList.getOfferedCandidatesForRRF(this.RRFID.Value)
             .subscribe(
@@ -208,6 +211,24 @@ export class RRFCandidateListComponent implements OnActivate {
                 if (results.length !== undefined && results.length > 0) {
                     // this.AllCandidatesForRRF = results;
                     this.OfferedCandidateForRRF = results;
+                    this.IsOfferedCandidate = false;
+                    //this.CheckInterviewStatus(results);
+                } else {
+                    //If No data present
+                    this.IsOfferedCandidate = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    //Get All Other Candidate List
+    getOtherCanidatesForRRF() {
+        //TODO : Need to change API
+        this._rrfCandidatesList.getOtherCandidatesForRRF(this.RRFID.Value)
+            .subscribe(
+            (results: any) => {
+                if (results.length !== undefined && results.length > 0) {
+                    // this.AllCandidatesForRRF = results;
+                    this.OtherCandidateForRRF = results;
                     this.IsOfferedCandidate = false;
                     //this.CheckInterviewStatus(results);
                 } else {
