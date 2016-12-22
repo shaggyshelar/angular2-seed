@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CandidateExperience, CandidateProfile, EmploymentHistory, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
-    OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
+    OtherDetails, Skills, TransferOwnershipMeta,SocialInformation} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -126,6 +126,15 @@ export class ProfileBankService {
         let url = Config.GetURL('/api/ProfileBank/AddCandidateTeamManagementDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateTeamManagement })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    editCandidateSocialInfo(CandidateSocialInfo: SocialInformation) {
+        //TODO:need to change API
+        let url = Config.GetURL('/api/ProfileBank/AddCandidateTeamManagementDetails');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateSocialInfo })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

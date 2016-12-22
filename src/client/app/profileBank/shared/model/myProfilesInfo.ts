@@ -105,6 +105,7 @@ export class SocialInformation {
   public TwitterID:string;
   public GooglePlusID:string;
   public LinkedinID:string;
+  public CandidateID:MasterData;
 }
 export class MailDetails {
   //properties of candidate Mail Details
