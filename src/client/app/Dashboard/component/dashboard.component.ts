@@ -450,7 +450,9 @@ export class DashboardComponent implements OnInit {
                 barChartData = results;
                 if (barChartData.functions && barChartData.ratingsData) {
                     this.IsBarchartDataShow = true;
-                    this.barChartLabels = barChartData.functions;
+                    this.barChartLabels = barChartData.functions.map(ele => {
+                        return ele.length > 25 ? ele.substring(0, 20) + '...' : ele;
+                    });;
                     this.barChartData = barChartData.ratingsData;
                 } else {
                     this.IsBarchartDataShow = false;

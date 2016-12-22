@@ -149,9 +149,9 @@ export class RRFCandidateListComponent implements OnActivate {
                     this.IsBarchartDataShow = true;
                     this.barChartLabels = barChartData.functions;
                     /** If function label goes beyond 25 char it update and add '...' @ the end of string.*/
-                    // this.barChartLabels = barChartData.functions.map(ele => {
-                    //     return ele.length > 25 ? ele.substring(0, 20) + '...' : ele;
-                    // });
+                    this.barChartLabels = barChartData.functions.map(ele => {
+                        return ele.length > 25 ? ele.substring(0, 20) + '...' : ele;
+                    });
                     this.barChartData = barChartData.ratingsData;
                 } else {
                     this.IsBarchartDataShow = false;
