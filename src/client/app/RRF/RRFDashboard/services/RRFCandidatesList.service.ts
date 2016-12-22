@@ -41,8 +41,7 @@ export class RRFCandidateListService {
             .finally(() => this._spinnerService.hide());
     }
     getOtherCandidatesForRRF(RRFID: string) {
-        //TODO: need to change API
-        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewCompletedCandidatesForRRF?RRFID=' + RRFID);
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewRejectedCandidatesForRRF?RRFID=' + RRFID);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
         return this.authHttp.get(url)

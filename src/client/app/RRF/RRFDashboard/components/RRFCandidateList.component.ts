@@ -88,6 +88,7 @@ export class RRFCandidateListComponent implements OnActivate {
     IsOfferGenerate: boolean = false;
     IsUpdateStatus: boolean = false;
     IsOfferedCandidate: boolean = false;
+    IsOtherCandidate:boolean = false;
     UpdatedStatus: any;
     selectedStatus = new MasterData();
     CandidateUpdatedStatus: MasterData = new MasterData();
@@ -222,18 +223,17 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     //Get All Other Candidate List
     getOtherCanidatesForRRF() {
-        //TODO : Need to change API
         this._rrfCandidatesList.getOtherCandidatesForRRF(this.RRFID.Value)
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined && results.length > 0) {
                     // this.AllCandidatesForRRF = results;
                     this.OtherCandidateForRRF = results;
-                    this.IsOfferedCandidate = false;
+                    this.IsOtherCandidate = false;
                     //this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
-                    this.IsOfferedCandidate = true;
+                    this.IsOtherCandidate = true;
                 }
             },
             error => this.errorMessage = <any>error);
