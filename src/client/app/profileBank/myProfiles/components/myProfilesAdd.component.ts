@@ -451,6 +451,26 @@ export class MyProfilesAddComponent implements OnActivate {
                 });
         }
     }
+    onSaveSocialInfo(): void {
+        this.profile.CandidateSocialInformation.CandidateID = this.CandidateID;
+        //TODO:need to change API
+        if (!this.isExist) {
+            this._profileBankService.editCandidateSocialInfo(this.profile.CandidateSocialInformation)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+    }
 
     /**Function to fetch candidate EXPERIENCE details */
     GetCandidateExperience(candidateID: MasterData) {
@@ -866,19 +886,19 @@ export class MyProfilesAddComponent implements OnActivate {
         }
     }
     setFocus() {
-        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnQuick'){
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnQuick') {
             $('#txtFollowUpForQuick').focus();
         }
-        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'BtnPersonal'){
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'BtnPersonal') {
             $('#txtFirstName').focus();
         }
-        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSkills'){
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSkills') {
             $('#txtFolloUpForSkill').focus();
         }
-        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnProfessional'){
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnProfessional') {
             $('#txtFolloupForProf').focus();
         }
-        if( $('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSalary'){
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSalary') {
             $('#txtFolloUpForSal').focus();
         }
     }
@@ -886,15 +906,15 @@ export class MyProfilesAddComponent implements OnActivate {
         $('.nav-tabs > .active').next('li').find('a').trigger('click');
         this.setFocus();
     }
-    
+
     previousTab() {
         $('.nav-tabs > .active').prev('li').find('a').trigger('click');
         this.setFocus();
     }
     onPersonalInfoTabClick() {
-        
+
         $('#txtFirstName').focus();
-       
+
     }
     onSkillTabClick() {
         $('#txtFolloUpForSkill').focus();
