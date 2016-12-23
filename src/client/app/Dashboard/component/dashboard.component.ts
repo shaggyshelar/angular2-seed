@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
         switch (InputString.message) {
             case 'FromPieChart': this.GetRRFStatusCount(InputString.inputstring);
                 break;
-            case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring);
+            case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring,InputString.inputstring2);
                 break;
             case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring, InputString.inputstring2);
                 break;
@@ -390,17 +390,10 @@ export class DashboardComponent implements OnInit {
     }
     /**Get all Open RRF's count */
     GetAllOpenRRFCount(): void {
-        this.dashboardService.getAllStatusCount()
+        this.dashboardService.getMyOpenCountForRecruiter()
             .subscribe(
             results => {
                 this.OpenRRF = <any>results;
-                if (this.OpenRRF.length > 0) {
-                    for (var index = 0; index < this.OpenRRF.length; index++) {
-                        if (this.OpenRRF[index].title.toLowerCase() === 'open') {
-                            this.OpenRRFCount = this.OpenRRF[index].value;
-                        }
-                    }
-                }
             },
             error => this.errorMessage = <any>error);
     }
@@ -559,16 +552,18 @@ export class DashboardComponent implements OnInit {
             (results: any) => {
                 //this.chartDataForColumnChart = <any>results;
                 if (results.length > 0) {
+                    this.status = _status;
                     this.ChartDataForStackedColChart = <any>results;
                     this.IsStackColChart = true;
                     var _rrfid = this.ChartDataForStackedColChart[0].RRFID.Value !== null ? this.ChartDataForStackedColChart[0].RRFID.Value : 0;
-                    this.GetTaggedCandidateStatusCount(_rrfid);
+                    this.GetTaggedCandidateStatusCount(_rrfid,this.ChartDataForStackedColChart[0].status);
                 }
                 else {
                     this.IsStackColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;
                     this.IsBarchartDataShow = false;
+                    this.rrf ='';
                     this.status = _status;
                 }
 
@@ -585,11 +580,12 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     /**Get all interview round wise candidate count for specific RRF*/
-    GetTaggedCandidateStatusCount(_rrfCode: string): void {
+    GetTaggedCandidateStatusCount(_rrfCode: string, _rrfLabel: string): void {
         this.dashboardService.getTaggedCandidateStatusCount(_rrfCode)
             .subscribe(
             (results: any) => {
                 this.rrfCode = _rrfCode;
+                this.rrf = _rrfLabel;
                 if (results.length > 0) {
                     this.chartDataForColumnChart = <any>results;
                     this.IsAmchart = true;
@@ -619,6 +615,11 @@ export class DashboardComponent implements OnInit {
                             var status = 'Selected';
                             break;
                         }
+                        if (this.chartDataForColumnChart[index].taggedVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var status = 'Not Scheduled';
+                            break;
+                        }
                     }
 
                     this.getCanidatesForRRF(round, this.rrfCode, status)
@@ -626,7 +627,7 @@ export class DashboardComponent implements OnInit {
                     this.IsAmchart = false;
                     this.isNull = false;
                     this.IsBarchartDataShow = false;
-                    this.rrf = _rrfCode;
+                    this.rrf = _rrfLabel;
                 }
 
             },

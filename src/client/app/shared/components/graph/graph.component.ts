@@ -121,6 +121,17 @@ export class GraphComponent implements OnChanges {
         graph5.fillAlphas = 1;
         this.chart.addGraph(graph5);
 
+         // six graph
+        var graph6 = new AmCharts.AmGraph();
+        graph6.type = 'column';
+        graph6.title = 'Not Scheduled';
+        graph6.valueField = 'taggedVal';
+        graph6.balloonText = 'Not Scheduled :[[value]]';
+        graph6.lineAlpha = 0;
+        graph6.fillColors = '#42f4ee';
+        graph6.fillAlphas = 1;
+        this.chart.addGraph(graph6);
+
         // LEGEND
         var legend = new AmCharts.AmLegend();
         legend.maxColumns = 4;

@@ -23,6 +23,15 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    //Get open rrf for recruiter
+    getMyOpenCountForRecruiter() {
+        let url = Config.GetURL('/api/Dashboards/GetOpenRRFCountByRole');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**Get all RRF with candidate count for specific RRF status */
     getRRFStatusCount(status: string) {
         let url = Config.GetURL('/api/Dashboards/GetCandidatesForRRFsByRRFStatus?RRFStatus=' + status);

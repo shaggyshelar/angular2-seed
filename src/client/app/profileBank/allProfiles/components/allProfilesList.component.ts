@@ -228,7 +228,24 @@ export class AllProfilesListComponent implements OnActivate {
             error => this.toastr.error(<any>error));
         this.isCollapsed = false;
     }
-
+    onBlackListProfile() {
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
+                    this.profile.Status = new MasterData();
+                    this.allProfilesList.GrdOperations = new GrdOptions();
+                    this.getAllProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.profile.Status = new MasterData();
+            },
+            error => this.errorMessage = <any>error);
+        this.isCollapsed = false;
+    }
     closeUpdatePanel() {
         this.isCollapsed = false;
     }

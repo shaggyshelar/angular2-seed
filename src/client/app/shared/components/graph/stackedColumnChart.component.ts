@@ -82,15 +82,6 @@ export class StackedColumnComponent implements OnChanges {
                     'type': 'column',
                     'color': '#000000',
                     'valueField': 'offeredVal'
-                }, {
-                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
-                    'fillAlphas': 0.8,
-                    'labelText': '[[value]]',
-                    'lineAlpha': 0.3,
-                    'title': 'Open',
-                    'type': 'column',
-                    'color': '#000000',
-                    'valueField': 'openVal'
                 }],
             'categoryField': 'status',
             'categoryAxis': {
@@ -110,7 +101,8 @@ export class StackedColumnComponent implements OnChanges {
             var _rrfId: string = val.item.dataContext.RRFID ? val.item.dataContext.RRFID.Value : '0';
             amChartInput.emit({
                 'inputstring': _rrfId,
-                'message': 'FromStackedColChart'
+                'message': 'FromStackedColChart',
+                'inputstring2':val.item.category
             });
         }
         // } else {
