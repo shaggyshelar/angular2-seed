@@ -140,9 +140,9 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr *ngFor="let Qualification of profile.CandidateQualification">
-                                                                    <td> {{Qualification.Qualification.Value}}</td>
+                                                                    <td> {{Qualification.Qualification?Qualification.Qualification.Value:'N/A'}}</td>
                                                                     <td> {{Qualification.YearofPassing}}</td>
-                                                                    <td> {{Qualification.Grade.Value}}</td>
+                                                                    <td> {{Qualification.Grade?Qualification.Grade.Value:'N/A'}}</td>
                                                                     <td class="center">{{Qualification.Marks}} </td>
                                                                 </tr>
                                                             </tbody>
@@ -544,7 +544,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Visa :</b></label>
                                                         <div class="col-md-7">
-                                                            {{profile.CandidateOtherDetails.Visa.Value}}
+                                                            {{profile.CandidateOtherDetails.Visa?profile.CandidateOtherDetails.Visa.Value:'N/A'}}
                                                         </div>
                                                     </div>
                                                 </div>

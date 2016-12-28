@@ -141,7 +141,7 @@ export class MyProfilesViewComponent implements OnActivate {
     }
     /** Get Candidate Resume */
     getCandidateResume() {
-        this._profileBankService.getResume(this.CandidateID)
+        this._profileBankService.getResumeInHtml(this.CandidateID)
             .subscribe(
             (results: any) => {
                 if (results !== undefined) {

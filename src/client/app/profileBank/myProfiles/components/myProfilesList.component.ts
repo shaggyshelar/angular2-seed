@@ -85,7 +85,7 @@ export class MyProfilesListComponent implements OnActivate {
     isViewRFF: Boolean = false;
     isViewRRFGrid: boolean = true;
     candidateMailDetails = new MailDetails();
-    IsDisable:boolean = true;
+    IsDisable: boolean = true;
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
         private _router: Router,
@@ -255,7 +255,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this.getMyProfiles();
                 // this.profile.Comments = results.Comments;
                 // this.profile.Status = results.Status;
-                
+
             },
             error => this.toastr.error(<any>error));
         this.onClearSelection(this.CandidateID);
@@ -389,6 +389,25 @@ export class MyProfilesListComponent implements OnActivate {
         //this.selectedStatus.Id = 0;
         //this.selectedStatus.Value = "Incomplete";
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
+                    this.profile.Status = new MasterData();
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    this.getMyProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.profile.Status = new MasterData();
+            },
+            error => this.errorMessage = <any>error);
+        this.isCollapsed = false;
+    }
+
+    onBlacklistedProfiles() {
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

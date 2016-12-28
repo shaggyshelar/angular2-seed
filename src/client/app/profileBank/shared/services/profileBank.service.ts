@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CandidateExperience, CandidateProfile, EmploymentHistory, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
-    OtherDetails, Skills, TransferOwnershipMeta,SocialInformation} from '../model/myProfilesInfo';
+    OtherDetails, Skills, TransferOwnershipMeta, SocialInformation} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -222,6 +222,7 @@ export class ProfileBankService {
 
     }
     blackListCandidate(CandidateID: MasterData, Status: MasterData, Comments: string) {
+        Status.Value = 'Blacklist';
         let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })
@@ -304,8 +305,16 @@ export class ProfileBankService {
             })
             .catch(this.handleError);
     }
-    getResume(CandidateID: MasterData) {
+    getResumeInHtml(CandidateID: MasterData) {
         let url = Config.GetURL('/api/ProfileBank/GetCandidateResumeInHTMLFormat?candidateID=' + CandidateID.Value);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    getResume(CandidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/GetResume?candidateID=' + CandidateID.Value);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

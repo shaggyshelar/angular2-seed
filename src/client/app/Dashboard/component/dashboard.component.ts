@@ -295,6 +295,7 @@ export class DashboardComponent implements OnInit {
             time: 1000
         });
         //Recruiters
+        this.GetAssignedOpenRRFCount();
         this.GetAllOpenRRFCount();
         this.GetAllOverdueRRFCount();
         this.GetIncompleteProfileCount();
@@ -397,10 +398,19 @@ export class DashboardComponent implements OnInit {
                 if (this.OpenRRF.length > 0) {
                     for (var index = 0; index < this.OpenRRF.length; index++) {
                         if (this.OpenRRF[index].title.toLowerCase() === 'open') {
-                            this.OpenRRFCount = this.OpenRRF[index].value;
+                            //this.OpenRRFCount = this.OpenRRF[index].value;
                         }
                     }
                 }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    /**Get all Open RRF's count */
+    GetAssignedOpenRRFCount(): void {
+        this.dashboardService.getAssginedOpenRRFCount()
+            .subscribe(
+            results => {
+                this.OpenRRFCount = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -546,7 +556,7 @@ export class DashboardComponent implements OnInit {
                     this.IsStackColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;
-                    this.IsBarchartDataShow
+                    this.IsBarchartDataShow;
                 }
 
             },
@@ -561,10 +571,10 @@ export class DashboardComponent implements OnInit {
                 if (results.length > 0) {
                     this.ChartDataForStackedColChart = <any>results;
                     this.IsStackColChart = true;
-                    var _rrfid = this.ChartDataForStackedColChart[0].RRFID.Value !== null ? this.ChartDataForStackedColChart[0].RRFID.Value : 0;
+                    var _rrfid = this.ChartDataForStackedColChart[0].RRFID.Value !== null ?
+                        this.ChartDataForStackedColChart[0].RRFID.Value : 0;
                     this.GetTaggedCandidateStatusCount(_rrfid);
-                }
-                else {
+                } else {
                     this.IsStackColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;

@@ -41,6 +41,15 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    /**Get all Open RRF Assggned to current user  */
+    getAssginedOpenRRFCount() {
+        let url = Config.GetURL('/api/Dashboards/GetOpenRRFCountByRole');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**Get all interview round wise candidate count for specific RRF */
     getTaggedCandidateStatusCount(RrfCode: string) {
         let url = Config.GetURL('/api/Dashboards/GetCandidatesInPipelineForSelectedRRF?RRFID=' + RrfCode);
