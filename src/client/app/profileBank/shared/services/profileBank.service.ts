@@ -221,12 +221,7 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
 
     }
-<<<<<<< HEAD
-    blackListCandidate(CandidateID: MasterData, Status: MasterData, Comments: string) {
-        Status.Value = 'Blacklist';
-=======
     blackListCandidate(CandidateID: MasterData, Comments: string) {
->>>>>>> ca2438f3e007d3d4164a2d785a9965c37e55e764
         let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, Comments: Comments })
@@ -317,11 +312,7 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-<<<<<<< HEAD
     getResume(CandidateID: MasterData) {
-=======
-     getResumeToDownload(CandidateID: MasterData) {
->>>>>>> ca2438f3e007d3d4164a2d785a9965c37e55e764
         let url = Config.GetURL('/api/ProfileBank/GetResume?candidateID=' + CandidateID.Value);
         this._spinnerService.show();
         return this.authHttp.get(url)

@@ -120,7 +120,7 @@ export class RecentProfilesListComponent implements OnActivate {
         if (this.selectedStatus.Id === undefined)
             this.selectedStatus = this.profile.Status;
 
-        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
