@@ -37,17 +37,17 @@ export class GraphComponent implements OnChanges {
 
         // add click listener    
         this.chart.addListener('clickGraphItem', function (event: any) {
-            if(event.target.title === 'FitmentIssue') {
+            if (event.target.title === 'FitmentIssue') {
                 event.target.title = 'Fitment Issue';
             }
-            if(event.target.title === 'OnHold') {
+            if (event.target.title === 'OnHold') {
                 event.target.title = 'On Hold';
             }
-                CandidateDetailInput.emit({
-                    'inputstring': event.item.category,
-                    'message': 'FromAmChart',
-                'inputstring2' : rrfId,
-                'inputstring3' : event.target.title
+            CandidateDetailInput.emit({
+                'inputstring': event.item.category,
+                'message': 'FromAmChart',
+                'inputstring2': rrfId,
+                'inputstring3': event.target.title
             });
         });
         // AXES
@@ -128,7 +128,7 @@ export class GraphComponent implements OnChanges {
         graph6.valueField = 'taggedVal';
         graph6.balloonText = 'Not Scheduled :[[value]]';
         graph6.lineAlpha = 0;
-        graph6.fillColors = '#42f4ee';
+        graph6.fillColors = '#44b6ae';
         graph6.fillAlphas = 1;
         this.chart.addGraph(graph6);
 
