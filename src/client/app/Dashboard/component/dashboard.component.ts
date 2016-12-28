@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
         switch (InputString.message) {
             case 'FromPieChart': this.GetRRFStatusCount(InputString.inputstring);
                 break;
-            case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring);
+            case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring, InputString.inputstring2);
                 break;
             case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring, InputString.inputstring2);
                 break;
@@ -391,7 +391,7 @@ export class DashboardComponent implements OnInit {
     }
     /**Get all Open RRF's count */
     GetAllOpenRRFCount(): void {
-        this.dashboardService.getAllStatusCount()
+        this.dashboardService.getMyOpenCountForRecruiter()
             .subscribe(
             results => {
                 this.OpenRRF = <any>results;
@@ -480,8 +480,6 @@ export class DashboardComponent implements OnInit {
                 if (results !== null && results.length > 0) {
                     this.CandidateRoundHistory = <any>results;
                     this.BindRatingChart(CandidateID, this.CandidateRoundHistory[0].RRFID);
-                } else {
-
                 }
             },
             error => this.errorMessage = <any>error);
@@ -549,14 +547,14 @@ export class DashboardComponent implements OnInit {
                 if (results.length > 0) {
                     this.chartDataForPie = results;
                     this.IsPieChart = true;
-                    var _status = this.chartDataForPie[0].title !== null ? this.chartDataForPie[0].title : "";
+                    var _status = this.chartDataForPie[0].title !== null ? this.chartDataForPie[0].title : '';
                     this.GetRRFStatusCount(_status);
                 } else {
                     this.IsPieChart = false;
                     this.IsStackColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;
-                    this.IsBarchartDataShow;
+                    this.IsBarchartDataShow = false;
                 }
 
             },
@@ -569,16 +567,19 @@ export class DashboardComponent implements OnInit {
             (results: any) => {
                 //this.chartDataForColumnChart = <any>results;
                 if (results.length > 0) {
+                    this.status = _status;
                     this.ChartDataForStackedColChart = <any>results;
                     this.IsStackColChart = true;
+
                     var _rrfid = this.ChartDataForStackedColChart[0].RRFID.Value !== null ?
                         this.ChartDataForStackedColChart[0].RRFID.Value : 0;
-                    this.GetTaggedCandidateStatusCount(_rrfid);
+                    this.GetTaggedCandidateStatusCount(_rrfid, this.ChartDataForStackedColChart[0].status);
                 } else {
                     this.IsStackColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;
                     this.IsBarchartDataShow = false;
+                    this.rrf = '';
                     this.status = _status;
                 }
 
@@ -595,48 +596,60 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     /**Get all interview round wise candidate count for specific RRF*/
-    GetTaggedCandidateStatusCount(_rrfCode: string): void {
+    GetTaggedCandidateStatusCount(_rrfCode: string, _rrfLabel: string): void {
         this.dashboardService.getTaggedCandidateStatusCount(_rrfCode)
             .subscribe(
             (results: any) => {
                 this.rrfCode = _rrfCode;
+                this.rrf = _rrfLabel;
                 if (results.length > 0) {
                     this.chartDataForColumnChart = <any>results;
                     this.IsAmchart = true;
                     for (var index = 0; index < this.chartDataForColumnChart.length; index++) {
                         if (this.chartDataForColumnChart[index].fitmentIssueVal > 0) {
-                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var round = this.chartDataForColumnChart[index].status !== null ?
+                                this.chartDataForColumnChart[index].status : '';
                             var status = 'Fitment Issue';
                             break;
                         }
                         if (this.chartDataForColumnChart[index].onholdVal > 0) {
-                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var round = this.chartDataForColumnChart[index].status !== null ?
+                                this.chartDataForColumnChart[index].status : '';
                             var status = 'On Hold';
                             break;
                         }
                         if (this.chartDataForColumnChart[index].rejectedVal > 0) {
-                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var round = this.chartDataForColumnChart[index].status !== null ?
+                                this.chartDataForColumnChart[index].status : '';
                             var status = 'Rejected';
                             break;
                         }
                         if (this.chartDataForColumnChart[index].scheduledVal > 0) {
-                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var round = this.chartDataForColumnChart[index].status !== null ?
+                                this.chartDataForColumnChart[index].status : '';
                             var status = 'Scheduled';
                             break;
                         }
                         if (this.chartDataForColumnChart[index].selectedVal > 0) {
-                            var round = this.chartDataForColumnChart[index].status !== null ? this.chartDataForColumnChart[index].status : "";
+                            var round = this.chartDataForColumnChart[index].status !== null ?
+                                this.chartDataForColumnChart[index].status : '';
                             var status = 'Selected';
+                            break;
+                        }
+                        if (this.chartDataForColumnChart[index].taggedVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ?
+                                this.chartDataForColumnChart[index].status : '';
+                            var status = 'Not Scheduled';
                             break;
                         }
                     }
 
-                    this.getCanidatesForRRF(round, this.rrfCode, status)
+                    this.getCanidatesForRRF(round, this.rrfCode, status);
                 } else {
                     this.IsAmchart = false;
                     this.isNull = false;
                     this.IsBarchartDataShow = false;
-                    this.rrf = _rrfCode;
+                    this.rrf = _rrfLabel;
                 }
 
             },

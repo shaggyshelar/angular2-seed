@@ -386,9 +386,25 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        //this.selectedStatus.Id = 0;
-        //this.selectedStatus.Value = "Incomplete";
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
+                    this.profile.Status = new MasterData();
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    this.getMyProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.profile.Status = new MasterData();
+            },
+            error => this.errorMessage = <any>error);
+        this.isCollapsed = false;
+    }
+    onBlackListProfile() {
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

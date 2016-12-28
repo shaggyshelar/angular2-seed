@@ -93,7 +93,8 @@ export class StackedColumnComponent implements OnChanges {
                 //     'color': '#000000',
                 //     'valueField': 'openVal'
                 // }
-                ],
+            ],
+
             'categoryField': 'status',
             'categoryAxis': {
                 'gridPosition': 'start',
@@ -112,7 +113,8 @@ export class StackedColumnComponent implements OnChanges {
             var _rrfId: string = val.item.dataContext.RRFID ? val.item.dataContext.RRFID.Value : '0';
             amChartInput.emit({
                 'inputstring': _rrfId,
-                'message': 'FromStackedColChart'
+                'message': 'FromStackedColChart',
+                'inputstring2': val.item.category
             });
         }
         // } else {

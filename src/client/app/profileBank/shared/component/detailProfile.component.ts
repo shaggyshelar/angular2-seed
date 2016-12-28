@@ -54,7 +54,7 @@ export class DetailProfileComponent implements OnInit {
 
     /**Get resume by candidate code */
     getResume(candidateID: MasterData) {
-        this._profileBankService.getResume(candidateID)
+        this._profileBankService.getResumeToDownload(candidateID)
             .subscribe(
             results => {
                 this.binaryResume = <any>results;
