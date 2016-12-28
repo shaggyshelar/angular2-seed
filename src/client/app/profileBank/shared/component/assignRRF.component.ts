@@ -78,7 +78,7 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
             sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
         }
         if (this.returnPathToSchedule !== undefined)
-            this._router.navigate([this.returnPath]);
+            this._router.navigate([this.returnPathToSchedule]);
     }
 
     onSelectRRF(RRFID: string) {

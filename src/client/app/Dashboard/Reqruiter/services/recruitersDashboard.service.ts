@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
+import { MasterData, GrdOptions } from  '../../../shared/model/index';
 
 @Injectable()
 
@@ -118,6 +119,15 @@ export class RecruitersDashboardService {
         let url = Config.GetURL('/api/Dashboards/GetIncompleteProfilesByRole');
         this._spinnerService.show();
         return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get all Incomplete Profile*/
+    getIncompleteProfile(grdOptions:GrdOptions) {
+        let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfilesByRoles');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

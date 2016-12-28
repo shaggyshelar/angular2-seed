@@ -17,11 +17,15 @@ import {
     CandidateDetailComponent} from '../../shared/index';
 import { MasterData, ResponseFromAPI} from '../../shared/model/common.model';
 import {Interview} from '../../recruitmentCycle/shared/model/interview';
-import { CandidateProfile, BarChartData } from  '../../profileBank/shared/model/myProfilesInfo';
+import { CandidateProfile, AllCandidateProfiles, BarChartData } from  '../../profileBank/shared/model/myProfilesInfo';
 import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 
 import {RRFCandidateListService} from '../../RRF/RRFDashboard/services/RRFCandidatesList.service';
 import {RRFSpecificCandidateList, TransferInterview} from '../../RRF/RRFDashboard/model/RRFCandidateList';
+import { GrdOptions } from '../../shared/model/common.model';
+import { DetailProfileComponent } from '../../profileBank/shared/component/detailProfile.component';
+
+
 @Component({
     moduleId: module.id,
     selector: 'dashboard-component',
@@ -36,7 +40,8 @@ import {RRFSpecificCandidateList, TransferInterview} from '../../RRF/RRFDashboar
         InterviewApprovalComponent,
         IfAuthorizeDirective,
         CandidateDetailComponent,
-        CHART_DIRECTIVES
+        CHART_DIRECTIVES,
+        DetailProfileComponent
     ],
     providers: [RecruitersDashboardService, RRFCandidateListService]
 })
@@ -82,6 +87,9 @@ export class DashboardComponent implements OnInit {
         responsive: true
     };
     RRFID: MasterData = new MasterData();
+    grdOptionsIncompeteProfiles: GrdOptions = new GrdOptions();
+    IncompleteProfileList: AllCandidateProfiles = new AllCandidateProfiles();
+    IsRecords: boolean = false;
     /************END RECRUITER'S DASHBOARD properties */
     /************BEGIN INITIATOR DASHBOARD properties */
     Open: string = '0';
@@ -670,6 +678,67 @@ export class DashboardComponent implements OnInit {
                 }
             },
             error => this.errorMessage = <any>error);
+    }
+    // get imcomplete profiles for count
+    GetIncompletesProfiles() {
+        this.dashboardService.getIncompleteProfile(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            results => {
+                this.IsRecords = true;
+                this.IncompleteProfileList = <any>results;
+                let modl: any = $('#IncompleteProfile');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
+
+    }
+    onCancelClick() {
+        let modl: any = $('#IncompleteProfile');
+        modl.modal('toggle');
+    }
+    GetOverdueRRF() {
+        let modl: any = $('#OverdueRRF');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetOfferedCandidate() {
+        let modl: any = $('#OfferedCandidate');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetJoiningCandidate() {
+        let modl: any = $('#JoiningCandidate');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetPendingRRF() {
+        let modl: any = $('#PendingRRF');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetOpenRRF() {
+        let modl: any = $('#OpenRRF');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetFeedbackPending() {
+        let modl: any = $('#FeedbackPending');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetRRFAwaiting() {
+        let modl: any = $('#RRFAwaiting');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetInterviewAwaiting() {
+        let modl: any = $('#InterviewAwaiting');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetAssigenedOpenRRF() {
+        let modl: any = $('#AssignedOpenRRF');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetMyOverdeuRRF() {
+        let modl: any = $('#MyOverdueRRF');
+        modl.modal({ 'backdrop': 'static' });
+    }
+    GetCandidateJoiningMonth() {
+        let modl: any = $('#CandidateJoiningMonth');
+        modl.modal({ 'backdrop': 'static' });
     }
     /**Get all Overdue RRF's count */
     // GetAllOverdueRRFCount(): void {
