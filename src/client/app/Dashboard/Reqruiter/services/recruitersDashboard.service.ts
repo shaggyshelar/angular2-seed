@@ -133,11 +133,11 @@ export class RecruitersDashboardService {
             .finally(() => this._spinnerService.hide());
     }
     /**Get all Offered Candidate list*/
-    getOfferedCandidatesList(grdOptions: GrdOptions) {
-        //TODO: need to change API
-        let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfilesByRoles');
+    getOfferedCandidatesList(status: string) {
+        
+        let url = Config.GetURL('/api/ProfileBank/GetAllCandidatesByCurrentStatus?status='+status);
         this._spinnerService.show();
-        return this.authHttp.post(url, { grdOptions })
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -170,11 +170,10 @@ export class RecruitersDashboardService {
             .finally(() => this._spinnerService.hide());
     }
      /**Get Get Pending RRF Approval by role*/
-    getPendingRRFApproval(grdOptions: GrdOptions) {
-        //Need to change API
-        let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
+    getPendingRRFApproval(grdOptions: GrdOptions,status:string) {
+        let url = Config.GetURL('/api/RRF/GetMyRaisedRRFWithCurrentStatus');
         this._spinnerService.show();
-        return this.authHttp.post(url, { grdOptions })
+        return this.authHttp.post(url, {GrdOptions: {grdOptions} ,status })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

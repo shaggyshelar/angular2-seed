@@ -741,16 +741,15 @@ export class DashboardComponent implements OnInit {
     }
     GetOfferedCandidate() {
          this.IncompleteProfileList = new AllCandidateProfiles();
-        //TODO: need to change API
-        this.dashboardService.getOfferedCandidatesList(this.grdOptionsIncompeteProfiles)
+        this.dashboardService.getOfferedCandidatesList('Offered')
             .subscribe(
             (results: any) => {
-                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                if (results !== undefined && results.length > 0) {
                     this.IsProfile = true;
                     this.IsRRF = false;
                     this.IsInterview = false;
                     this.NoDataFound = false;
-                    this.IncompleteProfileList = <any>results;
+                    this.IncompleteProfileList.Profiles = <any>results;
                 } else {
                     this.IsRRF = false;
                     this.IsInterview = false;
@@ -786,8 +785,7 @@ export class DashboardComponent implements OnInit {
     }
     GetPendingRRF() {
         this.rrfList =[];
-        //TODO: need to change API
-        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles)
+        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles,'Pending Approval')
             .subscribe(
             (results: any) => {
                 if (results.RRFs !== undefined && results.RRFs.length > 0) {
