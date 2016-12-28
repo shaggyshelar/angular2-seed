@@ -777,7 +777,7 @@ export class DashboardComponent implements OnInit {
                     this.IsInterview = false;
                     this.NoDataFound = true;
                 }
-                this.Title = 'Candidate Joining This Month';
+                //this.Title = 'Candidate Joining This Month';
                 let modl: any = $('#CountDetails');
                 modl.modal({ 'backdrop': 'static' });
             },

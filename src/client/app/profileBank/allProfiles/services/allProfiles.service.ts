@@ -23,7 +23,8 @@ export class AllProfilesService {
             .finally(() => this._spinnerService.hide());
     }
     getIncompleteProfiles(grdOptions: GrdOptions) {
-        let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfiles');
+        let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfilesByRoles');
+        // let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfiles');
         this._spinnerService.show();
         return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)

@@ -24,7 +24,7 @@ export class AnimatedPieComponent implements OnInit {
       'pullOutRadius': -50,
       'marginTop': 30,
       'titles': [{
-        'text': 'Candidate joinings this month'
+        'text': 'This chart is In-progress'
       }],
       'allLabels': [{
         'y': '54%',

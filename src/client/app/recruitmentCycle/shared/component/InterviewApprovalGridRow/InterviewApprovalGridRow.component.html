@@ -1,5 +1,5 @@
 <div>
-    <div class="col-lg-12">
+    <!--<div class="col-lg-12">
         <div class="col-lg-6">
             <div class="col-lg-5">
                 Need Approval for :
@@ -17,8 +17,7 @@
                 {{interviewDetails.Reason}}
             </div>
             <div class="col-lg-7" *ngIf="interviewDetails.ApprovalType == 'Fitment Issue'">
-                Interviewer's comment:{{interviewDetails.Comments}}.
-                Reason:{{interviewDetails.TransferReason}}
+                Interviewer's comment:{{interviewDetails.Comments}}. Reason:{{interviewDetails.TransferReason}}
             </div>
 
         </div>
@@ -41,6 +40,35 @@
                 {{interviewDetails.Recruiter.Value}}
             </div>
 
+        </div>
+    </div> -->
+
+    <div class="mt-comments">
+        <div class="mt-comment">
+            <div class="mt-comment-img">
+                <!--<img src="../assets/pages/media/users/avatar1.jpg">-->
+                <span class="btn btn-circle btn-icon-only green">
+                    <i class="icon-bubbles"></i>
+                </span>
+            </div>
+            <div class="mt-comment-body">
+                <div class="mt-comment-info">
+                    <span class="mt-comment-author">{{interviewDetails.Recruiter.Value}} seek approval to scheule interview for <span class="uppercase"> {{interviewDetails.CandidateDetails.FullName}}</span></span>
+                    <div class="mt-comment-details"><span class="mt-comment-status mt-comment-status-rejected pull-right"> {{interviewDetails.ApprovalType}}</span>
+                    </div>
+                </div>
+                <div class="mt-comment-text" style="text-align: justify;">
+                    <div class="mt-comment-text"> Scheduling interview under <b>{{interviewDetails.RRFCode}}</b></div>
+                    <span *ngIf="interviewDetails.ApprovalType != 'Fitment Issue'">
+                       <b>{{interviewDetails.ApprovalType}} Reason : </b>{{interviewDetails.Reason}}
+                    </span>
+                    <span *ngIf="interviewDetails.ApprovalType == 'Fitment Issue'">
+                        <b> {{interviewDetails.ApprovalType}} Reason :</b>{{interviewDetails.TransferReason}}
+                        <br>
+                        <b>Interviewer's comment :</b> {{interviewDetails.Comments}}. 
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
