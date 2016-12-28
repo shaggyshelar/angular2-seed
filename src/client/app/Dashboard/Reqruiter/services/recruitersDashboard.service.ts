@@ -124,10 +124,66 @@ export class RecruitersDashboardService {
             .finally(() => this._spinnerService.hide());
     }
     /**Get all Incomplete Profile*/
-    getIncompleteProfile(grdOptions:GrdOptions) {
+    getIncompleteProfile(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfilesByRoles');
         this._spinnerService.show();
         return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get all Offered Candidate list*/
+    getOfferedCandidatesList(grdOptions: GrdOptions) {
+        //TODO: need to change API
+        let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfilesByRoles');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get Candidate joining Profile*/
+    getCandidatesjoining(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/Dashboards/GetDetailsOfCandidatesJoiningThisMonth');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /**Get Overdue RRF by role*/
+    getOverdueRRF(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/Dashboards/GetOverdueRRFsByRole');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+     /**Get Assigned Open RRF by role*/
+    getAssignedOpenRRF(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/Dashboards/GetOpenAndAssignedRRFsByRole');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+     /**Get Get Pending RRF Approval by role*/
+    getPendingRRFApproval(grdOptions: GrdOptions) {
+        //Need to change API
+        let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    //Get All open RRF 
+    getAllRRF() {
+        let url = Config.GetURL('/api/RRF/GetAllOpenRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -156,6 +212,34 @@ export class RecruitersDashboardService {
         let url = Config.GetURL('/api/Dashboards/GetAllCandidateStatus');
         this._spinnerService.show();
         return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    
+    //Get List of RRF waiting for Freeze or feedback
+    getFeedbackPendingRRF(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RRF/GetFeedbackRRFs');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    //get RRF approval list
+     getRRFApprovalList(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
+        this._spinnerService.show();
+         return this.authHttp.post(url ,{grdOptions})
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    //Get list of Interview waiting approval
+    getListOfInterviewReqApproval(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetSkippedInterviewsAwaitingApproval');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

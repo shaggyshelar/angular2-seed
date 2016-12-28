@@ -266,7 +266,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="">78</span>-->
                                                 {{OverdueRRF?OverdueRRF.value:'0'}}
                                             </h3>
-                                            <a (click)='GetMyOverdeuRRF();'><small>MY OVERDUE RRF</small></a>
+                                            <a (click)='GetOverdueRRF();'><small>MY OVERDUE RRF</small></a>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-like"></i>
@@ -289,7 +289,7 @@
                                                 <!--<span class="counter" data-counter="counterup" data-value="27"></span>-->
                                                 {{CandidateJoining?CandidateJoining.value:'0'}}
                                             </h3>
-                                            <a (click)='GetCandidateJoiningMonth();'><small>JOINING THIS MONTH</small></a>
+                                            <a (click)='GetJoiningCandidate();'><small>JOINING THIS MONTH</small></a>
                                         </div>
                                         <div class="icon">
                                             <i class="icon-user-following"></i>
@@ -509,17 +509,43 @@
 
                     </section>
                     <!--_____END GENERAL SECTION -->
-                    <!--Begin Incomplete box-->
-                    <div id="IncompleteProfile" class="modal fade">
+                    <!--Begin Count Details box-->
+                    <div id="CountDetails" class="modal fade">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <b>Incomplete Profiles </b>
+                                    <b>{{Title}} </b>
                                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
                                 </div>
-                                <div id="modalBody" class="modal-body" *ngIf="IsRecords">
-                                    <div *ngFor="let profile of IncompleteProfileList.Profiles">
-                                        <detail-profile [CandidateRecruitmentMailDetails]="" [selectedProfile]="profile"></detail-profile>
+                                <div id="modalBody" class="modal-body" style="overflow-y:scroll;height:400px;">
+                                    <div *ngIf="IsProfile">
+                                        <div *ngFor="let profile of IncompleteProfileList.Profiles">
+                                            <detail-profile [CandidateRecruitmentMailDetails]="" [selectedProfile]="profile"></detail-profile>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="IsRRF">
+                                        <div *ngFor="let rrf of rrfList">
+                                            <RRFGridRow [RRFData]=rrf [displayApproval]='false' [displayAssignedTo]='false'></RRFGridRow>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="IsInterview">
+                                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                            <thead style="word-wrap: break-word;">
+                                                <tr width="50px">
+                                                    <td> <b>Interview Details</b> </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="odd gradeX" *ngFor="let interview of interviewApproval">
+                                                    <td>
+                                                        <interviewApp-gridRow [interviewDetails]=interview></interviewApp-gridRow>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="NoDataFound">
+                                        <center>No data found</center>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -528,205 +554,8 @@
                             </div>
                         </div>
                     </div>
-                    <!--END Incomplete Box-->
-                    <!--Begin Overdue RRF box-->
-                    <div id="OverdueRRF" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Overdue RRF </b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Over due
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Overdue RRF Box-->
-                    <!--Begin Offered Candidate box-->
-                    <div id="OfferedCandidate" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Offered Candidate List</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Offered Candidate
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Offered Candidate  Box-->
-                    <!--Begin Joining Candidate box-->
-                    <div id="JoiningCandidate" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Joining Candidate List</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Joining Candidate
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Joining Candidate  Box-->
-                    <!--Begin Pendiding RRF box-->
-                    <div id="PendingRRF" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Pendiding RRF</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Pendiding RRF
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Pendiding RRF Box-->
-                    <!--Begin Open RRF box-->
-                    <div id="OpenRRF" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Open RRF</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Open RRF
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Open RRF Box-->
-                    <!--Begin Feedback Pending box-->
-                    <div id="FeedbackPending" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Feedback Pending</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Feedback Pending
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Feedback Pending Box-->
-                    <!--Begin RRF Awaiting box-->
-                    <div id="RRFAwaiting" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>RRF Awaiting</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    RRF Awaiting
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END RRF Awaiting Box-->
-                    <!--Begin Interview Awaiting box-->
-                    <div id="InterviewAwaiting" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Interview Awaiting</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Interview Awaiting
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Interview Awaiting Box-->
-                    <!--Begin Assigned Open RRF box-->
-                    <div id="AssignedOpenRRF" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Assigned Open RRF</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Assigned Open RRF
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Assigned Open RRF Box-->
-                    <!--Begin My Overdue RRF box-->
-                    <div id="MyOverdueRRF" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>My Overdue RRF</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    My Overdue RRF
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END My Overdue RRF Box-->
-                    <!--Begin Candidate Joining this month box-->
-                    <div id="CandidateJoiningMonth" class="modal fade">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <b>Candidate Joining this month</b>
-                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                </div>
-                                <div id="modalBody" class="modal-body">
-                                    Candidate Joining this month
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--END Candidate Joining this month Box-->
+                    <!--END Count Details Box-->
+
                 </div>
             </div>
             <!-- END PAGE CONTENT INNER -->

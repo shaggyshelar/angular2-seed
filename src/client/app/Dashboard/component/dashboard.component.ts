@@ -24,8 +24,10 @@ import {RRFCandidateListService} from '../../RRF/RRFDashboard/services/RRFCandid
 import {RRFSpecificCandidateList, TransferInterview} from '../../RRF/RRFDashboard/model/RRFCandidateList';
 import { GrdOptions } from '../../shared/model/common.model';
 import { DetailProfileComponent } from '../../profileBank/shared/component/detailProfile.component';
-
-
+import { RRFDetails, AllRRFStatusCount  } from '../../RRF/myRRF/models/rrfDetails';
+import { RRFGridRowComponent} from '../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
+import { InterviewApproval } from '../../recruitmentCycle/shared/component/InterviewApproval/model/interviewApproval';
+import { InterviewApprovalGridRowComponent } from  '../../recruitmentCycle/shared/component/InterviewApprovalGridRow/InterviewApprovalGridRow.component';
 @Component({
     moduleId: module.id,
     selector: 'dashboard-component',
@@ -41,7 +43,9 @@ import { DetailProfileComponent } from '../../profileBank/shared/component/detai
         IfAuthorizeDirective,
         CandidateDetailComponent,
         CHART_DIRECTIVES,
-        DetailProfileComponent
+        DetailProfileComponent,
+        RRFGridRowComponent,
+        InterviewApprovalGridRowComponent
     ],
     providers: [RecruitersDashboardService, RRFCandidateListService]
 })
@@ -89,7 +93,13 @@ export class DashboardComponent implements OnInit {
     RRFID: MasterData = new MasterData();
     grdOptionsIncompeteProfiles: GrdOptions = new GrdOptions();
     IncompleteProfileList: AllCandidateProfiles = new AllCandidateProfiles();
-    IsRecords: boolean = false;
+    IsProfile: boolean = false;
+    IsRRF: boolean = false;
+    IsInterview:boolean = false;
+    NoDataFound: boolean = false;
+    Title: string;
+    rrfList: RRFDetails[] = [];
+    interviewApproval: InterviewApproval[] = [];
     /************END RECRUITER'S DASHBOARD properties */
     /************BEGIN INITIATOR DASHBOARD properties */
     Open: string = '0';
@@ -681,64 +691,230 @@ export class DashboardComponent implements OnInit {
     }
     // get imcomplete profiles for count
     GetIncompletesProfiles() {
+        this.IncompleteProfileList = new AllCandidateProfiles();
         this.dashboardService.getIncompleteProfile(this.grdOptionsIncompeteProfiles)
             .subscribe(
-            results => {
-                this.IsRecords = true;
-                this.IncompleteProfileList = <any>results;
-                let modl: any = $('#IncompleteProfile');
+            (results: any) => {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.IsProfile = true;
+                    this.IsRRF = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = false;
+                    this.IncompleteProfileList = <any>results;
+                } else {
+                    this.IsRRF = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Incomplete Profile';
+                let modl: any = $('#CountDetails');
                 modl.modal({ 'backdrop': 'static' });
             },
             error => this.errorMessage = <any>error);
 
     }
     onCancelClick() {
-        let modl: any = $('#IncompleteProfile');
+        let modl: any = $('#CountDetails');
         modl.modal('toggle');
     }
     GetOverdueRRF() {
-        let modl: any = $('#OverdueRRF');
-        modl.modal({ 'backdrop': 'static' });
+        this.rrfList =[];
+        this.dashboardService.getOverdueRRF(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.IsRRF = true;
+                    this.NoDataFound = false;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Overdue RRF';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetOfferedCandidate() {
-        let modl: any = $('#OfferedCandidate');
-        modl.modal({ 'backdrop': 'static' });
+         this.IncompleteProfileList = new AllCandidateProfiles();
+        //TODO: need to change API
+        this.dashboardService.getOfferedCandidatesList(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.IsProfile = true;
+                    this.IsRRF = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = false;
+                    this.IncompleteProfileList = <any>results;
+                } else {
+                    this.IsRRF = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Offered Candidates';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetJoiningCandidate() {
-        let modl: any = $('#JoiningCandidate');
-        modl.modal({ 'backdrop': 'static' });
+        this.IncompleteProfileList = new AllCandidateProfiles();
+        this.dashboardService.getCandidatesjoining(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.IsProfile = true;
+                    this.IsRRF = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = false;
+                    this.IncompleteProfileList = <any>results;
+                } else {
+                    this.IsRRF = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Candidate Joining This Month';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetPendingRRF() {
-        let modl: any = $('#PendingRRF');
-        modl.modal({ 'backdrop': 'static' });
+        this.rrfList =[];
+        //TODO: need to change API
+        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.IsRRF = true;
+                    this.NoDataFound = false;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Pending RRF';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetOpenRRF() {
-        let modl: any = $('#OpenRRF');
-        modl.modal({ 'backdrop': 'static' });
+        this.rrfList =[];
+        this.dashboardService.getAllRRF()
+            .subscribe(
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.IsRRF = true;
+                    this.NoDataFound = false;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Open RRF';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetFeedbackPending() {
-        let modl: any = $('#FeedbackPending');
-        modl.modal({ 'backdrop': 'static' });
+        this.rrfList =[];
+        this.dashboardService.getFeedbackPendingRRF(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.IsRRF = true;
+                    this.NoDataFound = false;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Feedback Pending';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetRRFAwaiting() {
-        let modl: any = $('#RRFAwaiting');
-        modl.modal({ 'backdrop': 'static' });
+         this.rrfList =[];
+        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.IsRRF = true;
+                    this.NoDataFound = false;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'RRF Approvals';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetInterviewAwaiting() {
-        let modl: any = $('#InterviewAwaiting');
-        modl.modal({ 'backdrop': 'static' });
+        this.dashboardService.getListOfInterviewReqApproval(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.AllInterviews !== undefined && results.AllInterviews.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = true;
+                    this.IsRRF = false;
+                    this.NoDataFound = false;
+                    this.interviewApproval = (<any>(results)).AllInterviews;
+                } else {
+                    this.IsProfile = false;
+                    this.IsRRF = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Interview Approvals';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     GetAssigenedOpenRRF() {
-        let modl: any = $('#AssignedOpenRRF');
-        modl.modal({ 'backdrop': 'static' });
-    }
-    GetMyOverdeuRRF() {
-        let modl: any = $('#MyOverdueRRF');
-        modl.modal({ 'backdrop': 'static' });
-    }
-    GetCandidateJoiningMonth() {
-        let modl: any = $('#CandidateJoiningMonth');
-        modl.modal({ 'backdrop': 'static' });
+        this.rrfList =[];
+        this.dashboardService.getAssignedOpenRRF(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.IsRRF = true;
+                    this.NoDataFound = false;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Assigned Open RRF';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
     }
     /**Get all Overdue RRF's count */
     // GetAllOverdueRRFCount(): void {
