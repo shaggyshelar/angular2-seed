@@ -122,7 +122,7 @@
                                 <li>
                                     <div class="tools">
                                         <!--(click)='getResume(profile.CandidateID)'-->
-                                        <a class="reload" data-original-title="reload" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
+                                        <a class="reload" *ngIf="profile.ResumeID!==''" data-original-title="reload" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
                                         <!--<br>
                                         <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc '}}"
                                             class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>-->

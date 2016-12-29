@@ -17,7 +17,7 @@ export class CandidateProfile {
   public Email: string;
   public Tag: string;
   public Skills: Array<string>;
-  public ResumeID: number;
+  public ResumeID: string;
   public Status = new MasterData();
   public Comments: string;
   public CandidateOtherDetails = new OtherDetails();
@@ -101,11 +101,11 @@ export class TeamManagement {
   public FollowUpComments: string;
 }
 export class SocialInformation {
-  public FacebookID:string;
-  public TwitterID:string;
-  public GooglePlusID:string;
-  public LinkedinID:string;
-  public CandidateID:MasterData;
+  public FacebookID: string;
+  public TwitterID: string;
+  public GooglePlusID: string;
+  public LinkedinID: string;
+  public CandidateID: MasterData;
 }
 export class MailDetails {
   //properties of candidate Mail Details
