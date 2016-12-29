@@ -526,7 +526,7 @@
                                     <!--<div class="col-md-12 col-sm-12">-->
 
                                     <div *ngIf="IsProfile" >
-                                        <div *ngFor="let profile of IncompleteProfileList.Profiles">
+                                        <div *ngFor="let profile of IncompleteProfileList.Profiles" style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29); padding-left: 5px;">
                                             <detail-profile [CandidateRecruitmentMailDetails]="" [selectedProfile]="profile"></detail-profile>
                                         </div>
                                     </div>
@@ -543,7 +543,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd gradeX" *ngFor="let interview of interviewApproval">
+                                                <tr class="odd gradeX" *ngFor="let interview of interviewApproval" >
                                                     <td>
                                                         <interviewApp-gridRow [interviewDetails]=interview></interviewApp-gridRow>
                                                     </td>
