@@ -63,6 +63,13 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         // this.AwaitedInterviewInformation = new Array<Interview>();
         var date = new Date();
         this.currentDate = this.formatDate(date);
+        //For pagination
+        this.grdOptionsIntwHistory.CamlString = '';
+        this.grdOptionsIntwHistory.NextPageID = 0;
+        this.grdOptionsIntwHistory.PreviousPageID = 0;
+        this.grdOptionsIntwHistory.PagingEvent = '';
+        this.grdOptionsIntwHistory.NextButton = false;
+        this.grdOptionsIntwHistory.PreviousButton = false;
     }
     /**Router method overrid from OnActivate class */
     routerOnActivate() {
@@ -195,12 +202,19 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
 
     OnPaginationClick(pageClicked: number) {
         this.grdOptionsIntwHistory.ButtonClicked = pageClicked;
+        if(pageClicked === 1) {
+            this.grdOptionsIntwHistory.PagingEvent = 'Next';
+        }
+        if(pageClicked === -1) {
+            this.grdOptionsIntwHistory.PagingEvent = 'Previous';
+        }
         this.GetMyAllConductedInerviewsHistory();
     }
 
     bindGridData() {
         this.grdOptionsIntwHistory.NextPageUrl = [];
         this.grdOptionsIntwHistory.ButtonClicked = 0;
+        this.grdOptionsIntwHistory.CamlString = '';
         this.GetMyAllConductedInerviewsHistory();
     }
     /**Commenting as this functionality is deprecated */
