@@ -146,7 +146,11 @@ export class MyProfilesViewComponent implements OnActivate {
             (results: any) => {
                 if (results !== undefined) {
                     this.Resume = results;
-                    this.ShowResume = false;
+                    if(this.Resume === 'File is not in docx format. Cannot read content'){
+                        this.ShowResume = true;
+                    } else {
+                        this.ShowResume = false;
+                    }
                 } else {
                     this.ShowResume = true;
                 }

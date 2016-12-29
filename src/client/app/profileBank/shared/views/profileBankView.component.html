@@ -762,13 +762,9 @@
                                     <!-- BEGIN FORM-->
                                     <form action="#" class="form-horizontal">
                                         <div class="form-body">
-                                            <div class="row">
-                                                TODO:: show resume
-                                            </div>
-                                            <div class="row">
-                                                {{Resume}}
-                                            </div>
-                                            <span *ngIf="ShowResume">No resume found</span>
+                                            <iframe src="data:text/html;charset=utf-8,{{Resume}}" *ngIf="!ShowResume" style="width:100%;height:1500px;"></iframe>
+
+                                            <span *ngIf="ShowResume">{{Resume}}</span>
                                         </div>
                                     </form>
                                     <!-- End FOrm -->

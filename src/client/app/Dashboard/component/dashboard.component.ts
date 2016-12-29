@@ -777,7 +777,7 @@ export class DashboardComponent implements OnInit {
                     this.IsInterview = false;
                     this.NoDataFound = true;
                 }
-                //this.Title = 'Candidate Joining This Month';
+                this.Title = 'Candidate Joining This Month';
                 let modl: any = $('#CountDetails');
                 modl.modal({ 'backdrop': 'static' });
             },
@@ -851,7 +851,7 @@ export class DashboardComponent implements OnInit {
     }
     GetRRFAwaiting() {
          this.rrfList =[];
-        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles)
+        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles,'Pending Approval')
             .subscribe(
             (results: any) => {
                 if (results.RRFs !== undefined && results.RRFs.length > 0) {
