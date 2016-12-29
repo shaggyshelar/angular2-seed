@@ -37,12 +37,15 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
     CandidateMasterDetails: CandidateMaster = new CandidateMaster();
     CandidateQualification: Qualification = new Qualification();
     skills: MasterData[];
-    district: MasterData[];
+    Cities: MasterData[];
+    Componies: MasterData[];
     errorMessage: string = '';
     visaTypes = ['H1', 'L1'];
     CurrentType = [{ id: 'Yes', value: 'Current Employer' },
         { id: 'No', value: 'Previous Employer' },
         { id: 'Both', value: 'Current / Previous Employer' }];
+    NORECORDSFOUND: boolean = false;
+    RECORDSFOUND: boolean = false;
     constructor(private _advanceSearchService: AdvanceSearchService,
         private http: Http,
         private _router: Router,
@@ -52,13 +55,22 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         this.candidateAdvancedSearch = new AdvancedSearch();
         this.candidateAdvancedSearch.CandidateOtherDetails.Visa = 'H1';
         this.candidateAdvancedSearch.CandidateCareerDetails.IsCurrent = 'Yes';
+        //For pagination
+        this.candidateGrdOperations.CamlString = '';
+        this.candidateGrdOperations.NextPageID = 0;
+        this.candidateGrdOperations.PreviousPageID = 0;
+        this.candidateGrdOperations.PagingEvent = '';
+        this.candidateGrdOperations.NextButton = false;
+        this.candidateGrdOperations.PreviousButton = false;
     }
 
     routerOnActivate(segment: RouteSegment) {
         $('#cmbSkills').select2();
         $('#cmbLocation').select2();
+        $('#cmbComponies').select2();
         this.getSkills();
-        this.getDistrict();
+        this.getCities();
+        this.getComponies();
     }
     getSkills(): void {
         this._masterService.getSkills()
@@ -68,24 +80,72 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    getDistrict(): void {
-        //To Do: Update fuction name getDistricts
-        this._masterService.getSkills()
+    getCities(): void {
+        this._masterService.getCities()
             .subscribe(
             results => {
-                this.district = results;
+                this.Cities = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    getComponies(): void {
+        this._masterService.getComponies()
+            .subscribe(
+            results => {
+                this.Componies = results;
             },
             error => this.errorMessage = <any>error);
     }
     onAdvancedSearch(): void {
+        this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = undefined;
+        this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = undefined;
+        this.candidateAdvancedSearch.CandidateCareerDetails.Company = undefined;
         let Skillcmb: any = $('#cmbSkills');
         let SkillValue = Skillcmb.val();
-        let Locationcmb: any = $('#cmbSkills');
+        let Locationcmb: any = $('#cmbLocation');
         let LoationValue = Locationcmb.val();
+        let Componycmb: any = $('#cmbComponies');
+        let ComponyValue = Componycmb.val();
+        if (SkillValue !== null) {
+            for (var index = 0; index < SkillValue.length; index++) {
+                if (this.candidateAdvancedSearch.CandidateSkillsDetails.Skills !== undefined) {
+                    this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = this.candidateAdvancedSearch.CandidateSkillsDetails.Skills + ',' + SkillValue[index];
+                }
+                if (this.candidateAdvancedSearch.CandidateSkillsDetails.Skills === undefined)
+                    this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = SkillValue[index];
+            }
+        }
+        if (LoationValue !== null) {
+            for (var index = 0; index < LoationValue.length; index++) {
+                if (this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation !== undefined) {
+                    this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation + ',' + LoationValue[index];
+                }
+                if (this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation === undefined)
+                    this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = LoationValue[index];
+            }
+        }
+        if (ComponyValue !== null) {
+            for (var index = 0; index < ComponyValue.length; index++) {
+                if (this.candidateAdvancedSearch.CandidateCareerDetails.Company !== undefined) {
+                    this.candidateAdvancedSearch.CandidateCareerDetails.Company = this.candidateAdvancedSearch.CandidateCareerDetails.Company + ',' + ComponyValue[index];
+                }
+                if (this.candidateAdvancedSearch.CandidateCareerDetails.Company === undefined)
+                    this.candidateAdvancedSearch.CandidateCareerDetails.Company = ComponyValue[index];
+            }
+        }
         this._advanceSearchService.getAdvancedSearchInSidebar(this.candidateAdvancedSearch, this.candidateGrdOperations)
             .subscribe(
-            results => {
-                //this.AdvanceSearchList = results;
+            (results: any) => {
+                if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.AdvanceSearchList = <any>results;
+                    this.RECORDSFOUND = true;
+                    this.NORECORDSFOUND = false;
+                }
+                else {
+                    this.NORECORDSFOUND = true;
+                    this.RECORDSFOUND = true;
+                }
+
             },
             error => this.errorMessage = <any>error);
     }

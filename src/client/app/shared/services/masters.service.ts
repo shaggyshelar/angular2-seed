@@ -47,6 +47,18 @@ export class MastersService {
             .catch(this.handleError);
     }
 
+    getCities() {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetAllCities');
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    getComponies() {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetAllCompanies');
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     getTechnologies() {
         let url = Config.GetURL('/api/Masters/GetTechnologies');
         return this.authHttp.get(url)

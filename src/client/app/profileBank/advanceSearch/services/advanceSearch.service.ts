@@ -20,10 +20,10 @@ export class AdvanceSearchService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    getAdvancedSearchInSidebar(candidateAdvancedSearch: AdvancedSearch,candidateGrdOperations: GrdOptions) {
+    getAdvancedSearchInSidebar(candidateAdvancedSearch: AdvancedSearch,grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/Search/CandidateAdvancedSearch');
         this._spinnerService.show();
-        return this.authHttp.post(url, { candidateAdvancedSearch,candidateGrdOperations })
+        return this.authHttp.post(url, { candidateAdvancedSearch,grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

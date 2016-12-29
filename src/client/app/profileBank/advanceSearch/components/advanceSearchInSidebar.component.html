@@ -49,7 +49,7 @@
 
                                 <select id="cmbLocation" class="form-control " multiple>
                                         <option value="-1" disabled="true" [selected]="selected">--Enter the cities you want to work in--</option>
-                                                            <option *ngFor="let skill of skills " [value]="skill.Id ">{{skill.Value}}</option>
+                                                            <option *ngFor="let city of Cities " [value]="city.Value ">{{city.Value}}</option>
                                                         </select>
                                 <span class="input-group-btn ">
                                            
@@ -87,41 +87,29 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="row">
-                                <label class="col-md-3 control-label">Company/Employer</label>
-                                <div class="col-md-6" style="margin-left:8px;">
-                                    <input type="text" class="form-control" placeholder="Type Company Name" style="width:97%">
-                                </div>
+                            <label class="col-md-3 control-label">Company/Employer</label>
+                            <div class="col-md-6">
+                                <!--<input type="text" class="form-control" placeholder="Type Company Name" style="width:97%">-->
+                                <select id="cmbComponies" class="form-control " multiple>
+                                        <option value="-1" disabled="true" [selected]="selected">--Enter the Componies you want to work in--</option>
+                                                            <option *ngFor="let compony of Componies " [value]="compony.Value ">{{compony.Value}}</option>
+                                                        </select>
+                                <span class="input-group-btn ">
+                                           
+                                                        </span>
+
                             </div>
-                            <div class="row">
-                                <div class="col-md-3"></div>
-                                <div class="btn-group col-md-1" style="margin-left: 8px; margin-top: 3px">
-                                    <select class="btn btn-xs dropdown-toggle" tabindex="25" [(ngModel)]="candidateAdvancedSearch.CandidateCareerDetails.IsCurrent" (change)="onSelectCurrentCompony($event.target.value)">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-3"></div>
+                            <div class="btn-group col-md-1" style=" margin-top: -10px">
+                                <select class="btn btn-xs dropdown-toggle" tabindex="25" [(ngModel)]="candidateAdvancedSearch.CandidateCareerDetails.IsCurrent"
+                                    (change)="onSelectCurrentCompony($event.target.value)">
                                           <option *ngFor="let type of CurrentType" [value]="type.id" selected>{{type.value}}</option>
                                           <!--<option  [value]="Yes">Current Employer</option>
                                           <option  [value]="No">Previous Employer</option>
                                           <option  [value]="Both">Current / Previous Employer</option>-->
                                  </select>
-                                    <!--<button class="btn btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Current Employer <i class="fa fa-angle-down"></i>
-                                                        
-                                                        </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li>
-                                            <a>
-                                                <i class="icon-user"></i> Current Employer </a>
-                                        </li>
-                                        <li class="divider"> </li>
-                                        <li>
-                                            <a>
-                                                <i class="icon-user"></i> Previous Employer </a>
-                                        </li>
-                                        <li class="divider"> </li>
-                                        <li>
-                                            <a>
-                                                <i class="icon-user"></i> Current / Previous Employer </a>
-                                        </li>
-                                    </ul>-->
-                                </div>
                             </div>
                         </div>
 
@@ -143,7 +131,8 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">Visa</label>
                             <div class="col-md-3">
-                                <select class="btn btn-xs dropdown-toggle" [(ngModel)]="candidateAdvancedSearch.CandidateOtherDetails.Visa" (change)="onSelectVisa($event.target.value)" tabindex="25">
+                                <select class="btn btn-xs dropdown-toggle" [(ngModel)]="candidateAdvancedSearch.CandidateOtherDetails.Visa" (change)="onSelectVisa($event.target.value)"
+                                    tabindex="25">
                                           <option *ngFor="let visa of visaTypes" [value]="visa">{{visa}}</option>
                                           <!--<option  [value]='L1'>H1</option>
                                           <option  [value]='H1'>L1</option>-->
@@ -163,6 +152,35 @@
                     </div>
                 </form>
                 <!-- END FORM-->
+                <!--Start Profile Component-->
+                <div class="portlet-title" *ngIf="RECORDSFOUND">
+                    <div class="caption" style="font-size: large;">
+                        <i class="icon-users"></i>
+                        <span class="caption-subject font-dark-sunglo bold uppercase">Candidate List</span>
+
+                    </div>
+                </div>
+                <hr *ngIf="RECORDSFOUND">
+                <table class="table  table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info"
+                    *ngIf="RECORDSFOUND && NORECORDSFOUND === false">
+                    <thead class="thead">
+                        <tr>
+                            <th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1" style="display:none;">Candidates</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" class="" *ngFor="let profile of AdvanceSearchList.Profiles">
+                            <td class=" light bordered" style="text-align: left !important;">
+                                <detail-profile [selectedProfile]="profile" [CandidateRecruitmentMailDetails]="" [rrfID]=""></detail-profile>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND && RECORDSFOUND'>No Candidates Found</span>
+                <!--<div class="row" *ngFor="let profile of AdvanceSearchList.Profiles">
+                    <detail-profile [selectedProfile]="profile" [CandidateRecruitmentMailDetails]="" [rrfID]=""></detail-profile>
+                </div>-->
+                <!--End Profile Componenet-->
             </div>
         </div>
 
