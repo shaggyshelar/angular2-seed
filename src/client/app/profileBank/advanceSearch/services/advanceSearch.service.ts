@@ -12,10 +12,10 @@ export class AdvanceSearchService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
     //This function contains advance search API
-    getAdvanceSearch(searchString: string) {
-        let url = Config.GetURL('/api/RecruitmentCycle/CandidateAdvancedSearch?searchValue=' + searchString + '&startRow=1&rowLimit=20');
+    getAdvanceSearch(candidateGeneralSearch: {},grdOptions:GrdOptions) {
+        let url = Config.GetURL('/api/Search/CandidateGeneralSearch');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url,{candidateGeneralSearch,grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

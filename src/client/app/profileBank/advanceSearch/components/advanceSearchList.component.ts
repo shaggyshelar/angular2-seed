@@ -79,6 +79,8 @@ export class AdvanceSearchListComponent implements OnActivate {
     profilePhoto: string;
     /** For profile picture */
     profilePic: any;
+    candidateGeneralSearch = { SearchValue: '' };
+    candidateGrdOptions: GrdOptions = new GrdOptions();
 
     constructor(private _advanceSearchService: AdvanceSearchService,
         private http: Http,
@@ -95,6 +97,14 @@ export class AdvanceSearchListComponent implements OnActivate {
         this.Candidate = new Candidate();
         this.uploadedPhoto = new Array<File>();
         this.photoMeta = new ResumeMeta();
+        //For pagination
+        this.candidateGrdOptions.CamlString = '';
+        this.candidateGrdOptions.NextPageID = 0;
+        this.candidateGrdOptions.PreviousPageID = 0;
+        this.candidateGrdOptions.PagingEvent = '';
+        this.candidateGrdOptions.NextButton = false;
+        this.candidateGrdOptions.PreviousButton = false;
+
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -106,7 +116,8 @@ export class AdvanceSearchListComponent implements OnActivate {
     }
     // This function will get all profiles according to search string
     getAdvanceSearchResult(insputString: string) {
-        this._advanceSearchService.getAdvanceSearch(insputString)
+        this.candidateGeneralSearch.SearchValue = insputString;
+        this._advanceSearchService.getAdvanceSearch(this.candidateGeneralSearch,this.candidateGrdOptions)
             .subscribe(
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
