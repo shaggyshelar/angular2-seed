@@ -131,17 +131,21 @@
                                     <div class="login-options">
                                         <br>
                                         <ul class="social-icons">
-                                            <li>
-                                                <a class="facebook" data-original-title="facebook"> </a>
+                                            <li >
+                                                <a class="facebook" data-original-title="facebook" *ngIf="profile.CandidateSocialInformation.FacebookID" href="{{profile.CandidateSocialInformation.FacebookID}}" target="_blank" > </a>
+                                                <a class="facebook" data-original-title="facebook" *ngIf="profile.CandidateSocialInformation.FacebookID === ''" href="javascript:;"> </a>
                                             </li>
                                             <li>
-                                                <a class="twitter" data-original-title="Twitter" href="javascript:;"> </a>
+                                                <a class="twitter" data-original-title="twitter" *ngIf="profile.CandidateSocialInformation.TwitterID" href="{{profile.CandidateSocialInformation.TwitterID}}" target="_blank"> </a>
+                                                <a class="twitter" data-original-title="Twitter" *ngIf="profile.CandidateSocialInformation.TwitterID === ''" href="javascript:;"> </a>
                                             </li>
                                             <li>
-                                                <a class="googleplus" data-original-title="Goole Plus" href="javascript:;"> </a>
+                                                <a class="googleplus" data-original-title="Goole Plus" *ngIf="profile.CandidateSocialInformation.GooglePlusID" href="{{profile.CandidateSocialInformation.GooglePlusID}}" target="_blank"> </a>
+                                                <a class="googleplus" data-original-title="googleplus" *ngIf="profile.CandidateSocialInformation.GooglePlusID === ''" href="javascript:;"> </a>
                                             </li>
                                             <li>
-                                                <a class="linkedin" data-original-title="Linkedin" href="javascript:;"> </a>
+                                                <a class="linkedin" data-original-title="Linkedin" *ngIf="profile.CandidateSocialInformation.LinkedinID" href="{{profile.CandidateSocialInformation.LinkedinID}}" target="_blank"> </a>
+                                                <a class="linkedin" data-original-title="linkedin" *ngIf="profile.CandidateSocialInformation.LinkedinID === ''" href="javascript:;"> </a>
                                             </li>
                                         </ul>
                                     </div>
