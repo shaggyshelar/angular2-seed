@@ -770,6 +770,7 @@ export class MyProfilesListComponent implements OnActivate {
     onSelectRRF(rrfID: string) {
         //this.rrfId = 'RRF6866237939ID76';
         if (rrfID === '-1') {
+            this.viewDetailsRRFId = '';
             this.getMyProfiles();
             this.NORECORDSFOUND = false;
         } else {
@@ -803,6 +804,7 @@ export class MyProfilesListComponent implements OnActivate {
         //this.isChartVisible = false;
     }
     showListOfRRF() {
+        this.isViewRFF = false;
         this.isViewRRFGrid = true;
         this.viewDetailsRRFId = '';
         this.myProfilesList.GrdOperations = new GrdOptions();
