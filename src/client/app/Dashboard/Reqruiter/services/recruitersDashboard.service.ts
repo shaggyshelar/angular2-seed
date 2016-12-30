@@ -171,7 +171,8 @@ export class RecruitersDashboardService {
     }
      /**Get Get Pending RRF Approval by role*/
     getPendingRRFApproval(grdOptions: GrdOptions,status:string) {
-        let url = Config.GetURL('/api/RRF/GetMyRaisedRRFWithCurrentStatus');
+        //let url = Config.GetURL('/api/RRF/GetMyRaisedRRFWithCurrentStatus');
+        let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, {GrdOptions: {grdOptions} ,status })
             .map(this.extractData)
