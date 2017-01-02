@@ -485,7 +485,7 @@ export class MyProfilesListComponent implements OnActivate {
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 mailto = mailto + this.myProfilesList.Profiles[index].Email + ';';
-                mailcc = mailcc + this.myProfilesList.Profiles[index].CandidateMailDetails.Cc + ';';
+                mailcc = mailcc + this.myProfilesList.Profiles[index].CandidateMailDetails.CC + ';';
                 mailsubject = this.myProfilesList.Profiles[index].CandidateMailDetails.Subject;
                 mailbody = this.myProfilesList.Profiles[index].CandidateMailDetails.Body;
                 mailbody += window.location.href;

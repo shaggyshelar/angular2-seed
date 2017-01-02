@@ -113,7 +113,7 @@ export class MyRRFAddComponent implements OnActivate {
             //this.newRRF.SkillsRequired.Id = 0;
             this.newRRF.Priority.Id = 0;
             this.newRRF.Designation.Id = 0;
-            $('#cmbInterviewer').val = ['0'];
+           // $('#cmbInterviewer').val = ['0'];
 
             this.currentRaiseRRFStatus = RaiseRRFStatus.newRRF; //New RRF
         }
@@ -307,9 +307,9 @@ export class MyRRFAddComponent implements OnActivate {
         var panel: Panel = new Panel();
         //panel.Comments = this.comment; //As per request from Backend
         panel.RoundNumber = this.getStringValue(this.IntwRound, this.interviewRound);
-
-        if ($('#cmbInterviewer').val() !== null) {
-            var selectedInterviewer: number[] = $('#cmbInterviewer').val();
+        let Interviewercmb:any = $('#cmbInterviewer');
+        if (Interviewercmb.val() !== null) {
+            var selectedInterviewer: number[] = Interviewercmb.val();
         }
         for (var index = 0; index < selectedInterviewer.length; index++) {
             panel.Interviewers.push(this.getStringValue(selectedInterviewer[index], this.interviewers));
@@ -360,8 +360,9 @@ export class MyRRFAddComponent implements OnActivate {
 
     onUpdatePanelClick() {
         this.editPanelData.RoundNumber = this.getStringValue(this.IntwRound, this.interviewRound);
-        if ($('#cmbInterviewer').val() !== null) {
-            var selectedInterviewer: number[] = $('#cmbInterviewer').val();
+        let Interviewercmb:any = $('#cmbInterviewer');
+        if (Interviewercmb.val() !== null) {
+            var selectedInterviewer: number[] = Interviewercmb.val();
         }
         this.editPanelData.Interviewers = new Array();
         for (var index = 0; index < selectedInterviewer.length; index++) {

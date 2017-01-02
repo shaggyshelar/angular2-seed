@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
-import {TODOList} from './model/ToDoList';
+import {TODOList} from '../model/ToDoList';
 
 
 @Injectable()

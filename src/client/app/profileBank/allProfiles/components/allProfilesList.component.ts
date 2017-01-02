@@ -107,7 +107,8 @@ export class AllProfilesListComponent implements OnActivate {
     redirectToView(CandidateID: MasterData) {
         //this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
         //Changed as per Backend Request and Bug 
-        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
+        //this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /**Takes confirmation from end User to delete profile */
     confirmDelete(candidateId: MasterData) {

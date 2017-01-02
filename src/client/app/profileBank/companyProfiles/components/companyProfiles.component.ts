@@ -11,18 +11,19 @@ import { DataSharedService } from '../../shared/services/dataShared.service';
 import { TransferOwnershipComponent} from './companyProfilesTransferOwnership.component';
 import { ProfileBankAssignRRFComponent} from '../../shared/component/assignRRF.component';
 import { ProfileEsplHistoryListComponent } from '../../profilesEsplHistory/components/profileEsplHistoryList.component';
-
+import {MyProfilesAddComponent} from '../../myProfiles/components/myProfilesAdd.component';
+import { MyProfilesService } from '../../myProfiles/services/myProfiles.service';
 @Component({
     selector: 'rrf-black-listed-profiles',
     template: ' <router-outlet></router-outlet>',
     directives: [ROUTER_DIRECTIVES],
     providers: [DataSharedService, CompanyProfilesService, MastersService,
-        ToastsManager, ProfileBankService]
+        ToastsManager, ProfileBankService, MyProfilesService]
 })
 
 @Routes([
     { path: '/', component: CompanyProfilesListComponent },
-    { path: '/Edit/:id', component: CompanyProfilesAddComponent },
+    { path: '/Edit/:id', component: MyProfilesAddComponent },
     { path: '/View/:id', component: CompanyProfilesViewComponent },
     { path: '/Transfer', component: TransferOwnershipComponent },
     { path: '/Assign', component: ProfileBankAssignRRFComponent },

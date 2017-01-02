@@ -32,7 +32,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     unAssignedComments: string = '';
     public currentDate: Date = new Date();
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
-
+    assignedData = new Array();
     constructor(private _myRRFService: MyRRFService,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
@@ -65,16 +65,16 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             .subscribe(
             results => {
                 this.selectedRRF = <any>results;
-                this.selectedRRF.assignedData = new Array();
-                for (var index = 0; index < results.AssignedData.length; index++) {
-                    if(results.AssignedData[index].Status.Value === 'Assigned'){
-                        this.selectedRRF.assignedData.push(results.AssignedData[index]);
+                this.assignedData = new Array();
+                for (var index = 0; index < this.selectedRRF.AssignedData.length; index++) {
+                    if(this.selectedRRF.AssignedData[index].Status.Value === 'Assigned'){
+                        this.assignedData.push(this.selectedRRF.AssignedData[index]);
                     }
                 }
-                if (this.selectedRRF.assignedData === undefined) {
+                if (this.assignedData === undefined) {
                     var assignmentDetails: AssignmentDetails = new AssignmentDetails();
-                    this.selectedRRF.assignedData = new Array();
-                    this.selectedRRF.assignedData.push(assignmentDetails);
+                    this.assignedData = new Array();
+                    this.assignedData.push(assignmentDetails);
                 }
                 this.GetRecruiter();
             },
@@ -95,7 +95,8 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         if(!this.isFormValidate()){
             return ;
         }
-        var selectedRec: number[] = $('#cmbAssignTo').val();
+        let AssignTocmb: any = $('#cmbAssignTo');
+        let selectedRec: number[] = AssignTocmb.val();
         // Creating array of selected Assignee
         var selectedRRFidsList: Array<MasterData> = new Array<MasterData>();
         for (var index = 0; index < selectedRec.length; index++) {
@@ -121,11 +122,12 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     }
 
     isFormValidate() {
-        if ($('#cmbAssignTo').val() === null) {
+        let AssignToCmb: any = $('#cmbAssignTo');
+        if (AssignToCmb.val() === null) {
             this.toastr.error('Please select assign To value');
             return false;
         }
-        if ($('#txtAssigningComment').val() === "") {
+        if (this.AssignedComments === "") {
             this.toastr.error('Please select Assigning Comment');
             return false;
         }

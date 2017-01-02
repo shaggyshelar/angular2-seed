@@ -96,7 +96,8 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        //this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
     SaveCandidateID(id: MasterData) {

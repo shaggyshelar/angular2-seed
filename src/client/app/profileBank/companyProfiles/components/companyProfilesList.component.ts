@@ -90,7 +90,8 @@ export class CompanyProfilesListComponent implements OnActivate {
             });
     }
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/CompanyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        //this._router.navigate(['/App/ProfileBank/CompanyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {

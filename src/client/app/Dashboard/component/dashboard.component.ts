@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES} from '@angular/router';
 import {CAROUSEL_DIRECTIVES, TOOLTIP_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import { RecruitersDashboardService } from '../Reqruiter/index';
+import { RecruitersDashboardService } from '../services/recruitersDashboard.service';
 import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 import {
@@ -47,7 +47,7 @@ import { InterviewApprovalGridRowComponent } from  '../../recruitmentCycle/share
         RRFGridRowComponent,
         InterviewApprovalGridRowComponent
     ],
-    providers: [RecruitersDashboardService, RRFCandidateListService]
+    providers: [RecruitersDashboardService,RRFCandidateListService]
 })
 
 export class DashboardComponent implements OnInit {

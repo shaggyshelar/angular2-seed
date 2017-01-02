@@ -67,7 +67,7 @@ export class RRFCandidateListComponent implements OnActivate {
     OfferedCandidateForRRF: RRFSpecificCandidateList[];
     OtherCandidateForRRF: RRFSpecificCandidateList[];
     CandidateRoundHistory: Array<Interview>;
-    CandidateHistoryForActualTime: Array<Interview>;
+    CandidateHistoryForActualTime: Interview;
     isRoundHistoryPresent: boolean = false;
     selectedCandidate: string;
     InterviewID: MasterData = new MasterData();
@@ -447,12 +447,6 @@ export class RRFCandidateListComponent implements OnActivate {
             return false;
         }
     }
-    OnProceedForOfferGenerationClick(CandidateDetails: RRFSpecificCandidateList) {
-        this.InterviewID = CandidateDetails.InterviewDetails.InterviewID;
-        this.CandidateID = CandidateDetails.CandidateID;
-        var cnfrmbx: any = $('#prcedfrOffrgenration');
-        cnfrmbx.modal();
-    }
     proceedForOfferGeneration(InterviewID: MasterData) {
         if (InterviewID.Id !== null && InterviewID.Id !== undefined) {
             this._rrfCandidatesList.proceedForOfferGeneration(InterviewID, this.CandidateID, this.RRFID, new Date())
@@ -471,7 +465,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     /**---------BEGING Transfer candidate functionality-------------*/
     /**Transfer candidat from current RRF to other Open RRF */
-    transferFromUnfit(interviewDetails: Interview) {
+    transferFromUnfit(interviewDetails: any) {
         if (!this.IsAllowTransfer) {
             this.UniqueRRFCode = interviewDetails.RRFCode;
             this.getAllOpenRRF(interviewDetails.RRFCode);
@@ -543,7 +537,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.changeStatusInterviewID = intervieID;
         this.showChangeStatus = true;
     }
-    setActualTime(CandidateHistory: Array<Interview>) {
+    setActualTime(CandidateHistory: Interview) {
         this.ActualTimeInterviewID = CandidateHistory.InterviewID;
         this.CandidateHistoryForActualTime = CandidateHistory;
         this.setActualTimeForm = true;
