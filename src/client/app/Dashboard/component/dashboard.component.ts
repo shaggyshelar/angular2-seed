@@ -851,7 +851,7 @@ export class DashboardComponent implements OnInit {
     }
     GetRRFAwaiting() {
          this.rrfList =[];
-        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles,'Pending Approval')
+        this.dashboardService.getRRFApprovalList(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
                 if (results.RRFs !== undefined && results.RRFs.length > 0) {
