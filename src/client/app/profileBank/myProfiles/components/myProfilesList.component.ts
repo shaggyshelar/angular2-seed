@@ -251,8 +251,8 @@ export class MyProfilesListComponent implements OnActivate {
         this._profileBankService.deleteProfile(CandidateID)
             .subscribe(
             (results: any) => {
+                setTimeout(() => { this.getMyProfiles(); }, 1000);
                 this.toastr.success((<ResponseFromAPI>results).Message);
-                this.getMyProfiles();
                 // this.profile.Comments = results.Comments;
                 // this.profile.Status = results.Status;
 
@@ -332,7 +332,7 @@ export class MyProfilesListComponent implements OnActivate {
                     /**update Profile grid*/
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                     this.profile = new CandidateProfile();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
@@ -363,7 +363,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.fileUploaded = false;
                     this.fileName = '';
                     // this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -394,7 +394,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -412,7 +412,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -431,7 +431,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -563,7 +563,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.photoUploaded = false;
                     this.photoName = '';
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -583,7 +583,7 @@ export class MyProfilesListComponent implements OnActivate {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.myProfilesList.GrdOperations = new GrdOptions();
-                        this.getMyProfiles();
+                        setTimeout(() => { this.getMyProfiles(); }, 1000);
                         this.profile = new CandidateProfile();
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);

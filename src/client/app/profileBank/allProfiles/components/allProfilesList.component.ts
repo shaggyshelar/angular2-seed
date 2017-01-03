@@ -127,8 +127,8 @@ export class AllProfilesListComponent implements OnActivate {
             (results: any) => {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
+                setTimeout(() => { this.getAllProfiles(); }, 1000);
                 this.toastr.success((<ResponseFromAPI>results).Message);
-                this.getAllProfiles();
             },
             error => this.toastr.error(<any>error));
         this.onClearSelection(CandidateID);
@@ -221,7 +221,7 @@ export class AllProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
-                    this.getAllProfiles();
+                    setTimeout(() => { this.getAllProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -238,7 +238,7 @@ export class AllProfilesListComponent implements OnActivate {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.allProfilesList.GrdOperations = new GrdOptions();
-                    this.getAllProfiles();
+                    setTimeout(() => { this.getAllProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }

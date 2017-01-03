@@ -168,7 +168,7 @@ export class CompanyProfilesListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
-                    this.getcompanyProfiles();
+                    setTimeout(() => {  this.getcompanyProfiles();}, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }

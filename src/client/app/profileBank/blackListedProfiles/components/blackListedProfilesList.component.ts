@@ -146,7 +146,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
-                    this.getBlacklistedProfiles();
+                    setTimeout(() => {  this.getBlacklistedProfiles();}, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
