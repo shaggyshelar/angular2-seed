@@ -477,7 +477,7 @@
 														<i class="fa fa-edit " style="margin-top: 25%;"></i>
 														<!-- Edit Profile-->
 													</a>
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)'
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value.toLowerCase() === 'open'"
 														tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Schedule Interview" tooltipEnable="true">
                                                             <i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
                                                         </button>
