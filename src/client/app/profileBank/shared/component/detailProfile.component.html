@@ -30,7 +30,7 @@
         <div class="col-md-10">
             <div class="row message">
                 <div class="col-md-8 profile-info">
-                    <h3 class="font-green sbold uppercase"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"":"-"}} </small></h3>
+                    <h3 class="font-green sbold uppercase"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></h3>
                     <!--<p>
                         <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
                         </p>-->

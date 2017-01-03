@@ -16,16 +16,18 @@ export class InterviewDetailsRowComponent implements OnActivate {
   routerOnActivate() {
 
   }
-  getTime(time: string[]) {
-    //time:string = interviewTime;
-    time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-    if (time.length > 1) { // If time format correct
-      time = time.slice(1);  // Remove full string match value
-      time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
-      time[0] = +time[0] % 12 || 12; // Adjust hours
+     getTime(time: string) {
+        //time:string = interviewTime;
+        var intTime :Array<string> =new Array<string>();
+        intTime = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        if (intTime.length > 1) { // If time format correct
+            intTime = intTime.slice(1);  // Remove full string match value
+            intTime[5] = +intTime[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+            var adjustHr = +intTime[0] % 12 || 12; // Adjust hours
+            intTime[0] = adjustHr.toString();
+        }
+        return intTime.join('');
     }
-    return time.join('');
-  }
   
  //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {

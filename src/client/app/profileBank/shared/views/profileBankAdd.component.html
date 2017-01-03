@@ -66,7 +66,9 @@
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" class="todo-tasklist-item todo-tasklist-item-border-yellow" (submit)="onSavePrimaryInfo()">
                                                 <div class="row">
-
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;" *ngIf="isExist">
+                                                        <h2> {{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
@@ -282,6 +284,9 @@
 
                                             <form role="form" (submit)="onSavePersonalDetails()">
                                                 <div class="row">
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;" *ngIf="isExist">
+                                                        <h2> {{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
@@ -679,8 +684,9 @@
                                                                         <label>Facebook</label>
                                                                         <!--[(ngModel)]="CandidateSocialInfo.FacebookID"-->
                                                                         <input type="text" placeholder="Facebook Link (Max 255 chars)" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.FacebookID"
-                                                                            tooltip="Facebook Link (Max 255 chars)" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            (blur)="onSaveSocialInfo()" tabindex="27" />
+                                                                            tooltip="Facebook Link (Max 255 chars)" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()"
+                                                                            tabindex="27" />
                                                                     </div>
                                                                 </div>
 
@@ -689,8 +695,9 @@
                                                                         <i class="fa fa-twitter"></i>
                                                                         <label class="control-label">Twitter</label>
                                                                         <input type="text" placeholder="Twitter Link (Max 255 chars)" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.TwitterID"
-                                                                            tooltip="Twitter Link (Max 255 chars)" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            (blur)="onSaveSocialInfo()" tabindex="28" />
+                                                                            tooltip="Twitter Link (Max 255 chars)" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()"
+                                                                            tabindex="28" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3">
@@ -708,8 +715,9 @@
                                                                         <i class="fa fa-linkedin-square"></i>
                                                                         <label class="control-label">Linkedin</label>
                                                                         <input type="text" placeholder="Linkedin Link (Max 255 chars)" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.LinkedinID"
-                                                                            tooltip="Linkedin link (Max 255 chars)" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            (blur)="onSaveSocialInfo()" tabindex="30" />
+                                                                            tooltip="Linkedin link (Max 255 chars)" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()"
+                                                                            tabindex="30" />
                                                                     </div>
                                                                 </div>
                                                             </div>
