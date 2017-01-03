@@ -822,6 +822,14 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CandidateOtherDetails.OfferDetails = '';
         }
     }
+    onAppliedEarlier(isChecked: any) {
+        if (isChecked === false) {
+            this.profile.CandidateOtherDetails.AppliedEarlier = true;
+        } else {
+            this.profile.CandidateOtherDetails.AppliedEarlier = false;
+        }
+        this.onSaveProfessionalDetails();
+    }
     onVariableCTC(isChecked: any) {
         if (isChecked === false) {
             this.VariableCTC = true;
@@ -829,6 +837,14 @@ export class MyProfilesAddComponent implements OnActivate {
             this.VariableCTC = false;
             this.profile.CandidateSalaryDetails.HowMuchVariable = 0;
         }
+    }
+    onTeamManagement(isChecked: any) {
+        if (isChecked === false) {
+            this.profile.CandidateTeamManagement.TeamMgmt = true;
+        } else {
+            this.profile.CandidateTeamManagement.TeamMgmt = false;
+        }
+        this.onSaveTeamManagementDetails()
     }
     onAllowance(isChecked: any) {
         if (isChecked === false) {

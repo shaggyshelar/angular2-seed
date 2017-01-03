@@ -34,16 +34,16 @@
                                     </div>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#tab_primaryInfo" data-toggle="tab" id="btnQuick">Quick Info</a>
+                                            <a href="#tab_primaryInfo" data-toggle="tab" id="btnQuick" tabindex="1">Quick Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_1" data-toggle="tab" (click)='onPersonalInfoTabClick()' id="BtnPersonal">Personal Info</a>
+                                            <a href="#tab_1_1" data-toggle="tab" (click)='onPersonalInfoTabClick()' id="BtnPersonal" tabindex="2">Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_3" data-toggle="tab" (click)="onSkillTabClick()" id="btnSkills">Skills</a>
+                                            <a href="#tab_1_3" data-toggle="tab" (click)="onSkillTabClick()" id="btnSkills" tabindex="3">Skills</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_7" data-toggle="tab" (click)="onProfessionalInfoTabClick()" id="btnProfessional">Professional Info</a>
+                                            <a href="#tab_1_7" data-toggle="tab" (click)="onProfessionalInfoTabClick()" id="btnProfessional" tabindex="4">Professional Info</a>
                                         </li>
                                         <!--<li>
                                             <a href="#tab_1_2" data-toggle="tab">Qualification</a>
@@ -55,7 +55,7 @@
                                             <a href="#tab_1_6" data-toggle="tab">Team Mgt</a>
                                         </li>-->
                                         <li>
-                                            <a href="#tab_1_5" data-toggle="tab" (click)="onSalaryTabClick()" id="btnSalary">Salary Details</a>
+                                            <a href="#tab_1_5" data-toggle="tab" (click)="onSalaryTabClick()" id="btnSalary" tabindex="5">Salary Details</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -1702,7 +1702,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-1">
                                                                             <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkAppliedEarlier" [(ngModel)]="profile.CandidateOtherDetails.AppliedEarlier"
-                                                                                tabindex="2" (change)="onSaveProfessionalDetails()"
+                                                                                tabindex="2" (change)="onAppliedEarlier(profile.CandidateOtherDetails.AppliedEarlier)"
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -2179,7 +2179,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-1">
                                                                                 <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" [(ngModel)]="profile.CandidateTeamManagement.TeamMgmt"
-                                                                                    tabindex="29" (change)='onSaveTeamManagementDetails()'
+                                                                                    tabindex="29" (change)='onTeamManagement(profile.CandidateTeamManagement.TeamMgmt)'
                                                                                 />
                                                                             </div>
                                                                         </div>
@@ -2202,7 +2202,7 @@
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <label class="control-label">Total Team Management Experience</label>
-                                                                        <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical"
+                                                                        <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience" style="resize:vertical"
                                                                             [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"
                                                                             (blur)='onSaveTeamManagementDetails()' tabindex="31"></textarea>
                                                                     </div>
