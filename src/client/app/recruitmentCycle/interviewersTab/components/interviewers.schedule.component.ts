@@ -1,26 +1,29 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Interview} from '../../shared/model/interview';
-import { InterviewersScheduleService} from '../services/interviewers.schedule.service';
+import { Interview } from '../../shared/model/interview';
+import { InterviewersScheduleService } from '../services/interviewers.schedule.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { MasterData } from  '../../../shared/model/index';
-import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-import { CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
-import { InterviewMode } from  '../../../shared/constantValue/index';
-import { iefModel} from '../../shared/model/ief';
+import { MasterData } from '../../../shared/model/index';
+import { FullCalendarComponent } from '../../../shared/components/calendar/fullCalendar';
+import { CalendarDetails } from '../../scheduleInterview/model/calendarDetails';
+import { InterviewMode } from '../../../shared/constantValue/index';
+import { iefModel } from '../../shared/model/ief';
 import { InterviewDetailsRowComponent } from '../../shared/component/InterviewDetailsRow/InterviewDetailsRow.component';
 import { GrdOptions } from '../../../shared/model/common.model';
 import { IEFGridRowComponent } from '../../shared/component/IEFGridRow/IEFGridRow.component';
 import { MyScheduleInterview } from '../model/myScheduleInterview';
 import { ProfileBankService } from '../../../profileBank/index';
-
+import { RRFGridRowComponent } from '../../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
+import { RRFDetails } from '../../../RRF/myRRF/models/rrfDetails';
+import { MyRRFService } from '../../../RRF/myRRF/services/myRRF.service';
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
     //directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
-    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService]
+    //directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent, RRFGridRowComponent],
+    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService, MyRRFService]
 })
 
 export class RecruitmentInterviewScheduleComponent implements OnInit {
@@ -41,27 +44,38 @@ export class RecruitmentInterviewScheduleComponent implements OnInit {
         right: 'month,agendaWeek,agendaDay'
     };
 
+    RRFData: RRFDetails = new RRFDetails();
+    isHover: boolean = false;
+    RRFID: Array<Interview> = new Array<Interview>();
     InterviewHistory: MyScheduleInterview[] = [];
     grdOptionsIntwHistory: GrdOptions = new GrdOptions();
     viewIEFText: string = 'View IEF';
     hideIEFText: string = 'Hide IEF';
     IEFButtonText: string = '';
+
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersScheduleService,
-        private _profileBankService: ProfileBankService) {
+        private _profileBankService: ProfileBankService,
+        private _myRRFService: MyRRFService) {
         this.InterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
         /**Commenting as this functionality is deprecated */
         // this.AwaitedInterviewInformation = new Array<Interview>();
         var date = new Date();
         this.currentDate = this.formatDate(date);
+        //For pagination
+        this.grdOptionsIntwHistory.CamlString = '';
+        this.grdOptionsIntwHistory.NextPageID = 0;
+        this.grdOptionsIntwHistory.PreviousPageID = 0;
+        this.grdOptionsIntwHistory.PagingEvent = '';
+        this.grdOptionsIntwHistory.NextButton = false;
+        this.grdOptionsIntwHistory.PreviousButton = false;
     }
     /**Router method overrid from On-Activate class */
     ngOnInit() {
         this.getMyInterviews();
         this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
-
         this.getMyAllInterviewsDetailsOfCalendar();
         //this.returnPath = sessionStorage.getItem('returnPath');
         this.GetMyAllConductedInerviewsHistory();
@@ -87,14 +101,15 @@ export class RecruitmentInterviewScheduleComponent implements OnInit {
             });
     }
     DisableIEF(interviewDate: Date, interviewTime: Date) {
-        if (moment(interviewDate).format('MM-DD-YYYY') > moment(new Date()).format('MM-DD-YYYY')) {
+        var intDate = moment(interviewDate).format('YYYY-MM-DD');
+        if (moment(intDate) > moment()) {
             return true;
         } else {
-            if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
+            if (moment(intDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
                 && interviewTime.split(':')[0] > new Date().getHours()) {
                 return true;
             } else {
-                if (moment(interviewDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
+                if (moment(intDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY')
                     && interviewTime.split(':')[0] > new Date().getHours() && interviewTime.split(':')[1] > new Date().getMinutes()) {
                     return true;
                 } else {
@@ -150,13 +165,18 @@ export class RecruitmentInterviewScheduleComponent implements OnInit {
             .subscribe(
             (results: any) => {
                 this.grdOptionsIntwHistory = results.GrdOperations;
-                if (results.AllInterviews !== undefined && results.AllInterviews.length > 0) {
-                    this.InterviewHistory = results.AllInterviews;
-                    for (var index = 0; index < this.InterviewHistory.length; index++) {
-                        this.InterviewHistory[index].showIEF = false;
-                        this.InterviewHistory[index].IEFButtonText = this.viewIEFText;
+                if (results.AllInterviews) {
+                    if (results.AllInterviews.length > 0) {
+                        this.InterviewHistory = results.AllInterviews;
+                        for (var index = 0; index < this.InterviewHistory.length; index++) {
+                            this.InterviewHistory[index].showIEF = false;
+                            this.InterviewHistory[index].IEFButtonText = this.viewIEFText;
+                        }
+                        this.HISTORYRECORDSNOTFOUND = false;
+                    } else {
+                        this.HISTORYRECORDSNOTFOUND = true;
+                        this.InterviewHistory = [];
                     }
-                    this.HISTORYRECORDSNOTFOUND = false;
                 } else {
                     this.HISTORYRECORDSNOTFOUND = true;
                     this.InterviewHistory = [];
@@ -183,12 +203,19 @@ export class RecruitmentInterviewScheduleComponent implements OnInit {
 
     OnPaginationClick(pageClicked: number) {
         this.grdOptionsIntwHistory.ButtonClicked = pageClicked;
+        if (pageClicked === 1) {
+            this.grdOptionsIntwHistory.PagingEvent = 'Next';
+        }
+        if (pageClicked === -1) {
+            this.grdOptionsIntwHistory.PagingEvent = 'Previous';
+        }
         this.GetMyAllConductedInerviewsHistory();
     }
 
     bindGridData() {
         this.grdOptionsIntwHistory.NextPageUrl = [];
         this.grdOptionsIntwHistory.ButtonClicked = 0;
+        this.grdOptionsIntwHistory.CamlString = '';
         this.GetMyAllConductedInerviewsHistory();
     }
     /**Commenting as this functionality is deprecated */
@@ -247,5 +274,49 @@ export class RecruitmentInterviewScheduleComponent implements OnInit {
             time[0] = +time[0] % 12 || 12; // Adjust hours
         }
         return time.join('');
+    }
+    showPopOver(RRFCode: any, index: string) {
+        let skillDetails: string = '';
+        let rowId: any = 'candidate' + index;
+        let row: any = $('#' + rowId);
+        //service to get RRFDetails
+        this._myRRFService.getRRFByID(RRFCode.Value)
+            .subscribe(
+            (results: RRFDetails) => {
+                this.RRFData = results;
+                for (var index = 0; index < this.RRFData.SkillsRequired.length; index++) {
+                    skillDetails = skillDetails + '"' + this.RRFData.SkillsRequired[index].Value + '"';
+                }
+                if (row.hasClass('pop')) {
+                    row.popover('hide')
+                    row.removeClass('pop');
+                } else {
+                    row.popover({
+                        placement: 'bottom',
+                        toggle: 'popover',
+                        title: 'RRF Details',
+                        html: true,
+                        //trigger: 'hover',
+                        //content: $('#myPopoverContent').html()
+                        content: 'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :'
+                        + this.RRFData.RaisedBy.Value + '<br/>' + '\nSkills :' + skillDetails + '<br/>'
+                        + '\nJob Description :' + this.RRFData.Description
+                    });
+                    row.popover('show');
+                    row.addClass('pop');
+                }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    //Format date in "yyyy-mm-dd" format
+    formatInputDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 }

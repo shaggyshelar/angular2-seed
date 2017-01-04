@@ -1,8 +1,8 @@
 <!-- BEGIN CONTENT -->
-<div class="page-content-wrapper">
+<div class="page-content-wrapper" style="margin-top: -26px !important;">
     <!-- BEGIN CONTENT BODY -->
-    <div class="page-content">
-        <ul class="page-breadcrumb breadcrumb">
+    <div class="page-content" style="margin-left: 203px;margin-right: -15px;">
+        <ul class="page-breadcrumb breadcrumb" style="display:none">
             <li>
                 <a [routerLink]="['/App']"> Home </a>
                 <i class="fa fa-circle"></i>
@@ -12,12 +12,26 @@
                 <i class="fa fa-circle"></i>
             </li>
             <li><span class="active">View</span>
-</li>
-</ul>
-<div class="row">
+            </li>
+        </ul>
+        <div class="row">
             <div class="col-md-12">
                 <div class="portlet light bordered">
+
                     <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+                    <div class="pull-right" style="margin-right:30px;">
+                        <a href="#ResumeId" class="btn blue" data-toggle="tooltip" data-placement="top" title="Candidate Resume" tooltip="Candidate Resume"
+                            tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+                            <i class="fa fa-file-o"></i> Resume
+                        </a>
+                        <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History"
+                            tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+                            (click)='getCandidateHistory(CandidateID)'>
+                            <i class="fa fa-history"> </i>
+                        </a>
+                    </div>
+
+
                     <div *ngIf="profile!==null" class="details">
                         <div class="portlet light nopadding">
                             <div class="portlet-title custom-portlet">
@@ -126,9 +140,9 @@
                                                             </thead>
                                                             <tbody>
                                                                 <tr *ngFor="let Qualification of profile.CandidateQualification">
-                                                                    <td> {{Qualification.Qualification.Value}}</td>
+                                                                    <td> {{Qualification.Qualification?Qualification.Qualification.Value:'N/A'}}</td>
                                                                     <td> {{Qualification.YearofPassing}}</td>
-                                                                    <td> {{Qualification.Grade.Value}}</td>
+                                                                    <td> {{Qualification.Grade?Qualification.Grade.Value:'N/A'}}</td>
                                                                     <td class="center">{{Qualification.Marks}} </td>
                                                                 </tr>
                                                             </tbody>
@@ -165,7 +179,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-8 "><b>Total Experience :</b></label>
                                                         <div class="col-md-3">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.TotalExperience?profile.CandidateCareerProfile.TotalExperience:"N/A":"N/A"}}
+                                                            {{profile.TotalExperience?profile.TotalExperience:"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -173,7 +187,7 @@
                                                     <div class="form-group">
                                                         <label class="col-md-8 "><b>Relevant Experience:</b></label>
                                                         <div class="col-md-2">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.RelevantExperience?profile.CandidateCareerProfile.RelevantExperience:"N/A":"N/A"}}
+                                                            {{profile.RelevantExperience?profile.RelevantExperience:"N/A"}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -182,7 +196,9 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Current Company:</b></label>
                                                         <div class="col-md-6">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentCompany?profile.CandidateCareerProfile.CurrentCompany:"N/A":"N/A"}}
+                                                            {{CurrentCompony ? CurrentCompony : "N/A"}}
+                                                            <!--{{profile.CandidateCareerProfile[0] && profile.CandidateCareerProfile[0].IsCurrentCompany ? profile.CandidateCareerProfile[0].Company ? profile.CandidateCareerProfile[0].Company:"N/A"
+                                                            :"N/A"}}-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,7 +210,8 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-4 "><b>Current Designation & Role:</b></label>
                                                         <div class="col-md-8">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.CurrentDesignationRole?profile.CandidateCareerProfile.CurrentDesignationRole:"N/A":"N/A"}}
+                                                            {{Designation ? Designation: "N/A"}}
+                                                            <!--{{profile.CandidateCareerProfile[0] && profile.CandidateCareerProfile[0].IsCurrentCompany ? profile.CandidateCareerProfile[0].DesignationRole ? profile.CandidateCareerProfile[0].DesignationRole:"N/A":"N/A"}}-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -202,7 +219,8 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-7 "><b>Time Spent In Current Company:</b></label>
                                                         <div class="col-md-2">
-                                                            {{profile.CandidateCareerProfile?profile.CandidateCareerProfile.TimeSpentInCurrentCompany?profile.CandidateCareerProfile.TimeSpentInCurrentCompany:"N/A":"N/A"}}
+                                                            {{TimeSpent ? TimeSpent : "N/A"}}
+                                                            <!--{{profile.CandidateCareerProfile[0] && profile.CandidateCareerProfile[0].IsCurrentCompany ? profile.CandidateCareerProfile[0].TimeSpentInCompany ? profile.CandidateCareerProfile[0].TimeSpentInCompany:"N/A":"N/A"}}-->
                                                         </div>
                                                     </div>
                                                 </div>
@@ -232,14 +250,14 @@
                                             <!-- BEGIN FORM-->
                                             <!--/row-->
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <!--<div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Exp In Skill :</b></label>
                                                         <div class="col-md-7">
                                                             {{profile.CandidateSkills.ExpInSkill}}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Any Functional Exp :</b></label>
@@ -370,7 +388,7 @@
 
                                             </div>
                                             <!--/row-->
-                                            <div class="row">
+                                            <!--<div *ngIf="false" class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b> How long you have been handling a team :</b></label>
@@ -379,7 +397,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <!--/row-->
                                             <!--/row-->
                                             <div class="row">
@@ -441,7 +459,7 @@
 
                                             </div>
                                             <!--/row-->
-                                            <div class="row">
+                                            <!--<div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label class=" col-md-4 "><b> What is your take home :</b></label>
@@ -450,7 +468,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <!--/row-->
                                             <!--/row-->
                                             <div class="row">
@@ -526,7 +544,7 @@
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>Visa :</b></label>
                                                         <div class="col-md-7">
-                                                            {{profile.CandidateOtherDetails.Visa.Value}}
+                                                            {{profile.CandidateOtherDetails.Visa?profile.CandidateOtherDetails.Visa.Value:'N/A'}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -604,7 +622,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label class=" col-md-5 "><b> Job Serach Period :</b></label>
+                                                        <label class=" col-md-5 "><b> Job Search Period :</b></label>
                                                         <div class="col-md-7">
                                                             {{profile.CandidateOtherDetails.JobSerachPeriod}}
                                                         </div>
@@ -656,14 +674,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <!--<div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class=" col-md-5 "><b>How many in your present company have left before the notice period :</b></label>
                                                         <div class="col-md-7">
                                                             {{profile.CandidateOtherDetails.NoticePeriodNotCompletedCount}}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
 
                                         </div>
@@ -726,6 +744,34 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- Candidate Resume -->
+                        <div class="portlet light nopadding topmargin" id="ResumeId">
+                            <div class="portlet-title  custom-portlet">
+                                <div class="caption">
+                                    Candidate Resume
+                                </div>
+                                <div class="caption pull-right" style="margin-right:30px;">
+                                    <a class="btn blue pull-right" data-toggle="tooltip" data-placement="top" title="Candidate Resume" tooltip="Candidate Resume"
+                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)="showResume();">
+                            {{ResumeText}} 
+                        </a>
+                                </div>
+                            </div>
+                            <div class="portlet-container" *ngIf="IsResumeShow">
+                                <div class="portlet-body">
+                                    <!-- BEGIN FORM-->
+                                    <form action="#" class="form-horizontal">
+                                        <div class="form-body">
+                                            <iframe src="data:text/html;charset=utf-8,{{Resume}}" *ngIf="!ShowResume" style="width:100%;height:1500px;"></iframe>
+
+                                            <span *ngIf="ShowResume">{{Resume}}</span>
+                                        </div>
+                                    </form>
+                                    <!-- End FOrm -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Camdidate Resume End-->
                     </div>
                     <div *ngIf="profile===null">
                         <label class="control-label"> No profile information found..!</label>

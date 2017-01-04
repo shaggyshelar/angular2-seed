@@ -51,7 +51,7 @@ export class MyRRFAddComponent implements OnInit {
     isDisabled: boolean = false;
     feedbackComment: string = '';
     previousExpectedDateValue: Date;
-    navagateBackPath: string ='';
+    navagateBackPath: string = '';
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,

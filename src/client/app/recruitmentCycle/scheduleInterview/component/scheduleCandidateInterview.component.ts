@@ -31,6 +31,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
     ScheduleInterView: Interview;
     resources: Array<Resource> = new Array<Resource>();
     errorMessage: string;
+    returnPath: string;
     // resource: Resource;
     InterviewModes: Array<MasterData>;
     InterviewTypes: Array<MasterData>;
@@ -100,6 +101,9 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
         this.ScheduleInterView.RRFID = JSON.parse(sessionStorage.getItem('RRFID'));
         this.ScheduleInterView.Candidate = JSON.parse(sessionStorage.getItem('Candidate')).Candidate;
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
+        this.returnPath = sessionStorage.getItem('returnPath');
+        sessionStorage.removeItem('returnPath');
+
         this.ScheduleInterView.Status = sessionStorage.getItem('Status') !== null ? sessionStorage.getItem('Status') : 'Not Scheduled';
         this.clearSession('Status');
 
@@ -188,8 +192,12 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
     redirectToPreviousView() {
         //Clear Session Values
         this.clearSession('RRFID');
-        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' +
-            this.ScheduleInterView.RRFID.Value + 'ID' + this.ScheduleInterView.RRFID.Id]);
+        if (this.returnPath === '') {
+            this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' +
+                this.ScheduleInterView.RRFID.Value + 'ID' + this.ScheduleInterView.RRFID.Id]);
+        } else {
+            this._router.navigate([this.returnPath]);
+        }
 
     }
 
@@ -210,7 +218,8 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
                     /**Get All Other selected Interviewers from multiselect Dropdown */
                     this.getOtherSelectedInterviewers(value);
                     /**Change Status According to Interview Schedule */
-                    this.changeStatus(this.ScheduleInterView.Status);
+                    //TODO:: Remove line once testing is sucessfull
+                    //this.changeStatus(this.ScheduleInterView.Status);
                     /**Check For Valid And Invalid Slots while scheduling interview */
                     var CheckOverlapping = this.checkAvailability();
 
@@ -260,6 +269,8 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
     ScheduleCandidateInterView() {
         let cnfrmBox: any = $('#confirmSlot');
         cnfrmBox.modal('hide');
+        /**Change Status According to Interview Schedule */
+        this.changeStatus(this.ScheduleInterView.Status);
 
         if (this.isRejectedCandidate) {
             this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
@@ -375,6 +386,7 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
         return result;
     }
     getNominatedInterviewersByRound(RoundId: string) {
+        RoundId = RoundId.includes(':') ? RoundId.split(':')[1].trim() : RoundId;
         if (this.CombinedInterviewRounds) {
             /**gets null incase of rescheduled */
             var selectedRound = this.CombinedInterviewRounds.find(x => x.InterviewRound.Id === parseInt(RoundId));
@@ -568,6 +580,12 @@ export class ScheduleCandidateInterviewComponent implements OnInit {
                     break;
                 case 'rescheduled':
                     this.ScheduleInterView.Status = 'Rescheduled';
+                    break;
+                case 'fitment issue':
+                    this.ScheduleInterView.Status = 'Scheduled';
+                    break;
+                case 'declined':
+                    this.ScheduleInterView.Status = 'Scheduled';
                     break;
             }
         }

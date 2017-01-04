@@ -3,7 +3,7 @@ import { RouterModule, Router } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
-//import { CHART_DIRECTIVES } from 'ng2-charts/ng2-charts';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import { RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFStatus, RRFAssignStatus } from '../../../shared/constantValue/index';
@@ -15,7 +15,8 @@ import { ViewRRFComponent } from '../../shared/components/viewRRF/viewRRF.compon
 import { RRFGridRowComponent } from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
 import { InterviewApprovalComponent } from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
-
+//import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+import { CommonService } from '../../../shared/index';
 
 @Component({
     moduleId: module.id,
@@ -66,28 +67,34 @@ export class RRFDashboardListComponent implements OnInit {
     SortByList: SortingMasterData[] = [];
 
     constructor(private _rrfDashboardService: RRFDashboardService,
-        private _myRRFService: MyRRFService, private _router: Router,
+        private _myRRFService: MyRRFService,
+        private _commonService: CommonService,
+        private _router: Router,
         public toastr: ToastsManager,
         private _mastersService: MastersService) {
         this.currentView = 'myRRF';
     }
 
     ngOnInit() {
-        this.getLoggedInUser();
+        this.logedInUser = this.getLoggedInUser();
         this.getMyRRFData();
         this.getColumsForSorting('MYRRF');
-        this.GetRecruiter();
+        /**
+         * Removed from here and added to Assinged RRF redio button changed event
+        this.GetRecruiter(); */
         this.setDefaultcloseRRFID();
     }
 
     getMyRRFData() {
         this.getMyRRF();
-        this.getStatuswiseMyRRFCount();
+        /**called for Charts which is depricated */
+        //this.getStatuswiseMyRRFCount();
     }
 
     getAllRRFData() {
         this.getAllRRF();
-        this.getStatuswiseRRFCount();
+        /**called for Charts which is depricated */
+        //this.getStatuswiseRRFCount();
     }
 
     getAssignedRRFData() {
@@ -314,6 +321,7 @@ export class RRFDashboardListComponent implements OnInit {
             this.currentView = 'assignRRF';
             this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
+            this.GetRecruiter();
         }
 
         this.viewWiseSetting();
@@ -368,9 +376,17 @@ export class RRFDashboardListComponent implements OnInit {
     }
 
 
-    checkIfRRFClosed(statusId: number) {
+    checkIfRRFClosed(selectedRrf: RRFDetails) {
         try {
-            if (statusId === RRFStatus.Closed) {
+            var assignedInfo = selectedRrf.AssignedData;
+            var showCandidate = false;
+            if (assignedInfo.length > 0)
+                assignedInfo.forEach(rrf => {
+                    if (rrf.AssignedTo.Value === this.logedInUser.Value)
+                        showCandidate = true;
+                });
+            var statusId = selectedRrf.Status.Id ? selectedRrf.Status.Id : '';
+            if (statusId === RRFStatus.Closed || !showCandidate) {
                 return true;
             } else {
                 return false;
@@ -383,7 +399,8 @@ export class RRFDashboardListComponent implements OnInit {
 
     allowEditRRF(statusId: number, raisedBy: number) {
         try {
-            if (raisedBy === this.logedInUser.Id && (statusId === RRFStatus.PendingApproval || statusId === RRFStatus.Rejected)) {
+            if (raisedBy === this.logedInUser.Id && (statusId === RRFStatus.PendingApproval
+                || statusId === RRFStatus.Rejected)) {
                 return false;
             } else {
                 return true;
@@ -434,13 +451,7 @@ export class RRFDashboardListComponent implements OnInit {
     }
 
     getLoggedInUser() {
-        this._rrfDashboardService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.logedInUser = results;
-            },
-            error => this.errorMessage = <any>error);
-
+        return this._commonService.getLoggedInUser();
     }
 
     GetRecruiter() {

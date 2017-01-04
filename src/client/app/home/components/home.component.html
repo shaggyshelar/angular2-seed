@@ -1,0 +1,110 @@
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner ">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="index.html">
+                <!--<a [routerLink]="['/App']">-->
+                <img src="../assets/global/img/social/rms-logo.png" style="width:90px;height:auto;margin-top:20px;" alt="logo" class="logo-default"
+                /> </a>
+            <div class="menu-toggler sidebar-toggler">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!--<page-actions></page-actions>-->
+        <!-- BEGIN PAGE TOP -->
+        <div class="page-top">
+            <!-- BEGIN HEADER SEARCH BOX -->
+            <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+            <!--<form class="search-form" action="page_general_search_2.html" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
+                    <span class="input-group-btn">
+                                <a href="javascript:;" class="btn submit">
+                                    <i class="icon-magnifier"></i>
+                                </a>
+                            </span>
+                </div>
+            </form>-->
+            <!-- END HEADER SEARCH BOX -->
+            <top-navigation-bar></top-navigation-bar>
+        </div>
+        <!-- END PAGE TOP -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"> </div>
+<!-- END HEADER & CONTENT DIVIDER -->
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <sidebar-component></sidebar-component>
+    <!-- BEGIN CONTENT -->
+    <router-outlet></router-outlet>
+    <!-- END CONTENT -->
+    <quick-sidebar></quick-sidebar>
+</div>
+<!-- END CONTAINER -->
+
+<footer></footer>
+<!-- BEGIN QUICK NAV -->
+<!--<nav class="quick-nav nav-is-visible">-->
+<nav class="quick-nav">
+    <a class="quick-nav-trigger" href="#0">
+        <span aria-hidden="true"></span>
+    </a>
+    <ul>
+        <li [ifAuthorize]="['PROFILEBANK.MANAGE']">
+            <a [routerLink]="['/App/ProfileBank/MyProfiles']" class="active">
+                <span>My Profiles</span>
+                <i class="fa fa-th-list"></i>
+            </a>
+        </li>
+        <li [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
+            <a [routerLink]="['/App/RRF/RRFDashboard/']">
+                <span>My RRF</span>
+                <i class="icon-basket"></i>
+            </a>
+        </li>
+        <li [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
+            <a [routerLink]="['/App/AllInterviews/showInterviews']">
+                <span>My Schedule Interview</span>
+                <i class="icon-users"></i>
+            </a>
+        </li>
+        <li [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
+            <a [routerLink]="['/App/RRF/InterviewsAvailability']">
+                <span>Interviewers Availability</span>
+                <i class="fa fa-signal"></i>
+            </a>
+        </li>
+        <li [ifAuthorize]="['RRF.FEEDBACK.MANAGE']">
+            <a [routerLink]="['/App/RRF/FeedbackPending']">
+                <span>RRF Feedbacks</span>
+                <!--<select class="">
+                      <option [value]="-1">All RRF</option>
+                      <option [value]="0" >Few RRF</option>
+                      <option [value]="1" >Huge RRF</option>
+             </select>-->
+                <i class="fa fa-check-square-o"></i>
+            </a>
+        </li>
+        <li [ifAuthorize]="['ADVANCEDSEARCH.MANAGE']">
+            <a [routerLink]="['/App/ProfileBank/AdvanceSearchInSidebar']">
+                <span>Advance Search</span>
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+    </ul>
+    <span aria-hidden="true" class="quick-nav-bg"></span>
+</nav>
+<div class="quick-nav-overlay"></div>
+<!-- END QUICK NAV -->
+<story-spinner></story-spinner>

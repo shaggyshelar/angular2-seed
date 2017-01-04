@@ -29,7 +29,7 @@
                             <div class="mt-comment-text">
                                 <ul class="mt-comment-actions">
                                     <li *ngFor="let slot of availability.AvailabilityData">
-                                        <span>From : <strong>{{slot.StartDate}}</strong> To : <strong>{{slot.EndDate}}</strong> </span>
+                                        <span>From : <strong>{{formatDate(slot.StartDate)}}</strong> To : <strong>{{formatDate(slot.EndDate)}}</strong> </span>
                                         <span class="mt-comment-status">@ {{slot.StartTime}} - {{slot.EndTime}}</span>
                                     </li>
                                     <!--<li>

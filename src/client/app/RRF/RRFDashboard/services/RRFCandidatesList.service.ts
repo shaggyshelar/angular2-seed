@@ -13,8 +13,45 @@ export class RRFCandidateListService {
         private _spinnerService: SpinnerService) { }
 
     //Get RRf Specific Candidates by RRFID - API will return list of Candidates
+    getCandidateProfilesByRRF(RRFID: string) {
+        let url = Config.GetURL('/api/ProfileBank/GetCandidateProfilesTaggedToCurrentUserByRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidateProfilesByRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     getCandidatesForRRF(RRFID: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    getOfferedCandidatesForRRF(RRFID: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewCompletedCandidatesForRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    getOtherCandidatesForRRF(RRFID: string) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewRejectedCandidatesForRRF?RRFID=' + RRFID);
+        //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    getCandidatesForSelectedRRF(round: any, rrfid: any, status: any) {
+        let url = Config.GetURL('/api/Dashboards/GetCandidatesForSelectedRRFAndInterviewStatus?RRFID=' + rrfid + '&InterviewRound=' + round + '&InterviewStatus=' + status);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
         return this.authHttp.get(url)
@@ -49,10 +86,10 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    proceedForOfferGeneration(InterviewID: MasterData) {
+    proceedForOfferGeneration(InterviewID: MasterData, CandidateID: MasterData, RRFID: MasterData, JoiningDate: Date) {
         let url = Config.GetURL('/api/RecruitmentCycle/ProceedForOfferGeneration');
         this._spinnerService.show();
-        return this.authHttp.post(url, { InterviewID })
+        return this.authHttp.post(url, { CandidateID, RRFID, InterviewID, JoiningDate })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

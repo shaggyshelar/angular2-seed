@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CandidateProfile, AllCandidateProfiles } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, AllCandidateProfiles, MailDetails } from '../../shared/model/myProfilesInfo';
 import { Candidate } from '../../shared/model/RRF';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -14,7 +14,7 @@ import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
 import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
-
+import { CommonService } from '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
@@ -44,9 +44,11 @@ export class CompanyProfilesListComponent implements OnInit {
     public isCollapsed: boolean = false;
     Candidate: Candidate;
     NORECORDSFOUND: boolean = false;
+    candidateMailDetails = new MailDetails();
     constructor(private _companyProfilesService: CompanyProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
+        private _commonService: CommonService,
         private _dataSharedService: DataSharedService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
@@ -60,17 +62,19 @@ export class CompanyProfilesListComponent implements OnInit {
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getcompanyProfiles();
-        this.getCandidateStatuses();
+        //this.getCandidateStatuses();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
-
-    getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
+    getEmail(EmailCode: any) {
+        this._profileBankService.getEmail(EmailCode)
             .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
+            results => {
+                this.candidateMailDetails = <any>results;
             },
             error => this.errorMessage = <any>error);
-
+    }
+    getLoggedInUser() {
+        this.currentUser = this._commonService.getLoggedInUser();
     }
 
     getcompanyProfiles() {
@@ -115,6 +119,7 @@ export class CompanyProfilesListComponent implements OnInit {
         this.seletedCandidateID = this.companyProfilesList.Profiles[index].CandidateID;
         // this.profile.Comments = this.allProfilesList[index].Comments;
         // this.profile.Status = this.allProfilesList[index].Status;
+        this.getUpdateStatus(this.seletedCandidateID.Value);
         this.currentCandidate = this.companyProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
@@ -127,6 +132,16 @@ export class CompanyProfilesListComponent implements OnInit {
         window.scrollTo(0, 40);
         if (this.isCollapsed === false)
             this.isCollapsed = !this.isCollapsed;
+    }
+    getUpdateStatus(candidateID: any) {
+        //TO DO : Update API
+        this.statusList = Array<MasterData>();
+        this._masterService.getUpdateStatus(candidateID)
+            .subscribe(
+            results => {
+                this.statusList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
     getCandidateStatuses() {
         this._masterService.getCandidateStatuses()
@@ -145,7 +160,7 @@ export class CompanyProfilesListComponent implements OnInit {
 
     onUpdateStauts() {
         if (this.selectedStatus.Id === undefined)
-            this.selectedStatus = this.profile.Status;
+            this.selectedStatus = this.selectedStatus;
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {
@@ -235,7 +250,7 @@ export class CompanyProfilesListComponent implements OnInit {
             this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-            sessionStorage.setItem('returnPath', '/App/ProfileBank/CompanyProfiles');
+            sessionStorage.setItem('returnPathToSchedule', '/App/ProfileBank/CompanyProfiles');
             this._router.navigate(['/App/ProfileBank/CompanyProfiles/Assign']);
         }
 
@@ -262,5 +277,17 @@ export class CompanyProfilesListComponent implements OnInit {
                 this.ColumnList = results;
             },
             error => this.toastr.error(<any>error));
+    }
+    getUpdateStatusAccess(Status: MasterData) {
+        try {
+            if (Status.Value.toLocaleLowerCase() === 'offered' ||
+                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined') {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
+
     }
 }

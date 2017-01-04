@@ -17,7 +17,7 @@ export class CandidateProfile {
   public Email: string;
   public Tag: string;
   public Skills: Array<string>;
-  public ResumeID: number;
+  public ResumeID: string;
   public Status = new MasterData();
   public Comments: string;
   public CandidateOtherDetails = new OtherDetails();
@@ -25,6 +25,7 @@ export class CandidateProfile {
   public CandidateSkills = new Skills();
   public AadharCardNo: string = '';
   public CandidateTeamManagement = new TeamManagement();
+  public CandidateSocialInformation = new SocialInformation();
   public CandidateCareerProfile = new CareerProfile();
   public CandidateCurrentCompanyProfile = new EmploymentHistory();
   public CandidateMailDetails = new MailDetails();
@@ -99,6 +100,13 @@ export class TeamManagement {
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
 }
+export class SocialInformation {
+  public FacebookID: string;
+  public TwitterID: string;
+  public GooglePlusID: string;
+  public LinkedinID: string;
+  public CandidateID: MasterData;
+}
 export class MailDetails {
   //properties of candidate Mail Details
   public CC: string;
@@ -123,7 +131,7 @@ export class Skills {
   public CandidateID: MasterData = new MasterData();
   public ExpInSkill: string;
   public AnyFunctionalExp: string;
-  public AnyFunctionalExpFlag:boolean;
+  public AnyFunctionalExpFlag: boolean;
   public PrimarySkills: string;
   public SecondarySkills: string;
   public OtherSkills: string;
@@ -146,8 +154,10 @@ export class SalaryDetails {
   public AnyPerks: string;
   public CTCIncludeVariable: any;
   public HowMuchVariable: number;
-  public Allowance: number;
-  public Incentive: number;
+  public Allowance: boolean = false;
+  public AllowanceInHand: number;
+  public IncentiveInHand: number;
+  public Incentive: boolean = false;
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
 }
@@ -156,6 +166,7 @@ export class OtherDetails {
   public CandidateID: MasterData = new MasterData();
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
+  public BondContractDetails: string;
   public Visa: MasterData = new MasterData();
   public NoticePeriod: string = '';
   public RoleExpected: string;
@@ -211,8 +222,8 @@ export class EmploymentHistory {
   public Location: string;
   public TimeSpentInCompany: string;
   public IsCurrentCompany: boolean = false;
-  public ToDate: Date;
-  public FromDate: Date;
+  public ToDate: string;
+  public FromDate: string;
 }
 export class CandidateExperience {
   public CandidateID: MasterData = new MasterData();

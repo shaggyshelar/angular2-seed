@@ -13,7 +13,7 @@
             <div class="timeline-body-head ">
                 <div class="timeline-body-head-caption ">
                     <label href="javascript:; " class="timeline-body-title font-blue-madison ">{{selectedRRF.RaisedBy.Value}}</label>
-                    <span class="timeline-body-time">Raised on : {{selectedRRF.CreatedDate}} </span>
+                    <span class="timeline-body-time">Raised on : {{formatDate(selectedRRF.CreatedDate)}} </span>
                 </div>
 
             </div>
@@ -164,11 +164,11 @@
                                                 {{assignee.AssignedComments }}
                                             </td>
                                             <td>
-                                                {{assignee.AssignedDate}}
+                                                {{formatDate(assignee.AssignedDate)}}
                                             </td>
                                             <!--<td>{{assignee.AssigneeLastDate== "" ? "Assign" : "Un-Assign"}}</td>-->
                                             <td>{{assignee.Status.Value}}</td>
-                                            <td>{{assignee.AssigneeLastDate }}</td>
+                                            <td>{{assignee.AssigneeLastDate}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -209,9 +209,9 @@
                              <tbody>
                                 <tr *ngFor="let selectedcandidate of candidatelist; let index = index">
                                     <td> {{index+1}} </td>
-                                    <td> {{selectedcandidate.Candidate}}</td>
-                                    <td> {{selectedcandidate.InterviewDetails.Status}} </td>
-                                    <td> {{selectedcandidate.InterviewDetails.Round.Value}}</td>
+                                    <td> {{selectedcandidate.Candidate ? selectedcandidate.Candidate : "NA"}}</td>
+                                    <td> {{selectedcandidate.InterviewDetails.Status ? selectedcandidate.Candidate : "NA"}} </td>
+                                    <td> {{selectedcandidate.InterviewDetails.Round.Value ? selectedcandidate.InterviewDetails.Round.Value : "--"}}</td>
                                </tr>
                             </tbody>
                        </table>
@@ -221,6 +221,49 @@
             </div>
         </div>
         <!-- END TIMELINE ITEM-->
+
+        <!-- TIMELINE ITEM *Offered Candidates* -->
+        <div class="timeline-item " *ngIf='OfferedCandidatelist.length >0'>
+            <div class="timeline-badge ">
+                <div class="timeline-icon ">
+                    <i class="icon-user-following font-green-haze "></i>
+                </div>
+            </div>
+            <div class="timeline-body " style="box-shadow: 2px 2px 7px rgba(0,0,0,.4);">
+                <div class="timeline-body-arrow "> </div>
+                <div class="timeline-body-head ">
+                    <div class="timeline-body-head-caption ">
+                        <label class="timeline-body-title font-blue-madison ">Offered Candidate Details :</label>
+                        <span class="timeline-body-time"></span>
+                    </div>
+                </div>
+                <div class="timeline-body-content ">
+                    <span class="">
+                      <div class="table-scrollable ">
+                         <table class="table table-bordered tableTimelinecolor">
+                           <thead>
+                               <tr>
+                                   <th> # </th>
+                                   <th>Candidate</th>                 
+                                    <th>Status</th>
+                                    <th>Last Round Scheduled</th>
+                               </tr>
+                            </thead>
+                             <tbody>
+                                <tr *ngFor="let selectedcandidate of OfferedCandidatelist; let index = index">
+                                    <td> {{index+1}} </td>
+                                    <td> {{selectedcandidate.Candidate ? selectedcandidate.Candidate : "NA"}}</td>
+                                    <td> {{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}} </td>
+                                    <td> {{selectedcandidate.InterviewDetails.Round.Value ? selectedcandidate.InterviewDetails.Round.Value : "--"}}</td>
+                               </tr>
+                            </tbody>
+                       </table>
+                    </div>
+                </span>
+                </div>
+            </div>
+        </div>
+        <!-- END TIMELINE ITEM -->
 
     </div>
 </div>

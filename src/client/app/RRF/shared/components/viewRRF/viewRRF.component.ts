@@ -24,6 +24,7 @@ export class ViewRRFComponent implements OnInit {
     @Input() RRFID: MasterData = new MasterData();
     selectedRRF: RRFDetails = new RRFDetails();
     candidatelist: RRFSpecificCandidateList[] = [];
+    OfferedCandidatelist: RRFSpecificCandidateList[] = [];
     errorMessage: string = '';
     constructor(private _myRRFService: MyRRFService,
         private _RRFCandidateService: RRFCandidateListService) {
@@ -33,6 +34,7 @@ export class ViewRRFComponent implements OnInit {
     ngOnInit() {
         this.getRRFDetails(this.RRFID);
         this.getCandidatesForRRF(this.RRFID);
+        this.getOfferedCandidatesForRRF(this.RRFID)
     }
     getRRFDetails(rrfID: MasterData) {
         this._myRRFService.getRRFDetails(rrfID.Value)
@@ -50,6 +52,15 @@ export class ViewRRFComponent implements OnInit {
             (results: RRFSpecificCandidateList[]) => {
                 this.candidatelist = results;
                 this.setValue();
+            },
+            error => this.errorMessage = <any>error);
+    }
+    getOfferedCandidatesForRRF(rrfID: MasterData) {
+        this._RRFCandidateService.getOfferedCandidatesForRRF(rrfID.Value)
+            .subscribe(
+            (results: RRFSpecificCandidateList[]) => {
+                this.OfferedCandidatelist = results;
+                //this.setValue();
             },
             error => this.errorMessage = <any>error);
     }
@@ -71,5 +82,16 @@ export class ViewRRFComponent implements OnInit {
         } else {
             rrf.IsShowFeedback = true;
         }
+    }
+    //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 }

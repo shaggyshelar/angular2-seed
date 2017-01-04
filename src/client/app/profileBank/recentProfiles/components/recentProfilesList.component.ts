@@ -11,7 +11,7 @@ import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
-
+import { CommonService } from  '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-recent-profiles-list',
@@ -40,6 +40,7 @@ export class RecentProfilesListComponent implements OnInit {
     constructor(private _recentProfilesService: RecentProfilesService,
         private _router: Router,
         private toastr: ToastsManager,
+        private _commonService: CommonService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) { }
 
@@ -50,12 +51,7 @@ export class RecentProfilesListComponent implements OnInit {
         this.getCandidateStatuses();
     }
     getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
+        this.currentUser = this._commonService.getLoggedInUser();
     }
 
 
@@ -124,7 +120,7 @@ export class RecentProfilesListComponent implements OnInit {
         if (this.selectedStatus.Id === undefined)
             this.selectedStatus = this.profile.Status;
 
-        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

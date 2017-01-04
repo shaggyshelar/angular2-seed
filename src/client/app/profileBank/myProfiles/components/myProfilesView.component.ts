@@ -1,9 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CandidateProfile } from '../../shared/model/myProfilesInfo';
-import { ProfileBankService} from  '../../shared/services/profileBank.service';
-import { MasterData } from  '../../../shared/model/index';
-
+import { CandidateProfile, CareerProfile, EmploymentHistory } from '../../shared/model/myProfilesInfo';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
+import { MasterData } from '../../../shared/model/index';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
@@ -17,11 +17,20 @@ export class MyProfilesViewComponent implements OnInit {
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
     errorMessage: string;
+    returnPath: string;
     TITLE: string = 'Profiles';
     count: number = 0;
+    CurrentCompony: string;
+    Designation: string;
+    TimeSpent: string;
+    ResumeText: string = 'Show Resume';
+    IsResumeShow: boolean = false;
+    ShowResume: boolean = false;
+    Resume: string;
     constructor(private _profileBankService: ProfileBankService,
         private activatedRoute: ActivatedRoute,
-        private _router: Router) {
+        private _router: Router,
+        public toastr: ToastsManager) {
         this.profile = new CandidateProfile();
     }
     ngOnInit() {
@@ -29,18 +38,43 @@ export class MyProfilesViewComponent implements OnInit {
         //this.params = segment.getParam('id');
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
-
+        this.returnPath = this.getSessionOf<string>('onProfilesReturnPath', false);
+        this.getCandidateProfile();
+    }
+    /**Get Candidate Profiles */
+    getCandidateProfile() {
         this._profileBankService.getCandidateProfile(this.CandidateID.Value)
             .subscribe(
-            (results: CandidateProfile) => {
+            (results: any) => {
                 this.profile = results;
+                if (results.CandidateCareerProfile.length > 0) {
+                    for (var index = 0; index < results.CandidateCareerProfile.length; index++) {
+                        if (results.CandidateCareerProfile[index].IsCurrentCompany === true) {
+                            this.CurrentCompony = results.CandidateCareerProfile[index].Company;
+                            this.Designation = results.CandidateCareerProfile[index].DesignationRole;
+                            this.TimeSpent = results.CandidateCareerProfile[index].TimeSpentInCompany;
+                        }
+                    }
+                }
                 this.count = results.CandidateQualification.length;
                 this.convertCheckboxesValues();
             },
             error => this.errorMessage = <any>error);
-
     }
-
+    /**Get data from session */
+    getSessionOf<T>(variableName: string, isJson: Boolean): T {
+        var _requestedIef = sessionStorage.getItem(variableName);
+        //var response: any;
+        if (_requestedIef !== null) {
+            var response = isJson ? JSON.parse(_requestedIef) : _requestedIef;
+            sessionStorage.setItem(variableName, '');
+        } else {
+            /** If no information found from Session then it will redirected to existing page */
+            //this.toastr.error('Somthing went wrong..!');
+            console.info('Following variable name is empty form session - ' + variableName);
+        }
+        return response;
+    }
     convertCheckboxesValues() {
         if (this.profile.IsCurrentSameAsPermanent === true) {
             this.profile.IsCurrentSameAsPermanent = 'Yes';
@@ -85,6 +119,43 @@ export class MyProfilesViewComponent implements OnInit {
         }
     }
     Back() {
-        this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        if (this.returnPath) {
+            this._router.navigate([this.returnPath]);
+        } else {
+            this._router.navigate(['/App/ProfileBank/MyProfiles']);
+        }
+    }
+    getCandidateHistory(_candidateID: MasterData) {
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
+        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+    }
+    showResume() {
+        if (this.ResumeText === 'Show Resume') {
+            this.ResumeText = 'Hide Resume';
+            this.IsResumeShow = true;
+            this.getCandidateResume();
+        } else {
+            this.ResumeText = 'Show Resume';
+            this.IsResumeShow = false;
+        }
+    }
+    /** Get Candidate Resume */
+    getCandidateResume() {
+        this._profileBankService.getResumeInHtml(this.CandidateID)
+            .subscribe(
+            (results: any) => {
+                if (results !== undefined) {
+                    this.Resume = results;
+                    if (this.Resume === 'File is not in docx format. Cannot read content') {
+                        this.ShowResume = true;
+                    } else {
+                        this.ShowResume = false;
+                    }
+                } else {
+                    this.ShowResume = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
     }
 }

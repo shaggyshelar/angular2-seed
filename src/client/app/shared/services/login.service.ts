@@ -23,8 +23,15 @@ export class LoginService {
             .map((res: Response) => { this.setToken(res); this.emitAuthEvent(true); })
             .catch(this.handleError);
     }
-
-
+    getCurrentLoggedInUser() {
+        let url = Config.GetURL('/api/authentication/getCurrentUserName');
+        return this.authHttp.get(url)
+            .map((res: Response) => {
+                this.commonService.setLoggedInUserName(res.json());
+                this.extractData(res);
+            })
+            .catch(this.handleError);
+    }
     getLoggedInUserPermission() {
         let url = Config.GetURL('/api/authentication/GetPermissionbyRole');
         return this.authHttp.get(url)
@@ -50,7 +57,7 @@ export class LoginService {
     }
 
     isAuthenticated() {
-        if (localStorage.getItem('access_token')) {
+        if (localStorage.getItem('access_token') !== null) {
             return true;
         } else {
             return false;

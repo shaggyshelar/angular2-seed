@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
-import { CandidateProfile, Qualification } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, Qualification, CandidateExperience, EmploymentHistory } from '../../shared/model/myProfilesInfo';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
+import { APIResult } from '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 //import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { CommonService } from '../../../shared/index';
+
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profile-add',
@@ -47,10 +49,18 @@ export class BlackListedProfilesAddComponent implements OnInit {
     IsSuccess: boolean = false;
     currentUser: MasterData = new MasterData();
     TITLE: string = 'BlackListed Profiles';
+    /**Candidate Experience */
+    CandidateExperiences: CandidateExperience = new CandidateExperience();
+    /**Employment History*/
+    EmployersInformation: EmploymentHistory = new EmploymentHistory();
+    /**Employment History collection */
+    EmployersInformationList: Array<EmploymentHistory> = new Array<EmploymentHistory>();
+    EmploymentDetailsAction: string = 'Add';
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private activatedRoute: ActivatedRoute,
         private _router: Router,
         public toastr: ToastsManager,
+        private _commonService: CommonService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
@@ -75,6 +85,8 @@ export class BlackListedProfilesAddComponent implements OnInit {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
             this.CandidateID.Value = this.params.split('ID')[0];
             this.getCandidateProfileById(this.CandidateID.Value);
+            this.GetEmployersInformationList(this.CandidateID);
+            this.GetCandidateExperience(this.CandidateID);
         }
         var date = new Date();
         this.CurrentYear = date.getFullYear();
@@ -83,12 +95,7 @@ export class BlackListedProfilesAddComponent implements OnInit {
     }
 
     getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
+        this.currentUser = this._commonService.getLoggedInUser();
 
     }
 
@@ -193,7 +200,32 @@ export class BlackListedProfilesAddComponent implements OnInit {
             this.profile.PermanentAddress = '';
         }
     }
+    /**Function to fetch candidate EXPERIENCE details */
+    GetCandidateExperience(candidateID: MasterData) {
+        this._profileBankService.getCandidateExperience(candidateID)
+            .subscribe(
+            results => {
+                this.CandidateExperiences = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    /**Bind candidate's all employment related information */
+    GetEmployersInformationList(_candidateID: MasterData) {
+        this._profileBankService.getCandidateEmploymentHistory(_candidateID)
+            .subscribe(
+            results => {
+                this.EmployersInformationList = <any>results;
+                this.EmploymentDetailsAction = 'Add';
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
 
+    }
     onSavePrimaryInfo(): void {
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
             this.profile.CommentsUpdated = true;

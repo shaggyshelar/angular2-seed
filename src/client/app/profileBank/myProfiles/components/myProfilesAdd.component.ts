@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
-import { CalendarModule} from 'primeng/primeng';
-import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience, EmploymentHistory} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience,
+    EmploymentHistory, Skills, SalaryDetails, SocialInformation} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 //import * as  _ from 'lodash';
-import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+//import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
@@ -43,10 +43,16 @@ export class MyProfilesAddComponent implements OnInit {
     selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
     TITLE: string = 'Profiles';
+    /*Candidate Salary Details */
+    CandidateSalaryDetails: SalaryDetails = new SalaryDetails();
+    /*Candidate Skills */
+    CandidateSkills: Skills = new Skills();
     /**Candidate Experience */
     CandidateExperiences: CandidateExperience = new CandidateExperience();
     /**Employment History*/
     EmployersInformation: EmploymentHistory = new EmploymentHistory();
+    /**Social Information */
+    CandidateSocialInfo: SocialInformation = new SocialInformation();
     /**Employment History collection */
     EmployersInformationList: Array<EmploymentHistory> = new Array<EmploymentHistory>();
     /**Variables for Upload photo */
@@ -64,6 +70,9 @@ export class MyProfilesAddComponent implements OnInit {
     AllowanceFlag: boolean = false;
     IncentiveFlag: boolean = false;
     FunctionalExp: boolean = false;
+    // For Duplicate Records
+    isExist: boolean = false;
+    existedProfile: CandidateProfile;
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -126,6 +135,15 @@ export class MyProfilesAddComponent implements OnInit {
                 }
                 if (this.profile.CandidateSalaryDetails.CTCIncludeVariable === true) {
                     this.VariableCTC = true;
+                }
+                if (this.profile.CandidateSalaryDetails.Allowance === true) {
+                    this.AllowanceFlag = true;
+                }
+                if (this.profile.CandidateSalaryDetails.Incentive === true) {
+                    this.IncentiveFlag = true;
+                }
+                if (this.profile.CandidateSkills.AnyFunctionalExpFlag === true) {
+                    this.FunctionalExp = true;
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
@@ -208,34 +226,86 @@ export class MyProfilesAddComponent implements OnInit {
 
     onSameAddressChecked(value: boolean) {
         if (value) {
-            this.profile.PermanentAddress = this.profile.CurrentAddress;
+            this.profile.CurrentAddress = this.profile.PermanentAddress;
         } else {
-            this.profile.PermanentAddress = '';
+            this.profile.CurrentAddress = '';
         }
     }
     onSavePrimaryInfo(): void {
-        if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
-            this.profile.CommentsUpdated = true;
-            this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+
+        if (!this.isExist) {
+            if (this.validatePrimaryInfo()) {
+                if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+                    this.profile.CommentsUpdated = true;
+                    this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
+                } else {
+                    this.profile.CommentsUpdated = false;
+                }
+                this._profileBankService.editCandidateProfile(this.profile)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.getCandidateProfileById(this.CandidateID.Value);
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.toastr.error(<any>error);
+                    });
+            }
+        }
+    }
+    validatePrimaryInfo(): boolean {
+        var submitFlag: boolean = true;
+        if (this.profile.FirstName === '') {
+            this.toastr.error('Please enter first name');
+            submitFlag = false;
         } else {
-            this.profile.CommentsUpdated = false;
+            if (this.profile.LastName === '') {
+                this.toastr.error('Please enter last name');
+                submitFlag = false;
+            } else {
+                if (this.profile.Email === '') {
+                    this.toastr.error('Please enter email');
+                    submitFlag = false;
+                } else {
+                    if (this.profile.PrimaryContact === '') {
+                        this.toastr.error('Please enter contact no.');
+                        submitFlag = false;
+                    } else {
+                        if (this.profile.CandidateSkills.PrimarySkills === '' || this.profile.CandidateSkills.PrimarySkills === null) {
+                            this.toastr.error('Please enter skills');
+                            submitFlag = false;
+                        } else {
+                            if (this.profile.Tag === '' || this.profile.CandidateSkills.PrimarySkills === null) {
+                                this.toastr.error('Please enter Tag');
+                                submitFlag = false;
+                            } else {
+                                if (this.profile.CandidateOtherDetails.NoticePeriod === '') {
+                                    this.toastr.error('Please enter notice period');
+                                    submitFlag = false;
+                                } else {
+                                    if (this.profile.CandidateSalaryDetails.CurrentSalary === '') {
+                                        this.toastr.error('Please enter current salary');
+                                        submitFlag = false;
+                                    } else {
+                                        if (this.profile.CandidateSalaryDetails.ExpectedSalary === '') {
+                                            this.toastr.error('Please enter expected salary');
+                                            submitFlag = false;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
-        this._profileBankService.editCandidateProfile(this.profile)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
-
+        return submitFlag;
     }
 
     onSavePersonalDetails(): void {
@@ -245,23 +315,55 @@ export class MyProfilesAddComponent implements OnInit {
         } else {
             this.profile.CommentsUpdated = false;
         }
-        this._profileBankService.editCandidatePersonalDetails(this.profile)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
-
+        if (!this.isExist) {
+            if (this.validatePersonalInfo()) {
+                this._profileBankService.editCandidatePersonalDetails(this.profile)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.getCandidateProfileById(this.CandidateID.Value);
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.toastr.error(<any>error);
+                    });
+            }
+        }
     }
 
+    validatePersonalInfo(): boolean {
+        var submitFlag: boolean = true;
+        if (this.profile.FirstName === '') {
+            this.toastr.error('Please enter first name');
+            submitFlag = false;
+        } else {
+            if (this.profile.LastName === '') {
+                this.toastr.error('Please enter last name');
+                submitFlag = false;
+            } else {
+                if (this.profile.Email === '') {
+                    this.toastr.error('Please enter email');
+                    submitFlag = false;
+                } else {
+                    if (this.profile.PrimaryContact === '') {
+                        this.toastr.error('Please enter primary contact');
+                        submitFlag = false;
+                    } else {
+                        if (this.profile.PermanentAddress === '') {
+                            this.toastr.error('Please enter permanent address');
+                            submitFlag = false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return submitFlag;
+    }
     onSaveProfessionalDetails(): void {
         //Check For Comments Updated
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
@@ -273,20 +375,23 @@ export class MyProfilesAddComponent implements OnInit {
         }
         this.profile.CandidateOtherDetails.CandidateID = this.CandidateID;
         //Save Data
-        this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (!this.isExist) {
+            this._profileBankService.editCandidateProfessionalDetails(this.profile.CandidateOtherDetails)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+
 
     }
 
@@ -301,20 +406,23 @@ export class MyProfilesAddComponent implements OnInit {
         } else {
             this.profile.CommentsUpdated = this.profile.CandidateSkills.CommentsUpdated = false;
         }
-        this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (!this.isExist) {
+            this._profileBankService.editCandidateSkillsDetails(this.profile.CandidateSkills)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+
+        }
 
     }
 
@@ -328,21 +436,41 @@ export class MyProfilesAddComponent implements OnInit {
             this.profile.CommentsUpdated = this.profile.CandidateTeamManagement.CommentsUpdated = false;
         }
         this.profile.CandidateTeamManagement.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateTeamManagementDetails(this.profile.CandidateTeamManagement)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
-
+        if (!this.isExist) {
+            this._profileBankService.editCandidateTeamManagementDetails(this.profile.CandidateTeamManagement)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+    }
+    onSaveSocialInfo(): void {
+        this.profile.CandidateSocialInformation.CandidateID = this.CandidateID;
+        if (!this.isExist) {
+            this._profileBankService.editCandidateSocialInfo(this.profile.CandidateSocialInformation)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
     }
 
     /**Function to fetch candidate EXPERIENCE details */
@@ -372,22 +500,25 @@ export class MyProfilesAddComponent implements OnInit {
             this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = false;
         }
         this.CandidateExperiences.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    // this.getCandidateProfileById(this.CandidateID.Value);
-                    this.GetCandidateExperience(this.CandidateID);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
+        if (!this.isExist) {
+            this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        // this.getCandidateProfileById(this.CandidateID.Value);
+                        this.GetCandidateExperience(this.CandidateID);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
                 }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            }
-            );
+                );
+        }
+
 
     }
 
@@ -400,20 +531,23 @@ export class MyProfilesAddComponent implements OnInit {
             this.profile.CommentsUpdated = false;
         }
         this.profile.CandidateSalaryDetails.CandidateID = this.CandidateID;
-        this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getCandidateProfileById(this.CandidateID.Value);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).Message);
-                }
-            },
-            error => {
-                this.errorMessage = <any>error;
-                this.toastr.error(<any>error);
-            });
+        if (!this.isExist) {
+            this._profileBankService.editCandidateSalaryDetails(this.profile.CandidateSalaryDetails)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.getCandidateProfileById(this.CandidateID.Value);
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).Message);
+                    }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                    this.toastr.error(<any>error);
+                });
+        }
+
 
     }
     /**START Candidate Employement History functionality (Candidate Employers Information) */
@@ -490,6 +624,12 @@ export class MyProfilesAddComponent implements OnInit {
             .subscribe(
             results => {
                 this.EmployersInformation = <any>results;
+                this.EmployersInformation.FromDate = this.formatDate(this.EmployersInformation.FromDate);
+                if (this.EmployersInformation.IsCurrentCompany === true) {
+                    this.EmployersInformation.ToDate = this.formatDate(new Date());
+                } else {
+                    this.EmployersInformation.ToDate = this.formatDate(this.EmployersInformation.ToDate);
+                }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -661,6 +801,9 @@ export class MyProfilesAddComponent implements OnInit {
     onOutstationedClick(isChecked: any) {
         if (isChecked === false) {
             this.readyToRelocateFlag = true;
+            if (this.profile.ReadyToRelocate === true) {
+                this.reasonToRelocateFlag = true;
+            }
         } else {
             this.readyToRelocateFlag = false;
             this.reasonToRelocateFlag = false;
@@ -671,6 +814,7 @@ export class MyProfilesAddComponent implements OnInit {
             this.reasonToRelocateFlag = true;
         } else {
             this.reasonToRelocateFlag = false;
+            this.profile.ReasonToRelocate = '';
         }
     }
     onOfferInHand(isChecked: any) {
@@ -678,6 +822,7 @@ export class MyProfilesAddComponent implements OnInit {
             this.OfferInHand = true;
         } else {
             this.OfferInHand = false;
+            this.profile.CandidateOtherDetails.OfferDetails = '';
         }
     }
     onVariableCTC(isChecked: any) {
@@ -685,6 +830,7 @@ export class MyProfilesAddComponent implements OnInit {
             this.VariableCTC = true;
         } else {
             this.VariableCTC = false;
+            this.profile.CandidateSalaryDetails.HowMuchVariable = 0;
         }
     }
     onAllowance(isChecked: any) {
@@ -692,6 +838,7 @@ export class MyProfilesAddComponent implements OnInit {
             this.AllowanceFlag = true;
         } else {
             this.AllowanceFlag = false;
+            this.profile.CandidateSalaryDetails.AllowanceInHand = 0;
         }
     }
     onIncentive(isChecked: any) {
@@ -699,19 +846,158 @@ export class MyProfilesAddComponent implements OnInit {
             this.IncentiveFlag = true;
         } else {
             this.IncentiveFlag = false;
+            this.profile.CandidateSalaryDetails.IncentiveInHand = 0;
         }
+    }
+    onCurrent(isChecked: any) {
+        if (isChecked === false) {
+            this.EmployersInformation.ToDate = this.formatDate(new Date());
+        } else {
+            this.EmployersInformation.ToDate = ' ';
+        }
+    }
+    //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            h = '' + d.getHours(),
+            m = '' + d.getMinutes(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
     }
     onFunctionalExp(isChecked: any) {
         if (isChecked === false) {
             this.FunctionalExp = true;
         } else {
             this.FunctionalExp = false;
+            this.profile.CandidateSkills.AnyFunctionalExp = '';
+        }
+    }
+    nextTabKeyPressed(e: any) {
+        if (e.keyCode === 13) {
+            this.nextTab();
+        }
+    }
+    prevTabKeyPressed(e: any) {
+        if (e.keyCode === 13) {
+            this.previousTab();
+        }
+    }
+    setFocus() {
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnQuick') {
+            $('#txtFollowUpForQuick').focus();
+        }
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'BtnPersonal') {
+            $('#txtFirstName').focus();
+        }
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSkills') {
+            $('#txtFolloUpForSkill').focus();
+        }
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnProfessional') {
+            $('#txtFolloupForProf').focus();
+        }
+        if ($('.nav-tabs > .active').andSelf('li').find('a')[0].id === 'btnSalary') {
+            $('#txtFolloUpForSal').focus();
         }
     }
     nextTab() {
         $('.nav-tabs > .active').next('li').find('a').trigger('click');
+        this.setFocus();
     }
+
     previousTab() {
         $('.nav-tabs > .active').prev('li').find('a').trigger('click');
+        this.setFocus();
+    }
+    onPersonalInfoTabClick() {
+
+        $('#txtFirstName').focus();
+
+    }
+    onSkillTabClick() {
+        $('#txtFolloUpForSkill').focus();
+    }
+    onProfessionalInfoTabClick() {
+        $('#txtFolloupForProf').focus();
+    }
+    onSalaryTabClick() {
+        $('#txtFolloUpForSal').focus();
+    }
+    validate(type: string, number: string) {
+        switch (type) {
+            case 'Aadhar': if (number.match('^[0-9\-\+]{9,15}$') && number.length === 12) {
+                this.IsExist();
+            } else {
+                this.profile.AadharCardNo = '';
+                this.toastr.error('Enter valid Aadhaar Card number For Eg. 123456789012');
+            }
+                break;
+            case 'Pan': if (number.match('[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}')) {
+                this.IsExist();
+            } else {
+                this.profile.PANNumber = '';
+                this.toastr.error('Enter valid PAN number. For Eg. ABCDE1234F');
+            }
+                break;
+            case 'Passport': if (number.match('[A-Za-z]{1}[0-9]{7}')) {
+                this.IsExist();
+            } else {
+                this.profile.PassportNumber = '';
+                this.toastr.error('Enter valid passport number. For Eg. A1234567');
+            }
+                break;
+            case 'Email': if (number.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')) {
+                this.IsExist();
+            } else {
+                this.profile.Email = '';
+                this.toastr.error('Enter valid Email ID For Eg. abc@gmail.com');
+            }
+                break;
+        }
+    }
+    /** Check is current information is already exist in database.*/
+    IsExist() {
+        this._myProfilesService.isExist(this.profile)
+            .subscribe(
+            (results: any) => {
+                if (results.profileBankObjects.CandidateID.Value !== this.profile.CandidateID.Value) {
+                    if (results.isExist) {
+                        if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
+                            this.existedProfile = <any>results.profileBankObjects;
+                            this.isExist = <any>results.isExist;
+                            this.toastr.error('Profile already exist');
+                        }
+                    }
+                } else {
+                    this.isExist = false;
+                    //this.onSavePrimaryInfo();
+                    this.onSavePersonalDetails();
+                }
+
+            },
+            error => this.toastr.error(<any>error));
+    }
+    /**Redirecting to candidate's all interview history page */
+    getCandidateHistory(_candidateID: MasterData) {
+        sessionStorage.setItem('CandidateIdForReturnPath', this.CandidateID.Value);
+        sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
+        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles/Edit/');
+        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+    }
+    /** Delete Prfile will be available only to the Recruitment Head*/
+    deleteCandidate(CandidateID: MasterData) {
+        this._profileBankService.deleteProfile(CandidateID)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+                this._location.back();
+                //this.getMyProfiles();
+            },
+            error => this.toastr.error(<any>error));
     }
 }

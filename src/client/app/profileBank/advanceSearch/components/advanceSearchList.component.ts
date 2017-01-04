@@ -1,19 +1,27 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
+//import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
+import {
+    CandidateProfile,
+    ResumeMeta,
+    AddCandidateResponse,
+    AllCandidateProfiles,
+    CareerProfile,
+    MailDetails
+} from '../../shared/model/myProfilesInfo';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 //import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
-import { ProfileBankService} from  '../../shared/services/profileBank.service';
+//import { APIResult } from  '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 //import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 
 @Component({
@@ -73,6 +81,8 @@ export class AdvanceSearchListComponent implements OnInit {
     profilePhoto: string;
     /** For profile picture */
     profilePic: any;
+    candidateGeneralSearch = { SearchValue: '' };
+    candidateGrdOptions: GrdOptions = new GrdOptions();
 
     constructor(private _advanceSearchService: AdvanceSearchService,
         private http: Http,
@@ -90,6 +100,14 @@ export class AdvanceSearchListComponent implements OnInit {
         this.Candidate = new Candidate();
         this.uploadedPhoto = new Array<File>();
         this.photoMeta = new ResumeMeta();
+        //For pagination
+        this.candidateGrdOptions.CamlString = '';
+        this.candidateGrdOptions.NextPageID = 0;
+        this.candidateGrdOptions.PreviousPageID = 0;
+        this.candidateGrdOptions.PagingEvent = '';
+        this.candidateGrdOptions.NextButton = false;
+        this.candidateGrdOptions.PreviousButton = false;
+
     }
 
     ngOnInit() {
@@ -103,12 +121,12 @@ export class AdvanceSearchListComponent implements OnInit {
     }
     // This function will get all profiles according to search string
     getAdvanceSearchResult(insputString: string) {
-        this._advanceSearchService.getAdvanceSearch(insputString)
+        this.candidateGeneralSearch.SearchValue = insputString;
+        this._advanceSearchService.getAdvanceSearch(this.candidateGeneralSearch, this.candidateGrdOptions)
             .subscribe(
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
-
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);

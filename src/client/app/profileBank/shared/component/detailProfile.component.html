@@ -30,13 +30,10 @@
         <div class="col-md-10">
             <div class="row message">
                 <div class="col-md-8 profile-info">
-                    <h3 class="font-green sbold uppercase">{{profile.Candidate}}</h3>
-                    <!--<p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt laoreet
-                        dolore magna aliquam tincidunt erat volutpat laoreet dolore magna aliquam tincidunt erat volutpat.
-                    </p>-->
+                    <h3 class="font-green sbold uppercase"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"":"-"}} </small></h3>
                     <!--<p>
                         <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
-                    </p>-->
+                        </p>-->
                     <div class="row">
                         <ul class="list-unstyled">
                             <li>
@@ -65,13 +62,13 @@
                         </ul>
                     </div>
                     <p>
-                        <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails.Cc}}&amp;subject={{profile.CandidateMailDetails.Subject}}&amp;body={{profile.CandidateMailDetails.Body}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
+                        <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
                     </p>
                     <div class="row">
                         <ul class="list-inline sbold" style="color:#f16e50">
                             <li>
                                 <!--location-->
-                                <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Location">
+                                <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <!--TODO:: Add Location once updated from Backend -->
                                     <i class="fa fa-map-marker"></i> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Location?profile.CandidateCurrentCompanyProfile.Location:"N/A":"N/A"}}
                                     <!--{{profile.District?profile.District:"N/A"}}-->
@@ -79,20 +76,21 @@
                             </li>
                             <li>
                                 <!--experience-->
-                                <div tooltip="Experience" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Experience">
-                                    <i class="fa fa-briefcase"></i> {{profile.TotalExperience?profile.TotalExperience:"N/A"}}
+                                <div tooltip="Experience" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                    <i class="fa fa-briefcase"></i> {{profile.TotalExperience?profile.TotalExperience+" yr":"N/A"}}
                                 </div>
                             </li>
                             <li>
                                 <!--tag-->
-                                <div tooltip="Tag" class="uppercase" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="tag">
+                                <div tooltip="Tag" class="uppercase" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}}
                                 </div>
                             </li>
                             <li>
                                 <!--notice period-->
-                                <div tooltip="Notice period" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Notice period">
-                                    <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
+                                <div tooltip="Notice period" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                    <i class="fa fa-hourglass-half"></i> NP: {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+"
+                                    days":"N/A"}}
                                 </div>
 
                             </li>
@@ -112,16 +110,19 @@
                         <div class="portlet-body">
                             <ul class="list-unstyled">
                                 <li>
-                                    <h5 tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Owner" class="font-blue sbold uppercase">
+                                    <h5 tooltip="Owner" tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="true" class="font-blue sbold uppercase">
                                         <!--<i class="fa fa-user"></i>-->{{profile.Owner.Value?profile.Owner.Value:"N/A"}}</h5>
                                 </li>
                                 <li>
-                                    <span class="mt-action-dot color{{profile.Status.Id}}"> </span>{{profile.Status.Value}}
+                                    <span class="mt-action-dot color{{profile.Status.Id}}"> </span>
+                                    <span *ngIf='!checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><strong>{{profile.Status.Value}}</strong></span>
+                                    <span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><a style="color:black"(click)='onViewCandidateClick(profile.RRFAssigned.RRFID)' tooltip="Click to check associated RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"><strong>{{profile.Status.Value}}</strong><small> with <i class="fa fa-external-link"></i></small></a></span>
+                                    <!--<span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'> with <a (click)='onViewCandidateClick(profile.RRFAssigned.RRFID)'></a></span>-->
                                 </li>
                                 <li>
                                     <div class="tools">
                                         <!--(click)='getResume(profile.CandidateID)'-->
-                                        <a class="reload" data-original-title="reload" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
+                                        <a class="reload" *ngIf="profile.ResumeID!==''" data-original-title="reload" title="" (click)='getResume(profile.CandidateID)'><i aria-hidden="true" class="fa fa-download"></i>Download Resume</a>
                                         <!--<br>
                                         <a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeName?profile.ResumeName:'TestResume.doc '}}"
                                             class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>-->
@@ -130,17 +131,21 @@
                                     <div class="login-options">
                                         <br>
                                         <ul class="social-icons">
-                                            <li>
-                                                <a class="facebook" data-original-title="facebook"> </a>
+                                            <li >
+                                                <a class="facebook" data-original-title="facebook" *ngIf="profile.CandidateSocialInformation.FacebookID" href="{{profile.CandidateSocialInformation.FacebookID}}" target="_blank" > </a>
+                                                <a class="facebook" data-original-title="facebook" *ngIf="profile.CandidateSocialInformation.FacebookID === ''" href="javascript:;"> </a>
                                             </li>
                                             <li>
-                                                <a class="twitter" data-original-title="Twitter" href="javascript:;"> </a>
+                                                <a class="twitter" data-original-title="twitter" *ngIf="profile.CandidateSocialInformation.TwitterID" href="{{profile.CandidateSocialInformation.TwitterID}}" target="_blank"> </a>
+                                                <a class="twitter" data-original-title="Twitter" *ngIf="profile.CandidateSocialInformation.TwitterID === ''" href="javascript:;"> </a>
                                             </li>
                                             <li>
-                                                <a class="googleplus" data-original-title="Goole Plus" href="javascript:;"> </a>
+                                                <a class="googleplus" data-original-title="Goole Plus" *ngIf="profile.CandidateSocialInformation.GooglePlusID" href="{{profile.CandidateSocialInformation.GooglePlusID}}" target="_blank"> </a>
+                                                <a class="googleplus" data-original-title="googleplus" *ngIf="profile.CandidateSocialInformation.GooglePlusID === ''" href="javascript:;"> </a>
                                             </li>
                                             <li>
-                                                <a class="linkedin" data-original-title="Linkedin" href="javascript:;"> </a>
+                                                <a class="linkedin" data-original-title="Linkedin" *ngIf="profile.CandidateSocialInformation.LinkedinID" href="{{profile.CandidateSocialInformation.LinkedinID}}" target="_blank"> </a>
+                                                <a class="linkedin" data-original-title="linkedin" *ngIf="profile.CandidateSocialInformation.LinkedinID === ''" href="javascript:;"> </a>
                                             </li>
                                         </ul>
                                     </div>

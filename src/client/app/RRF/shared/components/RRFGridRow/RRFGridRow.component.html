@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-lg-9">
-                Raised by <b> {{RRFData.RaisedBy.Value }}</b> On {{RRFData.CreatedDate}} with <b> {{RRFData.Priority.Value}}</b>                priority.
+                Raised by <b> {{RRFData.RaisedBy.Value }}</b> On {{formatDate(RRFData.CreatedDate)}} with <b> {{RRFData.Priority.Value}}</b>                priority.
             </div>
             <!--<div class="col-lg-4">
                 <b>Raised On</b>: {{RRFData.CreatedDate}} &nbsp;&nbsp;&nbsp;
@@ -24,7 +24,7 @@
                         <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
                 </div>-->
                 <div *ngIf='displayFeedBackStatus' style="color: #217ebd;" align='right'>
-                    <b>Feedback Status </b>: {{RRFData.FeedbackStatus}}
+                    <b>Feedback Status </b>: {{RRFData.FeedbackStatus === null ? "NA" : RRFData.FeedbackStatus}}
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
         </div>
         <div class="col-lg-4">
             Openings : {{RRFData.NoOfOpenings}}
-            <br>Date of Joining : {{RRFData.ExpDateOfJoining }}
+            <br>Date of Joining : {{formatDate(RRFData.ExpDateOfJoining) }}
         </div>
         <!--<div class="col-lg-3">
     Experience : {{RRFData.MinExp }} - {{RRFData.MaxExp }}

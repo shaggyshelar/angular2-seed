@@ -1,17 +1,17 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AllCandidateProfiles, CandidateProfile } from '../../shared/model/myProfilesInfo';
+import { AllCandidateProfiles, CandidateProfile, MailDetails } from '../../shared/model/myProfilesInfo';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 //import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData, SortingMasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, SortingMasterData, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
+import { APIResult } from '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
-
+import { CommonService } from '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-black-listed-profiles-list',
@@ -37,10 +37,11 @@ export class BlackListedProfilesListComponent implements OnInit {
     isCollapsed: boolean = false;
     NORECORDSFOUND: boolean = false;
     CandidateProfiles: AllCandidateProfiles = new AllCandidateProfiles();
-
+    candidateMailDetails = new MailDetails();
     constructor(private _blacklistedProfilesService: BlackListedProfilesService,
         private _router: Router,
         public toastr: ToastsManager,
+        private _commonService: CommonService,
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
@@ -52,22 +53,24 @@ export class BlackListedProfilesListComponent implements OnInit {
         this.getLoggedInUser();
         this.getBlacklistedProfiles();
         this.getCandidateStatuses();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
-
-    getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
+    getEmail(EmailCode: any) {
+        this._profileBankService.getEmail(EmailCode)
             .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
+            results => {
+                this.candidateMailDetails = <any>results;
             },
             error => this.errorMessage = <any>error);
-
+    }
+    getLoggedInUser() {
+        this.currentUser = this._commonService.getLoggedInUser();
     }
 
     setPaginationValues() {
         //this.CandidateProfiles.GrdOperations.
         this.blacklistedProfilesList.GrdOperations.ButtonClicked = 0;
-        this.blacklistedProfilesList.GrdOperations.PerPageCount = 3;
+        this.blacklistedProfilesList.GrdOperations.PerPageCount = 50;
     }
 
     getBlacklistedProfiles() {
@@ -133,8 +136,8 @@ export class BlackListedProfilesListComponent implements OnInit {
     }
 
     onUpdateStauts() {
-        if (this.selectedStatus.Id === undefined)
-            this.selectedStatus = this.profile.Status;
+        //if (this.selectedStatus.Id === undefined)
+        //this.selectedStatus = this.profile.Status;
 
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(

@@ -1,10 +1,10 @@
 <!-- BEGIN TOP NAVIGATION MENU -->
 <div class="page-top">
-    <form class="search-form" (submit)="advancedSearch(searchString)">
+    <form class="search-form open">
         <div class="input-group">
-            <input type="text" class="form-control input-sm" placeholder="Search...">
+            <input type="text" class="form-control input-sm" [(ngModel)]="searchString" placeholder="Search...">
             <span class="input-group-btn">
-                                <a class="btn submit" >
+                                <a class="btn" (click)="advancedSearch(searchString)">
                                     <i class="icon-magnifier"></i>
                                 </a>
              </span>

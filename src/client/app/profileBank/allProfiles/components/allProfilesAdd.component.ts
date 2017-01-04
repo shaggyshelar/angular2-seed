@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import {CandidateProfile, ResumeMeta, Qualification } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, ResumeMeta, Qualification } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../services/allProfiles.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { MastersService } from '../../../shared/services/masters.service';
-import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
-//import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-
+import { APIResult } from '../../../shared/constantValue/index';
+import { CommonService } from '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'allprofiles-add',
@@ -66,6 +65,7 @@ export class AllProfilesAddComponent implements OnInit {
         private activatedRoute: ActivatedRoute,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
+        private _commonService: CommonService,
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
         this.createQualification();
@@ -95,12 +95,7 @@ export class AllProfilesAddComponent implements OnInit {
     }
 
     getLoggedInUser() {
-        this._profileBankService.getCurrentLoggedInUser()
-            .subscribe(
-            (results: MasterData) => {
-                this.currentUser = results;
-            },
-            error => this.errorMessage = <any>error);
+        this.currentUser = this._commonService.getLoggedInUser();
 
     }
 
@@ -337,7 +332,7 @@ export class AllProfilesAddComponent implements OnInit {
 
     }
     /**Function to fetch candidate EXPERIENCE details */
-      GetCandidateExperience(candidateID: MasterData) {
+    GetCandidateExperience(candidateID: MasterData) {
         this._profileBankService.getCandidateExperience(candidateID)
             .subscribe(
             results => {

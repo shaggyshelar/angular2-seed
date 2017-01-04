@@ -53,7 +53,7 @@ export class RRFReScheduleInterviewsComponent implements OnInit {
             this.getAllReScheduleInterviewsData();
         } else if (viewMode === 'myReInterviews') {
             this.currentView = 'myReInterviews';
-            this.getAllReScheduleInterviewsData();
+            this.getMyReScheduleInterviewsData();
         }
     }
     resetToDefaultGridOptions() {

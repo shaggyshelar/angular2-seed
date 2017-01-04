@@ -1,109 +1,109 @@
 <style>
-    .btn-icon-only {
-        height: 28px importent;
-        width: 28px importent;
-    }
+	.btn-icon-only {
+		height: 28px importent;
+		width: 28px importent;
+	}
 </style>
 <!-- BEGIN CONTENT -->
-<div class="page-content-wrapper">
-    <!-- BEGIN CONTENT BODY -->
-    <div class="page-content" style="margin-left: 203px;margin-right: -15px;">
-        <!--BEGIN breadcrumb -->
-        <ul style="display:none" class="page-breadcrumb breadcrumb">
-            <li>
-                <a [routerLink]="['/App']"> Home </a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <span class="active">RRF Dashboard</span>
-            </li>
-        </ul>
-        <!--End Breadcrumb>-->
-        <div class="row">
+<div class="page-content-wrapper" style="margin-top: -26px !important;">
+	<!-- BEGIN CONTENT BODY -->
+	<div class="page-content" style="margin-left: 203px;margin-right: -15px;">
+		<!--BEGIN breadcrumb -->
+		<ul style="display:none" class="page-breadcrumb breadcrumb">
+			<li>
+				<a [routerLink]="['/App']"> Home </a>
+				<i class="fa fa-circle"></i>
+			</li>
+			<li>
+				<span class="active">RRF Dashboard</span>
+			</li>
+		</ul>
+		<!--End Breadcrumb>-->
+		<div class="row">
 
-            <div class="portlet-body">
+			<div class="portlet-body">
 
-                <div class="col-lg-12" *ngIf="false">
-                    <div class=" portlet light bordered" align="center">
-                        <base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
-                            [colors]="doughnutChartColors"></base-chart>
-                    </div>
-                </div>
+				<div class="col-lg-12" *ngIf="false">
+					<div class=" portlet light bordered" align="center">
+						<base-chart class="chart" [options]="doughnutChartOptions" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+							[colors]="doughnutChartColors"></base-chart>
+					</div>
+				</div>
 
-                <!--Approve/Reject skipped interview or rejected candidate-->
-                <div class="col-lg-12 " *ngIf="isListVisible">
-                    <interview-approval></interview-approval>
-                </div>
-                <!--END Approve/Reject skipped interview or rejected candidate-->
+				<!--Approve/Reject skipped interview or rejected candidate-->
+				<div class="col-lg-12 " *ngIf="isListVisible">
+					<interview-approval></interview-approval>
+				</div>
+				<!--END Approve/Reject skipped interview or rejected candidate-->
 
-                <div class="col-lg-12" *ngIf="isListVisible" id="divRRFList">
+				<div class="col-lg-12" *ngIf="isListVisible" id="divRRFList">
 
-                    <div class=" portlet light bordered">
-                        <div class="portlet-title">
-                            <!--<div class="row">-->
-                            <div class="col-md-4">
-                                <h4><i class="fa fa-dashboard"></i> Requisition List</h4>
-                            </div>
-                            <div class="btn-group pull-right" [ifAuthorize]="['RRF.INITIATERRF.MANAGE']">
-                                <a class="btn btn-transparent red btn-outline btn-circle active" (click)="navigateToInitiateRRF()">
-                                    <i class="fa fa-plus-circle"></i> Initiate RRF
-                                </a>
-                            </div>
-                            <!--</div>-->
-                        </div>
+					<div class=" portlet light bordered">
+						<div class="portlet-title">
+							<!--<div class="row">-->
+							<div class="col-md-4">
+								<h4><i class="fa fa-dashboard"></i> Requisition List</h4>
+							</div>
+							<div class="btn-group pull-right" [ifAuthorize]="['RRF.INITIATERRF.MANAGE']">
+								<a class="btn btn-transparent red btn-outline btn-circle active" (click)="navigateToInitiateRRF()">
+									<i class="fa fa-plus-circle"></i> Initiate RRF
+								</a>
+							</div>
+							<!--</div>-->
+						</div>
 
-                        <!-- BEGIN SHOW AND SEARCH  -->
-                        <div class="dataTables_wrapper no-footer">
-                            <div class="col-lg-12 col-sm-12 row bordered ">
-                                <!--<div class="mt-radio-inline col-lg-1 col-sm-1">
+						<!-- BEGIN SHOW AND SEARCH  -->
+						<div class="dataTables_wrapper no-footer">
+							<div class="col-lg-12 col-sm-12 row bordered ">
+								<!--<div class="mt-radio-inline col-lg-1 col-sm-1">
 
                                 </div>-->
-                                <div class="mt-radio-inline col-lg-7 col-sm-7">
-                                    <div class="col-lg-3 col-sm-3">
-                                        <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
+								<div class="mt-radio-inline col-lg-7 col-sm-7">
+									<div class="col-lg-3 col-sm-3">
+										<label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="myRRF" [checked]="currentView == 'myRRF'" (click)="onViewChanged('myRRF')" /> My RRF
                                             <span></span>
                                         </label>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-3">
-                                        <label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
+									</div>
+									<div class="col-lg-3 col-sm-3">
+										<label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="allRRF" [checked]="currentView == 'allRRF'" (click)="onViewChanged('allRRF') "
                                             /> All RRF
                                             <span></span>
                                         </label>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-3">
-                                        <!--<div class="col-lg-3 col-sm-3">-->
-                                        <label class="mt-radio" [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']">
+									</div>
+									<div class="col-lg-3 col-sm-3">
+										<!--<div class="col-lg-3 col-sm-3">-->
+										<label class="mt-radio" [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="unAssignRRF" [checked]="currentView == 'unAssignRRF'" (click)="onViewChanged('unAssignRRF') "
                                             /> Unassigned
                                             <span></span>
                                         </label>
-                                    </div>
-                                    <div class="col-lg-3 col-sm-3">
-                                        <label class="mt-radio" [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">
+									</div>
+									<div class="col-lg-3 col-sm-3">
+										<label class="mt-radio" [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="assignRRF" [checked]="currentView == 'assignRRF'" (click)="onViewChanged('assignRRF') "
                                             /> Assigned
                                             <span></span>
                                         </label>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-2 col-sm-2" *ngIf="currentView =='assignRRF'">
-                                    <select id="cmbAssignedTo" class="form-control" [(ngModel)]="selectedRecruiter.Id" (change)="onRecChange($event.target.value)">
+									</div>
+								</div>
+								<div class="form-group col-lg-2 col-sm-2" *ngIf="currentView =='assignRRF'">
+									<select id="cmbAssignedTo" class="form-control" [(ngModel)]="selectedRecruiter.Id" (change)="onRecChange($event.target.value)">
                                         <option value="0">All</option>
                                         <option *ngFor="let recruiter of recruiterList" [value]="recruiter.Id">{{recruiter.Value}}</option>
                                     </select>
-                                </div>
+								</div>
 
-                            </div>
-                            <div class="portlet-title">
+							</div>
+							<div class="portlet-title">
 
-                            </div>
-                            <!--Hide Sorting / filtering if No Data Found-->
-                            <div class="row" *ngIf="!NORECORDSFOUND">
-                                <div class="col-lg-3 col-sm-3">
-                                    <div class="dataTables_length ">
-                                        <label>show
+							</div>
+							<!--Hide Sorting / filtering if No Data Found-->
+							<div class="row" *ngIf="!NORECORDSFOUND">
+								<div class="col-lg-3 col-sm-3">
+									<div class="dataTables_length ">
+										<label>show
                                             <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.PerPageCount" (ngModelChange)="bindGridData()">
                                                 <option value="2">2</option>
                                                 <option value="5">5</option>
@@ -112,207 +112,205 @@
                                                 <option value="50">50</option>
                                             </select>
                                         </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-3">
-                                    <div class="dataTables_length ">
-                                        <label>Sort By
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3">
+									<div class="dataTables_length ">
+										<label>Sort By
                                             <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.OrderBy" (ngModelChange)="bindGridData()">
                                                 <option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>
                                             </select>
                                         </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-3">
-                                    <div class="dataTables_length ">
-                                        <label>Order by
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3">
+									<div class="dataTables_length ">
+										<label>Order by
                                             <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order" (ngModelChange)="bindGridData()">
                                                 <option value="asc">Ascending</option>
                                                 <option value="desc">Descending</option>
                                             </select>
                                         </label>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-3 ">
-                                    <div class="dataTables_filter pull-right ">
-                                        <label>Search:
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3 ">
+									<div class="dataTables_filter pull-right ">
+										<label>Search:
                                             <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
                                         </label>
-                                    </div>
-                                </div>
-                            </div>
+									</div>
+								</div>
+							</div>
 
 
-                        </div>
-                        <!-- END SHOW AND SEARCH -->
+						</div>
+						<!-- END SHOW AND SEARCH -->
 
 
-                        <div class="row " *ngIf="closeRRFID.Id != 0">
-                            <div class="col-lg-9 ">
-                                <textarea class="form-control " id="txtCloseComment " rows="1
+						<div class="row " *ngIf="closeRRFID.Id != 0">
+							<div class="col-lg-9 ">
+								<textarea class="form-control " id="txtCloseComment " rows="1
                                             " [(ngModel)]='closeComment' placeholder="close Comment " style="resize:vertical "
-                                    required=" "></textarea>
-                            </div>
-                            <div class="col-lg-3 ">
-                                <button id="btnClose " class="btn blue " (click)="onbtnCloseRRF() ">Close RRF</button>
-                                <button id="btnCancel " class="btn default " (click)="onCancelCloseRRF() ">cancel</button>
-                            </div>
-                        </div>
+									required=" "></textarea>
+							</div>
+							<div class="col-lg-3 ">
+								<button id="btnClose " class="btn blue " (click)="onbtnCloseRRF() ">Close RRF</button>
+								<button id="btnCancel " class="btn default " (click)="onCancelCloseRRF() ">cancel</button>
+							</div>
+						</div>
 
 
-                        <!-- BEGIN LIST OF RRF  -->
-                        <!--<div class="table-scrollable ">-->
-                        <div>
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
+						<!-- BEGIN LIST OF RRF  -->
+						<!--<div class="table-scrollable ">-->
+						<div>
+							<table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
                                             no-footer " role="grid " aria-describedby="sample_1_info ">
-                                <thead style="word-wrap: break-word; " class="thead">
-                                    <tr>
-                                        <!--<td> <b>RRF Details</b> </td>
+								<thead style="word-wrap: break-word; " class="thead">
+									<tr>
+										<!--<td> <b>RRF Details</b> </td>
                                         <td width="10%"><b> Action </b></td>-->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
-                                        <td style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);">
-                                            <!--<div class="pull-right" *ngIf="currentView =='myRRF'">
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let rrf of rrfList | RRFPipe :searchText |RRFIDPipe :closeRRFID.Value ">
+										<td style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);">
+											<!--<div class="pull-right" *ngIf="currentView =='myRRF'">
                                                 <a class="btn-green" (click)='onShowAvailabilityClick()'>
                                                     <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
                                             </div>-->
-                                            <div class="row portlet-title" style="width:100%">
-                                                <div class="actions pull-right">
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                                        title="Edit RRF" [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] " [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
+											<div class="row portlet-title" style="width:100%">
+												<div class="actions pull-right">
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'
+														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Edit RRF" [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
+														[disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i><!-- Edit RRF-->
                                                         </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='showRRFDetails(rrf.RRFID)' tooltip="View RRF"
-                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                                        title="View RRF">
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='showRRFDetails(rrf.RRFID)' tooltip="View RRF"
+														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
                                                             <i class="fa fa-search-plus "></i> <!--View RRF-->
                                                         </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
-                                                        tooltip="Assign RRF" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        title="Assign RRF" tooltipEnable="true" [disabled]='allowAssignRRF(rrf.Status.Id)'>
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
+														tooltip="Assign RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Assign RRF" tooltipEnable="true"
+														[disabled]='allowAssignRRF(rrf.Status.Id)'>
                                                             <i class="icon-user "></i> <!--Assign RRF-->
                                                         </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "
-                                                        tooltip="View Candidates" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        title="View Candidates" tooltipEnable="true" (click)='onViewCandidateClick(rrf.RRFID)'
-                                                        [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [ifAuthorize]="[ 'RRF.VIEWCANDIDATE.MANAGE','RC.VIEWRRFCANDIDATES.MANAGE'] "
+														tooltip="View Candidates" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Candidates" tooltipEnable="true"
+														(click)='onViewCandidateClick(rrf.RRFID)' [disabled]='checkIfRRFClosed(rrf)'>
                                                             <i class="fa fa-users "></i> <!--View Candidates-->
                                                         </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs green" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval' || rrf.Status.Value ==='Rejected'"
-                                                        tooltip="View Re-schedule Interviews" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        title="View Re-schedule Interviews" tooltipEnable="true" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs green" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval' || rrf.Status.Value ==='Rejected'"
+														tooltip="View Re-schedule Interviews" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Re-schedule Interviews"
+														tooltipEnable="true" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
                                                             <i class="fa fa-calendar-check-o"></i> <!--View Re-schedule Interviews-->
                                                         </button>
-                                                    <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
-                                                        tooltip="Close RRF" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                        title="Close RRF" tooltipEnable="true" [disabled]='allowCloseRRF(rrf.Status.Id)'>
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
+														tooltip="Close RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Close RRF" tooltipEnable="true"
+														[disabled]='allowCloseRRF(rrf.Status.Id)'>
                                                             <i class="fa fa-times "></i> <!--Close RRF-->
                                                         </button>
-                                                </div>
-                                            </div>
-                                            <RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo'></RRFGridRow>
-                                            <!--<div class="row" *ngIf="currentView =='myRRF' && showAvaililityPanel">
+												</div>
+											</div>
+											<RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo'></RRFGridRow>
+											<!--<div class="row" *ngIf="currentView =='myRRF' && showAvaililityPanel">
                                                 <div>
                                                     <panel-availablity [selectedRRF]='rrf'></panel-availablity>
                                                 </div>
                                             </div>-->
-                                        </td>
-                                        <td style="width:80px; Display:none">
-                                            <div class="btn-group ">
-                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+										</td>
+										<td style="width:80px; Display:none">
+											<div class="btn-group ">
+												<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                     Action
                                                     <i class="fa fa-angle-down "></i>
                                                 </button>
-                                                <ul class="dropdown-menu pull-right" role="menu ">
-                                                    <li>
-                                                        <button class="btn btn-default  btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
-                                                            [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
+												<ul class="dropdown-menu pull-right" role="menu ">
+													<li>
+														<button class="btn btn-default  btnLink" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)' [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
+															[disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i> Edit RRF
                                                         </button>
-                                                    </li>
-                                                    <li class="divider " [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink " (click)='showRRFDetails(rrf.RRFID)'>
+													</li>
+													<li class="divider " [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "> </li>
+													<li>
+														<button class="btn btn-default btnLink " (click)='showRRFDetails(rrf.RRFID)'>
                                                             <i class="fa fa-search-plus "></i> View RRF
                                                         </button>
-                                                    </li>
-                                                    <li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
-                                                            [disabled]='allowAssignRRF(rrf.Status.Id)'>
+													</li>
+													<li class="divider " [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "> </li>
+													<li>
+														<button class="btn btn-default btnLink" (click)='redirectToAssignRRF(rrf.RRFID)' [ifAuthorize]="[ 'RRF.ASSIGNRRF.MANAGE'] "
+															[disabled]='allowAssignRRF(rrf.Status.Id)'>
                                                             <i class="icon-user "></i> Assign RRF
                                                         </button>
-                                                    </li>
-                                                    <li class="divider " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)'
-                                                            [disabled]='checkIfRRFClosed(rrf.Status.Id)'>
+													</li>
+													<li class="divider " [ifAuthorize]="[ 'RC.VIEWRRFCANDIDATES.MANAGE'] "> </li>
+													<li>
+														<button class="btn btn-default btnLink " [ifAuthorize]="['RC.VIEWRRFCANDIDATES.MANAGE'] " (click)='onViewCandidateClick(rrf.RRFID)'
+															[disabled]='checkIfRRFClosed(rrf)'>
                                                             <i class="fa fa-users "></i> View Candidates
                                                         </button>
-                                                    </li>
-                                                    <li class="divider"> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval' || rrf.Status.Value ==='Rejected'"
-                                                            (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
+													</li>
+													<li class="divider"> </li>
+													<li>
+														<button class="btn btn-default btnLink" [disabled]="rrf.Status.Value ==='Declined' || rrf.Status.Value ==='Pending Approval' || rrf.Status.Value ==='Rejected'"
+															(click)='onReScheduleInterviewsClick(rrf.RRFID)'>
                                                             <i class="fa fa-calendar-check-o"></i> View Re-schedule Interviews
                                                         </button>
-                                                    </li>
-                                                    <li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
-                                                    <li>
-                                                        <button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] " [disabled]='allowCloseRRF(rrf.Status.Id)'>
+													</li>
+													<li class="divider " [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "> </li>
+													<li>
+														<button class="btn btn-default btnLink" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] " [disabled]='allowCloseRRF(rrf.Status.Id)'>
                                                             <i class="fa fa-times "></i> Close RRF
                                                         </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
-                        </div>
-                        <!-- END LIST OF RRF -->
+													</li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Records Found</span>
+						</div>
+						<!-- END LIST OF RRF -->
 
-                        <!-- START NAVIGATION BUTTON -->
-                        <div class="table-toolbar" *ngIf="!NORECORDSFOUND">
-                            <div class="pull-right ">
-                                <button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton
+						<!-- START NAVIGATION BUTTON -->
+						<div class="table-toolbar" *ngIf="!NORECORDSFOUND">
+							<div class="pull-right ">
+								<button type="button " class="btn btn-default " [disabled]="!grdOptions.PreviousButton
                                   " (click)="OnPaginationClick(-1) ">
                                     &laquo; Prev</button> &nbsp;&nbsp;
-                                <button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton
+								<button type="button " class="btn btn-default " [disabled]="!grdOptions.NextButton
                                   " (click)="OnPaginationClick(1) ">
                                     Next &raquo;</button>
-                            </div>
-                        </div>
-                        <!-- END NAVIGATION BUTTON-->
-                    </div>
-                </div>
+							</div>
+						</div>
+						<!-- END NAVIGATION BUTTON-->
+					</div>
+				</div>
 
-                <div class=" col-lg-12 " id="divTimeLine " *ngIf="!isListVisible ">
+				<div class=" col-lg-12 " id="divTimeLine " *ngIf="!isListVisible ">
 
-                    <div class="portlet light bordered col-lg-11 col-md-12 col-sm-12 col-xs-12 ">
-                        <div class="table-toolbar ">
-                            <div class="row ">
-                                <div class="col-md-6 ">
-                                    <div class="btn-group ">
-                                        <a class="btn green" (click)='showListOfRRF()'>Back</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <view-RRF [RRFID]='viewDetailsRRFId'></view-RRF>
-                    </div>
-                </div>
+					<div class="portlet light bordered col-lg-11 col-md-12 col-sm-12 col-xs-12 ">
+						<div class="table-toolbar ">
+							<div class="row ">
+								<div class="col-md-6 ">
+									<div class="btn-group ">
+										<a class="btn green" (click)='showListOfRRF()'>Back</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<view-RRF [RRFID]='viewDetailsRRFId'></view-RRF>
+					</div>
+				</div>
 
 
-            </div>
-            <!--<panel-availablity></panel-availablity>-->
-        </div>
-        <!-- END PAGE BASE CONTENT -->
-    </div>
-    <!-- END CONTENT BODY -->
+			</div>
+			<!--<panel-availablity></panel-availablity>-->
+		</div>
+		<!-- END PAGE BASE CONTENT -->
+	</div>
+	<!-- END CONTENT BODY -->
 </div>
 <!-- END CONTENT -->

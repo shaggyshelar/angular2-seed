@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CandidateExperience, CandidateProfile, EmploymentHistory, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
-    OtherDetails, Skills, TransferOwnershipMeta} from '../model/myProfilesInfo';
+    OtherDetails, Skills, TransferOwnershipMeta, SocialInformation} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -14,13 +14,6 @@ export class ProfileBankService {
 
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
-
-    getCurrentLoggedInUser() {
-        let url = Config.GetURL('/api/authentication/getCurrentUserName');
-        return this.authHttp.get(url)
-            .map(this.extractData)
-            .catch(this.handleError);
-    }
     //To DO need to change api
     getEmail(emailCode: any) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetEmailByEmailCode?emailCode=' + emailCode);
@@ -137,6 +130,14 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    editCandidateSocialInfo(CandidateSocialInformation: SocialInformation) {
+        let url = Config.GetURL('/api/ProfileBank/UpdateCandidateSocialInfo');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateSocialInformation })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
 
     addCandidateQualification(CandidateQualifications: Qualification) {
         let url = Config.GetURL('/api/ProfileBank/AddQualificationDetails');
@@ -211,10 +212,19 @@ export class ProfileBankService {
     }
 
     updateCandidateStatus(CandidateID: MasterData, Status: MasterData, Comments: string) {
-        //let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
-        let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
+        let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
+        //let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+
+    }
+    blackListCandidate(CandidateID: MasterData, Comments: string) {
+        let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateID: CandidateID, Comments: Comments })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
@@ -294,8 +304,16 @@ export class ProfileBankService {
             })
             .catch(this.handleError);
     }
+    getResumeInHtml(CandidateID: MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/GetCandidateResumeInHTMLFormat?candidateID=' + CandidateID.Value);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     getResume(CandidateID: MasterData) {
-        let url = Config.GetURL('/api/ProfileBank/GetResume?CandidateID=' + CandidateID.Value);
+        let url = Config.GetURL('/api/ProfileBank/GetResume?candidateID=' + CandidateID.Value);
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)

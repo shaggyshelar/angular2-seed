@@ -1,0 +1,37 @@
+<div class="tab-content">
+    <div class="tab-pane active" id="tab_actions_pending">
+        <!-- BEGIN: Actions -->
+        <div class="mt-actions" *ngFor="let Candidate of CandidateData">
+            <div class="mt-action">
+                <div class="mt-action-img">
+                    <img src="../assets/pages/media/users/avatar10.jpg"> </div>
+                <div class="mt-action-body">
+                    <div class="mt-action-row">
+                        <div class="mt-action-info " style="width: 80%;">
+                            <div class="mt-action-details ">
+                                <span class="mt-action-author">{{Candidate.Candidate}}</span>
+                                <p class="mt-action-desc">Round: {{Candidate.InterviewDetails.Round.Value}}</p>
+                                <p class="mt-action-desc">Mode: {{Candidate.InterviewDetails.InterviewMode.Value}}</p>
+                                <p class="mt-action-desc" *ngIf="Candidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">Skype ID:{{Candidate.InterviewDetails.SkypeID?Candidate.InterviewDetails.SkypeID.Value:"N/A"}}</p>
+                                <p class="mt-action-desc" *ngIf="Candidate.InterviewDetails.InterviewMode.Id == modeConstant.SkypeInterview">PassWord: {{Candidate.InterviewDetails.SkypePassword?Candidate.InterviewDetails.SkypePassword:"N/A"}}</p>
+                            </div>
+                        </div>
+                        <div class="mt-action-datetime " style="padding-right: 40px;">
+                            <span class="mt-action-date">{{Candidate.InterviewDetails.InterviewDate === null ?"NA" :getDate(Candidate.InterviewDetails.InterviewDate)}}</span>
+                            <br><span class="mt=action-time">{{Candidate.InterviewDetails.InterviewFromTime === null ?"NA" : Candidate.InterviewDetails.InterviewFromTime}}-{{Candidate.InterviewDetails.InterviewToTime === null ?"NA" : Candidate.InterviewDetails.InterviewToTime}}</span>
+                            <span class="mt-action-dot bg-green"></span>
+                            <span class="mt=action-time">{{Candidate.InterviewDetails.Status === null ?"NA" : Candidate.InterviewDetails.Status}}</span>
+                        </div>
+                        <div class="mt-action-buttons ">
+                            <div class="btn-group btn-group-circle">
+                                <button type="button" class="btn btn-outline green btn-sm" (click)='getCandidatesRoundHistory(Candidate)'>Show</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Actions -->
+    </div>
+
+</div>

@@ -1,10 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import { ProfileInterviewHistory, AllInterviewsHistory }from '../models/profileEsplHistoryModel';
-import { MasterData } from  '../../../shared/model/index';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
+import { ProfileInterviewHistory, AllInterviewsHistory } from '../models/profileEsplHistoryModel';
+import { MasterData } from '../../../shared/model/index';
 import { ProfileEsplHistoryService } from '../services/profileEsplHistory.service';
 import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/IEFGridRow/IEFGridRow.component';
 
@@ -25,18 +25,22 @@ export class ProfileEsplHistoryListComponent implements OnInit {
     historyOfCandidate: MasterData;
     errorMessage: string;
     NORECORDSFOUND: boolean = false;
+    returnPath: string;
+    candidateIdForReturnPath: string;
     constructor(private _router: Router,
         public toastr: ToastsManager,
         private profilesHistoryService: ProfileEsplHistoryService) {
     }
 
     ngOnInit() {
-        this.historyOfCandidate = this.getSessionOf<MasterData>('HistoryOfCandidate');
+        /** */
+        this.historyOfCandidate = this.getSessionOf<MasterData>('HistoryOfCandidate', true);
+        this.returnPath = this.getSessionOf<string>('onReturnPath', false);
+        this.candidateIdForReturnPath = sessionStorage.getItem('CandidateIdForReturnPath');
         this.getProfilesHistory(this.historyOfCandidate);
     }
     /**Function to get candidates interviews history with ESPL */
     getProfilesHistory(_candidateID: MasterData) {
-        /** TODO:: write service call for history  getProfilesInterviewHistory*/
         this.profilesHistoryService.getProfilesInterviewHistory(_candidateID)
             .subscribe(
             (results: any) => {
@@ -51,32 +55,40 @@ export class ProfileEsplHistoryListComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
 
-    // getProfilesAllHistory() {
-    //     try {
-    //         this.profilesHistoryService.getProfilesInterviewHistory(this.allInterviewsHistory.GrdOperations)
-    //             .subscribe(
-    //             (results: any) => {
-    //                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
-    //                     this.allInterviewsHistory = <AllInterviewsHistory>results;
-    //                 } else { this.NORECORDSFOUND = true; }
-    //             },
-    //             error => this.errorMessage = <any>error);
-    //     } catch (error) {
-    //         this.allInterviewsHistory = new AllInterviewsHistory();
-    //     }
-    // }
-
     /**Get data from session */
-    getSessionOf<T>(variableName: string): T {
+    getSessionOf<T>(variableName: string, isJson: Boolean): T {
         var _requestedIef = sessionStorage.getItem(variableName);
+        //var response: any;
         if (_requestedIef !== null) {
-            var response = JSON.parse(_requestedIef);
+            var response = isJson ? JSON.parse(_requestedIef) : _requestedIef;
             sessionStorage.setItem(variableName, '');
         } else {
             /** If no information found from Session then it will redirected to existing page */
             this.toastr.error('Somthing went wrong..!');
         }
         return response;
+    }
+    redirectToView(CandidateID: MasterData) {
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+    }
+    Back() {
+        if (this.returnPath.includes('Edit')) {
+            this._router.navigate([this.returnPath + this.candidateIdForReturnPath]);
+        } else {
+            this._router.navigate([this.returnPath]);
+        }
+
+    }
+    //Format date in "dd/mm/yyyy" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 
 }

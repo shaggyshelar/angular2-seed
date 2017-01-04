@@ -21,6 +21,7 @@ export class LoginComponent {
             .subscribe(
             results => {
                 this.getLoggedInUserPermission();
+                this.getLoggedInUser();
             },
             error => {
                 this.errorMessage = <any>error;
@@ -34,6 +35,12 @@ export class LoginComponent {
                 console.log('User Logged in Sucessfully From LoginComponent...!');
                 this._router.navigate(['Home']);
             },
+            error => this.errorMessage = <any>error);
+    }
+
+    getLoggedInUser(): void {
+        this._loginService.getCurrentLoggedInUser()
+            .subscribe(
             error => this.errorMessage = <any>error);
     }
     closeAlert() {

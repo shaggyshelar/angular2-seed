@@ -1,17 +1,17 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, AllCandidateProfiles, MailDetails } from '../../shared/model/myProfilesInfo';
 import { AllProfilesService } from '../../allProfiles/services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 //import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
-import { MasterData, GrdOptions, ResponseFromAPI, SortingMasterData } from  '../../../shared/model/index';
+import { APIResult } from '../../../shared/constantValue/index';
+import { MasterData, GrdOptions, ResponseFromAPI, SortingMasterData } from '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 
 @Component({
@@ -31,6 +31,7 @@ export class IncompleteProfilesListComponent implements OnInit {
     NORECORDSFOUND: boolean = false;
     errorMessage: any;
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    candidateMailDetails = new MailDetails();
     constructor(private _allProfilesService: AllProfilesService,
         private _dataSharedService: DataSharedService,
         private _router: Router,
@@ -41,6 +42,15 @@ export class IncompleteProfilesListComponent implements OnInit {
     }
     ngOnInit() {
         this.getIncompleteProfiles();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
+    }
+    getEmail(EmailCode: any) {
+        this._profileBankService.getEmail(EmailCode)
+            .subscribe(
+            results => {
+                this.candidateMailDetails = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
     /** Get ALL incomplte profiles to bind */
     getIncompleteProfiles() {
@@ -50,7 +60,10 @@ export class IncompleteProfilesListComponent implements OnInit {
                 (results: any) => {
                     if (results.Profiles !== undefined && results.Profiles.length > 0) {
                         this.incompleteProfilesList = <AllCandidateProfiles>results;
-                    } else { this.NORECORDSFOUND = true; }
+                    } else {
+                        this.incompleteProfilesList = new AllCandidateProfiles();
+                        this.NORECORDSFOUND = true;
+                    }
                 },
                 error => this.errorMessage = <any>error);
         } catch (error) {
@@ -82,7 +95,16 @@ export class IncompleteProfilesListComponent implements OnInit {
             error => this.toastr.error(<any>error));
     }
     /** END Pagination and sorting functionality */
-
+    /**Takes confirmation from end User to delete profile */
+    confirmDelete() {
+        let modl: any = $('#deleteProfile');
+        modl.modal('toggle');
+    }
+    /** OnRejection hide the confimation box and exit the delete process */
+    onClearSelection() {
+        let cnfrmBox: any = $('#deleteProfile');
+        cnfrmBox.modal('hide');
+    }
     //Delete candidate Profile
     onDeleteProfile(CandidateID: MasterData) {
         this._profileBankService.deleteProfile(CandidateID)

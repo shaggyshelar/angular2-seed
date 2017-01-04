@@ -40,7 +40,7 @@ export class ProfileBankAssignRRFComponent implements OnInit {
     ngOnInit() {
         this.returnPath = sessionStorage.getItem('returnPath');
         this.returnPathToSchedule = sessionStorage.getItem('returnPathToSchedule');
-        if (this.returnPath.includes('MyProfiles')) {
+        if (this.returnPathToSchedule.includes('MyProfiles')) {
             this.Title = 'My Profiles';
         } else {
             this.Title = 'Company Profiles';
@@ -73,12 +73,12 @@ export class ProfileBankAssignRRFComponent implements OnInit {
 
     Back() {
         sessionStorage.removeItem('CandidateIDs');
-        if (this.returnPath.toLowerCase().includes('schedule')) {
+        if (this.returnPathToSchedule.toLowerCase().includes('schedule')) {
             sessionStorage.setItem('RRFID', JSON.stringify(this.selectedRRF.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
         }
-        if (this.returnPath !== undefined)
-            this._router.navigate([this.returnPath]);
+        if (this.returnPathToSchedule !== undefined)
+            this._router.navigate([this.returnPathToSchedule]);
     }
 
     onSelectRRF(RRFID: string) {
@@ -106,9 +106,13 @@ export class ProfileBankAssignRRFComponent implements OnInit {
         if (this.returnPathToSchedule.toLowerCase().includes('schedule')) {
             sessionStorage.setItem('RRFID', JSON.stringify(this.selectedRRF.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(this.CandidateAssigment.Candidates[0]));
+            sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
         }
-        if (this.returnPathToSchedule !== undefined)
+        if (this.returnPathToSchedule !== undefined) {
             this._router.navigate([this.returnPathToSchedule]);
+        } else {
+            this._router.navigate([this.returnPath]);
+        }
     }
     onAssignRRF() {
         sessionStorage.removeItem('CandidateIDs');

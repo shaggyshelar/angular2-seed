@@ -1,5 +1,5 @@
 <!-- BEGIN CONTENT -->
-<div style="height:500px">
+<div style="height:500px; margin-top:-40px;">
     <div class="page-content-wrapper">
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
@@ -12,10 +12,561 @@
                 <!-- END PAGE TITLE -->
             </div>
             <!-- END PAGE HEAD-->
-            <div class="row">
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="page-content-inner">
+                <div class="mt-content-body" style="width: 106%; margin-left: -32px">
+                    <!--_____BEGIN TILES -->
+                    <section>
+                        <!--BEGIN HEAD Top TILES -->
+                        <!--[ifAuthorize]="['DB.COUNTERS.1.READ']"-->
+                        <div [ifAuthorize]="['DB.COUNTERS.1.READ']" class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-green-sharp">
+                                                <!--<span class="counter" data-counter="counterup" data-value="78">78</span>-->
+                                                {{OverdueRRF?OverdueRRF.value:'0'}}
+                                            </h3>
+                                            <a (click)="GetOverdueRRF();"><small>OVERDUE RRF</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-pie-chart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success green-sharp">
+<span class="sr-only">76% progress</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-red-haze">
+                                                <!--<span class="counter" data-counter="counterup" data-value="134">134</span>-->
+                                                {{offeredCandidateCount ? offeredCandidateCount : 0}}
+                                            </h3>
+                                            <a (click)="GetOfferedCandidate();"><small>OFFERED CANDIDATE</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-like"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success red-haze">
+<span class="sr-only">85% change</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="margin-left:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-blue-sharp">
+                                                <!--<span class="counter" data-counter="counterup" data-value="56">56</span>-->
+                                                {{CandidateJoining?CandidateJoining.value:'0'}}
+                                            </h3>
+                                            <a (click)="GetJoiningCandidate();"><small>JOINING CANDIDATES</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-user-following"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success blue-sharp">
+<span class="sr-only">45% grow</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-left:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-purple-soft">
+                                                <!--<span class="counter" data-counter="counterup" data-value="27">27</span>-->
+                                                {{Incomplete?Incomplete.value:'0'}}
+                                            </h3>
+                                            <a (click)='GetIncompletesProfiles();'><small>INCOMPLETE PROFILE</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success purple-soft">
+<span class="sr-only">56% change</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END HEAD Top TILES -->
 
+                        <!--BEGIN INITIATOR TILE -->
+                        <!--[ifAuthorize]="['DB.COUNTERS.3.READ']"-->
+                        <div [ifAuthorize]="['DB.COUNTERS.3.READ']" class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-green-sharp">
+                                                <!--<span class="counter" data-counter="counterup" data-value="78">{{Pending}}</span>-->
+                                                {{Pending?Pending:'0'}}
+                                            </h3>
+                                            <a (click)='GetPendingRRF();'><small>PENDING RRF FOR APPROVAL</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-pie-chart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success green-sharp">
+<span class="sr-only">76% progress</span>
+                                            </span>
+                                        </div>
+                                        <!--<div class="status">
+                                        <div class="status-title"> OPEN </div>
+                                        <div class="status-number"> 76% </div>
+                                    </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-red-haze">
+                                                <!--<span class="counter" data-counter="counterup" data-value="134">{{Open}}</span>-->
+                                                {{Open?Open:'0'}}
+                                            </h3>
+                                            <a (click)='GetOpenRRF();'><small>OPEN RRF</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-like"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success red-haze">
+<span class="sr-only">85% change</span>
+                                            </span>
+                                        </div>
+                                        <!--<div class="status">
+                                        <div class="status-title"> FEEDBACK PENDING INTERVIEW REQUEST </div>
+                                        <div class="status-number"> 85% </div>
+                                    </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="margin-left:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-blue-sharp">
+                                                <!--<span class="counter" data-counter="counterup" data-value="56"></span>-->
+                                                {{PendingFeedback?PendingFeedback.value:'0'}}
+                                            </h3>
+                                            <a (click)='GetFeedbackPending();'><small>FEEDBACK PENDING</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-basket"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success blue-sharp">
+<span class="sr-only">45% grow</span>
+                                            </span>
+                                        </div>
+                                        <!--<div class="status">
+                                        <div class="status-title"> SELECTED </div>
+                                        <div class="status-number"> 45% </div>
+                                    </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-left:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-purple-soft">
+                                                {{RRFAwaiting?RRFAwaiting.value:'0'}}
+                                                <a (click)='GetRRFAwaiting();'><small style="font-size: small;"> RRF</small>
+</a>
+                                                <!--<span class="counter" data-counter="counterup" data-value="27"></span>-->
+                                                {{InterviewAwaiting?InterviewAwaiting.value:'0'}}
+                                                <a (click)='GetInterviewAwaiting();'><small style="font-size: small;"> INTERVIEW</small>
+</a>
+                                            </h3>
+                                            <small>PENDING FOR APPROVAL</small>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success purple-soft">
+<span class="sr-only">56% change</span>
+                                            </span>
+                                        </div>
+                                        <!--<div class="status">
+                                        <div class="status-title"> JOIN </div>
+                                        <div class="status-number"> 57% </div>
+                                    </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END INITIATOR TILE -->
+
+                        <!--BEGIN RECRUITERS TILES -->
+                        <!--[ifAuthorize]="['DB.COUNTERS.2.READ']" -->
+                        <div [ifAuthorize]="['DB.COUNTERS.2.READ']" class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-green-sharp">
+                                                <!--<span class="counter" data-counter="counterup" data-value="OpenRRF">{{OpenRRF}}</span>-->
+                                                {{OpenRRFCount ? OpenRRFCount.value: 0}}
+                                            </h3>
+                                            <a (click)='GetAssigenedOpenRRF();'><small>ASSIGNED OPEN RRF</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-pie-chart"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success green-sharp">
+<span class="sr-only">76% progress</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-red-haze">
+                                                <!--<span class="counter" data-counter="counterup" data-value="">78</span>-->
+                                                {{OverdueRRF?OverdueRRF.value:'0'}}
+                                            </h3>
+                                            <a (click)='GetOverdueRRF();'><small>MY OVERDUE RRF</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-like"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success red-haze">
+<span class="sr-only">85% change</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="margin-left:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-blue-sharp">
+                                                <!--<span class="counter" data-counter="counterup" data-value="27"></span>-->
+                                                {{CandidateJoining?CandidateJoining.value:'0'}}
+                                            </h3>
+                                            <a (click)='GetJoiningCandidate();'><small>JOINING THIS MONTH</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-user-following"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success blue-sharp">
+<span class="sr-only">56% change</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-left:inherit;">
+                                <div class="dashboard-stat2 bordered">
+                                    <div class="display">
+                                        <div class="number">
+                                            <h3 class="font-purple-soft">
+                                                <!--<span class="counter" data-counter="counterup" data-value="56"></span>-->
+                                                {{Incomplete?Incomplete.value:'0'}}
+                                            </h3>
+                                            <a (click)='GetIncompletesProfiles();'><small>INCOMPLETE PROFILE</small></a>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="icon-basket"></i>
+                                        </div>
+                                    </div>
+                                    <div class="progress-info">
+                                        <div class="progress">
+                                            <span style="width: 100%;" class="progress-bar progress-bar-success purple-soft">
+<span class="sr-only">45% grow</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--END RECRUITERS TILES -->
+                    </section>
+                    <!--_____END TILES -->
+
+                    <!--_____BEGIN COMMAN SECTION -->
+                    <section>
+                        <!--BEGIN  Interviews Request panel -->
+                        <div class="row">
+                            <!-- BEGIN REGIONAL STATS PORTLET-->
+                            <div class="col-lg-12" style="width: 98.5%;">
+                                <interview-approval></interview-approval>
+                            </div>
+                            <!-- END REGIONAL STATS PORTLET-->
+                        </div>
+                        <!--END  Interviews Request panel -->
+                        <!--BEGIN HEAD TIMELINE CHART  -1-->
+                        <div class="row">
+                            <!--BEGIN chart -1.1-->
+                            <!--[ifAuthorize]="['DB.GRAPH.2.READ']"-->
+                            <div [ifAuthorize]="['DB.GRAPH.2.READ']" class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width:98.5%;">
+                                <div class="portlet light ">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">RRF Timeline</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <stacked-bar-chart [chartData]='rrfTimeline'></stacked-bar-chart>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--END chart -1.1-->
+
+                        </div>
+                        <!--END HEAD TIMELINE CHART -1-->
+                    </section>
+                    <!--_____END COMMAN SECTION -->
+
+                    <!--_____BEGIN HEAD SECTION -->
+                    <section>
+                        <!--BEGIN HEAD CHART SECTION 1-->
+
+
+                        <!--[ifAuthorize]="['DB.GRAPH.1.READ']"-->
+                        <div [ifAuthorize]="['DB.GRAPH.1.READ']" class="row">
+                            <!--BEGIN HEAD PENDING RRF CHART 1.1-->
+                            <div class="col-md-6 col-sm-6" style="margin-right:inherit;margin-top:-5px;">
+                                <div class="portlet light ">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel uppercase bold">Recruitment status</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <pie-chart [chartData]='chartDataForPie' *ngIf="IsPieChart" (stackColChartInput)='onNotify($event)'></pie-chart>
+                                        <span *ngIf="!IsPieChart"><center>No Data Found Recruitment status</center></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- candidate Joining this month chart -->
+                            <div class="col-md-6 col-sm-6" style="margin-top:-5px;">
+                                <div class="portlet light ">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel bold uppercase">Recruitment Statistics <small style="font-weight:500;">yearly</small>
+</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <animated-pie-chart [chartData]='chartDataForAnimatedPie'></animated-pie-chart>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--END HEAD PENDING RRF CHART 1.1-->
+
+                        </div>
+                        <!--END HEAD CHART SECTION 1-->
+
+                        <!--BEGIN HEAD CHART SECTION 2-->
+                        <!--[ifAuthorize]="['DB.GRAPH.1.READ']"-->
+                        <div [ifAuthorize]="['DB.GRAPH.1.READ']" class="row">
+                            <!--BEGIN HEAD OPEN RRF CHART 1.2-->
+                            <div class="col-md-6 col-sm-6" style="margin-top:-5px; margin-right: inherit;">
+                                <div class="portlet light ">
+                                    <div class="portlet-title">
+                                        <div class="caption caption-md">
+                                            <i class="icon-bar-chart font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel bold uppercase">RRF Statastics <small style="font-weight:500;">{{status?"For status "+status:""}}</small>
+</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+
+                                        <!--<stackedcol-chart [chartData]='ChartDataForStackedColChartTest'></stackedcol-chart>-->
+                                        <stackedcol-chart [chartData]='ChartDataForStackedColChart' *ngIf="IsStackColChart" (amChartInput)='onNotify($event)'></stackedcol-chart>
+                                        <span *ngIf="!IsStackColChart"><center>No Data Found for {{status?status:""}} status</center></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--END HEAD OPEN RRF CHART 1.2-->
+                            <!--BEGIN HEAD SELECTED CANDIDATE CHART 1.1-->
+                            <div class="col-md-6 col-sm-6" style="margin-top:-5px;">
+                                <div class="portlet light tasks-widget ">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-share font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel bold uppercase">Round Statastics <small style="font-weight:500;">{{rrf?"For " +rrf:""}}</small>
+</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <am-chart [chartData]='chartDataForColumnChart' *ngIf="IsAmchart" [rrfId]='rrfCode' (CandidateDetailInput)='onNotify($event)'></am-chart>
+                                        <span *ngIf="!IsAmchart"><center>No Data Found for {{rrf?rrf:""}} RRF</center></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--END HEAD SELECTED CANDIDATE CHART 1.1-->
+
+                        </div>
+                        <!--END HEAD CHART SECTION 2-->
+
+                        <!--BEGIN HEAD CHART SECTION 3-->
+                        <div class="row" [ifAuthorize]="['DB.GRAPH.1.READ']">
+                            <!--BEGIN CANDIDATE JOINING CHART 1.1-->
+                            <div class="col-md-12 col-sm-12" style="margin-top:-5px;">
+                                <div class="portlet light bordered">
+                                    <div class="portlet-title tabbable-line">
+                                        <div class="caption">
+                                            <i class=" icon-social-twitter font-dark hide"></i>
+                                            <span class="caption-subject font-dark bold uppercase">Candidates List  {{rrfId?"for "+ rrfId:""}} </span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 slimScrollDiv" style="max-height: 300px;overflow-y:auto;">
+                                                <candidate-details *ngIf="isNull" [CandidateData]='AllCandidatesForRRF' (BarchartInput)='onNotify($event)'></candidate-details>
+                                                <span *ngIf="!isNull"><center>No Candidates found {{round?"for "+round : ""}}</center></span>
+                                            </div>
+                                            <!--<div class="row">-->
+                                            <div class="col-md-6 col-sm-6">
+                                                <base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                                                    [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
+                                                    (chartClick)="chartClicked($event)" style="display: block; width: 100% !important;"></base-chart>
+                                                <span *ngIf="!IsBarchartDataShow"><center>No Data Found</center></span>
+                                            </div>
+                                            <!--</div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--END CANDIDATE JOINING CHART 1.1-->
+                        </div>
+                        <!--END HEAD CHART SECTION 3-->
+                    </section>
+                    <!--_____END HEAD SECTION -->
+
+                    <!--_____BEGIN GENERAL SECTION -->
+                    <section>
+                        <!--BEGIN INITIATOR REGIONAL STATS PORTLET CHART 3-->
+                        <!--[ifAuthorize]="['DB.GRAPH.4.READ']"-->
+                        <div [ifAuthorize]="['DB.GRAPH.4.READ']" class="row">
+                            <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width: 98.5%;">
+                                <!-- BEGIN REGIONAL STATS PORTLET-->
+                                <div class="portlet light ">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icon-share font-dark hide"></i>
+                                            <span class="caption-subject font-green-steel bold uppercase">Regional Stats</span>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <gauge-chart [chartData]='guageData'></gauge-chart>
+                                    </div>
+                                </div>
+                                <!-- END REGIONAL STATS PORTLET-->
+                            </div>
+                        </div>
+                        <!--END INITIATOR REGIONAL STATS PORTLET CHART 3-->
+
+                    </section>
+                    <!--_____END GENERAL SECTION -->
+                    <!--Begin Count Details box-->
+                    <div id="CountDetails" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <b>{{Title}} </b>
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                </div>
+                                <div id="modalBody" class="modal-body" style="overflow-y:scroll;height:400px;">
+                                    <!--<div class="col-md-12 col-sm-12">-->
+
+                                    <div *ngIf="IsProfile" >
+                                        <div *ngFor="let profile of IncompleteProfileList.Profiles" style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29); padding-left: 5px;">
+                                            <detail-profile [CandidateRecruitmentMailDetails]="" [selectedProfile]="profile"></detail-profile>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="IsRRF">
+                                        <div *ngFor="let rrf of rrfList" style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29); padding-left: 5px;">
+                                            <RRFGridRow [RRFData]=rrf [displayApproval]='false' [displayAssignedTo]='false'></RRFGridRow>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="IsInterview">
+                                        <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                                            <thead style="word-wrap: break-word;">
+                                                <tr width="50px">
+                                                    <td> <b>Interview Details</b> </td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="odd gradeX" *ngFor="let interview of interviewApproval" >
+                                                    <td>
+                                                        <interviewApp-gridRow [interviewDetails]=interview></interviewApp-gridRow>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div *ngIf="NoDataFound">
+                                        <center>No data found</center>
+                                    </div>
+                                    <!--</div>-->
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--END Count Details Box-->
+
+                </div>
             </div>
-            <!-- END PAGE BASE CONTENT -->
+            <!-- END PAGE CONTENT INNER -->
         </div>
         <!-- END CONTENT BODY -->
     </div>

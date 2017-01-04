@@ -56,6 +56,7 @@ export class MyProfilesListComponent implements OnInit {
     selectedRowCount: number = 0;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
+    isUpdateStatusCollapsed: boolean = false;
     IsSuccess: boolean = false;
     resumeMeta: ResumeMeta;
     fileUploaded: boolean = false;
@@ -75,6 +76,7 @@ export class MyProfilesListComponent implements OnInit {
     selectedCandidates: Array<Candidate>;
     NORECORDSFOUND: boolean = false;
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    CandidateName: string;
     /***variables for Upload photo */
     uploadedPhoto: any;
     photoUploaded: boolean = false;
@@ -89,7 +91,8 @@ export class MyProfilesListComponent implements OnInit {
     viewRRFDetails: MasterData = new MasterData();
     isViewRFF: Boolean = false;
     isViewRRFGrid: boolean = true;
-
+    candidateMailDetails = new MailDetails();
+    IsDisable: boolean = true;
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
         private _router: Router,
@@ -119,6 +122,7 @@ export class MyProfilesListComponent implements OnInit {
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
         this.getCandidateStatuses();
+        this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getMyOpenAssignedRRF() {
         this._assignRRFService.getMyOpenRRF()
@@ -151,7 +155,47 @@ export class MyProfilesListComponent implements OnInit {
             this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
         if (this.isUploadPanelCollapsed === true)
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
+
         window.scrollTo(0, 40);
+    }
+    onUpdateStatusClick(id: MasterData) {
+        this.seletedCandidateID = id;
+
+        var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
+        // this.profile.Comments = this.allProfilesList[index].Comments;
+        // this.profile.Status = this.allProfilesList[index].Status;
+        this.getUpdateStatus(this.seletedCandidateID.Value);
+        this.currentCandidate = this.myProfilesList.Profiles[index].Candidate;
+        this._profileBankService.getStatusById(id.Value)
+            .subscribe(
+            (results: any) => {
+                this.profile.Comments = results.Comments;
+                this.profile.Status = results.Status;
+            },
+            error => this.toastr.error(<any>error));
+        if (this.isUpdateStatusCollapsed === false)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
+        if (this.isCollapsed === true)
+            this.isCollapsed = !this.isCollapsed;
+        if (this.isCommentsPanelCollapsed === true)
+            this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+        if (this.isUploadPanelCollapsed === true)
+            this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+
+        window.scrollTo(0, 40);
+    }
+    // Get Updated status
+    getUpdateStatus(candidateID: any) {
+        //TO DO : Update API
+        this.statusList = Array<MasterData>();
+        this._masterService.getUpdateStatus(candidateID)
+            .subscribe(
+            results => {
+                this.statusList = <any>results;
+            },
+            error => this.errorMessage = <any>error);
     }
     /** Check is current information is already exist in database.*/
     IsExist() {
@@ -170,41 +214,58 @@ export class MyProfilesListComponent implements OnInit {
             },
             error => this.toastr.error(<any>error));
     }
+    focusIn() {
+        this.IsDisable = true;
+    }
+    focusOut() {
+        this.IsDisable = false;
+    }
     getMyProfiles() {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
-                    this.getEmail('RMS.RRF.NEEDAPPROVAL');
+                    this.NORECORDSFOUND = false;
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
     getEmail(EmailCode: any) {
-        this.profile.CandidateMailDetails = new MailDetails();
         this._profileBankService.getEmail(EmailCode)
             .subscribe(
             results => {
-                for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
-                    this.myProfilesList.Profiles[index].CandidateMailDetails = <any>results;
-                }
+                this.candidateMailDetails = <any>results;
             },
             error => this.errorMessage = <any>error);
     }
     redirectToView(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
+    /**Takes confirmation from end User to delete profile */
+    confirmDelete(ID: MasterData) {
+        this.CandidateID = ID;
+        let modl: any = $('#deleteProfile' + ID.Value);
+        modl.modal('toggle');
+    }
+    /** OnRejection hide the confimation box and exit the delete process */
+    onClearSelection(ID: MasterData) {
+        let cnfrmBox: any = $('#deleteProfile' + ID.Value);
+        cnfrmBox.modal('hide');
+    }
     /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {
         this._profileBankService.deleteProfile(CandidateID)
             .subscribe(
             (results: any) => {
-                this.profile.Comments = results.Comments;
-                this.profile.Status = results.Status;
+                this.toastr.success((<ResponseFromAPI>results).Message);
                 this.getMyProfiles();
+                // this.profile.Comments = results.Comments;
+                // this.profile.Status = results.Status;
+
             },
             error => this.toastr.error(<any>error));
+        this.onClearSelection(this.CandidateID);
     }
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
@@ -339,6 +400,44 @@ export class MyProfilesListComponent implements OnInit {
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
+                    this.profile.Status = new MasterData();
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    this.getMyProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.profile.Status = new MasterData();
+            },
+            error => this.errorMessage = <any>error);
+        this.isCollapsed = false;
+    }
+    onBlackListProfile() {
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
+                    this.profile.Status = new MasterData();
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    this.getMyProfiles();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.profile.Status = new MasterData();
+            },
+            error => this.errorMessage = <any>error);
+        this.isCollapsed = false;
+    }
+
+    onBlacklistedProfiles() {
+        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     this.getMyProfiles();
@@ -353,6 +452,9 @@ export class MyProfilesListComponent implements OnInit {
 
     closeUpdatePanel() {
         this.isCollapsed = false;
+    }
+    closeUpdateStatus() {
+        this.isUpdateStatusCollapsed = false;
     }
 
     onStateChange(e: any): void {
@@ -421,6 +523,8 @@ export class MyProfilesListComponent implements OnInit {
             this.isCollapsed = !this.isCollapsed;
         if (this.isUploadPanelCollapsed === true)
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
     }
 
     closeCommentsPanel() {
@@ -561,6 +665,8 @@ export class MyProfilesListComponent implements OnInit {
             this.isCollapsed = !this.isCollapsed;
         if (this.isCommentsPanelCollapsed === true)
             this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
 
     }
 
@@ -622,6 +728,7 @@ export class MyProfilesListComponent implements OnInit {
         if (selectedCandidate.Status.Value.toLowerCase() === 'in process') {
             sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFAssigned.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(selectedCandidate));
+            sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
             this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
         } else {
             if (selectedCandidate.Status.Value.toLowerCase() === 'open') {
@@ -672,22 +779,30 @@ export class MyProfilesListComponent implements OnInit {
     }
     onSelectRRF(rrfID: string) {
         //this.rrfId = 'RRF6866237939ID76';
-        this.viewDetailsRRFId = rrfID;
-        this._rrfCandidatesList.getCandidatesForRRF(rrfID)
-            .subscribe(
-            (results: any) => {
-                if (results.length !== undefined) {
-                    this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.myProfilesList.Profiles = <any>results;
-                    // this.AllCandidatesForRRF = results;
-                    //this.CheckInterviewStatus(results);
-                } else {
-                    //If No data present
-                    //this.isNull = true;
-                    this.NORECORDSFOUND = true;
-                }
-            },
-            error => this.errorMessage = <any>error);
+        if (rrfID === '-1') {
+            this.viewDetailsRRFId = '';
+            this.getMyProfiles();
+            this.NORECORDSFOUND = false;
+        } else {
+            this.viewDetailsRRFId = rrfID;
+            this._rrfCandidatesList.getCandidateProfilesByRRF(rrfID)
+                .subscribe(
+                (results: any) => {
+                    if (results.length > 0) {
+                        this.myProfilesList.GrdOperations = new GrdOptions();
+                        this.myProfilesList.Profiles = <any>results;
+                        // this.AllCandidatesForRRF = results;
+                        //this.CheckInterviewStatus(results);
+                        this.NORECORDSFOUND = false;;
+                    } else {
+                        //If No data present
+                        //this.isNull = true;
+                        this.NORECORDSFOUND = true;
+                    }
+                },
+                error => this.errorMessage = <any>error);
+        }
+
     }
     showRRFDetails(rrfId: string) {
         //this.getRRFDetails(rrfId);
@@ -699,10 +814,23 @@ export class MyProfilesListComponent implements OnInit {
         //this.isChartVisible = false;
     }
     showListOfRRF() {
+        this.isViewRFF = false;
         this.isViewRRFGrid = true;
         this.viewDetailsRRFId = '';
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
+    }
+    getUpdateStatusAccess(Status: MasterData) {
+        try {
+            if (Status.Value.toLocaleLowerCase() === 'offered' ||
+                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined') {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
+
     }
 }
 

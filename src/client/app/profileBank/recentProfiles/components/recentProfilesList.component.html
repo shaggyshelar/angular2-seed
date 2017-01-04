@@ -111,8 +111,7 @@
 
 
                             <div class="table-scrollable">
-                                <table class="table table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid"
-                                    aria-describedby="sample_1_info">
+                                <table class="table table-bordered table-hover order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
                                             <th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Name / Email / Contact</th>
@@ -125,7 +124,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"  *ngFor="let recentProfile of recentProfilesList.Profiles|ProfileBankPipe:searchString">
+                                        <tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" *ngFor="let recentProfile of recentProfilesList.Profiles|ProfileBankPipe:searchString">
                                             <td>
                                                 <detail-profile [selectedProfile]="recentProfile"></detail-profile>
                                             </td>

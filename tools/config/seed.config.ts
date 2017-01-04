@@ -373,6 +373,7 @@ export class SeedConfig {
       // For test config
       'dist/dev/*': '/base/dist/dev/*',
       '*': 'node_modules/*'
+
     },
     packages: {
       // rxjs: { defaultExtension: 'js' }

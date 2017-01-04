@@ -1,5 +1,5 @@
 <!-- BEGIN CONTENT -->
-<div class="page-content-wrapper">
+<div class="page-content-wrapper" style="margin-top: -26px !important;">
     <!-- BEGIN CONTENT BODY -->
     <div class="page-content" style="margin-left: 203px;margin-right: -15px;">
 
@@ -40,6 +40,47 @@
                     </div>
                     <div class="portlet-body">
                         <div class="table-toolbar">
+                            <!-- update status-->
+                            <div class="row" style="margin-top: 10px">
+                                <div id="updateRow" *ngIf='isCollapsed'>
+                                    <span class="header sbold font-red uppercase">{{currentCandidate}}</span>
+                                    <hr style="margin:0px 0px !important" />
+                                    <form role="form" (submit)="onUpdateStauts()">
+                                        <div class="row" style="margin-top: 10px">
+                                            <!--<div class="col-md-3">
+                                            <div class="form-group">
+
+                                                <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
+                                            </div>
+                                        </div>-->
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <!--(change)='onSelectStatus($event.target.value)' -->
+                                                    <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="selectedStatus" tooltip="Status"
+                                                        tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
+                                                   <option *ngFor="let status of statusList" [ngValue]="status">{{status.Value}}</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <!--<div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="edit-content"></div>
+                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.Comments" required=""
+                                                    tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
+                                                </textarea>
+                                            </div>
+                                        </div>-->
+                                            <div class="col-md-1">
+                                                <button type="submit" class="btn btn-info "> Update </button>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- update status end -->
                             <!--Hide Pagination / sorting / filtering if No records found-->
                             <div class="row" *ngIf="!NORECORDSFOUND">
                                 <div class="col-md-3 col-sm-3">
@@ -47,10 +88,10 @@
                                         <label>Show :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
                                             [(ngModel)]="blacklistedProfilesList.GrdOperations.PerPageCount"  (ngModelChange)="onChange()">
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="20">20</option>
                                                 <option value="50">50</option>
+                                                <option value="100">100</option>
+                                                <option value="150">150</option>
+                                                <option value="200">200</option>
                                             </select>
                                         </label>
                                     </div>
@@ -84,46 +125,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" style="margin-top: 10px">
-                                <div id="updateRow" *ngIf='isCollapsed'>
-                                    <span class="header">Update Status</span>
-                                    <hr style="margin:0px 0px !important" />
-                                    <form role="form" (submit)="onUpdateStauts()">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
 
-                                                <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{currentCandidate}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <!--(change)='onSelectStatus($event.target.value)' -->
-                                                <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
-                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <div class="edit-content"></div>
-                                                <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.Comments" required=""
-                                                    tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
-                                                </textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <button type="submit" class="btn btn-info "> Update </button>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                             <div class="table">
-                                <table class="table table-bordered table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid"
-                                    aria-describedby="sample_1_info">
+                                <!--table-bordered-->
+                                <table *ngIf="!NORECORDSFOUND" class="table  table-hover table-checkable order-column dataTable no-footer" id="sample_1"
+                                    role="grid" aria-describedby="sample_1_info">
                                     <thead class="thead">
                                         <tr>
                                             <th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Candidates</th>
@@ -138,26 +144,26 @@
                                     <tbody>
                                         <!-- *ngFor="let profile of allProfilesList.Profiles | ProfileBankPipe:searchString-->
                                         <tr class="" style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" *ngFor="let blacklistedProfile of blacklistedProfilesList.Profiles | ProfileBankPipe : searchString ">
-                                            <td>
+                                            <td style="text-align: left !important">
                                                 <div class="row portlet-title" style="width:100%">
                                                     <div class="actions pull-right">
                                                         <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [disabled]='getEditAccess(blacklistedProfile.Owner)'
                                                             (click)='redirectToEditProfile(blacklistedProfile.CandidateID)' tooltipPlacement="top"
-                                                            tooltipTrigger="mouseenter" tooltipEnable="true" title="Edit Profile">
+                                                            tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile">
                                                             <i class="fa fa-edit "></i><!-- Edit Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" [disabled]='getEditAccess(blacklistedProfile.Owner)'
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" *ngIf='!getEditAccess(blacklistedProfile.Owner)'
                                                             (click)='SaveCandidateID(blacklistedProfile.CandidateID)' tooltip="Update Status"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
                                                             title="Update Status">
-                                                            <i class="icon-flag"></i> <!--Update Status-->
+                                                            <i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='redirectToView(blacklistedProfile.CandidateID)'
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(blacklistedProfile.CandidateID)'
                                                             tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                             title="View Profile" tooltipEnable="true">
                                                             <i class="fa fa-search-plus"></i> <!--View Profile-->
                                                         </button>
-                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='getCandidateHistory(blacklistedProfile.CandidateID)'
+                                                        <button class="btn btn-circle btn-icon-only btn-default btn-xs yellow-soft" (click)='getCandidateHistory(blacklistedProfile.CandidateID)'
                                                             tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                             title="View Interview History" tooltipEnable="true">
                                                             <i class="fa fa-history"></i> <!--View Interview History-->
@@ -165,7 +171,7 @@
 
                                                     </div>
                                                 </div>
-                                                <detail-profile [selectedProfile]="blacklistedProfile"></detail-profile>
+                                                <detail-profile [CandidateRecruitmentMailDetails]="candidateMailDetails" [selectedProfile]="blacklistedProfile"></detail-profile>
                                             </td>
                                             <!--<td>
                                                 <tr>
@@ -210,10 +216,10 @@
                                                              </button>
                                                         </li>
                                                         <li class="divider"> </li>
-                                                        <li>
+                                                        <!--<li>
                                                             <button class="btn btn-default btnLink" [disabled]='getEditAccess(blacklistedProfile.Owner)' (click)='SaveCandidateID(blacklistedProfile.CandidateID)'>
                                                                   <i class="icon-flag"></i> Update Status </button>
-                                                        </li>
+                                                        </li>-->
                                                         <li class="divider"> </li>
                                                         <li>
                                                             <a (click)='redirectToView(blacklistedProfile.CandidateID)'>

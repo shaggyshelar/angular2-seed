@@ -21,7 +21,6 @@ export class IEFFunctionComponent {
         }
     }
     onUpdate() {
-        //console.log(this.functionsCollection[this.recordCount]);
         this.functionUpdate.emit(this.functionsCollection);
     }
 }

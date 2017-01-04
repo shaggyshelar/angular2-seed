@@ -24,7 +24,7 @@ export class RecruitmentIEFComponent implements OnInit {
     candidateIEFHistory: Array<Interview> = new Array<Interview>();
     candidateIEFDetails: IEFInformation = new IEFInformation();
     functions: Array<IEFFunction> = new Array<IEFFunction>();
-    iefStatus: string;
+    iefStatus: string = 'Selected';
     iefComments: string;
     isChangeStatusReq: boolean = false;
     constructor(private _router: Router,

@@ -26,10 +26,14 @@ export class GrdOptions {
                  */
     public NextButton: boolean;
     public PreviousButton: boolean;
-    public PerPageCount: number = 5;
+    public PerPageCount: number = 50;
     public OrderBy: string = 'Modified';
     public Order: string = 'desc';
     public NextPageUrl: string[] = [];
+    public CamlString:string ;
+    public NextPageID:number ;
+    public PreviousPageID:number ;
+    public PagingEvent:string ;
 }
 
 export class SortingMasterData {
