@@ -69,13 +69,16 @@
         <!--<b style="margin-left: 15px;">Job Description</b>: {{RRFData.Description}}-->
         <label style="margin-left: 15px; margin-right:20px;"><b>Job Description</b>: {{RRFData.Description}}</label>
         <br>
+
+        <label style="margin-left: 15px; margin-right:20px;" *ngIf="RRFData.Status.Value === 'Closed'"> Closed by <b> {{RRFData.ModifiedBy.Value }}</b> On {{formatDate(RRFData.ModifiedDate)}} with <b>Comment:</b> {{RRFData.ClosedComment?RRFData.ClosedComment:"NA"}} </label>
+            
         <!--</div>-->
         <div *ngIf="displayJobDescDetails">
             <label style="margin-left: 15px; margin-right:20px;"><b>Preferred Skills</b>: {{RRFData.PreferredSkills}}</label><br>
-            <label style="margin-left: 15px; margin-right:20px;"><b>Good to Have</b>: {{RRFData.GoodToHave}}</label><br>
-            <label style="margin-left: 15px; margin-right:20px;"><b>Competencies</b>: {{RRFData.Competencies}}</label><br>
-            <label style="margin-left: 15px; margin-right:20px;"><b>Qual/ Cert required</b>: {{RRFData.QualCertRquired}}</label><br>
-            <!--<div>
+        <label style="margin-left: 15px; margin-right:20px;"><b>Good to Have</b>: {{RRFData.GoodToHave}}</label><br>
+        <label style="margin-left: 15px; margin-right:20px;"><b>Competencies</b>: {{RRFData.Competencies}}</label><br>
+        <label style="margin-left: 15px; margin-right:20px;"><b>Qual/ Cert required</b>: {{RRFData.QualCertRquired}}</label><br>
+        <!--<div>
     <div class="col-lg-6">
         <div class="col-lg-4 " align="right">
             <b> Preferred Skills :</b>
@@ -111,51 +114,51 @@
         </div>
     </div>
 </div>-->
-        </div>
     </div>
+</div>
 
-    <!--<div class="row">
+<!--<div class="row">
         <div class="collapse" id="#demo{{RRFData.RRFID.Id}}">
             <panel-availablity></panel-availablity>
         </div>
     </div>-->
 
-    <!--<div [ifAuthorize]="['RRF.APPROVERCOLUMNVISIBILITY.MANAGE']"  *ngIf='displayApproval'>-->
-    <div *ngIf='displayApproval' style="margin-top: 7px;">
-        <div *ngIf='displayApproval'>
-            <div>
-                <b>RRF Approver</b>:
+<!--<div [ifAuthorize]="['RRF.APPROVERCOLUMNVISIBILITY.MANAGE']"  *ngIf='displayApproval'>-->
+<div *ngIf='displayApproval' style="margin-top: 7px;">
+    <div *ngIf='displayApproval'>
+        <div>
+            <b>RRF Approver</b>:
+        </div>
+        <div class="row" *ngFor="let Approvaldetails of RRFData.RRFApproval">
+            <div class="col-lg-3">
+                {{Approvaldetails.Approver.Value}}
             </div>
-            <div class="row" *ngFor="let Approvaldetails of RRFData.RRFApproval">
-                <div class="col-lg-3">
-                    {{Approvaldetails.Approver.Value}}
-                </div>
-                <div class="col-lg-1">
-                    :
-                </div>
-                <div class="col-lg-3">
-                    {{Approvaldetails.Status}}
-                </div>
+            <div class="col-lg-1">
+                :
+            </div>
+            <div class="col-lg-3">
+                {{Approvaldetails.Status}}
             </div>
         </div>
     </div>
+</div>
 
-    <div *ngIf='displayAssignedTo' style="margin-top: 7px;">
-        <div>
-            <div> <b>Assigned To</b>:
-            </div>
-            <div class="col-lg-9 pull-left">
-                <ul class="list-inline" style="color:#f16e50">
-                    <li *ngFor="let AssignedDatadetails of RRFData.AssignedData">
-                        <span *ngIf="AssignedDatadetails.Status.Id == AssignStatus.Assigned">{{AssignedDatadetails.AssignedTo.Value}}</span>
-                    </li>
-                </ul>
-            </div>
+<div *ngIf='displayAssignedTo' style="margin-top: 7px;">
+    <div>
+        <div> <b>Assigned To</b>:
         </div>
-        <!--<div *ngFor="let AssignedDatadetails of RRFData.AssignedData">
+        <div class="col-lg-9 pull-left">
+            <ul class="list-inline" style="color:#f16e50">
+                <li *ngFor="let AssignedDatadetails of RRFData.AssignedData">
+                    <span *ngIf="AssignedDatadetails.Status.Id == AssignStatus.Assigned">{{AssignedDatadetails.AssignedTo.Value}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--<div *ngFor="let AssignedDatadetails of RRFData.AssignedData">
             <span *ngIf="AssignedDatadetails.Status.Id == AssignStatus.Assigned">
                 {{AssignedDatadetails.AssignedTo.Value}}
             </span>
         </div>-->
-    </div>
+</div>
 </div>

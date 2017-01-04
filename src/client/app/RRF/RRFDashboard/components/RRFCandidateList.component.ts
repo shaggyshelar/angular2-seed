@@ -68,7 +68,7 @@ export class RRFCandidateListComponent implements OnInit {
     OfferedCandidateForRRF: RRFSpecificCandidateList[];
     OtherCandidateForRRF: RRFSpecificCandidateList[];
     CandidateRoundHistory: Array<Interview>;
-    CandidateHistoryForActualTime: Array<Interview>;
+    CandidateHistoryForActualTime: Interview;
     isRoundHistoryPresent: boolean = false;
     selectedCandidate: string;
     InterviewID: MasterData = new MasterData();
@@ -418,15 +418,17 @@ export class RRFCandidateListComponent implements OnInit {
 
         return [day, month, year].join('-');
     }
-    getTime(time: string[]) {
+    getTime(time: string) {
         //time:string = interviewTime;
-        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-        if (time.length > 1) { // If time format correct
-            time = time.slice(1);  // Remove full string match value
-            time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
-            time[0] = +time[0] % 12 || 12; // Adjust hours
+        var intTime :Array<string> =new Array<string>();
+        intTime = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        if (intTime.length > 1) { // If time format correct
+            intTime = intTime.slice(1);  // Remove full string match value
+            intTime[5] = +intTime[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+            var adjustHr = +intTime[0] % 12 || 12; // Adjust hours
+            intTime[0] = adjustHr.toString();
         }
-        return time.join('');
+        return intTime.join('');
     }
 
     isOfferGenerationVisible(lastInterviewRound: string, status: string) {
@@ -451,12 +453,6 @@ export class RRFCandidateListComponent implements OnInit {
             return false;
         }
     }
-    OnProceedForOfferGenerationClick(CandidateDetails: RRFSpecificCandidateList) {
-        this.InterviewID = CandidateDetails.InterviewDetails.InterviewID;
-        this.CandidateID = CandidateDetails.CandidateID;
-        var cnfrmbx: any = $('#prcedfrOffrgenration');
-        cnfrmbx.modal();
-    }
     proceedForOfferGeneration(InterviewID: MasterData) {
         if (InterviewID.Id !== null && InterviewID.Id !== undefined) {
             this._rrfCandidatesList.proceedForOfferGeneration(InterviewID, this.CandidateID, this.RRFID, new Date())
@@ -475,7 +471,7 @@ export class RRFCandidateListComponent implements OnInit {
     }
     /**---------BEGING Transfer candidate functionality-------------*/
     /**Transfer candidat from current RRF to other Open RRF */
-    transferFromUnfit(interviewDetails: Interview) {
+    transferFromUnfit(interviewDetails: any) {
         if (!this.IsAllowTransfer) {
             this.UniqueRRFCode = interviewDetails.RRFCode;
             this.getAllOpenRRF(interviewDetails.RRFCode);
@@ -547,7 +543,7 @@ export class RRFCandidateListComponent implements OnInit {
         this.changeStatusInterviewID = intervieID;
         this.showChangeStatus = true;
     }
-    setActualTime(CandidateHistory: Array<Interview>) {
+    setActualTime(CandidateHistory: Interview) {
         this.ActualTimeInterviewID = CandidateHistory.InterviewID;
         this.CandidateHistoryForActualTime = CandidateHistory;
         this.setActualTimeForm = true;

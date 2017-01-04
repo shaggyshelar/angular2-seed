@@ -113,7 +113,7 @@ export class IncompleteProfilesListComponent implements OnInit {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     //Bind Updated data to grid
-                    this.getIncompleteProfiles();
+                    setTimeout(() => {   this.getIncompleteProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }

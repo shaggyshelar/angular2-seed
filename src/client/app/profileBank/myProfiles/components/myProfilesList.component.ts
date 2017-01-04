@@ -258,8 +258,8 @@ export class MyProfilesListComponent implements OnInit {
         this._profileBankService.deleteProfile(CandidateID)
             .subscribe(
             (results: any) => {
+                setTimeout(() => { this.getMyProfiles(); }, 1000);
                 this.toastr.success((<ResponseFromAPI>results).Message);
-                this.getMyProfiles();
                 // this.profile.Comments = results.Comments;
                 // this.profile.Status = results.Status;
 
@@ -339,7 +339,7 @@ export class MyProfilesListComponent implements OnInit {
                     /**update Profile grid*/
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                     this.profile = new CandidateProfile();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
@@ -370,7 +370,7 @@ export class MyProfilesListComponent implements OnInit {
                     this.fileUploaded = false;
                     this.fileName = '';
                     // this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -403,7 +403,7 @@ export class MyProfilesListComponent implements OnInit {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -421,7 +421,7 @@ export class MyProfilesListComponent implements OnInit {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -440,7 +440,7 @@ export class MyProfilesListComponent implements OnInit {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -494,7 +494,7 @@ export class MyProfilesListComponent implements OnInit {
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 mailto = mailto + this.myProfilesList.Profiles[index].Email + ';';
-                mailcc = mailcc + this.myProfilesList.Profiles[index].CandidateMailDetails.Cc + ';';
+                mailcc = mailcc + this.myProfilesList.Profiles[index].CandidateMailDetails.CC + ';';
                 mailsubject = this.myProfilesList.Profiles[index].CandidateMailDetails.Subject;
                 mailbody = this.myProfilesList.Profiles[index].CandidateMailDetails.Body;
                 mailbody += window.location.href;
@@ -570,7 +570,7 @@ export class MyProfilesListComponent implements OnInit {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.photoUploaded = false;
                     this.photoName = '';
-                    this.getMyProfiles();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -590,7 +590,7 @@ export class MyProfilesListComponent implements OnInit {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.myProfilesList.GrdOperations = new GrdOptions();
-                        this.getMyProfiles();
+                        setTimeout(() => { this.getMyProfiles(); }, 1000);
                         this.profile = new CandidateProfile();
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);

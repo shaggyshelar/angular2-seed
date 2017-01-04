@@ -34,16 +34,16 @@
                                     </div>
                                     <ul class="nav nav-tabs">
                                         <li class="active">
-                                            <a href="#tab_primaryInfo" data-toggle="tab" id="btnQuick">Quick Info</a>
+                                            <a href="#tab_primaryInfo" data-toggle="tab" id="btnQuick" tabindex="1">Quick Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_1" data-toggle="tab" (click)='onPersonalInfoTabClick()' id="BtnPersonal">Personal Info</a>
+                                            <a href="#tab_1_1" data-toggle="tab" (click)='onPersonalInfoTabClick()' id="BtnPersonal" tabindex="2">Personal Info</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_3" data-toggle="tab" (click)="onSkillTabClick()" id="btnSkills">Skills</a>
+                                            <a href="#tab_1_3" data-toggle="tab" (click)="onSkillTabClick()" id="btnSkills" tabindex="3">Skills</a>
                                         </li>
                                         <li>
-                                            <a href="#tab_1_7" data-toggle="tab" (click)="onProfessionalInfoTabClick()" id="btnProfessional">Professional Info</a>
+                                            <a href="#tab_1_7" data-toggle="tab" (click)="onProfessionalInfoTabClick()" id="btnProfessional" tabindex="4">Professional Info</a>
                                         </li>
                                         <!--<li>
                                             <a href="#tab_1_2" data-toggle="tab">Qualification</a>
@@ -55,7 +55,7 @@
                                             <a href="#tab_1_6" data-toggle="tab">Team Mgt</a>
                                         </li>-->
                                         <li>
-                                            <a href="#tab_1_5" data-toggle="tab" (click)="onSalaryTabClick()" id="btnSalary">Salary Details</a>
+                                            <a href="#tab_1_5" data-toggle="tab" (click)="onSalaryTabClick()" id="btnSalary" tabindex="5">Salary Details</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -66,7 +66,9 @@
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" class="todo-tasklist-item todo-tasklist-item-border-yellow" (submit)="onSavePrimaryInfo()">
                                                 <div class="row">
-
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
@@ -87,7 +89,7 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+                                                                        tooltipEnable="false">{{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
@@ -282,6 +284,9 @@
 
                                             <form role="form" (submit)="onSavePersonalDetails()">
                                                 <div class="row">
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
@@ -305,7 +310,7 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+                                                                        tooltipEnable="false">{{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
@@ -679,8 +684,9 @@
                                                                         <label>Facebook</label>
                                                                         <!--[(ngModel)]="CandidateSocialInfo.FacebookID"-->
                                                                         <input type="text" placeholder="Facebook Link (Max 255 chars)" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.FacebookID"
-                                                                            tooltip="Facebook Link (Max 255 chars)" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            (blur)="onSaveSocialInfo()" tabindex="27" />
+                                                                            tooltip="Facebook Link (Max 255 chars)" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()"
+                                                                            tabindex="27" />
                                                                     </div>
                                                                 </div>
 
@@ -689,8 +695,9 @@
                                                                         <i class="fa fa-twitter"></i>
                                                                         <label class="control-label">Twitter</label>
                                                                         <input type="text" placeholder="Twitter Link (Max 255 chars)" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.TwitterID"
-                                                                            tooltip="Twitter Link (Max 255 chars)" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            (blur)="onSaveSocialInfo()" tabindex="28" />
+                                                                            tooltip="Twitter Link (Max 255 chars)" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()"
+                                                                            tabindex="28" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-3">
@@ -708,8 +715,9 @@
                                                                         <i class="fa fa-linkedin-square"></i>
                                                                         <label class="control-label">Linkedin</label>
                                                                         <input type="text" placeholder="Linkedin Link (Max 255 chars)" class="form-control" [(ngModel)]="profile.CandidateSocialInformation.LinkedinID"
-                                                                            tooltip="Linkedin link (Max 255 chars)" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                            (blur)="onSaveSocialInfo()" tabindex="30" />
+                                                                            tooltip="Linkedin link (Max 255 chars)" tooltipPlacement="top"
+                                                                            tooltipTrigger="mouseenter" (blur)="onSaveSocialInfo()"
+                                                                            tabindex="30" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -962,6 +970,9 @@
                                         <div class="tab-pane" id="tab_1_3">
                                             <form role="form" (submit)="onSaveSkillsDetails()">
                                                 <div class="row">
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
@@ -1394,6 +1405,9 @@
                                         <div class="tab-pane" id="tab_1_5">
                                             <form role="form" (submit)="onSaveSalaryDetails()">
                                                 <div class="row">
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
@@ -1668,6 +1682,9 @@
                                                 <div class="col-md-12">
                                                     <form role="form" (submit)="onSaveProfessionalDetails()">
                                                         <div class="row">
+                                                            <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                             <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                                 <a class="btn green " (click)='previousTab()'>
                                                                     <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                    Prev
@@ -1702,7 +1719,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-1">
                                                                             <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="chkAppliedEarlier" [(ngModel)]="profile.CandidateOtherDetails.AppliedEarlier"
-                                                                                tabindex="2" (change)="onSaveProfessionalDetails()"
+                                                                                tabindex="2" (change)="onAppliedEarlier(profile.CandidateOtherDetails.AppliedEarlier)"
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -2179,7 +2196,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-1">
                                                                                 <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" [(ngModel)]="profile.CandidateTeamManagement.TeamMgmt"
-                                                                                    tabindex="29" (change)='onSaveTeamManagementDetails()'
+                                                                                    tabindex="29" (change)='onTeamManagement(profile.CandidateTeamManagement.TeamMgmt)'
                                                                                 />
                                                                             </div>
                                                                         </div>
@@ -2202,7 +2219,7 @@
                                                                 <div class="col-md-4">
                                                                     <div class="form-group">
                                                                         <label class="control-label">Total Team Management Experience</label>
-                                                                        <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience<" style="resize:vertical"
+                                                                        <textarea class="form-control text-capitalize" rows="1" placeholder="Add Team Handling Experience" style="resize:vertical"
                                                                             [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience"
                                                                             (blur)='onSaveTeamManagementDetails()' tabindex="31"></textarea>
                                                                     </div>

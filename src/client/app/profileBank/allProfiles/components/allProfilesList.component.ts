@@ -108,7 +108,8 @@ export class AllProfilesListComponent implements OnInit {
     redirectToView(CandidateID: MasterData) {
         //this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
         //Changed as per Backend Request and Bug 
-        this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
+        //this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /**Takes confirmation from end User to delete profile */
     confirmDelete(candidateId: MasterData) {
@@ -127,8 +128,8 @@ export class AllProfilesListComponent implements OnInit {
             (results: any) => {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
+                setTimeout(() => { this.getAllProfiles(); }, 1000);
                 this.toastr.success((<ResponseFromAPI>results).Message);
-                this.getAllProfiles();
             },
             error => this.toastr.error(<any>error));
         this.onClearSelection(CandidateID);
@@ -221,7 +222,7 @@ export class AllProfilesListComponent implements OnInit {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
-                    this.getAllProfiles();
+                    setTimeout(() => { this.getAllProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -238,7 +239,7 @@ export class AllProfilesListComponent implements OnInit {
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
                     this.allProfilesList.GrdOperations = new GrdOptions();
-                    this.getAllProfiles();
+                    setTimeout(() => { this.getAllProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }

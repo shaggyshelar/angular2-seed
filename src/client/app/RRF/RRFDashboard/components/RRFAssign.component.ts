@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, AfterContentInit  } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RRFDetails, AssignmentDetails } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
@@ -7,9 +7,9 @@ import { RRFDashboardService } from '../services/rrfDashboard.service';
 import { MastersService } from '../../../shared/services/masters.service';
 //import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
+import { APIResult, RRFAssignStatus } from '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
-import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { RRFGridRowComponent } from '../../shared/components/RRFGridRow/RRFGridRow.component';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class RRFAssignComponent implements OnInit, AfterViewInit, AfterContentIn
     unAssignedComments: string = '';
     public currentDate: Date = new Date();
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
-
+    assignedData = new Array();
     constructor(private _myRRFService: MyRRFService,
         private activatedRoute: ActivatedRoute,
         private _rrfDashboardService: RRFDashboardService,
@@ -67,16 +67,16 @@ export class RRFAssignComponent implements OnInit, AfterViewInit, AfterContentIn
             .subscribe(
             results => {
                 this.selectedRRF = <any>results;
-                this.selectedRRF.assignedData = new Array();
-                for (var index = 0; index < results.AssignedData.length; index++) {
-                    if (results.AssignedData[index].Status.Value === 'Assigned') {
-                        this.selectedRRF.assignedData.push(results.AssignedData[index]);
+                this.assignedData = new Array();
+                for (var index = 0; index < this.selectedRRF.AssignedData.length; index++) {
+                    if (this.selectedRRF.AssignedData[index].Status.Value === 'Assigned') {
+                        this.assignedData.push(this.selectedRRF.AssignedData[index]);
                     }
                 }
-                if (this.selectedRRF.assignedData === undefined) {
+                if (this.assignedData === undefined) {
                     var assignmentDetails: AssignmentDetails = new AssignmentDetails();
-                    this.selectedRRF.assignedData = new Array();
-                    this.selectedRRF.assignedData.push(assignmentDetails);
+                    this.assignedData = new Array();
+                    this.assignedData.push(assignmentDetails);
                 }
                 this.GetRecruiter();
             },
@@ -97,13 +97,14 @@ export class RRFAssignComponent implements OnInit, AfterViewInit, AfterContentIn
         if (!this.isFormValidate()) {
             return;
         }
-        var selectedRec: number[] = $('#cmbAssignTo').val();
+        let AssignTocmb: any = $('#cmbAssignTo');
+        let selectedRec: number[] = AssignTocmb.val();
         // Creating array of selected Assignee
         var selectedRRFidsList: Array<MasterData> = new Array<MasterData>();
         for (var index = 0; index < selectedRec.length; index++) {
             var selectedRRF: MasterData = new MasterData();
             selectedRRF.Id = selectedRec[index];
-            selectedRRF.Value = "";
+            selectedRRF.Value = '';
             selectedRRFidsList.push(selectedRRF);
         }
         this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRRFidsList, this.AssignedComments)
@@ -123,11 +124,12 @@ export class RRFAssignComponent implements OnInit, AfterViewInit, AfterContentIn
     }
 
     isFormValidate() {
-        if ($('#cmbAssignTo').val() === null) {
+        let AssignToCmb: any = $('#cmbAssignTo');
+        if (AssignToCmb.val() === null) {
             this.toastr.error('Please select assign To value');
             return false;
         }
-        if ($('#txtAssigningComment').val() === "") {
+        if (this.AssignedComments === "") {
             this.toastr.error('Please select Assigning Comment');
             return false;
         }
@@ -187,7 +189,7 @@ export class RRFAssignComponent implements OnInit, AfterViewInit, AfterContentIn
         }
         return false;
     }
-     //Format date in "yyyy-mm-dd" format
+    //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),

@@ -35,9 +35,6 @@ import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruiters
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
 import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
 import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
-import { HeadDashboardComponent } from '../../Dashboard/Reqruiter/component/headDashboard.component';
-import { InitiatorDashboardComponent } from '../../Dashboard/Reqruiter/component/initiatorDashboard.component';
-import { RecruiterDashboardComponent } from '../../Dashboard/Reqruiter/component/recruiterDashboard.component';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 @Component({
     moduleId: module.id,
@@ -78,9 +75,6 @@ import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.direct
     { path: '/NotificationSetting', component: PushNotificationComponent },
     { path: '/RRF/InterviewsAvailability', component: InterviewerAvalabilityComponent },
     { path: '/RRF/FeedbackPending', component: FeedbackPendingComponent },
-    { path: '/Dashboard/Head', component: HeadDashboardComponent },
-    { path: '/Dashboard/Initiator', component: InitiatorDashboardComponent },
-    { path: '/Dashboard/Recruiter', component: RecruiterDashboardComponent },
     { path: '/Dashboard', component: DashboardComponent }
 
 

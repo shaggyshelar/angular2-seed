@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 //import { ROUTER_DIRECTIVES} from '@angular/router';
 import { CarouselModule, TooltipDirective, ButtonsModule } from 'ng2-bootstrap/ng2-bootstrap';
-import { RecruitersDashboardService } from '../Reqruiter/index';
+//import { RecruitersDashboardService } from '../Reqruiter/index';
+import { RecruitersDashboardService } from '../services/recruitersDashboard.service';
 import { InterviewApprovalComponent } from '../../recruitmentCycle/shared/index';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 import {
-    GuageChartData,
-    PiechartData
+    GuageChartData, PiechartData
 } from '../index';
 import {
-    GraphComponent,
-    PiechartComponent,
-    GaugeChartComponent,
-    AnimatedPieComponent,
-    StackedColumnComponent,
-    StackedBarComponent,
-    CandidateDetailComponent
+    GraphComponent, PiechartComponent, GaugeChartComponent, AnimatedPieComponent, StackedColumnComponent,
+    StackedBarComponent, CandidateDetailComponent
 } from '../../shared/index';
 import { MasterData, ResponseFromAPI } from '../../shared/model/common.model';
 import { Interview } from '../../recruitmentCycle/shared/model/interview';
-import { CandidateProfile, AllCandidateProfiles, BarChartData } from '../../profileBank/shared/model/myProfilesInfo';
+import {
+    CandidateProfile, AllCandidateProfiles, BarChartData
+} from '../../profileBank/shared/model/myProfilesInfo';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { RRFCandidateListService } from '../../RRF/RRFDashboard/services/RRFCandidatesList.service';
@@ -28,13 +25,17 @@ import { GrdOptions } from '../../shared/model/common.model';
 import { DetailProfileComponent } from '../../profileBank/shared/component/detailProfile.component';
 import { RRFDetails, AllRRFStatusCount } from '../../RRF/myRRF/models/rrfDetails';
 import { RRFGridRowComponent } from '../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
-import { InterviewApproval } from '../../recruitmentCycle/shared/component/InterviewApproval/model/interviewApproval';
-import { InterviewApprovalGridRowComponent } from '../../recruitmentCycle/shared/component/InterviewApprovalGridRow/InterviewApprovalGridRow.component';
+import {
+    InterviewApproval
+} from '../../recruitmentCycle/shared/component/InterviewApproval/model/interviewApproval';
+import {
+    InterviewApprovalGridRowComponent
+} from '../../recruitmentCycle/shared/component/InterviewApprovalGridRow/InterviewApprovalGridRow.component';
+
 @Component({
     moduleId: module.id,
     selector: 'dashboard-component',
     templateUrl: 'dashboard.component.html',
-
     // directives: [ROUTER_DIRECTIVES,
     //     GraphComponent,
     //     PiechartComponent,

@@ -3,7 +3,7 @@ import { Component, Input, Output, OnChanges, OnInit, EventEmitter} from '@angul
 import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 //import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
 //import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAvailablity.component';
-import { RecruitersDashboardService } from '../../../Dashboard/Reqruiter/services/recruitersDashboard.service';
+import { RecruitersDashboardService } from '../../../Dashboard/services/recruitersDashboard.service';
 @Component({
   moduleId: module.id,
   selector: 'pie-chart',
