@@ -597,7 +597,8 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
 
     setSelectedMode(ModeId: string) {
-        var i = _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) });
+        var i = _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) }) >= 0
+        ? _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) }) : _.findIndex(this.InterviewModes, { Id: ModeId }) ;
         if (i >= 0)
             this.ScheduleInterView.InterviewMode = this.InterviewModes[i];
         if (this.ScheduleInterView.InterviewMode.Value.toLowerCase().includes('skype')) {
@@ -653,6 +654,9 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ifInterviewScheduled = false;
         let modl: any = $('#skippingRound');
         modl.modal('toggle');
+    }
+    onSelectInterviewer(Id:any) {
+        console.log(Id);
     }
 
     /*---------------------------- MasterData Service Methods -----------------------------*/

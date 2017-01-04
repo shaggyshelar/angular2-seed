@@ -16,7 +16,7 @@ export class AllScheduleInterviewPipe implements PipeTransform {
                 interview.CandidateDetails.FullName.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 interview.CandidateDetails.FirstName.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 interview.CandidateDetails.LastName.search(new RegExp(stringToSearh, 'i')) !== -1 ||
-                interview.RRFID.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                interview.RRFCode.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 interview.Round.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 // interview.CandidateSalaryDetails.ExpectedSalary.search(new RegExp(stringToSearh, 'i'))!== -1 ||
                 // interview.CandidateSalaryDetails.CurrentSalary.search(new RegExp(stringToSearh, 'i')) !== -1
@@ -28,7 +28,7 @@ export class AllScheduleInterviewPipe implements PipeTransform {
     checkForInterviewers(value: Interview, stringToSearh: string) {
         var result: boolean = false;
         for (var i = 0; i < value.InterviewerAvailability.length; i++) {
-            if (value.Interviewer[i].Value.includes(stringToSearh)) {
+            if (value.InterviewerAvailability[i].Interviewer.Value.toLowerCase().includes(stringToSearh.toLowerCase())) {
                 result = true;
                 return result;
             }

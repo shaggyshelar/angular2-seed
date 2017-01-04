@@ -302,13 +302,14 @@
                                             </label>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-sm-3 ">
-                                    <div class="dataTables_filter pull-right ">
-                                        <label>Search:
-                                                <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
+                                <div class="col-md-3 col-sm-3">
+									<div id="sample_1_filter" class="dataTables_filter">
+										<label>Search :
+                                            <input type="search" class="form-control input-sm input-small input-inline " [(ngModel)] = "searchString"
+                                            placeholder="" aria-controls="sample_1">
                                             </label>
-                                    </div>
-                                </div>
+									</div>
+								</div>
                             </div>
                         </div>
                         <!-- END SHOW AND SEARCH -->
@@ -322,7 +323,7 @@
                                 </thead>-->
                                 <tbody>
                                     <!-- NgBinding-->
-                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory">
+                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory |InterviewersSchedule:searchString">
                                         <td>
                                             <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
                                             <br>

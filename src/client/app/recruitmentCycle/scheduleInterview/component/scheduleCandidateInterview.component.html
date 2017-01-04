@@ -25,7 +25,7 @@
             <div class="portlet light bordered">
                 <div class="row">
                     <div class="col-md-4">
-                        <h4> &nbsp;&nbsp; Schdule Interview </h4>
+                        <h4> &nbsp;&nbsp; Schedule Interview </h4>
                     </div>
                     <div class="col-md-8" *ngIf="ifInvalidInterview ">
                         <div style="color:red;margin-top:10px" class="control-label align"> Note *: This Interview Will Be Scheduled After Approval. </div>
@@ -38,10 +38,10 @@
                             <form role="form" (submit)="onScheduleInterviewClick()">
                                 <div class="row">
                                     <div class="form-group">
-                                        <label class="col-md-3 control-label align">Candidate <span class="required"> * </span></label>
-                                        <div class="col-md-3">
+                                        <label class="col-md-3 control-label align">Candidate Name <span class="required"> * </span></label>
+                                        <div class="col-md-3" style="margin-top : -8px;">
 
-                                            <h5 class="font-red sbold uppercase">{{ScheduleInterView.Candidate}}</h5>
+                                            <h5 class="font-green sbold uppercase">{{ScheduleInterView.Candidate}}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -68,7 +68,6 @@
                                             <div class="input-group select2-bootstrap-append" style="width:160px !important">
                                                 <select class="form-control" [(ngModel)]="ScheduleInterView.Round.Id" (change)='getNominatedInterviewersByRound($event.target.value)'
                                                     [disabled]='isInterviewReschedule'>
-                                                    <option></option>
                                                     <option *ngFor="let round of CombinedInterviewRounds" [ngValue]="round.InterviewRound.Id">{{round.InterviewRound.Value}}</option>
                                             </select>
                                             </div>
@@ -80,7 +79,7 @@
                                         <label class="col-md-3 control-label align">Interview Mode <span class="required"> * </span></label>
                                         <div class="col-md-3">
                                             <div class="input-group select2-bootstrap-append" style="width:160px !important">
-                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id" (change)='setSelectedMode($event.target.value)'>
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.InterviewMode.Id" (change)='setSelectedMode($event.target.value)' required="">
                                                         <option  *ngFor="let mode of InterviewModes" [value]="mode.Id">{{mode.Value}}</option>
                                                  </select>
                                             </div>

@@ -16,13 +16,15 @@ import { ProfileBankService } from '../../../profileBank/index';
 import {RRFGridRowComponent} from '../../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
 import { RRFDetails} from '../../../RRF/myRRF/models/rrfDetails';
 import { MyRRFService } from '../../../RRF/myRRF/services/myRRF.service';
+import { InterviewersSchedule }from '../../shared/filter/interviewersSchedule.pipe';
 
 @Component({
     moduleId: module.id,
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
     directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent, RRFGridRowComponent],
-    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService, MyRRFService]
+    providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService, MyRRFService],
+    pipes: [InterviewersSchedule]
 })
 
 export class RecruitmentInterviewScheduleComponent implements OnActivate {
@@ -51,6 +53,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     viewIEFText: string = 'View IEF';
     hideIEFText: string = 'Hide IEF';
     IEFButtonText: string = '';
+    searchString: string;
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
@@ -60,10 +63,9 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this.InterviewInformation = new Array<Interview>();
         this.InterviewInformationForCalendar = new Array<Interview>();
         /**Commenting as this functionality is deprecated */
-        // this.AwaitedInterviewInformation = new Array<Interview>();
         var date = new Date();
         this.currentDate = this.formatDate(date);
-        //For pagination
+        /**For pagination */
         this.grdOptionsIntwHistory.CamlString = '';
         this.grdOptionsIntwHistory.NextPageID = 0;
         this.grdOptionsIntwHistory.PreviousPageID = 0;
@@ -75,9 +77,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     routerOnActivate() {
         this.getMyInterviews();
         this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
-
         this.getMyAllInterviewsDetailsOfCalendar();
-        //this.returnPath = sessionStorage.getItem('returnPath');
         this.GetMyAllConductedInerviewsHistory();
         this.IEFButtonText = this.viewIEFText;
     }
@@ -103,14 +103,15 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     DisableIEF(interviewDate: Date, interviewTime: any) {
         var intDate = moment(interviewDate).format('YYYY-MM-DD');
         if (moment(intDate) > moment()) {
-            return true
-        }
-        else {
-            if (moment(intDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] > new Date().getHours().toString()) {
-                return true
-            }
-            else {
-                if (moment(intDate).format('MM-DD-YYYY') >= moment(new Date()).format('MM-DD-YYYY') && interviewTime.split(':')[0] >= new Date().getHours().toString() && interviewTime.split(':')[1] > new Date().getMinutes().toString()) {
+            return true;
+        } else {
+            if (moment(intDate).format('YYYY-MM-DD') >= moment(new Date()).format('YYYY-MM-DD')
+                && interviewTime.split(':')[0] > new Date().getHours().toString()) {
+                return true;
+            } else {
+                if (moment(intDate).format('YYYY-MM-DD') >= moment(new Date()).format('YYYY-MM-DD')
+                    && interviewTime.split(':')[0] >= new Date().getHours().toString()
+                    && interviewTime.split(':')[1] > new Date().getMinutes().toString()) {
                     return true;
                 } else {
                     return false;
@@ -152,8 +153,6 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
 
     //Shows Tooltip on calendar
     showDetails(e: any) {
-        var StartTime = e.event.start._i.split('T')[1];
-        var EndTime = e.event.end._i.split('T')[1];
         let element: any = $(e.element);
         element.tooltip({
             title: ':' + e.event.title
@@ -203,10 +202,10 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
 
     OnPaginationClick(pageClicked: number) {
         this.grdOptionsIntwHistory.ButtonClicked = pageClicked;
-        if(pageClicked === 1) {
+        if (pageClicked === 1) {
             this.grdOptionsIntwHistory.PagingEvent = 'Next';
         }
-        if(pageClicked === -1) {
+        if (pageClicked === -1) {
             this.grdOptionsIntwHistory.PagingEvent = 'Previous';
         }
         this.GetMyAllConductedInerviewsHistory();
@@ -218,19 +217,12 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this.grdOptionsIntwHistory.CamlString = '';
         this.GetMyAllConductedInerviewsHistory();
     }
-    /**Commenting as this functionality is deprecated */
-    // rejectInterview(_rrfID: MasterData) {
-    //     let modalpopup: any = $('#rejectInterview');
-    //     modalpopup.modal();
-    // }
 
     //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
-            h = '' + d.getHours(),
-            m = '' + d.getMinutes(),
             year = d.getFullYear();
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
@@ -267,7 +259,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
 
     getTime(time: string) {
         //time:string = interviewTime;
-        var intTime :Array<string> =new Array<string>();
+        var intTime: Array<string> = new Array<string>();
         intTime = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
         if (intTime.length > 1) { // If time format correct
             intTime = intTime.slice(1);  // Remove full string match value
@@ -290,7 +282,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                     skillDetails = skillDetails + '"' + this.RRFData.SkillsRequired[index].Value + '"';
                 }
                 if (row.hasClass('pop')) {
-                    row.popover('hide')
+                    row.popover('hide');
                     row.removeClass('pop');
                 } else {
                     row.popover({
@@ -298,9 +290,8 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
                         toggle: 'popover',
                         title: 'RRF Details',
                         html: true,
-                        //trigger: 'hover',
-                        //content: $('#myPopoverContent').html()
-                        content: 'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :' + this.RRFData.RaisedBy.Value + '<br/>' + '\nSkills :' + skillDetails + '<br/>' + '\nJob Description :' + this.RRFData.Description
+                        content: 'RRF Code :' + this.RRFData.RRFCODE + '<br/>' + '\nRaised By :' + this.RRFData.RaisedBy.Value + '<br/>'
+                        + '\nSkills :' + skillDetails + '<br/>' + '\nJob Description :' + this.RRFData.Description
                     });
                     row.popover('show');
                     row.addClass('pop');
