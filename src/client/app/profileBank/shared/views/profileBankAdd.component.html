@@ -66,8 +66,8 @@
                                         <div class="tab-pane active" id="tab_primaryInfo">
                                             <form role="form" class="todo-tasklist-item todo-tasklist-item-border-yellow" (submit)="onSavePrimaryInfo()">
                                                 <div class="row">
-                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;" *ngIf="isExist">
-                                                        <h2> {{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}} </h2>
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
                                                     </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
@@ -89,7 +89,7 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+                                                                        tooltipEnable="false">{{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
@@ -284,8 +284,8 @@
 
                                             <form role="form" (submit)="onSavePersonalDetails()">
                                                 <div class="row">
-                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;" *ngIf="isExist">
-                                                        <h2> {{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}} </h2>
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
                                                     </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a href="javascript:;" class="btn red" data-toggle="tooltip" data-placement="top" title="Delete Profile" tooltip="Delete Profile"
@@ -310,7 +310,7 @@
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                        tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+                                                                        tooltipEnable="false">{{existedProfile.CANDIDATECODE ? existedProfile.CANDIDATECODE : ""}}</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3  inlineForm">
@@ -970,6 +970,9 @@
                                         <div class="tab-pane" id="tab_1_3">
                                             <form role="form" (submit)="onSaveSkillsDetails()">
                                                 <div class="row">
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
@@ -1402,6 +1405,9 @@
                                         <div class="tab-pane" id="tab_1_5">
                                             <form role="form" (submit)="onSaveSalaryDetails()">
                                                 <div class="row">
+                                                    <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                     <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                         <a class="btn green " (click)='previousTab()'>
                                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Prev
@@ -1676,6 +1682,9 @@
                                                 <div class="col-md-12">
                                                     <form role="form" (submit)="onSaveProfessionalDetails()">
                                                         <div class="row">
+                                                            <div class="margiv-top-10 pull-left" style="margin-left: 15px; color: #2ab4c0;">
+                                                        <h2> {{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}} </h2>
+                                                    </div>
                                                             <div class="margiv-top-10 pull-right" style="margin-right:15px;">
                                                                 <a class="btn green " (click)='previousTab()'>
                                                                     <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>                                                                    Prev
