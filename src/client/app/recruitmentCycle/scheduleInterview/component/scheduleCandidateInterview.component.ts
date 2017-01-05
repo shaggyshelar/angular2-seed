@@ -134,7 +134,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         //For MultiselectDropdown
         let cmb: any = $('#cmbInterviewers');
         cmb.select2();
-        //Check for New Interview Schedule or Re-schdule
+        //Check for New Interview Schedule or Re-schedule
         if (segment.getParam('id') !== 'New') {
             this.ScheduleInterView.InterviewID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
             this.ScheduleInterView.InterviewID.Value = (segment.getParam('id')).split('ID')[0];
@@ -423,7 +423,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             modl.modal({ 'backdrop': 'static' });
         } else if (this.ScheduleInterView.Status !== null && this.ScheduleInterView.Status !== undefined &&
             this.ScheduleInterView.Status.toLowerCase() === 'rejected') {
-            this.toastr.warning('You can not schdule interview  of rejected candidate by skipping round');
+            this.toastr.warning('You can not schedule interview  of rejected candidate by skipping round');
             this.ScheduleInterView.Round = new MasterData();
         } else {
             this.toastr.warning('Somthing is missed..!');
