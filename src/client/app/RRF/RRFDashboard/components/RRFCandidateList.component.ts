@@ -645,4 +645,7 @@ export class RRFCandidateListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+    Back() {
+        this._router.navigate(['/App/RRF/RRFDashboard']);
+    }
 }

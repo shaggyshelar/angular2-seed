@@ -100,7 +100,7 @@ export class RRFDashboardService {
     closeRRF(rrfId: MasterData, closeComment: string) {
         let url = Config.GetURL('/api/RRF/CloseRRF');
         this._spinnerService.show();
-        return this.authHttp.post(url, { RRFID: rrfId, CloseComment: closeComment })
+        return this.authHttp.post(url, { RRFID: rrfId, ClosedComment: closeComment })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

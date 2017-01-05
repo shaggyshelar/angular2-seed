@@ -1,5 +1,5 @@
 import {Component, AfterViewInit, AfterContentInit  } from '@angular/core';
-import { OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/router';
+import { OnActivate, ROUTER_DIRECTIVES, RouteSegment,Router } from '@angular/router';
 import { RRFDetails, AssignmentDetails } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
@@ -36,7 +36,8 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
     constructor(private _myRRFService: MyRRFService,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
-        public toastr: ToastsManager) {
+        public toastr: ToastsManager,
+        private _router: Router) {
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -197,5 +198,8 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         if (day.length < 2) day = '0' + day;
 
         return [day, month, year].join('-');
+    }
+    Back() {
+        this._router.navigate(['/App/RRF/RRFDashboard']);
     }
 }

@@ -27,7 +27,7 @@
         <!-- /Profile Photo -->
 
         <!-- Profiles Details -->
-        <div class="col-md-10">
+        <div class="col-md-9" style="margin-left:35px;">
             <div class="row message">
                 <div class="col-md-8 profile-info">
                     <h3 class="font-green sbold uppercase"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></h3>
@@ -62,9 +62,9 @@
                         </ul>
                     </div>
                     <p>
-                        <a class="sbold" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
+                        <a class="sbold text-lowercase" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
                     </p>
-                    <div class="row">
+                    <div class="row" style="margin-left:-3px;">
                         <ul class="list-inline sbold" style="color:#f16e50">
                             <li>
                                 <!--location-->
