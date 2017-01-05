@@ -88,10 +88,11 @@ export class RRFCandidateListComponent implements OnActivate {
     IsOfferGenerate: boolean = false;
     IsUpdateStatus: boolean = false;
     IsOfferedCandidate: boolean = false;
-    IsOtherCandidate:boolean = false;
+    IsOtherCandidate: boolean = false;
     UpdatedStatus: any;
     selectedStatus = new MasterData();
     CandidateUpdatedStatus: MasterData = new MasterData();
+    candidateStatus: string;
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
         responsive: true
@@ -136,6 +137,19 @@ export class RRFCandidateListComponent implements OnActivate {
         this.doughnutChartData = [50, 50];
         this.doughnutChartColors = [{ backgroundColor: ['#E9EF0B', '#32c5d2'] }];
         this.selectedRRF = new RRFDetails();
+        this.candidateStatus = sessionStorage.getItem('StatusValue');
+        if (this.candidateStatus !== null) {
+            if (this.candidateStatus.toLowerCase() === 'offered' || this.candidateStatus.toLowerCase() === 'offer accepted'
+                || this.candidateStatus.toLowerCase() === 'joined') {
+                $('#mytabs a[href="#tab_Offered_Candidates"]').tab('show');
+                this.getOfferedCanidatesForRRF();
+            }
+            if (this.candidateStatus.toLowerCase() === 'blacklisted' || this.candidateStatus.toLowerCase() === 'absconded'
+                || this.candidateStatus.toLowerCase() === 'asked to leave') {
+                $('#mytabs a[href="#tab_Other_Candidates"]').tab('show');
+                this.getOtherCanidatesForRRF();
+            }
+        }
         //TODO : Call API to get Candidates Specific to SelectedRRF
         this.getCanidatesForRRF();
         //this.getOfferedCanidatesForRRF();
@@ -416,7 +430,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     getTime(time: string) {
         //time:string = interviewTime;
-        var intTime :Array<string> =new Array<string>();
+        var intTime: Array<string> = new Array<string>();
         intTime = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
         if (intTime.length > 1) { // If time format correct
             intTime = intTime.slice(1);  // Remove full string match value

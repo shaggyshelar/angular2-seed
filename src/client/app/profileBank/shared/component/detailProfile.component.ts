@@ -47,8 +47,9 @@ export class DetailProfileComponent implements OnInit {
         }
         //this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
-    onViewCandidateClick(rrfID: MasterData) {
+    onViewCandidateClick(rrfID: MasterData, status:string) {
         // rrfID = 'RRF6866237939ID76';
+        sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 

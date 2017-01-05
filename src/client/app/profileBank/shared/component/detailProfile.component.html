@@ -115,7 +115,7 @@
                                 <li>
                                     <span class="mt-action-dot color{{profile.Status.Id}}"> </span>
                                     <span *ngIf='!checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><strong>{{profile.Status.Value}}</strong></span>
-                                    <span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><a style="color:black"(click)='onViewCandidateClick(profile.RRFAssigned.RRFID)' tooltip="Click to check associated RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"><strong>{{profile.Status.Value}}</strong><small> with <i class="fa fa-external-link"></i></small></a></span>
+                                    <span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><a style="color:black"(click)='onViewCandidateClick(profile.RRFAssigned.RRFID,profile.Status.Value)' tooltip="Click to check associated RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"><strong>{{profile.Status.Value}}</strong><small> with <i class="fa fa-external-link"></i></small></a></span>
                                     <!--<span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'> with <a (click)='onViewCandidateClick(profile.RRFAssigned.RRFID)'></a></span>-->
                                 </li>
                                 <li>
