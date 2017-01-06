@@ -142,11 +142,13 @@ export class RRFCandidateListComponent implements OnActivate {
             if (this.candidateStatus.toLowerCase() === 'offered' || this.candidateStatus.toLowerCase() === 'offer accepted'
                 || this.candidateStatus.toLowerCase() === 'joined') {
                 $('#mytabs a[href="#tab_Offered_Candidates"]').tab('show');
+                sessionStorage.removeItem('StatusValue');
                 this.getOfferedCanidatesForRRF();
             }
             if (this.candidateStatus.toLowerCase() === 'blacklisted' || this.candidateStatus.toLowerCase() === 'absconded'
                 || this.candidateStatus.toLowerCase() === 'asked to leave') {
                 $('#mytabs a[href="#tab_Other_Candidates"]').tab('show');
+                sessionStorage.removeItem('StatusValue');
                 this.getOtherCanidatesForRRF();
             }
         }

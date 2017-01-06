@@ -660,6 +660,12 @@ export class DashboardComponent implements OnInit {
                             var status = 'Not Scheduled';
                             break;
                         }
+                        if (this.chartDataForColumnChart[index].awaitingApprovalVal > 0) {
+                            var round = this.chartDataForColumnChart[index].status !== null ?
+                                this.chartDataForColumnChart[index].status : '';
+                            var status = 'Awaiting Approval';
+                            break;
+                        }
                     }
 
                     this.getCanidatesForRRF(round, this.rrfCode, status);

@@ -132,6 +132,17 @@ export class GraphComponent implements OnChanges {
         graph6.fillAlphas = 1;
         this.chart.addGraph(graph6);
 
+         // seventh graph
+        var graph7 = new AmCharts.AmGraph();
+        graph7.type = 'column';
+        graph7.title = 'Awaiting Approval';
+        graph7.valueField = 'awaitingApprovalVal';
+        graph7.balloonText = 'Awaiting Approval :[[value]]';
+        graph7.lineAlpha = 0;
+        graph7.fillColors = '#581845';
+        graph7.fillAlphas = 1;
+        this.chart.addGraph(graph7);
+
         // LEGEND
         var legend = new AmCharts.AmLegend();
         legend.maxColumns = 4;
