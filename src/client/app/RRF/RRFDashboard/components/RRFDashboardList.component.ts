@@ -65,6 +65,7 @@ export class RRFDashboardListComponent implements OnActivate {
     displayApproval: boolean = false;
     displayAssignedTo: boolean = false;
     SortByList: SortingMasterData[] = [];
+    sessionValue:string;
 
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
@@ -76,6 +77,10 @@ export class RRFDashboardListComponent implements OnActivate {
     }
     routerOnActivate() {
         this.logedInUser = this.getLoggedInUser();
+        this.sessionValue = sessionStorage.getItem('backToRRFList');
+        if(this.sessionValue !== null) {
+            this.onViewChanged(this.sessionValue);
+        }
         this.getMyRRFData();
         this.getColumsForSorting('MYRRF');
         /**
@@ -300,6 +305,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onViewChanged(viewMode: string) {
+        sessionStorage.removeItem('backToRRFList');
         this.resetToDefaultGridOptions();
         this.grdOptions.OrderBy = 'Modified';
         this.grdOptions.Order = 'desc';
@@ -434,6 +440,7 @@ export class RRFDashboardListComponent implements OnActivate {
 
 
     redirectToAssignRRF(rrfID: MasterData) {
+        sessionStorage.setItem('backToRRFList',this.currentView);
         this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
@@ -445,6 +452,8 @@ export class RRFDashboardListComponent implements OnActivate {
 
     onViewCandidateClick(rrfID: MasterData) {
         // rrfID = 'RRF6866237939ID76';
+        sessionStorage.setItem('backToRRFList',this.currentView);
+        sessionStorage.setItem('backToRRFDashboardList','/App/RRF/RRFDashboard');
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
@@ -506,6 +515,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
     onReScheduleInterviewsClick(RRFID: MasterData) {
         //redirect to All Reschedule Interviews Screen
+        sessionStorage.setItem('backToRRFList',this.currentView);
         this._router.navigate(['/App/RRF/RRFDashboard/Interviews/' + RRFID.Value + 'ID' + RRFID.Id]);
     }
     onShowAvailabilityClick() {

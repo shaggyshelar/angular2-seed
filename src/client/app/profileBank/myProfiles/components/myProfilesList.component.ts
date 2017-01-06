@@ -110,6 +110,7 @@ export class MyProfilesListComponent implements OnActivate {
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
         };
+        sessionStorage.setItem('backToProfile','/App/ProfileBank/MyProfiles');
         this.getColumnsForSorting();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
@@ -181,7 +182,6 @@ export class MyProfilesListComponent implements OnActivate {
     }
     // Get Updated status
     getUpdateStatus(candidateID: any) {
-        //TO DO : Update API
         this.statusList = Array<MasterData>();
         this._masterService.getUpdateStatus(candidateID)
             .subscribe(

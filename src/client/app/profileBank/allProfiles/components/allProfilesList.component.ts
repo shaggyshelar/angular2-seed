@@ -64,6 +64,7 @@ export class AllProfilesListComponent implements OnActivate {
 
     routerOnActivate() {
         //this.setPaginationValues();
+        sessionStorage.setItem('backToProfile','/App/ProfileBank/AllProfiles');
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getAllProfiles();
@@ -186,7 +187,6 @@ export class AllProfilesListComponent implements OnActivate {
             this.isCollapsed = !this.isCollapsed;
     }
     getUpdateStatus(candidateID: any) {
-        //TO DO : Update API
         this.statusList = Array<MasterData>();
         this._masterService.getUpdateStatus(candidateID)
             .subscribe(

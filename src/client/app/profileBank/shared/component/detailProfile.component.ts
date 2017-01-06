@@ -49,6 +49,7 @@ export class DetailProfileComponent implements OnInit {
     }
     onViewCandidateClick(rrfID: MasterData, status:string) {
         // rrfID = 'RRF6866237939ID76';
+        sessionStorage.setItem('backToRRFDashboardList',sessionStorage.getItem('backToProfile'));
         sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }

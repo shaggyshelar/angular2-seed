@@ -248,7 +248,6 @@
                                                     <select id="cmbIntwRound " class="form-control" required="" placeholder="Select Interview Round " [(ngModel)]='IntwRound'
                                                         (ngModelChange)='InterviewRoundSelected()' tooltip="Select Interview Round"
                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!IntwRound">
-                                                        <option value="" disabled>Select Interview Round </option>
                                                         <option *ngFor="let Round of interviewRound " [value]="Round.Id ">{{Round.Value}}</option>
                                                     </select>
 

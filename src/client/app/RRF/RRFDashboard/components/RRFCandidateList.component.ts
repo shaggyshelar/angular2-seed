@@ -93,6 +93,7 @@ export class RRFCandidateListComponent implements OnActivate {
     selectedStatus = new MasterData();
     CandidateUpdatedStatus: MasterData = new MasterData();
     candidateStatus: string;
+    ReturnPath: string;
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
         responsive: true
@@ -137,6 +138,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.doughnutChartData = [50, 50];
         this.doughnutChartColors = [{ backgroundColor: ['#E9EF0B', '#32c5d2'] }];
         this.selectedRRF = new RRFDetails();
+        this.ReturnPath = sessionStorage.getItem('backToRRFDashboardList');
         this.candidateStatus = sessionStorage.getItem('StatusValue');
         if (this.candidateStatus !== null) {
             if (this.candidateStatus.toLowerCase() === 'offered' || this.candidateStatus.toLowerCase() === 'offer accepted'
@@ -662,6 +664,7 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     Back() {
-        this._router.navigate(['/App/RRF/RRFDashboard']);
+        //this._router.navigate(['/App/RRF/RRFDashboard']);
+        this._router.navigate([this.ReturnPath]);
     }
 }

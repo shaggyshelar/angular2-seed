@@ -49,6 +49,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        sessionStorage.setItem('backToProfile','/App/ProfileBank/BlackListedProfiles');
         this.setPaginationValues();
         this.getLoggedInUser();
         this.getBlacklistedProfiles();
