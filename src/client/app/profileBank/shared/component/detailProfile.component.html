@@ -65,7 +65,7 @@
                         <a class="sbold text-lowercase" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
                     </p>
                     <div class="row" style="margin-left:-3px;">
-                        <ul class="list-inline sbold" style="color:#f16e50">
+                        <ul class="list-inline text-lowercase sbold" style="color:#f16e50">
                             <li>
                                 <!--location-->
                                 <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
@@ -89,7 +89,7 @@
                             <li>
                                 <!--notice period-->
                                 <div tooltip="Notice period" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                    <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+"days":"N/A"}}
+                                    <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+" days":"N/A"}}
                                 </div>
 
                             </li>
