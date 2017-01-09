@@ -12,6 +12,7 @@ export class SkillService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addSkill(skill: SkillInfo) {
+        // TO DO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Skill/Add');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { skill })
@@ -30,6 +31,7 @@ export class SkillService {
     }
 
      getSkillById(id:number) {
+         // TO DO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Masters/Skill/GetSkillById');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl,{ skill:{Id:id} })
@@ -39,6 +41,7 @@ export class SkillService {
     }
 
     deleteSkill(skill: SkillInfo) {
+        // TO DO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Skill/Delete');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { skill })
@@ -48,6 +51,7 @@ export class SkillService {
     }
 
     editSkill(skill: SkillInfo) {
+        // TO DO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Skill/Edit');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { skill })

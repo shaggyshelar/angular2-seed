@@ -12,6 +12,7 @@ export class QualificationService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addQualification(qualification: QualificationInfo) {
+        // TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Qualification/Add');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { qualification })
@@ -30,6 +31,7 @@ export class QualificationService {
     }
 
     getQualificationById(id: number) {
+        // TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Masters/Qualification/GetQualificationById');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { qualification: { Id: id } })
@@ -39,6 +41,7 @@ export class QualificationService {
     }
 
     deleteQualification(qualification: QualificationInfo) {
+        // TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Qualification/Delete');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { qualification })
@@ -48,6 +51,7 @@ export class QualificationService {
     }
 
     editQualification(qualification: QualificationInfo) {
+        // TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Qualification/Edit');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { qualification })

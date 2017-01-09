@@ -12,7 +12,8 @@ export class RoleService {
     constructor( private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addRole(role: RoleInfo) {
-        let url = Config.GetURL('api/Role/Add');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/Add');
         this._spinnerService.show();
         return this.authHttp.post(url, { role })
             .map(this.extractData)
@@ -21,7 +22,8 @@ export class RoleService {
     }
 
     getRoles() {
-        let url = Config.GetURL('api/Role/GetRoles');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/GetRoles');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -30,7 +32,8 @@ export class RoleService {
     }
 
     getRoleById(id:number) {
-        let url = Config.GetURL('api/Role/GetRoleById');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/GetRoleById');
         this._spinnerService.show();
         return this.authHttp.post(url, { role: { Id: id } })
             .map(this.extractData)
@@ -39,7 +42,8 @@ export class RoleService {
     }
 
     deleteRole(role: RoleInfo) {
-        let url = Config.GetURL('api/Role/Delete');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/Delete');
         this._spinnerService.show();
         return this.authHttp.post(url, { role })
             .map(this.extractData)
@@ -48,7 +52,8 @@ export class RoleService {
     }
 
     editRole(role: RoleInfo) {
-        let url = Config.GetURL('api/Role/Edit');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/Edit');
         this._spinnerService.show();
         return this.authHttp.post(url, { role })
             .map(this.extractData)
@@ -57,7 +62,8 @@ export class RoleService {
     }
 
     getAllPermissions() {
-        let url = Config.GetURL('api/permission/GetAllPermissions');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/permission/GetAllPermissions');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -65,7 +71,8 @@ export class RoleService {
             .finally(() => this._spinnerService.hide());
     }
     addPermissionToRole(permission:any) {
-        let url = Config.GetURL('api/Role/AddPermissionToRole');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/AddPermissionToRole');
         this._spinnerService.show();
         return this.authHttp.post(url, { permission })
             .map(this.extractData)
@@ -73,7 +80,8 @@ export class RoleService {
             .finally(() => this._spinnerService.hide());
     }
     getPermissionsByRole(roleId:number) {
-        let url = Config.GetURL('api/Role/GetPermissionsByRole');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/GetPermissionsByRole');
         this._spinnerService.show();
         return this.authHttp.post(url, { roleId: roleId })
             .map(this.extractData)
@@ -81,7 +89,8 @@ export class RoleService {
             .finally(() => this._spinnerService.hide());
     }
     revokePermissionFromRole(permission:any) {
-        let url = Config.GetURL('api/Role/RevokePermissionFromRole');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Role/RevokePermissionFromRole');
         this._spinnerService.show();
         return this.authHttp.post(url, { permission })
             .map(this.extractData)

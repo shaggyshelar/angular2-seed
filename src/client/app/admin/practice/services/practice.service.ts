@@ -12,14 +12,15 @@ export class PracticeService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addPractice(practice: PracticeInfo) {
-        let url = Config.GetURL('api/Masters/Practice/Add');
+        //TODO : need to create API
+        let url = Config.GetURL('/api/Masters/Practice/Add');
         return this.authHttp.post(url, { practice })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getPractices() {
-        let url = Config.GetURL('api/Masters/GetPractices');
+        let url = Config.GetURL('/api/Masters/GetPractices');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -28,7 +29,8 @@ export class PracticeService {
     }
 
      getPracticeById(id: number) {
-        let url = Config.GetURL('api/Masters/Practice/GetPracticeById');
+         //TODO : need to create API
+        let url = Config.GetURL('/api/Masters/Practice/GetPracticeById');
         this._spinnerService.show();
         return this.authHttp.post(url,{ practice:{Id:id} })
             .map(this.extractData)
@@ -37,7 +39,8 @@ export class PracticeService {
     }
 
     deletePractice(practice: PracticeInfo) {
-        let url = Config.GetURL('api/Masters/Practice/Delete');
+        //TODO : need to create API
+        let url = Config.GetURL('/api/Masters/Practice/Delete');
         this._spinnerService.show();
         return this.authHttp.post(url, { practice })
             .map(this.extractData)
@@ -46,7 +49,8 @@ export class PracticeService {
     }
 
     editPractice(practice: PracticeInfo) {
-        let url = Config.GetURL('api/Masters/Practice/Edit');
+        //TODO : need to create API
+        let url = Config.GetURL('/api/Masters/Practice/Edit');
         this._spinnerService.show();
         return this.authHttp.post(url, { practice })
             .map(this.extractData)

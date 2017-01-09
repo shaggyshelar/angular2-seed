@@ -12,14 +12,15 @@ export class InterviewRoundService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addInterviewRound(interviewRound: InterviewRoundInfo) {
-        let url = Config.GetURL('api/Masters/InterviewRound/Add');
+        //TODO: need to create API
+        let url = Config.GetURL('/api/Masters/InterviewRound/Add');
         return this.authHttp.post(url, { interviewRound })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getInterviewRound() {
-        let url = Config.GetURL('api/Masters/GetRounds');
+        let url = Config.GetURL('/api/Masters/GetRounds');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -28,7 +29,8 @@ export class InterviewRoundService {
     }
 
      getInterviewRoundById(id : number) {
-        let url = Config.GetURL('api/Masters/InterviewRound/GetRoundsById');
+         //TODO: need to create API
+        let url = Config.GetURL('/api/Masters/InterviewRound/GetRoundsById');
         this._spinnerService.show();
         return this.authHttp.post(url,{ interviewRound:{Id:id} })
             .map(this.extractData)
@@ -37,7 +39,8 @@ export class InterviewRoundService {
     }
 
     deleteInterviewRound(interviewRound: InterviewRoundInfo) {
-        let url = Config.GetURL('api/Masters/InterviewRound/Delete');
+        //TODO: need to create API
+        let url = Config.GetURL('/api/Masters/InterviewRound/Delete');
         this._spinnerService.show();
         return this.authHttp.post(url, { interviewRound })
             .map(this.extractData)
@@ -46,7 +49,8 @@ export class InterviewRoundService {
     }
 
     editInterviewRound(interviewRound: InterviewRoundInfo) {
-        let url = Config.GetURL('api/Masters/InterviewRound/Edit');
+        //TODO: need to create API
+        let url = Config.GetURL('/api/Masters/InterviewRound/Edit');
         this._spinnerService.show();
         return this.authHttp.post(url, { interviewRound })
             .map(this.extractData)

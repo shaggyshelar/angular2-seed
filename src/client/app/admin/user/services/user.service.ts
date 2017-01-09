@@ -12,7 +12,8 @@ export class UserService {
     }
 
     getUsers() {
-        let url =  Config.GetURL('api/User/GetUsers');
+        // TODO : Need To create API
+        let url =  Config.GetURL('/api/User/GetUsers');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -21,7 +22,8 @@ export class UserService {
     }
 
     getUserRole(id:number) {
-        let url =  Config.GetURL('api/User/GetRoles');
+        // TODO : Need To create API
+        let url =  Config.GetURL('/api/User/GetRoles');
         this._spinnerService.show();
         return this.authHttp.post(url, { userId: id })
             .map(this.extractData)
@@ -30,7 +32,8 @@ export class UserService {
     }
 
     addUserRole(role:any) {
-        let url =  Config.GetURL('api/User/AddRole');
+        // TODO : Need To create API
+        let url =  Config.GetURL('/api/User/AddRole');
         this._spinnerService.show();
         return this.authHttp.post(url, { role })
             .map(this.extractData)
@@ -39,7 +42,8 @@ export class UserService {
     }
 
     revokeRole(role:any) {
-        let url = Config.GetURL('api/User/RevokeRole');
+        // TODO : Need To create API
+        let url = Config.GetURL('/api/User/RevokeRole');
         this._spinnerService.show();
         return this.authHttp.post(url, { role })
             .map(this.extractData)

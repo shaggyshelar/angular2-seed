@@ -12,6 +12,7 @@ export class OwnerTypeService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addOwnerType(ownerType: OwnerTypeInfo) {
+        //TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/OwnerType/Add');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { ownerType })
@@ -30,6 +31,7 @@ export class OwnerTypeService {
     }
 
     getOwnerTypeById(id: number) {
+        //TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Masters/OwnerType/GetOwnerTypeById');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { ownerType: { Id: id } })
@@ -39,6 +41,7 @@ export class OwnerTypeService {
     }
 
     deleteOwnerType(ownerType: OwnerTypeInfo) {
+        //TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/OwnerType/Delete');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { ownerType })
@@ -48,6 +51,7 @@ export class OwnerTypeService {
     }
 
     editOwnerType(ownerType: OwnerTypeInfo) {
+        //TODO : Need to create API
         let authenticateUrl = Config.GetURL('/api/Master/OwnerType/Edit');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { ownerType })

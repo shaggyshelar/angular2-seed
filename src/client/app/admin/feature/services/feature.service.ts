@@ -13,6 +13,7 @@ export class FeatureService {
     constructor(private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addFeature(feature: FeatureInfo) {
+        //TODO: Need to create API
         let url = Config.GetURL('/api/Feature/Add');
         return this.authHttp.post(url, { feature })
             .map(this.extractData)
@@ -20,6 +21,7 @@ export class FeatureService {
     }
 
     getFeatures(gridOptions: GridOptions) {
+        //TODO: Need to create API
         let url = Config.GetURL('/api/Feature/GetFeatures');
         this._spinnerService.show();
         return this.authHttp.post(url, { gridOptions })
@@ -29,6 +31,7 @@ export class FeatureService {
     }
 
     getFeatureById(id: number) {
+        //TODO: Need to create API
         let url = Config.GetURL('/api/Feature/GetFeatureById');
         this._spinnerService.show();
         return this.authHttp.post(url, { feature: { Id: id } })
@@ -38,6 +41,7 @@ export class FeatureService {
     }
 
     deleteFeature(feature: FeatureInfo) {
+        //TODO: Need to create API
         let url = Config.GetURL('/api/Feature/Delete');
         this._spinnerService.show();
         return this.authHttp.post(url, { feature })
@@ -47,6 +51,7 @@ export class FeatureService {
     }
 
     editFeature(feature: FeatureInfo) {
+        //TODO: Need to create API
         let url = Config.GetURL('/api/Feature/Edit');
         this._spinnerService.show();
         return this.authHttp.post(url, { feature })

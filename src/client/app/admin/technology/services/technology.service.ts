@@ -12,14 +12,15 @@ export class TechnologyService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addTechnology(technology: TechnologyInfo) {
-        let url = Config.GetURL('api/Masters/Technology/Add');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Masters/Technology/Add');
         return this.authHttp.post(url, { technology })
             .map(this.extractData)
             .catch(this.handleError);
     }
 
     getTechnologies() {
-        let url = Config.GetURL('api/Masters/GetTechnologies');
+        let url = Config.GetURL('/api/Masters/GetTechnologies');
         this._spinnerService.show();
         return this.authHttp.get(url)
             .map(this.extractData)
@@ -28,7 +29,8 @@ export class TechnologyService {
     }
 
      getTechnologyById(id: number) {
-        let url = Config.GetURL('api/Masters/Technology/GetTechnologyById');
+         // TODO : Need to create API
+        let url = Config.GetURL('/api/Masters/Technology/GetTechnologyById');
         this._spinnerService.show();
         return this.authHttp.post(url,{ technology:{Id:id} })
             .map(this.extractData)
@@ -37,7 +39,8 @@ export class TechnologyService {
     }
 
     deleteTechnology(technology: TechnologyInfo) {
-        let url = Config.GetURL('api/Masters/Technology/Delete');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Masters/Technology/Delete');
         this._spinnerService.show();
         return this.authHttp.post(url, { technology })
             .map(this.extractData)
@@ -46,7 +49,8 @@ export class TechnologyService {
     }
 
     editTechnology(technology: TechnologyInfo) {
-        let url = Config.GetURL('api/Masters/Technology/Edit');
+        // TODO : Need to create API
+        let url = Config.GetURL('/api/Masters/Technology/Edit');
         this._spinnerService.show();
         return this.authHttp.post(url, { technology })
             .map(this.extractData)

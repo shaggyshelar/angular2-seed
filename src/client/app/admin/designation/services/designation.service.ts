@@ -12,6 +12,7 @@ export class DesignationService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     addDesignation(designation: DesignationInfo) {
+        //TODO: need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Designation/Add');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { designation })
@@ -30,6 +31,7 @@ export class DesignationService {
     }
 
      getDesignationById(id:number) {
+        //TODO: need to create API
         let authenticateUrl = Config.GetURL('/api/Masters/Designation/GetDesignationById');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl,{ designation:{Id:id} })
@@ -39,6 +41,7 @@ export class DesignationService {
     }
 
     deleteDesignation(designation: DesignationInfo) {
+        //TODO: need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Designation/Delete');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { designation })
@@ -48,6 +51,7 @@ export class DesignationService {
     }
 
     editDesignation(designation: DesignationInfo) {
+        //TODO: need to create API
         let authenticateUrl = Config.GetURL('/api/Master/Designation/Edit');
         this._spinnerService.show();
         return this.authHttp.post(authenticateUrl, { designation })
