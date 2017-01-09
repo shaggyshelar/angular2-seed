@@ -201,64 +201,72 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
     onScheduleInterviewClick() {
         try {
-            //Check For Valid Interview if Valid ScheduleInterview
-            if (!this.ifInvalidInterview) {
-                //Validate Timeslot and proceed for Schedule Interview
-                let cmb: any = $('#cmbInterviewers');
-                let value = cmb.val();
-                //Get Events Data if "Show Availability"
-                // if (this.InterviewerCalendarDetails.Events === null)
-                if (this.InterviewerCalendarDetails.Events === null
-                    || this.InterviewerCalendarDetails.Events.length === 0)
-                    this.ShowAvailabilityOnCalendar();
-                //&& this.ScheduleInterView.InterviewerAvailability.length < value.length
-                if (value !== null) {
-                    /**Get All Other selected Interviewers from multiselect Dropdown */
-                    this.getOtherSelectedInterviewers(value);
-                    /**Change Status According to Interview Schedule */
-                    //TODO:: Remove line once testing is sucessfull
-                    //this.changeStatus(this.ScheduleInterView.Status);
-                    /**Check For Valid And Invalid Slots while scheduling interview */
-                    var CheckOverlapping = this.checkAvailability();
+            var starttime = moment(this.ScheduleInterView.InterviewFromTime, 'h:mm');
+            var endtime = moment(this.ScheduleInterView.InterviewToTime, 'h:mm');
+            //check for To time and from time should not be same
+            if (starttime.isBefore(endtime)) {
+                //Check For Valid Interview if Valid ScheduleInterview
+                if (!this.ifInvalidInterview) {
+                    //Validate Timeslot and proceed for Schedule Interview
+                    let cmb: any = $('#cmbInterviewers');
+                    let value = cmb.val();
+                    //Get Events Data if "Show Availability"
+                    // if (this.InterviewerCalendarDetails.Events === null)
+                    if (this.InterviewerCalendarDetails.Events === null
+                        || this.InterviewerCalendarDetails.Events.length === 0)
+                        this.ShowAvailabilityOnCalendar();
+                    //&& this.ScheduleInterView.InterviewerAvailability.length < value.length
+                    if (value !== null) {
+                        /**Get All Other selected Interviewers from multiselect Dropdown */
+                        this.getOtherSelectedInterviewers(value);
+                        /**Change Status According to Interview Schedule */
+                        //TODO:: Remove line once testing is sucessfull
+                        //this.changeStatus(this.ScheduleInterView.Status);
+                        /**Check For Valid And Invalid Slots while scheduling interview */
+                        var CheckOverlapping = this.checkAvailability();
 
-                    if (!CheckOverlapping && this.showConfirmation === true) {
-                        let cnfrmBox: any = $('#confirmSlot');
-                        cnfrmBox.modal('toggle');
-                    } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === true) {
-                        /**Checking in case of slot available */
-                        this.toastr.success('Timeslot Valid');
-                        this.ScheduleCandidateInterView();
-                    } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === false) {
-                        /**Checking in case of overlaping of slots */
-                        let cnfrmBox: any = $('#confirmSlot');
-                        cnfrmBox.modal('toggle');
-                    } else if (this.InterviewerCalendarDetails.Events === null
-                        || this.InterviewerCalendarDetails.Events.length === 0) {
-                        /**Checking In case of there are no Availability for interviewrs */
-                        let cnfrmBox: any = $('#confirmSlot');
-                        cnfrmBox.modal('toggle');
-                    } else {
-                        this.toastr.warning('You can not schedule interview in booked slot');
+                        if (!CheckOverlapping && this.showConfirmation === true) {
+                            let cnfrmBox: any = $('#confirmSlot');
+                            cnfrmBox.modal('toggle');
+                        } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === true) {
+                            /**Checking in case of slot available */
+                            this.toastr.success('Timeslot Valid');
+                            this.ScheduleCandidateInterView();
+                        } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === false) {
+                            /**Checking in case of overlaping of slots */
+                            let cnfrmBox: any = $('#confirmSlot');
+                            cnfrmBox.modal('toggle');
+                        } else if (this.InterviewerCalendarDetails.Events === null
+                            || this.InterviewerCalendarDetails.Events.length === 0) {
+                            /**Checking In case of there are no Availability for interviewrs */
+                            let cnfrmBox: any = $('#confirmSlot');
+                            cnfrmBox.modal('toggle');
+                        } else {
+                            this.toastr.warning('You can not schedule interview in booked slot');
+                        }
+                    } else { this.toastr.warning('Please fill atleast one interviewer'); }
+
+                } else {
+                    //if Invalid Send for Approval
+
+                    if (this.isRejectedCandidate) {
+                        this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
+                    } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
+
+                    this.ScheduleInterView.Status = 'Awaiting Approval';
+                    //Validate Timeslot and proceed for Schedule Interview
+                    let cmb: any = $('#cmbInterviewers');
+                    let value = cmb.val();
+                    if (value !== null) {
+                        /**Get All Other selected Interviewers from multiselect Dropdown */
+                        this.getOtherSelectedInterviewers(value);
                     }
-                } else { this.toastr.warning('Please fill atleast one interviewer'); }
-
-            } else {
-                //if Invalid Send for Approval
-
-                if (this.isRejectedCandidate) {
-                    this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
-                } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
-
-                this.ScheduleInterView.Status = 'Awaiting Approval';
-                //Validate Timeslot and proceed for Schedule Interview
-                let cmb: any = $('#cmbInterviewers');
-                let value = cmb.val();
-                if (value !== null) {
-                    /**Get All Other selected Interviewers from multiselect Dropdown */
-                    this.getOtherSelectedInterviewers(value);
+                    this.ScheduleCandidateInterView();
                 }
-                this.ScheduleCandidateInterView();
+            } else {
+                this.toastr.error('Interview To time must be greater than interview From time');
             }
+
         } catch (error) {
             console.log(error);
         }
@@ -598,7 +606,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
     setSelectedMode(ModeId: string) {
         var i = _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) }) >= 0
-        ? _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) }) : _.findIndex(this.InterviewModes, { Id: ModeId }) ;
+            ? _.findIndex(this.InterviewModes, { Id: parseInt(ModeId) }) : _.findIndex(this.InterviewModes, { Id: ModeId });
         if (i >= 0)
             this.ScheduleInterView.InterviewMode = this.InterviewModes[i];
         if (this.ScheduleInterView.InterviewMode.Value.toLowerCase().includes('skype')) {
@@ -655,7 +663,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         let modl: any = $('#skippingRound');
         modl.modal('toggle');
     }
-    onSelectInterviewer(Id:any) {
+    onSelectInterviewer(Id: any) {
         console.log(Id);
     }
 
