@@ -23,7 +23,7 @@ import { MastersService } from '../../../shared/services/masters.service';
 export class RRFApprovalListComponent implements OnActivate {
     rrfApprovalList: RRFDetails[] = [];
     errorMessage: string;
-    comment: string;
+    comment: string = '';
     selectedRowCount: number = 0;
     allChecked: boolean = false;
     statusConstant: RRFStatus = RRFStatus;
@@ -35,6 +35,7 @@ export class RRFApprovalListComponent implements OnActivate {
     constructor(private _rrfApprovalService: RRFApprovalService,
         public toastr: ToastsManager,
         private _mastersService: MastersService) {
+            this.comment = '';
     }
 
     routerOnActivate(): void {
@@ -99,8 +100,13 @@ export class RRFApprovalListComponent implements OnActivate {
     }
 
     onStatusReject(): void {
-        this.onStatusChange('Rejected');
-        this.getRRFApprovalList();
+        if (this.comment !== '') {
+            this.onStatusChange('Rejected');
+            this.getRRFApprovalList();
+        } else {
+            this.toastr.error('Please enter comment');
+        }
+
     }
 
     onStatusApprove(): void {
@@ -156,7 +162,7 @@ export class RRFApprovalListComponent implements OnActivate {
         this.grdOptions.ButtonClicked = 0;
         this.grdOptions.NextPageUrl = [];
     }
-    
+
     //Raised RRF single approval service call
     ActionOnRaisedRRF(rrfID: string,
         status: number,
