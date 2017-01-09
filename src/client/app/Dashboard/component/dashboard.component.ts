@@ -1,12 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES} from '@angular/router';
-import {CAROUSEL_DIRECTIVES, TOOLTIP_DIRECTIVES, BUTTON_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import { RecruitersDashboardService } from '../services/recruitersDashboard.service';
 import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
-import {
-    GuageChartData,
-    PiechartData } from '../index';
 import {
     GraphComponent,
     PiechartComponent,
@@ -15,19 +11,20 @@ import {
     StackedColumnComponent,
     StackedBarComponent,
     CandidateDetailComponent} from '../../shared/index';
-import { MasterData, ResponseFromAPI} from '../../shared/model/common.model';
-import {Interview} from '../../recruitmentCycle/shared/model/interview';
-import { CandidateProfile, AllCandidateProfiles, BarChartData } from  '../../profileBank/shared/model/myProfilesInfo';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-
-import {RRFCandidateListService} from '../../RRF/RRFDashboard/services/RRFCandidatesList.service';
-import {RRFSpecificCandidateList, TransferInterview} from '../../RRF/RRFDashboard/model/RRFCandidateList';
+import { MasterData } from '../../shared/model/common.model';
+import { Interview } from '../../recruitmentCycle/shared/model/interview';
+import { AllCandidateProfiles, BarChartData } from  '../../profileBank/shared/model/myProfilesInfo';
+import { CHART_DIRECTIVES } from 'ng2-charts/ng2-charts';
+import { RRFCandidateListService } from '../../RRF/RRFDashboard/services/RRFCandidatesList.service';
+import { RRFSpecificCandidateList } from '../../RRF/RRFDashboard/model/RRFCandidateList';
 import { GrdOptions } from '../../shared/model/common.model';
 import { DetailProfileComponent } from '../../profileBank/shared/component/detailProfile.component';
-import { RRFDetails, AllRRFStatusCount  } from '../../RRF/myRRF/models/rrfDetails';
+import { RRFDetails } from '../../RRF/myRRF/models/rrfDetails';
 import { RRFGridRowComponent} from '../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
 import { InterviewApproval } from '../../recruitmentCycle/shared/component/InterviewApproval/model/interviewApproval';
-import { InterviewApprovalGridRowComponent } from  '../../recruitmentCycle/shared/component/InterviewApprovalGridRow/InterviewApprovalGridRow.component';
+import {
+    InterviewApprovalGridRowComponent }
+from  '../../recruitmentCycle/shared/component/InterviewApprovalGridRow/InterviewApprovalGridRow.component';
 @Component({
     moduleId: module.id,
     selector: 'dashboard-component',
@@ -47,23 +44,10 @@ import { InterviewApprovalGridRowComponent } from  '../../recruitmentCycle/share
         RRFGridRowComponent,
         InterviewApprovalGridRowComponent
     ],
-    providers: [RecruitersDashboardService,RRFCandidateListService]
+    providers: [RecruitersDashboardService, RRFCandidateListService]
 })
 
 export class DashboardComponent implements OnInit {
-    onNotify(InputString: any): void {
-        switch (InputString.message) {
-            case 'FromPieChart': this.GetRRFStatusCount(InputString.inputstring);
-                break;
-            case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring, InputString.inputstring2);
-                break;
-            case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring, InputString.inputstring2);
-                break;
-            case 'FromAmChart': this.getCanidatesForRRF(InputString.inputstring, InputString.inputstring2, InputString.inputstring3);
-                break;
-        }
-
-    }
     errorMessage: string;
     /************BEGIN RECRUITER'S DASHBOARD properties */
     OpenRRF: any[];
@@ -95,7 +79,7 @@ export class DashboardComponent implements OnInit {
     IncompleteProfileList: AllCandidateProfiles = new AllCandidateProfiles();
     IsProfile: boolean = false;
     IsRRF: boolean = false;
-    IsInterview:boolean = false;
+    IsInterview: boolean = false;
     NoDataFound: boolean = false;
     Title: string;
     rrfList: RRFDetails[] = [];
@@ -300,6 +284,19 @@ export class DashboardComponent implements OnInit {
             { 'sector': 'Transport and Communication', 'size': 10.5 },
             { 'sector': 'Finance, real estate and business services', 'size': 26.5 }]
     };
+    onNotify(InputString: any): void {
+        switch (InputString.message) {
+            case 'FromPieChart': this.GetRRFStatusCount(InputString.inputstring);
+                break;
+            case 'FromStackedColChart': this.GetTaggedCandidateStatusCount(InputString.inputstring, InputString.inputstring2);
+                break;
+            case 'FromCandidateDetails': this.GetCandidatesRoundHistory(InputString.inputstring, InputString.inputstring2);
+                break;
+            case 'FromAmChart': this.getCanidatesForRRF(InputString.inputstring, InputString.inputstring2, InputString.inputstring3);
+                break;
+        }
+
+    }
     /************END RECRUITER HEAD DASHBOARD properties */
 
     constructor(private dashboardService: RecruitersDashboardService,
@@ -320,7 +317,6 @@ export class DashboardComponent implements OnInit {
         this.GetCandidateJoining();
         this.GetRrfStatusForGuage();
         this.GetRrfTimeline();
-        //this.getCanidatesForRRF();
         //Initiator
         this.GetStatusWiseRRFCount();
         this.GetPendingFeedbackCount();
@@ -328,13 +324,7 @@ export class DashboardComponent implements OnInit {
         this.GetRRFAwaitingCount();
         //Head
         this.GetAllRrfStatusCount();
-        //this.GetRRFStatusCount('Open');
-        //this.GetTaggedCandidateStatusCount('RRF6499265970');
         this.GetAllOfferedCandidateCount();
-        //this.GetAllOverdueRRFCount();
-        //this.GetIncompleteProfileCount();
-        //this.GetCandidateJoining();
-
     }
 
     /************BEGIN RECRUITER'S DATA************/
@@ -343,9 +333,7 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             (results: any) => {
                 if (results.length > 0) {
-                    // this.AllCandidatesForRRF = results;
                     this.isNull = true;
-                    //this.IsBarchartDataShow = true;
                     this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
@@ -367,8 +355,6 @@ export class DashboardComponent implements OnInit {
                         this.AllCandidatesForRRF[index].isInterviewScheduled = false;
                         break;
                     case 'scheduled':
-                        //case 're-scheduled':
-                        // case 'Cancelled':
                         this.AllCandidatesForRRF[index].isInterviewScheduled = true;
                         break;
                     case 'declined':
@@ -413,13 +399,6 @@ export class DashboardComponent implements OnInit {
             .subscribe(
             results => {
                 this.OpenRRF = <any>results;
-                if (this.OpenRRF.length > 0) {
-                    for (var index = 0; index < this.OpenRRF.length; index++) {
-                        if (this.OpenRRF[index].title.toLowerCase() === 'open') {
-                            //this.OpenRRFCount = this.OpenRRF[index].value;
-                        }
-                    }
-                }
             },
             error => this.errorMessage = <any>error);
     }
@@ -452,7 +431,6 @@ export class DashboardComponent implements OnInit {
     }
     /**Get all Candidate Joining this month Count*/
     GetCandidateJoining(): void {
-        //TODO: need to update API in Service
         this.dashboardService.getCandidateJoining()
             .subscribe(
             results => {
@@ -583,7 +561,6 @@ export class DashboardComponent implements OnInit {
         this.dashboardService.getRRFStatusCount(_status)
             .subscribe(
             (results: any) => {
-                //this.chartDataForColumnChart = <any>results;
                 if (results.length > 0) {
                     this.status = _status;
                     this.ChartDataForStackedColChart = <any>results;
@@ -724,7 +701,7 @@ export class DashboardComponent implements OnInit {
         modl.modal('toggle');
     }
     GetOverdueRRF() {
-        this.rrfList =[];
+        this.rrfList = [];
         this.dashboardService.getOverdueRRF(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
@@ -746,7 +723,7 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     GetOfferedCandidate() {
-         this.IncompleteProfileList = new AllCandidateProfiles();
+        this.IncompleteProfileList = new AllCandidateProfiles();
         this.dashboardService.getOfferedCandidatesList('Offered')
             .subscribe(
             (results: any) => {
@@ -790,8 +767,8 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     GetPendingRRF() {
-        this.rrfList =[];
-        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles,'Pending Approval')
+        this.rrfList = [];
+        this.dashboardService.getPendingRRFApproval(this.grdOptionsIncompeteProfiles, 'Pending Approval')
             .subscribe(
             (results: any) => {
                 if (results.RRFs !== undefined && results.RRFs.length > 0) {
@@ -812,7 +789,7 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     GetOpenRRF() {
-        this.rrfList =[];
+        this.rrfList = [];
         this.dashboardService.getAllRRF()
             .subscribe(
             (results: any) => {
@@ -834,7 +811,7 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     GetFeedbackPending() {
-        this.rrfList =[];
+        this.rrfList = [];
         this.dashboardService.getFeedbackPendingRRF(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
@@ -856,7 +833,7 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     GetRRFAwaiting() {
-         this.rrfList =[];
+        this.rrfList = [];
         this.dashboardService.getRRFApprovalList(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
@@ -899,7 +876,7 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     GetAssigenedOpenRRF() {
-        this.rrfList =[];
+        this.rrfList = [];
         this.dashboardService.getAssignedOpenRRF(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
@@ -920,39 +897,4 @@ export class DashboardComponent implements OnInit {
             },
             error => this.errorMessage = <any>error);
     }
-    /**Get all Overdue RRF's count */
-    // GetAllOverdueRRFCount(): void {
-    //     this.dashboardService.getAllOverdueRRFCount()
-    //         .subscribe(
-    //         results => {
-    //             //this.chartDataForColumnChart = <any>results;
-    //             this.OverdueRRFList = <any>results;
-    //             this.Overdue = this.OverdueRRFList.value;
-    //         },
-    //         error => this.errorMessage = <any>error);
-    // }
-
-    /**Get all Incomplete Profile Count*/
-    // GetIncompleteProfileCount(): void {
-    //     this.dashboardService.getIncompleteProfileCount()
-    //         .subscribe(
-    //         results => {
-    //             this.IncompleteProfileList = <any>results;
-    //             this.IncompleteProfile = this.IncompleteProfileList.value;
-    //         },
-    //         error => this.errorMessage = <any>error);
-    // }
-
-    /**Get all Candidate Joining this month Count*/
-    // GetCandidateJoining(): void {
-    //     //TO DO: need to update API in Service
-    //     this.dashboardService.getCandidateJoining()
-    //         .subscribe(
-    //         results => {
-    //             this.CandidateJoiningList = <any>results;
-    //             this.CandidateJoining = this.CandidateJoiningList.value;
-    //         },
-    //         error => this.errorMessage = <any>error);
-    // }
-    /************END HEAD DATA */
 }

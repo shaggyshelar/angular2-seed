@@ -80,8 +80,9 @@ export class RRFDashboardListComponent implements OnActivate {
         this.sessionValue = sessionStorage.getItem('backToRRFList');
         if(this.sessionValue !== null) {
             this.onViewChanged(this.sessionValue);
+        } else {
+            this.getMyRRFData();
         }
-        this.getMyRRFData();
         this.getColumsForSorting('MYRRF');
         /**
          * Removed from here and added to Assinged RRF redio button changed event

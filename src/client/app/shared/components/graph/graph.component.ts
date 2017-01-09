@@ -92,7 +92,7 @@ export class GraphComponent implements OnChanges {
         var graph3 = new AmCharts.AmGraph();
         graph3.type = 'column';
         graph3.title = 'OnHold';
-        graph3.valueField = 'onHoldVal';
+        graph3.valueField = 'onholdVal';
         graph3.balloonText = 'On Hold :[[value]]';
         graph3.lineAlpha = 0;
         graph3.fillColors = '#cd82ad';
