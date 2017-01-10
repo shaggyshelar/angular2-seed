@@ -119,7 +119,7 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label align">Interview Date <span class="required"> * </span></label>
                                         <div class="col-md-7">
-                                            <input type="date" name="bday" id="expectedDateOfJoining" required="" [(ngModel)]="ScheduleInterView.InterviewDate" />
+                                            <input type="date" name="bday" id="expectedDateOfJoining" [min]="mindate" required="" [(ngModel)]="ScheduleInterView.InterviewDate" />
                                         </div>
                                     </div>
                                 </div>

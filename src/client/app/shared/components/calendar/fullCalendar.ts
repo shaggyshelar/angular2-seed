@@ -180,13 +180,13 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
                     'movingEvent': movingEvent,
              });
             },
-            eventClick: (calEvent: any, jsEvent: any, view: any) => {
-                this.onEventClick.emit({
-                    'calEvent': calEvent,
-                    'jsEvent': jsEvent,
-                    'view': view
-                });
-            },
+            // eventClick: (calEvent: any, jsEvent: any, view: any) => {
+            //     this.onEventClick.emit({
+            //         'calEvent': calEvent,
+            //         'jsEvent': jsEvent,
+            //         'view': view
+            //     });
+            // },
             select: (start: any, end: any, jsEvent: any, view: any, resource: any) => {
                 this.onSelect.emit({
                     'start': start,

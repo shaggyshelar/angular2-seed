@@ -20,18 +20,19 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
 
     meta: CalenderSlot[] = [];
     errorMessage: string = '';
-
+    mindate: Date;
 
     constructor(private _router: Router,
         private _interviewSlotService: InterviewSlotService,
         public toastr: ToastsManager) {
         // this.getRRFSlot();
         //this.HideSlot.emit('hideit');
-
-         this.getRRFSlot();
+        this.setMinDateToCalender();
+        this.getRRFSlot();
     }
 
     routerOnActivate() {
+        
         //console.write();
         if (this.meta.length === 0) {
             this.addNewSlot();
@@ -157,6 +158,10 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
             }
         }
         return true;
+    }
+    setMinDateToCalender() {
+        var todayDate = new Date();
+        this.mindate = (<any>this.formatDate(todayDate));
     }
 
 }

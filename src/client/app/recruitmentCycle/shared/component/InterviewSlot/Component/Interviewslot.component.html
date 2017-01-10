@@ -34,12 +34,12 @@
                             </td>
                             <td>
                                 <div>
-                                    <input type="date" required='' [(ngModel)]='slot.StartDate' [disabled]="slot.ID != undefined" tooltip="Start Date" tooltipPlacement="top"
+                                    <input type="date" [min]="mindate" required='' [(ngModel)]='slot.StartDate' [disabled]="slot.ID != undefined" tooltip="Start Date" tooltipPlacement="top"
                                     tooltipTrigger="mouseenter" tooltipEnable="!slot.StartDate" />
                                 </div>
 
                                 <div>
-                                    <input type="date" required='' [(ngModel)]='slot.EndDate' [disabled]="slot.ID != undefined" tooltip="End Date" tooltipPlacement="top"
+                                    <input type="date" [min]="mindate" required='' [(ngModel)]='slot.EndDate' [disabled]="slot.ID != undefined" tooltip="End Date" tooltipPlacement="top"
                                     tooltipTrigger="mouseenter" tooltipEnable="!slot.EndDate" />
                                 </div>
                             </td>

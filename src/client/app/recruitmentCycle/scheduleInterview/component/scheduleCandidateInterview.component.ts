@@ -69,6 +69,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     isInterviewReschedule: boolean = false;
     NominatedInterviewersAvailable: boolean = false;
     currentDate: string;
+    mindate: Date;
 
     constructor(private _router: Router,
         private _calendarDataService: CalendarDataService,
@@ -112,6 +113,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.isRejectedCandidate = this.ifInvalidInterview = true;
         }
 
+        this.setMinDateToCalender();
         this.getResources();
         //Get All Interviewers     
         this.getOtherInterviewers();
@@ -506,7 +508,10 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             m = '' + d.getMinutes();
         return [h, m].join(':');
     }
-
+    setMinDateToCalender() {
+        var todayDate = new Date();
+        this.mindate = (<any>this.formatDate(todayDate));
+    }
     /**Check For Valid And Invalid Slots while scheduling interview */
     checkAvailability() {
         this.isAvailableSlot = this.isBookedSlot = this.showConfirmation = false;
