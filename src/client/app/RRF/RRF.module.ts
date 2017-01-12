@@ -15,13 +15,14 @@ import { InterviewApprovalComponent } from '../recruitmentCycle/index';
     declarations: [
         InterviewApprovalComponent
         //RRFGridRowComponent
-        // , FeedbackDataComponent
+        , FeedbackDataComponent
         // , PanelsAvailablityComponent
         // , ViewRRFComponent
     ],
     exports: [
         //RRFGridRowComponent
-        // , FeedbackDataComponent
+        //,
+        FeedbackDataComponent
         // , PanelsAvailablityComponent
     ],
     providers: [MastersService, ToastsManager]

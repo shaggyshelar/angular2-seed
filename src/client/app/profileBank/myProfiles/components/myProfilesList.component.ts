@@ -270,8 +270,8 @@ export class MyProfilesListComponent implements OnInit {
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
-        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
-        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+        sessionStorage.setItem('onReturnPath', '/ProfileBank/MyProfiles');
+        this._router.navigate(['/MyProfiles/History']);
     }
     /**Modified for uploading photo 
      * Replacing with

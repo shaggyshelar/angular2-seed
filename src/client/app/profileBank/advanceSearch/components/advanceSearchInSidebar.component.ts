@@ -1,32 +1,34 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
-import { AdvancedSearch, OtherDetails, Qualification, CandidateMaster, SalaryDetails, AllCandidateProfiles, CareerProfile, Skills } from '../../shared/model/advancedSearchInfo';
+import { Component, OnInit } from '@angular/core';
+//import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment } from '@angular/router';
+import {
+    AdvancedSearch, OtherDetails, Qualification, CandidateMaster, SalaryDetails, AllCandidateProfiles, CareerProfile, Skills
+} from '../../shared/model/advancedSearchInfo';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+//import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
-import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import { APIResult } from '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 //import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-list',
     templateUrl: 'advanceSearchInSidebar.component.html',
-    directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
+    //directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective],
     styleUrls: ['../../myProfiles/components/myProfiles.component.css'],
-    pipes: [ProfileBankPipe],
+    //pipes: [ProfileBankPipe],
     providers: [AdvanceSearchService, ProfileBankService, MastersService, ToastsManager]
 })
 
-export class AdvanceSearchInSidebarComponent implements OnActivate {
+export class AdvanceSearchInSidebarComponent implements OnInit {
     candidateAdvancedSearch: AdvancedSearch;
     candidateGrdOperations: GrdOptions = new GrdOptions();
     AdvanceSearchList: AllCandidateProfiles = new AllCandidateProfiles();
@@ -42,13 +44,13 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
     errorMessage: string = '';
     visaTypes = ['H1', 'L1'];
     CurrentType = [{ id: 'Yes', value: 'Current Employer' },
-        { id: 'No', value: 'Previous Employer' },
-        { id: 'Both', value: 'Current / Previous Employer' }];
+    { id: 'No', value: 'Previous Employer' },
+    { id: 'Both', value: 'Current / Previous Employer' }];
     NORECORDSFOUND: boolean = false;
     RECORDSFOUND: boolean = false;
     constructor(private _advanceSearchService: AdvanceSearchService,
         private http: Http,
-        private _router: Router,
+        //private _router: Router,
         private _profileBankService: ProfileBankService,
         public toastr: ToastsManager,
         private _masterService: MastersService) {
@@ -64,7 +66,7 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         this.candidateGrdOperations.PreviousButton = false;
     }
 
-    routerOnActivate(segment: RouteSegment) {
+    ngOnInit() {
         $('#cmbSkills').select2();
         $('#cmbLocation').select2();
         $('#cmbComponies').select2();
@@ -109,7 +111,8 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         if (SkillValue !== null) {
             for (var index = 0; index < SkillValue.length; index++) {
                 if (this.candidateAdvancedSearch.CandidateSkillsDetails.Skills !== undefined) {
-                    this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = this.candidateAdvancedSearch.CandidateSkillsDetails.Skills + ',' + SkillValue[index];
+                    this.candidateAdvancedSearch.CandidateSkillsDetails.Skills
+                        = this.candidateAdvancedSearch.CandidateSkillsDetails.Skills + ',' + SkillValue[index];
                 }
                 if (this.candidateAdvancedSearch.CandidateSkillsDetails.Skills === undefined)
                     this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = SkillValue[index];
@@ -118,7 +121,8 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         if (LoationValue !== null) {
             for (var index = 0; index < LoationValue.length; index++) {
                 if (this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation !== undefined) {
-                    this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation + ',' + LoationValue[index];
+                    this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation
+                        = this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation + ',' + LoationValue[index];
                 }
                 if (this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation === undefined)
                     this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = LoationValue[index];
@@ -127,7 +131,8 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         if (ComponyValue !== null) {
             for (var index = 0; index < ComponyValue.length; index++) {
                 if (this.candidateAdvancedSearch.CandidateCareerDetails.Company !== undefined) {
-                    this.candidateAdvancedSearch.CandidateCareerDetails.Company = this.candidateAdvancedSearch.CandidateCareerDetails.Company + ',' + ComponyValue[index];
+                    this.candidateAdvancedSearch.CandidateCareerDetails.Company
+                        = this.candidateAdvancedSearch.CandidateCareerDetails.Company + ',' + ComponyValue[index];
                 }
                 if (this.candidateAdvancedSearch.CandidateCareerDetails.Company === undefined)
                     this.candidateAdvancedSearch.CandidateCareerDetails.Company = ComponyValue[index];
@@ -140,8 +145,7 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
                     this.AdvanceSearchList = <any>results;
                     this.RECORDSFOUND = true;
                     this.NORECORDSFOUND = false;
-                }
-                else {
+                } else {
                     this.NORECORDSFOUND = true;
                     this.RECORDSFOUND = true;
                 }

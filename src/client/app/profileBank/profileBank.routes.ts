@@ -33,10 +33,10 @@ export const ProfileBankRoutes: Route[] = [
     { path: 'ProfileBank', component: MyProfilesListComponent },
     /**My Profiles */
     { path: 'ProfileBank/MyProfiles', component: MyProfilesListComponent },
-    // { path: 'MyProfiles/Edit/:id', component: MyProfilesAddComponent },
-    // { path: 'MyProfiles/View/:id', component: MyProfilesViewComponent },
-    // { path: 'MyProfiles/Assign', component: ProfileBankAssignRRFComponent },
-    // { path: 'MyProfiles/History', component: ProfileEsplHistoryListComponent },
+    { path: 'MyProfiles/Edit/:id', component: MyProfilesAddComponent },
+    { path: 'MyProfiles/View/:id', component: MyProfilesViewComponent },
+    { path: 'MyProfiles/Assign', component: ProfileBankAssignRRFComponent },
+    { path: 'MyProfiles/History', component: ProfileEsplHistoryListComponent },
 
     // /**All Profiles */
     //{ path: 'AllProfiles', component: AllProfilesListComponent },
@@ -46,22 +46,22 @@ export const ProfileBankRoutes: Route[] = [
     // { path: 'ProfileBank/History', component: ProfileEsplHistoryListComponent },
 
     // /**Blacklisted Profiles */
-    { path: 'BlackListedProfiles', component: BlackListedProfilesListComponent },
-    // { path: '/Edit/:id', component: BlackListedProfilesAddComponent },
-    // { path: '/View/:id', component: BlackListedProfilesViewComponent },
-    // { path: '/History', component: ProfileEsplHistoryListComponent },
+    { path: 'ProfileBank/BlackListedProfiles', component: BlackListedProfilesListComponent },
+    { path: 'BlackListedProfiles/Edit/:id', component: BlackListedProfilesAddComponent },
+    { path: 'BlackListedProfiles/View/:id', component: BlackListedProfilesViewComponent },
+    { path: 'BlackListedProfiles/History', component: ProfileEsplHistoryListComponent },
 
     // /**Company Profiles */
-    { path: 'CompanyProfiles', component: CompanyProfilesListComponent },
-    // { path: '/Edit/:id', component: CompanyProfilesAddComponent },
-    // { path: '/View/:id', component: CompanyProfilesViewComponent },
-    // { path: '/Transfer', component: TransferOwnershipComponent },
-    // { path: '/Assign', component: ProfileBankAssignRRFComponent },
-    //{ path: 'History', component: ProfileEsplHistoryListComponent },
+    { path: 'ProfileBank/CompanyProfiles', component: CompanyProfilesListComponent },
+    { path: 'CompanyProfiles/Edit/:id', component: CompanyProfilesAddComponent },
+    { path: 'CompanyProfiles/View/:id', component: CompanyProfilesViewComponent },
+    //{ path: 'CompanyProfiles/Transfer', component: TransferOwnershipComponent },
+    { path: 'CompanyProfiles/Assign', component: ProfileBankAssignRRFComponent },
+    { path: 'CompanyProfiles/History', component: ProfileEsplHistoryListComponent },
 
     // /**Incomplete Profiles */
-     { path: 'IncompleteProfiles', component: IncompleteProfilesListComponent },
-    // { path: '/Edit/:id', component: MyProfilesAddComponent },
+    { path: 'ProfileBank/IncompleteProfiles', component: IncompleteProfilesListComponent },
+    { path: 'IncompleteProfiles/Edit/:id', component: MyProfilesAddComponent },
 
     // /**Profiles Espl Histoy */
     // /**NA */

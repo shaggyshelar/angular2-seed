@@ -46,7 +46,7 @@ import {
 } from './shared/index';
 import { ViewRRFComponent } from '../RRF/shared/index';
 
-import { RRFGridRowComponent } from '../RRF/index';
+import { RRFGridRowComponent, FeedbackDataComponent } from '../RRF/index';
 
 
 @NgModule({
@@ -75,6 +75,8 @@ import { RRFGridRowComponent } from '../RRF/index';
     , RecentProfilesAddComponent
     , RecentProfilesListComponent
     , RecentProfilesViewComponent
+    , ViewRRFComponent
+    , FeedbackDataComponent
     , IEFGridRowComponent
   ],
   exports: [
