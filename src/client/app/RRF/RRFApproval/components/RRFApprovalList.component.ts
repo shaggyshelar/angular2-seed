@@ -50,8 +50,6 @@ export class RRFApprovalListComponent implements OnActivate {
                 if (results.RRFs !== undefined && results.RRFs.length > 0) {
                     this.grdOptions = (<any>(results)).GrdOperations;
                     this.rrfApprovalList = (<any>(results)).RRFs;
-                    //this.rrfApprovalList = <any>results;
-
                     for (var index = 0; index < this.rrfApprovalList.length; index++) {
                         // this.rrfApprovalList[index].Status = {'Id' :1 ,'Value' :'PendingApproval'}; //TODO : get it from API
                         this.rrfApprovalList[index].IsChecked = false;

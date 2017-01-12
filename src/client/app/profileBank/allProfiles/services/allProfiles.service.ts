@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { MasterData, GrdOptions } from  '../../../shared/model/index';
-//import { TransferOwnershipMeta} from '../../shared/model/myProfilesInfo';
-//import { GridOperations} from '../../shared/model/myProfilesInfo';
+import { GrdOptions } from  '../../../shared/model/index';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -24,7 +22,6 @@ export class AllProfilesService {
     }
     getIncompleteProfiles(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfilesByRoles');
-        // let url = Config.GetURL('/api/ProfileBank/GetInCompleteProfiles');
         this._spinnerService.show();
         return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)
@@ -33,9 +30,6 @@ export class AllProfilesService {
     }
 
     getOpenProfiles(grdOptions: GrdOptions) {
-        ///api/ProfileBank/GetOpenProfiles1?PerPageCount=3&ButtonClicked=-1&IDs=90,106,109
-        // let url = Config.GetURL('/api/ProfileBank/GetOpenProfiles1?PerPageCount='+grdOptions.PerPageCount+
-        //         '&ButtonClicked='+grdOptions.ButtonClicked+'&IDs='+grdOptions.IDColl);
         let url = Config.GetURL('/api/ProfileBankPaging/GetOpenProfiles');
         this._spinnerService.show();
         return this.authHttp.post(url, { grdOptions })

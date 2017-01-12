@@ -31,15 +31,6 @@ export class ScheduleInterviewService {
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
-        // let interviewers: Array<MasterData> = [{
-        //     "Id": 11,
-        //     "Value": "Rohit Sevaramani"
-        // },
-        //     {
-        //         "Id": 2,
-        //         "Value": "Bharati Shinde"
-        //     }];
-        // return interviewers;
 
     }
 

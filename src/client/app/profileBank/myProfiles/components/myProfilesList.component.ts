@@ -1,6 +1,12 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile, MailDetails } from '../../shared/model/myProfilesInfo';
+import {
+    CandidateProfile,
+    ResumeMeta,
+    AddCandidateResponse,
+    AllCandidateProfiles,
+    CareerProfile,
+    MailDetails } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
@@ -9,7 +15,6 @@ import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
-//import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
@@ -131,10 +136,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
-
         var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
-        // this.profile.Comments = this.allProfilesList[index].Comments;
-        // this.profile.Status = this.allProfilesList[index].Status;
         this.currentCandidate = this.myProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
             .subscribe(
@@ -156,10 +158,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
     onUpdateStatusClick(id: MasterData) {
         this.seletedCandidateID = id;
-
         var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateID });
-        // this.profile.Comments = this.allProfilesList[index].Comments;
-        // this.profile.Status = this.allProfilesList[index].Status;
         this.getUpdateStatus(this.seletedCandidateID.Value);
         this.currentCandidate = this.myProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
@@ -253,9 +252,6 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 setTimeout(() => { this.getMyProfiles(); }, 1000);
                 this.toastr.success((<ResponseFromAPI>results).Message);
-                // this.profile.Comments = results.Comments;
-                // this.profile.Status = results.Status;
-
             },
             error => this.toastr.error(<any>error));
         this.onClearSelection(this.CandidateID);
@@ -266,51 +262,6 @@ export class MyProfilesListComponent implements OnActivate {
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
     }
-    /**Modified for uploading photo 
-     * Replacing with
-     * 
-     * TODO:: Arati :: Delete after confirmation.
-     * */
-    // onSave(): void {
-    //     if (this.chkValidations()) {
-    //         if (this.fileName === '' || this.fileName === undefined) {
-    //             this._myProfilesService.addCandidateProfile(this.profile)
-    //                 .subscribe(
-    //                 results => {
-    //                     if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-    //                         this.myProfilesList.GrdOperations = new GrdOptions();
-    //                         this.getMyProfiles();
-    //                         this.toastr.success((<ResponseFromAPI>results).Message);
-    //                     } else {
-    //                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
-    //                     }
-    //                     this.profile = new CandidateProfile();
-    //                 },
-    //                 error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage) });
-    //         } else {
-
-    //             //If File is Uploaded then After Adding Candidate Call API to Upload File
-    //             this._myProfilesService.addCandidateProfile(this.profile)
-    //                 .subscribe(
-    //                 results => {
-    //                     if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
-    //                         this.uploadResume((<AddCandidateResponse>results).CandidateID, this.psdTemplates[0]);
-    //                         this.postProfilePhoto((<AddCandidateResponse>results).CandidateID, this.uploadedPhoto[0]);
-
-    //                     } else {
-    //                         this.toastr.error((<ResponseFromAPI>results).Message);
-    //                     }
-    //                     this.profile = new CandidateProfile();
-    //                 },
-    //                 error => {
-    //                     this.errorMessage = <any>error; this.toastr.error(this.errorMessage)
-    //                 });
-    //         }
-    //     } else {
-    //         this.toastr.error('Please enter one of field : PassportNumber / PANNumber /AadhaarCardNo');
-    //     }
-
-    // }
 
     /**Funtion to Quick Add candidate */
     OnSubmitCandidate(): void {
@@ -340,18 +291,7 @@ export class MyProfilesListComponent implements OnActivate {
             },
             error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage); });
     }
-    /** Validations are removed as per requirement introducing "Incomplete Profiles"
-     * 
-     chkValidations(): boolean {
-        if ((this.profile.PassportNumber !== undefined && this.profile.PassportNumber !== '') ||
-            (this.profile.PANNumber !== undefined && this.profile.PANNumber !== '') ||
-            (this.profile.AadharCardNo !== undefined && this.profile.AadharCardNo !== '')) {
-            return true;
-        } else { return false; }
-    } */
-    /** This function sends file to service to upload in library/DB
-     * after click on save buttong or Form submission
-    */
+
     uploadResume(CandidateLookupId: MasterData, File: any) {
         this.resumeMeta.CandidateID = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
@@ -362,7 +302,6 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.fileUploaded = false;
                     this.fileName = '';
-                    // this.myProfilesList.GrdOperations = new GrdOptions();
                     setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
@@ -528,9 +467,9 @@ export class MyProfilesListComponent implements OnActivate {
         try {
             let FileList: FileList = selectedFile.target.files;
             if (selectedFile.target.files[0].size < 2000000) {
-                if (selectedFile.target.files[0].type === "image/jpeg"
-                    || selectedFile.target.files[0].type === "image/png"
-                    || selectedFile.target.files[0].type === "image/jpg") {
+                if (selectedFile.target.files[0].type === 'image/jpeg'
+                    || selectedFile.target.files[0].type === 'image/png'
+                    || selectedFile.target.files[0].type === 'image/jpg') {
                     if (this.uploadedPhoto)
                         this.uploadedPhoto.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
@@ -538,12 +477,10 @@ export class MyProfilesListComponent implements OnActivate {
                         this.photoUploaded = true;
                         this.photoName = FileList.item(i).name;
                     }
-                }
-                else {
+                }else {
                     this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
                 }
-            }
-            else {
+            }else {
                 this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
@@ -600,19 +537,19 @@ export class MyProfilesListComponent implements OnActivate {
         try {
             let FileList: FileList = inputValue.target.files;
             if (inputValue.target.files[0].size < 2000000) {
-                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                if (inputValue.target.files[0].type === 'application/pdf'
+                || inputValue.target.files[0].name.split('.')[1] === 'docx' ||
+                inputValue.target.files[0].name.split('.')[1] === 'doc') {
                     this.psdTemplates.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.psdTemplates.push(FileList.item(i));
                         this.fileUploaded = true;
                         this.fileName = FileList.item(i).name;
                     }
-                }
-                else {
+                }else {
                     this.toastr.error('Please upload document of type .doc, .docx, .pdf');
                 }
-            }
-            else {
+            }else {
                 this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
@@ -625,7 +562,9 @@ export class MyProfilesListComponent implements OnActivate {
         try {
             let FileList: FileList = inputValue.target.files;
             if (inputValue.target.files[0].size < 2000000) {
-                if (inputValue.target.files[0].type === "application/pdf" || inputValue.target.files[0].name.split('.')[1] === "docx" || inputValue.target.files[0].name.split('.')[1] === "doc") {
+                if (inputValue.target.files[0].type === 'application/pdf' ||
+                inputValue.target.files[0].name.split('.')[1] === 'docx' ||
+                inputValue.target.files[0].name.split('.')[1] === 'doc') {
                     this.resumeFiles.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.resumeFiles.push(FileList.item(i));
@@ -680,8 +619,6 @@ export class MyProfilesListComponent implements OnActivate {
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
-
-                // || this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'rejected'  //Do not allow to assign RRF to Rejected candidate
                 if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
                     if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
                         //Add to selectedCandidates array
@@ -735,7 +672,6 @@ export class MyProfilesListComponent implements OnActivate {
                 this.selectedCandidates = new Array<CandidateProfile>();
             } else {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-                //sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule/New');
                 sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
                 sessionStorage.setItem('returnPathToSchedule', '/App/Recruitment Cycle/Schedule/New');
                 this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
@@ -781,12 +717,9 @@ export class MyProfilesListComponent implements OnActivate {
                     if (results.length > 0) {
                         this.myProfilesList.GrdOperations = new GrdOptions();
                         this.myProfilesList.Profiles = <any>results;
-                        // this.AllCandidatesForRRF = results;
-                        //this.CheckInterviewStatus(results);
                         this.NORECORDSFOUND = false;;
                     } else {
                         //If No data present
-                        //this.isNull = true;
                         this.NORECORDSFOUND = true;
                     }
                 },
@@ -795,13 +728,10 @@ export class MyProfilesListComponent implements OnActivate {
 
     }
     showRRFDetails(rrfId: string) {
-        //this.getRRFDetails(rrfId);
         this.rrfObj = { Id: 0, Value: rrfId };
         this.viewRRFDetails = this.rrfObj;
         this.isViewRFF = true;
         this.isViewRRFGrid = false;
-        //this.isListVisible = false;
-        //this.isChartVisible = false;
     }
     showListOfRRF() {
         this.isViewRFF = false;

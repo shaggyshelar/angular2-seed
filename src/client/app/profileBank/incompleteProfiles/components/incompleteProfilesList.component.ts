@@ -7,7 +7,7 @@ import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
-import { MasterData, GrdOptions, ResponseFromAPI, SortingMasterData } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI, SortingMasterData } from  '../../../shared/model/index';
 import { DataSharedService } from '../../shared/services/dataShared.service';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
@@ -73,7 +73,6 @@ export class IncompleteProfilesListComponent implements OnActivate {
     /** START Pagination and sorting functionality */
 
     setPaginationValues() {
-        //this.CandidateProfiles.GrdOperations.
         this.CandidateProfiles.GrdOperations.ButtonClicked = 0;
         this.CandidateProfiles.GrdOperations.PerPageCount = 3;
     }

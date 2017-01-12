@@ -1,5 +1,4 @@
  import { MasterData } from  '../../../shared/model/index';
-// import { CandidateProfile } from  '../../../ProfileBank/shared/model/myProfilesInfo';
 
 export class CalendarDetails {
     public Events: Array<Event> = new Array<Event>();

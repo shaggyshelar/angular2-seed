@@ -39,7 +39,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         this.returnPath = sessionStorage.getItem('onReturnPath');
     }
     ngOnInit() {
-        var intrviewStatus: string = sessionStorage.getItem('InterviewStatus')
+        var intrviewStatus: string = sessionStorage.getItem('InterviewStatus');
         if (intrviewStatus.toLowerCase() === 'on hold') {
             this.getIEFPreviousData(this.requestedIef.InterviewID);
             this.isChangeStatusReq = true;

@@ -69,7 +69,6 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     setPaginationValues() {
-        //this.CandidateProfiles.GrdOperations.
         this.blacklistedProfilesList.GrdOperations.ButtonClicked = 0;
         this.blacklistedProfilesList.GrdOperations.PerPageCount = 50;
     }
@@ -80,7 +79,6 @@ export class BlackListedProfilesListComponent implements OnActivate {
             (results: AllCandidateProfiles) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.blacklistedProfilesList = results;
-                    //this.CandidateProfiles = results;
                 } else { this.NORECORDSFOUND = true; }
             },
             error => {
@@ -98,12 +96,9 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
     redirectToView(CandidateID: MasterData) {
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
-        //this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 
     SaveCandidateID(id: MasterData) {
-        //this.seletedCandidateID = id;
-
         var index = _.findIndex(this.blacklistedProfilesList.Profiles, { CandidateID: id });
         this.seletedCandidateID = this.blacklistedProfilesList.Profiles[index].CandidateID;
 
@@ -138,9 +133,6 @@ export class BlackListedProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        //if (this.selectedStatus.Id === undefined)
-            //this.selectedStatus = this.profile.Status;
-
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             results => {

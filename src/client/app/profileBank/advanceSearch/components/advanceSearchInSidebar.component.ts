@@ -1,17 +1,22 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
-import { AdvancedSearch, OtherDetails, Qualification, CandidateMaster, SalaryDetails, AllCandidateProfiles, CareerProfile, Skills } from '../../shared/model/advancedSearchInfo';
+import {
+    AdvancedSearch,
+    OtherDetails,
+    Qualification,
+    CandidateMaster,
+    SalaryDetails,
+    AllCandidateProfiles,
+    CareerProfile,
+    Skills } from '../../shared/model/advancedSearchInfo';
 import { AdvanceSearchService } from '../services/advanceSearch.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, GrdOptions,} from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
-//import {MyProfilesFilterPipe} from './myProfiles.component.pipe';
-import { Headers, Http } from '@angular/http';
-import { Candidate } from '../../shared/model/RRF';
+import { Http } from '@angular/http';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
@@ -109,7 +114,8 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         if (SkillValue !== null) {
             for (var index = 0; index < SkillValue.length; index++) {
                 if (this.candidateAdvancedSearch.CandidateSkillsDetails.Skills !== undefined) {
-                    this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = this.candidateAdvancedSearch.CandidateSkillsDetails.Skills + ',' + SkillValue[index];
+                    this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = this.candidateAdvancedSearch.CandidateSkillsDetails.Skills
+                    + ',' + SkillValue[index];
                 }
                 if (this.candidateAdvancedSearch.CandidateSkillsDetails.Skills === undefined)
                     this.candidateAdvancedSearch.CandidateSkillsDetails.Skills = SkillValue[index];
@@ -118,7 +124,8 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         if (LoationValue !== null) {
             for (var index = 0; index < LoationValue.length; index++) {
                 if (this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation !== undefined) {
-                    this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation + ',' + LoationValue[index];
+                    this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation
+                    + ',' + LoationValue[index];
                 }
                 if (this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation === undefined)
                     this.candidateAdvancedSearch.CandidateMasterDetails.CurrentLocation = LoationValue[index];
@@ -127,7 +134,8 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
         if (ComponyValue !== null) {
             for (var index = 0; index < ComponyValue.length; index++) {
                 if (this.candidateAdvancedSearch.CandidateCareerDetails.Company !== undefined) {
-                    this.candidateAdvancedSearch.CandidateCareerDetails.Company = this.candidateAdvancedSearch.CandidateCareerDetails.Company + ',' + ComponyValue[index];
+                    this.candidateAdvancedSearch.CandidateCareerDetails.Company = this.candidateAdvancedSearch.CandidateCareerDetails.Company
+                    + ',' + ComponyValue[index];
                 }
                 if (this.candidateAdvancedSearch.CandidateCareerDetails.Company === undefined)
                     this.candidateAdvancedSearch.CandidateCareerDetails.Company = ComponyValue[index];
@@ -140,8 +148,7 @@ export class AdvanceSearchInSidebarComponent implements OnActivate {
                     this.AdvanceSearchList = <any>results;
                     this.RECORDSFOUND = true;
                     this.NORECORDSFOUND = false;
-                }
-                else {
+                }else {
                     this.NORECORDSFOUND = true;
                     this.RECORDSFOUND = true;
                 }

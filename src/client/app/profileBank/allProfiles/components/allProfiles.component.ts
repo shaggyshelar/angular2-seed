@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { AllProfilesListComponent } from './allProfilesList.component';
 import {MyProfilesAddComponent} from '../../myProfiles/components/myProfilesAdd.component';
-//import { AllProfilesAddComponent } from './allProfilesAdd.component';
 import { MyProfilesService } from '../../myProfiles/services/myProfiles.service';
 import { AllProfilesService } from '../services/allProfiles.service';
 import {AllProfilesViewComponent} from './allProfilesView.component';

@@ -5,7 +5,7 @@ import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFPriority, RRFStatus, RaiseRRFStatus } from  '../../../shared/constantValue/index';
+import { APIResult, RRFStatus, RaiseRRFStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
@@ -35,7 +35,7 @@ export class MyRRFAddComponent implements OnActivate {
     skills: MasterData[];
     interviewRound: MasterData[];
     interviewers: MasterData[];
-    isNewRRF: boolean = true; //TODO
+    isNewRRF: boolean = true;
     comment: string;
     IntwRound: number = 0;
     priorities: MasterData[];
@@ -60,7 +60,6 @@ export class MyRRFAddComponent implements OnActivate {
         private _mastersService: MastersService,
         public toastr: ToastsManager) {
         // this.newRRF.Panel.push(this.panel);
-
     }
 
     routerOnActivate(segment: RouteSegment): void {
@@ -84,7 +83,6 @@ export class MyRRFAddComponent implements OnActivate {
                 this.RRFStatus = parseInt(temp.split('ST')[1]);
 
             }
-            //this.RRFId = segment.getParam('id');
             this.isNewRRF = false;
             if (+this.RRFStatus === +RRFStatus.Rejected) {
                 this.GetRRFByIDToReRaiseRRF(this.RRFId);
@@ -104,18 +102,13 @@ export class MyRRFAddComponent implements OnActivate {
 
         if (this.isNewRRF) {
             this.newRRF.NoOfOpenings = 1;
-
             this.newRRF.MinExp = 0;
             this.newRRF.MaxExp = 0;
-
             this.newRRF.Practice.Id = 0;
             this.newRRF.Technology.Id = 0;
-            //this.newRRF.SkillsRequired.Id = 0;
             this.newRRF.Priority.Id = 0;
             this.newRRF.Designation.Id = 0;
-           // $('#cmbInterviewer').val = ['0'];
-
-            this.currentRaiseRRFStatus = RaiseRRFStatus.newRRF; //New RRF
+            this.currentRaiseRRFStatus = RaiseRRFStatus.newRRF;
         }
 
         this.getDesignation();
@@ -134,15 +127,15 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     validateForm(): boolean {
-        if (this.newRRF.Panel.length == 0) {
+        if (this.newRRF.Panel.length === 0) {
             this.toastr.error('Please select interview panel Details');
             return false;
         }
-        if (this.newRRF.SkillsRequired.length == 0) {
+        if (this.newRRF.SkillsRequired.length === 0) {
             this.toastr.error('Please select Required skills');
             return false;
         }
-        return true;;
+        return true;
     }
 
     raiseRRF(): void {
@@ -217,7 +210,6 @@ export class MyRRFAddComponent implements OnActivate {
             if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
                 this._router.navigate(['/App/RRF/FeedbackPending/']);
             } else {
-                //this._router.navigate(['/App/RRF/RRFDashboard/']);
                 this._router.navigate([this.navagateBackPath]);
             }
         }
@@ -303,9 +295,7 @@ export class MyRRFAddComponent implements OnActivate {
                 return;
             }
         }
-
         var panel: Panel = new Panel();
-        //panel.Comments = this.comment; //As per request from Backend
         panel.RoundNumber = this.getStringValue(this.IntwRound, this.interviewRound);
         let Interviewercmb:any = $('#cmbInterviewer');
         if (Interviewercmb.val() !== null) {
@@ -391,7 +381,7 @@ export class MyRRFAddComponent implements OnActivate {
                 this.newRRF = results;
                 this.ExpDateOfJoining = this.formatDate(results.ExpDateOfJoining);
                 this.newRRF.ExpDateOfJoining = this.ExpDateOfJoining;
-                this.previousExpectedDateValue = this.ExpDateOfJoining; ////Need in case of feedback
+                this.previousExpectedDateValue = this.ExpDateOfJoining;
                 this.setSkillDropdown();
             },
             error => this.errorMessage = <any>error);
@@ -404,29 +394,18 @@ export class MyRRFAddComponent implements OnActivate {
                 this.newRRF = results;
                 this.ExpDateOfJoining = this.formatDate(results.ExpDateOfJoining);
                 this.newRRF.ExpDateOfJoining = this.ExpDateOfJoining;
-                this.previousExpectedDateValue = this.ExpDateOfJoining; //Need in case of feedback
+                this.previousExpectedDateValue = this.ExpDateOfJoining;
                 this.setSkillDropdown();
             },
             error => this.errorMessage = <any>error);
     }
 
     setSkillDropdown() {
-        // var panelId: string[] = new Array();
-        // for (var index = 0; index < this.newRRF.SkillsRequired.length; index++) {
-        //     panelId.push((this.newRRF.SkillsRequired[index].Id).toString());
-        // }
-        // $('#cmbSkillsReq').select2('val', panelId);
+        //empty blolck
     }
 
     setSkillToObject() {
-
-        // if ($('#cmbSkillsReq').val() !== null) {
-        //     var selectedSkill: number[] = $('#cmbSkillsReq').val();
-        // }
-        // this.newRRF.SkillsRequired = new Array();
-        // for (var j = 0; j < selectedSkill.length; j++) {
-        //     this.newRRF.SkillsRequired.push(this.getStringValue(selectedSkill[j], this.skills));
-        // }
+        //empty blolck
     }
 
     onUpdateClick() {
@@ -489,7 +468,7 @@ export class MyRRFAddComponent implements OnActivate {
         }
 
         //Get all record of above interview type
-        var interviewType: IntwRoundSeqData[] = this.intwRoundSeq.filter(temp => (temp.InterviewType.Id == intType));
+        var interviewType: IntwRoundSeqData[] = this.intwRoundSeq.filter(temp => (temp.InterviewType.Id === intType));
 
         for (var i = 0; i < interviewType.length; i++) {
             if (interviewType[i].Sequence < seq) {

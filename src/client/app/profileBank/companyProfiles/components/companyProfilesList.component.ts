@@ -28,7 +28,6 @@ import { CommonService } from  '../../../shared/index';
 export class CompanyProfilesListComponent implements OnActivate {
     companyProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
-
     profile: CandidateProfile;
     statusList: Array<MasterData>;
     seletedCandidateID: MasterData = new MasterData();
@@ -62,7 +61,6 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getcompanyProfiles();
-        //this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getEmail(EmailCode: any) {
@@ -90,7 +88,6 @@ export class CompanyProfilesListComponent implements OnActivate {
             });
     }
     redirectToView(CandidateID: MasterData) {
-        //this._router.navigate(['/App/ProfileBank/CompanyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
@@ -114,12 +111,8 @@ export class CompanyProfilesListComponent implements OnActivate {
 
     }
     SaveCandidateID(id: MasterData) {
-        //this.seletedCandidateID = id;
-
         var index = _.findIndex(this.companyProfilesList.Profiles, { CandidateID: id });
         this.seletedCandidateID = this.companyProfilesList.Profiles[index].CandidateID;
-        // this.profile.Comments = this.allProfilesList[index].Comments;
-        // this.profile.Status = this.allProfilesList[index].Status;
         this.getUpdateStatus(this.seletedCandidateID.Value);
         this.currentCandidate = this.companyProfilesList.Profiles[index].Candidate;
         this._profileBankService.getStatusById(id.Value)
@@ -135,7 +128,6 @@ export class CompanyProfilesListComponent implements OnActivate {
             this.isCollapsed = !this.isCollapsed;
     }
     getUpdateStatus(candidateID: any) {
-        //TO DO : Update API
         this.statusList = Array<MasterData>();
         this._masterService.getUpdateStatus(candidateID)
             .subscribe(
@@ -157,7 +149,6 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.selectedStatus.Id = parseInt(statusId);
         this.selectedStatus.Value = null;
     }
-
 
     onUpdateStauts() {
         if (this.selectedStatus.Id === undefined)

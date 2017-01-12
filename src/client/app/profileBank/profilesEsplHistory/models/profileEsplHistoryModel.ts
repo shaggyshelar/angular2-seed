@@ -1,6 +1,4 @@
 import { RRFDetails  } from '../../../RRF/myRRF/models/rrfDetails';
-//import {CandidateProfile, AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
-//import { IEFFunction} from '../../../recruitmentCycle/shared/model/ief';
 import { Interview} from '../../../recruitmentCycle/shared/model/interview';
 import { GrdOptions } from  '../../../shared/model/index';
 

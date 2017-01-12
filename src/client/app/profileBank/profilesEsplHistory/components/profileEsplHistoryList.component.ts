@@ -45,7 +45,6 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
         this.profilesHistoryService.getProfilesInterviewHistory(_candidateID)
             .subscribe(
             (results: any) => {
-                //if (results.Profiles !== undefined && results.Profiles.length > 0) {
                 if (results !== undefined && results.length > 0) {
                     this.profileHistoryCollection = <any>results;
                 } else {
@@ -56,25 +55,9 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    // getProfilesAllHistory() {
-    //     try {
-    //         this.profilesHistoryService.getProfilesInterviewHistory(this.allInterviewsHistory.GrdOperations)
-    //             .subscribe(
-    //             (results: any) => {
-    //                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
-    //                     this.allInterviewsHistory = <AllInterviewsHistory>results;
-    //                 } else { this.NORECORDSFOUND = true; }
-    //             },
-    //             error => this.errorMessage = <any>error);
-    //     } catch (error) {
-    //         this.allInterviewsHistory = new AllInterviewsHistory();
-    //     }
-    // }
-
     /**Get data from session */
     getSessionOf<T>(variableName: string, isJson: Boolean): T {
         var _requestedIef = sessionStorage.getItem(variableName);
-        //var response: any;
         if (_requestedIef !== null) {
             var response = isJson ? JSON.parse(_requestedIef) : _requestedIef;
             sessionStorage.setItem(variableName, '');

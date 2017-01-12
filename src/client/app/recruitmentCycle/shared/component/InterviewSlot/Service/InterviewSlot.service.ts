@@ -5,7 +5,6 @@ import { AuthHttp } from '../../../../../shared/services/authHttp.service';
 import { Config } from '../../../../../shared/config/config';
 import { SpinnerService } from '../../../../../shared/components/spinner/spinner';
 import {CalenderSlot} from '../Model/interviewSlot';
-import { MasterData } from '../../../../../shared/model/common.model';
 
 @Injectable()
 
@@ -31,7 +30,7 @@ export class InterviewSlotService {
             .finally(() => this._spinnerService.hide());
     }
 
-    getSlotForRRF(){
+    getSlotForRRF() {
          let url = Config.GetURL('/api/RecruitmentCycle/GetMyInterviewerCalendar'); //api/RecruitmentCycle/GetMyInterviewerCalendar TODO
         this._spinnerService.show();
         return this.authHttp.get(url)

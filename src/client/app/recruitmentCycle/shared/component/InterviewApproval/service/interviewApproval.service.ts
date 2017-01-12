@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../../../shared/services/authHttp.service';
 import { Config } from '../../../../../shared/config/config';
 import { SpinnerService } from '../../../../../shared/components/spinner/spinner';
-import { MasterData, GrdOptions } from '../../../../../shared/model/common.model';
+import { GrdOptions } from '../../../../../shared/model/common.model';
 import { InterviewApproval } from '../model/interviewApproval';
 
 @Injectable()

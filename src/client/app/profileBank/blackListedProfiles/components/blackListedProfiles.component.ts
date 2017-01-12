@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { BlackListedProfilesListComponent } from './blackListedProfilesList.component';
-import { BlackListedProfilesAddComponent } from './blackListedProfilesAdd.component';
 import {MyProfilesAddComponent} from '../../myProfiles/components/myProfilesAdd.component';
 import { BlackListedProfilesService } from '../services/blacklistedProfiles.service';
 import { BlackListedProfilesViewComponent} from './blackListedProfilesView.component';

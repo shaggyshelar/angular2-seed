@@ -14,7 +14,7 @@ export class InterviewDetailsRowComponent implements OnActivate {
   @Input() InterviewRecord: Interview = new Interview();
 
   routerOnActivate() {
-
+      //Empty block
   }
      getTime(time: string) {
         //time:string = interviewTime;
@@ -28,7 +28,7 @@ export class InterviewDetailsRowComponent implements OnActivate {
         }
         return intTime.join('');
     }
-  
+
  //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {
         var d = new Date(date),

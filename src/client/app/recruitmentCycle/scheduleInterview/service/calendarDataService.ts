@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
-import {CalendarDetails} from '../model/calendarDetails';
-import {InterviewersPanel, Interviewers} from '../model/scheduleInterview';
+import { CalendarDetails} from '../model/calendarDetails';
+import { Interviewers} from '../model/scheduleInterview';
 
 @Injectable()
 export class CalendarDataService {
@@ -18,16 +18,6 @@ export class CalendarDataService {
         this.InterviewCalendarDetails.Resources = [{ id: 1, title: 'Available', eventColor: 'green' },
             { id: 2, title: 'Booked', eventColor: 'red' }];
     }
-
-    // getResources1() {
-    //     return [{ id: 1, title: 'InterViewer A', eventColor: this.generateHexColors() },
-    //         { id: 2, title: 'InterViewer B', eventColor: this.generateHexColors() },
-    //         { id: 3, title: 'InterViewer C', eventColor: this.generateHexColors() }];
-    // }
-    // getCalendarEventData() {
-
-    //     return this.Events;
-    // }
 
     SaveEvent(index: number, Event: any) {
         this.Events[index] = Event;
@@ -46,14 +36,12 @@ export class CalendarDataService {
     }
     //Get All InterViewer's All Events Available And Booked Slots 
     GetInterviewerCalendarDetail(Interviewers: Array<Interviewers>) {
-        //TODO : Change URL
         let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetInterviewCalendarByMultipleInterviewers');
         this._spinnerService.show();
         return this.authHttp.post(url, { Interviewers })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
-        //return this.InterviewCalendarDetails;
     }
 
     GetResources() {

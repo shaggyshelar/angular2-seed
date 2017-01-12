@@ -4,7 +4,7 @@ import { Interview} from '../../shared/model/interview';
 import { InterviewersCalendarService} from '../services/interviewers.calendar.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-import { Resource, Event, CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
+import { Resource, CalendarDetails} from '../../scheduleInterview/model/calendarDetails';
 import { InterviewersAvailabilityService} from '../services/interviewers.availability.service';
 import { MasterData} from '../../../shared/model/common.model';
 import { DetailRRF } from '../../shared/model/detailRRF';
@@ -28,28 +28,23 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
     header: any;
     resources: Array<Resource> = new Array<Resource>();
     myAssignedRRF: DetailRRF[] = [];
-
     RRFIdTOShowSlot: MasterData = new MasterData();
     RRFCode: string;
     showSlotForRRF: boolean = false;
-    //selectedRRFID: number = 0;
     AddNewSlotText: string = 'Show Slot';
     _myCalendarDetails: CalendarDetails = new CalendarDetails();
     currentDate: string;
-
 
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersCalendarService,
         private _interviewAvailabilityService: InterviewersAvailabilityService) {
-        // this.getListOfAssignedRRF();
         var date = new Date();
         this.currentDate = this.formatDate(date);
     }
     routerOnActivate() {
         //Get Events to show on Calendar
         this._myCalendarDetails.Resources = this._interviewService.getStaticResources();
-        //this.events = this._interviewService.getCalendarEventData();
         //Pass Headers
         this.header = {
             left: 'prev,next today',
@@ -58,7 +53,6 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
         };
 
         this.returnPath = sessionStorage.getItem('returnPath');
-        // this.getResources();
         this.getMyInterviews();
     }
     Back() {
@@ -70,7 +64,6 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
         this._interviewService.GetResources()
             .subscribe(
             (results: any) => {
-                // this.InterviewAvailabilityInformation = results;
                 this._myCalendarDetails.Resources = results;
             },
             error => {
@@ -85,7 +78,6 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
         this._interviewService.getMyAvailability()
             .subscribe(
             (results: any) => {
-                // this.InterviewAvailabilityInformation = results;
                 this._myCalendarDetails = results;
             },
             error => {
@@ -115,12 +107,6 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
         if (this.showSlotForRRF === false) {
             this.showSlotForRRF = true;
             this.AddNewSlotText = 'Hide Slot';
-            // for (var i = 0; i < this.myAssignedRRF.length; i++) {
-            //     if (this.myAssignedRRF[i].RRFID.Id == this.selectedRRFID) {
-            //         this.RRFIdTOShowSlot = this.myAssignedRRF[i].RRFID;
-            //         break;
-            //     }
-            // }
         } else {
             this.showSlotForRRF = false;
             this.AddNewSlotText = 'Show Slot';
@@ -132,8 +118,6 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
     }
     //Shows Tooltip on calendar
     showDetails(e: any) {
-        var StartTime = e.event.start._i.split('T')[1];
-        var EndTime = e.event.end._i.split('T')[1];
         let element: any = $(e.element);
         element.tooltip({
             title: '' + e.event.title

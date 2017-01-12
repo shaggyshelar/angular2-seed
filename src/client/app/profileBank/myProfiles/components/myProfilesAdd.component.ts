@@ -4,7 +4,6 @@ import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience,
     EmploymentHistory, Skills, SalaryDetails, SocialInformation} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
-//import * as  _ from 'lodash';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -92,10 +91,7 @@ export class MyProfilesAddComponent implements OnActivate {
         };
         //get all master data and bind to dropdown
         this.getCountries();
-        // this.getStates();
-        // this.getDistricts();
         this.getQualifications();
-
         this.getGrades();
         this.getVisaType();
         //get current profile by Id
@@ -491,7 +487,6 @@ export class MyProfilesAddComponent implements OnActivate {
             ? this.CandidateExperiences.FollowUpComments.trim().replace(/ +/g, ' ') : ''
         ) {
             this.profile.CommentsUpdated = this.CandidateExperiences.CommentsUpdated = true;
-            // this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments = this.profile.FollowUpComments.trim();
             this.profile.PreviousFollowupComments = this.CandidateExperiences.FollowUpComments
                 = this.CandidateExperiences.FollowUpComments.trim();
         } else {
@@ -504,7 +499,6 @@ export class MyProfilesAddComponent implements OnActivate {
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
-                        // this.getCandidateProfileById(this.CandidateID.Value);
                         this.GetCandidateExperience(this.CandidateID);
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).Message);
@@ -787,7 +781,6 @@ export class MyProfilesAddComponent implements OnActivate {
     /** END Upload profile photo functionality*/
 
     Back() {
-        // this._router.navigate(['/App/ProfileBank/MyProfiles']);
         let res: any;
         res = confirm(
             'Data will be lost if you leave the page, are you sure?'
@@ -844,7 +837,7 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             this.profile.CandidateTeamManagement.TeamMgmt = false;
         }
-        this.onSaveTeamManagementDetails()
+        this.onSaveTeamManagementDetails();
     }
     onAllowance(isChecked: any) {
         if (isChecked === false) {
@@ -874,8 +867,6 @@ export class MyProfilesAddComponent implements OnActivate {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
-            h = '' + d.getHours(),
-            m = '' + d.getMinutes(),
             year = d.getFullYear();
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
@@ -987,7 +978,6 @@ export class MyProfilesAddComponent implements OnActivate {
                     }
                 } else {
                     this.isExist = false;
-                    //this.onSavePrimaryInfo();
                     this.onSavePersonalDetails();
                 }
 
@@ -1009,7 +999,6 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.profile.Comments = results.Comments;
                 this.profile.Status = results.Status;
                 this._location.back();
-                //this.getMyProfiles();
             },
             error => this.toastr.error(<any>error));
     }

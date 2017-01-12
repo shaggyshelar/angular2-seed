@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-//import { MasterData, GrdOptions } from  '../../../shared/model/index';
 import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
 import { SpinnerService } from '../../shared/components/spinner/spinner';
-import { MasterData, GrdOptions } from  '../../shared/model/index';
+import { GrdOptions } from  '../../shared/model/index';
 
 @Injectable()
 
@@ -134,7 +133,6 @@ export class RecruitersDashboardService {
     }
     /**Get all Offered Candidate list*/
     getOfferedCandidatesList(status: string) {
-        
         let url = Config.GetURL('/api/ProfileBank/GetAllCandidatesByCurrentStatus?status='+status);
         this._spinnerService.show();
         return this.authHttp.get(url)
@@ -172,7 +170,6 @@ export class RecruitersDashboardService {
      /**Get Get Pending RRF Approval by role*/
     getPendingRRFApproval(grdOptions: GrdOptions,status:string) {
         let url = Config.GetURL('/api/RRF/GetMyRaisedRRFWithCurrentStatus');
-        //let url = Config.GetURL('/api/RRF/GetAllRaisedRRF');
         this._spinnerService.show();
         return this.authHttp.post(url, {GrdOptions: {grdOptions} ,status })
             .map(this.extractData)
@@ -190,7 +187,6 @@ export class RecruitersDashboardService {
     }
     /**Get All RRF wise candidate status for Initiator*/
     getRrfStatusForGuage() {
-        //To Do: need to update API
         let url = Config.GetURL('/api/Dashboards/GetRRFwiseCandidateStatusForInitiator');
         this._spinnerService.show();
         return this.authHttp.get(url)
@@ -216,7 +212,7 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    
+
     //Get List of RRF waiting for Freeze or feedback
     getFeedbackPendingRRF(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetFeedbackRRFs');

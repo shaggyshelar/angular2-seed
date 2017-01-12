@@ -41,15 +41,7 @@ export class TransferOwnershipComponent implements OnActivate {
     }
 
     getCandidateIds() {
-        // this.CheckedCandidateIds = this._myProfilesDataSharedService.getCheckedItems();
         this.CheckedCandidateIds = JSON.parse(sessionStorage.getItem('CheckedItemIds'));
-
-        // this._profileBankService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
-        //     .subscribe(
-        //     results => {
-        //         this.candidateProfiles = <any>results;
-        //     },
-        //     error => this.errorMessage = <any>error);
         this._profileBankService.getCandidateOwnwershipInfo(this.CheckedCandidateIds)
             .subscribe(
             (results: TransferOwnershipMeta) => {

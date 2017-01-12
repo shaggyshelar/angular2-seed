@@ -51,7 +51,8 @@ export class RRFCandidateListService {
             .finally(() => this._spinnerService.hide());
     }
     getCandidatesForSelectedRRF(round: any, rrfid: any, status: any) {
-        let url = Config.GetURL('/api/Dashboards/GetCandidatesForSelectedRRFAndInterviewStatus?RRFID=' + rrfid + '&InterviewRound=' + round + '&InterviewStatus=' + status);
+        let url = Config.GetURL('/api/Dashboards/GetCandidatesForSelectedRRFAndInterviewStatus?RRFID='
+        + rrfid + '&InterviewRound=' + round + '&InterviewStatus=' + status);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
         this._spinnerService.show();
         return this.authHttp.get(url)

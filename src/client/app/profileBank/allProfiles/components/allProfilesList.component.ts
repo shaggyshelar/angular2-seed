@@ -13,7 +13,6 @@ import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
 import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
-// import { PanelsAvailablityComponent } from '../../../RRF/shared/index';
 import { CommonService } from  '../../../shared/index';
 @Component({
     moduleId: module.id,
@@ -63,17 +62,14 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
-        //this.setPaginationValues();
         sessionStorage.setItem('backToProfile','/App/ProfileBank/AllProfiles');
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getAllProfiles();
-        // this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
 
     setPaginationValues() {
-        //this.CandidateProfiles.GrdOperations.
         this.CandidateProfiles.GrdOperations.ButtonClicked = 0;
         this.CandidateProfiles.GrdOperations.PerPageCount = 3;
     }
@@ -106,7 +102,6 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     redirectToView(CandidateID: MasterData) {
-        //this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
         //Changed as per Backend Request and Bug 
         //this._router.navigate(['/App/ProfileBank/AllProfiles/View/' + CandidateID.Value]);
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
@@ -212,8 +207,6 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     onUpdateStauts() {
-        //this.selectedStatus.Id = 0;
-        //this.selectedStatus.Value = 'Incomplete';
         this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
             .subscribe(
             (results: ResponseFromAPI) => {
@@ -298,13 +291,10 @@ export class AllProfilesListComponent implements OnActivate {
     transferOwnerShipClick() {
         for (var index = 0; index < this.allProfilesList.Profiles.length; index++) {
             if (this.allProfilesList.Profiles[index].IsChecked) {
-                //if (this.allProfilesList.Profiles[index].Owner ){
                 this.AllCheckedItemIds.push(this.allProfilesList.Profiles[index].CandidateID);
-                //}
             }
         }
         if (this.AllCheckedItemIds.length > 0) {
-            //this._dataSharedService.setCheckedItems(this.AllCheckedItemIds);
             sessionStorage.setItem('CheckedItemIds', JSON.stringify(this.AllCheckedItemIds));
             this._router.navigate(['/App/ProfileBank/AllProfiles/Transfer/']);
         }
@@ -332,16 +322,6 @@ export class AllProfilesListComponent implements OnActivate {
             return false;
         }
 
-    }
-
-    getResume(CandidateID: MasterData) {
-        // this._profileBankService.getResumeById(CandidateID)
-        //     .subscribe(
-        //     (results: any) => {
-        //         this.url = results;
-        //     },
-        //     error => this.toastr.error(<any>error));
-        // this._profileBankService.getResumeById(CandidateID);
     }
 
     OnPaginationClick(ButtonClicked: string) {

@@ -15,7 +15,7 @@ import { ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.compone
 import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
 import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
-import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { CommonService} from '../../../shared/index';
 
 @Component({
@@ -50,7 +50,7 @@ export class RRFDashboardListComponent implements OnActivate {
     viewDetailsRRFId: MasterData = new MasterData();
     doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
-    doughnutChartType: string = 'doughnut'; //doughnut
+    doughnutChartType: string = 'doughnut';
     doughnutChartColors: any[] = [{ backgroundColor: [] }];
     doughnutChartOptions: any = {
         animation: false,
@@ -92,14 +92,10 @@ export class RRFDashboardListComponent implements OnActivate {
 
     getMyRRFData() {
         this.getMyRRF();
-        /**called for Charts which is depricated */
-        //this.getStatuswiseMyRRFCount();
     }
 
     getAllRRFData() {
         this.getAllRRF();
-        /**called for Charts which is depricated */
-        //this.getStatuswiseRRFCount();
     }
 
     getAssignedRRFData() {
@@ -208,7 +204,6 @@ export class RRFDashboardListComponent implements OnActivate {
         this.doughnutChartLabels = [];
         this.doughnutChartData = [];
         var chartColor: any[] = [];
-        // doughnutChartColors: any[] = [{ backgroundColor: ["#E9EF0B", "#32c5d2" , "#e7505a" , "#c2cad8" , "#41ce29"] }];
         this.isChartVisible = false;
         for (var index = 0; index < this.rrfStatusCount.length; index++) {
             this.doughnutChartLabels.push(this.rrfStatusCount[index].Status.Value);
@@ -248,7 +243,6 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     showRRFDetails(rrfId: MasterData) {
-        //this.getRRFDetails(rrfId);
         this.viewDetailsRRFId = rrfId;
         this.isListVisible = false;
         this.isChartVisible = false;
@@ -264,11 +258,8 @@ export class RRFDashboardListComponent implements OnActivate {
             this.getUnAssignedRRFData();
 
         } else {
-            // this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
         }
-
-        // this.viewWiseSetting();
     }
 
     loadListView() {
@@ -356,8 +347,6 @@ export class RRFDashboardListComponent implements OnActivate {
                 this.showListOfRRF();
             },
             error => this.errorMessage = <any>error);
-
-        // this.closeRRFID = 0;
         this.setDefaultcloseRRFID();
         this.closeComment = '';
     }
@@ -368,7 +357,6 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onCancelCloseRRF() {
-        //this.closeRRFID = 0;
         this.setDefaultcloseRRFID();
         this.closeComment = '';
     }
@@ -380,7 +368,6 @@ export class RRFDashboardListComponent implements OnActivate {
     getStatusClass(statusID: number): string {
         return 'status' + statusID;
     }
-
 
     checkIfRRFClosed(selectedRrf: RRFDetails) {
         try {
@@ -446,13 +433,11 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     redirectToEditRRF(rrfID: MasterData, status: number) {
-        // this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id]);
         this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id + 'ST' + status]);
 
     }
 
     onViewCandidateClick(rrfID: MasterData) {
-        // rrfID = 'RRF6866237939ID76';
         sessionStorage.setItem('backToRRFList',this.currentView);
         sessionStorage.setItem('backToRRFDashboardList','/App/RRF/RRFDashboard');
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
@@ -483,7 +468,6 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     resetToDefaultGridOptions() {
-        //this.grdOptions = new GrdOptions();
         this.grdOptions.ButtonClicked = 0;
         this.grdOptions.NextPageUrl = [];
     }

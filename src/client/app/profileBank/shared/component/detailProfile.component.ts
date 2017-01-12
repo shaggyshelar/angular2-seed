@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { OnActivate, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { CandidateProfile, MailDetails} from '../../shared/model/myProfilesInfo';
 import { MasterData, Resume } from  '../../../shared/model/index';
@@ -25,7 +25,6 @@ export class DetailProfileComponent implements OnInit {
     @Input() selectedProfile: CandidateProfile;
     @Input() rrfID: string;
     @Input() CandidateRecruitmentMailDetails: MailDetails;
-    // @Input() profilePic: any;
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
     CurrentUser: MasterData = new MasterData();
     loginflag: boolean = false;
@@ -38,17 +37,13 @@ export class DetailProfileComponent implements OnInit {
         this.loginflag = this.getLoggedInUser();
     }
     ngOnInit() {
-        /** */
-
         this.profile = this.selectedProfile;
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
         if (this.profile) {
             this.profile.CandidateMailDetails = this.profile ? this.CandidateRecruitmentMailDetails : new MailDetails();
         }
-        //this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     onViewCandidateClick(rrfID: MasterData, status:string) {
-        // rrfID = 'RRF6866237939ID76';
         sessionStorage.setItem('backToRRFDashboardList',sessionStorage.getItem('backToProfile'));
         sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
@@ -88,8 +83,7 @@ export class DetailProfileComponent implements OnInit {
             } else {
                 return false;
             }
-        }
-        else {
+        }else {
             return false;
         }
 

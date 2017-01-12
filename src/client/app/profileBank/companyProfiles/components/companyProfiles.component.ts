@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { CompanyProfilesListComponent } from './companyProfilesList.component';
-import { CompanyProfilesAddComponent } from './companyProfilesAdd.component';
 import { CompanyProfilesService } from '../services/companyProfiles.service';
 import { CompanyProfilesViewComponent} from './companyProfilesView.component';
 import { MastersService } from '../../../shared/services/masters.service';

@@ -46,8 +46,6 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             this.RRFId.Id = parseInt(params.split('ID')[1]);
             this.RRFId.Value = params.split('ID')[0];
         }
-        //this.RRFId = segment.getParam('id');
-        // this.GetRecruiter();
         this.getRRFDetails(this.RRFId);
         this.UnAssignRec.AssignedTo = new MasterData();
     }
@@ -91,7 +89,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
 
     onAssignRRF(): void {
 
-        if(!this.isFormValidate()){
+        if(!this.isFormValidate()) {
             return ;
         }
         let AssignTocmb: any = $('#cmbAssignTo');
@@ -101,7 +99,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         for (var index = 0; index < selectedRec.length; index++) {
             var selectedRRF: MasterData = new MasterData();
             selectedRRF.Id = selectedRec[index];
-            selectedRRF.Value = "";
+            selectedRRF.Value = '';
             selectedRRFidsList.push(selectedRRF);
         }
         this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRRFidsList, this.AssignedComments)
@@ -113,7 +111,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
-                this.getRRFDetails(this.RRFId); //TODO
+                this.getRRFDetails(this.RRFId);
                 this.AssignedComments = '';
                 $('#cmbAssignTo').select2('val', '');
             },
@@ -126,7 +124,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             this.toastr.error('Please select assign To value');
             return false;
         }
-        if (this.AssignedComments === "") {
+        if (this.AssignedComments === '') {
             this.toastr.error('Please select Assigning Comment');
             return false;
         }
@@ -157,7 +155,7 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
                     this.UnAssignRec = new AssignmentDetails();
                     this.unAssignedComments = '';
                     $('#cmbAssignTo').select2();
-                    this.getRRFDetails(this.RRFId); //TODO
+                    this.getRRFDetails(this.RRFId);
                     setTimeout(function() {
                         $('#cmbAssignTo').select2();
                     }, 20);
@@ -176,9 +174,8 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         if (this.selectedRRF.AssignedData === undefined) {
             return false;
         }
-
         for (var index = 0; index < this.selectedRRF.AssignedData.length; index++) {
-            if (this.selectedRRF.AssignedData[index].AssignedTo.Id == recuiterId) {
+            if (this.selectedRRF.AssignedData[index].AssignedTo.Id === recuiterId) {
                 if (this.selectedRRF.AssignedData[index].Status.Id === RRFAssignStatus.Assigned) {
                     return true;
                 }

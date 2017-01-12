@@ -7,7 +7,7 @@ import { ResponseFromAPI, MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RRFDetails } from  '../../../RRF/myRRF/index';
 import * as  _ from 'lodash';
-import { CandidateProfile, ResumeMeta, AddCandidateResponse, AllCandidateProfiles, CareerProfile } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 @Component({
     moduleId: module.id,
     selector: 'profiles-assignrrf',
@@ -46,8 +46,6 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
             this.Title = 'Company Profiles';
         }
         this.getCandidateIDs();
-
-        //TODO :  call getMyOpenRRF to fill RRf Dropdown
         this.getMyOpenAssignedRRF();
     }
 
@@ -82,14 +80,11 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     }
 
     onSelectRRF(RRFID: string) {
-        //  this.CandidateAssigment.RRFID = RRFID;
         for (var index = 0; index < this.RRFList.length; index++) {
             if (this.RRFList[index].RRFID.Id === parseInt(RRFID)) {
                 this.selectedRRF = this.RRFList[index];
             }
         }
-        // var index = _.findIndex(this.RRFList, { RRFID: { Id: RRFID } });
-        // this.selectedRRF = this.RRFList[index];
         this.isRRFSelected = true;
     }
 
@@ -117,15 +112,11 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
     onAssignRRF() {
         sessionStorage.removeItem('CandidateIDs');
         this.CandidateAssigment.RRFID = this.selectedRRF.RRFID;
-        // this.profile = new CandidateProfile();
-        // this.profile.isRRFAssigned = true;
         if (this.CandidateAssigment.Candidates.length > 0) {
             this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        // this.profile = new CandidateProfile();
-                        // this.profile.isRRFAssigned = true;
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.nextToSchedule();
                     } else {

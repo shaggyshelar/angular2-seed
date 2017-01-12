@@ -31,8 +31,6 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
         private toastr: ToastsManager,
         private _interviewService: InterviewersAvailabilityService) {
         this._rrfDetails = new Array<DetailRRF>();
-        // this._showSlots =true;
-
     }
     //Router method overrid from OnActivate class
     routerOnActivate() {
@@ -73,8 +71,6 @@ export class RecruitmentInterviewAvailabilityComponent implements OnActivate {
         this.RRFIdTOShowSlot = _rrfId;
         this.RRFCode = RRFCode;
         this.showSlotForRRF = true;
-
-        // this._showSlots = _isHidenSlot;
     }
 
     hideSlot() {

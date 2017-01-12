@@ -12,7 +12,6 @@ import { AllScheduleInterviewPipe } from  '../filter/scheduleInterviews.pipe';
     templateUrl: 'scheduleInterviews.component.html',
     directives: [ROUTER_DIRECTIVES],
     pipes: [AllScheduleInterviewPipe]
-    // providers:[RecruiterScheduleInterviewService,ToastsManager]
 })
 
 export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
@@ -30,7 +29,6 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         this.getMyScheduleInterviewsData();
     }
     onViewChanged(viewMode: string) {
-        // this.InterviewDetailsList.GrdOperations = new GrdOptions();
         this.resetToDefaultGridOptions();
         this.InterviewDetailsList.GrdOperations.OrderBy = 'Modified';
         this.InterviewDetailsList.GrdOperations.Order = 'desc';
@@ -106,14 +104,9 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         this.checkViewMode();
     }
     checkViewMode() {
-        //Clear RRF List
-        //this.InterviewDetailsList = new InterviewsList();
-
         if (this.currentView === 'allInterviews') {
-            //this.currentView = 'allInterviews';
             this.getAllScheduleInterviewsData();
         } else if (this.currentView === 'myInterviews') {
-            //this.currentView = 'myInterviews';
             this.getMyScheduleInterviewsData();
         }
     }

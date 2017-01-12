@@ -1,7 +1,6 @@
 import {Component, ChangeDetectorRef } from '@angular/core';
 import {Router, RouteSegment, ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
 import { FullCalendarComponent} from  '../../../shared/components/calendar/fullCalendar';
-//import { MultipleDemoComponent} from  '../../../shared/components/MultiselectDropdown/MultipleDrodown.Component';
 import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';//ResponseFromAPI
 import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
 import {CalendarDataService} from '../service/calendarDataService';
@@ -32,7 +31,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     resources: Array<Resource> = new Array<Resource>();
     errorMessage: string;
     returnPath: string;
-    // resource: Resource;
     InterviewModes: Array<MasterData>;
     InterviewTypes: Array<MasterData>;
     InterviewSkypeId: Array<MasterData>;
@@ -84,7 +82,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.InterviewSkypeId = new Array<MasterData>();
         this.InterviewRounds = new Array<MasterData>();
         this.InterviewModes = new Array<MasterData>();
-        // this.resource = new Resource();
         this.ScheduleInterView = new Interview();
         this.NominatedInterviewers = new Array<MasterData>();
         this.AllNominatedInterviewers = new Array<InterviewersPanel>();
@@ -94,7 +91,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.getResources();
         var date = new Date();
         this.currentDate = this.formatDate(date);
-        //this.event = new Event();
     }
 
     routerOnActivate(segment: RouteSegment) {
@@ -103,11 +99,9 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.ScheduleInterView.CandidateID = JSON.parse(sessionStorage.getItem('Candidate')).CandidateID;
         this.returnPath = sessionStorage.getItem('returnPath');
         sessionStorage.removeItem('returnPath');
-
         this.ScheduleInterView.Status = sessionStorage.getItem('Status') !== null ? sessionStorage.getItem('Status') : 'Not Scheduled';
         this.clearSession('Status');
 
-        //this.ScheduleInterView.CandidateStatus.Value = 'Rejected';
         if (this.ScheduleInterView.Status !== null && this.ScheduleInterView.Status !== undefined &&
             this.ScheduleInterView.Status.toLowerCase() === 'rejected') {
             this.isRejectedCandidate = this.ifInvalidInterview = true;
@@ -180,12 +174,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         this.IsOtherInterviewersAdded ? this.IsOtherInterviewersAdded = false : this.IsOtherInterviewersAdded = true;
     }
     getResources() {
-        //  this._calendarDataService.GetResources().then(
-        //         (results:any) => {
-        //             this.resources = results;
-        //         }).catch(
-        //             (error: any) => this.errorMessage = <any>error
-        //         );
         this.resources = this._calendarDataService.GetResources();
     }
 
@@ -213,17 +201,13 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                     let cmb: any = $('#cmbInterviewers');
                     let value = cmb.val();
                     //Get Events Data if "Show Availability"
-                    // if (this.InterviewerCalendarDetails.Events === null)
                     if (this.InterviewerCalendarDetails.Events === null
                         || this.InterviewerCalendarDetails.Events.length === 0)
                         this.ShowAvailabilityOnCalendar();
-                    //&& this.ScheduleInterView.InterviewerAvailability.length < value.length
                     if (value !== null) {
                         /**Get All Other selected Interviewers from multiselect Dropdown */
                         this.getOtherSelectedInterviewers(value);
                         /**Change Status According to Interview Schedule */
-                        //TODO:: Remove line once testing is sucessfull
-                        //this.changeStatus(this.ScheduleInterView.Status);
                         /**Check For Valid And Invalid Slots while scheduling interview */
                         var CheckOverlapping = this.checkAvailability();
 
@@ -250,7 +234,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
                 } else {
                     //if Invalid Send for Approval
-
                     if (this.isRejectedCandidate) {
                         this.ScheduleInterView.ApprovalType = 'Rejected Candidate';
                     } else { this.ScheduleInterView.ApprovalType = 'Skip Interview'; }
@@ -356,7 +339,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                 },
                 error => this.errorMessage = <any>error);
         }
-        // this.NominatedInterviewers = this._ScheduleInterviewService.GetNominatedInterviewersByRRFID(this.ScheduleInterView.RRFID.Value);
     }
 
     setValueNominatedInterviewers(results: Array<InterviewersPanel>) {
@@ -407,15 +389,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.ifInterviewScheduled = false;
             this.ifInvalidInterview = this.isRejectedCandidate ? this.isRejectedCandidate : false;
             this.getNominatedInterviewersByRounds(RoundId);
-            // this.NominatedInterviewers = new Array<MasterData>();
-            // for (var index = 0; index < this.AllNominatedInterviewers.length; index++) {
-            //     if (this.AllNominatedInterviewers[index].RoundNumber.Id === parseInt(RoundId)) {
-            //         for (var i = 0; i < this.AllNominatedInterviewers[index].Interviewers.length; i++) {
-            //             this.NominatedInterviewers.push(this.AllNominatedInterviewers[index].Interviewers[i]);
-            //         }
-            //     }
-            // }
-            // this.NominatedInterviewersAvailable = (this.NominatedInterviewers.length > 0) ? true : false;
             if (this.ScheduleInterView.InterviewID.Id !== null && this.ScheduleInterView.InterviewID.Id !== undefined) {
                 var interviewerId: string[] = new Array();
                 for (var index = 0; index < this.ScheduleInterView.InterviewerAvailability.length; index++) {
@@ -469,10 +442,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                 var tmpInterviewer: Interviewers = new Interviewers();
                 tmpInterviewer.InterviewerId = this.OtherInterviewers[i];
                 this.SelectedInterviewers.push(tmpInterviewer);
-                //Push Interviewers In InterviewerAvailability Obj
-                // var interviewAvailability: InterviewAvailability = new InterviewAvailability();
-                // interviewAvailability.Interviewer = this.NominatedInterviewers[i];
-                // this.ScheduleInterView.InterviewerAvailability.push(interviewAvailability);
             }
         }
         return this.SelectedInterviewers;
@@ -493,8 +462,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
             day = '' + d.getDate(),
-            h = '' + d.getHours(),
-            m = '' + d.getMinutes(),
             year = d.getFullYear();
         if (month.length < 2) month = '0' + month;
         if (day.length < 2) day = '0' + day;
@@ -634,12 +601,10 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     setInterviewValues(results: Interview) {
         //get Result
         this.ScheduleInterView = results;
-        //GetCandidateName TODO://fetch Candidate Name from results
         this.ScheduleInterView.Candidate = this.ScheduleInterView.Candidate ? this.ScheduleInterView.Candidate : 'No candidate available';
         //Set Value of Round By Interview Type
         if (this.ScheduleInterView.InterviewType.Id !== 0)
             this.getInterviewRoundsbyInterviewType(this.ScheduleInterView.InterviewType.Id.toString());
-
         //Change Date Format to yyyy-mm-dd
         this.ScheduleInterView.InterviewDate = this.formatDate(this.ScheduleInterView.InterviewDate);
 
@@ -649,7 +614,6 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
         //Set selected Nominated Interviewers
         if (this.ScheduleInterView.Round.Id !== 0) {
-            //this.getNominatedInterviewers();
             this.getNominatedInterviewersByRound(this.ScheduleInterView.Round.Id.toString());
         }
     }
@@ -786,88 +750,3 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     }
 
 }
-
-/* handleDayClick(event: any) {
-        this.event = new Event();
-        this.event.start = event.start.format();
-        this.event.end = event.end.format();
-        this.dialogVisible = true;
-        let modalPopup: any = $('#fullCalModal');
-        modalPopup.modal();
-        // trigger detection manually as somehow only moving the mouse quickly after
-        // click triggers the automatic detection
-        this.cd.detectChanges();
-    }
-
-    handleEventClick(e: any) {
-        this.event = new Event();
-        this.event.title = e.calEvent.title;
-
-        let start = e.calEvent.start;
-        let end = e.calEvent.end;
-        if (e.view.name === 'month') {
-            start.stripTime();
-        }
-
-        if (end) {
-            end.stripTime();
-            this.event.end = end.format();
-        }
-
-        this.event.resourceId = e.calEvent.resourceId;
-        this.event.id = e.calEvent.id;
-        this.event.start = start.format();
-        var i = _.findIndex(this.InterviewerCalendarDetails.Resources, { id: e.resourceId });
-        if (i >= 0)
-            this.event.Resource = this.InterviewerCalendarDetails.Resources[i].title;
-        // this.event.allDay = e.calEvent.allDay;
-        this.dialogVisible = true;
-        this.cd.detectChanges();
-        let modalPopup: any = $('#fullCalModal');
-        modalPopup.modal();
-    }
-
-    saveEvent() {
-        //update
-        if (this.event.id) {
-            let index: number = this.findEventIndexById(this.event.id);
-            //_.findIndex(this.events, { id: this.event.id });
-            if (index >= 0) {
-                //this.events[index] = this.event;
-                this._calendarDataService.SaveEvent(index, this.event);
-            }
-        } else {
-            //new
-            this.event.id = this.idGen;
-            this.events.push(this.event);
-            this.event = null;
-        }
-        this.cd.detectChanges();
-        let modalPopup: any = $('#fullCalModal');
-        modalPopup.modal('toggle');
-        this.dialogVisible = false;
-    }
-
-    deleteEvent() {
-        let index: number = this.findEventIndexById(this.event.id);
-        if (index >= 0) {
-            this.events.splice(index, 1);
-        }
-        this.dialogVisible = false;
-        let modalPopup: any = $('#fullCalModal');
-        modalPopup.modal('toggle');
-        this.cd.detectChanges();
-
-    }
-
-    findEventIndexById(id: number) {
-        let index = -1;
-        for (let i = 0; i < this.events.length; i++) {
-            if (id === this.events[i].id) {
-                index = i;
-                break;
-            }
-        }
-
-        return index;
-    }*/

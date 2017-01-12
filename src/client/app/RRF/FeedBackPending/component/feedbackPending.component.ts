@@ -12,7 +12,7 @@ import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.dir
 import { FeedbackDataComponent } from '../../shared/components/feedbackData/feedbackData.component';
 import { FeedBackpending } from '../models/feedbackPending';
 import { CommonService } from '../../../shared/index';
-import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
+import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
     moduleId: module.id,
@@ -46,7 +46,7 @@ export class FeedbackPendingComponent implements OnActivate {
     routerOnActivate(): void {
         this.getLoggedInUser();
         this.getFeedbackPendingRRF();
-        this.getColumsForSorting('RRFAPPROVAL'); //TODO
+        this.getColumsForSorting('RRFAPPROVAL');
     }
 
     //Get list of ALL RRF waiting for Freeze or feedback

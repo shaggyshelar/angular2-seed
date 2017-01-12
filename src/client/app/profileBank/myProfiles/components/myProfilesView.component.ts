@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, RouteSegment, Router, OnActivate} from '@angular/router';
-import { CandidateProfile, CareerProfile,EmploymentHistory } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -46,7 +46,7 @@ export class MyProfilesViewComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 this.profile = results;
-                if (results.CandidateCareerProfile.length > 0){
+                if (results.CandidateCareerProfile.length > 0) {
                     for (var index = 0; index < results.CandidateCareerProfile.length; index++) {
                         if (results.CandidateCareerProfile[index].IsCurrentCompany === true) {
                             this.CurrentCompony = results.CandidateCareerProfile[index].Company;
@@ -63,13 +63,11 @@ export class MyProfilesViewComponent implements OnActivate {
     /**Get data from session */
     getSessionOf<T>(variableName: string, isJson: Boolean): T {
         var _requestedIef = sessionStorage.getItem(variableName);
-        //var response: any;
         if (_requestedIef !== null) {
             var response = isJson ? JSON.parse(_requestedIef) : _requestedIef;
             sessionStorage.setItem(variableName, '');
         } else {
             /** If no information found from Session then it will redirected to existing page */
-            //this.toastr.error('Somthing went wrong..!');
             console.info('Following variable name is empty form session - ' + variableName);
         }
         return response;
@@ -146,7 +144,7 @@ export class MyProfilesViewComponent implements OnActivate {
             (results: any) => {
                 if (results !== undefined) {
                     this.Resume = results;
-                    if(this.Resume === 'File is not in docx format. Cannot read content'){
+                    if(this.Resume === 'File is not in docx format. Cannot read content') {
                         this.ShowResume = true;
                     } else {
                         this.ShowResume = false;

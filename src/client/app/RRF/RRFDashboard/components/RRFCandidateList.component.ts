@@ -102,19 +102,8 @@ export class RRFCandidateListComponent implements OnActivate {
     public barChartLegend: boolean = true;
     public InterviewDetails: {};
     UniqueRRFCode: string = '';
-
     public barChartLabels: string[] = new Array<string>();
     public barChartData: any[] = new Array<string>();
-
-    // public barChartLabels: string[] = ['Business Logic', 'Technical Skills0', 'Technical Skills1', 'Technical Skills2', 'Technical Skills3', 'Technical Skills4', 'Communication Skil 2123456789'];
-    // public barChartData: any[] = [
-    //     { data: [2, 5, 2, 5, 2, 5, 4], label: 'Technical 1' },
-    //     { data: [1, 3, 2, 5, 2, 5, 4], label: 'Technical 2' },
-    //     { data: [5, 3, 2, 5, 2, 5, 5], label: 'HR 1' }
-    // ];
-    // public barChartLabels: string[] = ['No Data'];
-    // public barChartData: any[] = [{ data: [0], label: 'No Data' }];
-
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
@@ -154,10 +143,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 this.getOtherCanidatesForRRF();
             }
         }
-        //TODO : Call API to get Candidates Specific to SelectedRRF
         this.getCanidatesForRRF();
-        //this.getOfferedCanidatesForRRF();
-        //this.getOtherCanidatesForRRF();
         this.getRRFDetails();
     }
     /**Bind candidtes rating in chart */
@@ -198,7 +184,6 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     // Get Updated status
     getUpdateStatus(candidateID: any) {
-        //TO DO : Update API
         this._mastersService.getUpdateStatus(candidateID)
             .subscribe(
             results => {
@@ -212,7 +197,6 @@ export class RRFCandidateListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined && results.length > 0) {
-                    // this.AllCandidatesForRRF = results;
                     this.isNull = false;
                     this.CheckInterviewStatus(results);
                 } else {
@@ -228,10 +212,8 @@ export class RRFCandidateListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined && results.length > 0) {
-                    // this.AllCandidatesForRRF = results;
                     this.OfferedCandidateForRRF = results;
                     this.IsOfferedCandidate = false;
-                    //this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
                     this.IsOfferedCandidate = true;
@@ -245,10 +227,8 @@ export class RRFCandidateListComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 if (results.length !== undefined && results.length > 0) {
-                    // this.AllCandidatesForRRF = results;
                     this.OtherCandidateForRRF = results;
                     this.IsOtherCandidate = false;
-                    //this.CheckInterviewStatus(results);
                 } else {
                     //If No data present
                     this.IsOtherCandidate = true;
@@ -282,20 +262,19 @@ export class RRFCandidateListComponent implements OnActivate {
                     this.CandidateRoundHistory = <any>results;
                     this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
                     if (status.toLowerCase() === 'selected') {
-                        if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Round.Value.includes('HR') && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
+                        if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Round.Value.includes('HR')
+                        && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
                             this.IsHRConducted = true;
                             this.IsOffered = false;
                         } else {
                             this.IsOffered = false;
                             this.IsHRConducted = false;
                         }
-                    }
-                    else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
+                    }else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
                         status.toLowerCase() === 'joined') {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
-                    }
-                    else {
+                    }else {
                         this.IsOffered = false;
                         this.IsHRConducted = false;
                     }
@@ -327,11 +306,8 @@ export class RRFCandidateListComponent implements OnActivate {
         this.doughnutChartLabels = [];
         this.doughnutChartData = [];
         var chartColor: any[] = [];
-        // doughnutChartColors: any[] = [{ backgroundColor: ["#E9EF0B", "#32c5d2" , "#e7505a" , "#c2cad8" , "#41ce29"] }];
         for (var index = 0; index < this.CandidateRoundHistory.length; index++) {
             this.doughnutChartLabels.push(this.CandidateRoundHistory[index].Status);
-            // this.doughnutChartData.push(this.CandidateRoundHistory[index].);
-            // chartColor.push(this.getChartColor(this.rrfStatusCount[index].Status.Id));
         }
         this.doughnutChartColors[0].backgroundColor = chartColor;
     }
@@ -356,7 +332,6 @@ export class RRFCandidateListComponent implements OnActivate {
         sessionStorage.setItem('RRFID', JSON.stringify(this.RRFID));
         sessionStorage.setItem('Candidate', JSON.stringify(Candidate));
         sessionStorage.setItem('returnPath', '/App/RRF/RRFDashboard/Candidates/' + this.RRFID.Value + 'ID' + this.RRFID.Id);
-        // sessionStorage.setItem('Status', Candidate.InterviewDetails.Status);
         sessionStorage.setItem('Status', 'Rescheduled');
         this._router.navigate(['/App/Recruitment Cycle/Schedule/' +
             Candidate.InterviewDetails.InterviewID.Value + 'ID' + Candidate.InterviewDetails.InterviewID.Id]);
@@ -388,8 +363,6 @@ export class RRFCandidateListComponent implements OnActivate {
                         this.AllCandidatesForRRF[index].isInterviewScheduled = false;
                         break;
                     case 'scheduled':
-                        //case 're-scheduled':
-                        // case 'Cancelled':
                         this.AllCandidatesForRRF[index].isInterviewScheduled = true;
                         break;
                     case 'declined':
@@ -452,7 +425,6 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     canCancelInterview(status: string) {
-        //if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 're-scheduled' ||
         if (status.toLowerCase() === 'scheduled' || status.toLowerCase() === 'rescheduled') {
             return false;
         } else { return true; }
@@ -489,7 +461,6 @@ export class RRFCandidateListComponent implements OnActivate {
         if (!this.IsAllowTransfer) {
             this.UniqueRRFCode = interviewDetails.RRFCode;
             this.getAllOpenRRF(interviewDetails.RRFCode);
-            // this.TransferInterviewID = intervieID;
             /**Prepare object to transfer Candidate */
             this.TransferInterviewDetails.InterviewID = interviewDetails.InterviewID;
             this.TransferInterviewDetails.CandidateID = interviewDetails.CandidateID;
@@ -647,8 +618,6 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     saveUpdateStatus() {
-        //this.selectedStatus.Id = 0;
-        //this.selectedStatus.Value = updatedStatus;
         this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, '')
             .subscribe(
             results => {
@@ -664,7 +633,6 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     Back() {
-        //this._router.navigate(['/App/RRF/RRFDashboard']);
         this._router.navigate([this.ReturnPath]);
     }
 }
