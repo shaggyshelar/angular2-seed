@@ -1,21 +1,24 @@
 import { Route } from '@angular/router';
 
-import {MyRRFAddComponent} from './myRRF/index';
-import {RRFApprovalListComponent} from './RRFApproval/index';
-import {RRFDashboardListComponent,
+import { MyRRFAddComponent } from './myRRF/index';
+import { RRFApprovalListComponent } from './RRFApproval/index';
+import {
+    RRFDashboardListComponent,
     RRFAssignComponent,
     RRFCandidateListComponent,
-    RRFReScheduleInterviewsComponent } from './RRFDashboard/index';
+    RRFReScheduleInterviewsComponent
+} from './RRFDashboard/index';
 
 export const RRFRoutes: Route[] = [
-    /**My RRF*/
-    { path: '/Add', component: MyRRFAddComponent },
-    { path: '/Edit/:id', component: MyRRFAddComponent },
-    /**RRF Approval */
-    { path: '/', component: RRFApprovalListComponent },
     /**RRF Dashboard */
-    { path: '/', component: RRFDashboardListComponent },
-    { path: '/Assign/:id', component: RRFAssignComponent },
-    { path: '/Candidates/:id', component: RRFCandidateListComponent },
-    { path: '/Interviews/:id', component: RRFReScheduleInterviewsComponent },
+    { path: 'RRF/RRFDashboard', component: RRFDashboardListComponent },
+    { path: 'RRF/Assign/:id', component: RRFAssignComponent },
+    { path: 'RRF/Candidates/:id', component: RRFCandidateListComponent },
+    { path: 'RRF/Interviews/:id', component: RRFReScheduleInterviewsComponent },
+    /**My RRF*/
+    { path: 'RRF/Add', component: MyRRFAddComponent },
+    { path: 'RRF/Edit/:id', component: MyRRFAddComponent },
+    /**RRF Approval */
+    { path: '/RRF/PendingRequest', component: RRFApprovalListComponent }
+
 ];
