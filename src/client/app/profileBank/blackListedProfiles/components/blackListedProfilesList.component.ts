@@ -89,14 +89,15 @@ export class BlackListedProfilesListComponent implements OnInit {
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
-        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/BlackListedProfiles');
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/History']);
+        sessionStorage.setItem('onReturnPath', '/ProfileBank/BlackListedProfiles');
+        this._router.navigate(['/BlackListedProfiles/History']);
     }
     redirectToEditProfile(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/BlackListedProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/BlackListedProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        sessionStorage.setItem('onProfilesReturnPath','/ProfileBank/BlackListedProfiles');
+        this._router.navigate(['/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
         //this._router.navigate(['/App/ProfileBank/BlackListedProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
 

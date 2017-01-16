@@ -69,7 +69,7 @@ export class ProfileEsplHistoryListComponent implements OnInit {
         return response;
     }
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     Back() {
         if (this.returnPath.includes('Edit')) {

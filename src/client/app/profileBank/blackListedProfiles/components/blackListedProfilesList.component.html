@@ -56,7 +56,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <!--(change)='onSelectStatus($event.target.value)' -->
-                                                    <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="selectedStatus" tooltip="Status"
+                                                    <select class="form-control" name="selectStatus" (change)='onSelectStatus($event.target.value)' [(ngModel)]="selectedStatus" tooltip="Status"
                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
                                                    <option *ngFor="let status of statusList" [ngValue]="status">{{status.Value}}</option>
                                                 </select>

@@ -49,7 +49,7 @@ export class DetailProfileComponent implements OnInit {
     }
     onViewCandidateClick(rrfID: MasterData) {
         // rrfID = 'RRF6866237939ID76';
-        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
+        this._router.navigate(['/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
     /**Get resume by candidate code */
@@ -66,7 +66,7 @@ export class DetailProfileComponent implements OnInit {
     }
     /** Redirect user to view profiles page. */
     viewProfiles(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /** Download crate file form binary and download in given fyle type */
     Download(binaryResume: string, ResumeName: string) {

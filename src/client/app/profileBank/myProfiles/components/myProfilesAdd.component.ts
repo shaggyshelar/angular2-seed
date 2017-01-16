@@ -100,7 +100,7 @@ export class MyProfilesAddComponent implements OnInit {
         this.getGrades();
         this.getVisaType();
         //get current profile by Id
-        this.params = this.activatedRoute.snapshot.params['Id'];
+        this.params = this.activatedRoute.snapshot.params['id'];
         //this.params = segment.getParam('id');
         if (this.params) {
             this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
@@ -1001,8 +1001,8 @@ export class MyProfilesAddComponent implements OnInit {
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('CandidateIdForReturnPath', this.CandidateID.Value);
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
-        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles/Edit/');
-        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+        sessionStorage.setItem('onReturnPath', '/MyProfiles/Edit/');
+        this._router.navigate(['/MyProfiles/History']);
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {

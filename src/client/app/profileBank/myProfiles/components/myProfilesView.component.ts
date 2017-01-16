@@ -34,7 +34,7 @@ export class MyProfilesViewComponent implements OnInit {
         this.profile = new CandidateProfile();
     }
     ngOnInit() {
-        this.params = this.activatedRoute.snapshot.params['Id'];
+        this.params = this.activatedRoute.snapshot.params['id'];
         //this.params = segment.getParam('id');
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
@@ -122,13 +122,13 @@ export class MyProfilesViewComponent implements OnInit {
         if (this.returnPath) {
             this._router.navigate([this.returnPath]);
         } else {
-            this._router.navigate(['/App/ProfileBank/MyProfiles']);
+            this._router.navigate(['/ProfileBank/MyProfiles']);
         }
     }
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
-        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
-        this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
+        sessionStorage.setItem('onReturnPath', '/ProfileBank/MyProfiles');
+        this._router.navigate(['/MyProfiles/History']);
     }
     showResume() {
         if (this.ResumeText === 'Show Resume') {

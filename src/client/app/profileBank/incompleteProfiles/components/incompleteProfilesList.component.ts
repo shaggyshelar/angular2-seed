@@ -122,7 +122,7 @@ export class IncompleteProfilesListComponent implements OnInit {
     }
 
     redirectToEditProfile(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/IncompleteProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/IncompleteProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
 
     }
 

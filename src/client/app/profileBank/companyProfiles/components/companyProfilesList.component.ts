@@ -90,8 +90,9 @@ export class CompanyProfilesListComponent implements OnInit {
             });
     }
     redirectToView(CandidateID: MasterData) {
+        sessionStorage.setItem('onProfilesReturnPath','/ProfileBank/CompanyProfiles');
         //this._router.navigate(['/App/ProfileBank/CompanyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
-        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /** Delete Prfile will be available only to the Recruitment Head*/
     deleteCandidate(CandidateID: MasterData) {
@@ -106,11 +107,11 @@ export class CompanyProfilesListComponent implements OnInit {
     /**Redirecting to candidate's all interview history page */
     getCandidateHistory(_candidateID: MasterData) {
         sessionStorage.setItem('HistoryOfCandidate', JSON.stringify(_candidateID));
-        sessionStorage.setItem('onReturnPath', '/App/ProfileBank/CompanyProfiles');
-        this._router.navigate(['/App/ProfileBank/CompanyProfiles/History']);
+        sessionStorage.setItem('onReturnPath', '/ProfileBank/CompanyProfiles');
+        this._router.navigate(['/CompanyProfiles/History']);
     }
     redirectToEditProfile(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/CompanyProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/CompanyProfiles/Edit/' + CandidateID.Value + 'ID' + CandidateID.Id]);
 
     }
     SaveCandidateID(id: MasterData) {
@@ -251,8 +252,8 @@ export class CompanyProfilesListComponent implements OnInit {
             this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-            sessionStorage.setItem('returnPathToSchedule', '/App/ProfileBank/CompanyProfiles');
-            this._router.navigate(['/App/ProfileBank/CompanyProfiles/Assign']);
+            sessionStorage.setItem('returnPathToSchedule', '/ProfileBank/CompanyProfiles');
+            this._router.navigate(['/CompanyProfiles/Assign']);
         }
 
     }
