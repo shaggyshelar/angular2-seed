@@ -10,7 +10,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFAssignStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
 import {RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
-
+import * as  _ from 'lodash';
 
 @Component({
     moduleId: module.id,
@@ -98,8 +98,10 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
         var selectedRRFidsList: Array<MasterData> = new Array<MasterData>();
         for (var index = 0; index < selectedRec.length; index++) {
             var selectedRRF: MasterData = new MasterData();
+            var selectedVal = selectedRec[index];
+            var i = _.findIndex(this.recruiterDtls, { Id: parseInt(selectedVal)});
             selectedRRF.Id = selectedRec[index];
-            selectedRRF.Value = '';
+            selectedRRF.Value = this.recruiterDtls[i].Value;
             selectedRRFidsList.push(selectedRRF);
         }
         this._rrfDashboardService.saveRRFAssignmentDeatils(this.RRFId, selectedRRFidsList, this.AssignedComments)

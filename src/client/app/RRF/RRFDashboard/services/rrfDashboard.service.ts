@@ -23,6 +23,14 @@ export class RRFDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    getAllOpenRRFExceptTaggedRRF(CandidateID : MasterData) {
+        let url = Config.GetURL('/api/RRF/GetAllOpenRRFExceptTaggedRRF?CandidateID='+ CandidateID.Value);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     getAllRRF(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetAllRRF');
         this._spinnerService.show();

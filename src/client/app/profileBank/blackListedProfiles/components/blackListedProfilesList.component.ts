@@ -26,7 +26,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
     blacklistedProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
     profile: CandidateProfile;
-    statusList: Array<MasterData>;
+    statusList: Array<MasterData> = [];
     seletedCandidateID: MasterData = new MasterData();
     selectedStatus = new MasterData();
     Comments: string;
@@ -45,6 +45,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         private _profileBankService: ProfileBankService,
         private _masterService: MastersService) {
         this.profile = new CandidateProfile();
+        this.statusList.push({Id : 2, Value : 'Open'});
 
     }
 
@@ -53,7 +54,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this.setPaginationValues();
         this.getLoggedInUser();
         this.getBlacklistedProfiles();
-        this.getCandidateStatuses();
+        //this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getEmail(EmailCode: any) {

@@ -121,6 +121,7 @@ export class RRFApprovalListComponent implements OnActivate {
                 //:: Create object of RRF details and send object to api
                 var _rrfDetails: RRFDetails = new RRFDetails();
                 _rrfDetails.RRFID = this.rrfApprovalList[index].RRFID;
+                _rrfDetails.RaisedBy = this.rrfApprovalList[index].RaisedBy;
                 //:: Created Approval list object
                 var _rrfApprovalList: RRFApproval = new RRFApproval();
                 _rrfApprovalList.Status = status;

@@ -460,7 +460,7 @@ export class RRFCandidateListComponent implements OnActivate {
     transferFromUnfit(interviewDetails: any) {
         if (!this.IsAllowTransfer) {
             this.UniqueRRFCode = interviewDetails.RRFCode;
-            this.getAllOpenRRF(interviewDetails.RRFCode);
+            this.getAllOpenRRFExceptTaggedRRF(interviewDetails.CandidateID);
             /**Prepare object to transfer Candidate */
             this.TransferInterviewDetails.InterviewID = interviewDetails.InterviewID;
             this.TransferInterviewDetails.CandidateID = interviewDetails.CandidateID;
@@ -476,16 +476,13 @@ export class RRFCandidateListComponent implements OnActivate {
         this.resetTransferOperation();
         this.TransferInterviewDetails = new TransferInterview();
     }
-    /**Get all open RRF */
-    getAllOpenRRF(uniqueRRF: string) {
-        this._rrfDashboardService.getAllOpenRRF()
+    /**Get all open RRF Except Tagged RRFs */
+    getAllOpenRRFExceptTaggedRRF(CandidateID : MasterData) {
+        //TODO: Need to test After API get publish
+        this._rrfDashboardService.getAllOpenRRFExceptTaggedRRF(CandidateID)
             .subscribe(
             (results: any) => {
-                for (var index = 0; index < results.length; index++) {
-                    if (results[index].RRFCODE !== uniqueRRF) {
-                        this.allOpenRrf.push(<any>(results)[index]);
-                    }
-                }
+                this.allOpenRrf.push(<any>(results));
             },
             error => this.errorMessage = <any>error);
     }
