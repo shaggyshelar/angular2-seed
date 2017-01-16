@@ -26,7 +26,7 @@
                         <div class="row">
                             <label class="col-md-2 control-label">RRF <span class="required"> * </span></label>
                             <div class="col-md-6" [hidden]="RRFList.length == 0">
-                                <select class="form-control" required (change)='onSelectRRF($event.target.value)'>
+                                <select class="form-control" required name="selectRRF" (change)='onSelectRRF($event.target.value)'>
                                     <option></option>
                                      <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Id">{{rrf.RRFCODE}} - {{rrf.Designation.Value}} - {{rrf.PositionTitle}} - {{rrf.RaisedBy.Value}}</option> 
                                 </select>
@@ -164,7 +164,7 @@
                         <div class="row">
                             <label class="col-md-2 control-label">Comments <span class="required"> * </span></label>
                             <div class="col-md-10">
-                                <textarea class="form-control" rows="2" placeholder="Comments" style="resize:vertical" required="" [(ngModel)]='CandidateAssigment.Comments'>
+                                <textarea class="form-control" rows="2" name="txtComment" placeholder="Comments" style="resize:vertical" required="" [(ngModel)]='CandidateAssigment.Comments'>
                                 </textarea>
                             </div>
                         </div>

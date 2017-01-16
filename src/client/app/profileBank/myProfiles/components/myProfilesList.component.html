@@ -416,16 +416,6 @@
                                             </label>
 									</div>
 								</div>
-								<div class="col-md-2 col-sm-2">
-									<label class="col-md-2 control-label">RRF: </label>
-									<div class="col-md-6" [hidden]="RRFList.length == 0">
-										<select name="rrfFilter" class="form-control" required (change)='onSelectRRF($event.target.value)' style="width:328px;">
-                                     <option></option>
-                                     <option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
-                                </select>
-									</div>
-								</div>
-
 							</div>
 						</div>
 
@@ -467,7 +457,7 @@
 														tooltip="View RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
                                                             <i class="fa fa-search-plus "></i> 
                                                         </button>
-													<a class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]"
+													<a class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [routerLink]="['/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile">
 														<i class="fa fa-edit " style="margin-top: 25%;"></i>
 														<!-- Edit Profile-->

@@ -240,7 +240,7 @@ export class MyProfilesListComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
     redirectToView(CandidateID: MasterData) {
-        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+        this._router.navigate(['/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
     /**Takes confirmation from end User to delete profile */
     confirmDelete(ID: MasterData) {
@@ -423,7 +423,7 @@ export class MyProfilesListComponent implements OnInit {
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    this.toastr.error((<ResponseFromAPI>results).Message);
                 }
                 this.profile.Status = new MasterData();
             },
@@ -431,24 +431,24 @@ export class MyProfilesListComponent implements OnInit {
         this.isCollapsed = false;
     }
 
-    onBlacklistedProfiles() {
-        this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.isUpdateStatusCollapsed = false;
-                    this.profile.Status = new MasterData();
-                    this.myProfilesList.GrdOperations = new GrdOptions();
-                    setTimeout(() => { this.getMyProfiles(); }, 1000);
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
-                }
-                this.profile.Status = new MasterData();
-            },
-            error => this.errorMessage = <any>error);
-        this.isCollapsed = false;
-    }
+    // onBlacklistedProfiles() {
+    //     this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
+    //         .subscribe(
+    //         results => {
+    //             if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+    //                 this.toastr.success((<ResponseFromAPI>results).Message);
+    //                 this.isUpdateStatusCollapsed = false;
+    //                 this.profile.Status = new MasterData();
+    //                 this.myProfilesList.GrdOperations = new GrdOptions();
+    //                 setTimeout(() => { this.getMyProfiles(); }, 1000);
+    //             } else {
+    //                 this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+    //             }
+    //             this.profile.Status = new MasterData();
+    //         },
+    //         error => this.errorMessage = <any>error);
+    //     this.isCollapsed = false;
+    // }
 
     closeUpdatePanel() {
         this.isCollapsed = false;
@@ -715,8 +715,8 @@ export class MyProfilesListComponent implements OnInit {
             this.selectedCandidates = new Array<CandidateProfile>();
         } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
-            sessionStorage.setItem('returnPathToSchedule', '/App/ProfileBank/MyProfiles');
-            this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
+            sessionStorage.setItem('returnPathToSchedule', '/ProfileBank/MyProfiles');
+            this._router.navigate(['/MyProfiles/Assign']);
         }
     }
 
@@ -728,7 +728,7 @@ export class MyProfilesListComponent implements OnInit {
         if (selectedCandidate.Status.Value.toLowerCase() === 'in process') {
             sessionStorage.setItem('RRFID', JSON.stringify(selectedCandidate.RRFAssigned.RRFID));
             sessionStorage.setItem('Candidate', JSON.stringify(selectedCandidate));
-            sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
+            sessionStorage.setItem('returnPath', '/ProfileBank/MyProfiles');
             this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
         } else {
             if (selectedCandidate.Status.Value.toLowerCase() === 'open') {
@@ -746,9 +746,9 @@ export class MyProfilesListComponent implements OnInit {
             } else {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
                 //sessionStorage.setItem('returnPath', '/App/Recruitment Cycle/Schedule/New');
-                sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
+                sessionStorage.setItem('returnPath', '/ProfileBank/MyProfiles');
                 sessionStorage.setItem('returnPathToSchedule', '/App/Recruitment Cycle/Schedule/New');
-                this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
+                this._router.navigate(['/MyProfiles/Assign']);
             }
 
         }

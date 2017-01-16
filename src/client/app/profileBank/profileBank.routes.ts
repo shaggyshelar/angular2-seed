@@ -47,8 +47,8 @@ export const ProfileBankRoutes: Route[] = [
 
     // /**Blacklisted Profiles */
     { path: 'ProfileBank/BlackListedProfiles', component: BlackListedProfilesListComponent },
-    { path: 'BlackListedProfiles/Edit/:id', component: BlackListedProfilesAddComponent },
-    { path: 'BlackListedProfiles/View/:id', component: BlackListedProfilesViewComponent },
+    { path: 'BlackListedProfiles/Edit/:id', component: MyProfilesAddComponent },
+    { path: 'BlackListedProfiles/View/:id', component: MyProfilesViewComponent },
     { path: 'BlackListedProfiles/History', component: ProfileEsplHistoryListComponent },
 
     // /**Company Profiles */
