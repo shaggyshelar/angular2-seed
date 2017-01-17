@@ -110,25 +110,29 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
         }
     }
     onAssignRRF() {
-        sessionStorage.removeItem('CandidateIDs');
-        this.CandidateAssigment.RRFID = this.selectedRRF.RRFID;
-        if (this.CandidateAssigment.Candidates.length > 0) {
-            this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.nextToSchedule();
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+        if (this.selectedRRF.RRFID.Id !== undefined) {
+            sessionStorage.removeItem('CandidateIDs');
+            this.CandidateAssigment.RRFID = this.selectedRRF.RRFID;
+            if (this.CandidateAssigment.Candidates.length > 0) {
+                this._assignRRFService.assignRRFToCandidates(this.CandidateAssigment)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.nextToSchedule();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.toastr.error(<any>error);
+                    });
+            } else {
+                this.toastr.error('No Candidates Selected');
+            }
         } else {
-            this.toastr.error('No Candidates Selected');
+            this.toastr.error('Please Select RRF');
         }
 
     }

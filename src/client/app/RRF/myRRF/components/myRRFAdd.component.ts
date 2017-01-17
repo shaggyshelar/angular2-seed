@@ -127,6 +127,22 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     validateForm(): boolean {
+        if(this.newRRF.Practice.Id === 0) {
+            this.toastr.error('Please select Practice');
+            return false;
+        }
+        if(this.newRRF.Technology.Id === 0) {
+            this.toastr.error('Please select Technology');
+            return false;
+        }
+        if(this.newRRF.Designation.Id === 0) {
+            this.toastr.error('Please select Designation');
+            return false;
+        }
+        if(this.newRRF.Priority.Id === 0) {
+            this.toastr.error('Please select Priority');
+            return false;
+        }
         if (this.newRRF.Panel.length === 0) {
             this.toastr.error('Please select interview panel Details');
             return false;

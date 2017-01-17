@@ -59,6 +59,7 @@
                                             <div class="form-group ">
                                                 <select id="cmbPractice" required="" [disabled]='isDisabled' class="form-control" [(ngModel)]='newRRF.Practice.Id' tooltip="Select Practice"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Practice.Id">
+                                                    <option value="0" selected [disabled]=true>Select Practice</option>
                                                     <option *ngFor="let practice of practices" [value]="practice.Id">{{practice.Value}}</option>
                                                 </select>
                                             </div>
@@ -70,6 +71,7 @@
                                     <!--<input type="text" [(ngModel)]='newRRF.Technology' id="txtTechnology" class="form-control" placeholder="Technology" />-->
                                     <select id="cmbTechnology" class="form-control" [(ngModel)]='newRRF.Technology.Id' [disabled]='isDisabled' required placeholder="Select Technology"
                                         tooltip="Select Technology" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Technology.Id">
+                                        <option value="0" selected [disabled]=true>Select Technology</option>
                                         <option *ngFor="let technologie of technologies" [value]="technologie.Id">{{technologie.Value}}</option>
                                     </select>
                                 </div>
@@ -92,6 +94,7 @@
                                     <!--<input type="text" [(ngModel)]='newRRF.Designation' id="txtDesignation" class="form-control" placeholder="Designation"/>-->
                                     <select id="cmbDesignation" class="form-control" [(ngModel)]='newRRF.Designation.Id' [disabled]='isDisabled' required tooltip="Select Designation"
                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Designation.Id">
+                                        <option value="0" selected [disabled]=true>Select Designation</option>
                                         <option *ngFor="let designation of designations" [value]="designation.Id">{{designation.Value}}</option>
                                     </select>
                                 </div>
@@ -106,6 +109,7 @@
 
                                                 <select id="cmbPriority" class="form-control" [(ngModel)]='newRRF.Priority.Id' [disabled]='isDisabled' required="" tooltip="Select Priority"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Priority.Id">
+                                                    <option value="0" selected [disabled]=true>Select Priority</option>
                                                     <option *ngFor="let priority of priorities" [value]="priority.Id">{{priority.Value}}</option>
                                                 </select>
                                             </div>
