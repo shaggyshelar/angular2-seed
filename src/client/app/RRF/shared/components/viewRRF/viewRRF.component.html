@@ -209,7 +209,7 @@
                                 <tr *ngFor="let selectedcandidate of candidatelist; let index = index">
                                     <td> {{index+1}} </td>
                                     <td> {{selectedcandidate.Candidate ? selectedcandidate.Candidate : "NA"}}</td>
-                                    <td> {{selectedcandidate.InterviewDetails.Status ? selectedcandidate.Candidate : "NA"}} </td>
+                                    <td> {{selectedcandidate.InterviewDetails.Status ? selectedcandidate.InterviewDetails.Status : "NA"}} </td>
                                     <td> {{selectedcandidate.InterviewDetails.Round.Value ? selectedcandidate.InterviewDetails.Round.Value : "--"}}</td>
                                </tr>
                             </tbody>

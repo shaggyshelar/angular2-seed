@@ -73,7 +73,7 @@ export class DetailProfileComponent implements OnInit {
         link.click();
     }
     checkOwner(owner: string, isRRFAssigned: any) {
-        if (isRRFAssigned) {
+        if (isRRFAssigned && owner !== null) {
             if (this.loginflag) {
                 if (owner.toLowerCase() === this.CurrentUser.Value.toLowerCase()) {
                     return true;

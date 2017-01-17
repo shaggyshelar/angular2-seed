@@ -246,7 +246,28 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                         /**Get All Other selected Interviewers from multiselect Dropdown */
                         this.getOtherSelectedInterviewers(value);
                     }
-                    this.ScheduleCandidateInterView();
+                    var CheckOverlapping = this.checkAvailability();
+
+                    if (!CheckOverlapping && this.showConfirmation === true) {
+                        let cnfrmBox: any = $('#confirmSlot');
+                        cnfrmBox.modal('toggle');
+                    } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === true) {
+                        /**Checking in case of slot available */
+                        this.toastr.success('Timeslot Valid');
+                        this.ScheduleCandidateInterView();
+                    } else if (CheckOverlapping && this.isBookedSlot === false && this.isAvailableSlot === false) {
+                        /**Checking in case of overlaping of slots */
+                        let cnfrmBox: any = $('#confirmSlot');
+                        cnfrmBox.modal('toggle');
+                    } else if (this.InterviewerCalendarDetails.Events === null
+                        || this.InterviewerCalendarDetails.Events.length === 0) {
+                        /**Checking In case of there are no Availability for interviewrs */
+                        let cnfrmBox: any = $('#confirmSlot');
+                        cnfrmBox.modal('toggle');
+                    } else {
+                        this.toastr.warning('You can not schedule interview in booked slot');
+                    }
+                    //this.ScheduleCandidateInterView();
                 }
             } else {
                 this.toastr.error('Interview To time must be greater than interview From time');
@@ -525,15 +546,20 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                         return true;
                     }
                 } else if (InterviewersStartDt.getDate() === givenStrtDate.getDate()) {
-                    if (this.InterviewerCalendarDetails.Events[index].resourceId === Booked) {
-                        //Booked Time should not overlap
-                        if ((InterviewersStartDt >= givenStrtDate && InterviewersStartDt >= givenendDate)
-                            || (InterviewersEndDt <= givenendDate && InterviewersEndDt <= givenStrtDate)) {
-                            /** checking for overlaping slots*/
-                            this.showConfirmation = true;
+                    if (InterviewersStartDt <= givenStrtDate && InterviewersEndDt >= givenendDate) {
+                        if (this.InterviewerCalendarDetails.Events[index].resourceId === Booked) {
+                            //Booked Time should not overlap
+                            // if ((InterviewersStartDt >= givenStrtDate && InterviewersStartDt >= givenendDate)
+                            //     || (InterviewersEndDt <= givenendDate && InterviewersEndDt <= givenStrtDate)) {
+                            //     /** checking for overlaping slots*/
+                            //     this.showConfirmation = true;
+                            //     return false;
+                            // } else { this.isAvailableSlot = true; return true; }
                             return false;
-                        } else return false;
-                    } else { this.showConfirmation = true; return false; }
+                        } else {
+                            this.isAvailableSlot = true; return true;
+                        }
+                    } else { continue; }
                 }
             } else return false;
         }

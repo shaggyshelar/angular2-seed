@@ -62,7 +62,7 @@ export class AllProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
-        sessionStorage.setItem('backToProfile','/App/ProfileBank/AllProfiles');
+        sessionStorage.setItem('backToProfile', '/App/ProfileBank/AllProfiles');
         this.getColumnsForSorting();
         this.getLoggedInUser();
         this.getAllProfiles();
@@ -313,15 +313,29 @@ export class AllProfilesListComponent implements OnActivate {
     }
     getUpdateStatusAccess(Owner: MasterData, Status: MasterData) {
         try {
-            if (Owner.Id === this.currentUser.Id && (Status.Value.toLocaleLowerCase() === 'offered' ||
-                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined')) {
+            if (Status.Value !== null) {
+                if (Owner.Id === this.currentUser.Id && (Status.Value.toLocaleLowerCase() === 'offered' ||
+                    Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined')) {
+                    return false;
+                } else { return true; }
+            } else {
                 return false;
-            } else { return true; }
+            }
         } catch (error) {
             this.toastr.error(error);
             return false;
         }
 
+    }
+    disableDelete(Status:MasterData) {
+        if(Status.Value !== null) {
+            if(Status.Value.toLowerCase() !== 'Open'.toLowerCase()
+            && Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()) {
+                return true;
+            } else {return false;}
+        }else {
+            return false;
+        }
     }
 
     OnPaginationClick(ButtonClicked: string) {
