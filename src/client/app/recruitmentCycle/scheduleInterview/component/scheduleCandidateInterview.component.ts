@@ -451,7 +451,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
     showDetails(e: any) {
         var StartTime = e.event.start.format('hh:mm A');
         var EndTime = e.event.end.format('hh:mm A');
-        let fromTimeLabel: string = e.event.title + ' From :' + StartTime + ' To ' + EndTime;
+        let fromTimeLabel: string = e.event.Interviewer.Value + ':' + e.event.title + ' From :' + StartTime + ' To ' + EndTime;
         let element: any = $(e.element);
         element.tooltip({
             title: fromTimeLabel
