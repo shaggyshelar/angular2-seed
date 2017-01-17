@@ -482,7 +482,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this._rrfDashboardService.getAllOpenRRFExceptTaggedRRF(CandidateID)
             .subscribe(
             (results: any) => {
-                this.allOpenRrf.push(<any>(results));
+                this.allOpenRrf = results;
             },
             error => this.errorMessage = <any>error);
     }
