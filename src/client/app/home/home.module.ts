@@ -17,8 +17,8 @@ import { AllProfilesListComponent } from '../profileBank/allProfiles/index';
     , SharedModule
     , LayoutModule
     , ProfileBankModule
-    //, RecruitmentCycleModule
-    //, RRFModule
+    , RecruitmentCycleModule
+    , RRFModule
   ],
   declarations: [HomeComponent, MyDashboardComponent],
   exports: [HomeComponent],

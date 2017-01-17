@@ -323,10 +323,10 @@
 								<!--BEGIN CANDIDATE HISTORY SECTION -->
 								<div class="col-md-5" style="border-left:1px solid gray">
 									<span class="caption-subject bold" *ngIf="IsBarchartDataShow" style="font-size : 14px">{{selectedCandidate}} Interview Feedback History</span>
-									<div class="row">
+									<!--<div class="row">
 										<base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions"
 											[legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
-									</div>
+									</div>-->
 									<span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
 									<div class="pull-right">
 										<button class="btn btn-circle btn-icon-only grey-cascade" *ngIf="IsHRConducted" (click)='onGenerateOffer()' tooltip="Generate Offer"

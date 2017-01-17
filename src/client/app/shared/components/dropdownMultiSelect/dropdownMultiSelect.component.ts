@@ -1,12 +1,12 @@
 import { Component, AfterViewInit, ElementRef, Input } from '@angular/core';
-import { MasterData} from '../../model/common.model';
-import {MastersService } from '../../services/masters.service';
+import { MasterData } from '../../model/common.model';
+import { MastersService } from '../../services/masters.service';
 
 @Component({
     moduleId: module.id,
     selector: 'multiselect-dropdown',
     templateUrl: 'dropdownMultiSelect.component.html',
-//    directives: [ROUTER_DIRECTIVES],
+    //    directives: [ROUTER_DIRECTIVES],
     styleUrls: ['dropdownMultiSelect.component.css'],
     providers: [MastersService]
 })
@@ -37,7 +37,7 @@ export class DropdownMultiSelectComponent implements AfterViewInit {
 
     filter() {
         if (this.query !== '') {
-            this.filteredList = this.dataToBind.filter(function(el: any) {
+            this.filteredList = this.dataToBind.filter(function (el: any) {
                 return el.Value.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
             }.bind(this));
 

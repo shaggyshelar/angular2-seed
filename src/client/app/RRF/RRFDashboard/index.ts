@@ -10,3 +10,6 @@ export * from './services/RRFCandidatesList.service';
 export * from './services/rrfDashboard.service';
 export * from './services/RRFReScheduleInterviews.service';
 
+export * from '../RRFApproval/index';
+export * from '../myRRF/index';
+

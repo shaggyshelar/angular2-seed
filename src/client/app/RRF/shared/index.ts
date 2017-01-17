@@ -6,3 +6,8 @@ export * from './components/feedbackData/feedbackData.component';
 export * from './model/panelAvailability.model';
 
 export * from './services/panelsAvailability.service';
+/**Filters or Pipe */
+
+export * from './Filters/RRFFilter.component';
+export * from './Filters/RRFIdFilter.component';
+

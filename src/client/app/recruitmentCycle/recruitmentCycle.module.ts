@@ -5,6 +5,7 @@ import { InterviewSlotComponent, IEFFunctionComponent, IEFGridRowComponent, Inte
 import { FullCalendarComponent } from '../shared/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
+import { AllScheduleInterviewPipe } from './recruitersTab/index';
 import { MastersService } from '../shared/index';
 import { InterviewApprovalGridRowComponent } from './shared/index';
 @NgModule({
@@ -14,8 +15,7 @@ import { InterviewApprovalGridRowComponent } from './shared/index';
     , FullCalendarComponent
     , InterviewDetailsRowComponent
     , IEFGridRowComponent
-    , InterviewApprovalGridRowComponent
-    , IEFFunctionComponent
+    //, InterviewApprovalGridRowComponent
     , IEFFunctionComponent
   ],
   exports: [
@@ -23,9 +23,9 @@ import { InterviewApprovalGridRowComponent } from './shared/index';
     , FullCalendarComponent
     , InterviewDetailsRowComponent
     , IEFGridRowComponent
-    , InterviewApprovalGridRowComponent
+    //, InterviewApprovalGridRowComponent
     , IEFFunctionComponent
-    , IEFFunctionComponent
+    //, AllScheduleInterviewPipe
   ],
   providers: [ToastsManager, MastersService]
 })

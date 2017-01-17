@@ -55,7 +55,7 @@ import { RRFGridRowComponent, FeedbackDataComponent } from '../RRF/index';
     ProfileBankPipe
     , DetailProfileComponent
     , ProfileBankAssignRRFComponent
-    , RRFGridRowComponent
+    //, RRFGridRowComponent
     , AllProfilesAddComponent
     , TransferOwnershipComponent
     , AllProfilesListComponent
@@ -75,13 +75,14 @@ import { RRFGridRowComponent, FeedbackDataComponent } from '../RRF/index';
     , RecentProfilesAddComponent
     , RecentProfilesListComponent
     , RecentProfilesViewComponent
-    , ViewRRFComponent
-    , FeedbackDataComponent
-    , IEFGridRowComponent
+    //, ViewRRFComponent
+    //, FeedbackDataComponent
+    //, IEFGridRowComponent
   ],
   exports: [
     //DetailProfileComponent
-    ////, RRFGridRowComponent
+    //, 
+    //RRFGridRowComponent
     //, ProfileBankAssignRRFComponent
     //, AllProfilesAddComponent
     //, TransferOwnershipComponent

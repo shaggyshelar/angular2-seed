@@ -19,6 +19,6 @@ export const RRFRoutes: Route[] = [
     { path: 'RRF/Add', component: MyRRFAddComponent },
     { path: 'RRF/Edit/:id', component: MyRRFAddComponent },
     /**RRF Approval */
-    { path: '/RRF/PendingRequest', component: RRFApprovalListComponent }
+    { path: 'RRF/PendingRequest', component: RRFApprovalListComponent }
 
 ];

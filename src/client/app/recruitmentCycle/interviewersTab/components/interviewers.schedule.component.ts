@@ -21,7 +21,6 @@ import { MyRRFService } from '../../../RRF/myRRF/services/myRRF.service';
     moduleId: module.id,
     selector: 'interviewers-shedule',
     templateUrl: 'interviewers.schedule.component.html',
-    //directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent],
     //directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent, RRFGridRowComponent],
     providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService, MyRRFService]
 })
