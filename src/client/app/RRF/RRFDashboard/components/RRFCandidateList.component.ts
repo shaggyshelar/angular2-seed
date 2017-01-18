@@ -94,6 +94,7 @@ export class RRFCandidateListComponent implements OnActivate {
     CandidateUpdatedStatus: MasterData = new MasterData();
     candidateStatus: string;
     ReturnPath: string;
+    mindate: Date;
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
         responsive: true
@@ -143,6 +144,7 @@ export class RRFCandidateListComponent implements OnActivate {
                 this.getOtherCanidatesForRRF();
             }
         }
+        this.setMinDateToCalender();
         this.getCanidatesForRRF();
         this.getRRFDetails();
     }
@@ -263,18 +265,18 @@ export class RRFCandidateListComponent implements OnActivate {
                     this.getUpdateStatus(this.CandidateRoundHistory[0].CandidateID.Value);
                     if (status.toLowerCase() === 'selected') {
                         if (this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Round.Value.includes('HR')
-                        && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
+                            && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
                             this.IsHRConducted = true;
                             this.IsOffered = false;
                         } else {
                             this.IsOffered = false;
                             this.IsHRConducted = false;
                         }
-                    }else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
+                    } else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
                         status.toLowerCase() === 'joined') {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
-                    }else {
+                    } else {
                         this.IsOffered = false;
                         this.IsHRConducted = false;
                     }
@@ -477,7 +479,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.TransferInterviewDetails = new TransferInterview();
     }
     /**Get all open RRF Except Tagged RRFs */
-    getAllOpenRRFExceptTaggedRRF(CandidateID : MasterData) {
+    getAllOpenRRFExceptTaggedRRF(CandidateID: MasterData) {
         //TODO: Need to test After API get publish
         this._rrfDashboardService.getAllOpenRRFExceptTaggedRRF(CandidateID)
             .subscribe(
@@ -631,5 +633,20 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     Back() {
         this._router.navigate([this.ReturnPath]);
+    }
+    //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+    setMinDateToCalender() {
+        var todayDate = new Date();
+        this.mindate = (<any>this.formatDate(todayDate));
     }
 }

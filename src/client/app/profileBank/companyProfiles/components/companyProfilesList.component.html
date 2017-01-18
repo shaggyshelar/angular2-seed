@@ -178,7 +178,7 @@
                                                         </button>
                                                         <button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='SaveCandidateID(profile.CandidateID)' tooltip="Update Status"
                                                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                                            title="Update Status" *ngIf='!getUpdateStatusAccess(profile.Status)'>
+                                                            title="Update Status" *ngIf='!getUpdateStatusAccess(profile.Owner,profile.Status)'>
                                                             <i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
                                                         </button>
                                                         <button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(profile.CandidateID)' tooltip="View Profile"
@@ -194,7 +194,7 @@
                                                         </button>
                                                         <button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='deleteCandidate(profile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "
                                                             tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                            [disabled]="profile.Status.Value.toLowerCase() !== 'Open'.toLowerCase() && profile.Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()"
+                                                            [disabled]="disableDelete(profile.Status)"
                                                             title="Delete Profile" tooltipEnable="true">
                                                             <i class="fa fa-remove "></i> <!--Delete Profile-->
                                                         </button>

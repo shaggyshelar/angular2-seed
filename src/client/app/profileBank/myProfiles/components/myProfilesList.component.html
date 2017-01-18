@@ -172,6 +172,9 @@
 																			title="Enter notice period in Days Eg. 45" max="120" />
 																	</div>
 																</div>
+																<div class="col-md-3 inlineForm" *ngIf="photoUploaded" style="margin-top:15px;">
+																	{{photoName}}
+																</div>
 															</div>
 														</div>
 														<div class="container-fluid">
@@ -508,7 +511,7 @@
                                                             <i class="icon-flag"></i> <!--Blacklist Profile-->
                                                         </button>
 													<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='confirmDelete(myprofile.CandidateID)' tooltip="Delete Profile"
-														tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true" [disabled]="myprofile.Status.Value.toLowerCase() !== 'Open'.toLowerCase() && myprofile.Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()"
+														tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true" [disabled]="disableDelete(myprofile.Status)"
 														[ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']">
                                                             <i class="fa fa-remove "></i> <!--Delete Profile-->
                                                         </button>

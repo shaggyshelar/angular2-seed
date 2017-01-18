@@ -344,7 +344,7 @@
 <div class="row" style="margin-top:20px;" *ngIf="IsOfferGenerate">
 <form (submit)="saveOffer(ExpDateOfJoining);">
 	<div class="form-group col-md-7">
-		<label class="col-md-6 control-label align" style="margin-left:-12px;">Joining Date: </label>
+		<label class="col-md-6 control-label align" style="margin-left:-12px;">Joining Date <span class="required">*</span> </label>
 <div class="col-md-2">
 	<input type="date" [min]="mindate" name="bday" id="ExpDateOfJoining" required="" [(ngModel)]="ExpDateOfJoining" style="margin-left: -20px;" />
 </div>
@@ -367,7 +367,7 @@
 <form (submit)="saveUpdateStatus();">
 	<div class="form-group col-md-7">
 		<div class="dataTables_length" id="sample_1_length">
-			<label>Status:</label>
+			<label>Status <span class="required">*</span></label>
 			<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="selectedStatus"
 				required="" style="width: 159px!important;">
 <option *ngFor="let status of CandidateUpdatedStatus" [ngValue]="status">{{status.Value}}</option>
@@ -438,7 +438,7 @@
 </div>
 <div class="row" style="margin-top:10px;">
 <div class="form-group col-md-7">
-	<label class="col-md-6 control-label align">Actual Time </label>
+	<label class="col-md-6 control-label align">Actual Time <span class="required">*</span> </label>
 	<div class="col-md-2">
 		<input type="time" name="bday" id="" [(ngModel)]='actualTime' required="" />
 	</div>
@@ -462,7 +462,7 @@
 		<br/>
 		<div class="row">
 			<div class="col-lg-4" align="right">
-				Status
+				Status <span style="color:red">*</span>
 			</div>
 			<div class="col-lg-8">
 				<select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
@@ -476,7 +476,7 @@
 <br>
 <div class="row">
 	<div class="col-lg-4" align="right">
-		Comments
+		Comments <span style="color:red">*</span>
 	</div>
 	<div class="col-lg-8">
 		<!---->
@@ -507,7 +507,7 @@
 		<br/>
 		<div class="row">
 			<div class="col-lg-4" align="right">
-				Open RRF
+				Open RRF <span style="color:red">*</span>
 			</div>
 			<div class="col-lg-8">
 				<select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
@@ -519,7 +519,7 @@
 <br>
 <div class="row">
 	<div class="col-lg-4" align="right">
-		Comments/Reason
+		Comments/Reason <span style="color:red">*</span>
 	</div>
 	<div class="col-lg-8">
 		<input type="text" [(ngModel)]='transferReason' id="transferReasons" class="form-control" placeholder="Transfer reason" tooltip="comment"

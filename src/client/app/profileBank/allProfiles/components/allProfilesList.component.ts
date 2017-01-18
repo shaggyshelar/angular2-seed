@@ -313,13 +313,13 @@ export class AllProfilesListComponent implements OnActivate {
     }
     getUpdateStatusAccess(Owner: MasterData, Status: MasterData) {
         try {
-            if (Status.Value !== null) {
-                if (Owner.Id === this.currentUser.Id && (Status.Value.toLocaleLowerCase() === 'offered' ||
-                    Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined')) {
+            if (Status.Value !== null && Owner.Value !== null) {
+                if (Owner.Id === this.currentUser.Id && (Status.Value.toLowerCase() === 'offered' ||
+                    Status.Value.toLowerCase() === 'offer accepted' || Status.Value.toLowerCase() === 'joined')) {
                     return false;
                 } else { return true; }
             } else {
-                return false;
+                return true;
             }
         } catch (error) {
             this.toastr.error(error);

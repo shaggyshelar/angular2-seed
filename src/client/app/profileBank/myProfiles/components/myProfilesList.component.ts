@@ -115,7 +115,7 @@ export class MyProfilesListComponent implements OnActivate {
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
         };
-        sessionStorage.setItem('backToProfile','/App/ProfileBank/MyProfiles');
+        sessionStorage.setItem('backToProfile', '/App/ProfileBank/MyProfiles');
         this.getColumnsForSorting();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
@@ -466,22 +466,24 @@ export class MyProfilesListComponent implements OnActivate {
     uploadPhoto(selectedFile: any) {
         try {
             let FileList: FileList = selectedFile.target.files;
-            if (selectedFile.target.files[0].size < 2000000) {
-                if (selectedFile.target.files[0].type === 'image/jpeg'
-                    || selectedFile.target.files[0].type === 'image/png'
-                    || selectedFile.target.files[0].type === 'image/jpg') {
-                    if (this.uploadedPhoto)
-                        this.uploadedPhoto.length = 0;
-                    for (let i = 0, length = FileList.length; i < length; i++) {
-                        this.uploadedPhoto.push(FileList.item(i));
-                        this.photoUploaded = true;
-                        this.photoName = FileList.item(i).name;
+            if (selectedFile.target.files.length > 0) {
+                if (selectedFile.target.files[0].size < 2000000) {
+                    if (selectedFile.target.files[0].type === 'image/jpeg'
+                        || selectedFile.target.files[0].type === 'image/png'
+                        || selectedFile.target.files[0].type === 'image/jpg') {
+                        if (this.uploadedPhoto)
+                            this.uploadedPhoto.length = 0;
+                        for (let i = 0, length = FileList.length; i < length; i++) {
+                            this.uploadedPhoto.push(FileList.item(i));
+                            this.photoUploaded = true;
+                            this.photoName = FileList.item(i).name;
+                        }
+                    } else {
+                        this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
                     }
-                }else {
-                    this.toastr.error('Please upload image of type .jpg, .png, .jpeg');
+                } else {
+                    this.toastr.error('Please upload image of size less than 2 MB');
                 }
-            }else {
-                this.toastr.error('Please upload image of size less than 2 MB');
             }
         } catch (error) {
             document.write(error);
@@ -538,18 +540,18 @@ export class MyProfilesListComponent implements OnActivate {
             let FileList: FileList = inputValue.target.files;
             if (inputValue.target.files[0].size < 2000000) {
                 if (inputValue.target.files[0].type === 'application/pdf'
-                || inputValue.target.files[0].name.split('.')[1] === 'docx' ||
-                inputValue.target.files[0].name.split('.')[1] === 'doc') {
+                    || inputValue.target.files[0].name.split('.')[1] === 'docx' ||
+                    inputValue.target.files[0].name.split('.')[1] === 'doc') {
                     this.psdTemplates.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.psdTemplates.push(FileList.item(i));
                         this.fileUploaded = true;
                         this.fileName = FileList.item(i).name;
                     }
-                }else {
+                } else {
                     this.toastr.error('Please upload document of type .doc, .docx, .pdf');
                 }
-            }else {
+            } else {
                 this.toastr.error('Please upload document of size less than 2 MB');
             }
         } catch (error) {
@@ -563,8 +565,8 @@ export class MyProfilesListComponent implements OnActivate {
             let FileList: FileList = inputValue.target.files;
             if (inputValue.target.files[0].size < 2000000) {
                 if (inputValue.target.files[0].type === 'application/pdf' ||
-                inputValue.target.files[0].name.split('.')[1] === 'docx' ||
-                inputValue.target.files[0].name.split('.')[1] === 'doc') {
+                    inputValue.target.files[0].name.split('.')[1] === 'docx' ||
+                    inputValue.target.files[0].name.split('.')[1] === 'doc') {
                     this.resumeFiles.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.resumeFiles.push(FileList.item(i));
@@ -685,6 +687,16 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getMyProfiles();
     }
+    disableDelete(Status: MasterData) {
+        if (Status.Value !== null) {
+            if (Status.Value.toLowerCase() !== 'Open'.toLowerCase()
+                && Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()) {
+                return true;
+            } else { return false; }
+        } else {
+            return false;
+        }
+    }
     OnPaginationClick(ButtonClicked: string) {
         /* ButtonClicked 
                 i. Initial - 0
@@ -742,9 +754,11 @@ export class MyProfilesListComponent implements OnActivate {
     }
     getUpdateStatusAccess(Status: MasterData) {
         try {
-            if (Status.Value.toLocaleLowerCase() === 'offered' ||
-                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined') {
-                return false;
+            if (Status.Value !== null) {
+                if (Status.Value.toLowerCase() === 'offered' ||
+                    Status.Value.toLowerCase() === 'offer accepted' || Status.Value.toLowerCase() === 'joined') {
+                    return false;
+                } else { return true; }
             } else { return true; }
         } catch (error) {
             this.toastr.error(error);

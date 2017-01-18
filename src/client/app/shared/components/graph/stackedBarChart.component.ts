@@ -39,7 +39,7 @@ export class StackedBarComponent implements OnChanges {
             }],
             'startDuration': 1,
             'graphs': [{
-                'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]] Days</b></span>',
                 'fillAlphas': 0.8,
                 'labelText': '[[value]]',
                 'lineAlpha': 0.3,
@@ -48,7 +48,7 @@ export class StackedBarComponent implements OnChanges {
                 'color': '#000000',
                 'valueField': 'completedVal'
             }, {
-                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]] Days</b></span>',
                     'fillAlphas': 0.8,
                     'labelText': '[[value]]',
                     'lineAlpha': 0.3,
@@ -57,7 +57,7 @@ export class StackedBarComponent implements OnChanges {
                     'color': '#000000',
                     'valueField': 'remainingVal'
                 }, {
-                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
+                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]] Days</b></span>',
                     'fillAlphas': 0.8,
                     'labelText': '[[value]]',
                     'lineAlpha': 0.3,

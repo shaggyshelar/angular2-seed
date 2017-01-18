@@ -159,7 +159,7 @@ export class CompanyProfilesListComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.profile.Status = new MasterData();
-                    setTimeout(() => {  this.getcompanyProfiles();}, 1000);
+                    setTimeout(() => { this.getcompanyProfiles(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -252,6 +252,16 @@ export class CompanyProfilesListComponent implements OnActivate {
         this.companyProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getcompanyProfiles();
     }
+    disableDelete(Status: MasterData) {
+        if (Status.Value !== null) {
+            if (Status.Value.toLowerCase() !== 'Open'.toLowerCase()
+                && Status.Value.toLowerCase() !== 'Incomplete'.toLowerCase()) {
+                return true;
+            } else { return false; }
+        } else {
+            return false;
+        }
+    }
     OnPaginationClick(ButtonClicked: string) {
         /* ButtonClicked 
                 i. Initial - 0
@@ -270,12 +280,16 @@ export class CompanyProfilesListComponent implements OnActivate {
             },
             error => this.toastr.error(<any>error));
     }
-    getUpdateStatusAccess(Status: MasterData) {
+    getUpdateStatusAccess(Owner: MasterData, Status: MasterData) {
         try {
-            if (Status.Value.toLocaleLowerCase() === 'offered' ||
-                Status.Value.toLocaleLowerCase() === 'offer accepted' || Status.Value.toLocaleLowerCase() === 'joined') {
-                return false;
-            } else { return true; }
+            if (Status.Value !== null && Owner.Value !== null) {
+                if (Owner.Id === this.currentUser.Id && (Status.Value.toLowerCase() === 'offered' ||
+                    Status.Value.toLowerCase()  === 'offer accepted' || Status.Value.toLowerCase()  === 'joined')) {
+                    return false;
+                } else { return true; }
+            } else {
+                return true;
+            }
         } catch (error) {
             this.toastr.error(error);
             return false;
