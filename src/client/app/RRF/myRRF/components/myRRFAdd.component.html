@@ -182,8 +182,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-lg-8">
+                                    <div class="row">
+                                    <label>Skills<span class="required"> * </span></label>
+                                    </div>
+                                    <div class="row" style="margin-top:-30px;">
                                     <multiselect-dropdown [isReadOnly]="isDisabled" placeholder="Select Skills" [dataToBind]='skills' [selected]='newRRF.SkillsRequired'
                                         isAddButtonVisible='true'></multiselect-dropdown>
+                                        </div>
                                 </div>
                             </div>
                             <!--<div class="row">
@@ -194,7 +199,7 @@
 
                             <div class="row">
                                 <div class="form-group col-lg-12">
-                                    <label>Job description<span class="required"> * </span></label>
+                                    <label>Job description<small> (Max 500 chars)</small><span class="required"> * </span></label>
                                     <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.Description' [disabled]='isDisabled' maxlength="500" id="txtDescription"
                                         rows="2" tooltip="Job description" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                         tooltipEnable="!newRRF.Description" placeholder="Job description" required="" style="resize:vertical"></textarea>
@@ -203,7 +208,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
-                                    <label>Preferred skills<span class="required"> * </span></label>
+                                    <label>Preferred skills<small> (Max 250 chars)</small><span class="required"> * </span></label>
                                     <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.PreferredSkills' [disabled]='isDisabled' maxlength="250"
                                         id="txtDescription" rows="2" tooltip="Preferred skills" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                         tooltipEnable="!newRRF.Description" placeholder="Preferred skills" required="" style="resize:vertical"></textarea>
@@ -211,7 +216,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
-                                    <label>Competencies<span class="required"> * </span></label>
+                                    <label>Competencies<small> (Max 250 chars)</small><span class="required"> * </span></label>
                                     <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.Competencies' [disabled]='isDisabled' maxlength="250"
                                         id="txtDescription" rows="2" tooltip="Competencies" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                         tooltipEnable="!newRRF.Description" placeholder="Competencies" required="" style="resize:vertical"></textarea>
@@ -219,7 +224,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
-                                    <label>Good to have<span class="required"> * </span></label>
+                                    <label>Good to have<small> (Max 250 chars)</small><span class="required"> * </span></label>
                                     <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.GoodToHave' [disabled]='isDisabled' maxlength="250" id="txtDescription"
                                         rows="2" tooltip="Good to have" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
                                         placeholder="Good to have" required="" style="resize:vertical"></textarea>
@@ -227,7 +232,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
-                                    <label>Qualification/ Certifications required<span class="required"> * </span></label>
+                                    <label>Qualification/ Certifications required<small> (Max 250 chars)</small><span class="required"> * </span></label>
                                     <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.QualCertRquired' [disabled]='isDisabled' maxlength="250"
                                         id="txtDescription" rows="2" tooltip="Qualification/ Certifications required" tooltipPlacement="top"
                                         tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description" placeholder="Qualification/ Certifications required"

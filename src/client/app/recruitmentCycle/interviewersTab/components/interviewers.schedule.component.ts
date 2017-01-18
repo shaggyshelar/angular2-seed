@@ -153,15 +153,15 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
 
     //Shows Tooltip on calendar
     showDetails(e: any) {
+        var StartTime = e.event.start.format('hh:mm A');
+        var EndTime = e.event.end.format('hh:mm A');
         let element: any = $(e.element);
         if (e.event.title !== '') {
             element.tooltip({
-                title: ':' + e.event.title
+                title: e.event.title + 'From :' + StartTime + ' To ' + EndTime
             });
         }
         if (e.event.title === '') {
-            var StartTime = e.event.start.format('hh:mm A');
-            var EndTime = e.event.end.format('hh:mm A');
             let fromTimeLabel: string = e.event.title + ' From :' + StartTime + ' To ' + EndTime;
             element.tooltip({
                 title: fromTimeLabel

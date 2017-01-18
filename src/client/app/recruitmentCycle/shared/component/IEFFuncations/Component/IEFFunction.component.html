@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-md-8">
-                <textarea class="form-control" (change)="onUpdate()" rows="3" placeholder="Enter comment..." style="resize:vertical" [(ngModel)]='functionsCollection[recordCount].FunctionValue'  [disabled]='isDisabled'></textarea>
+                <textarea class="form-control" (change)="onUpdate()" rows="3" maxlength="500" placeholder="Enter comment (Max 500 characters)..." style="resize:vertical" [(ngModel)]='functionsCollection[recordCount].FunctionValue'  [disabled]='isDisabled'></textarea>
             </div>
             <!-- /ng2 Binding -->
         </div>

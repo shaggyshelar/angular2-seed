@@ -210,6 +210,17 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     //Get All Candidate List whose status is offered
     getOfferedCanidatesForRRF() {
+        this.CandidateRoundHistory = new Array<Interview>();
+        this.IsBarchartDataShow = false;
+        this.IsHRConducted = false;
+        this.IsOffered = false;
+        this.IsOfferGenerate = false;
+        this.IsUpdateStatus = false;
+        this.isRoundHistoryPresent = false;
+        this.setActualTimeForm = false;
+        this.showChangeStatus = false;
+        this.IsAllowTransfer = false;
+        this.selectedCandidate = '';
         this._rrfCandidatesList.getOfferedCandidatesForRRF(this.RRFID.Value)
             .subscribe(
             (results: any) => {
@@ -225,6 +236,17 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     //Get All Other Candidate List
     getOtherCanidatesForRRF() {
+        this.CandidateRoundHistory = new Array<Interview>();
+        this.IsBarchartDataShow = false;
+        this.IsHRConducted = false;
+        this.IsOffered = false;
+        this.IsOfferGenerate = false;
+        this.IsUpdateStatus = false;
+        this.isRoundHistoryPresent = false;
+        this.setActualTimeForm = false;
+        this.showChangeStatus = false;
+        this.IsAllowTransfer = false;
+        this.selectedCandidate = '';
         this._rrfCandidatesList.getOtherCandidatesForRRF(this.RRFID.Value)
             .subscribe(
             (results: any) => {
@@ -237,6 +259,19 @@ export class RRFCandidateListComponent implements OnActivate {
                 }
             },
             error => this.errorMessage = <any>error);
+    }
+     getInProcessCanidatesForRRF() {
+        this.CandidateRoundHistory = new Array<Interview>();
+        this.IsBarchartDataShow = false;
+        this.IsHRConducted = false;
+        this.IsOffered = false;
+        this.IsOfferGenerate = false;
+        this.IsUpdateStatus = false;
+        this.isRoundHistoryPresent = false;
+        this.setActualTimeForm = false;
+        this.showChangeStatus = false;
+        this.IsAllowTransfer = false;
+        this.selectedCandidate = '';
     }
     getRRFDetails() {
         //this.RRFID
@@ -300,7 +335,7 @@ export class RRFCandidateListComponent implements OnActivate {
             title: 'Comments',
             html: true,
             trigger: 'hover',
-            content: Comments
+            content: Comments?Comments:'No data found'
         });
     }
 

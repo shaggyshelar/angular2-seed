@@ -24,12 +24,12 @@
 			<div class="portlet light bordered" style="margin-left: -32px;">
 <div class="portlet-title">
 	<div class="row" style="margin-left:1px;">
-		<a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
-	</div>
+<a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+</div>
 
-	<div class="caption">
-		<span class="caption-subject bold uppercase">Tagged candidates for {{selectedRRF.PositionTitle}}</span>
-	</div>
+<div class="caption">
+	<span class="caption-subject bold uppercase">Tagged candidates for {{selectedRRF.PositionTitle}}</span>
+</div>
 
 </div>
 <div class="portlet-body">
@@ -90,7 +90,7 @@
 			<div class="tabbable-line">
 				<ul class="nav nav-tabs " id="mytabs">
 					<li class="active">
-						<a href="#tab_Candidate_Details" data-toggle="tab" aria-expanded="true"> Inprocess Candidates </a>
+						<a href="#tab_Candidate_Details" data-toggle="tab" aria-expanded="true" (click)="getInProcessCanidatesForRRF();"> Inprocess Candidates </a>
 					</li>
 					<li class="">
 						<a href="#tab_Offered_Candidates" data-toggle="tab" aria-expanded="false" (click)="getOfferedCanidatesForRRF();"> Offered Candidates </a>
@@ -462,11 +462,12 @@
 		<br/>
 		<div class="row">
 			<div class="col-lg-4" align="right">
-				Status <span style="color:red">*</span>
-			</div>
-			<div class="col-lg-8">
-				<select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
-					tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus" style="font-size: inherit;" required>
+				Status
+				<span style="color:red">*</span>
+</div>
+<div class="col-lg-8">
+	<select id="cmbStaus" class="form-control" [(ngModel)]='changedStatus' required placeholder="Select status" tooltip="Select status"
+		tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changedStatus" style="font-size: inherit;" required>
 <!--<option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFID.Value}}</option>-->
 <option value="Selected"> Selected</option>
 <option value="Rejected"> Rejected</option>
@@ -476,13 +477,14 @@
 <br>
 <div class="row">
 	<div class="col-lg-4" align="right">
-		Comments <span style="color:red">*</span>
-	</div>
-	<div class="col-lg-8">
-		<!---->
-		<input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
-			tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changesStatusComment" required=""
-			autocomplete="off" style="font-size: inherit;" />
+		Comments
+		<span style="color:red">*</span>
+</div>
+<div class="col-lg-8">
+	<!---->
+	<input type="text" [(ngModel)]='changesStatusComment' id="changesStatusComment" class="form-control" placeholder="change Status Comment"
+		tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changesStatusComment" required="" autocomplete="off"
+		style="font-size: inherit;" />
 </div>
 </div>
 <br>
@@ -507,11 +509,12 @@
 		<br/>
 		<div class="row">
 			<div class="col-lg-4" align="right">
-				Open RRF <span style="color:red">*</span>
-			</div>
-			<div class="col-lg-8">
-				<select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
-					[(ngModel)]='rrfToTrnasfer' tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" style="font-size: inherit;" required>
+				Open RRF
+				<span style="color:red">*</span>
+</div>
+<div class="col-lg-8">
+	<select id="cmbStaus" class="form-control" required placeholder="Select suitable RRF" tooltip="Select suitable Open RRF"
+		[(ngModel)]='rrfToTrnasfer' tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" style="font-size: inherit;" required>
 <option *ngFor="let OpenRrf of allOpenRrf" [value]="OpenRrf.RRFID.Id">{{OpenRrf.RRFCODE}} - {{OpenRrf.Designation.Value}} - {{OpenRrf.RaisedBy.Value}}</option>
 </select>
 </div>
@@ -519,12 +522,13 @@
 <br>
 <div class="row">
 	<div class="col-lg-4" align="right">
-		Comments/Reason <span style="color:red">*</span>
-	</div>
-	<div class="col-lg-8">
-		<input type="text" [(ngModel)]='transferReason' id="transferReasons" class="form-control" placeholder="Transfer reason" tooltip="comment"
-			tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changesStatusComment" required="" autocomplete="off"
-			style="font-size: inherit;" />
+		Comments/Reason
+		<span style="color:red">*</span>
+</div>
+<div class="col-lg-8">
+	<input type="text" [(ngModel)]='transferReason' id="transferReasons" class="form-control" placeholder="Transfer reason" tooltip="comment"
+		tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!changesStatusComment" required="" autocomplete="off"
+		style="font-size: inherit;" />
 </div>
 </div>
 <br>

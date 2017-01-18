@@ -46,7 +46,7 @@
                                         <a href="mailto:shuxer@gmail.com"> {{_awaitedInterview.RRFCODE}} </a>
                                     </td>
                                     <td> {{_awaitedInterview.InterviewMode.Value}} </td>
-                                    <td class="center"> {{_awaitedInterview.InterviewDate}} on {{_awaitedInterview.InterviewFromTime}} </td>
+                                    <td class="center"> {{_awaitedInterview.InterviewDate}} At {{_awaitedInterview.InterviewFromTime}} </td>
 
                                     <td>
                                         <div class="btn-group">
@@ -195,7 +195,7 @@
                                             <div *ngIf="_myInterview.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{_myInterview.SkypeID.Value ? _myInterview.SkypeID.Value : "N/A"}}</div>
                                             <div *ngIf="_myInterview.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{_myInterview.SkypePassword ? _myInterview.SkypePassword : "N/A"}}</div>
                                         </td>
-                                        <td class="center"> {{formatInputDate(_myInterview.InterviewDate)}} on {{getTime(_myInterview.InterviewFromTime)}} </td>
+                                        <td class="center"> {{formatInputDate(_myInterview.InterviewDate)}} At {{getTime(_myInterview.InterviewFromTime)}} </td>
                                         <td>
                                             <span class="label label-sm label-success"> {{_myInterview.Status}} </span>
                                         </td>
@@ -206,7 +206,7 @@
                                                 </button>
                                                 <ul class="dropdown-menu" role="menu">
                                                     <li>
-                                                        <a href="javascript:;" (click)='getResume(_myInterview.CandidateID)'>
+                                                        <a href="javascript:;" *ngIf="_myInterview.CandidatePrimaryDetails.ResumeID !== ''" (click)='getResume(_myInterview.CandidateID)'>
                                                             <i class="icon-download"></i> Download Resume </a>
                                                     </li>
                                                     <li>
