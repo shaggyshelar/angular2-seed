@@ -15,6 +15,7 @@ export class RRFPipe implements PipeTransform {
                 rrfData.Designation.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 rrfData.Technology.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 rrfData.Description.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                rrfData.RRFCODE.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 (<any>(rrfData.MinExp)).search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 (<any>(rrfData.CreatedDate)).search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 (<any>(rrfData.ExpDateOfJoining)).search(new RegExp(stringToSearh, 'i')) !== -1 ||

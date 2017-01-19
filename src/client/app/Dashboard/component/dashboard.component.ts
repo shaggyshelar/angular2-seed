@@ -565,10 +565,39 @@ export class DashboardComponent implements OnInit {
                     this.status = _status;
                     this.ChartDataForStackedColChart = <any>results;
                     this.IsStackColChart = true;
-
-                    var _rrfid = this.ChartDataForStackedColChart[0].RRFID.Value !== null ?
-                        this.ChartDataForStackedColChart[0].RRFID.Value : 0;
-                    this.GetTaggedCandidateStatusCount(_rrfid, this.ChartDataForStackedColChart[0].status);
+                    for (var index = 0; index < this.ChartDataForStackedColChart.length; index++) {
+                        if (this.ChartDataForStackedColChart[index].JoinedVal > 0) {
+                            this.GetTaggedCandidateStatusCount(this.ChartDataForStackedColChart[index].RRFID.Value,
+                                this.ChartDataForStackedColChart[index].status);
+                            break;
+                        }
+                        if (this.ChartDataForStackedColChart[index].inprocessVal > 0) {
+                            this.GetTaggedCandidateStatusCount(this.ChartDataForStackedColChart[index].RRFID.Value,
+                                this.ChartDataForStackedColChart[index].status);
+                            break;
+                        }
+                        if (this.ChartDataForStackedColChart[index].offerAcceptedVal > 0) {
+                            this.GetTaggedCandidateStatusCount(this.ChartDataForStackedColChart[index].RRFID.Value,
+                                this.ChartDataForStackedColChart[index].status);
+                            break;
+                        }
+                        if (this.ChartDataForStackedColChart[index].offeredVal > 0) {
+                            this.GetTaggedCandidateStatusCount(this.ChartDataForStackedColChart[index].RRFID.Value,
+                                this.ChartDataForStackedColChart[index].status);
+                            break;
+                        }
+                        if (this.ChartDataForStackedColChart[index].openVal > 0) {
+                            this.GetTaggedCandidateStatusCount(this.ChartDataForStackedColChart[index].RRFID.Value,
+                                this.ChartDataForStackedColChart[index].status);
+                            break;
+                        }
+                        if (this.ChartDataForStackedColChart[index].rejectedVal > 0) {
+                            this.GetTaggedCandidateStatusCount(this.ChartDataForStackedColChart[index].RRFID.Value,
+                                this.ChartDataForStackedColChart[index].status);
+                            break;
+                        }
+                    }
+                    //this.GetTaggedCandidateStatusCount(_rrfid, this.ChartDataForStackedColChart[0].status);
                 } else {
                     this.IsStackColChart = false;
                     this.IsAmchart = false;

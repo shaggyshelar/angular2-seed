@@ -32,7 +32,7 @@ export class PiechartComponent implements OnChanges {
     if (_chartData.length > 0) {
       this.chart = AmCharts.makeChart('chartdivforPie', {
         'type': 'pie',
-        'labelRadius': -5,
+        'labelRadius': 5,
         'startDuration': 0.5,
         'theme': 'light',
         'addClassNames': true,
