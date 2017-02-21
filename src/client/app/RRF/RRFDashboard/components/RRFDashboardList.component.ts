@@ -436,18 +436,18 @@ export class RRFDashboardListComponent implements OnInit {
 
 
     redirectToAssignRRF(rrfID: MasterData) {
-        this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID.Value + 'ID' + rrfID.Id]);
+        this._router.navigate(['RRF/Assign/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
     redirectToEditRRF(rrfID: MasterData, status: number) {
         // this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id]);
-        this._router.navigate(['/App/RRF/MyRRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id + 'ST' + status]);
+        this._router.navigate(['RRF/Edit/' + rrfID.Value + 'ID' + rrfID.Id + 'ST' + status]);
 
     }
 
     onViewCandidateClick(rrfID: MasterData) {
         // rrfID = 'RRF6866237939ID76';
-        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
+        this._router.navigate(['RRF/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
     getLoggedInUser() {
@@ -508,14 +508,14 @@ export class RRFDashboardListComponent implements OnInit {
     }
     onReScheduleInterviewsClick(RRFID: MasterData) {
         //redirect to All Reschedule Interviews Screen
-        this._router.navigate(['/App/RRF/RRFDashboard/Interviews/' + RRFID.Value + 'ID' + RRFID.Id]);
+        this._router.navigate(['RRF/Interviews/' + RRFID.Value + 'ID' + RRFID.Id]);
     }
     onShowAvailabilityClick() {
         this.showAvaililityPanel = !this.showAvaililityPanel;
     }
     navigateToInitiateRRF() {
-        sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard');
-        this._router.navigate(['/App/RRF/MyRRF/Add']);
+        sessionStorage.setItem('navigationPath', 'RRF/RRFDashboard');
+        this._router.navigate(['RRF/Add']);
     }
 
 }

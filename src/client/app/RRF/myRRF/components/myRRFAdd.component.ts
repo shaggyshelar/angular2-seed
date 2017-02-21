@@ -173,7 +173,7 @@ export class MyRRFAddComponent implements OnInit {
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
-                        this._router.navigate(['/App/RRF/RRFDashboard/']);
+                        this._router.navigate(['RRF/RRFDashboard']);
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).Message);
                     }
@@ -437,7 +437,7 @@ export class MyRRFAddComponent implements OnInit {
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this._router.navigate(['/App/RRF/RRFDashboard/']);
+                    this._router.navigate(['RRF/RRFDashboard/']);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }

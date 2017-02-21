@@ -6,8 +6,11 @@ import {
     RRFDashboardListComponent,
     RRFAssignComponent,
     RRFCandidateListComponent,
-    RRFReScheduleInterviewsComponent
+    RRFReScheduleInterviewsComponent,
 } from './RRFDashboard/index';
+import { InterviewerAvalabilityComponent } from './index';
+import { ScheduleInterviewsForRecruitersComponent } from '../recruitmentCycle/recruitersTab/index';
+import { FeedbackPendingComponent } from './index';
 
 export const RRFRoutes: Route[] = [
     /**RRF Dashboard */
@@ -19,6 +22,12 @@ export const RRFRoutes: Route[] = [
     { path: 'RRF/Add', component: MyRRFAddComponent },
     { path: 'RRF/Edit/:id', component: MyRRFAddComponent },
     /**RRF Approval */
-    { path: 'RRF/PendingRequest', component: RRFApprovalListComponent }
+    { path: 'RRF/PendingRequest', component: RRFApprovalListComponent },
+    /**All Schedule Interview*/
+    { path: 'RRF/ScheduleInterviews', component: ScheduleInterviewsForRecruitersComponent },
+    /**Interviews Availability*/
+    { path: 'RRF/InterviewsAvailability', component: InterviewerAvalabilityComponent },
+    /**RRF Feedback*/
+    { path: 'RRF/FeedbackPending', component: FeedbackPendingComponent }
 
 ];

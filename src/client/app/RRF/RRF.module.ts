@@ -24,12 +24,16 @@ import {
     , MyRRFService
     , RRFCandidateListService
     , RRFReScheduleInterviewService
+    , RRFApprovalService
 } from './RRFDashboard/index';
 import {
     InterviewApprovalComponent
     , InterviewApprovalGridRowComponent
     , AllScheduleInterviewPipe
+    , ScheduleInterviewsForRecruitersComponent
 } from '../recruitmentCycle/index';
+import { InterviewerAvalabilityComponent
+        , FeedbackPendingComponent } from './index';
 @NgModule({
     imports: [CommonModule, SharedModule],
     declarations: [
@@ -50,6 +54,9 @@ import {
         , MyRRFAddComponent
         , AllScheduleInterviewPipe
         , DropdownMultiSelectComponent
+        , ScheduleInterviewsForRecruitersComponent
+        , InterviewerAvalabilityComponent
+        , FeedbackPendingComponent
     ],
     exports: [
         RRFGridRowComponent
@@ -58,6 +65,9 @@ import {
         , PanelsAvailablityComponent
         , InterviewApprovalGridRowComponent
         , AllScheduleInterviewPipe
+        , ScheduleInterviewsForRecruitersComponent
+        , InterviewerAvalabilityComponent
+        , FeedbackPendingComponent
     ],
     providers: [
         MastersService
@@ -67,6 +77,7 @@ import {
         , PanelsAvailabilityService
         , RRFCandidateListService
         , RRFReScheduleInterviewService
+        , RRFApprovalService
     ]
 })
 export class RRFModule { }

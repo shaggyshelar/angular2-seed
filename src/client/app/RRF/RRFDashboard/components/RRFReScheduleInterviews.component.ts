@@ -36,7 +36,7 @@ export class RRFReScheduleInterviewsComponent implements OnInit {
         this.getMyReScheduleInterviewsData();
     }
     Back() {
-        this._router.navigate(['/App/RRF/RRFDashboard']);
+        this._router.navigate(['RRF/RRFDashboard']);
     }
     onViewChanged(viewMode: string) {
 

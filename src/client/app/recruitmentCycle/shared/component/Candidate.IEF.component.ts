@@ -3,11 +3,11 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { Interview } from  '../../shared/model/interview';
 import { CandidateIEFService } from  '../services/Candidate.IEF.service';
 import { Router } from '@angular/router';
-import { IEFFunctionComponent} from './IEFFuncations/Component/IEFFunction.component';
-import { InterviewSlotComponent} from './InterviewSlot/Component/InterviewSlot.component';
-import { IEFInformation, iefModel, IEFFunction, IEFSubmission} from '../../shared/model/ief';
-import { ResponseFromAPI, MasterData} from '../../../shared/model/common.model';
-import { APIResult} from  '../../../shared/constantValue/index';
+import { IEFFunctionComponent } from './IEFFuncations/Component/IEFFunction.component';
+import { InterviewSlotComponent } from './InterviewSlot/Component/InterviewSlot.component';
+import { IEFInformation, iefModel, IEFFunction, IEFSubmission } from '../../shared/model/ief';
+import { ResponseFromAPI, MasterData } from '../../../shared/model/common.model';
+import { APIResult } from  '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,

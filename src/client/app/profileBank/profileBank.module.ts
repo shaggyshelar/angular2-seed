@@ -17,7 +17,8 @@ import {
   BlackListedProfilesViewComponent,
   BlackListedProfilesService
 } from './blackListedProfiles/index';
-import { AdvanceSearchListComponent } from './advanceSearch/index';
+import { AdvanceSearchInSidebarComponent
+          , AdvanceSearchService } from './advanceSearch/index';
 import {
   CompanyProfilesAddComponent,
   CompanyProfilesListComponent,
@@ -60,7 +61,7 @@ import { RRFGridRowComponent, FeedbackDataComponent } from '../RRF/index';
     , TransferOwnershipComponent
     , AllProfilesListComponent
     , AllProfilesViewComponent
-    , AdvanceSearchListComponent
+    , AdvanceSearchInSidebarComponent
     , BlackListedProfilesAddComponent
     , BlackListedProfilesListComponent
     , BlackListedProfilesViewComponent
@@ -112,7 +113,8 @@ import { RRFGridRowComponent, FeedbackDataComponent } from '../RRF/index';
     BlackListedProfilesService,
     DataSharedService,
     AllProfilesService,
-    CompanyProfilesService
+    CompanyProfilesService,
+    AdvanceSearchService
   ]
 })
 export class ProfileBankModule { }

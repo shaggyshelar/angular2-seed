@@ -39,7 +39,7 @@ export const HomeRoutes: Route[] = [
   { path: '', component: HomeComponent }
   , ...ProfileBankRoutes
   , ...RRFRoutes
-  //, ...RecruitmentCycleRoutes
+  , ...RecruitmentCycleRoutes
 
   // ,{ path: '/Admin/Feature', component: FeatureComponent },
   // { path: '/Admin/Practice', component: PracticeComponent },

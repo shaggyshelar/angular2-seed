@@ -123,32 +123,32 @@
                         </a>
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
-                        <a [routerLink]="['/RRF/RRFApproval']" class="nav-link ">
+                        <a [routerLink]="['/RRF/PendingRequest']" class="nav-link ">
                             <i class="fa fa-check-square"></i>
                             <span class="title">Approval Requests</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
-                        <a [routerLink]="['/App/AllInterviews/showInterviews']" class="nav-link ">
+                        <a [routerLink]="['/RRF/ScheduleInterviews']" class="nav-link ">
                             <i class="fa fa-calendar-check-o"></i>
                             <span class="title">All Schedule Interviews</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
-                        <a [routerLink]="['/App/RRF/InterviewsAvailability']" class="nav-link ">
+                        <a [routerLink]="['/RRF/InterviewsAvailability']" class="nav-link ">
                             <i class="fa fa-signal"></i>
                             <span class="title">Interviewers Availability</span>
                         </a>
                     </li>
                     <li [ifAuthorize]="['RRF.FEEDBACK.MANAGE']" class="nav-item start ">
-                        <a [routerLink]="['/App/RRF/FeedbackPending']" class="nav-link ">
+                        <a [routerLink]="['/RRF/FeedbackPending']" class="nav-link ">
                             <i class="fa fa-check-square-o"></i>
                             <span class="title">RRF Feedback</span>
                         </a>
                     </li>
                     <li [ifAuthorize]="['ADVANCEDSEARCH.MANAGE']" class="nav-item start ">
-                        <a [routerLink]="['/App/ProfileBank/AdvanceSearchInSidebar']" class="nav-link ">
+                        <a [routerLink]="['/ProfileBank/AdvanceSearch']" class="nav-link ">
                             <i class="fa fa-check-square-o"></i>
                             <span class="title">Advance Search</span>
                         </a>
@@ -165,19 +165,19 @@
                 <ul class="sub-menu always-open">
                     <li class="nav-item start ">
                         <li class="nav-item start ">
-                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">
+                            <a [routerLink]="['/RecruitmentCycle/Schedule']" class="nav-link ">
                                 <i class="fa fa-calendar-check-o"></i>
                                 <span class="title">My Schedule</span>
                             </a>
                         </li>
                         <li class="nav-item start ">
-                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers/mycalendar']" class="nav-link ">
+                            <a [routerLink]="['/RecruitmentCycle/mycalendar']" class="nav-link ">
                                 <i class="fa fa-calendar"></i>
                                 <span class="title">My Calendar</span>
                             </a>
                         </li>
                         <li class="nav-item start ">
-                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers']" class="nav-link ">
+                            <a [routerLink]="['/RecruitmentCycle/availability']" class="nav-link ">
                                 <i class="fa fa-chain"></i>
                                 <span class="title">Assignment & Availability</span>
                             </a>

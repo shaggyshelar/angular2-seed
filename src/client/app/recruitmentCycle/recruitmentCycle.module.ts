@@ -8,6 +8,11 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { AllScheduleInterviewPipe } from './recruitersTab/index';
 import { MastersService } from '../shared/index';
 import { InterviewApprovalGridRowComponent } from './shared/index';
+import { RecruitmentInterviewScheduleComponent
+        , RecruitmentInterviewerCalenderComponent
+        , RecruitmentInterviewAvailabilityComponent
+         } from './interviewersTab/index';
+//import { RecruitmentIEFComponent } from './shared/index';
 @NgModule({
   imports: [CommonModule, SharedModule],
   declarations: [
@@ -17,6 +22,10 @@ import { InterviewApprovalGridRowComponent } from './shared/index';
     , IEFGridRowComponent
     //, InterviewApprovalGridRowComponent
     , IEFFunctionComponent
+    , RecruitmentInterviewScheduleComponent
+    , RecruitmentInterviewerCalenderComponent
+    , RecruitmentInterviewAvailabilityComponent
+    //, RecruitmentIEFComponent
   ],
   exports: [
     InterviewSlotComponent
@@ -26,6 +35,7 @@ import { InterviewApprovalGridRowComponent } from './shared/index';
     //, InterviewApprovalGridRowComponent
     , IEFFunctionComponent
     //, AllScheduleInterviewPipe
+    , RecruitmentInterviewScheduleComponent
   ],
   providers: [ToastsManager, MastersService]
 })

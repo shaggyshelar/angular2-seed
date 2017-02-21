@@ -29,11 +29,11 @@ import { RRFDashboardComponent } from '../../RRF/RRFDashboard/index';
 //import { PendingRequestComponent } from '../../RRF/PendingRequest/index';
 import { SpinnerComponent, SpinnerService } from '../../shared/components/spinner/spinner';
 import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
-import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
-import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
-import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
+import { ScheduleInterviewComponent } from '../../recruitmentCycle/scheduleInterview/index';
+import { DashboardComponent } from '../../Dashboard/component/dashboard.component';
+import { ShowScheduleInterviewsComponent } from '../../recruitmentCycle/recruitersTab/components/interviews.component';
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
-import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
+import { InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
 import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 @Component({
@@ -69,9 +69,9 @@ import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.direct
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
     //{ path: '/RRF/PendingRequest', component: PendingRequestComponent },
     { path: '/AllInterviews/showInterviews', component: ShowScheduleInterviewsComponent },
-    { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
-    { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
-    { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
+    { path: '/RecruitmentCycle/Interviewers', component: InterviewrsComponent },
+    { path: '/RecruitmentCycle/Schedule', component: InterviewrsComponent },
+    { path: '/RecruitmentCycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
     { path: '/NotificationSetting', component: PushNotificationComponent },
     { path: '/RRF/InterviewsAvailability', component: InterviewerAvalabilityComponent },
     { path: '/RRF/FeedbackPending', component: FeedbackPendingComponent },

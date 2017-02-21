@@ -28,6 +28,7 @@ import {
     DetailProfileComponent
 } from './shared/index';
 import { IncompleteProfilesListComponent } from './incompleteProfiles/index';
+import { AdvanceSearchInSidebarComponent } from './advanceSearch/index';
 
 export const ProfileBankRoutes: Route[] = [
     { path: 'ProfileBank', component: MyProfilesListComponent },
@@ -73,5 +74,5 @@ export const ProfileBankRoutes: Route[] = [
     // { path: '/History', component: ProfileEsplHistoryListComponent },
 
     /**Adavance search */
-    //{ path: '/:searchString', component: AdvanceSearchListComponent }
+    { path: 'ProfileBank/AdvanceSearch', component: AdvanceSearchInSidebarComponent }
 ];
