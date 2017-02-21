@@ -819,7 +819,7 @@ export class DashboardComponent implements OnInit {
     }
     GetOpenRRF() {
         this.rrfList = [];
-        this.dashboardService.getAllRRF()
+        this.dashboardService.getAllRRF(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
                 if (results.RRFs !== undefined && results.RRFs.length > 0) {

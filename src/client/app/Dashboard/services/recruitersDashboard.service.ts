@@ -177,10 +177,18 @@ export class RecruitersDashboardService {
             .finally(() => this._spinnerService.hide());
     }
     //Get All open RRF 
-    getAllRRF() {
-        let url = Config.GetURL('/api/RRF/GetAllOpenRRF');
+    // getAllRRF() {
+    //     let url = Config.GetURL('/api/RRF/GetAllOpenRRF');
+    //     this._spinnerService.show();
+    //     return this.authHttp.get(url)
+    //         .map(this.extractData)
+    //         .catch(this.handleError)
+    //         .finally(() => this._spinnerService.hide());
+    // }
+    getAllRRF(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RRF/GetOpenRRF');
         this._spinnerService.show();
-        return this.authHttp.get(url)
+        return this.authHttp.post(url,{grdOptions})
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

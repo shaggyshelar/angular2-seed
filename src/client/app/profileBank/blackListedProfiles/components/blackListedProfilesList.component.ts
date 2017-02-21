@@ -55,6 +55,7 @@ export class BlackListedProfilesListComponent implements OnActivate {
         this.getLoggedInUser();
         this.getBlacklistedProfiles();
         //this.getCandidateStatuses();
+        this.getColumnsForSorting();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
     getEmail(EmailCode: any) {

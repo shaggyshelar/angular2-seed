@@ -675,7 +675,7 @@ export class MyProfilesListComponent implements OnActivate {
             } else {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
                 sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
-                sessionStorage.setItem('returnPathToSchedule', '/App/Recruitment Cycle/Schedule/New');
+                sessionStorage.setItem('returnPathToSchedule', 'App/ProfileBank/MyProfiles');
                 this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
             }
 
