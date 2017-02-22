@@ -31,6 +31,7 @@ export class QuickSidebarComponent implements OnInit {
     private toastr: ToastsManager) { }
 
   getMyToDoList() {
+    this.MyTodoList = new Array<TODOList>();
     this._todoservice.GetMyToDoList()
       .subscribe(
       (results: any) => {
