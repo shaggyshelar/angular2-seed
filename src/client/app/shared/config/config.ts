@@ -3,7 +3,7 @@ export class Config {
         //  Production URL
         //  let baseURL= 'http://192.168.101.124:8010';
 
-        //  Dev URL
+        //  Dev URL 123
         //UAT API URL
         //let baseURL = 'http://192.168.101.21:99';
         //New_Test
