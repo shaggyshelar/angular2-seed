@@ -91,6 +91,7 @@ export class MyProfilesListComponent implements OnActivate {
     isViewRRFGrid: boolean = true;
     candidateMailDetails = new MailDetails();
     IsDisable: boolean = true;
+    FilterBy: Array<SortingMasterData> = new Array<SortingMasterData>();
     constructor(private _myProfilesService: MyProfilesService,
         private http: Http,
         private _router: Router,
@@ -117,6 +118,7 @@ export class MyProfilesListComponent implements OnActivate {
         };
         sessionStorage.setItem('backToProfile', '/App/ProfileBank/MyProfiles');
         this.getColumnsForSorting();
+        this.getFilterByMaster();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
@@ -716,6 +718,36 @@ export class MyProfilesListComponent implements OnActivate {
             },
             error => this.toastr.error(<any>error));
     }
+    /**
+    TODO : FilterBy Master API Call
+     */
+    getFilterByMaster() {
+        // this._profileBankService.getFilterByMaster()
+        //     .subscribe(
+        //         results: any => {
+        //             this.FilterBy = results;
+        //         },
+        //         error => this.toastr.error(<any>error);
+        //     );
+        this.FilterBy = [
+            {
+                Id: 'My Profiles',
+                Value: 'my'
+            }
+            ,{
+                Id: 'All Profiles',
+                Value: 'all'
+            }
+            ,{
+                Id: 'Incomplete Profiles',
+                Value: 'incomplete'
+            }
+            ,{
+                Id: 'Black Listed Profiles',
+                Value: 'blackList'
+            }
+        ];
+    }
     onSelectRRF(rrfID: string) {
         //this.rrfId = 'RRF6866237939ID76';
         if (rrfID === '-1') {
@@ -766,6 +798,14 @@ export class MyProfilesListComponent implements OnActivate {
             return false;
         }
 
+    }
+
+    filterBy() {
+        
+    }
+
+    showNewProfileModal() {
+        
     }
 }
 

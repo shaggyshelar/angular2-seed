@@ -41,7 +41,7 @@
 									<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing yellow' : 'btn btn-default btn-circle btnLink toolbar-spacing' " [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount' (click)='AssignRRFClick()'  data-toggle="tooltip" data-placement="bottom" title="Assign RRF" tooltip="Assign RRF" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false">
                                                 <i class="fa fa-check-square-o"></i> 
                                     </button>
-									<button data-toggle="collapse" class="btn red btn-default btn-circle btnLink toolbar-spacing" data-target="#demo" data-toggle="tooltip" data-placement="bottom" title="New Profile" tooltip="New Profile" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false">
+									<button data-toggle="collapse" class="btn red btn-default btn-circle btnLink toolbar-spacing" (click)='showNewProfileModal()' data-target="#demo" data-toggle="tooltip" data-placement="bottom" title="New Profile" tooltip="New Profile" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false">
 										<i class="fa fa-plus-circle"></i>
 									</button>
 									<!--<button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
@@ -434,16 +434,16 @@
 										<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" class="fa fa-long-arrow-up"></i>
 									</button>
 								</div>
-								<!--<div class="col-md-3 col-sm-3">
-									<label>Order By :
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
-                                             [(ngModel)]="myProfilesList.GrdOperations.Order"  
-                                            (ngModelChange)='onChange()'>
-                                                <option value="asc">Ascending</option>
-                                                <option value="desc">Descending</option>
-                                            </select> 
-                                            </label>
-								</div>-->
+								<div class="col-md-3 col-sm-3">
+									<label>Filter By :
+                                        <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+                                               [(ngModel)]="myProfilesList.GrdOperations.FilterBy"
+                                            (ngModelChange)='filterBy()'>
+											<!--[(ngModel)]="myProfilesList.GrdOperations.Order"-->
+                                                <option *ngFor="let filter of FilterBy" [value]="filter.Value">{{filter.Id}}</option>
+										</select> 
+                                    </label>
+								</div>
 
 								<div class="col-md-3 col-sm-3">
 									<div id="sample_1_filter" class="dataTables_filter">
