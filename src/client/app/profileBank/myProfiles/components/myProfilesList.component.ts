@@ -683,6 +683,7 @@ export class MyProfilesListComponent implements OnActivate {
 
     }
     onChange() {
+        this.myProfilesList.GrdOperations.Order = this.myProfilesList.GrdOperations.Order === 'asc' ? 'desc' : 'asc';
         this.myProfilesList.GrdOperations.ButtonClicked = 0;
         this.myProfilesList.GrdOperations.NextPageUrl = new Array<string>();
         this.getMyProfiles();

@@ -429,8 +429,12 @@
 
                                             </select>
                                         </label>
+									<button type="" class="btn btn-default btn-outline green btn-sm" (click)="onChange()">
+										<i *ngIf="myProfilesList.GrdOperations.Order === 'asc'" class="fa fa-long-arrow-down"></i>
+										<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" class="fa fa-long-arrow-up"></i>
+									</button>
 								</div>
-								<div class="col-md-3 col-sm-3">
+								<!--<div class="col-md-3 col-sm-3">
 									<label>Order By :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                              [(ngModel)]="myProfilesList.GrdOperations.Order"  
@@ -439,7 +443,7 @@
                                                 <option value="desc">Descending</option>
                                             </select> 
                                             </label>
-								</div>
+								</div>-->
 
 								<div class="col-md-3 col-sm-3">
 									<div id="sample_1_filter" class="dataTables_filter">
