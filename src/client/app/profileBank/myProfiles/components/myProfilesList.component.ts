@@ -8,6 +8,8 @@ import {
     CareerProfile,
     MailDetails } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
+import { BlackListedProfilesService } from '../../blackListedProfiles/services/blacklistedProfiles.service';
+import { AllProfilesService } from '../../allProfiles/services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
 import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
@@ -30,7 +32,7 @@ import {ViewRRFComponent} from '../../../RRF/shared/components/viewRRF/viewRRF.c
     selector: 'rrf-myprofiles-list',
     templateUrl: 'myProfilesList.component.html',
     directives: [DetailProfileComponent, ROUTER_DIRECTIVES, CollapseDirective, TOOLTIP_DIRECTIVES, IfAuthorizeDirective, ViewRRFComponent],
-    providers: [AssignRRFService, ToastsManager, RRFCandidateListService],
+    providers: [AssignRRFService, ToastsManager, RRFCandidateListService, BlackListedProfilesService, AllProfilesService],
     styleUrls: ['myProfiles.component.css'],
     pipes: [ProfileBankPipe]
 })
@@ -91,8 +93,11 @@ export class MyProfilesListComponent implements OnActivate {
     isViewRRFGrid: boolean = true;
     candidateMailDetails = new MailDetails();
     IsDisable: boolean = true;
-    FilterBy: Array<SortingMasterData> = new Array<SortingMasterData>();
+    FilterByList: Array<SortingMasterData> = new Array<SortingMasterData>();
+    modelFilterBy: string = 'my';
     constructor(private _myProfilesService: MyProfilesService,
+        private _blacklistedProfilesService: BlackListedProfilesService,
+        private _allProfilesService: AllProfilesService,
         private http: Http,
         private _router: Router,
         private _profileBankService: ProfileBankService,
@@ -118,7 +123,7 @@ export class MyProfilesListComponent implements OnActivate {
         };
         sessionStorage.setItem('backToProfile', '/App/ProfileBank/MyProfiles');
         this.getColumnsForSorting();
-        this.getFilterByMaster();
+        this.initFilterBy();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
         this.getMyProfiles();
@@ -180,6 +185,28 @@ export class MyProfilesListComponent implements OnActivate {
             this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
 
         window.scrollTo(0, 40);
+    }
+
+    initFilterBy() {
+        console.log('grdOptions =>;',new GrdOptions());
+        this.FilterByList = [
+            {
+                Id: 'My Profiles',
+                Value: 'my'
+            }
+            ,{
+                Id: 'All Profiles',
+                Value: 'all'
+            }
+            ,{
+                Id: 'Incomplete Profiles',
+                Value: 'incomplete'
+            }
+            ,{
+                Id: 'Black Listed Profiles',
+                Value: 'blackList'
+            }
+        ];
     }
     // Get Updated status
     getUpdateStatus(candidateID: any) {
@@ -688,7 +715,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations.Order = this.myProfilesList.GrdOperations.Order === 'asc' ? 'desc' : 'asc';
         this.myProfilesList.GrdOperations.ButtonClicked = 0;
         this.myProfilesList.GrdOperations.NextPageUrl = new Array<string>();
-        this.getMyProfiles();
+        this.filterBy();
     }
     disableDelete(Status: MasterData) {
         if (Status.Value !== null) {
@@ -708,7 +735,7 @@ export class MyProfilesListComponent implements OnActivate {
            PerPageCount = No of items shown per page
                 */
         this.myProfilesList.GrdOperations.ButtonClicked = parseInt(ButtonClicked);
-        this.getMyProfiles();
+        this.filterBy();
     }
     getColumnsForSorting() {
         this._profileBankService.getColumsForSorting('COMPANYPROFILS')
@@ -717,36 +744,6 @@ export class MyProfilesListComponent implements OnActivate {
                 this.ColumnList = results;
             },
             error => this.toastr.error(<any>error));
-    }
-    /**
-    TODO : FilterBy Master API Call
-     */
-    getFilterByMaster() {
-        // this._profileBankService.getFilterByMaster()
-        //     .subscribe(
-        //         results: any => {
-        //             this.FilterBy = results;
-        //         },
-        //         error => this.toastr.error(<any>error);
-        //     );
-        this.FilterBy = [
-            {
-                Id: 'My Profiles',
-                Value: 'my'
-            }
-            ,{
-                Id: 'All Profiles',
-                Value: 'all'
-            }
-            ,{
-                Id: 'Incomplete Profiles',
-                Value: 'incomplete'
-            }
-            ,{
-                Id: 'Black Listed Profiles',
-                Value: 'blackList'
-            }
-        ];
     }
     onSelectRRF(rrfID: string) {
         //this.rrfId = 'RRF6866237939ID76';
@@ -801,11 +798,63 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     filterBy() {
-        
+        switch(this.modelFilterBy){
+            case 'all':
+                this.getAllProfiles();
+            break;
+            case 'my':
+                this.getMyProfiles();
+            break;
+            case 'incomplete':
+                this.getIncompleteProfiles();
+            break;
+            case 'blackList':
+                this.getBlacklistedProfiles();
+            break;
+
+            default:
+            console.log('issue in filterBy',this.modelFilterBy);
+            break;
+        }
+    }
+    getAllProfiles() {
+        this._allProfilesService.getAllProfiles(this.myProfilesList.GrdOperations)
+                .subscribe(
+                (results: any) => {
+                    if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                        this.myProfilesList = <any>results;
+                    } else { this.NORECORDSFOUND = true; }
+                },
+                error => this.errorMessage = <any>error);
+    }
+    getIncompleteProfiles() {
+        this._allProfilesService.getIncompleteProfiles(this.myProfilesList.GrdOperations)
+                    .subscribe(
+                    (results: any) => {
+                        if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                            this.myProfilesList = <any>results;
+                        } else {
+                            this.NORECORDSFOUND = true;
+                        }
+                    },
+                    error => this.errorMessage = <any>error);
+    }
+    getBlacklistedProfiles() {
+        this._blacklistedProfilesService.getBlackListedProfiles(this.myProfilesList.GrdOperations)
+                .subscribe(
+                (results: AllCandidateProfiles) => {
+                    if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                        this.myProfilesList = <any>results;
+                    } else { this.NORECORDSFOUND = true; }
+                },
+                error => {
+                    this.errorMessage = <any>error;
+                });
     }
 
     showNewProfileModal() {
-        
+        let modl: any = $('#CountDetails');
+        modl.modal({ 'backdrop': 'static' });
     }
 }
 
