@@ -113,13 +113,12 @@
                                     <select class="form-control" [(ngModel)]='iefStatus' required>
                                         <option>Selected</option>
                                         <option>Rejected</option>
-                                        <option>Fitment Issue</option>
                                         <option *ngIf='!isChangeStatusReq'>On Hold</option>
                                     </select>
                                 </div>
                                 <label class="control-label col-md-2">General Comments<span class="required">*</span>:</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control" required id="txtComment" rows="3" maxlength="500" placeholder="Enter comment (Max 500 characters)..." style="resize:vertical" [(ngModel)]='iefComments'></textarea>
+                                    <textarea class="form-control" required id="txtComment" rows="3" minlength="50" maxlength="500" placeholder="Enter comment (Max 500 characters)..." style="resize:vertical" [(ngModel)]='iefComments'></textarea>
                                 </div>
                             </div>
                             <!--</form>-->
