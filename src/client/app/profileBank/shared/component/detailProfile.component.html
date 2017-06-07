@@ -1,13 +1,12 @@
 <!-- Profile card -->
-<div class="light bordered">
-    <div class="row">
+<div class="dark bordered col-md-12">
+    <div class="row" style="min-height: 250px">
         <!-- Profile Photo -->
-        <div class="col-md-2">
+        <!--<div class="col-md-2">
             <br>
             <ul class="list-unstyled profile-nav text-center">
-                <li>
-                    <!--*ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null"-->
-                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!==''&&profile.BinaryImage!==null" style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
+                <li style="display:none">
+                    <img class="img-responsive pic-bordered" *ngIf="profile.BinaryImage!=='' && profile.BinaryImage!==null" style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
                         alt="" src="data:image/jpeg;base64,{{profile.BinaryImage}}">
 
                     <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profile.BinaryImage===''||profile.BinaryImage===null" class="img-responsive pic-bordered"
@@ -15,7 +14,6 @@
                     <br>
 
                 </li>
-                <!--<li><a href="javascript:;">shaktiman@durdarshan.com</a></li>-->
                 <li>
                     <span> 
                     <a class="btn btn-xs red" style="color: white;font-size: larger;" href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
@@ -23,41 +21,74 @@
                 </li>
 
             </ul>
-        </div>
+        </div>-->
         <!-- /Profile Photo -->
 
         <!-- Profiles Details -->
-        <div class="col-md-9" style="margin-left:35px;">
+        <div class="col-md-12" >
             <div class="row message">
-                <div class="col-md-8 profile-info">
-                    <h3 class="font-green sbold uppercase"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></h3>
+                <ul class="list-inline">
+                    <li style="float:left" ><small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></li>
+                    <li style="float:right">
+                        <span class="mt-action-dot color{{profile.Status.Id}}"> </span>
+                        <span *ngIf='!checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><strong>{{profile.Status.Value?profile.Status.Value:"N/A"}}</strong></span>
+                        <span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><a style="color:black"(click)='onViewCandidateClick(profile.RRFAssigned.RRFID,profile.Status.Value)' tooltip="Click to check associated RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"><strong>{{profile.Status.Value ? profile.Status.Value : "N/A"}}</strong><small> with <i class="fa fa-external-link"></i></small></a></span>
+                    </li>
+                </ul>
+                <div class="col-md-12 centered profile-info" >
+                    <h4 class="green uppercase sbold"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> </h4>
+                    <h6 class="sbold uppercase"> As {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}} {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?" at "+profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}} </h6>
+                    <a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline"  href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
                     <!--<p>
                         <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
                         </p>-->
-                    <div class="row">
+                        <!--<hr >-->
+                        
+                       <!-- <ul class="list-unstyled">
+                         <li>
+                        <p> 
+                        <a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline"  href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
+                        </p>
+                        </li>
+                        <li>
+                        <p>
+                            <a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
+                        </p>
+                        </li>
+                        </ul>-->
+                        <!--<hr >-->
+                    <div class="row profile-desc-text">
                         <ul class="list-unstyled">
                             <li>
                                 <div class="col-md-12">
-                                    <label class="control-label"><small>Skills : <strong> {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} </strong> {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}} </small></label>
-                                </div>
-                                <!--<label class="control-label">Skills : <strong> C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</strong></label>-->
-                            </li>
-                            <li>
-                                <div class="col-md-6">
-                                    <label class="control-label"><small> Current CTC : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</small> </label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="control-label"><small> Expected CTC : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>
+                                    <label class="control-label"><small>Skills : {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}}</small></label>
+                                <!--<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>-->
                                 </div>
                             </li>
                             <li>
-                                <div class="col-md-6">
-                                    <label class="control-label"><small> Company : {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}} </small></label>
+                                <div class="col-md-12">
+                                    <ul class="list-inline" >
+                                        <li>
+                                            <label class="control-label"><small> CTC  Current : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</small> </label>
+                                        </li>
+                                         <li>
+                                            <label class="control-label"><small> Expected : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>        
+                                        </li>
+                                        </ul>
+                                    
+                                <!--</div>
+                                <div class="col-md-6">-->
+                                    
+                                </div>
+                            </li>
+                            <!--<li>
+                                <div class="col-md-12">
+                                    <label class="control-label"><small> Employer : {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}} </small></label>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="control-label"><small> Designation : {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}} </small></label>
                                 </div>
-                            </li>
+                            </li>-->
 
                         </ul>
                     </div>
@@ -67,44 +98,41 @@
                     <div class="row" style="margin-left:-3px;">
                         <ul class="list-inline sbold" style="color:#f16e50">
                             <li>
-                                <!--location-->
                                 <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                    <!--TODO:: Add Location once updated from Backend -->
                                     <i class="fa fa-map-marker"></i> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Location?profile.CandidateCurrentCompanyProfile.Location:"N/A":"N/A"}}
-                                    <!--{{profile.District?profile.District:"N/A"}}-->
                                 </div>
                             </li>
                             <li>
-                                <!--experience-->
                                 <div tooltip="Experience" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <i class="fa fa-briefcase"></i> {{profile.TotalExperience?profile.TotalExperience+" yr":"N/A"}}
                                 </div>
                             </li>
                             <li>
-                                <!--tag-->
-                                <div tooltip="Tag" class="uppercase" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                    <i class="fa fa-tag"></i> {{profile.Tag?profile.Tag:"N/A"}}
-                                </div>
-                            </li>
-                            <li>
-                                <!--notice period-->
                                 <div tooltip="Notice period" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+" days":"N/A"}}
                                 </div>
 
                             </li>
+                            <li>
+                                <div tooltip="Owner" tooltipPlacement="right" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                    <!--<h5 tooltip="Owner" tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="true" class="font-blue sbold uppercase"></h5>-->
+                                        <i class="fa fa-user"></i>{{profile.Owner.Value?profile.Owner.Value:"N/A"}}
+                                </div>
+
+                            </li>
                         </ul>
                     </div>
+                   
                 </div>
                 <!--end col-md-8-->
-                <div class="col-md-4">
+                <div class="col-md-4" style="display:none">
                     <div class="portlet sale-summary">
                         <div class="portlet-title">
 
                             <!--<div class="tools">
                                 <a class="reload" href="javascript:;" data-original-title="" title=""> </a>
                             </div>-->
-                            <span class="font-gray pull-right"> <small> Updated On {{profile.ModifiedOn?profile.ModifiedOn:"N/A"}}</small></span>
+                            <!--<span class="font-gray pull-right"> <small> Updated On {{profile.ModifiedOn?profile.ModifiedOn:"N/A"}}</small></span>-->
                         </div>
                         <div class="portlet-body">
                             <ul class="list-unstyled">
@@ -127,7 +155,7 @@
                                             class="reload" data-original-title="" title=""><i aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  </a>-->
                                         <!--<a href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryImage}}" class="btn btn-primary" download="pdftesting.pdf">Download</a>-->
                                     </div>
-                                    <div class="login-options">
+                                    <!--<div class="login-options">
                                         <br>
                                         <ul class="social-icons">
                                             <li >
@@ -147,7 +175,7 @@
                                                 <a class="linkedin" data-original-title="linkedin" *ngIf="profile.CandidateSocialInformation.LinkedinID === ''" href="javascript:;"> </a>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>-->
                                 </li>
                             </ul>
                         </div>

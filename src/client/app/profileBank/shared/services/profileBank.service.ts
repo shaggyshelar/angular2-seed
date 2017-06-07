@@ -11,7 +11,7 @@ import { MasterData } from  '../../../shared/model/index';
 @Injectable()
 
 export class ProfileBankService {
-
+    masterFilterBy : any[] = [];
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
     //To DO need to change api
@@ -381,6 +381,17 @@ export class ProfileBankService {
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
+    }
+    /**
+    TODO : API call to master for 'FilterBy' list
+     */
+    getFilterByMaster(featureName: string) {
+        // let url = Config.GetURL('/api/Masters/GetSortableColumns?Feature=' + featureName);
+        // this._spinnerService.show();
+        // return this.authHttp.get(url)
+        //     .map(this.extractData)
+        //     .catch(this.handleError)
+        //     .finally(() => this._spinnerService.hide());
     }
     private createBolb(res: Response) {
         if (res.status < 200 || res.status >= 300) {
