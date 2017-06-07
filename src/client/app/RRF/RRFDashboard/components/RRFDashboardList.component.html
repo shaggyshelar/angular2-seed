@@ -58,7 +58,7 @@
 								<!--<div class="mt-radio-inline col-lg-1 col-sm-1">
 
                                 </div>-->
-								<div class="mt-radio-inline col-lg-7 col-sm-7">
+								<!--<div class="mt-radio-inline col-lg-7 col-sm-7">
 									<div class="col-lg-3 col-sm-3">
 										<label class="mt-radio" [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="myRRF" [checked]="currentView == 'myRRF'" (click)="onViewChanged('myRRF')" /> My RRF
@@ -73,7 +73,6 @@
                                         </label>
 									</div>
 									<div class="col-lg-3 col-sm-3">
-										<!--<div class="col-lg-3 col-sm-3">-->
 										<label class="mt-radio" [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']">
                                             <input type="radio" name="viewType" value="unAssignRRF" [checked]="currentView == 'unAssignRRF'" (click)="onViewChanged('unAssignRRF') "
                                             /> Unassigned
@@ -87,7 +86,7 @@
                                             <span></span>
                                         </label>
 									</div>
-								</div>
+								</div>-->
 								<div class="form-group col-lg-2 col-sm-2" *ngIf="currentView =='assignRRF'">
 									<select id="cmbAssignedTo" class="form-control" [(ngModel)]="selectedRecruiter.Id" (change)="onRecChange($event.target.value)">
                                         <option value="0">All</option>
@@ -125,10 +124,12 @@
 								</div>
 								<div class="col-lg-3 col-sm-3">
 									<div class="dataTables_length ">
-										<label>Order by
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order" (ngModelChange)="bindGridData()">
-                                                <option value="asc">Ascending</option>
-                                                <option value="desc">Descending</option>
+										<label>Filter By
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="currentView"  (ngModelChange)="onViewChanged(currentView)">
+                                                <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="myRRF">My RRF</option>
+                                                <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="allRRF">All RRF</option>
+                                                <option [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']" value="unAssignRRF">Unassigned</option>
+                                                <option value="assignRRF" [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">Assigned</option>
                                             </select>
                                         </label>
 									</div>
