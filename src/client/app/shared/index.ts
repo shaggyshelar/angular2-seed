@@ -10,7 +10,7 @@ export *  from './components/graph/stackedColumnChart.component';
 export *  from './components/graph/graph.component';
 export *  from './components/graph/piechart.component';
 export *  from './components/graph/gaugeChart.component';
-export *  from './components/graph/AnimatedPieChart.component';
+export *  from './components/graph/animatedPieChart.component';
 export *  from './components/graph/candidateDetailList.component';
 
 export *  from './services/common.service';

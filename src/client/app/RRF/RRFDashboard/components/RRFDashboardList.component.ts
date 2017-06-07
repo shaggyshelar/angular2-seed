@@ -14,7 +14,7 @@ import { RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import { ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
 import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
-import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
+import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.component';
 import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { CommonService} from '../../../shared/index';
 
