@@ -1,31 +1,32 @@
-import {Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate} from '@angular/router';
+import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import {
     CandidateProfile,
     ResumeMeta,
     AddCandidateResponse,
     AllCandidateProfiles,
     CareerProfile,
-    MailDetails } from '../../shared/model/myProfilesInfo';
+    MailDetails
+} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { BlackListedProfilesService } from '../../blackListedProfiles/services/blacklistedProfiles.service';
 import { AllProfilesService } from '../../allProfiles/services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import * as  _ from 'lodash';
-import { CollapseDirective, TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from  '../../../shared/model/index';
+import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { MasterData, SortingMasterData, GrdOptions, ResponseFromAPI } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
-import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import { APIResult } from '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { Headers, Http } from '@angular/http';
 import { Candidate } from '../../shared/model/RRF';
-import { ProfileBankPipe }from '../../shared/filter/profileBank.pipe';
-import {IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { ProfileBankPipe } from '../../shared/filter/profileBank.pipe';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { DetailProfileComponent } from '../../shared/component/detailProfile.component';
-import { RRFDetails } from  '../../../RRF/myRRF/index';
-import {AssignRRFService} from '../../shared/services/assignRRF.service';
-import {RRFCandidateListService} from '../../../RRF/RRFDashboard/services/RRFCandidatesList.service';
-import {ViewRRFComponent} from '../../../RRF/shared/components/viewRRF/viewRRF.component';
+import { RRFDetails } from '../../../RRF/myRRF/index';
+import { AssignRRFService } from '../../shared/services/assignRRF.service';
+import { RRFCandidateListService } from '../../../RRF/RRFDashboard/services/RRFCandidatesList.service';
+import { ViewRRFComponent } from '../../../RRF/shared/components/viewRRF/viewRRF.component';
 
 @Component({
     moduleId: module.id,
@@ -188,21 +189,20 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     initFilterBy() {
-        console.log('grdOptions =>;',new GrdOptions());
         this.FilterByList = [
             {
                 Id: 'My Profiles',
                 Value: 'my'
             }
-            ,{
+            , {
                 Id: 'All Profiles',
                 Value: 'all'
             }
-            ,{
+            , {
                 Id: 'Incomplete Profiles',
                 Value: 'incomplete'
             }
-            ,{
+            , {
                 Id: 'Black Listed Profiles',
                 Value: 'blackList'
             }
@@ -798,58 +798,57 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     filterBy() {
-        switch(this.modelFilterBy){
+        switch (this.modelFilterBy) {
             case 'all':
                 this.getAllProfiles();
-            break;
+                break;
             case 'my':
                 this.getMyProfiles();
-            break;
+                break;
             case 'incomplete':
                 this.getIncompleteProfiles();
-            break;
+                break;
             case 'blackList':
                 this.getBlacklistedProfiles();
-            break;
+                break;
 
             default:
-            console.log('issue in filterBy',this.modelFilterBy);
-            break;
+                break;
         }
     }
     getAllProfiles() {
         this._allProfilesService.getAllProfiles(this.myProfilesList.GrdOperations)
-                .subscribe(
-                (results: any) => {
-                    if (results.Profiles !== undefined && results.Profiles.length > 0) {
-                        this.myProfilesList = <any>results;
-                    } else { this.NORECORDSFOUND = true; }
-                },
-                error => this.errorMessage = <any>error);
+            .subscribe(
+            (results: any) => {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.myProfilesList = <any>results;
+                } else { this.NORECORDSFOUND = true; }
+            },
+            error => this.errorMessage = <any>error);
     }
     getIncompleteProfiles() {
         this._allProfilesService.getIncompleteProfiles(this.myProfilesList.GrdOperations)
-                    .subscribe(
-                    (results: any) => {
-                        if (results.Profiles !== undefined && results.Profiles.length > 0) {
-                            this.myProfilesList = <any>results;
-                        } else {
-                            this.NORECORDSFOUND = true;
-                        }
-                    },
-                    error => this.errorMessage = <any>error);
+            .subscribe(
+            (results: any) => {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.myProfilesList = <any>results;
+                } else {
+                    this.NORECORDSFOUND = true;
+                }
+            },
+            error => this.errorMessage = <any>error);
     }
     getBlacklistedProfiles() {
         this._blacklistedProfilesService.getBlackListedProfiles(this.myProfilesList.GrdOperations)
-                .subscribe(
-                (results: AllCandidateProfiles) => {
-                    if (results.Profiles !== undefined && results.Profiles.length > 0) {
-                        this.myProfilesList = <any>results;
-                    } else { this.NORECORDSFOUND = true; }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                });
+            .subscribe(
+            (results: AllCandidateProfiles) => {
+                if (results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.myProfilesList = <any>results;
+                } else { this.NORECORDSFOUND = true; }
+            },
+            error => {
+                this.errorMessage = <any>error;
+            });
     }
 
     showNewProfileModal() {
