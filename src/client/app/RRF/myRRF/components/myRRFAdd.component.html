@@ -198,17 +198,24 @@
                             </div>-->
 
                             <div class="row">
-                                <div class="form-group col-lg-12">
-                                    <label>Job description<small> (Max 1200 chars)</small><span class="required"> * </span></label>
-                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.Description' [disabled]='isDisabled' maxlength="1200" id="txtDescription"
+                                <div class="form-group col-lg-6">
+                                    <label>Job description</label>
+                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.Description' disabled maxlength="1200" id="txtDescription"
                                         rows="2" tooltip="Job description" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                         tooltipEnable="!newRRF.Description" placeholder="Job description" required="" style="resize:vertical"></textarea>
+                                    <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label>Additional Roles<small> (Max 1200 chars)</small><span class="required"> * </span></label>
+                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.Description' maxlength="1200" id="txtDescription"
+                                        rows="2" tooltip="Additional Roles" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                        tooltipEnable="!newRRF.Description" placeholder="Additional Roles" required="" style="resize:vertical"></textarea>
                                     <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
-                                    <label>Preferred skills<small> (Max 250 chars)</small><span class="required"> * </span></label>
+                                    <label>Additional skills<small> (Max 250 chars)</small><span class="required"> * </span></label>
                                     <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.PreferredSkills' [disabled]='isDisabled' maxlength="250"
                                         id="txtDescription" rows="2" tooltip="Preferred skills" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                         tooltipEnable="!newRRF.Description" placeholder="Preferred skills" required="" style="resize:vertical"></textarea>

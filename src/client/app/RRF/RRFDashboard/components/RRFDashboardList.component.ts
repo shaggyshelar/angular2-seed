@@ -14,7 +14,7 @@ import { RRFPipe } from '../../shared/Filters/RRFFilter.component';
 import { ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
 import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
-import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.Component';
+import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.component';
 import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
 import { CommonService} from '../../../shared/index';
 
@@ -66,7 +66,7 @@ export class RRFDashboardListComponent implements OnActivate {
     displayAssignedTo: boolean = false;
     SortByList: SortingMasterData[] = [];
     sessionValue:string;
-
+    currentUser: MasterData = new MasterData();
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
         private _commonService: CommonService,
@@ -510,6 +510,16 @@ export class RRFDashboardListComponent implements OnActivate {
         sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard');
         this._router.navigate(['/App/RRF/MyRRF/Add']);
     }
+     getCloseRRFAccess(Owner: MasterData,statusId: number) {
+        try {
+            if (Owner.Id === this.logedInUser.Id && (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned)) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
 
+    }
 }
 

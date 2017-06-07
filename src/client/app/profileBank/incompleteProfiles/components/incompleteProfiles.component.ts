@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { IncompleteProfilesListComponent } from './incompleteProfilesList.component';
-import { AllProfilesService } from '../../allprofiles/services/allProfiles.service';
+import { AllProfilesService } from '../../allProfiles/services/allProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DataSharedService } from '../../shared/services/dataShared.service';

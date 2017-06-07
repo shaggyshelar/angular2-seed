@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
     constructor(private _router: Router) {
     }
     ngOnInit(): void {
-        this._router.navigate(['/App/Dashboard']);
+        //this._router.navigate(['/App/Dashboard']);
         App.init();
         Layout.init();
         Demo.init();

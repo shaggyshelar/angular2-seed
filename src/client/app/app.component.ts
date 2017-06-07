@@ -4,7 +4,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 
 import { AboutComponent } from './+about/index';
 import { HomeComponent } from './home/index';
-import { NameListService, NavbarComponent, ToolbarComponent } from './shared/index';
+import { NameListService, NavbarComponent, ToolbarComponent,CommonService } from './shared/index';
 
 import { LoginComponent } from './login/index';
 import { LoginService } from './shared/services/login.service';
@@ -38,10 +38,14 @@ import { Error400Component,Error500Component } from './errorPages/index';
  * loaded components (HomeComponent, AboutComponent).
  */
 export class AppComponent implements OnInit {
-  constructor(private _router: Router, private _loginService: LoginService) {
+  constructor(private _router: Router, private _loginService: LoginService,
+   private _commonService: CommonService) {
   }
 
   ngOnInit() {
+    if(!this._commonService.getLoggedInUser()){
+        this._loginService.logout();
+    }
     if (this._loginService.isAuthenticated()) {
       this.getLoggedInUserPermission();
     } else {
@@ -53,7 +57,7 @@ export class AppComponent implements OnInit {
     this._loginService.getLoggedInUserPermission()
       .subscribe(
       results => {
-        this._router.navigate(['/App']);
+        //this._router.navigate(['/App']);
       },error=> {
           localStorage.clear();
           this._router.navigate(['/Login']);

@@ -1,4 +1,4 @@
-import { Interview } from '../../shared/model/Interview';
+import { Interview } from '../../shared/model/interview';
 
 export class MyScheduleInterview extends Interview{
     public showIEF: boolean = false;
