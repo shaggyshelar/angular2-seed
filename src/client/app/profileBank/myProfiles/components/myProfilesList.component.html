@@ -122,6 +122,91 @@
 							</div>
 						</div>
 
+						<!-- Modal Start -->
+								<!--Begin Count Details box-->
+									<div id="CountDetails" class="modal fade">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<b>{{Title}} </b>
+													<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+												</div>
+												<div id="modalBody" class="modal-body" style="overflow-y:scroll;">
+													<!-- Modal Body Start -->
+														<div class="row ">
+															<div class="col-md-12">
+															
+																<form role="form" (submit)="OnSubmitCandidate()" style="background: #f6fbfc;overflow: hidden; padding-left: 8px; border-left: #d4ad38 3px solid;">
+																	<!--<div class="container-fluid">
+																		<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
+																			<div class="row" style="margin-left: 5px;">
+																				<div class="col-md-4 inlineForm">
+																					<div class="form-group">
+																						<input type="text" placeholder="First Name" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required=""
+																							tooltip="First Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
+																						/>
+																					</div>
+																				</div>
+																				<div class="col-md-4  inlineForm">
+																					<div class="form-group ">
+																						<input type="text" placeholder="Last Name" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required=""
+																							tooltip="Last Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
+																						/>
+																					</div>
+																				</div>
+																				<div class="col-md-4  inlineForm">
+																					<div class="form-group ">
+																						<input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required="" tooltip="Email"
+																							(blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email">
+																					</div>
+																				</div>
+																			</div>
+																			<div class="row" style="margin-left: 5px;">
+																				<div class="col-md-3 inlineForm">
+																					<div class="form-group ">
+																						<input type="text" placeholder="Contact Number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
+																							(blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
+																							tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" />
+																					</div>
+																				</div>
+																				<div class="col-md-3 inlineForm">
+																					<div class="form-group ">
+																						<input type="number" step="any" placeholder="Total Experience (In years)" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
+																							tooltip="Total Experience (In years)" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
+																							title="Enter total experience in years Eg. 02" minlength="0" maxlength="60" style="padding: 6px;" />
+																					</div>
+																				</div>
+																				<div class="col-md-3 inlineForm">
+																					<div class="form-group">
+																						<input type="number" placeholder="Notice Period (In days)" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
+																							tooltip="Notice Period (In days)" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
+																							title="Enter notice period in Days Eg. 45" max="120" />
+																					</div>
+																				</div>
+																				<div class="col-md-3 inlineForm">
+																					<div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+																						<input type="file" class="upload" (change)="uploadFile($event)" />
+																						<i class="fa fa-file-text"></i><span> </span>
+																					</div><br>
+																					<span class="row" *ngIf='fileUploaded'> {{fileName}}</span>
+																				</div>
+																			</div>
+																		<!--</div>
+																	</div>-->
+																</form>
+															</div>
+														</div>
+													<!-- Modal Body End -->	
+												<div class="modal-footer">
+													<button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Save</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									</div>
+								<!--END Count Details Box-->
+							<!-- Modal End -->
+
 <!-- Test data -->
 <div style="box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.29);" class="col-md-4" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
 	<div class="row portlet-title" style="padding-top: 5px;padding-bottom: 10px;">
@@ -195,7 +280,7 @@
 											</div>
 											<!-- START Delete Confirmation Model dailog -->
 </div>
-<!-- /Test data -->
+<!-- Test data -->
 
 						<!-- My Profile Grid Starts-->
 						<!--<div class="table">-->
