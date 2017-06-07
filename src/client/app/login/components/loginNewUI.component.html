@@ -1,0 +1,31 @@
+<body class="login-body">
+    <section class="rem-login-section">
+        <div class="container rms-login-container">
+            <div class="col-md-4 col-sm-2 login-parent-box"></div>
+            <div class="col-md-4 col-sm-8 login-parent-box rms-login-box">
+                <h2>Eternus Solutions RMS</h2>
+                <h4>Welcome. <span>Please login.</span></h4>
+
+                <form class="login-form" (submit)="doLogin($event)">
+                    <div class="form-group">
+                        <input type="text" class="form-control login-textbox" [(ngModel)]="model.UserName" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control login-textbox" [(ngModel)]="model.Password" placeholder="Password">
+                    </div>
+
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+
+                <div class="forgot-pass-link-box">
+                    Don't have an account <a href="#">Sign Up</a> <br class="login-separator">
+                    <span class="forgot-pass-link-span">
+						<a href="#">Forgot Password?</a>
+					</span>
+                </div>
+
+            </div>
+            <div class="col-md-4 col-sm-2 login-parent-box"></div>
+        </div>
+    </section>
+</body>

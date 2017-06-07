@@ -1,0 +1,355 @@
+<div class="body-overlay"></div>
+
+<!-- Sidebar toggle Button -->
+<a href="#" id="sidebar-toggle" title="Toggle" class="show">
+	<button class="pro-button"><i class="material-icons">subject</i></button>
+</a>
+<!-- Sidebar toggle Button Ends -->
+
+
+<!-- Tabs structure for tablets and Mobile, Hidden on desktop, laptops -->
+
+<section class="tablet-mobile-tab-container">
+	<table class="table">
+		<tr>
+			<td>
+				<div class="tablet-mobile-tab-box1">
+					<h5>Dashboard</h5>
+				</div>
+			</td>
+			<td>
+				<div class="tablet-mobile-tab-box2">
+					<h5>RRF Activities</h5>
+				</div>
+			</td>
+		</tr>
+	</table>
+</section>
+<!-- Tabs structure for tablets and Mobile, Hidden on desktop, laptops Ends -->
+
+
+
+<section class="rms-content">
+	<!--<div class="col-md-1 rms-sidebar-box">
+		
+		<div class="rms-sidebar-hamburger">
+			<img src="img/eternus.png" class="logo-img">
+		</div>
+	
+		<div class="rms-sidebar">
+			<h3>RRF Activity</h3>
+			
+			<ul class="sidebar-list">
+				<a href="#"><li>Dashboard</li></a>
+				<a href="#"><li>Pending Requests <span class="badge pending-request-badge">5</span> </li></a>
+			</ul>	
+			
+			<h3>Interviewer's Action</h3>
+			
+			<hr class="sidebar-separator"/>
+			
+			<ul class="sidebar-list">
+				<a href="#"><li>Assignment & Availability</li></a>
+				<a href="#"><li>My Schedule</li></a>
+				<a href="#"><li>My Calendar</li></a>
+			</ul>
+			
+		</div>
+	</div>-->
+
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	<!-- Dashboard -->
+	<div class="col-md-4 rms-content-box rms-content-box1">
+		<div class="panel panel-default rms-content-panel">
+			<div class="rms-box-heading rms-box-heading-1">
+				Dashboard
+			</div>
+
+			<div class="Scrollbox">
+				<!-- Checkbox Daily, Monthly, Yearly -->
+				<div class="panel-body rms-content-body1">
+					<div class="row">
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<label class="checkbox-inline rms-checkbox-label"><input type="checkbox" value="">Daily</label>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<label class="checkbox-inline rms-checkbox-label"><input type="checkbox" value="">Monthly</label>
+						</div>
+						<div class="col-md-4 col-sm-4 col-xs-4">
+							<label class="checkbox-inline rms-checkbox-label"><input type="checkbox" value="">Yearly</label>
+						</div>
+					</div>
+				</div>
+				<!-- Checkbox Daily, Monthly, Yearly Ends -->
+
+				<!-- RRF history Tabs -->
+				<div class="panel-body rms-content-body2">
+					<h3>RRF History</h3>
+
+					<ul class="nav nav-tabs rrf-nav-tabs">
+						<li class="active"><a href="#rrf-rejected-tab">Rejected</a></li>
+						<li><a href="#rrf-open-tab">Open</a></li>
+						<li><a href="#rrf-approved-tab">Approved</a></li>
+
+					</ul>
+
+					<div class="tab-content rrf-tab-content">
+						<div id="rrf-rejected-tab" class="tab-pane fade in active">
+
+							<canvas id="myChart" width="400" height="200"></canvas>
+						</div>
+
+						<div id="rrf-open-tab" class="tab-pane fade">
+
+						</div>
+
+						<div id="rrf-approved-tab" class="tab-pane fade">
+
+						</div>
+
+					</div>
+					<!-- .tab-content Ends -->
+				</div>
+				<!-- .rms-content-body2 Ends -->
+
+
+
+				<!-- RRF Overview -->
+				<div class="panel-body rms-content-body2">
+					<h3>RRF Overview</h3>
+
+					<div class="row rrf-overview-row">
+
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="panel panel-default rrf-overview-panel">
+								<div class="panel-body">
+									<h1>{{rrfOpenCount.Count}}</h1>
+									<h4 class="rrf-status-label open-rrf">Open RRF</h4>
+								</div>
+								<div class="panel-footer rrf-overview-footer">
+									<button class="arrow-green">
+												<i class="fa fa-caret-up" aria-hidden="true"></i>
+											</button> 13% Increase
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="panel panel-default rrf-overview-panel">
+								<div class="panel-body">
+									<h1>100</h1>
+									<h4 class="rrf-status-label approved-rrf">Approved RRF</h4>
+								</div>
+								<div class="panel-footer rrf-overview-footer">
+									<button class="arrow-green">
+												<i class="fa fa-caret-up" aria-hidden="true"></i>
+											</button> 4% Increase
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row rrf-overview-row">
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="panel panel-default rrf-overview-panel">
+								<div class="panel-body">
+									<h1>1000</h1>
+									<h4 class="rrf-status-label pending-rrf">Pending RRF</h4>
+								</div>
+								<div class="panel-footer rrf-overview-footer">
+									<button class="arrow-red">
+												<i class="fa fa-caret-down" aria-hidden="true"></i>
+											</button> 4% Increase
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="panel panel-default rrf-overview-panel">
+								<div class="panel-body">
+									<h1>2,494</h1>
+									<h4 class="rrf-status-label rejected-rrf">Rejected RRF</h4>
+								</div>
+								<div class="panel-footer rrf-overview-footer">
+									<button class="arrow-red">
+												<i class="fa fa-caret-down" aria-hidden="true"></i>
+											</button> 4% Increase
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- RRF Overview Ends -->
+
+			</div>
+			<!-- Scrollbox Ends -->
+
+		</div>
+	</div>
+
+	<!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+	<!-- RRF Activities -->
+	<div class="col-md-4 rms-content-box rms-content-box2">
+		<div class="panel panel-default rms-content-panel rms-content-panel2">
+			<div class="rms-box-heading rms-box-heading-2">
+				RRF Activities
+
+				<a class="btn-initiate-rrf" [routerLink]="['/App/RRF/MyRRF/Add']">
+					<i class="fa fa-plus-circle"></i> Initiate RRF
+				</a>
+
+				<!--<button class="btn-initiate-rrf" [routerLink]="['/App/RRF/MyRRF/Add']">Initiate RRF</button>-->
+			</div>
+
+			<div class="Scrollbox">
+				<!-- Searchbox -->
+				<div class="panel-body rms-content-body3">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<i class="fa fa-search rrf-search-icon" aria-hidden="true"></i>
+							<input type="text" class="form-control rrf-activities-searchbox" placeholder="Search" />
+						</div>
+					</div>
+				</div>
+				<!-- Searchbox Ends -->
+
+				<!-- RRF-activities-container  -->
+				<div class="rrf-activities-container">
+
+					<!-- Monthbox -->
+					<div class="rrf-activity-month-box">
+						<div class="rrf-activity-heading">
+							<h4>This Month</h4>
+
+							<!-- Sort by Dropdown -->
+							<div class="dropdown rrf-month-sort-dropdown">
+								<button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown">Sort By
+								  <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Filter 1</a></li>
+									<li><a href="#">Filter 2</a></li>
+									<li><a href="#">Filter 3</a></li>
+								</ul>
+							</div>
+							<!-- Sort by Dropdown Ends -->
+						</div>
+
+						<div class="rrf-activity-content-box">
+							<div class="table-responsive">
+								<table class="table rrf-activity-table table-hover">
+									<tbody>
+										<tr class="activity-row1 rrf-activity-selected-row" *ngFor="let rrfdetails of rrfList" (click)="showRRFGrid(rrfdetails)">
+											<td><input type="checkbox" /></td>
+											<td><i *ngIf="rrfdetails.Status.Value === 'Open'" class="fa fa-bookmark green-badge" aria-hidden="true"></i>
+												<i *ngIf="rrfdetails.Status.Value === 'Closed'" class="fa fa-bookmark red-badge" aria-hidden="true"></i> {{rrfdetails.PositionTitle}}</td>
+											<td><span *ngIf="rrfdetails.Status.Value === 'Open'" class="open-status">{{rrfdetails.Status.Value}}</span>
+												<span *ngIf="rrfdetails.Status.Value === 'Closed'" class="close-status">{{rrfdetails.Status.Value}}</span>
+											</td>
+											<td>{{rrfdetails.CreatedDate}}</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- Monthbox Ends -->
+
+
+					<!-- Monthbox -->
+					<div class="rrf-activity-month-box">
+						<div class="rrf-activity-heading">
+							<h4>July 2016</h4>
+
+							<!-- Sort by Dropdown -->
+							<div class="dropdown rrf-month-sort-dropdown">
+								<button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown">Sort By
+								  <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Filter 1</a></li>
+									<li><a href="#">Filter 2</a></li>
+									<li><a href="#">Filter 3</a></li>
+								</ul>
+							</div>
+							<!-- Sort by Dropdown Ends -->
+						</div>
+
+						<div class="rrf-activity-content-box">
+							<div class="table-responsive">
+								<table class="table rrf-activity-table table-hover">
+									<tbody>
+										<tr class="activity-row1 rrf-activity-selected-row" *ngFor="let rrfdetails of rrfList">
+											<td><input type="checkbox" /></td>
+											<td><i *ngIf="rrfdetails.Status.Value === 'Open'" class="fa fa-bookmark green-badge" aria-hidden="true"></i>
+												<i *ngIf="rrfdetails.Status.Value === 'Closed'" class="fa fa-bookmark red-badge" aria-hidden="true"></i> {{rrfdetails.PositionTitle}}</td>
+											<td><span *ngIf="rrfdetails.Status.Value === 'Open'" class="open-status">{{rrfdetails.Status.Value}}</span>
+												<span *ngIf="rrfdetails.Status.Value === 'Closed'" class="close-status">{{rrfdetails.Status.Value}}</span>
+											</td>
+											<td>{{rrfdetails.CreatedDate}}</td>
+										</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- Monthbox Ends -->
+
+					<!-- Monthbox -->
+					<div class="rrf-activity-month-box">
+						<div class="rrf-activity-heading">
+							<h4>July 2016</h4>
+
+							<!-- Sort by Dropdown -->
+							<div class="dropdown rrf-month-sort-dropdown">
+								<button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown">Sort By
+								  <span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#">Filter 1</a></li>
+									<li><a href="#">Filter 2</a></li>
+									<li><a href="#">Filter 3</a></li>
+								</ul>
+							</div>
+							<!-- Sort by Dropdown Ends -->
+						</div>
+
+						<div class="rrf-activity-content-box">
+							<div class="table-responsive">
+								<table class="table rrf-activity-table table-hover">
+									<tbody>
+										<tr class="activity-row1 rrf-activity-selected-row" *ngFor="let rrfdetails of rrfList">
+											<td><input type="checkbox" /></td>
+											<td><i *ngIf="rrfdetails.Status.Value === 'Open'" class="fa fa-bookmark green-badge" aria-hidden="true"></i>
+												<i *ngIf="rrfdetails.Status.Value === 'Closed'" class="fa fa-bookmark red-badge" aria-hidden="true"></i> {{rrfdetails.PositionTitle}}</td>
+											<td><span *ngIf="rrfdetails.Status.Value === 'Open'" class="open-status">{{rrfdetails.Status.Value}}</span>
+												<span *ngIf="rrfdetails.Status.Value === 'Closed'" class="close-status">{{rrfdetails.Status.Value}}</span>
+											</td>
+											<td>{{rrfdetails.CreatedDate}}</td>
+										</tr>
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- Monthbox Ends -->
+
+				</div>
+				<!-- RRF-activities-container Ends -->
+
+			</div>
+
+		</div>
+	</div>
+	<!--ds-->
+	<div class="col-md-4 rms-content-box rms-content-box3" id="rrf-profile-box1">
+		<div class="panel panel-default rms-content-panel rms-content-panel2">
+
+			<RRFGridNewUI [RRFData]=selectedRRFDetails></RRFGridNewUI>
+
+			
+		</div>
+	</div>
+</section>

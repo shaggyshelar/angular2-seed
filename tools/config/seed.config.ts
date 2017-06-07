@@ -308,11 +308,13 @@ export class SeedConfig {
       '@angular/platform-browser': `${this.APP_BASE}node_modules/@angular/platform-browser/platform-browser.umd.js`,
       '@angular/platform-browser-dynamic': `${this.APP_BASE}node_modules/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js`,
       'rxjs/*': `${this.APP_BASE}node_modules/rxjs/*`,
+      'primeng': `${this.APP_BASE}node_modules/primeng/*`,
       'app/*': `/app/*`,
       '*': `${this.APP_BASE}node_modules/*`
     },
     packages: {
-      rxjs: { defaultExtension: false }
+      rxjs: { defaultExtension: false },
+      primeng: { defaultExtension: 'js' }
     }
   };
 
@@ -371,6 +373,9 @@ export class SeedConfig {
         defaultExtension: 'js'
       },
       'rxjs': {
+        defaultExtension: 'js'
+      },
+      'primeng': {
         defaultExtension: 'js'
       },
       'lodash': {

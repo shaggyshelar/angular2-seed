@@ -1,0 +1,151 @@
+	<div class="body-overlay"></div>
+	<section class="rms-content">
+	<!-- Request Activities -->
+	<div class="col-md-4 rms-content-box rms-col-half1">
+		<div class="panel panel-default rms-content-panel rms-content-panel2">
+			<div class="rms-box-heading rms-box-heading-2">
+				Request Activities
+				
+				<div class="rrf-req-btns-box">
+					<button class="btn-cross"><i class="fa fa-times" aria-hidden="true"></i></button>
+					<button class="btn-tick"><i class="fa fa-check" aria-hidden="true"></i></button>
+				</div>
+			</div>
+			
+			<div class="Scrollbox2 pending-scrollbox1">
+					<!-- Searchbox -->
+					<div class="panel-body rms-content-body3">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<i class="fa fa-search rrf-search-icon" aria-hidden="true"></i>
+								<input type="text" class="form-control rrf-activities-searchbox" placeholder="Search"/>
+								
+								<!-- Sort by Dropdown -->
+								<div class="dropdown rrf-month-sort-dropdown rrf-req-sort-dropdown">
+								  <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown">Sort By
+								  <span class="caret"></span></button>
+								  <ul class="dropdown-menu">
+									<li><a href="#">Filter 1</a></li>
+									<li><a href="#">Filter 2</a></li>
+									<li><a href="#">Filter 3</a></li>
+								  </ul>
+								</div>
+								<!-- Sort by Dropdown Ends -->
+							</div>
+						</div>
+					</div>
+					<!-- Searchbox Ends -->
+					
+					<!-- RRF-activities-container  -->
+					<div class="rrf-activities-container">
+						
+						<!-- Rescheduling -->
+						<div class="rrf-activity-month-box">
+							<div class="rrf-activity-heading">
+								<h4>Rescheduling</h4>
+								
+								<!-- View All Dropdown -->
+								<div class="dropdown rrf-month-sort-dropdown">
+								  <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown">View All
+								  <span class="caret"></span></button>
+								  <ul class="dropdown-menu">
+									<li><a href="#">Filter 1</a></li>
+									<li><a href="#">Filter 2</a></li>
+									<li><a href="#">Filter 3</a></li>
+								  </ul>
+								</div>
+								<!-- View All Dropdown Ends -->
+							</div>
+							
+							<div class="rrf-request-content-box">
+								<div class="table-responsive">
+								<table class="table rrf-activity-table table-hover rrf-request-table">
+									<tbody>
+									  <tr class="activity-row1 rrf-activity-selected-row">
+										<td><input type="checkbox"/></td>
+										<td><i class="fa fa-bookmark grey-badge" aria-hidden="true"></i> 
+											Diksha Sisodia rescheduling John Doe's Technical Round 3 for Sr. Java Developer
+										</td>
+										<td>2 mins ago</td>
+									  </tr>
+									  <tr class="activity-row2">
+										<td><input type="checkbox"/></td>
+										<td><i class="fa fa-bookmark yellow-badge" aria-hidden="true"></i>
+											Richa Kararia rescheduling Prashnat Kashyap's HR Round 1 for UI/UX Designer
+										</td>
+										<td>90 mins ago</td>
+									  </tr>
+									  <tr>
+										<td><input type="checkbox"/></td>
+										<td><i class="fa fa-bookmark grey-badge" aria-hidden="true"></i>
+											Diksha Sisodia rescheduling Cody Lewis's Technical Round 1 for Salesforce Solution Architect
+										</td>
+										<td>03:15 PM</td>
+									  </tr>
+									  <tr>
+										<td><input type="checkbox"/></td>
+										<td><i class="fa fa-bookmark yellow-badge" aria-hidden="true"></i>
+											Richa Kararia rescheduling Chaitanya Belsare's HR Round 2 for Sr. Angular JS Developer
+										</td>
+										<td>12:15 PM</td>
+									  </tr>
+									  <tr>
+										<td><input type="checkbox"/></td>
+										<td><i class="fa fa-bookmark grey-badge" aria-hidden="true"></i> 
+											Diksha Sisodia rescheduling John Doe's Technical Round 3 for Sr. Java Developer
+										</td>
+										<td>10:30 AM</td>
+									  </tr>
+									</tbody>
+								  </table>
+								  </div>
+							</div>
+						</div>
+						<!-- Rescheduling Ends -->
+						
+						
+						<!-- Round Skipping -->
+						<div class="rrf-activity-month-box">
+							<div class="rrf-activity-heading">
+								<h4>Round Skipping</h4>
+								
+								<!-- View All Dropdown -->
+								<div class="dropdown rrf-month-sort-dropdown">
+								  <button class="btn-dropdown dropdown-toggle" type="button" data-toggle="dropdown">View All
+								  <span class="caret"></span></button>
+								  <ul class="dropdown-menu">
+									<li><a href="#">Filter 1</a></li>
+									<li><a href="#">Filter 2</a></li>
+									<li><a href="#">Filter 3</a></li>
+								  </ul>
+								</div>
+								<!-- View All Dropdown Ends -->
+							</div>
+							
+							<div class="rrf-request-content-box">
+								<div class="table-responsive">
+								<table class="table rrf-activity-table table-hover rrf-request-table">
+									<tbody>
+									  <tr class="activity-row1" *ngFor="let interviews of interviewApproval" (click)="showInterviewDetails(interviews)">
+										<td><input type="checkbox"/></td>
+										<td><i class="fa fa-bookmark grey-badge" aria-hidden="true"></i> 
+											{{interviews.Recruiter.Value}} rescheduling {{interviews.CandidateDetails.FullName}}'s {{interviews.Round.Value}}
+										</td>
+										<td>{{interviews.InterviewDate}}</td>
+									  </tr>
+									</tbody>
+								  </table>
+								  </div>
+							</div>
+						</div>
+						<!-- Round Skipping Ends -->
+						
+					</div>
+					<!-- RRF-activities-container Ends -->
+			
+			</div>
+			
+		</div>
+	</div> 
+<PendingRequestDetails [selectedInterview]=selectedCandidateInterview></PendingRequestDetails>
+</section>

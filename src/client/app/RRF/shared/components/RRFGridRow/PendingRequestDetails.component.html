@@ -1,0 +1,140 @@
+<div class="col-md-4 rms-content-box rms-col-half2" id="">
+    <div class="panel panel-default rms-content-panel rms-content-panel2">
+        <div class="rms-box-heading rms-box-heading-1">
+            Rescheduling {{selectedInterview.Round.Value}}
+
+            <button class="btn-view-rrf">View RRF</button>
+        </div>
+        <div class="Scrollbox pending-scrollbox2">
+					<div class="row rrf-accept-decline-box">
+						<div class="col-md-1 col-sm-1 col-xs-1"></div>
+						<div class="col-md-5 col-sm-5 col-xs-5">
+							<button class="rrf-accept-btn">Accept</button>
+						</div>
+						<div class="col-md-5 col-sm-5 col-xs-5">
+							<button class="rrf-decline-btn">Decline</button>
+						</div>
+						<div class="col-md-1 col-sm-1 col-xs-1"></div>
+					</div>
+					<div class="rrf-request-descr-box">
+						<div class="row">
+							<div class="col-md-9 col-sm-9">
+								<h5 class="rrf-expr-req-label">
+									Candidate Experience: 4 yrs
+								</h5>
+								
+								<h4 class="rrf-designation-label">Cody Lewis</h4>
+								
+								<h6 class="rrf-request-designation-label">Sr. Java Developer</h6>
+								
+								<div class="rrf-skills-box rrf-req-skill-box">
+									<h3>Skills:</h3>
+									<p>
+										HTML, CSS, Photoshop, Rendering and animations, Wireframing, Prototyping.
+									</p>
+								</div>
+							</div>
+							<div class="col-md-3 col-sm-3">
+								<img src="img/user.jpg" class="img-responsive rrf-req-user-img"/>
+							</div>
+						</div>
+						<div class="rrf-job-descr-box">
+							<h3>Comment:</h3>
+							
+							<div class="row req-author-descr-row">
+								<div class="col-md-8 col-sm-8 col-xs-8 req-author-name-box">
+									<span class="req-author-name">Kunal Adhikari :</span> <span class="req-author-post">Delivery Manager</span>
+								</div>
+								<div class="col-md-4 col-sm-4 col-xs-4 req-date-time-box">
+									<span class="req-date-time">30/08/2016, 03:15 PM</span>
+								</div>
+							</div>
+							
+							<p>
+								Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+							</p>
+						</div>
+						
+					</div>
+					
+					<div class="rrf-req-separator"></div>
+					
+					<div class="rrf-selected-candidate-box">
+						
+						<h5>Candidate Previous Ratings</h5>
+						
+						<div class="row prev-ratings-row">
+							<div class="col-md-7 col-sm-7">
+								<button class="prev-ratings-red-btn btn-show-comment" (click)='onTech1Click()'>Technical Round 3</button>
+							</div>
+							<div class="col-md-5 col-sm-5 prev-ratings-name-box">
+								<span class="prev-ratings-name">Kunal Adhikari</span>
+								<div class="rating prev-rating">
+									<span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span>
+								</div>
+							</div>
+							<div class="comment-row">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+									<div class="comment-box" *ngIf="tech1Flag">
+										<span class="comment-box-heading">Comment:</span>
+										<p class="comment-box-para">
+											Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem.
+										</p>
+									</div>
+								</div>
+								<div class="col-md-1"></div>
+							</div>
+						</div>
+						<div class="row prev-ratings-row">
+							<div class="col-md-7 col-sm-7">
+								<button class="prev-ratings-grey-btn btn-show-comment" (click)='onTech2Click()'>Technical Round 2</button>
+							</div>
+							<div class="col-md-5 col-sm-5 prev-ratings-name-box">
+								<span class="prev-ratings-name">Aradhana Chindhade</span>
+								<div class="rating prev-rating">
+									<span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span>
+								</div>
+							</div>
+							<div class="comment-row">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+									<div class="comment-box" *ngIf="tech2Flag">
+										<span class="comment-box-heading">Comment:</span>
+										<p class="comment-box-para">
+											Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem.
+										</p>
+									</div>
+								</div>
+								<div class="col-md-1"></div>
+							</div>
+						</div>
+						
+						<div class="row prev-ratings-row">
+							<div class="col-md-7 col-sm-7">
+								<button class="prev-ratings-light-grey-btn btn-show-comment" (click)='onTech3Click()'>Technical Round 1</button>
+							</div>
+							<div class="col-md-5 col-sm-5 prev-ratings-name-box">
+								<span class="prev-ratings-name">Haresh Punjabi</span>
+								<div class="rating prev-rating">
+									<span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span>
+								</div>
+							</div>
+							
+							<div class="comment-row">
+								<div class="col-md-1"></div>
+								<div class="col-md-10">
+									<div class="comment-box" *ngIf="tech3Flag">
+										<span class="comment-box-heading">Comment:</span>
+										<p class="comment-box-para">
+											Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem.
+										</p>
+									</div>
+								</div>
+								<div class="col-md-1"></div>
+							</div>
+						</div>
+					</div>
+			</div> 
+    </div>
+</div>
