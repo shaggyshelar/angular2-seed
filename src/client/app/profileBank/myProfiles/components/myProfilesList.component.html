@@ -136,27 +136,30 @@
 														<div class="row ">
 															<div class="col-md-12">
 															
-																<form role="form" (submit)="OnSubmitCandidate()" style="background: #f6fbfc;overflow: hidden; padding-left: 8px; border-left: #d4ad38 3px solid;">
+																<form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px; border-left: #d4ad38 3px solid;">
 																	<!--<div class="container-fluid">
 																		<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
 																			<div class="row" style="margin-left: 5px;">
 																				<div class="col-md-4 inlineForm">
 																					<div class="form-group">
-																						<input type="text" placeholder="First Name" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required=""
+																						<label >First Name</label>
+																						<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required=""
 																							tooltip="First Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName"
 																						/>
 																					</div>
 																				</div>
 																				<div class="col-md-4  inlineForm">
 																					<div class="form-group ">
-																						<input type="text" placeholder="Last Name" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required=""
+																						<label >Last Name</label>
+																						<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required=""
 																							tooltip="Last Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName"
 																						/>
 																					</div>
 																				</div>
 																				<div class="col-md-4  inlineForm">
 																					<div class="form-group ">
-																						<input type="email" class="form-control" placeholder="Email Address" [(ngModel)]="profile.Email" required="" tooltip="Email"
+																						<label >Email Address</label>
+																						<input type="email" class="form-control" [(ngModel)]="profile.Email" required="" tooltip="Email"
 																							(blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.Email">
 																					</div>
 																				</div>
@@ -164,31 +167,37 @@
 																			<div class="row" style="margin-left: 5px;">
 																				<div class="col-md-3 inlineForm">
 																					<div class="form-group ">
-																						<input type="text" placeholder="Contact Number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
+																						<label >Contact Number</label>
+																						<input type="text" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact"
 																							(blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
 																							tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" />
 																					</div>
 																				</div>
 																				<div class="col-md-3 inlineForm">
 																					<div class="form-group ">
-																						<input type="number" step="any" placeholder="Total Experience (In years)" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
+																						<label >Total Experience</label>
+																						<input type="number" step="any" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience"
 																							tooltip="Total Experience (In years)" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
 																							title="Enter total experience in years Eg. 02" minlength="0" maxlength="60" style="padding: 6px;" />
 																					</div>
 																				</div>
 																				<div class="col-md-3 inlineForm">
 																					<div class="form-group">
-																						<input type="number" placeholder="Notice Period (In days)" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
+																						<label >Notice Period</label>
+																						<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod"
 																							tooltip="Notice Period (In days)" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
 																							title="Enter notice period in Days Eg. 45" max="120" />
 																					</div>
 																				</div>
 																				<div class="col-md-3 inlineForm">
-																					<div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+																					<div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
 																						<input type="file" class="upload" (change)="uploadFile($event)" />
 																						<i class="fa fa-file-text"></i><span> </span>
-																					</div><br>
+																					</div>
+																					<button type="submit" class="btn green" style="float: right; margin-top: 23px;" [disabled]="IsDisable"> Save</button>
+																					<br>
 																					<span class="row" *ngIf='fileUploaded'> {{fileName}}</span>
+																					
 																				</div>
 																			</div>
 																		<!--</div>
