@@ -167,7 +167,8 @@ export class OtherDetails {
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;
   public BondContractDetails: string;
-  public Visa: MasterData = new MasterData();
+  //public Visa: MasterData = new MasterData();
+  public Visa: any ;
   public NoticePeriod: string = '';
   public RoleExpected: string;
   public ResignedStatusOfOfferedCandidate: string;
@@ -179,6 +180,7 @@ export class OtherDetails {
   public NoticePeriodNotCompletedCount: string;
   public LookingFor: string;
   public OfferInHand: any;
+  public HaveOffer: any = true;
   public OfferDetails: string;
   public PrimaryReasonToQuitLastJob: string;
   public SecondaryReasonToQuitLastJob: string;

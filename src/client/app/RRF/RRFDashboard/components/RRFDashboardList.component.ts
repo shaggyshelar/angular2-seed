@@ -66,7 +66,7 @@ export class RRFDashboardListComponent implements OnActivate {
     displayAssignedTo: boolean = false;
     SortByList: SortingMasterData[] = [];
     sessionValue:string;
-
+    currentUser: MasterData = new MasterData();
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
         private _commonService: CommonService,
@@ -510,6 +510,16 @@ export class RRFDashboardListComponent implements OnActivate {
         sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard');
         this._router.navigate(['/App/RRF/MyRRF/Add']);
     }
+     getCloseRRFAccess(Owner: MasterData,statusId: number) {
+        try {
+            if (Owner.Id === this.logedInUser.Id && (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned)) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
 
+    }
 }
 

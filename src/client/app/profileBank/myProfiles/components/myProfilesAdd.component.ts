@@ -9,13 +9,14 @@ import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from  '../../../shared/constantValue/index';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
 import {Location} from '@angular/common';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
     templateUrl: '../../shared/views/profileBankAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES,DropdownMultiSelectComponent],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -27,7 +28,7 @@ export class MyProfilesAddComponent implements OnActivate {
     params: string;
     countries: Array<MasterData>;
     states: Array<MasterData>;
-
+    haveVisa:boolean = false;
     qualifications: Array<MasterData>;
     grades: Array<MasterData>;
     years: Array<MasterData>;
@@ -72,9 +73,11 @@ export class MyProfilesAddComponent implements OnActivate {
     // For Duplicate Records
     isExist: boolean = false;
     existedProfile: CandidateProfile;
+    skills: MasterData[];
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
+        private _mastersService: MastersService,
         public toastr: ToastsManager,
         private _router: Router,
         private _location: Location) {
@@ -106,6 +109,15 @@ export class MyProfilesAddComponent implements OnActivate {
         var date = new Date();
         this.CurrentYear = date.getFullYear();
         this.getProfilePhoto(this.CandidateID);
+        this.getSkills();
+    }
+    getSkills(): void {
+        this._mastersService.getSkills()
+            .subscribe(
+            results => {
+                this.skills = results;
+            },
+            error => this.errorMessage = <any>error);
     }
     createQualificationObj() {
         this.qualification = new Qualification();
@@ -270,18 +282,6 @@ export class MyProfilesAddComponent implements OnActivate {
                         this.toastr.error('Please enter contact no.');
                         submitFlag = false;
                     } else {
-                        if (this.profile.CandidateSkills.PrimarySkills === '' || this.profile.CandidateSkills.PrimarySkills === null) {
-                            this.toastr.error('Please enter skills');
-                            submitFlag = false;
-                        } else {
-                            if (this.profile.Tag === '' || this.profile.CandidateSkills.PrimarySkills === null) {
-                                this.toastr.error('Please enter Tag');
-                                submitFlag = false;
-                            } else {
-                                if (this.profile.CandidateOtherDetails.NoticePeriod === '') {
-                                    this.toastr.error('Please enter notice period');
-                                    submitFlag = false;
-                                } else {
                                     if (this.profile.CandidateSalaryDetails.CurrentSalary === '') {
                                         this.toastr.error('Please enter current salary');
                                         submitFlag = false;
@@ -292,9 +292,23 @@ export class MyProfilesAddComponent implements OnActivate {
                                         }
                                     }
                                 }
-                            }
-                        }
-                    }
+                    // else {
+                    //     if (this.profile.CandidateSkills.PrimarySkills === '' || this.profile.CandidateSkills.PrimarySkills === null) {
+                    //         this.toastr.error('Please enter skills');
+                    //         submitFlag = false;
+                    //     } else {
+                    //         if (this.profile.Tag === '' || this.profile.CandidateSkills.PrimarySkills === null) {
+                    //             this.toastr.error('Please enter Tag');
+                    //             submitFlag = false;
+                    //         } else {
+                    //             if (this.profile.CandidateOtherDetails.NoticePeriod === '') {
+                    //                 this.toastr.error('Please enter notice period');
+                    //                 submitFlag = false;
+                    //             } 
+                                
+                    //         }
+                    //     }
+                    // }
                 }
             }
         }
@@ -346,11 +360,6 @@ export class MyProfilesAddComponent implements OnActivate {
                     if (this.profile.PrimaryContact === '') {
                         this.toastr.error('Please enter primary contact');
                         submitFlag = false;
-                    } else {
-                        if (this.profile.PermanentAddress === '') {
-                            this.toastr.error('Please enter permanent address');
-                            submitFlag = false;
-                        }
                     }
                 }
             }
@@ -1002,4 +1011,14 @@ export class MyProfilesAddComponent implements OnActivate {
             },
             error => this.toastr.error(<any>error));
     }
+    /** Enable visa field  */
+    onHaveVisa(isChecked: any) {
+        if (isChecked === false) {
+            this.haveVisa = true;
+        } else {
+            this.haveVisa = false;
+            this.profile.CandidateOtherDetails.Visa = '';
+        }
+    }
+    
 }

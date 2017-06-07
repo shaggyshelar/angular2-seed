@@ -63,6 +63,7 @@ export class MyRRFAddComponent implements OnActivate {
     }
 
     routerOnActivate(segment: RouteSegment): void {
+        this.newRRF.Description = 'TO:DO - Will get data from API as per selection of designation';
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
         };

@@ -149,7 +149,17 @@
 
 
 						<div class="row " *ngIf="closeRRFID.Id != 0">
-							<div class="col-lg-9 ">
+							<div class="col-lg-3 col-sm-3">
+									<div class="dataTables_length ">
+										<label>Reason
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order">
+                                                <option value="asc">Test 1</option>
+                                                <option value="desc">Test 2</option>
+                                            </select>
+                                        </label>
+									</div>
+								</div>
+							<div class="col-lg-6 ">
 								<textarea class="form-control " id="txtCloseComment " rows="1
                                             " [(ngModel)]='closeComment' placeholder="close Comment " style="resize:vertical "
 									required=" "></textarea>
@@ -205,10 +215,10 @@
 														tooltipEnable="true" (click)='onReScheduleInterviewsClick(rrf.RRFID)'>
                                                             <i class="fa fa-calendar-check-o"></i> <!--View Re-schedule Interviews-->
                                                         </button>
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='onCloseRRFClick(rrf.RRFID)' [ifAuthorize]="[ 'RRF.CLOSERRF.MANAGE'] "
-														tooltip="Close RRF" tooltipPlacement="top" tooltipTrigger="mouseenter"  tooltipEnable="true"
-														[disabled]='allowCloseRRF(rrf.Status.Id)'>
-                                                            <i class="fa fa-times "></i> <!--Close RRF-->
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='onCloseRRFClick(rrf.RRFID)'
+														tooltip="Close RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Close RRF" tooltipEnable="true"
+														[disabled]='getCloseRRFAccess(rrf.RaisedBy,rrf.Status.Id)'>
+                                                            <i class="fa fa-times "></i> <!--Close RRF  [disabled]='allowCloseRRF(rrf.Status.Id)'-->
                                                         </button>
 												</div>
 											</div>

@@ -126,10 +126,10 @@ export class RRFAssignComponent implements OnActivate, AfterViewInit, AfterConte
             this.toastr.error('Please select assign To value');
             return false;
         }
-        if (this.AssignedComments === '') {
-            this.toastr.error('Please select Assigning Comment');
-            return false;
-        }
+        // if (this.AssignedComments === '') {
+        //     this.toastr.error('Please select Assigning Comment');
+        //     return false;
+        // }
         return true;
     }
 
