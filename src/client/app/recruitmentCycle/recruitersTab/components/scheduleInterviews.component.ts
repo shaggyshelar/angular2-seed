@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
+import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { RecruiterScheduleInterviewService} from '../services/displayScheduleInterviews.service';
 import { InterviewsList} from '../model/interviewDetails';
@@ -21,6 +21,7 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
     errorMessage: string;
     InterviewDetailsList: InterviewsList = new InterviewsList();
     constructor(private _recruitersInterviewService: RecruiterScheduleInterviewService,
+        private _router: Router,
         private toastr: ToastsManager) {
         this.currentView = 'myInterviews';
     }
@@ -120,5 +121,9 @@ export class ScheduleInterviewsForRecruitersComponent implements OnActivate {
         if (day.length < 2) day = '0' + day;
 
         return [day, month, year].join('-');
+    }
+
+    redirect(rrfID:any, rrfCode:any) {
+        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID + 'ID' + rrfCode]);
     }
 }
