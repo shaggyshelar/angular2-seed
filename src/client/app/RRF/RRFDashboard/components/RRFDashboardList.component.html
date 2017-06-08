@@ -100,10 +100,10 @@
 							</div>
 							<!--Hide Sorting / filtering if No Data Found-->
 							<div class="row" *ngIf="!NORECORDSFOUND">
-								<div class="col-lg-3 col-sm-3">
+								<div class="col-lg-2 col-sm-2">
 									<div class="dataTables_length ">
 										<label>show
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.PerPageCount" (ngModelChange)="bindGridData()">
+                                            <select class="form-control input-sm input-small  input-inline" [(ngModel)]="grdOptions.PerPageCount" (ngModelChange)="bindGridData()">
                                                 <option value="2">2</option>
                                                 <option value="5">5</option>
                                                 <option value="10">10</option>
@@ -113,19 +113,11 @@
                                         </label>
 									</div>
 								</div>
-								<div class="col-lg-3 col-sm-3">
+								
+								<div class="col-lg-2 col-sm-2">
 									<div class="dataTables_length ">
-										<label>Sort By
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.OrderBy" (ngModelChange)="bindGridData()">
-                                                <option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>
-                                            </select>
-                                        </label>
-									</div>
-								</div>
-								<div class="col-lg-3 col-sm-3">
-									<div class="dataTables_length ">
-										<label>Filter By
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="currentView"  (ngModelChange)="onViewChanged(currentView)">
+										<label>Filter
+                                            <select class="form-control input-sm input-small  input-inline" [(ngModel)]="currentView"  (ngModelChange)="subFilter1='';subFilter2='';onViewChanged(currentView)">
                                                 <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="myRRF">My RRF</option>
                                                 <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="allRRF">All RRF</option>
                                                 <option [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']" value="unAssignRRF">Unassigned</option>
@@ -134,7 +126,28 @@
                                         </label>
 									</div>
 								</div>
-								<div class="col-lg-3 col-sm-3 ">
+								<div class="col-lg-2 col-sm-2">
+									<div class="dataTables_length ">
+										<label>Filter By
+                                            <select class="form-control input-sm input-small input-inline"  [(ngModel)]="subFilter1"  (ngModelChange)="onFilterChange(subFilter1)">
+                                               	<option value="Practice">Practice</option>
+                                                <option value="Priority">Priority</option>
+                                                <option value="Status">Status</option>
+                                                <option value="RaisedBy">RaisedBy</option>
+                                            </select>
+                                        </label>
+									</div>
+								</div>
+								<div class="col-lg-2 col-sm-2">
+									<div class="dataTables_length " >
+										<label>Options
+                                            <select [disabled]="subFilter1==''" class="form-control input-sm input-small input-inline" [(ngModel)]="subFilter2" (ngModelChange)="onSubFilterChange(subFilter2)">
+                                                <option *ngFor="let item of rrfSubFilter" [value]="item">{{item}}</option>
+                                            </select>
+                                        </label>
+									</div>
+								</div>
+								<div class="col-lg-2 col-sm-2 ">
 									<div class="dataTables_filter pull-right ">
 										<label>Search:
                                             <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />

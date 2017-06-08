@@ -7,7 +7,7 @@ import { CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 import { RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFStatus, RRFAssignStatus} from  '../../../shared/constantValue/index';
-import { MasterData, ResponseFromAPI, GrdOptions, SortingMasterData} from '../../../shared/model/common.model';
+import { MasterData, ResponseFromAPI, GrdOptions,RRFFilters, SortingMasterData} from '../../../shared/model/common.model';
 import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
 import { RRFPipe } from '../../shared/Filters/RRFFilter.component';
@@ -67,6 +67,10 @@ export class RRFDashboardListComponent implements OnActivate {
     SortByList: SortingMasterData[] = [];
     sessionValue:string;
     currentUser: MasterData = new MasterData();
+    RRfFiltersList:any;
+    rrfSubFilter:any=[];
+    subFilter1:string='';
+    subFilter2:string='';
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
         private _commonService: CommonService,
@@ -88,6 +92,12 @@ export class RRFDashboardListComponent implements OnActivate {
          * Removed from here and added to Assinged RRF redio button changed event
         this.GetRecruiter(); */
         this.setDefaultcloseRRFID();
+        this.RRfFiltersList = {
+            Practice:['EBS','ECS'],
+            Priority:['High','Medium','Low'],
+            Status:['Open','Closed','Rejected','Pending Approval'],
+            RaisedBy:[]
+        }
     }
 
     getMyRRFData() {
@@ -117,6 +127,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
     getAllRRF() {
         this.NORECORDSFOUND = false;
+       
         this._rrfDashboardService.getAllRRF(this.grdOptions)
             .subscribe(
             (results: any) => {
@@ -413,7 +424,6 @@ export class RRFDashboardListComponent implements OnActivate {
             return false;
         }
     }
-
     allowCloseRRF(statusId: number) {
         try {
             if (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned) {
@@ -520,6 +530,23 @@ export class RRFDashboardListComponent implements OnActivate {
             return false;
         }
 
+    }
+    onFilterChange(item:string){
+        console.log(item)
+        this.rrfSubFilter=this.RRfFiltersList[item]
+    }
+    onSubFilterChange(item:string){
+        this.grdOptions.RRFFilters=new RRFFilters();
+        if(this.subFilter1==='Practice'){
+            this.grdOptions.RRFFilters.Practice=this.subFilter2;
+        } else if(this.subFilter1==='Priority'){
+            this.grdOptions.RRFFilters.Priority=this.subFilter2;
+        } else if(this.subFilter1==='Status'){
+            this.grdOptions.RRFFilters.Status=this.subFilter2;
+        } else if(this.subFilter1==='RaisedBy'){
+            this.grdOptions.RRFFilters.RaisedBy=this.subFilter2;
+        }
+        this.onViewChanged(this.currentView)
     }
 }
 
