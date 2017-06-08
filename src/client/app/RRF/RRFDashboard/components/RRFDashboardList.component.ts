@@ -67,14 +67,11 @@ export class RRFDashboardListComponent implements OnActivate {
     SortByList: SortingMasterData[] = [];
     sessionValue:string;
     currentUser: MasterData = new MasterData();
-<<<<<<< HEAD
     hideRrfDetails: boolean = true;
-=======
     RRfFiltersList:any;
     rrfSubFilter:any=[];
     subFilter1:string='';
     subFilter2:string='';
->>>>>>> e6b47c5939b7630533dedfaf8a9b31835f71547f
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
         private _commonService: CommonService,
