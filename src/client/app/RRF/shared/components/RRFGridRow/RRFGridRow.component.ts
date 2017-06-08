@@ -18,10 +18,13 @@ export class RRFGridRowComponent implements OnInit {
     @Input() displayApproval: boolean = false;
     @Input() displayAssignedTo: boolean = false;
     @Input() displayJobDescDetails: boolean = false;
-    @Input() displayFeedBackStatus: boolean = false;
+    @Input() displayFeedBackStatus: boolean = true;
+    // @Input() hideRRFDetails: boolean;
+    @Input() hideRRFDetails: boolean = false;
 
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
     ngOnInit() {
+        console.log('hideRRFDetails =>', this.hideRRFDetails);
         // this.RRFData.CreatedDate = moment(this.RRFData.CreatedDate).format('DD/MM/YYYY');
         // this.RRFData.ExpDateOfJoining = moment(this.RRFData.ExpDateOfJoining).format('DD/MM/YYYY');
     }

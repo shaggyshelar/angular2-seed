@@ -1,7 +1,8 @@
 <div align="left">
     <div class="rowHeader">
-        <div class="col-lg-12 row " style="">
-            <b><label style="color: #26a1ab;">RRF Code : {{RRFData.RRFCODE }}</label></b> Raised by <b> {{RRFData.RaisedBy.Value }}</b>            On {{formatDate(RRFData.CreatedDate)}} with <b> {{RRFData.Priority.Value}}</b> priority.
+        <div class="col-lg-12 row ">
+            <span [hidden]="hideRRFDetails"><b><label style="color: #26a1ab;">RRF Code : {{RRFData.RRFCODE }}</label></b> Raised by <b> {{RRFData.RaisedBy.Value }}</b>            On {{formatDate(RRFData.CreatedDate)}} with <b> {{RRFData.Priority.Value}}</b> priority.</span>
+            <span [hidden]="!hideRRFDetails"> <b> Title : {{RRFData.PositionTitle}}</b> </span>
             <div class="pull-right">
                 <span style="color: #217ebd; margin-right: 25px;" *ngIf='displayFeedBackStatus'><b>Feedback Status </b>: {{RRFData.FeedbackStatus === null ? "NA" : RRFData.FeedbackStatus}}</span>
                 <b><span  style="margin-top: 15px;" class="mt-action-dot {{getStatusClass(RRFData.Status.Id)}} "></span>{{RRFData.Status.Value}}</b>
@@ -27,7 +28,7 @@
                     <b>Feedback Status </b>: {{RRFData.FeedbackStatus === null ? "NA" : RRFData.FeedbackStatus}}
                 </div>-->
             <!--</div>-->
-            <div class="col-lg-12 text-center">
+            <div class="col-lg-12 text-center" [hidden]="hideRRFDetails">
                 <b> Title : {{RRFData.PositionTitle}}</b>
             </div>
             <div class="col-lg-4">

@@ -67,6 +67,7 @@ export class RRFDashboardListComponent implements OnActivate {
     SortByList: SortingMasterData[] = [];
     sessionValue:string;
     currentUser: MasterData = new MasterData();
+    hideRrfDetails: boolean = true;
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
         private _commonService: CommonService,
@@ -74,6 +75,7 @@ export class RRFDashboardListComponent implements OnActivate {
         public toastr: ToastsManager,
         private _mastersService: MastersService) {
         this.currentView = 'myRRF';
+        this.hideRrfDetails = true;
     }
     routerOnActivate() {
         this.logedInUser = this.getLoggedInUser();
