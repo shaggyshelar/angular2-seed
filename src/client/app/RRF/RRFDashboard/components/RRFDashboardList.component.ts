@@ -69,8 +69,8 @@ export class RRFDashboardListComponent implements OnActivate {
     currentUser: MasterData = new MasterData();
     RRfFiltersList:any;
     rrfSubFilter:any=[];
-    subFilter1:string;
-    subFilter2:string;
+    subFilter1:string='';
+    subFilter2:string='';
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
         private _commonService: CommonService,
@@ -308,6 +308,8 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onViewChanged(viewMode: string) {
+        this.subFilter1='';
+        this.subFilter2='';
         sessionStorage.removeItem('backToRRFList');
         this.resetToDefaultGridOptions();
         this.grdOptions.OrderBy = 'Modified';
@@ -424,7 +426,6 @@ export class RRFDashboardListComponent implements OnActivate {
             return false;
         }
     }
-
     allowCloseRRF(statusId: number) {
         try {
             if (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned) {
