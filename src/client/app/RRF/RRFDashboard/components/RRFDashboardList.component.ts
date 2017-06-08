@@ -308,8 +308,6 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onViewChanged(viewMode: string) {
-        this.subFilter1='';
-        this.subFilter2='';
         sessionStorage.removeItem('backToRRFList');
         this.resetToDefaultGridOptions();
         this.grdOptions.OrderBy = 'Modified';

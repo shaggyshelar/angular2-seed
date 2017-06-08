@@ -117,7 +117,7 @@
 								<div class="col-lg-2 col-sm-2">
 									<div class="dataTables_length ">
 										<label>Filter
-                                            <select class="form-control input-sm input-small  input-inline" [(ngModel)]="currentView"  (ngModelChange)="onViewChanged(currentView)">
+                                            <select class="form-control input-sm input-small  input-inline" [(ngModel)]="currentView"  (ngModelChange)="subFilter1='';subFilter2='';onViewChanged(currentView)">
                                                 <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="myRRF">My RRF</option>
                                                 <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="allRRF">All RRF</option>
                                                 <option [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']" value="unAssignRRF">Unassigned</option>
