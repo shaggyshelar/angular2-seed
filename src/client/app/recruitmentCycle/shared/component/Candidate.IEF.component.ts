@@ -1,13 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { Interview } from  '../../shared/model/interview';
-import { CandidateIEFService } from  '../services/Candidate.IEF.service';
-import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
-import { IEFFunctionComponent} from './IEFFuncations/Component/IEFFunction.component';
-import { InterviewSlotComponent} from './InterviewSlot/Component/InterviewSlot.component';
-import { IEFInformation, iefModel, IEFFunction, IEFSubmission} from '../../shared/model/ief';
-import { ResponseFromAPI, MasterData} from '../../../shared/model/common.model';
-import { APIResult} from  '../../../shared/constantValue/index';
+import { Interview } from '../../shared/model/interview';
+import { CandidateIEFService } from '../services/Candidate.IEF.service';
+import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment } from '@angular/router';
+import { IEFFunctionComponent } from './IEFFuncations/Component/IEFFunction.component';
+import { InterviewSlotComponent } from './InterviewSlot/Component/InterviewSlot.component';
+import { IEFInformation, iefModel, IEFFunction, IEFSubmission } from '../../shared/model/ief';
+import { ResponseFromAPI, MasterData } from '../../../shared/model/common.model';
+import { APIResult } from '../../../shared/constantValue/index';
 
 @Component({
     moduleId: module.id,
@@ -27,10 +27,32 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
     iefStatus: string = 'Selected';
     iefComments: string;
     isChangeStatusReq: boolean = false;
+    rejectReason: any = null;
+    rejectReasons: any[] = [];
+    showRejectReasons: boolean = false;
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _candidateIEFService: CandidateIEFService) {
-
+        this.rejectReasons = [
+            {
+                ID: null,
+                Title: 'Work',
+                Reason: 'The work we were doing was not inspising',
+                Category: 'IEF'
+            },
+            {
+                ID: null,
+                Title: '--',
+                Reason: 'The requirements fulfilled',
+                Category: 'Close RRF'
+            },
+            {
+                ID: null,
+                Title: '--',
+                Reason: 'Project escalation',
+                Category: 'Close RRF'
+            }
+        ];
     }
     routerOnActivate(segment: RouteSegment) {
         this.requestedIef = this.getSessionOf<iefModel>('SubmitIef');
@@ -161,6 +183,20 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
             this.Back();
         }
         return response;
+    }
+    ifRejected(event: any) {
+        if (event === 'Rejected') {
+            this.showRejectReasons = true;
+            this.rejectReason = this.rejectReasons[0];
+        } else {
+            this.rejectReason = null;
+            this.showRejectReasons = false;
+        }
+    }
+    rejectReasonSet(event: any) {
+        this.rejectReason = this.rejectReasons.find(element => {
+            return (element.Reason.indexOf(event.target.value) > -1);
+        });
     }
 
 }

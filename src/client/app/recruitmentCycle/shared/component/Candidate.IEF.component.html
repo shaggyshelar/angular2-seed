@@ -108,12 +108,18 @@
                             </div>
                             <!--<form class="form-horizontal form-bordered" (submit)="submitIEFDetails(functions)">-->
                             <div class="form-body form-group">
-                                <label class="control-label col-md-2">Status<span class="required">*</span> :</label>
                                 <div class="col-md-2">
-                                    <select class="form-control" [(ngModel)]='iefStatus' required>
+                                    <label class="control-label " style="display: block; margin-bottom : 10px;">Status<span class="required">*</span> :</label>
+                                    <label *ngIf="showRejectReasons" class="control-label " style="display: block;">Reason<span class="required">*</span> :</label>
+                                </div>
+                                <div class="col-md-2">
+                                    <select style=" margin-bottom : 10px;" class="form-control" [(ngModel)]='iefStatus' required (ngModelChange)="ifRejected($event)">
                                         <option>Selected</option>
                                         <option>Rejected</option>
                                         <option *ngIf='!isChangeStatusReq'>On Hold</option>
+                                    </select>
+                                    <select *ngIf="showRejectReasons" class="form-control" required (change)="rejectReasonSet($event)">
+                                        <option *ngFor="let reason of rejectReasons; let i = index" [value]="reason.Reason">{{reason.Reason}}</option>
                                     </select>
                                 </div>
                                 <label class="control-label col-md-2">General Comments<span class="required">*</span>:</label>
