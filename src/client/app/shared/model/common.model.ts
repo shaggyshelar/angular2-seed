@@ -34,8 +34,14 @@ export class GrdOptions {
     public NextPageID:number ;
     public PreviousPageID:number ;
     public PagingEvent:string ;
+    public RRFFilters:RRFFilters=new RRFFilters();
 }
-
+export class RRFFilters {
+        public RaisedBy : string ;
+        public Practice  : string;
+        public Priority  : string;
+        public Status  : string;
+}
 export class SortingMasterData {
     public Id: string;
     public Value: string;
