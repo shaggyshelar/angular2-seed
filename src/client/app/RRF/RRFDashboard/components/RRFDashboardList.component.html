@@ -113,11 +113,15 @@
                                         </label>
 									</div>
 								</div>
+								
 								<div class="col-lg-3 col-sm-3">
 									<div class="dataTables_length ">
-										<label>Sort By
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.OrderBy" (ngModelChange)="bindGridData()">
-                                                <option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>
+										<label>Filter
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="currentView"  (ngModelChange)="onViewChanged(currentView)">
+                                                <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="myRRF">My RRF</option>
+                                                <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="allRRF">All RRF</option>
+                                                <option [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']" value="unAssignRRF">Unassigned</option>
+                                                <option value="assignRRF" [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">Assigned</option>
                                             </select>
                                         </label>
 									</div>
@@ -125,11 +129,20 @@
 								<div class="col-lg-3 col-sm-3">
 									<div class="dataTables_length ">
 										<label>Filter By
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="currentView"  (ngModelChange)="onViewChanged(currentView)">
-                                                <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="myRRF">My RRF</option>
-                                                <option [ifAuthorize]="['RRF.VIEWALLRRF.MANAGE']" value="allRRF">All RRF</option>
-                                                <option [ifAuthorize]="['RRF.RECRUITERUNASSIGNEDRRF.MANAGE']" value="unAssignRRF">Unassigned</option>
-                                                <option value="assignRRF" [ifAuthorize]="['RRF.RECRUITERASSIGNEDRRF.MANAGE']">Assigned</option>
+                                            <select class="form-control input-sm input-small input-inline"  [(ngModel)]="subFilter1"  (ngModelChange)="onFilterChange(subFilter1)">
+                                               	<option value="Practice">Practice</option>
+                                                <option value="Priority">Priority</option>
+                                                <option value="Status">Status</option>
+                                                <option value="RaisedBy">RaisedBy</option>
+                                            </select>
+                                        </label>
+									</div>
+								</div>
+								<div class="col-lg-3 col-sm-3">
+									<div class="dataTables_length ">
+										<label>Sort By
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="subFilter2" (ngModelChange)="onSubFilterChange(subFilter2)">
+                                                <option *ngFor="let item of rrfSubFilter" [value]="item">{{item}}</option>
                                             </select>
                                         </label>
 									</div>
