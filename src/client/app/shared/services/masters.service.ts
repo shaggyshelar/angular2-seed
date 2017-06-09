@@ -189,6 +189,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    getRejectionReasons() {
+        let url = Config.GetURL('/api/Masters/GetAllReasons');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     addSkillToMaster(skill: string) {
         let url = Config.GetURL('/api/Masters/AddSkills');
