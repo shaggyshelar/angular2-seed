@@ -96,6 +96,8 @@ export class MyProfilesListComponent implements OnActivate {
     IsDisable: boolean = true;
     FilterByList: Array<SortingMasterData> = new Array<SortingMasterData>();
     modelFilterBy: string = 'my';
+    modelFilterByProfile: string = 'all';
+    cachedProfileList: AllCandidateProfiles = new AllCandidateProfiles();
     constructor(private _myProfilesService: MyProfilesService,
         private _blacklistedProfilesService: BlackListedProfilesService,
         private _allProfilesService: AllProfilesService,
@@ -247,6 +249,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results;
                     this.NORECORDSFOUND = false;
                 } else { this.NORECORDSFOUND = true; }
             },
@@ -822,6 +825,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results;
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
@@ -832,6 +836,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results;
                 } else {
                     this.NORECORDSFOUND = true;
                 }
@@ -844,6 +849,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: AllCandidateProfiles) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results;
                 } else { this.NORECORDSFOUND = true; }
             },
             error => {
@@ -854,6 +860,33 @@ export class MyProfilesListComponent implements OnActivate {
     showNewProfileModal() {
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });
+    }
+
+    filterByProfile(event: any) {
+        let profUntagged: any[] = ['Open', 'Rejected', 'Absconded'];
+        let profTagged: any[] = ['In Process', 'Offered', 'Joined', 'Accepted'];
+        switch (event.target.value) {
+            case 'all':
+                this.myProfilesList.Profiles = this.cachedProfileList.Profiles;
+                break;
+            case 'tagged':
+                this.myProfilesList.Profiles = this.cachedProfileList.Profiles.filter(element => {
+                    return (element.Status.Value.toLowerCase().indexOf(profTagged[0].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profTagged[1].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profTagged[2].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profTagged[3].toLowerCase()) > -1);
+                });
+                break;
+            case 'untagged':
+                this.myProfilesList.Profiles = this.cachedProfileList.Profiles.filter(element => {
+                    return (element.Status.Value.toLowerCase().indexOf(profUntagged[0].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profUntagged[1].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profUntagged[2].toLowerCase()) > -1);
+                });
+                break;
+            default:
+                break;
+        }
     }
 }
 

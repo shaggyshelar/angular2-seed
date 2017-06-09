@@ -100,6 +100,18 @@
 										</select> 
                                     </label>
 								</div>
+								<div class="col-md-3 col-sm-3">
+									<label> Profiles :
+                                        <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+                                               [(ngModel)]="modelFilterByProfile" (change)='filterByProfile($event)'>
+											<!--[(ngModel)]="myProfilesList.GrdOperations.Order"-->
+                                                <option value="all">All</option>
+                                                <option value="tagged">Tagged</option>
+                                                <option value="untagged">Untagged</option>
+                                                <!--<option value="referenced">Referenced</option>-->
+										</select> 
+                                    </label>
+								</div>
 
 								<div class="col-md-3 col-sm-3">
 									<label>Sort By :
@@ -118,12 +130,10 @@
 									<!--</button>-->
 								</div>
 
-								<div class="col-md-3 col-sm-3">
+								<div class="col-md-2 col-sm-3">
 									<div id="sample_1_filter" class="dataTables_filter">
-										<label>Search :
-                                            <input type="search" class="form-control input-sm input-small input-inline " [(ngModel)] = "searchString"
-                                            placeholder="" aria-controls="sample_1">
-                                            </label>
+										<input type="search" placeholder="Search" class="form-control input-sm input-small input-inline " [(ngModel)]="searchString"
+										 aria-controls="sample_1">
 									</div>
 								</div>
 
@@ -134,13 +144,13 @@
 						<!-- Modal Start -->
 						<!--Begin Count Details box-->
 						<div id="CountDetails" class="modal fade">
-							<div class="modal-dialog">
+							<div class="modal-dialog" style="width: 50%;">
 								<div class="modal-content">
 									<div class="modal-header">
 										<b>{{Title}} </b>
 										<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
 									</div>
-									<div id="modalBody" class="modal-body" style="overflow-y:scroll;">
+									<div id="modalBody" class="modal-body">
 										<!-- Modal Body Start -->
 										<div class="row ">
 											<div class="col-md-12">
@@ -220,7 +230,7 @@
 														</div>
 													</div>
 													<div class="row" style="margin-left: 5px;">
-														<div class="col-md-3 inlineForm">
+														<div class="col-md-4 inlineForm">
 															<div class="form-group ">
 																<label>Contact Number</label>
 																<input type="text" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()"
@@ -229,31 +239,31 @@
 																/>
 															</div>
 														</div>
-														<div class="col-md-3 inlineForm">
+														<div class="col-md-2 inlineForm">
 															<div class="form-group ">
-																<label>Total Experience</label>
+																<label>Experience</label>
 																<input type="number" step="any" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience" tooltip="Total Experience (In years)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
 																 title="Enter total experience in years Eg. 02" minlength="0" max="60" style="padding: 6px;" />
 															</div>
 														</div>
-														<div class="col-md-3 inlineForm">
+														<div class="col-md-2 inlineForm">
 															<div class="form-group">
-																<label>Notice Period</label>
+																<label>Notice</label>
 																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
 																 title="Enter notice period in Days Eg. 45" max="120" />
 															</div>
 														</div>
-														<div class="col-md-3 inlineForm">
+														<div class="col-md-4 inlineForm">
 															<div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume"
 															 tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
 																<input type="file" class="upload" (change)="uploadFile($event)" />
 																<i class="fa fa-file-text"></i><span> </span>
 															</div>
-															<button type="submit" class="btn green" style="float: right; margin-top: 23px;" [disabled]="IsDisable"> Save</button>
+															<button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 66%" [disabled]="IsDisable"> Save</button>
 															<br>
-															<span class="row" *ngIf='fileUploaded'> {{fileName}}</span>
+															<span class="row" *ngIf='fileUploaded' style="word-wrap: break-word;"> {{fileName}}</span>
 
 														</div>
 													</div>
