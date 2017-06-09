@@ -1,8 +1,8 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
-import { RRFDetails} from '../../../myRRF/models/rrfDetails';
-import { RRFAssignStatus} from  '../../../../shared/constantValue/index';
-import {IfAuthorizeDirective} from '../../../../shared/directives/ifAuthorize.directive';
+import { RRFDetails } from '../../../myRRF/models/rrfDetails';
+import { RRFAssignStatus } from '../../../../shared/constantValue/index';
+import { IfAuthorizeDirective } from '../../../../shared/directives/ifAuthorize.directive';
 //import { PanelsAvailablityComponent } from '../interviewersAvailablity/panelsAvailablity.component';
 
 @Component({
@@ -24,7 +24,6 @@ export class RRFGridRowComponent implements OnInit {
 
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
     ngOnInit() {
-        console.log('hideRRFDetails =>', this.hideRRFDetails);
         // this.RRFData.CreatedDate = moment(this.RRFData.CreatedDate).format('DD/MM/YYYY');
         // this.RRFData.ExpDateOfJoining = moment(this.RRFData.ExpDateOfJoining).format('DD/MM/YYYY');
     }
