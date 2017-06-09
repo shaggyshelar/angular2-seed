@@ -653,19 +653,19 @@ export class MyProfilesListComponent implements OnActivate {
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
-                if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
-                    if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
+                //if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
+                    //if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
                         //Add to selectedCandidates array
                         this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                         this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
                         this.Candidate.Status = this.myProfilesList.Profiles[index].Status;
                         this.selectedCandidates.push(this.Candidate);
                         this.Candidate = new Candidate();
-                    } else { chkRRFAssigned = true; break; }
-                } else {
-                    chkStatus = true;
-                    break;
-                }
+                    //} else { chkRRFAssigned = true; break; }
+               // } else {
+                 //   chkStatus = true;
+                //    break;
+                //}
             }
         }
         if (chkStatus) {

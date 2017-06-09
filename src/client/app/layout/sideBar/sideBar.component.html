@@ -45,12 +45,12 @@
                 </ul>-->
             </li>
             <li class="nav-item start open" [ifAuthorize]="['PROFILEBANK.MANAGE']">
-                <a href="javascript:;" class="nav-link nav-toggle">
+                <a href="javascript:;" class="nav-link nav-toggle" [routerLink]="['/App/ProfileBank/MyProfiles']" [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
                     <i class="fa fa-bank"></i>
-                    <span class="title">Profile Bank</span>
+                    <span class="title">Candidate Profiles</span>
                     <span class="arrow"></span>
                 </a>
-                <ul class="sub-menu always-open">
+                <!--<ul class="sub-menu always-open">
                     <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/MyProfiles']" class="nav-link ">
                             <i class="fa fa-th-list"></i>
@@ -63,13 +63,13 @@
                             <span class="title">All Profiles</span>
                         </a>
                     </li>
-                    <!--As per discussion with Shrikant commenting-->
-                    <!--<li class="nav-item start " [ifAuthorize]="['PROFILEBANK.RECENTPROFILES.MANAGE']">
+                    As per discussion with Shrikant commenting
+                    <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.RECENTPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/RecentProfiles']" class="nav-link ">
                             <i class="icon-graph"></i>
                             <span class="title">Recent Profiles</span>
                         </a>
-                    </li>-->
+                    </li>
                     <li class="nav-item start " [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
                         <a [routerLink]="['/App/ProfileBank/CompanyProfiles']" class="nav-link ">
                             <i class="fa fa-list-ul"></i>
@@ -89,7 +89,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li class="nav-item start " [ifAuthorize]="['RRF.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-users"></i>

@@ -60,7 +60,7 @@
                     <div class="row profile-desc-text">
                         <ul class="list-unstyled">
                             <li>
-                                <div class="col-md-12">
+                                <div class="col-md-12" style="height: 60px;">
                                     <label class="control-label"><small>Skills : {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}}</small></label>
                                 <!--<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>-->
                                 </div>
@@ -95,7 +95,7 @@
                     <p>
                         <a class="sbold text-lowercase" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
                     </p>
-                    <div class="row" style="margin-left:-3px;">
+                    <div class="row" style="margin-left:-3px;height: 44px;">
                         <ul class="list-inline sbold" style="color:#f16e50">
                             <li>
                                 <div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
