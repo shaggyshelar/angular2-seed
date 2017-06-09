@@ -110,10 +110,12 @@
 
                                             </select>
                                         </label>
-									<button type="" class="btn btn-default btn-outline green btn-sm" (click)="onChange()">
-										<i *ngIf="myProfilesList.GrdOperations.Order === 'asc'" class="fa fa-long-arrow-down"></i>
-										<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" class="fa fa-long-arrow-up"></i>
-									</button>
+									<!--<button type="" class="btn btn-outline black" (click)="onChange()">-->
+									<i *ngIf="myProfilesList.GrdOperations.Order === 'asc'" style="margin-left: 10px; margin-right: 10px;" class="fa fa-long-arrow-down black"
+									 (click)="onChange()"></i>
+									<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" style="margin-left: 10px; margin-right: 10px;" class="fa fa-long-arrow-up black"
+									 (click)="onChange()"></i>
+									<!--</button>-->
 								</div>
 
 								<div class="col-md-3 col-sm-3">
@@ -142,6 +144,53 @@
 										<!-- Modal Body Start -->
 										<div class="row ">
 											<div class="col-md-12">
+
+												<!-- Existing Candidate Check Begin -->
+												<div class="container-fluid">
+													<div class="row" style="margin-top:34px;" *ngIf="isExist">
+														<!--*ngIf="existedProfile.length != 0"-->
+														<div class="col-md-3 inlineForm">
+															<div class="form-group">
+																<label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
+																 tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+															</div>
+														</div>
+														<div class="col-md-3  inlineForm">
+															<div class="form-group ">
+																<label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top"
+																 tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
+															</div>
+														</div>
+														<div class="col-md-3  inlineForm">
+															<div class="form-group ">
+																<label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter"
+																 tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
+															</div>
+														</div>
+														<div class="col-md-3 inlineForm">
+															<div class="form-group ">
+																<div class="col-md-7 inlineForm">
+																	<label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter"
+																	 tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+																</div>
+
+																<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
+																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(existedProfile.CandidateID)'>
+																			<i class="glyphicon glyphicon-user"> </i>
+																		</a>
+
+
+																<a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History"
+																 tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+																 (click)='getCandidateHistory(existedProfile.CandidateID)'>
+																			<i class="fa fa-history"> </i>
+																		</a>
+
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- Existing Candidate Check End -->
 
 												<form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px; border-left: #d4ad38 3px solid;">
 													<!--<div class="container-fluid">
