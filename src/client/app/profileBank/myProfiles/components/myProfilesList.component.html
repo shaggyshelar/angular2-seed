@@ -76,7 +76,7 @@
 						<div class="table-toolbar">
 
 							<div class="row" *ngIf="!NORECORDSFOUND">
-								<div class="col-md-2 col-sm-2">
+								<div class="col-md-2 col-sm-2" style="margin-top: 16px;">
 									<div class="dataTables_length" id="sample_1_length">
 										<label>Show :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
@@ -90,7 +90,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-3 col-sm-3">
+								<div class="col-md-2 col-sm-3">
 									<label>Filter By :
                                         <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                                [(ngModel)]="modelFilterBy"
@@ -100,7 +100,7 @@
 										</select> 
                                     </label>
 								</div>
-								<div class="col-md-3 col-sm-3">
+								<div class="col-md-2 col-sm-3">
 									<label> Profiles :
                                         <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                                [(ngModel)]="modelFilterByProfile" (change)='filterByProfile($event)'>
@@ -113,8 +113,9 @@
                                     </label>
 								</div>
 
-								<div class="col-md-3 col-sm-3">
-									<label>Sort By :
+								<div class="col-md-2 col-sm-3">
+									<div style="display: inline-flex">
+										<label>Sort By :
                                             <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
                                             [(ngModel)]="myProfilesList.GrdOperations.OrderBy"
                                             (ngModelChange)="onChange()" >
@@ -122,18 +123,20 @@
 
                                             </select>
                                         </label>
-									<!--<button type="" class="btn btn-outline black" (click)="onChange()">-->
-									<i *ngIf="myProfilesList.GrdOperations.Order === 'asc'" style="margin-left: 10px; margin-right: 10px;" class="fa fa-long-arrow-down black"
-									 (click)="onChange()"></i>
-									<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" style="margin-left: 10px; margin-right: 10px;" class="fa fa-long-arrow-up black"
-									 (click)="onChange()"></i>
-									<!--</button>-->
+										<!--<button type="" class="btn btn-outline black" (click)="onChange()">-->
+										<i *ngIf="myProfilesList.GrdOperations.Order === 'asc'" style="margin-left: 10px; margin-right: 10px; margin-top: 25px;"
+										 class="fa fa-long-arrow-down black" (click)="onChange()"></i>
+										<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" style="margin-left: 10px; margin-right: 10px;margin-top: 25px;"
+										 class="fa fa-long-arrow-up black" (click)="onChange()"></i>
+										<!--</button>-->
+									</div>
 								</div>
 
 								<div class="col-md-2 col-sm-3">
-									<div id="sample_1_filter" class="dataTables_filter">
-										<input type="search" placeholder="Search" class="form-control input-sm input-small input-inline " [(ngModel)]="searchString"
-										 aria-controls="sample_1">
+									<div id="sample_1_filter" class="form-group">
+										<label>Search :
+										<input type="search" placeholder="" class="form-control input-sm input-small input-inline " [(ngModel)]="searchString" aria-controls="sample_1">
+										</label>
 									</div>
 								</div>
 
