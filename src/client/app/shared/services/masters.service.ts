@@ -46,6 +46,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    getResumeSource() {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetAllResumeSources');
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
 
     getCities() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetAllCities');
@@ -185,6 +191,12 @@ export class MastersService {
     }
     GetInterviewModes() {
         let url = Config.GetURL('/api/Masters/GetInterviewMode');
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    getRejectionReasons() {
+        let url = Config.GetURL('/api/Masters/GetAllReasons');
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError);

@@ -1,22 +1,22 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
-import { RRFDetails, AllRRFStatusCount  } from '../../myRRF/models/rrfDetails';
+import { RRFDetails, AllRRFStatusCount } from '../../myRRF/models/rrfDetails';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
-import { CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
+import { CHART_DIRECTIVES } from 'ng2-charts/ng2-charts';
 import { RRFIDPipe } from '../../shared/Filters/RRFIdFilter.component';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult, RRFStatus, RRFAssignStatus} from  '../../../shared/constantValue/index';
-import { MasterData, ResponseFromAPI, GrdOptions,RRFFilters, SortingMasterData} from '../../../shared/model/common.model';
-import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { APIResult, RRFStatus, RRFAssignStatus } from '../../../shared/constantValue/index';
+import { MasterData, ResponseFromAPI, GrdOptions, RRFFilters, SortingMasterData } from '../../../shared/model/common.model';
+import { IfAuthorizeDirective } from '../../../shared/directives/ifAuthorize.directive';
 import { MastersService } from '../../../shared/services/masters.service';
 import { RRFPipe } from '../../shared/Filters/RRFFilter.component';
-import { ViewRRFComponent} from '../../shared/components/viewRRF/viewRRF.component';
-import { RRFGridRowComponent} from '../../shared/components/RRFGridRow/RRFGridRow.component';
+import { ViewRRFComponent } from '../../shared/components/viewRRF/viewRRF.component';
+import { RRFGridRowComponent } from '../../shared/components/RRFGridRow/RRFGridRow.component';
 import { PanelsAvailablityComponent } from '../../shared/components/interviewersAvailablity/panelsAvailablity.component';
-import { InterviewApprovalComponent} from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.component';
-import { TOOLTIP_DIRECTIVES} from 'ng2-bootstrap';
-import { CommonService} from '../../../shared/index';
+import { InterviewApprovalComponent } from '../../../recruitmentCycle/shared/component/InterviewApproval/InterviewApproval.component';
+import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { CommonService } from '../../../shared/index';
 
 @Component({
     moduleId: module.id,
@@ -65,13 +65,13 @@ export class RRFDashboardListComponent implements OnActivate {
     displayApproval: boolean = false;
     displayAssignedTo: boolean = false;
     SortByList: SortingMasterData[] = [];
-    sessionValue:string;
+    sessionValue: string;
     currentUser: MasterData = new MasterData();
     hideRrfDetails: boolean = true;
-    RRfFiltersList:any;
-    rrfSubFilter:any=[];
-    subFilter1:string='';
-    subFilter2:string='';
+    RRfFiltersList: any;
+    rrfSubFilter: any = [];
+    subFilter1: string = '';
+    subFilter2: string = '';
     constructor(private _rrfDashboardService: RRFDashboardService,
         private _myRRFService: MyRRFService,
         private _commonService: CommonService,
@@ -84,7 +84,7 @@ export class RRFDashboardListComponent implements OnActivate {
     routerOnActivate() {
         this.logedInUser = this.getLoggedInUser();
         this.sessionValue = sessionStorage.getItem('backToRRFList');
-        if(this.sessionValue !== null) {
+        if (this.sessionValue !== null) {
             this.onViewChanged(this.sessionValue);
         } else {
             this.getMyRRFData();
@@ -96,10 +96,10 @@ export class RRFDashboardListComponent implements OnActivate {
         this.setDefaultcloseRRFID();
         this.getRaisedBy()
         this.RRfFiltersList = {
-            Practice:['EBS','ECS'],
-            Priority:['High','Medium','Low'],
-            Status:['Open','Closed','Rejected','Pending Approval'],
-            RaisedBy:[]
+            Practice: ['EBS', 'ECS'],
+            Priority: ['High', 'Medium', 'Low'],
+            Status: ['Open', 'Closed', 'Rejected', 'Pending Approval'],
+            RaisedBy: []
         }
     }
     getRaisedBy(){
@@ -141,7 +141,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
     getAllRRF() {
         this.NORECORDSFOUND = false;
-       
+
         this._rrfDashboardService.getAllRRF(this.grdOptions)
             .subscribe(
             (results: any) => {
@@ -452,7 +452,7 @@ export class RRFDashboardListComponent implements OnActivate {
 
 
     redirectToAssignRRF(rrfID: MasterData) {
-        sessionStorage.setItem('backToRRFList',this.currentView);
+        sessionStorage.setItem('backToRRFList', this.currentView);
         this._router.navigate(['/App/RRF/RRFDashboard/Assign/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
@@ -462,8 +462,8 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onViewCandidateClick(rrfID: MasterData) {
-        sessionStorage.setItem('backToRRFList',this.currentView);
-        sessionStorage.setItem('backToRRFDashboardList','/App/RRF/RRFDashboard');
+        sessionStorage.setItem('backToRRFList', this.currentView);
+        sessionStorage.setItem('backToRRFDashboardList', '/App/RRF/RRFDashboard');
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
 
@@ -524,7 +524,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
     onReScheduleInterviewsClick(RRFID: MasterData) {
         //redirect to All Reschedule Interviews Screen
-        sessionStorage.setItem('backToRRFList',this.currentView);
+        sessionStorage.setItem('backToRRFList', this.currentView);
         this._router.navigate(['/App/RRF/RRFDashboard/Interviews/' + RRFID.Value + 'ID' + RRFID.Id]);
     }
     onShowAvailabilityClick() {
@@ -534,7 +534,7 @@ export class RRFDashboardListComponent implements OnActivate {
         sessionStorage.setItem('navigationPath', '/App/RRF/RRFDashboard');
         this._router.navigate(['/App/RRF/MyRRF/Add']);
     }
-     getCloseRRFAccess(Owner: MasterData,statusId: number) {
+    getCloseRRFAccess(Owner: MasterData, statusId: number) {
         try {
             if (Owner.Id === this.logedInUser.Id && (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned)) {
                 return false;
@@ -545,20 +545,20 @@ export class RRFDashboardListComponent implements OnActivate {
         }
 
     }
-    onFilterChange(item:string){
+    onFilterChange(item: string) {
         console.log(item)
-        this.rrfSubFilter=this.RRfFiltersList[item]
+        this.rrfSubFilter = this.RRfFiltersList[item]
     }
-    onSubFilterChange(item:string){
-        this.grdOptions.RRFFilters=new RRFFilters();
-        if(this.subFilter1==='Practice'){
-            this.grdOptions.RRFFilters.Practice=this.subFilter2;
-        } else if(this.subFilter1==='Priority'){
-            this.grdOptions.RRFFilters.Priority=this.subFilter2;
-        } else if(this.subFilter1==='Status'){
-            this.grdOptions.RRFFilters.Status=this.subFilter2;
-        } else if(this.subFilter1==='RaisedBy'){
-            this.grdOptions.RRFFilters.RaisedBy=this.subFilter2;
+    onSubFilterChange(item: string) {
+        this.grdOptions.RRFFilters = new RRFFilters();
+        if (this.subFilter1 === 'Practice') {
+            this.grdOptions.RRFFilters.Practice = this.subFilter2;
+        } else if (this.subFilter1 === 'Priority') {
+            this.grdOptions.RRFFilters.Priority = this.subFilter2;
+        } else if (this.subFilter1 === 'Status') {
+            this.grdOptions.RRFFilters.Status = this.subFilter2;
+        } else if (this.subFilter1 === 'RaisedBy') {
+            this.grdOptions.RRFFilters.RaisedBy = this.subFilter2;
         }
         this.onViewChanged(this.currentView)
     }

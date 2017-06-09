@@ -49,6 +49,7 @@ export class CandidateProfile {
   public OutstationedCandidate: any;
   public ReadyToRelocate: any;
   public CommentsAdditionalInformation: string;
+  public ResumeSourceType = new MasterData();
   public ResumeSource: string;
   public ReasonToRelocate: string;
   public FriendsRelatives: string;

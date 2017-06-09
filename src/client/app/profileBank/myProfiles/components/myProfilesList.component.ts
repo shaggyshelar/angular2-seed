@@ -96,6 +96,8 @@ export class MyProfilesListComponent implements OnActivate {
     IsDisable: boolean = true;
     FilterByList: Array<SortingMasterData> = new Array<SortingMasterData>();
     modelFilterBy: string = 'my';
+    modelFilterByProfile: string = 'all';
+    cachedProfileList: any[] = [];
     constructor(private _myProfilesService: MyProfilesService,
         private _blacklistedProfilesService: BlackListedProfilesService,
         private _allProfilesService: AllProfilesService,
@@ -247,6 +249,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results.Profiles;
                     this.NORECORDSFOUND = false;
                 } else { this.NORECORDSFOUND = true; }
             },
@@ -650,19 +653,19 @@ export class MyProfilesListComponent implements OnActivate {
         for (var index = 0; index < this.myProfilesList.Profiles.length; index++) {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
-                if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
-                    if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
+                //if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
+                    //if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
                         //Add to selectedCandidates array
                         this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
                         this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
                         this.Candidate.Status = this.myProfilesList.Profiles[index].Status;
                         this.selectedCandidates.push(this.Candidate);
                         this.Candidate = new Candidate();
-                    } else { chkRRFAssigned = true; break; }
-                } else {
-                    chkStatus = true;
-                    break;
-                }
+                    //} else { chkRRFAssigned = true; break; }
+               // } else {
+                 //   chkStatus = true;
+                //    break;
+                //}
             }
         }
         if (chkStatus) {
@@ -715,6 +718,9 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations.Order = this.myProfilesList.GrdOperations.Order === 'asc' ? 'desc' : 'asc';
         this.myProfilesList.GrdOperations.ButtonClicked = 0;
         this.myProfilesList.GrdOperations.NextPageUrl = new Array<string>();
+        let event = { target : { value : 'all'} };
+        this.modelFilterByProfile = 'all';
+        this.filterByProfile(event);
         this.filterBy();
     }
     disableDelete(Status: MasterData) {
@@ -822,6 +828,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results.Profiles;
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
@@ -832,6 +839,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: any) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results.Profiles;
                 } else {
                     this.NORECORDSFOUND = true;
                 }
@@ -844,6 +852,7 @@ export class MyProfilesListComponent implements OnActivate {
             (results: AllCandidateProfiles) => {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results.Profiles;
                 } else { this.NORECORDSFOUND = true; }
             },
             error => {
@@ -854,6 +863,36 @@ export class MyProfilesListComponent implements OnActivate {
     showNewProfileModal() {
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });
+    }
+
+    filterByProfile(event:any) {
+        let profUntagged: any[] = ['Open', 'Rejected', 'Absconded'];
+        let profTagged: any[] = ['In Process', 'Offered', 'Joined', 'Accepted'];
+        this.myProfilesList.Profiles = this.cachedProfileList;
+        let temp: any = this.myProfilesList.Profiles;
+        switch (event.target.value) {
+        // switch (this.modelFilterByProfile) {
+            case 'all':
+            this.myProfilesList.Profiles = this.cachedProfileList;
+                break;
+            case 'tagged':
+                this.myProfilesList.Profiles = temp.filter((element:any) => {
+                    return (element.Status.Value.toLowerCase().indexOf(profTagged[0].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profTagged[1].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profTagged[2].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profTagged[3].toLowerCase()) > -1);
+                });
+                break;
+            case 'untagged':
+                this.myProfilesList.Profiles = temp.filter((element:any) => {
+                    return (element.Status.Value.toLowerCase().indexOf(profUntagged[0].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profUntagged[1].toLowerCase()) > -1 ||
+                        element.Status.Value.toLowerCase().indexOf(profUntagged[2].toLowerCase()) > -1);
+                });
+                break;
+            default:
+                break;
+        }
     }
 }
 

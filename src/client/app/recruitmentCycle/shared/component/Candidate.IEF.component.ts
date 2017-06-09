@@ -8,13 +8,14 @@ import { InterviewSlotComponent } from './InterviewSlot/Component/InterviewSlot.
 import { IEFInformation, iefModel, IEFFunction, IEFSubmission } from '../../shared/model/ief';
 import { ResponseFromAPI, MasterData } from '../../../shared/model/common.model';
 import { APIResult } from '../../../shared/constantValue/index';
+import { MastersService } from '../../../shared/services/masters.service';
 
 @Component({
     moduleId: module.id,
     selector: 'recruiter-ief',
     templateUrl: 'Candidate.IEF.component.html',
     directives: [ROUTER_DIRECTIVES, IEFFunctionComponent, InterviewSlotComponent],
-    providers: [ToastsManager, CandidateIEFService]
+    providers: [ToastsManager, CandidateIEFService, MastersService]
 })
 
 export class RecruitmentIEFComponent implements OnActivate, OnInit {
@@ -32,33 +33,15 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
     showRejectReasons: boolean = false;
     constructor(private _router: Router,
         private toastr: ToastsManager,
+        private masterService: MastersService,
         private _candidateIEFService: CandidateIEFService) {
-        this.rejectReasons = [
-            {
-                ID: null,
-                Title: 'Work',
-                Reason: 'The work we were doing was not inspising',
-                Category: 'IEF'
-            },
-            {
-                ID: null,
-                Title: '--',
-                Reason: 'The requirements fulfilled',
-                Category: 'Close RRF'
-            },
-            {
-                ID: null,
-                Title: '--',
-                Reason: 'Project escalation',
-                Category: 'Close RRF'
-            }
-        ];
     }
     routerOnActivate(segment: RouteSegment) {
         this.requestedIef = this.getSessionOf<iefModel>('SubmitIef');
         this.getIEFDetails(this.requestedIef);
         this.getIEFHistory(this.requestedIef);
         this.returnPath = sessionStorage.getItem('onReturnPath');
+        this.getRejectionReasonList();
     }
     ngOnInit() {
         var intrviewStatus: string = sessionStorage.getItem('InterviewStatus');
@@ -184,6 +167,16 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         }
         return response;
     }
+
+    getRejectionReasonList() {
+        this.masterService.getRejectionReasons()
+            .subscribe(
+            response => {
+                this.rejectReasons = response;
+            },
+            error => this.errorMessage = <any>error);
+    }
+
     ifRejected(event: any) {
         if (event === 'Rejected') {
             this.showRejectReasons = true;
