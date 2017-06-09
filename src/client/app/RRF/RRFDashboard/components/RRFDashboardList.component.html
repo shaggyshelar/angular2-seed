@@ -203,9 +203,9 @@
                                                     <i class="fa fa-eye" aria-hidden="true"></i> Show Availability</a>
                                             </div>-->
 											<div class="row portlet-title" style="width:100%">
-												<!--<span *ngIf="!hideRRFDetails">-->
-													<!--<b><label style="color: #26a1ab;">RRF Code : {{rrf.RRFCODE }}</label></b> Raised by <b> {{rrf.RaisedBy.Value }}</b>            On {{rrf.CreatedDate}} with <b> {{rrf.Priority.Value}}</b> priority.-->
-												<!--</span>-->
+												<span *ngIf="!hideRRFDetails">
+													<b><label style="color: #26a1ab;">RRF Code : {{rrf.RRFCODE }}</label></b> Raised by <b> {{rrf.RaisedBy.Value }}</b>            On {{rrf.CreatedDate}} with <b> {{rrf.Priority.Value}}</b> priority.
+												</span>
 												<div class="actions pull-right">
 													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'
 													 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" [ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "
@@ -236,8 +236,8 @@
                                                         </button>
 												</div>
 											</div>
-											<RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo' ></RRFGridRow>
-											<!--<RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo' [hideRRFDetails]="hideRrfDetails"></RRFGridRow>-->
+											<!--<RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo' ></RRFGridRow>-->
+											<RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo' hideRRFDetails="hideRrfDetails"></RRFGridRow>
 											<!--<div class="row" *ngIf="currentView =='myRRF' && showAvaililityPanel">
                                                 <div>
                                                     <panel-availablity [selectedRRF]='rrf'></panel-availablity>
