@@ -784,11 +784,9 @@
                                                                     <label>Resume Source </label>
                                                                     <!--<input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">-->
                                                                     <!--(change)='onSelectResume($event.target.value)'-->
-                                                                    <select class="form-control">
-                                                                        (change)="onSavePersonalDetails()" tabindex="35">
-                                                                        <option [value]="1">Job Portal</option>
-                                                                        <option [value]="2">Employee Referrence</option>
-                                                                        <option [value]="3">Others</option>
+                                                                    <select class="form-control"
+                                                                        (change)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
+                                                                        <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -1027,7 +1025,7 @@
                                                             <label>Languages</label>
                                                         </div>
                                                         <div class="row">
-                                                            <multiselect-dropdown placeholder="Select La" [dataToBind]='skills' 
+                                                            <multiselect-dropdown placeholder="Select Laguages" [dataToBind]='skills' 
                                                                 ></multiselect-dropdown>
                                                         </div>
                                                     </div>

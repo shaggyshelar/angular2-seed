@@ -21,7 +21,7 @@
 					<div class="portlet-title">
 						<div class="row">
 							<div class="col-md-4">
-								<h4><i class="fa fa-th-list"></i> My Profiles<small style="font-size: small;"> {{myProfilesList.Profiles.length > 0 ?'(' + myProfilesList.Profiles.length + ' ' + 'Found' + ')':""}}</small></h4>
+								<h4><i class="icon-users"></i> Candidate Profiles<small style="font-size: small;"> {{myProfilesList.Profiles.length > 0 ?'(' + myProfilesList.Profiles.length + ' ' + 'Found' + ')':""}}</small></h4>
 							</div>
 
 							<div class="col-md-8">
@@ -286,13 +286,18 @@
 						<!--END Count Details Box-->
 						<!-- Modal End -->
 
-						<!-- Test data -->
-						<div style="box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.29);" class="col-md-4" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
-							<div class="row portlet-title" style="padding-top: 5px;padding-bottom: 10px;">
-								<div class="actions pull-right">
-									<!--btn btn-circle btn-icon-only btn-default btn-xs-->
-									<button class="btn btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF"
-									 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
+
+<!-- Test data -->
+<div style="box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.29);" class="col-md-4" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
+	<div class="row portlet-title" style="padding-top: 5px;padding-bottom: 10px;">
+													<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px;">
+                                                    <input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
+                                                    <span></span>
+                                                </label>
+												<div class="actions pull-right">
+													<!--btn btn-circle btn-icon-only btn-default btn-xs-->
+													<button class="btn btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)'
+														tooltip="View RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
                                                             <i class="fa fa-search-plus "></i> 
                                                         </button>
 									<a class="btn btn-xs yellow" [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]"

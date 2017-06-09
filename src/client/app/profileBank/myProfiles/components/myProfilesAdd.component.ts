@@ -74,6 +74,7 @@ export class MyProfilesAddComponent implements OnActivate {
     isExist: boolean = false;
     existedProfile: CandidateProfile;
     skills: MasterData[];
+    resumeSource: MasterData[];
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -110,12 +111,21 @@ export class MyProfilesAddComponent implements OnActivate {
         this.CurrentYear = date.getFullYear();
         this.getProfilePhoto(this.CandidateID);
         this.getSkills();
+        this.getResumeSource();
     }
     getSkills(): void {
         this._mastersService.getSkills()
             .subscribe(
             results => {
                 this.skills = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    getResumeSource(): void {
+        this._mastersService.getResumeSource()
+            .subscribe(
+            results => {
+                this.resumeSource = results;
             },
             error => this.errorMessage = <any>error);
     }

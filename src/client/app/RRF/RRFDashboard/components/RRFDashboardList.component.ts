@@ -94,6 +94,7 @@ export class RRFDashboardListComponent implements OnActivate {
          * Removed from here and added to Assinged RRF redio button changed event
         this.GetRecruiter(); */
         this.setDefaultcloseRRFID();
+        this.getRaisedBy()
         this.RRfFiltersList = {
             Practice: ['EBS', 'ECS'],
             Priority: ['High', 'Medium', 'Low'],
@@ -101,7 +102,18 @@ export class RRFDashboardListComponent implements OnActivate {
             RaisedBy: []
         }
     }
-
+    getRaisedBy(){
+       this._rrfDashboardService.getRaisedBy()
+         .subscribe(
+            (results: any) => {
+                if (results!== undefined && results.length > 0) {
+                    for (let i=0;i<results.length;i++) {
+                        this.RRfFiltersList.RaisedBy.push(results[i].Value)
+                    }
+                }
+            },
+            error => this.errorMessage = <any>error); 
+    }
     getMyRRFData() {
         this.getMyRRF();
     }
