@@ -153,6 +153,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         objUpdatedIEF.IEFTransactionDetails = _iefFunctions;
         objUpdatedIEF.Status = this.iefStatus;
         objUpdatedIEF.Comments = this.iefComments;
+        objUpdatedIEF.RejectReason = this.rejectReason;
         return objUpdatedIEF;
     }
     getSessionOf<T>(variableName: string): T {
