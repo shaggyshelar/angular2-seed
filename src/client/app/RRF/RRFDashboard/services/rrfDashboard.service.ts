@@ -131,7 +131,14 @@ export class RRFDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+    getRaisedBy() {
+        let url = Config.GetURL('/api/RRF/GetAllRaisedByInRRF');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
