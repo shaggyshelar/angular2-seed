@@ -48,6 +48,7 @@ export class RRFDashboardListComponent implements OnActivate {
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
     grdOptions: GrdOptions = new GrdOptions();
     viewDetailsRRFId: MasterData = new MasterData();
+    reasons: MasterData = new MasterData();
     doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
     doughnutChartType: string = 'doughnut';
@@ -101,6 +102,15 @@ export class RRFDashboardListComponent implements OnActivate {
             Status: ['Open', 'Closed', 'Rejected', 'Pending Approval'],
             RaisedBy: []
         }
+        this.getCloseReason();
+    }
+    getCloseReason(){
+        this._mastersService.getCloseReason('Close RRF')
+            .subscribe(
+            results => {
+                this.reasons = results;
+            },
+            error => this.errorMessage = <any>error);
     }
     getRaisedBy(){
        this._rrfDashboardService.getRaisedBy()

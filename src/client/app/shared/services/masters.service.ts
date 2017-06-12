@@ -46,15 +46,38 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+     getSoftSkills() {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetSoftSkills');
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+     getLanguages() {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetLanguageSkills');
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     getResumeSource() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetAllResumeSources');
         return this.authHttp.get(authenticateUrl)
             .map(this.extractData)
             .catch(this.handleError);
     }
-
+    getCloseReason(category:string) {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetAllReasons?Category='+category);
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     getCities() {
         let authenticateUrl = Config.GetURL('/api/Masters/GetAllCities');
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    getDescription(Designation:string) {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetJobDescriptionsByDesignation?Designation='+Designation);
         return this.authHttp.get(authenticateUrl)
             .map(this.extractData)
             .catch(this.handleError);

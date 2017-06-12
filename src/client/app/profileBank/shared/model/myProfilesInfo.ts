@@ -169,7 +169,8 @@ export class OtherDetails {
   public AppraisalBondContractDetails: string;
   public BondContractDetails: string;
   //public Visa: MasterData = new MasterData();
-  public Visa: any ;
+  public VisaType: any ;
+  public HasVisa:boolean;
   public NoticePeriod: string = '';
   public RoleExpected: string;
   public ResignedStatusOfOfferedCandidate: string;
@@ -191,6 +192,7 @@ export class OtherDetails {
   public OfferedCandidateStatus: string;
   public CommentsUpdated: boolean;
   public FollowUpComments: string;
+  public Comment: string;
 
 }
 export class ResumeMeta {

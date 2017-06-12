@@ -781,11 +781,11 @@
                                                                 </div>
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
-                                                                    <label>Resume Source </label>
+                                                                    <label>Resume Source Type</label>
                                                                     <!--<input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">-->
                                                                     <!--(change)='onSelectResume($event.target.value)'-->
                                                                     <select class="form-control"
-                                                                        (change)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
+                                                                        (blur)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
                                                                         <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
@@ -987,9 +987,9 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Comments</label>
                                                             <textarea class="form-control text-capitalize" id="txtCommnets" rows="2" placeholder="Functional Experience, Roles and Responsibilities" style="resize:vertical"
-                                                             [(ngModel)]="profile.FollowUpComments" tooltip="Functional Experience, Roles and Responsibilities"
-                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments"
-                                                                (blur)='onSaveSkillsDetails()' tabindex="1">
+                                                             [(ngModel)]="profile.CandidateOtherDetails.Comment" tooltip="Functional Experience, Roles and Responsibilities"
+                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.Comment"
+                                                                (blur)='onSaveProfessionalDetails()' tabindex="1">
                                                             </textarea>
                                                         </div>
                                                     </div>
@@ -1716,8 +1716,8 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label">Comments</label>
                                                                     <textarea class="form-control text-capitalize" id="txtCommnets" rows="2" placeholder="Functional Experience, Roles and Responsibilities" style="resize:vertical"
-                                                                        [(ngModel)]="profile.FollowUpComments" tooltip="Functional Experience, Roles and Responsibilities"
-                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments"
+                                                                        [(ngModel)]="profile.CandidateSkills.RoleAndResponsibility" tooltip="Functional Experience, Roles and Responsibilities"
+                                                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateSkills.RoleAndResponsibility"
                                                                             (blur)='onSaveSkillsDetails()' tabindex="1">
                                                                     </textarea>
                                                                 </div>
@@ -1745,7 +1745,7 @@
                                                             <label>Soft Skills</label>
                                                         </div>
                                                         <div class="row">
-                                                            <multiselect-dropdown placeholder="Select Soft Skills" [dataToBind]='skills' 
+                                                            <multiselect-dropdown placeholder="Select Soft Skills" [dataToBind]='softSkills' 
                                                                 ></multiselect-dropdown>
                                                         </div>
                                                     </div>
@@ -1754,7 +1754,7 @@
                                                             <label>Languages</label>
                                                         </div>
                                                         <div class="row">
-                                                            <multiselect-dropdown placeholder="Select La" [dataToBind]='skills' 
+                                                            <multiselect-dropdown placeholder="Select Language" [dataToBind]='languages' 
                                                                 ></multiselect-dropdown>
                                                         </div>
                                                     </div>
@@ -1763,8 +1763,8 @@
                                                                     <label class="control-label">Have Visa</label>
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.HaveOffer"
-                                                                                tabindex="3" (change)="onHaveVisa(profile.CandidateOtherDetails.HaveOffer)"
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.HasVisa"
+                                                                                tabindex="3" (change)="onHaveVisa(profile.CandidateOtherDetails.HasVisa)"
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -1773,7 +1773,7 @@
                                                             <div class="col-md-2">
                                                                 <div class="form-group">
                                                                     <label>Visa </label>
-                                                                    <input type="text" class="form-control" [disabled]="haveVisa" (blur)="onSaveProfessionalDetails()" placeholder="Enter visa details" [(ngModel)]="profile.CandidateOtherDetails.Visa">
+                                                                    <input type="text" class="form-control" [disabled]="haveVisa" (blur)="onSaveProfessionalDetails()" placeholder="Enter visa details" [(ngModel)]="profile.CandidateOtherDetails.VisaType">
                                                                     <!--<select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.Visa.Id" (change)='onSelectVisa($event.target.value)'
                                                                         (change)="onSaveProfessionalDetails()" tabindex="5">
                                                                         <option *ngFor="let visa of VisaType" [value]="visa.Id">{{visa.Value}}</option>
@@ -2152,11 +2152,11 @@
                                                                         <label class="control-label">Experience For Current Job<span class="required"> * </span></label>
                                                                         <div class="row">
                                                                             <div class="col-md-6">
-                                                                                <input type="number" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.Location"
+                                                                                <input type="number" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany"
                                                                                     title="Please enter experience for current job"
                                                                                     required="" tooltip="Please enter experience for current job"
                                                                                     tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                                                                    tooltipEnable="!EmployersInformation.Location" onKeyPress="if(this.value.length==3) return false;"
+                                                                                    tooltipEnable="!EmployersInformation.TimeSpentInCompany" onKeyPress="if(this.value.length==3) return false;"
                                                                                 />
                                                                             </div>
                                                                         </div>
