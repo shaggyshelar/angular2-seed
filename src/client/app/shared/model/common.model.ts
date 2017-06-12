@@ -41,6 +41,7 @@ export class RRFFilters {
         public Practice  : string;
         public Priority  : string;
         public Status  : string;
+        public Designation  : string;
 }
 export class SortingMasterData {
     public Id: string;

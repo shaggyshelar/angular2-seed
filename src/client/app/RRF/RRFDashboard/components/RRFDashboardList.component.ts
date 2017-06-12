@@ -95,12 +95,26 @@ export class RRFDashboardListComponent implements OnActivate {
         this.GetRecruiter(); */
         this.setDefaultcloseRRFID();
         this.getRaisedBy()
+        this.getDesigntaions()
         this.RRfFiltersList = {
-            Practice: ['EBS', 'ECS'],
-            Priority: ['High', 'Medium', 'Low'],
-            Status: ['Open', 'Closed', 'Rejected', 'Pending Approval'],
-            RaisedBy: []
+            Practice: [{Id:'EBS',Value:'EBS'},{Id:'ECS',Value:'ECS'} ],
+            Priority: [{Id:'High',Value:'High'},{Id:'Medium',Value:'Medium'},{Id:'Low',Value:'Low'}],
+            Status: [{Id:'Open',Value:'Open'},{Id:'Closed',Value:'Closed'} ,{Id:'Rejected',Value:'Rejected'} ,{Id:'Pending Approval',Value:'Pending Approval'} ],
+            RaisedBy: [],
+            Designation:[]
         }
+    }
+    getDesigntaions(){
+        this._mastersService.GetDesignations()
+        .subscribe(
+            (results: any) => {
+                if (results!== undefined && results.length > 0) {
+                    for (let i=0;i<results.length;i++) {
+                        this.RRfFiltersList.Designation=results;
+                    }
+                }
+            },
+            error => this.errorMessage = <any>error); 
     }
     getRaisedBy(){
        this._rrfDashboardService.getRaisedBy()
@@ -108,7 +122,7 @@ export class RRFDashboardListComponent implements OnActivate {
             (results: any) => {
                 if (results!== undefined && results.length > 0) {
                     for (let i=0;i<results.length;i++) {
-                        this.RRfFiltersList.RaisedBy.push(results[i].Value)
+                        this.RRfFiltersList.RaisedBy=results;
                     }
                 }
             },
@@ -559,6 +573,8 @@ export class RRFDashboardListComponent implements OnActivate {
             this.grdOptions.RRFFilters.Status = this.subFilter2;
         } else if (this.subFilter1 === 'RaisedBy') {
             this.grdOptions.RRFFilters.RaisedBy = this.subFilter2;
+        } else if (this.subFilter1 === 'Designation') {
+            this.grdOptions.RRFFilters.Designation = this.subFilter2;
         }
         this.onViewChanged(this.currentView)
     }
