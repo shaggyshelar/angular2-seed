@@ -133,6 +133,7 @@
                                                	<option value="Practice">Practice</option>
                                                 <option value="Priority">Priority</option>
                                                 <option value="Status">Status</option>
+                                                <option value="Designation">Designation</option>
                                                 <option value="RaisedBy">RaisedBy</option>
                                             </select>
                                         </label>
@@ -142,7 +143,7 @@
 									<div class="dataTables_length ">
 										<label>Options
                                             <select [disabled]="subFilter1==''" class="form-control input-sm input-small input-inline" [(ngModel)]="subFilter2" (ngModelChange)="onSubFilterChange(subFilter2)">
-                                                <option *ngFor="let item of rrfSubFilter" [value]="item">{{item}}</option>
+                                                <option *ngFor="let item of rrfSubFilter" [value]="item.Id">{{item.Value}}</option>
                                             </select>
                                         </label>
 									</div>

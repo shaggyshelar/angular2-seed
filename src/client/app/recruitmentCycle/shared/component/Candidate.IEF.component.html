@@ -119,7 +119,7 @@
                                         <option *ngIf='!isChangeStatusReq'>On Hold</option>
                                     </select>
                                     <select *ngIf="showRejectReasons" class="form-control" required (change)="rejectReasonSet($event)">
-                                        <option *ngFor="let reason of rejectReasons; let i = index" [value]="reason.Reason">{{reason.Reason}}</option>
+                                        <option *ngFor="let reason of rejectReasons; let i = index" [value]="reason.Value">{{reason.Value}}</option>
                                     </select>
                                 </div>
                                 <label class="control-label col-md-2">General Comments<span class="required">*</span>:</label>

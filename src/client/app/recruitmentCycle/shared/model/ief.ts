@@ -64,6 +64,7 @@ export class IEFSubmission {
     InterviewID: MasterData = new MasterData();
     Status: string;
     Comments: string;
+    RejectReason: MasterData = new MasterData();
     IEFTransactionDetails: Array<IEFFunction> = new Array<IEFFunction>();
 }
 
