@@ -788,16 +788,7 @@
                                                                     <label>Resume Source Type</label>
                                                                     <!--<input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">-->
                                                                     <!--(change)='onSelectResume($event.target.value)'-->
-                                                                    <select class="form-control"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                                                                        (blur)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
-=======
-                                                                        (change)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
->>>>>>> Stashed changes
-=======
-                                                                        (change)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
->>>>>>> Stashed changes
+                                                                    <select class="form-control" (blur)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
                                                                         <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
