@@ -34,6 +34,7 @@ export class RRFDetails {
     public Technology: MasterData = new MasterData();
     public PositionTitle: string;
     public Description: string;
+    public AdditionalRoles: string;
     public IsShowFeedback : boolean = false;
     public NoOfOpenings: number = 1;
     public SkillsRequired = new Array<MasterData>();

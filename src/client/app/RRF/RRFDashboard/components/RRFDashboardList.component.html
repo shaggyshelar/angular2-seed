@@ -166,8 +166,8 @@
 							<div class="col-lg-3 col-sm-3">
 								<div class="dataTables_length ">
 									<label>Reason
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order">
-                                                <option *ngFor="let reason of reasons" [value]="reason.Value">{{reason.Value}}</option>
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="reason.Id">
+                                                <option *ngFor="let rea of reasons" [value]="rea.Id">{{rea.Value}}</option>
                                             </select>
                                         </label>
 								</div>

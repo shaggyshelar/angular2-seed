@@ -49,6 +49,7 @@ export class RRFDashboardListComponent implements OnActivate {
     grdOptions: GrdOptions = new GrdOptions();
     viewDetailsRRFId: MasterData = new MasterData();
     reasons: MasterData = new MasterData();
+    reason: MasterData = new MasterData();
     doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
     doughnutChartType: string = 'doughnut';
@@ -107,7 +108,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this.getCloseReason();
     }
     getCloseReason(){
-        this._mastersService.getCloseReason('Close RRF')
+        this._mastersService.getCloseReason('CloseRRF')
             .subscribe(
             results => {
                 this.reasons = results;
@@ -384,7 +385,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onbtnCloseRRF() {
-        this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment)
+        this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment,this.reason)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
