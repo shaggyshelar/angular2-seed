@@ -789,7 +789,11 @@
                                                                     <!--<input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">-->
                                                                     <!--(change)='onSelectResume($event.target.value)'-->
                                                                     <select class="form-control"
+<<<<<<< Updated upstream
                                                                         (blur)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
+=======
+                                                                        (change)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
+>>>>>>> Stashed changes
                                                                         <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
@@ -1027,7 +1031,9 @@
                                                             <label>Languages</label>
                                                         </div>
                                                         <div class="row">
+
                                                             <multiselect-dropdown placeholder="Select Laguages" [dataToBind]='skills'></multiselect-dropdown>
+
                                                         </div>
                                                     </div>
                                                     <!--<div class="col-md-3">
