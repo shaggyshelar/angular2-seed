@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
     errorMessage: string;
     /************BEGIN RECRUITER'S DASHBOARD properties */
     OpenRRF: any[];
-    guageData: any[];
+    guageData: any[] = [];
     OverdueRRF: any[];
     Incomplete: any[];
     CandidateJoining: any[];

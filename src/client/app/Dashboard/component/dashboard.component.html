@@ -493,8 +493,8 @@
                     <section>
                         <!--BEGIN INITIATOR REGIONAL STATS PORTLET CHART 3-->
                         <!--[ifAuthorize]="['DB.GRAPH.4.READ']"-->
-                        <div [ifAuthorize]="['DB.GRAPH.4.READ']" class="row">
-                            <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width: 98.5%;">
+                        <div [ifAuthorize]="['DB.GRAPH.4.READ']" class="row" *ngIf="guageData.length > 0">
+                            <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width: 98.5%;" >
                                 <!-- BEGIN REGIONAL STATS PORTLET-->
                                 <div class="portlet light ">
                                     <div class="portlet-title">
