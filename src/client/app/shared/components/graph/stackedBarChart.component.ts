@@ -1,5 +1,5 @@
-import { Component, Input, OnChanges, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES, OnActivate} from '@angular/router';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ROUTER_DIRECTIVES, OnActivate } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -23,6 +23,17 @@ export class StackedBarComponent implements OnChanges {
         var chart = AmCharts.makeChart('barChartDiv', {
             'type': 'serial',
             'theme': 'light',
+            'colours': [
+                {
+                    'fillColor': '#FF0000'
+                },
+                {
+                    'fillColor': '#0000FF'
+                },
+                {
+                    'fillColor': '#00FF00'
+                }
+            ],
             'creditsPosition': 'top-right',
             'legend': {
                 'horizontalGap': 10,
@@ -46,26 +57,29 @@ export class StackedBarComponent implements OnChanges {
                 'title': 'Completed',
                 'type': 'column',
                 'color': '#000000',
+                'fillColors' : '#00FF00',
                 'valueField': 'completedVal'
             }, {
-                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]] Days</b></span>',
-                    'fillAlphas': 0.8,
-                    'labelText': '[[value]]',
-                    'lineAlpha': 0.3,
-                    'title': 'Remaining',
-                    'type': 'column',
-                    'color': '#000000',
-                    'valueField': 'remainingVal'
-                }, {
-                    'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]] Days</b></span>',
-                    'fillAlphas': 0.8,
-                    'labelText': '[[value]]',
-                    'lineAlpha': 0.3,
-                    'title': 'Overdue',
-                    'type': 'column',
-                    'color': '#000000',
-                    'valueField': 'overdueVal'
-                }
+                'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]] Days</b></span>',
+                'fillAlphas': 0.8,
+                'labelText': '[[value]]',
+                'lineAlpha': 0.3,
+                'title': 'Remaining',
+                'type': 'column',
+                'color': '#000000',
+                'fillColors' : '#FFDD51',
+                'valueField': 'remainingVal'
+            }, {
+                'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]] Days</b></span>',
+                'fillAlphas': 0.8,
+                'labelText': '[[value]]',
+                'lineAlpha': 0.3,
+                'title': 'Overdue',
+                'type': 'column',
+                'color': '#000000',
+                'fillColors' : '#FF0000',
+                'valueField': 'overdueVal'
+            }
                 // , {
                 //     'balloonText': '<b>[[title]]</b><br><span style="font-size:14px">[[category]]: <b>[[value]]</b></span>',
                 //     'fillAlphas': 0.8,
