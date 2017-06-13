@@ -99,7 +99,7 @@
 
 							</div>
 							<!--Hide Sorting / filtering if No Data Found-->
-							<div class="row" *ngIf="!NORECORDSFOUND">
+							<div class="row">
 								<div class="col-lg-2 col-sm-2">
 									<div class="dataTables_length ">
 										<label>show
@@ -166,9 +166,8 @@
 							<div class="col-lg-3 col-sm-3">
 								<div class="dataTables_length ">
 									<label>Reason
-                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptions.Order">
-                                                <option value="asc">Test 1</option>
-                                                <option value="desc">Test 2</option>
+                                            <select class="form-control input-sm input-small input-inline" [(ngModel)]="reason.Id">
+                                                <option *ngFor="let rea of reasons" [value]="rea.Id">{{rea.Value}}</option>
                                             </select>
                                         </label>
 								</div>

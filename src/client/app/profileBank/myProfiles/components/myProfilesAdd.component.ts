@@ -74,6 +74,8 @@ export class MyProfilesAddComponent implements OnActivate {
     isExist: boolean = false;
     existedProfile: CandidateProfile;
     skills: MasterData[];
+    softSkills: MasterData[];
+    languages: MasterData[];
     resumeSource: MasterData[];
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
@@ -112,12 +114,30 @@ export class MyProfilesAddComponent implements OnActivate {
         this.getProfilePhoto(this.CandidateID);
         this.getSkills();
         this.getResumeSource();
+        this.getSoftSkills();
+        this.getLanguages();
     }
     getSkills(): void {
         this._mastersService.getSkills()
             .subscribe(
             results => {
                 this.skills = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    getSoftSkills(): void {
+        this._mastersService.getSoftSkills()
+            .subscribe(
+            results => {
+                this.softSkills = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
+    getLanguages(): void {
+        this._mastersService.getLanguages()
+            .subscribe(
+            results => {
+                this.languages = results;
             },
             error => this.errorMessage = <any>error);
     }
@@ -160,6 +180,12 @@ export class MyProfilesAddComponent implements OnActivate {
                 }
                 if (this.profile.CandidateSkills.AnyFunctionalExpFlag === true) {
                     this.FunctionalExp = true;
+                }
+                if(this.profile.CandidateOtherDetails.HasVisa === true) {
+                    this.haveVisa = false;
+                }
+                if(this.profile.CandidateOtherDetails.HasVisa === false) {
+                    this.haveVisa = true;
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
@@ -233,7 +259,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this.selectedQualification = parseInt(candidateQualification);
     }
     onSelectVisa(visaId: string) {
-        this.profile.CandidateOtherDetails.Visa.Id = parseInt(visaId);
+       // this.profile.CandidateOtherDetails.Visa.Id = parseInt(visaId);
     }
 
     onSelectGrade(grade: string) {
@@ -1024,10 +1050,10 @@ export class MyProfilesAddComponent implements OnActivate {
     /** Enable visa field  */
     onHaveVisa(isChecked: any) {
         if (isChecked === false) {
-            this.haveVisa = true;
-        } else {
             this.haveVisa = false;
-            this.profile.CandidateOtherDetails.Visa = '';
+        } else {
+            this.haveVisa = true;
+            this.profile.CandidateOtherDetails.VisaType = '';
         }
     }
     

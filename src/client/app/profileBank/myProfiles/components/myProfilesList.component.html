@@ -298,6 +298,7 @@
 									<!--btn btn-circle btn-icon-only btn-default btn-xs-->
 									<button class="btn btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF"
 									 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
+
                                                             <i class="fa fa-search-plus "></i> 
                                                         </button>
 									<a class="btn btn-xs yellow" [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]"

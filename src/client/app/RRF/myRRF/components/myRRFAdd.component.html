@@ -92,10 +92,10 @@
                                 <div class="form-group col-lg-4">
                                     <label>Designation<span class="required"> * </span></label>
                                     <!--<input type="text" [(ngModel)]='newRRF.Designation' id="txtDesignation" class="form-control" placeholder="Designation"/>-->
-                                    <select id="cmbDesignation" class="form-control" [(ngModel)]='newRRF.Designation.Id' [disabled]='isDisabled' required tooltip="Select Designation"
+                                    <select id="cmbDesignation" class="form-control" (change)='getDescription($event.target.value)' [(ngModel)]='newRRF.Designation.Id' [disabled]='isDisabled' required tooltip="Select Designation"
                                         tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Designation.Id">
                                         <option value="0" selected [disabled]=true>Select Designation</option>
-                                        <option *ngFor="let designation of designations" [value]="designation.Id">{{designation.Value}}</option>
+                                        <option *ngFor="let designation of designations" [value]="designation.Value">{{designation.Value}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-4">
@@ -206,10 +206,10 @@
                                     <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label>Additional Roles<small> (Max 1200 chars)</small><span class="required"> * </span></label>
-                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.Description' maxlength="1200" id="txtDescription"
+                                    <label>Additional Roles<small> (Max 1200 chars)</small></label>
+                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.AdditionalRoles' maxlength="1200" id="txtDescription"
                                         rows="2" tooltip="Additional Roles" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                        tooltipEnable="!newRRF.Description" placeholder="Additional Roles" required="" style="resize:vertical"></textarea>
+                                        tooltipEnable="!newRRF.AdditionalRoles" placeholder="Additional Roles" style="resize:vertical"></textarea>
                                     <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
                                 </div>
                             </div>
