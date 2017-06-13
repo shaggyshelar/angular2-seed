@@ -359,6 +359,7 @@
                                     </div>
                                     <div class="portlet-body">
                                         <stacked-bar-chart [chartData]='rrfTimeline'></stacked-bar-chart>
+                                        <span style="text-align: center; display:block;">Days <i style=" vertical-align: middle; font-size: 15px; margin-left: 10px;"class="fa fa-long-arrow-right"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -494,7 +495,7 @@
                         <!--BEGIN INITIATOR REGIONAL STATS PORTLET CHART 3-->
                         <!--[ifAuthorize]="['DB.GRAPH.4.READ']"-->
                         <div [ifAuthorize]="['DB.GRAPH.4.READ']" class="row" *ngIf="guageData.length > 0">
-                            <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width: 98.5%;" >
+                            <div class="col-md-12 col-sm-12" style="margin-right:inherit;margin-top:-5px;width: 98.5%;">
                                 <!-- BEGIN REGIONAL STATS PORTLET-->
                                 <div class="portlet light ">
                                     <div class="portlet-title">
@@ -525,7 +526,7 @@
                                 <div id="modalBody" class="modal-body" style="overflow-y:scroll;height:400px;">
                                     <!--<div class="col-md-12 col-sm-12">-->
 
-                                    <div *ngIf="IsProfile" >
+                                    <div *ngIf="IsProfile">
                                         <div *ngFor="let profile of IncompleteProfileList.Profiles" style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29); padding-left: 5px;">
                                             <detail-profile [CandidateRecruitmentMailDetails]="" [selectedProfile]="profile"></detail-profile>
                                         </div>
@@ -543,7 +544,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="odd gradeX" *ngFor="let interview of interviewApproval" >
+                                                <tr class="odd gradeX" *ngFor="let interview of interviewApproval">
                                                     <td>
                                                         <interviewApp-gridRow [interviewDetails]=interview></interviewApp-gridRow>
                                                     </td>
