@@ -77,6 +77,19 @@ export class MyProfilesAddComponent implements OnActivate {
     softSkills: MasterData[];
     languages: MasterData[];
     resumeSource: MasterData[];
+    onNotify(SkillInput: any): void {
+        console.log(SkillInput);
+        switch(SkillInput.input){
+            case 'Technical':this.addTechnicalSkill(SkillInput.skills);
+                break;
+            case 'Soft':this.addSoftSkill(SkillInput.skills);
+                break;
+            case 'Language':this.addLanguageSkill(SkillInput.skills);
+                break;
+        }
+        this.onSaveSkillsDetails();
+
+    }
     constructor(private _myProfilesService: MyProfilesService,
         private _masterService: MastersService,
         private _profileBankService: ProfileBankService,
@@ -116,6 +129,18 @@ export class MyProfilesAddComponent implements OnActivate {
         this.getResumeSource();
         this.getSoftSkills();
         this.getLanguages();
+    }
+    addTechnicalSkill(SkillInput:any){
+            this.profile.CandidateSkills.TechnicalSkills = [];
+            this.profile.CandidateSkills.TechnicalSkills=SkillInput;
+    }
+    addSoftSkill(SkillInput:any){
+            this.profile.CandidateSkills.SoftSkills = [];
+            this.profile.CandidateSkills.SoftSkills=SkillInput;
+    }
+    addLanguageSkill(SkillInput:any){
+            this.profile.CandidateSkills.LanguageSkills = [];
+            this.profile.CandidateSkills.LanguageSkills=SkillInput;
     }
     getSkills(): void {
         this._mastersService.getSkills()

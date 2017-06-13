@@ -137,6 +137,9 @@ export class Skills {
   public SecondarySkills: string;
   public OtherSkills: string;
   public RoleAndResponsibility: string;
+  public TechnicalSkills = new Array<MasterData>();
+  public SoftSkills = new Array<MasterData>();
+  public LanguageSkills = new Array<MasterData>();
   public ProjectsDone: string;
   public TestingSkills: string;
   public Database: string;

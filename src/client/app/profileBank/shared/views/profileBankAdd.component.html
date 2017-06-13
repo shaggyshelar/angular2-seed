@@ -1738,8 +1738,8 @@
                                                             <label>Technical Skills</label>
                                                         </div>
                                                         <div class="row">
-                                                            <multiselect-dropdown placeholder="Select Technical Skills" [dataToBind]='skills' 
-                                                                ></multiselect-dropdown>
+                                                            <multiselect-dropdown placeholder="Select Technical Skills" [dataToBind]='skills' inputString='Technical' [selected]='profile.CandidateSkills.TechnicalSkills' (saveSkills)='onNotify($event)'
+                                                               ></multiselect-dropdown>
                                                         </div>
                                                     </div>
                                                     <div class="form-group col-md-3">
@@ -1747,7 +1747,7 @@
                                                             <label>Soft Skills</label>
                                                         </div>
                                                         <div class="row">
-                                                            <multiselect-dropdown placeholder="Select Soft Skills" [dataToBind]='softSkills' 
+                                                            <multiselect-dropdown placeholder="Select Soft Skills" [dataToBind]='softSkills' inputString='Soft' [selected]='profile.CandidateSkills.SoftSkills' (saveSkills)='onNotify($event)'
                                                                 ></multiselect-dropdown>
                                                         </div>
                                                     </div>
@@ -1756,7 +1756,7 @@
                                                             <label>Languages</label>
                                                         </div>
                                                         <div class="row">
-                                                            <multiselect-dropdown placeholder="Select Language" [dataToBind]='languages' 
+                                                            <multiselect-dropdown placeholder="Select Language" [dataToBind]='languages' inputString='Language' [selected]='profile.CandidateSkills.LanguageSkills' (saveSkills)='onNotify($event)'
                                                                 ></multiselect-dropdown>
                                                         </div>
                                                     </div>
