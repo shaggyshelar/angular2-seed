@@ -103,8 +103,8 @@
 								<div class="col-md-2 col-sm-3">
 									<label> Profiles :
                                         <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
-                                               [(ngModel)]="modelFilterByProfile" (change)='filterByProfile($event)'>
-											<!--[(ngModel)]="myProfilesList.GrdOperations.Order"-->
+                                               (change)='modelFilterByProfileChanged($event)'>
+											<!--[(ngModel)]="modelFilterByProfile"-->
                                                 <option value="all">All</option>
                                                 <option value="tagged">Tagged</option>
                                                 <option value="untagged">Untagged</option>
@@ -213,14 +213,14 @@
 															<div class="form-group">
 																<label>First Name</label>
 																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
-																 tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" />
+																 tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="35" />
 															</div>
 														</div>
 														<div class="col-md-4  inlineForm">
 															<div class="form-group ">
 																<label>Last Name</label>
 																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name" tooltipPlacement="bottom"
-																 tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" />
+																 tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="35" />
 															</div>
 														</div>
 														<div class="col-md-4  inlineForm">
@@ -228,7 +228,7 @@
 																<label>Email Address</label>
 																<input type="email" class="form-control" [(ngModel)]="profile.Email" required="" tooltip="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
 																 (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
-																 tooltipEnable="!profile.Email" />
+																 tooltipEnable="!profile.Email" maxlength="255" />
 															</div>
 														</div>
 													</div>
@@ -247,7 +247,7 @@
 																<label>Experience</label>
 																<input type="number" step="any" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience" tooltip="Total Experience (In years)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
-																 title="Enter total experience in years Eg. 02" minlength="0" max="60" style="padding: 6px;" />
+																 title="Enter total experience in years Eg. 02" minlength="0" min="0" max="60" style="padding: 6px;" />
 															</div>
 														</div>
 														<div class="col-md-2 inlineForm">
@@ -255,7 +255,7 @@
 																<label>Notice</label>
 																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
-																 title="Enter notice period in Days Eg. 45" max="120" />
+																 title="Enter notice period in Days Eg. 45" min="0" max="120" />
 															</div>
 														</div>
 														<div class="col-md-4 inlineForm">
@@ -294,7 +294,7 @@
                                                     <input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
                                                     <span></span>
                                                 </label>
-								<div class="actions pull-right">
+								<div class="actions pull-right" style="margin-right:7px;">
 									<!--btn btn-circle btn-icon-only btn-default btn-xs-->
 									<button class="btn btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF"
 									 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
@@ -305,7 +305,7 @@
 														<i class="fa fa-edit " style="margin-top: 25%;"></i>
 														<!-- Edit Profile-->
 													</a>
-									<button class="btn btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value.toLowerCase() === 'open'"
+									<button class="btn btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value === 'Open'"
 									 tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Schedule Interview" tooltipEnable="true">
                                                             <i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
                                                         </button>

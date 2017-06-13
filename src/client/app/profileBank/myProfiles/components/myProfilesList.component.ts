@@ -251,6 +251,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.NORECORDSFOUND = false;
+                    this.filterByProfile();
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
@@ -654,16 +655,16 @@ export class MyProfilesListComponent implements OnActivate {
             if (this.myProfilesList.Profiles[index].IsChecked) {
                 //Check for open / rejected Status
                 //if (this.myProfilesList.Profiles[index].Status.Value.toLowerCase() === 'open') {
-                    //if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
-                        //Add to selectedCandidates array
-                        this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
-                        this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
-                        this.Candidate.Status = this.myProfilesList.Profiles[index].Status;
-                        this.selectedCandidates.push(this.Candidate);
-                        this.Candidate = new Candidate();
-                    //} else { chkRRFAssigned = true; break; }
-               // } else {
-                 //   chkStatus = true;
+                //if (!this.myProfilesList.Profiles[index].RRFAssigned.isRRFAssigned) {
+                //Add to selectedCandidates array
+                this.Candidate.CandidateID = this.myProfilesList.Profiles[index].CandidateID;
+                this.Candidate.Candidate = this.myProfilesList.Profiles[index].Candidate;
+                this.Candidate.Status = this.myProfilesList.Profiles[index].Status;
+                this.selectedCandidates.push(this.Candidate);
+                this.Candidate = new Candidate();
+                //} else { chkRRFAssigned = true; break; }
+                // } else {
+                //   chkStatus = true;
                 //    break;
                 //}
             }
@@ -718,10 +719,11 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations.Order = this.myProfilesList.GrdOperations.Order === 'asc' ? 'desc' : 'asc';
         this.myProfilesList.GrdOperations.ButtonClicked = 0;
         this.myProfilesList.GrdOperations.NextPageUrl = new Array<string>();
-        let event = { target : { value : 'all'} };
-        this.modelFilterByProfile = 'all';
-        this.filterByProfile(event);
+        console.log('onChange model =>', this.modelFilterByProfile);
+        // this.modelFilterByProfile = 'all';
+        // this.filterByProfile();
         this.filterBy();
+        // this.filterByProfile();
     }
     disableDelete(Status: MasterData) {
         if (Status.Value !== null) {
@@ -829,6 +831,7 @@ export class MyProfilesListComponent implements OnActivate {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
+                    this.filterByProfile();
                 } else { this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
@@ -840,6 +843,7 @@ export class MyProfilesListComponent implements OnActivate {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
+                    this.filterByProfile();
                 } else {
                     this.NORECORDSFOUND = true;
                 }
@@ -853,6 +857,7 @@ export class MyProfilesListComponent implements OnActivate {
                 if (results.Profiles !== undefined && results.Profiles.length > 0) {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
+                    this.filterByProfile();
                 } else { this.NORECORDSFOUND = true; }
             },
             error => {
@@ -865,29 +870,45 @@ export class MyProfilesListComponent implements OnActivate {
         modl.modal({ 'backdrop': 'static' });
     }
 
-    filterByProfile(event:any) {
+    modelFilterByProfileChanged(event: any) {
+        this.modelFilterByProfile = event.target.value;
+        console.log('event =>', event.target.value, 'model =>', this.modelFilterByProfile);
+        this.filterByProfile();
+    }
+
+    filterByProfile() {
+        console.log('model =>', this.modelFilterByProfile);
         let profUntagged: any[] = ['Open', 'Rejected', 'Absconded'];
         let profTagged: any[] = ['In Process', 'Offered', 'Joined', 'Accepted'];
-        this.myProfilesList.Profiles = this.cachedProfileList;
-        let temp: any = this.myProfilesList.Profiles;
-        switch (event.target.value) {
-        // switch (this.modelFilterByProfile) {
+        this.myProfilesList.Profiles = [];
+        let temp: any = this.cachedProfileList;
+        switch (this.modelFilterByProfile) {
             case 'all':
-            this.myProfilesList.Profiles = this.cachedProfileList;
+                this.myProfilesList.Profiles = this.cachedProfileList;
                 break;
             case 'tagged':
-                this.myProfilesList.Profiles = temp.filter((element:any) => {
-                    return (element.Status.Value.toLowerCase().indexOf(profTagged[0].toLowerCase()) > -1 ||
-                        element.Status.Value.toLowerCase().indexOf(profTagged[1].toLowerCase()) > -1 ||
-                        element.Status.Value.toLowerCase().indexOf(profTagged[2].toLowerCase()) > -1 ||
-                        element.Status.Value.toLowerCase().indexOf(profTagged[3].toLowerCase()) > -1);
+                this.myProfilesList.Profiles = temp.filter((element: any) => {
+                    let retVal;
+                    if (element.Status.Value) {
+                        retVal = ((element.Status.Value.indexOf(profTagged[0]) > -1 ||
+                            element.Status.Value.indexOf(profTagged[1]) > -1 ||
+                            element.Status.Value.indexOf(profTagged[2]) > -1 ||
+                            element.Status.Value.indexOf(profTagged[3]) > -1));
+                        retVal ? null : console.log(element.Status.Value);
+                    }
+                    return retVal;
                 });
                 break;
             case 'untagged':
-                this.myProfilesList.Profiles = temp.filter((element:any) => {
-                    return (element.Status.Value.toLowerCase().indexOf(profUntagged[0].toLowerCase()) > -1 ||
-                        element.Status.Value.toLowerCase().indexOf(profUntagged[1].toLowerCase()) > -1 ||
-                        element.Status.Value.toLowerCase().indexOf(profUntagged[2].toLowerCase()) > -1);
+                this.myProfilesList.Profiles = temp.filter((element: any) => {
+                    let retVal;
+                    if (element.Status.Value) {
+                        retVal = ((element.Status.Value.indexOf(profUntagged[0]) > -1 ||
+                            element.Status.Value.indexOf(profUntagged[1]) > -1 ||
+                            element.Status.Value.indexOf(profUntagged[2]) > -1));
+                        retVal ? null : console.log(element.Status.Value);
+                    }
+                    return retVal;
                 });
                 break;
             default:
