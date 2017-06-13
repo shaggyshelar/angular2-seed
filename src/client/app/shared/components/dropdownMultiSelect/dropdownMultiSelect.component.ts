@@ -1,8 +1,7 @@
-import { Component, AfterViewInit, ElementRef, Input } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, Input,Output,EventEmitter } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { MasterData} from '../../model/common.model';
 import {MastersService } from '../../services/masters.service';
-
 @Component({
     moduleId: module.id,
     selector: 'multiselect-dropdown',
@@ -18,8 +17,9 @@ export class DropdownMultiSelectComponent implements AfterViewInit {
     @Input() selected: MasterData[] = [];  //List of selected value
     @Input() isAddButtonVisible: boolean = false;  //Set visibility of Add button
     @Input() isReadOnly: boolean = false;
+    @Input() inputString:string = '';
+    @Output() saveSkills:EventEmitter<any> = new EventEmitter<any>();
     public query = '';
-
     public filteredList: any[] = [];
     public elementRef: any;
     // public selected: any[] = [];
@@ -35,7 +35,11 @@ export class DropdownMultiSelectComponent implements AfterViewInit {
     ngAfterViewInit() {
         //
     }
-
+    onSaveSkillsDetails() {
+        this.saveSkills.emit({
+                    'skills':this.selected,
+                    'input':this.inputString});
+    }
     filter() {
         if (this.query !== '') {
             this.filteredList = this.dataToBind.filter(function(el: any) {
@@ -66,6 +70,7 @@ export class DropdownMultiSelectComponent implements AfterViewInit {
         }
         this.query = '';
         this.filteredList = [];
+        this.onSaveSkillsDetails();
     }
 
     handleClick(event: any) {
@@ -84,6 +89,7 @@ export class DropdownMultiSelectComponent implements AfterViewInit {
 
     remove(item: any) {
         this.selected.splice(this.selected.indexOf(item), 1);
+        this.onSaveSkillsDetails();
     }
 
 
