@@ -571,7 +571,6 @@ export class RRFDashboardListComponent implements OnActivate {
 
     }
     onFilterChange(item: string) {
-        console.log(item)
         this.rrfSubFilter = this.RRfFiltersList[item]
     }
     onSubFilterChange(item: string) {
