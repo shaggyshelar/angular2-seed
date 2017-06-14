@@ -13,12 +13,12 @@
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <ul class="page-sidebar-menu" aria-expanded="true" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200"
             style="margin-bottom: 40%;">
-            <li class="nav-item start ">
+            <li class="nav-item start "  [ngClass]="{'active':checkRouterActive('/App')}">
                 <!--<a [routerLink]="['/App/Dashboard']" class="nav-link">
                     <i class="icon-graph"></i>
                     <span class="title">Dashboard</span>
                 </a>-->
-                <a [routerLink]="['/App/Dashboard']" class="nav-link">
+                <a [routerLink]="['/App']" class="nav-link"  >
                     <i class="fa fa-pie-chart"></i>
                     <span class="title"> Dashboard</span>
                     <!--<span class="arrow"></span>-->
@@ -44,7 +44,7 @@
                     </li>
                 </ul>-->
             </li>
-            <li class="nav-item start open" [ifAuthorize]="['PROFILEBANK.MANAGE']">
+            <li class="nav-item" [ifAuthorize]="['PROFILEBANK.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/ProfileBank/MyProfiles')}">
                 <a href="javascript:;" class="nav-link nav-toggle" [routerLink]="['/App/ProfileBank/MyProfiles']" [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
                     <i class="fa fa-bank"></i>
                     <span class="title">Candidate Profiles</span>
@@ -88,10 +88,10 @@
                             <span class="title">Black listed Profiles</span>
                         </a>
                     </li>
-                </ul>
-            </li>-->
+                </ul>-->
+            </li>
             <li class="nav-item start " [ifAuthorize]="['RRF.MANAGE']">
-                <a href="javascript:;" class="nav-link nav-toggle">
+                <a href="javascript:;"  class="nav-link nav-toggle">
                     <i class="fa fa-users"></i>
                     <span class="title">Requisition Requests</span>
                     <span class="arrow"></span>
@@ -104,8 +104,8 @@
                             <span class="title">My RRF</span>
                         </a>
                     </li>-->
-                    <li class="nav-item start " [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
-                        <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link ">
+                    <li class="nav-item start "  [ngClass]="{'active':checkRouterActive('/App/RRF/RRFDashboard')}" [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
+                        <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link "  >
                             <i class="icon-basket"></i>
                             <span class="title">Requisition List</span>
                         </a>
@@ -116,38 +116,38 @@
                             <span class="title">Reqruiter's Dashboard</span>
                         </a>
                     </li>-->
-                    <li class="nav-item start " [ifAuthorize]="['RRF.DdashASHBOARD.MANAGE']">
-                        <a [routerLink]="['/App/RRF/PendingRequest/']" class="nav-link ">
+                    <li class="nav-item start "  [ngClass]="{'active':checkRouterActive('/App/RRF/PendingRequest')}" [ifAuthorize]="['RRF.DdashASHBOARD.MANAGE']">
+                        <a [routerLink]="['/App/RRF/PendingRequest/']" class="nav-link "  >
                             <i class="fa fa-dashboard"></i>
                             <span class="title">Pending Requests</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
-                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link ">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/RRF/RRFApproval')}" [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
+                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link "  >
                             <i class="fa fa-check-square"></i>
                             <span class="title">Approval Requests</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviews')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/AllInterviews/showInterviews']" class="nav-link ">
                             <i class="fa fa-calendar-check-o"></i>
                             <span class="title">All Schedule Interviews</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/RRF/InterviewsAvailability')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
                         <a [routerLink]="['/App/RRF/InterviewsAvailability']" class="nav-link ">
                             <i class="fa fa-signal"></i>
                             <span class="title">Interviewers Availability</span>
                         </a>
                     </li>
-                    <li [ifAuthorize]="['RRF.FEEDBACK.MANAGE']" class="nav-item start ">
+                    <li [ifAuthorize]="['RRF.FEEDBACK.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/RRF/PendingRequest')}" class="nav-item start ">
                         <a [routerLink]="['/App/RRF/FeedbackPending']" class="nav-link ">
                             <i class="fa fa-check-square-o"></i>
                             <span class="title">RRF Feedback</span>
                         </a>
                     </li>
-                    <li [ifAuthorize]="['ADVANCEDSEARCH.MANAGE']" class="nav-item start ">
+                    <li [ifAuthorize]="['ADVANCEDSEARCH.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/ProfileBank/AdvanceSearchInSidebar')}" class="nav-item start ">
                         <a [routerLink]="['/App/ProfileBank/AdvanceSearchInSidebar']" class="nav-link ">
                             <i class="fa fa-check-square-o"></i>
                             <span class="title">Advance Search</span>
@@ -164,25 +164,25 @@
                 </a>
                 <ul class="sub-menu always-open">
                     <li class="nav-item start ">
-                        <li class="nav-item start ">
+                        <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/schedule')}">
                             <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">
                                 <i class="fa fa-calendar-check-o"></i>
                                 <span class="title">My Schedule</span>
                             </a>
                         </li>
-                        <li class="nav-item start ">
+                        <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/mycalendar')}" >
                             <a [routerLink]="['/App/Recruitment Cycle/Interviewers/mycalendar']" class="nav-link ">
                                 <i class="fa fa-calendar"></i>
                                 <span class="title">My Calendar</span>
                             </a>
                         </li>
-                        <li class="nav-item start ">
+                        <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers')}">
                             <a [routerLink]="['/App/Recruitment Cycle/Interviewers']" class="nav-link ">
                                 <i class="fa fa-chain"></i>
                                 <span class="title">Assignment & Availability</span>
                             </a>
                         </li>
-                        <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
+                        <li class="nav-item start "  [ifAuthorize]="['RCIC.IEF.READ']">
                             <a class="nav-link ">
                                 <i class="icon-graph"></i>
                                 <span class="title">IEF</span>
@@ -194,61 +194,61 @@
                 <li [ifAuthorize]="['ADMIN.MANAGE']" class="heading">
                     <h3 class="uppercase">Administration</h3>
                 </li>
-                <li [ifAuthorize]="['ADMIN.ROLE.READ']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.ROLE.READ']" [ngClass]="{'active':checkRouterActive('/App/Admin/Role')}" class="nav-item start ">
                     <a class="nav-link " [routerLink]="['/App/Admin/Role/']">
                         <i class="icon-graph"></i>
                         <span class="title">Roles</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.FEATURE.READ']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.FEATURE.READ']" [ngClass]="{'active':checkRouterActive('/App/Admin/Feature')}" class="nav-item start ">
                     <a [routerLink]="['/App/Admin/Feature/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Features</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.USER.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.USER.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/User')}" class="nav-item start ">
                     <a [routerLink]="['/App/Admin/User/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">User</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.PRACTICE.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.PRACTICE.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/Practice')}" class="nav-item start ">
                     <a id="practiceLink" [routerLink]="['/App/Admin/Practice/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Practice</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.TECHNOLOGY.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.TECHNOLOGY.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/Technology')}" class="nav-item start ">
                     <a id="technologyLink" [routerLink]="['/App/Admin/Technology/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Technology</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.SKILLS.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.SKILLS.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/Skill')}" class="nav-item start ">
                     <a id="skillLink" [routerLink]="['/App/Admin/Skill/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Skills</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.QUALIFICATIONS.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.QUALIFICATIONS.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/Qualification')}" class="nav-item start ">
                     <a id="qualificationLink" [routerLink]="['/App/Admin/Qualification']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Qualifications</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.DESIGNATION.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.DESIGNATION.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/Designation')}" class="nav-item start ">
                     <a id="designationLink" [routerLink]="['/App/Admin/Designation/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Designation</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.INTERVIEWROUNDS.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.INTERVIEWROUNDS.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/InterviewRounds')}" class="nav-item start ">
                     <a id="interviewRoundLink" [routerLink]="['/App/Admin/InterviewRounds/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Interview Rounds</span>
                     </a>
                 </li>
-                <li [ifAuthorize]="['ADMIN.OWNERTYPE.MANAGE']" class="nav-item start ">
+                <li [ifAuthorize]="['ADMIN.OWNERTYPE.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/Admin/OwnerType')}" class="nav-item start ">
                     <a id="ownerTypeLink" [routerLink]="['/App/Admin/OwnerType/']" class="nav-link ">
                         <i class="icon-graph"></i>
                         <span class="title">Owner Type</span>

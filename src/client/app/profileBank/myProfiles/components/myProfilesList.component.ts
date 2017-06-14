@@ -130,7 +130,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.initFilterBy();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
-        this.getMyProfiles();
+         setTimeout(() => { this.getMyProfiles(); }, 300);
         this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
