@@ -47,7 +47,7 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
 
     @Input() eventDurationEditable: boolean;
 
-    @Input() defaultView: string = 'month';
+    @Input() defaultView: string = 'agendaWeek';
 
     @Input() allDaySlot: boolean = true;
 
