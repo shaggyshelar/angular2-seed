@@ -25,26 +25,39 @@
         <!-- /Profile Photo -->
 
         <!-- Profiles Details -->
-        <div class="col-md-12" >
+        <div class="col-md-12">
             <div class="row message">
                 <ul class="list-inline">
-                    <li style="float:left" ><small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></li>
+                    <li style="float:left"><small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></li>
                     <li style="float:right">
-                        <span class="mt-action-dot color{{profile.Status.Id}}"> </span>
-                        <span *ngIf='!checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><strong>{{profile.Status.Value?profile.Status.Value:"N/A"}}</strong></span>
-                        <span *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)'><a style="color:black"(click)='onViewCandidateClick(profile.RRFAssigned.RRFID,profile.Status.Value)' tooltip="Click to check associated RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"><strong>{{profile.Status.Value ? profile.Status.Value : "N/A"}}</strong><small> with <i class="fa fa-external-link"></i></small></a></span>
+                        <!--<span class="mt-action-dot color{{profile.Status.Id}}"> </span>-->
+
+                        <span *ngIf='!checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)' style=" padding-top:3px; padding-bottom:3px;">
+                            <span class="mt-action-dot color{{profile.Status.Id}}"> </span>
+                            <strong>{{profile.Status.Value?profile.Status.Value:"N/A"}}</strong>
+                        </span>
+
+                        <!--<span >-->
+                            <a *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)' style="color:black; padding-top:3px; padding-bottom:3px;" (click)='onViewCandidateClick(profile.RRFAssigned.RRFID,profile.Status.Value)' tooltip="Click to check associated RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                <span class="mt-action-dot color{{profile.Status.Id}}"> </span>
+                                <strong>{{profile.Status.Value ? profile.Status.Value : "N/A"}}</strong>
+                                <small> with <i class="fa fa-external-link"></i></small>
+                            </a>
+                        <!--</span>-->
                     </li>
                 </ul>
-                <div class="col-md-12 centered profile-info" >
+                <div class="col-md-12 centered profile-info">
                     <h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> </h4>
-                    <h6 class="sbold uppercase" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> As {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}} {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?" at "+profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}} </h6>
-                    <a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline"  href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
+                    <h6 class="sbold uppercase" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> As {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}}
+                        {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?" at "+profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}}
+                        </h6>
+                    <a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline" href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
                     <!--<p>
                         <a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>
                         </p>-->
-                        <!--<hr >-->
-                        
-                       <!-- <ul class="list-unstyled">
+                    <!--<hr >-->
+
+                    <!-- <ul class="list-unstyled">
                          <li>
                         <p> 
                         <a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline"  href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
@@ -56,29 +69,29 @@
                         </p>
                         </li>
                         </ul>-->
-                        <!--<hr >-->
+                    <!--<hr >-->
                     <div class="row profile-desc-text">
                         <ul class="list-unstyled">
                             <li>
                                 <div class="col-md-12" style="height: 60px;overflow: hidden; text-overflow: ellipsis;">
                                     <label class="control-label"><small>Skills : {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}}</small></label>
-                                <!--<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>-->
+                                    <!--<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>-->
                                 </div>
                             </li>
                             <li>
                                 <div class="col-md-12">
-                                    <ul class="list-inline" >
+                                    <ul class="list-inline">
                                         <li>
                                             <label class="control-label"><small> CTC  Current : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}}</small> </label>
                                         </li>
-                                         <li>
-                                            <label class="control-label"><small> Expected : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>        
+                                        <li>
+                                            <label class="control-label"><small> Expected : <i class="fa fa-inr"></i>{{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}}</small> </label>
                                         </li>
-                                        </ul>
-                                    
-                                <!--</div>
+                                    </ul>
+
+                                    <!--</div>
                                 <div class="col-md-6">-->
-                                    
+
                                 </div>
                             </li>
                             <!--<li>
@@ -109,20 +122,21 @@
                             </li>
                             <li>
                                 <div tooltip="Notice period" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                    <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+" days":"N/A"}}
+                                    <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod+"
+                                    days":"N/A"}}
                                 </div>
 
                             </li>
                             <li>
                                 <div tooltip="Owner" tooltipPlacement="right" tooltipTrigger="mouseenter" tooltipEnable="true">
                                     <!--<h5 tooltip="Owner" tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="true" class="font-blue sbold uppercase"></h5>-->
-                                        <i class="fa fa-user"></i>{{profile.Owner.Value?profile.Owner.Value:"N/A"}}
+                                    <i class="fa fa-user"></i>{{profile.Owner.Value?profile.Owner.Value:"N/A"}}
                                 </div>
 
                             </li>
                         </ul>
                     </div>
-                   
+
                 </div>
                 <!--end col-md-8-->
                 <div class="col-md-4" style="display:none">
