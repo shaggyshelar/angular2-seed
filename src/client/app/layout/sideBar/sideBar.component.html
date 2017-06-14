@@ -46,7 +46,7 @@
             </li>
             <li class="nav-item" [ifAuthorize]="['PROFILEBANK.MANAGE']" [ngClass]="{'active':checkRouterActive('/App/ProfileBank/MyProfiles')}">
                 <a href="javascript:;" class="nav-link nav-toggle" [routerLink]="['/App/ProfileBank/MyProfiles']" [ifAuthorize]="['PROFILEBANK.MYPROFILES.MANAGE']">
-                    <i class="fa fa-bank"></i>
+                    <i class="icon-users"></i>
                     <span class="title">Candidate Profiles</span>
                     <!--<span class="arrow"></span>-->
                 </a>
@@ -106,8 +106,8 @@
                     </li>-->
                     <li class="nav-item start "  [ngClass]="{'active':checkRouterActive('/App/RRF/RRFDashboard')}" [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
                         <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link "  >
-                            <i class="icon-basket"></i>
-                            <span class="title">Requisition List</span>
+                            <i class="icon-book-open"></i>
+                            <span class="title">RRF (Requisition List)</span>
                         </a>
                     </li>
                     <!--<li class="nav-item start " [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
