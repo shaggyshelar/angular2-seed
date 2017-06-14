@@ -98,6 +98,7 @@ export class MyProfilesListComponent implements OnActivate {
     modelFilterBy: string = 'my';
     modelFilterByProfile: string = 'all';
     cachedProfileList: any[] = [];
+    showRrfFilter: boolean = false;
     constructor(private _myProfilesService: MyProfilesService,
         private _blacklistedProfilesService: BlackListedProfilesService,
         private _allProfilesService: AllProfilesService,
@@ -129,7 +130,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.initFilterBy();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
-        this.getMyProfiles();
+         setTimeout(() => { this.getMyProfiles(); }, 300);
         this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
@@ -207,6 +208,10 @@ export class MyProfilesListComponent implements OnActivate {
             , {
                 Id: 'Black Listed Profiles',
                 Value: 'blackList'
+            }
+            , {
+                Id: 'RRF',
+                Value: 'rrf'
             }
         ];
     }
@@ -315,6 +320,8 @@ export class MyProfilesListComponent implements OnActivate {
                     }
                     /**update Profile grid*/
                     this.toastr.success((<ResponseFromAPI>results).Message);
+                    let modl: any = $('#CountDetails');
+                    modl.modal('hide');
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     setTimeout(() => { this.getMyProfiles(); }, 1000);
                     this.profile = new CandidateProfile();
@@ -719,7 +726,6 @@ export class MyProfilesListComponent implements OnActivate {
         this.myProfilesList.GrdOperations.Order = this.myProfilesList.GrdOperations.Order === 'asc' ? 'desc' : 'asc';
         this.myProfilesList.GrdOperations.ButtonClicked = 0;
         this.myProfilesList.GrdOperations.NextPageUrl = new Array<string>();
-        console.log('onChange model =>', this.modelFilterByProfile);
         // this.modelFilterByProfile = 'all';
         // this.filterByProfile();
         this.filterBy();
@@ -809,15 +815,22 @@ export class MyProfilesListComponent implements OnActivate {
         switch (this.modelFilterBy) {
             case 'all':
                 this.getAllProfiles();
+                this.showRrfFilter = false;
                 break;
             case 'my':
                 this.getMyProfiles();
+                this.showRrfFilter = false;
                 break;
             case 'incomplete':
                 this.getIncompleteProfiles();
+                this.showRrfFilter = false;
                 break;
             case 'blackList':
                 this.getBlacklistedProfiles();
+                this.showRrfFilter = false;
+                break;
+            case 'rrf':
+                this.showRrfFilter = true;
                 break;
 
             default:
@@ -872,12 +885,10 @@ export class MyProfilesListComponent implements OnActivate {
 
     modelFilterByProfileChanged(event: any) {
         this.modelFilterByProfile = event.target.value;
-        console.log('event =>', event.target.value, 'model =>', this.modelFilterByProfile);
         this.filterByProfile();
     }
 
     filterByProfile() {
-        console.log('model =>', this.modelFilterByProfile);
         let profUntagged: any[] = ['Open', 'Rejected', 'Absconded'];
         let profTagged: any[] = ['In Process', 'Offered', 'Joined', 'Accepted'];
         this.myProfilesList.Profiles = [];
@@ -894,7 +905,6 @@ export class MyProfilesListComponent implements OnActivate {
                             element.Status.Value.indexOf(profTagged[1]) > -1 ||
                             element.Status.Value.indexOf(profTagged[2]) > -1 ||
                             element.Status.Value.indexOf(profTagged[3]) > -1));
-                        retVal ? null : console.log(element.Status.Value);
                     }
                     return retVal;
                 });
@@ -906,7 +916,6 @@ export class MyProfilesListComponent implements OnActivate {
                         retVal = ((element.Status.Value.indexOf(profUntagged[0]) > -1 ||
                             element.Status.Value.indexOf(profUntagged[1]) > -1 ||
                             element.Status.Value.indexOf(profUntagged[2]) > -1));
-                        retVal ? null : console.log(element.Status.Value);
                     }
                     return retVal;
                 });
@@ -916,5 +925,4 @@ export class MyProfilesListComponent implements OnActivate {
         }
     }
 }
-
 
