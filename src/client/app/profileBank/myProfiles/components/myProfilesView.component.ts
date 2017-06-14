@@ -28,6 +28,12 @@ export class MyProfilesViewComponent implements OnActivate {
     IsResumeShow: boolean = false;
     ShowResume: boolean = false;
     Resume: string;
+    public technicalSkills : string = '';
+    public softSkills : string = '';
+    public languageSkills : string = '';
+    public tSkills : string = '';
+    public sSkills : string = '';
+    public lSkills : string = '';
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router,
         public toastr: ToastsManager) {
@@ -55,6 +61,24 @@ export class MyProfilesViewComponent implements OnActivate {
                         }
                     }
                 }
+                if(this.profile.CandidateSkills.TechnicalSkills.length > 0){
+                    this.profile.CandidateSkills.TechnicalSkills.forEach(data=>{
+                        this.tSkills = this.tSkills + ',' + data.Value;
+                    })
+                }
+                if(this.profile.CandidateSkills.SoftSkills.length > 0){
+                    this.profile.CandidateSkills.SoftSkills.forEach(data=>{
+                        this.sSkills = this.sSkills + ',' + data.Value;
+                    })
+                }
+                if(this.profile.CandidateSkills.LanguageSkills.length > 0){
+                    this.profile.CandidateSkills.LanguageSkills.forEach(data=>{
+                        this.lSkills = this.lSkills + ',' + data.Value;
+                    })
+                }
+                this.technicalSkills =this.tSkills? this.tSkills.substring(1) : this.tSkills;
+                this.softSkills = this.sSkills? this.sSkills.substring(1) : this.tSkills;
+                this.languageSkills=this.lSkills? this.lSkills.substring(1) : this.lSkills;
                 this.count = results.CandidateQualification.length;
                 this.convertCheckboxesValues();
             },

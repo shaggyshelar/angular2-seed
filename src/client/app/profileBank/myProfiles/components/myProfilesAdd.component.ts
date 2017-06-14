@@ -564,6 +564,7 @@ export class MyProfilesAddComponent implements OnActivate {
         }
         this.CandidateExperiences.CandidateID = this.CandidateID;
         if (!this.isExist) {
+            if (this.CandidateExperiences.TotalExperience >= this.CandidateExperiences.RelevantExperience) {
             this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
                 .subscribe(
                 results => {
@@ -579,6 +580,10 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.toastr.error(<any>error);
                 }
                 );
+            }
+            else{
+                this.toastr.error('Relavant Experience should not be more than total Experiece');
+            }
         }
 
 

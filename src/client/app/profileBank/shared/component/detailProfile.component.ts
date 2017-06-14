@@ -28,6 +28,8 @@ export class DetailProfileComponent implements OnInit {
     @Output() updatedProfile: EventEmitter<CandidateProfile> = new EventEmitter<CandidateProfile>();
     CurrentUser: MasterData = new MasterData();
     loginflag: boolean = false;
+    public technicalSkills : string = '';
+    public tSkills : string = '';
     constructor(
         private toastr: ToastsManager,
         private _commonService: CommonService,
@@ -38,6 +40,12 @@ export class DetailProfileComponent implements OnInit {
     }
     ngOnInit() {
         this.profile = this.selectedProfile;
+        if(this.profile.CandidateSkills.TechnicalSkills.length > 0){
+            this.profile.CandidateSkills.TechnicalSkills.forEach(data=>{
+                this.tSkills = this.tSkills + ','+data.Value;
+            })
+        }
+        this.technicalSkills =this.tSkills? this.tSkills.substring(1) : this.tSkills;
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
         if (this.profile) {
             this.profile.CandidateMailDetails = this.profile ? this.CandidateRecruitmentMailDetails : new MailDetails();
