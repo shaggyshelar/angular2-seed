@@ -217,22 +217,22 @@
 												</div>
 												<!-- Existing Candidate Check End -->
 
-												<form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px; border-left: #d4ad38 3px solid;">
+												<form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px;">
 													<!--<div class="container-fluid">
 																			<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
 													<div class="row" style="margin-left: 5px;">
 														<div class="col-md-4 inlineForm">
 															<div class="form-group">
 																<label>First Name</label>
-																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
-																 tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="35" />
+																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name" 
+																 tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$"/>
 															</div>
 														</div>
 														<div class="col-md-4  inlineForm">
 															<div class="form-group ">
 																<label>Last Name</label>
 																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name" tooltipPlacement="bottom"
-																 tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="35" />
+																 tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$" />
 															</div>
 														</div>
 														<div class="col-md-4  inlineForm">
@@ -251,7 +251,7 @@
 																<input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()"
 																 (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No"
 																 title="Enter 10 digits" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact"
-																 onKeyPress="if(this.value.length==10) return false;" />
+																 onKeyPress="if(this.value.length==10) return false;" required/>
 															</div>
 														</div>
 														<div class="col-md-2 inlineForm">
@@ -260,7 +260,7 @@
 																<input type="number" step="any" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience" tooltip="Total Experience (In years)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
 																 title="Enter total experience in years Eg. 02" min="0" max="60" step="0.01" style="padding: 6px;" onKeyPress="if(this.value.length==4) return false;"
-																/>
+																required/>
 																<!--(keyup)="onKeyExperience($event)" />-->
 															</div>
 														</div>
@@ -270,7 +270,7 @@
 																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
 																 title="Enter notice period in Days Eg. 45" min="0" max="120" onKeyPress="if(this.value.length==2) return false;"
-																/>
+																required/>
 															</div>
 														</div>
 														<div class="col-md-4 inlineForm">
