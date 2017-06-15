@@ -87,6 +87,7 @@ export class RRFCandidateListComponent implements OnActivate {
     IsOffered: boolean = false;
     ExpDateOfJoining: Date;
     IsOfferGenerate: boolean = false;
+    IsReject : boolean = false;
     IsUpdateStatus: boolean = false;
     IsOfferedCandidate: boolean = false;
     IsOtherCandidate: boolean = false;
@@ -106,7 +107,9 @@ export class RRFCandidateListComponent implements OnActivate {
     UniqueRRFCode: string = '';
     public barChartLabels: string[] = new Array<string>();
     public barChartData: any[] = new Array<string>();
-
+    public FinalStatus : any = [{'Id':4,'Value':'Select'},{'Id':12,'Value':'Reject'}];
+    finalStatus = new MasterData();
+    public finalStatusComment:any='';
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private location: Location,
@@ -686,5 +689,36 @@ export class RRFCandidateListComponent implements OnActivate {
     setMinDateToCalender() {
         var todayDate = new Date();
         this.mindate = (<any>this.formatDate(todayDate));
+    }
+    onFinalOperation(status:any){
+        if(status === '4'){
+            this.IsReject = false;
+            this.onGenerateOffer();
+        }
+        if(status === '12'){
+            this.IsReject = true;
+            this.IsOfferGenerate = false;
+        }
+    }
+    onCancelReject(){
+        this.IsReject = false;
+    }
+    UpdateFinalStatus(comment:string){
+        this.finalStatus.Id= parseInt(this.finalStatus.Id);
+        this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.finalStatus, comment)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.IsUpdateStatus = false;
+                    this.IsOffered = false;
+                    this.getOfferedCanidatesForRRF();
+                    this.IsReject = false;
+                    this.IsOfferGenerate = false;
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+            },
+            error => this.errorMessage = <any>error);
     }
 }

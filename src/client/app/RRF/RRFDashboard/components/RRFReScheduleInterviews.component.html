@@ -22,7 +22,7 @@
                 <div class="portlet-body">
                     <div class="row">
                         <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
-                        <div class="mt-radio-inline col-md-12">
+                        <!--<div class="mt-radio-inline col-md-12">
                             <div class="col-md-3">
                                 <label class="mt-radio">
                                     <input type="radio" name="viewType" value="myReInterviews" [checked]="currentView == 'myReInterviews'" (click)="onViewChanged('myReInterviews')"
@@ -37,10 +37,11 @@
                                     <span></span>
                                 </label>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
-                    <div class="row" *ngIf="!NORECORDSFOUND">
-                        <div class="col-md-3 col-sm-3">
+                    <div class="row" *ngIf="!NORECORDSFOUND" style="margin-top:5px;">
+                        
+                        <div class="col-md-1 col-sm-1">
                             <div class="dataTables_length" id="sample_1_length">
                                 <label>Show :
                                     <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="InterviewDetailsList.GrdOperations.PerPageCount"
@@ -53,7 +54,15 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
+							<label>Filter
+                                            <select class="form-control input-sm input-inline" [(ngModel)]="currentView"  (ngModelChange)="onViewChanged(currentView)">
+                                                <option  value="myReInterviews">My Schedule Interviews</option>
+                                                <option  value="allReInterviews">All Schedule Interviews</option>
+                                            </select>
+                                        </label>
+						</div>
+                        <div class="col-md-2 col-sm-2">
                             <label>Sort By
                                 <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" [(ngModel)]="InterviewDetailsList.GrdOperations.OrderBy"
                                 (ngModelChange)="onChange()">
@@ -65,7 +74,7 @@
                                 </select>
                             </label>
                         </div>
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-2 col-sm-2">
                             <label>Order By
                                 <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline" [(ngModel)]="InterviewDetailsList.GrdOperations.Order"
                                 (ngModelChange)='onChange()'>
@@ -74,7 +83,7 @@
                                 </select>
                             </label>
                         </div>
-                        <div class="col-md-3 col-sm-4">
+                        <div class="col-md-2 col-sm-2">
                             <div id="sample_1_filter" class="dataTables_filter">
                                 <label>Search
                                     <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">

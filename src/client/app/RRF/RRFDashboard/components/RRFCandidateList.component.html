@@ -333,8 +333,13 @@
 </div>
 <span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
 <div class="pull-right">
-	<button class="btn btn-circle btn-icon-only grey-cascade" *ngIf="IsHRConducted" (click)='onGenerateOffer()' tooltip="Generate Offer"
-		tooltipPlacement="top" tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true"><i class="fa fa-link"></i></button>
+	 <select class="form-control" [(ngModel)]="finalStatus.Id" (change)='onFinalOperation($event.target.value)' *ngIf="IsHRConducted">
+        
+		 <option *ngFor="let status of FinalStatus" [value]="status.Id">{{status.Value}}</option>
+		 
+      </select>
+	<!--<button class="btn btn-circle btn-icon-only grey-cascade" *ngIf="IsHRConducted" (click)='onGenerateOffer()' tooltip="Generate Offer"
+		tooltipPlacement="top" tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true"><i class="fa fa-link"></i></button>-->
 	<button class="btn btn-circle btn-icon-only blue-dark" *ngIf="IsOffered" (click)='onUpdateStatus()' tooltip="Update Status"
 		tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"><i class="glyphicon glyphicon-pencil"></i></button>
 </div>
@@ -361,6 +366,27 @@
 </div>
 <hr *ngIf="IsOfferGenerate">
 <!-- END offer generation form-->
+
+<!-- BEGIN Reject form-->
+<div class="row" style="margin-top:20px;" *ngIf="IsReject">
+<form (submit)="UpdateFinalStatus(finalStatusComment);">
+	<div class="form-group col-md-7">
+		<input type="text" [(ngModel)]='finalStatusComment' id="changesStatusComment" class="form-control" placeholder="Reason"
+		tooltip="comment" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!finalStatusComment" required="" autocomplete="off"
+		style="font-size: inherit;" />
+	</div>
+
+	<div class="col-md-5">
+		<div class="pull-right">
+			<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+			<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelReject()'>Cancel</button> &nbsp;
+
+		</div>
+	</div>
+</form>
+</div>
+<hr *ngIf="IsReject">
+<!-- END Reject form-->
 
 <!-- BEGIN status update form-->
 <div class="row" style="margin-top:20px;" *ngIf="IsUpdateStatus">
