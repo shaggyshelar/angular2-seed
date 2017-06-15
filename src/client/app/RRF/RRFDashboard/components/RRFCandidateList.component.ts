@@ -1,4 +1,5 @@
 import {Component } from '@angular/core';
+import {Location} from '@angular/common';
 import { OnActivate, ROUTER_DIRECTIVES, RouteSegment, Router } from '@angular/router';
 import { MyRRFService } from '../../myRRF/services/myRRF.service';
 import { RRFDashboardService } from '../services/rrfDashboard.service';
@@ -108,6 +109,7 @@ export class RRFCandidateListComponent implements OnActivate {
 
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
+        private location: Location,
         private _rrfDashboardService: RRFDashboardService,
         private _mastersService: MastersService,
         private _rrfCandidatesList: RRFCandidateListService,
@@ -667,7 +669,8 @@ export class RRFCandidateListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
     Back() {
-        this._router.navigate([this.ReturnPath]);
+        // this._router.navigate([this.ReturnPath]);
+        this.location.back();
     }
     //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {
