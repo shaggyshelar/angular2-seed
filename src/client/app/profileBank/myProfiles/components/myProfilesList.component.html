@@ -29,12 +29,12 @@
 								<div class="col-md-8">
 									<div class="dt-buttons pull-right toolbar-actions toolbar-spacing">
 
-										<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing red' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
+										<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing blue' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
 										 (click)='openMailWindow()' [disabled]='!selectedRowCount' data-toggle="tooltip" data-placement="bottom" title="Send Mails "
 										 tooltip="Send Mails " tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false" style="border-radius: 5px !important;">
 													<i class="fa fa-envelope-o"></i>   
 										</button>
-										<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing yellow' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
+										<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing green' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
 										 [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount' (click)='AssignRRFClick()' data-toggle="tooltip"
 										 data-placement="bottom" title="Assign RRF" tooltip="Assign RRF" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
 										 tooltipEnable="false" style="border-radius: 5px !important;">
