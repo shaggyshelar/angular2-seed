@@ -43,6 +43,7 @@ export class MyProfilesAddComponent implements OnActivate {
     selectedVisa: MasterData = new MasterData();
     VisaType: Array<MasterData> = new Array<MasterData>();
     TITLE: string = 'Profiles';
+    resumeTypeDisable: boolean;
     /*Candidate Salary Details */
     CandidateSalaryDetails: SalaryDetails = new SalaryDetails();
     /*Candidate Skills */
@@ -377,6 +378,11 @@ export class MyProfilesAddComponent implements OnActivate {
         return submitFlag;
     }
     onChangeResume(event: any) {
+        // console.log(event.target.value)
+        if(event.target.value === 0) {
+            this.resumeTypeDisable = true;
+            return;
+        }
         this.profile.ResumeSourceType = this.resumeSource.find(element => {
             return (element.Id === parseInt(event.target.value));
         });

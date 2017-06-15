@@ -788,7 +788,7 @@
                                                                     -->
                                                                     <select class="form-control"
                                                                         (change)="onChangeResume($event)" tabindex="35" >
-                                                                        
+                                                                        <option disabled selected>Select</option>
                                                                         <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
