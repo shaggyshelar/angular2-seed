@@ -221,6 +221,45 @@
 						</div>
 						<!-- Upload Resume END-->
 
+						<!-- Blacklist profile-->
+
+						<div id="updateRow" *ngIf='isCollapsed'>
+							<span class="header sbold">You are blacklisting <span class="font-red uppercase">{{currentCandidate}}</span> !</span>
+							<hr class="red" style="margin:0px 0px !important" />
+							<form role="form" (submit)="onBlackListProfile()">
+								<div class="row" style="margin-top: 10px;margin-left: 0px;">
+									<!--<div class="col-md-2">
+                                            <div class="form-group">
+                                                <label class="sbold uppercase"> {{currentCandidate}}</label>
+                                            </div>
+                                        </div>-->
+									<!-- <div class="col-md-2">
+                                            <div class="form-group">
+                                                <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
+                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
+                                                </select>
+                                            </div>
+                                        </div> -->
+									<div class="col-md-9">
+										<div class="form-group">
+											<div class="edit-content"></div>
+											<textarea class="form-control red sbold statusComments" rows="1" placeholder="Enter reason" style="resize:vertical; width:100%"
+											 [(ngModel)]="profile.Comments" required="" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter"
+											 tooltipEnable="!profile.Comments">
+                                                </textarea>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<button type="submit" class="btn btn-info updatebtn"> Update </button> <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
+									</div>
+								</div>
+							</form>
+							<hr class="red" style="margin:8px 0px !important" />
+						</div>
+
+						<!-- Black List Profile END-->
+
 						<!-- Modal Start -->
 						<!--Begin Count Details box-->
 						<div id="CountDetails" class="modal fade">
