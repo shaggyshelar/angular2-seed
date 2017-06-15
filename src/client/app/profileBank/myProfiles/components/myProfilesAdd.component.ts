@@ -376,6 +376,12 @@ export class MyProfilesAddComponent implements OnActivate {
 
         return submitFlag;
     }
+    onChangeResume(event: any) {
+        this.profile.ResumeSourceType = this.resumeSource.find(element => {
+            return (element.Id === parseInt(event.target.value));
+        });
+        this.onSavePersonalDetails();
+    }
 
     onSavePersonalDetails(): void {
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {

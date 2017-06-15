@@ -783,9 +783,12 @@
                                                                 <div class="form-group">
                                                                     <label>Resume Source Type</label>
                                                                     <!--<input type="text" class="form-control" placeholder="" [(ngModel)]="profile.CandidateOtherDetails.Visa">-->
-                                                                    <!--(change)='onSelectResume($event.target.value)'-->
+                                                                    <!--(change)='onSelectResume($event.target.value)'
+                                                                    [(ngModel)]="profile.ResumeSourceType.Id"
+                                                                    -->
                                                                     <select class="form-control"
-                                                                        (change)="onSavePersonalDetails()" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
+                                                                        (change)="onChangeResume($event)" tabindex="35" >
+                                                                        
                                                                         <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
@@ -794,7 +797,7 @@
                                                                 <div class="form-group">
                                                                     <label class="control-label">Resume Source</label>
                                                                     <textarea class="form-control text-capitalize" rows="2" placeholder="Resume Source" style="resize:vertical" [(ngModel)]="profile.ResumeSource"
-                                                                        (blur)="onSavePersonalDetails()" tabindex="35"></textarea>
+                                                                        (blur)="onSavePersonalDetails()" tabindex="35" [disabled]="!profile.ResumeSourceType.Id"></textarea>
                                                                 </div>
                                                             </div>
 
