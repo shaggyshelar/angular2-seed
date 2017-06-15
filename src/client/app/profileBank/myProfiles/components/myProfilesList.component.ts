@@ -202,10 +202,6 @@ export class MyProfilesListComponent implements OnActivate {
                 Value: 'all'
             }
             , {
-                Id: 'Incomplete Profiles',
-                Value: 'incomplete'
-            }
-            , {
                 Id: 'Black Listed Profiles',
                 Value: 'blackList'
             }

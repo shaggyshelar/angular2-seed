@@ -18,136 +18,143 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="portlet light bordered" *ngIf="isViewRRFGrid">
-					<div class="portlet-title">
-						<div class="row">
-							<div class="col-md-4">
-								<h4><i class="icon-users"></i> Candidate Profiles<small style="font-size: small;"> {{myProfilesList.Profiles.length > 0 ?'(' + myProfilesList.Profiles.length + ' ' + 'Found' + ')':""}}</small></h4>
+					<div id="noScroll">
+						<div class="portlet-title">
+							<div class="row">
+								<div class="col-md-4">
+									<h4><i class="icon-book-open"></i> Candidate Profiles<small style="font-size: small;"> {{myProfilesList.Profiles.length > 0 ?'(' + myProfilesList.Profiles.length + ' ' + 'Found' + ')':""}}</small></h4>
+								</div>
+
+								<div class="col-md-8">
+									<div class="dt-buttons pull-right toolbar-actions toolbar-spacing">
+
+										<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing red' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
+										 (click)='openMailWindow()' [disabled]='!selectedRowCount' data-toggle="tooltip" data-placement="bottom" title="Send Mails "
+										 tooltip="Send Mails " tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false" style="border-radius: 5px !important;">
+													<i class="fa fa-envelope-o"></i>   
+										</button>
+										<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing yellow' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
+										 [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount' (click)='AssignRRFClick()' data-toggle="tooltip"
+										 data-placement="bottom" title="Assign RRF" tooltip="Assign RRF" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
+										 tooltipEnable="false" style="border-radius: 5px !important;">
+													<i class="fa fa-check-square-o"></i> 
+										</button>
+										<button data-toggle="collapse" class="btn red btn-default btn-circle btnLink toolbar-spacing" (click)='showNewProfileModal()'
+										 data-target="#demo" data-toggle="tooltip" data-placement="bottom" title="New Profile" tooltip="New Profile" tooltipPlacement="bottom"
+										 tooltipTrigger="mouseenter" tooltipEnable="false" style="border-radius: 5px !important;">
+											<i class="fa fa-plus-circle"></i>
+										</button>
+										<!--<button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
+												<i class="fa fa-angle-down"></i>
+									</button>
+										<ul class="dropdown-menu" role="menu">
+											<li>
+												<button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
+													<i class="fa fa-envelope-o"></i>   Send Mails </button>
+											</li>
+											<li class="divider"> </li>
+											<li>
+												<button class="btn btn-default btnLink" [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount'
+													(click)='AssignRRFClick()'>
+													<i class="fa fa-check-square-o"></i> Assign RRF
+												</button>
+											</li>
+										</ul>-->
+
+									</div>
+								</div>
 							</div>
+							<div>
 
-							<div class="col-md-8">
-								<div class="dt-buttons pull-right toolbar-actions toolbar-spacing">
+								<div class="row" *ngIf="!NORECORDSFOUND">
+									<div class="col-md-2 col-sm-2" style="margin-top: 16px;">
+										<div class="dataTables_length" id="sample_1_length">
+											<label>Show :
+												<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+												[(ngModel)]="myProfilesList.GrdOperations.PerPageCount"  (ngModelChange)="onChange()" >
+													<option value="50">50</option>
+													<option value="100">100</option>
+													<option value="150">150</option>
+													<option value="200">200</option>
+												</select>
+											</label>
+										</div>
+									</div>
 
-									<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing red' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
-									 (click)='openMailWindow()' [disabled]='!selectedRowCount' data-toggle="tooltip" data-placement="bottom" title="Send Mails "
-									 tooltip="Send Mails " tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false" style="border-radius: 5px !important;">
-												<i class="fa fa-envelope-o"></i>   
-									</button>
-									<button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing yellow' : 'btn btn-default btn-circle btnLink toolbar-spacing' "
-									 [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount' (click)='AssignRRFClick()' data-toggle="tooltip"
-									 data-placement="bottom" title="Assign RRF" tooltip="Assign RRF" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
-									 tooltipEnable="false" style="border-radius: 5px !important;">
-												<i class="fa fa-check-square-o"></i> 
-									</button>
-									<button data-toggle="collapse" class="btn red btn-default btn-circle btnLink toolbar-spacing" (click)='showNewProfileModal()'
-									 data-target="#demo" data-toggle="tooltip" data-placement="bottom" title="New Profile" tooltip="New Profile" tooltipPlacement="bottom"
-									 tooltipTrigger="mouseenter" tooltipEnable="false" style="border-radius: 5px !important;">
-										<i class="fa fa-plus-circle"></i>
-									</button>
-									<!--<button class="btn btn-md green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Mass Actions
-											  <i class="fa fa-angle-down"></i>
-								   </button>
-									<ul class="dropdown-menu" role="menu">
-										<li>
-											<button class="btn btn-default btnLink" (click)='openMailWindow()' [disabled]='!selectedRowCount'>
-												<i class="fa fa-envelope-o"></i>   Send Mails </button>
-										</li>
-										<li class="divider"> </li>
-										<li>
-											<button class="btn btn-default btnLink" [ifAuthorize]="[ 'RC.CANDIDATEASSIGNRRF.MANAGE'] " [disabled]='!selectedRowCount'
-												(click)='AssignRRFClick()'>
-												<i class="fa fa-check-square-o"></i> Assign RRF
-											</button>
-										</li>
-									</ul>-->
+									<div class="col-md-2 col-sm-3">
+										<label>Filter By :
+											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+												[(ngModel)]="modelFilterBy"
+												(ngModelChange)='filterBy()'>
+												<!--[(ngModel)]="myProfilesList.GrdOperations.Order"-->
+													<option *ngFor="let filter of FilterByList" [value]="filter.Value">{{filter.Id}}</option>
+											</select> 
+										</label>
+									</div>
+
+									<div class="col-md-2 col-sm-3" *ngIf="!showRrfFilter">
+										<label> Profiles :
+											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+												(change)='modelFilterByProfileChanged($event)'>
+												<!--[(ngModel)]="modelFilterByProfile"-->
+													<option value="all">All</option>
+													<option value="tagged">Tagged</option>
+													<option value="untagged">Untagged</option>
+													<!--<option value="referenced">Referenced</option>-->
+											</select>
+										</label>
+									</div>
+									<div class="col-md-2 col-sm-3" *ngIf="showRrfFilter && RRFList.length > 0">
+										<label> All My Profiles :
+											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+												required (change)='onSelectRRF($event.target.value)'>
+												<!--[(ngModel)]="modelFilterByProfile"-->
+													<option [value]="-1" >All My Profiles</option>
+												<option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
+													<!--<option value="referenced">Referenced</option>-->
+											</select>
+										</label>
+									</div>
+
+
+									<div class="col-md-2 col-sm-3">
+										<div style="display: inline-flex">
+											<label>Sort By :
+												<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+												[(ngModel)]="myProfilesList.GrdOperations.OrderBy"
+												(ngModelChange)="onChange()" >
+													<option *ngFor="let column of ColumnList" [value]="column.Value">{{column.Id}}</option>
+
+												</select>
+											</label>
+											<!--<button type="" class="btn btn-outline black" (click)="onChange()">-->
+											<i *ngIf="myProfilesList.GrdOperations.Order === 'asc'" style="margin-left: 10px; margin-right: 10px; margin-top: 25px;"
+											 class="fa fa-long-arrow-down black" (click)="onChange()"></i>
+											<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" style="margin-left: 10px; margin-right: 10px;margin-top: 25px;"
+											 class="fa fa-long-arrow-up black" (click)="onChange()"></i>
+											<!--</button>-->
+										</div>
+									</div>
+
+									<div class="col-md-2 col-sm-3">
+										<div id="sample_1_filter" class="form-group">
+											<label>Search :
+											<input type="search" placeholder="" class="form-control input-sm input-small input-inline " [(ngModel)]="searchString" aria-controls="sample_1">
+											</label>
+										</div>
+									</div>
+
+									<div style="margin-top: 25px !important;">
+										<span *ngIf="selectedRowCount > 0" style="font-size: 14px;"> Selected Profile Count : <strong>{{selectedRowCount}}</strong></span>
+									</div>
+
 
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="portlet-body">
-						<div>
+					<div class="portlet-body" >
 
-							<div class="row" *ngIf="!NORECORDSFOUND">
-								<div class="col-md-2 col-sm-2" style="margin-top: 16px;">
-									<div class="dataTables_length" id="sample_1_length">
-										<label>Show :
-											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
-											[(ngModel)]="myProfilesList.GrdOperations.PerPageCount"  (ngModelChange)="onChange()" >
-												<option value="50">50</option>
-												<option value="100">100</option>
-												<option value="150">150</option>
-												<option value="200">200</option>
-											</select>
-										</label>
-									</div>
-								</div>
-
-								<div class="col-md-2 col-sm-3">
-									<label>Filter By :
-										<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
-											   [(ngModel)]="modelFilterBy"
-											(ngModelChange)='filterBy()'>
-											<!--[(ngModel)]="myProfilesList.GrdOperations.Order"-->
-												<option *ngFor="let filter of FilterByList" [value]="filter.Value">{{filter.Id}}</option>
-										</select> 
-									</label>
-								</div>
-
-								<div class="col-md-2 col-sm-3" *ngIf="!showRrfFilter">
-									<label> Profiles :
-										<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
-											   (change)='modelFilterByProfileChanged($event)'>
-											<!--[(ngModel)]="modelFilterByProfile"-->
-												<option value="all">All</option>
-												<option value="tagged">Tagged</option>
-												<option value="untagged">Untagged</option>
-												<!--<option value="referenced">Referenced</option>-->
-										</select>
-									</label>
-								</div>
-								<div class="col-md-2 col-sm-3" *ngIf="showRrfFilter && RRFList.length > 0">
-									<label> All My Profiles :
-										<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
-											required (change)='onSelectRRF($event.target.value)'>
-											<!--[(ngModel)]="modelFilterByProfile"-->
-												<option [value]="-1" >All My Profiles</option>
-											<option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
-												<!--<option value="referenced">Referenced</option>-->
-										</select>
-									</label>
-								</div>
-
-
-								<div class="col-md-2 col-sm-3">
-									<div style="display: inline-flex">
-										<label>Sort By :
-											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
-											[(ngModel)]="myProfilesList.GrdOperations.OrderBy"
-											(ngModelChange)="onChange()" >
-												<option *ngFor="let column of ColumnList" [value]="column.Value">{{column.Id}}</option>
-
-											</select>
-										</label>
-										<!--<button type="" class="btn btn-outline black" (click)="onChange()">-->
-										<i *ngIf="myProfilesList.GrdOperations.Order === 'asc'" style="margin-left: 10px; margin-right: 10px; margin-top: 25px;"
-										 class="fa fa-long-arrow-down black" (click)="onChange()"></i>
-										<i *ngIf="myProfilesList.GrdOperations.Order === 'desc'" style="margin-left: 10px; margin-right: 10px;margin-top: 25px;"
-										 class="fa fa-long-arrow-up black" (click)="onChange()"></i>
-										<!--</button>-->
-									</div>
-								</div>
-
-								<div class="col-md-2 col-sm-3">
-									<div id="sample_1_filter" class="form-group">
-										<label>Search :
-										<input type="search" placeholder="" class="form-control input-sm input-small input-inline " [(ngModel)]="searchString" aria-controls="sample_1">
-										</label>
-									</div>
-								</div>
-
-
-							</div>
-						</div>
 
 						<!-- Modal Start -->
 						<!--Begin Count Details box-->
@@ -194,15 +201,15 @@
 
 																<a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(existedProfile.CandidateID)'>
-																			<i class="glyphicon glyphicon-user"> </i>
-																		</a>
+																				<i class="glyphicon glyphicon-user"> </i>
+																			</a>
 
 
 																<a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History"
 																 tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
 																 (click)='getCandidateHistory(existedProfile.CandidateID)'>
-																			<i class="fa fa-history"> </i>
-																		</a>
+																				<i class="fa fa-history"> </i>
+																			</a>
 
 															</div>
 														</div>
@@ -210,22 +217,22 @@
 												</div>
 												<!-- Existing Candidate Check End -->
 
-												<form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px; border-left: #d4ad38 3px solid;">
+												<form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px;">
 													<!--<div class="container-fluid">
-																		<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
+																			<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
 													<div class="row" style="margin-left: 5px;">
 														<div class="col-md-4 inlineForm">
 															<div class="form-group">
 																<label>First Name</label>
-																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name"
-																 tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="35" />
+																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name" 
+																 tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$"/>
 															</div>
 														</div>
 														<div class="col-md-4  inlineForm">
 															<div class="form-group ">
 																<label>Last Name</label>
 																<input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name" tooltipPlacement="bottom"
-																 tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="35" />
+																 tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$" />
 															</div>
 														</div>
 														<div class="col-md-4  inlineForm">
@@ -244,7 +251,7 @@
 																<input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()"
 																 (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No"
 																 title="Enter 10 digits" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact"
-																 onKeyPress="if(this.value.length==10) return false;" />
+																 onKeyPress="if(this.value.length==10) return false;" required/>
 															</div>
 														</div>
 														<div class="col-md-2 inlineForm">
@@ -253,7 +260,7 @@
 																<input type="number" step="any" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience" tooltip="Total Experience (In years)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
 																 title="Enter total experience in years Eg. 02" min="0" max="60" step="0.01" style="padding: 6px;" onKeyPress="if(this.value.length==4) return false;"
-																/>
+																required/>
 																<!--(keyup)="onKeyExperience($event)" />-->
 															</div>
 														</div>
@@ -263,7 +270,7 @@
 																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
 																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
 																 title="Enter notice period in Days Eg. 45" min="0" max="120" onKeyPress="if(this.value.length==2) return false;"
-																/>
+																required/>
 															</div>
 														</div>
 														<div class="col-md-4 inlineForm">
@@ -279,14 +286,14 @@
 														</div>
 													</div>
 													<!--</div>
-																	</div>-->
+																		</div>-->
 												</form>
 											</div>
 										</div>
 										<!-- Modal Body End -->
 										<!--<div class="modal-footer">
-											<button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Save</button>
-										</div>-->
+												<button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Save</button>
+											</div>-->
 									</div>
 								</div>
 							</div>
@@ -299,57 +306,57 @@
 						<div style="box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.29);" class="col-md-4" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
 							<div class="row portlet-title" style="padding-top: 5px;padding-bottom: 10px;">
 								<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px;">
-													<input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
-													<span></span>
-												</label>
+														<input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
+														<span></span>
+													</label>
 								<div class="actions pull-right" style="margin-right:7px;">
 									<!--btn btn-circle btn-icon-only btn-default btn-xs-->
 									<button style="border-radius: 5px !important;" class="btn btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)'
 									 tooltip="View RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
 
-															<i class="fa fa-search-plus "></i> 
-														</button>
+																<i class="fa fa-search-plus "></i> 
+															</button>
 									<a style="border-radius: 5px !important;" class="btn btn-xs yellow" [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]"
 									 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile">
-														<i class="fa fa-edit " style="margin-top: 25%;"></i>
-														<!-- Edit Profile-->
-													</a>
+															<i class="fa fa-edit " style="margin-top: 25%;"></i>
+															<!-- Edit Profile-->
+														</a>
 									<button style="border-radius: 5px !important;" class="btn btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)'
 									 *ngIf="myprofile.Status.Value === 'Open'" tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter"
 									 title="Schedule Interview" tooltipEnable="true">
-															<i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
-														</button>
+																<i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
+															</button>
 									<button style="border-radius: 5px !important;" class="btn btn-xs green-jungle" (click)='onClickFollowUpComments(myprofile.CandidateID)'
 									 tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Follow Up Comments" tooltipEnable="true">
-															<i class="fa fa-comments "></i> <!--Follow Up Comments-->
-														</button>
+																<i class="fa fa-comments "></i> <!--Follow Up Comments-->
+															</button>
 									<button style="border-radius: 5px !important;" class="btn btn-xs blue" (click)='onClickUploadResume(myprofile.CandidateID)'
 									 tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Upload Resume" tooltipEnable="true">
-															<i class="fa fa-upload"></i> <!--Upload Resume-->
-														</button>
+																<i class="fa fa-upload"></i> <!--Upload Resume-->
+															</button>
 									<button style="border-radius: 5px !important;" class="btn btn-xs green" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile"
 									 tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile" tooltipEnable="true">
-															<i class="fa fa-search"></i> <!--View Profile-->
-														</button>
+																<i class="fa fa-search"></i> <!--View Profile-->
+															</button>
 									<button style="border-radius: 5px !important;" class="btn btn-xs yellow-soft" (click)='getCandidateHistory(myprofile.CandidateID)'
 									 tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History"
 									 tooltipEnable="true">
-															<i class="fa fa-history"></i> <!--View Interview History-->
-														</button>
+																<i class="fa fa-history"></i> <!--View Interview History-->
+															</button>
 									<button style="border-radius: 5px !important;" class="btn btn-xs blue-dark" (click)='onUpdateStatusClick(myprofile.CandidateID)'
 									 tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"
 									 *ngIf='!getUpdateStatusAccess(myprofile.Status)'>
-															<i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
-														</button>
+																<i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
+															</button>
 									<button style="border-radius: 5px !important;" class="btn btn-xs dark" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile"
 									 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile">
-															<i class="icon-flag"></i> <!--Blacklist Profile-->
-														</button>
+																<i class="icon-flag"></i> <!--Blacklist Profile-->
+															</button>
 									<button style="border-radius: 5px !important;" class="btn btn-xs red" (click)='confirmDelete(myprofile.CandidateID)' tooltip="Delete Profile"
 									 tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true" [disabled]="disableDelete(myprofile.Status)"
 									 [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']">
-															<i class="fa fa-remove "></i> <!--Delete Profile-->
-														</button>
+																<i class="fa fa-remove "></i> <!--Delete Profile-->
+															</button>
 								</div>
 							</div>
 							<detail-profile [selectedProfile]="myprofile" [CandidateRecruitmentMailDetails]="candidateMailDetails" [rrfID]="viewDetailsRRFId"></detail-profile>
