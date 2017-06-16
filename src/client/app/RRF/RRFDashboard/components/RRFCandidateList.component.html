@@ -331,20 +331,17 @@
 	<base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions"
 		[legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
 </div>
-<span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
+<span class="caption-subject bold" style="font-size : 14px" *ngIf="IsHRConducted">{{selectedCandidate}} Final Status</span>
 <div class="pull-right">
 	 <select class="form-control" [(ngModel)]="finalStatus.Id" (change)='onFinalOperation($event.target.value)' *ngIf="IsHRConducted">
         
 		 <option *ngFor="let status of FinalStatus" [value]="status.Id">{{status.Value}}</option>
 		 
       </select>
-	<!--<button class="btn btn-circle btn-icon-only grey-cascade" *ngIf="IsHRConducted" (click)='onGenerateOffer()' tooltip="Generate Offer"
-		tooltipPlacement="top" tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true"><i class="fa fa-link"></i></button>-->
-	<button class="btn btn-circle btn-icon-only blue-dark" *ngIf="IsOffered" (click)='onUpdateStatus()' tooltip="Update Status"
-		tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"><i class="glyphicon glyphicon-pencil"></i></button>
+	
 </div>
 <br/>
-<hr>
+<hr *ngIf="IsHRConducted">
 <!-- BEGIN offer generation form-->
 <div class="row" style="margin-top:20px;" *ngIf="IsOfferGenerate">
 <form (submit)="saveOffer(ExpDateOfJoining);">
@@ -387,6 +384,21 @@
 </div>
 <hr *ngIf="IsReject">
 <!-- END Reject form-->
+
+<span class="caption-subject bold" style="font-size : 14px">{{selectedCandidate}} Interview Rounds History</span>
+<div class="pull-right">
+	 <!--<select class="form-control" [(ngModel)]="finalStatus.Id" (change)='onFinalOperation($event.target.value)' *ngIf="IsHRConducted">
+        
+		 <option *ngFor="let status of FinalStatus" [value]="status.Id">{{status.Value}}</option>
+		 
+      </select>-->
+	<!--<button class="btn btn-circle btn-icon-only grey-cascade" *ngIf="IsHRConducted" (click)='onGenerateOffer()' tooltip="Generate Offer"
+		tooltipPlacement="top" tooltipTrigger="mouseenter" title="Generate Offer" tooltipEnable="true"><i class="fa fa-link"></i></button>-->
+	<button class="btn btn-circle btn-icon-only blue-dark" *ngIf="IsOffered" (click)='onUpdateStatus()' tooltip="Update Status"
+		tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"><i class="glyphicon glyphicon-pencil"></i></button>
+</div>
+<br/>
+<hr>
 
 <!-- BEGIN status update form-->
 <div class="row" style="margin-top:20px;" *ngIf="IsUpdateStatus">

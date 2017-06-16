@@ -78,6 +78,11 @@ export class MyProfilesAddComponent implements OnActivate {
     softSkills: MasterData[];
     languages: MasterData[];
     resumeSource: MasterData[];
+    public noticePeriod : any=[{'Id':15,'Value':"15"},{'Id':30,'Value':"30"},{'Id':45,'Value':"45"},{'Id':60,'Value':"60"},{'Id':90,'Value':"90"}];
+    public varificationProof : any=[{'Id':1,'Value':"Aadhar Card"},{'Id':2,'Value':"Pan Card"},{'Id':3,'Value':"Passport"}];
+    public showAadhar :boolean = false;
+    public showPan :boolean= false;
+    public showLiecence :boolean= false; 
     onNotify(SkillInput: any): void {
         console.log(SkillInput);
         switch(SkillInput.input){
@@ -343,17 +348,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     if (this.profile.PrimaryContact === '') {
                         this.toastr.error('Please enter contact no.');
                         submitFlag = false;
-                    } else {
-                                    if (this.profile.CandidateSalaryDetails.CurrentSalary === '') {
-                                        this.toastr.error('Please enter current salary');
-                                        submitFlag = false;
-                                    } else {
-                                        if (this.profile.CandidateSalaryDetails.ExpectedSalary === '') {
-                                            this.toastr.error('Please enter expected salary');
-                                            submitFlag = false;
-                                        }
-                                    }
-                                }
+                    }
                     // else {
                     //     if (this.profile.CandidateSkills.PrimarySkills === '' || this.profile.CandidateSkills.PrimarySkills === null) {
                     //         this.toastr.error('Please enter skills');
@@ -1098,5 +1093,37 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CandidateOtherDetails.VisaType = '';
         }
     }
-    
+    totalMonths(date:any){
+        if(date !== undefined)
+        this.EmployersInformation.TimeSpentInCompany = this.monthDiff(new Date(date),new Date());
+    }
+    monthDiff(d1:Date, d2:Date) {
+        var d1Y = d1.getFullYear();
+        var d2Y = d2.getFullYear();
+        var d1M = d1.getMonth();
+        var d2M = d2.getMonth();
+        let months = (d2M+12*d2Y)-(d1M+12*d1Y);
+        return months.toString();
+    }
+    onNoticePeriod(id:any) {
+        this.profile.CandidateOtherDetails.NoticePeriod = id;
+        this.onSavePrimaryInfo();
+    }
+    onVerificationProofs(id:any){
+        if(id==='1'){
+            this.showAadhar = true;
+            this.showPan = false;
+            this.showLiecence = false;
+        }
+        if(id==='2'){
+            this.showAadhar = false;
+            this.showPan = true;
+            this.showLiecence = false;
+        }
+        if(id==='3'){
+            this.showAadhar = false;
+            this.showPan = false;
+            this.showLiecence = true;
+        }
+    }
 }
