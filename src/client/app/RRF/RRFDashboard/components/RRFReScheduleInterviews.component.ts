@@ -1,10 +1,10 @@
-import { Component} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment} from '@angular/router';
+import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES, Router, OnActivate, RouteSegment } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { RRFReScheduleInterviewService} from '../services/RRFReScheduleInterviews.service';
-import {InterviewsList, CandidateRRFID} from '../../../recruitmentCycle/recruitersTab/index';
-import { GrdOptions, MasterData } from  '../../../shared/model/index';
-import { AllScheduleInterviewPipe } from  '../../..//recruitmentCycle/recruitersTab/index';
+import { RRFReScheduleInterviewService } from '../services/RRFReScheduleInterviews.service';
+import { InterviewsList, CandidateRRFID } from '../../../recruitmentCycle/recruitersTab/index';
+import { GrdOptions, MasterData } from '../../../shared/model/index';
+import { AllScheduleInterviewPipe } from '../../..//recruitmentCycle/recruitersTab/index';
 @Component({
     moduleId: module.id,
     selector: 'show-re-schedule-interviews',
@@ -128,5 +128,21 @@ export class RRFReScheduleInterviewsComponent implements OnActivate {
     setGridOptions() {
         this.InterviewDetailsList.GrdOperations.Order = 'desc';
         this.InterviewDetailsList.GrdOperations.OrderBy = 'Interview_x0020_ID';
+    }
+
+    redirect(rrfID: any, rrfCode: any) {
+        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID + 'ID' + rrfCode]);
+    }
+
+    //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 }
