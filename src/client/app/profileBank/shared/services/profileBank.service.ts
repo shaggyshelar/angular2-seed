@@ -220,6 +220,15 @@ export class ProfileBankService {
             .finally(() => this._spinnerService.hide());
 
     }
+    updateCandidateStatusAndInterviewStatus(CandidateID: MasterData, Status: MasterData, Comments: string,InterviewId:MasterData) {
+        let url = Config.GetURL('/api/ProfileBank/UpdateInterviewNCandidateStatus');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments,InterviewID:InterviewId })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+
+    }
     blackListCandidate(CandidateID: MasterData, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/BlacklistCandidate');
         this._spinnerService.show();

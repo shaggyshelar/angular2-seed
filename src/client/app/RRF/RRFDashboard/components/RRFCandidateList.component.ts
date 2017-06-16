@@ -110,6 +110,7 @@ export class RRFCandidateListComponent implements OnActivate {
     public FinalStatus : any = [{'Id':4,'Value':'Select'},{'Id':12,'Value':'Reject'}];
     finalStatus = new MasterData();
     public finalStatusComment:any='';
+    public candidateInterviewId :MasterData = new MasterData();
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private location: Location,
@@ -297,6 +298,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.CandidateRoundHistory = new Array<Interview>();
         this.selectedCandidate = CandidateName;
         this.changeStatusCandidateID = CandidateID;
+        this.candidateInterviewId = new MasterData();
         this._rrfCandidatesList.getInterviewRoundHistorybyCandidateId(CandidateID, this.RRFID)
             .subscribe(
             (results: any) => {
@@ -308,6 +310,7 @@ export class RRFCandidateListComponent implements OnActivate {
                             && this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].Status.toLowerCase() === 'selected') {
                             this.IsHRConducted = true;
                             this.IsOffered = false;
+                            this.candidateInterviewId = this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewID;
                         } else {
                             this.IsOffered = false;
                             this.IsHRConducted = false;
@@ -705,14 +708,14 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     UpdateFinalStatus(comment:string){
         this.finalStatus.Id= parseInt(this.finalStatus.Id);
-        this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.finalStatus, comment)
+        this._profileBankService.updateCandidateStatusAndInterviewStatus(this.CandidateRoundHistory[0].CandidateID, this.finalStatus, comment,this.candidateInterviewId)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
                     this.IsOffered = false;
-                    this.getOfferedCanidatesForRRF();
+                    this.getCanidatesForRRF();
                     this.IsReject = false;
                     this.IsOfferGenerate = false;
                 } else {
