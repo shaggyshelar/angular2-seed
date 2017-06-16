@@ -318,6 +318,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     let modl: any = $('#CountDetails');
                     modl.modal('hide');
+                    modl = $('#fullDetailsDialogue');
+                    modl.modal({ 'backdrop': 'static' });
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     setTimeout(() => { this.getMyProfiles(); }, 1000);
                     this.profile = new CandidateProfile();
@@ -919,6 +921,9 @@ export class MyProfilesListComponent implements OnActivate {
             default:
                 break;
         }
+    }
+    enterFullDetails(){
+        
     }
 }
 

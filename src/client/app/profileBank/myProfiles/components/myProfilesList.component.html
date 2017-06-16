@@ -406,6 +406,24 @@
 						<!--END Count Details Box-->
 						<!-- Modal End -->
 
+						<!-- START DETAILS DIALOGUE -->
+						<div id="fullDetailsDialogue" class="modal fade">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div id="modalHeader" class="modal-header">
+									</div>
+									<div id="modalBody" class="modal-body">
+										Would you like to enter candidate's other relevent details?
+									</div>
+									<div id="modalFooter" class="modal-footer">
+										<button class="btn" (click)="enterFullDetails()">Yes</button>
+										<button class="btn" data-dismiss="modal">No</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END DETAILS DIALOGUE -->
+
 
 						<!-- Test data -->
 						<div style="box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.29);" class="col-md-4" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
