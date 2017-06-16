@@ -130,7 +130,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.initFilterBy();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
-         setTimeout(() => { this.getMyProfiles(); }, 300);
+        setTimeout(() => { this.getMyProfiles(); }, 300);
         this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
@@ -922,8 +922,21 @@ export class MyProfilesListComponent implements OnActivate {
                 break;
         }
     }
-    enterFullDetails(){
-        
+    enterFullDetails() {
+        // let buffProfiles: any;
+        // this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
+        //     .subscribe(
+        //     (results: any) => {
+        //         if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
+        //             buffProfiles = <any>results.Profiles;
+        //             this._router.navigate(["/App/ProfileBank/MyProfiles/Edit/" + buffProfiles[0].CandidateID.Value + "ID" +
+        //                 buffProfiles[0].CandidateID.Id]);
+        //         }
+        //     },
+        //     error => this.errorMessage = <any>error);
+        this._router.navigate(['/App/ProfileBank/MyProfiles/Edit/C6274522228ID28608']);
+        let modl: any = $('#fullDetailsDialogue');
+        modl.modal('hide');
     }
 }
 
