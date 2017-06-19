@@ -797,13 +797,22 @@
                                                                     <!--(change)='onSelectResume($event.target.value)'
                                                                     [(ngModel)]="profile.ResumeSourceType.Id"
                                                                     -->
-                                                                    <select class="form-control" (change)="onChangeResume($event)" tabindex="35">
+                                                                    <select class="form-control" (change)="onChangeResume($event)" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
                                                                         <option disabled selected>Select</option>
                                                                         <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-2" *ngIf="showEmp">
+                                                                <div class="form-group">
+                                                                    <label>Employees</label>
+                                                                    <select class="form-control" (change)="onEmpRef($event)" tabindex="35" [(ngModel)]="profile.ResumeSource">
+                                                                        <option disabled selected>Select</option>
+                                                                        <option *ngFor="let emp of employeeReference" [value]="emp.Value">{{emp.Value}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3" *ngIf="showResource">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Resume Source</label>
                                                                     <textarea class="form-control text-capitalize" rows="2" placeholder="Resume Source" style="resize:vertical" [(ngModel)]="profile.ResumeSource"
@@ -1873,7 +1882,7 @@
                                                                     </div>-->
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand"
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod"
                                                                                 tabindex="3" (change)="onSavePrimaryInfo()" />
                                                                         </div>
                                                                     </div>
@@ -2380,6 +2389,7 @@
                                                                                 <th> Time Spent <small>(In Months)</small> </th>
                                                                                 <th> Current </th>
                                                                                 <th> Edit </th>
+                                                                                <th> Delete </th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -2391,6 +2401,9 @@
                                                                                 <td class="text-center"> {{EmployersInformation.IsCurrentCompany===true?"Current":"-"}}</td>
                                                                                 <td>
                                                                                     <a class="edit" (click)='EditEmployerInformation(EmployersInformation.CareerProfileID)'> Edit </a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    <a style="color:red" (click)='deleteEmployerInformation(EmployersInformation.CareerProfileID)'> Delete </a>
                                                                                 </td>
                                                                             </tr>
 
