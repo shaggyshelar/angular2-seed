@@ -728,6 +728,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
             } else{
                 this.toastr.warning('You can not tag '+selectedCandidate.Candidate +' to any RRF. Please upload resume first');
+                this.selectedCandidates = new Array<CandidateProfile>();
             }
 
         }
