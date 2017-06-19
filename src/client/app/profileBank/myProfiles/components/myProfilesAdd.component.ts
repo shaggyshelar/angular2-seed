@@ -1,22 +1,24 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
-import { CandidateProfile, ResumeMeta, Qualification, CandidateExperience,
-    EmploymentHistory, Skills, SalaryDetails, SocialInformation} from '../../shared/model/myProfilesInfo';
+import {
+    CandidateProfile, ResumeMeta, Qualification, CandidateExperience,
+    EmploymentHistory, Skills, SalaryDetails, SocialInformation
+} from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MasterData, ResponseFromAPI } from  '../../../shared/model/index';
+import { MasterData, ResponseFromAPI, InHandOffer } from '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { APIResult } from  '../../../shared/constantValue/index';
-import { ProfileBankService} from  '../../shared/services/profileBank.service';
+import { APIResult } from '../../../shared/constantValue/index';
+import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
     templateUrl: '../../shared/views/profileBankAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES,DropdownMultiSelectComponent],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES, DropdownMultiSelectComponent],
     styleUrls: ['myProfiles.component.css']
 })
 
@@ -28,7 +30,7 @@ export class MyProfilesAddComponent implements OnActivate {
     params: string;
     countries: Array<MasterData>;
     states: Array<MasterData>;
-    haveVisa:boolean = false;
+    haveVisa: boolean = false;
     qualifications: Array<MasterData>;
     grades: Array<MasterData>;
     years: Array<MasterData>;
@@ -78,19 +80,23 @@ export class MyProfilesAddComponent implements OnActivate {
     softSkills: MasterData[];
     languages: MasterData[];
     resumeSource: MasterData[];
-    public noticePeriod : any=[{'Id':15,'Value':"15"},{'Id':30,'Value':"30"},{'Id':45,'Value':"45"},{'Id':60,'Value':"60"},{'Id':90,'Value':"90"}];
-    public varificationProof : any=[{'Id':1,'Value':"Aadhar Card"},{'Id':2,'Value':"Pan Card"},{'Id':3,'Value':"Passport"}];
-    public showAadhar :boolean = false;
-    public showPan :boolean= false;
-    public showLiecence :boolean= false; 
+    public noticePeriod: any = [{ 'Id': 15, 'Value': "15" }, { 'Id': 30, 'Value': "30" }, { 'Id': 45, 'Value': "45" }, { 'Id': 60, 'Value': "60" }, { 'Id': 90, 'Value': "90" }];
+    public varificationProof: any = [{ 'Id': 1, 'Value': "Aadhar Card" }, { 'Id': 2, 'Value': "Pan Card" }, { 'Id': 3, 'Value': "Passport" }];
+    public showAadhar: boolean = false;
+    public showPan: boolean = false;
+    public showLiecence: boolean = false;
+    entries: InHandOffer[];
+    inHandOffer: InHandOffer;
+    inHandOfferAction: any = { action: 'Add', index: -999 };
+
     onNotify(SkillInput: any): void {
         console.log(SkillInput);
-        switch(SkillInput.input){
-            case 'Technical':this.addTechnicalSkill(SkillInput.skills);
+        switch (SkillInput.input) {
+            case 'Technical': this.addTechnicalSkill(SkillInput.skills);
                 break;
-            case 'Soft':this.addSoftSkill(SkillInput.skills);
+            case 'Soft': this.addSoftSkill(SkillInput.skills);
                 break;
-            case 'Language':this.addLanguageSkill(SkillInput.skills);
+            case 'Language': this.addLanguageSkill(SkillInput.skills);
                 break;
         }
         this.onSaveSkillsDetails();
@@ -107,6 +113,8 @@ export class MyProfilesAddComponent implements OnActivate {
         this.createQualificationObj();
         this.resumeMeta = new ResumeMeta();
         this.uploadedPhoto = new Array<File>();
+        this.entries = [];
+        this.initInHandOffer();
 
     }
 
@@ -136,17 +144,17 @@ export class MyProfilesAddComponent implements OnActivate {
         this.getSoftSkills();
         this.getLanguages();
     }
-    addTechnicalSkill(SkillInput:any){
-            this.profile.CandidateSkills.TechnicalSkills = [];
-            this.profile.CandidateSkills.TechnicalSkills=SkillInput;
+    addTechnicalSkill(SkillInput: any) {
+        this.profile.CandidateSkills.TechnicalSkills = [];
+        this.profile.CandidateSkills.TechnicalSkills = SkillInput;
     }
-    addSoftSkill(SkillInput:any){
-            this.profile.CandidateSkills.SoftSkills = [];
-            this.profile.CandidateSkills.SoftSkills=SkillInput;
+    addSoftSkill(SkillInput: any) {
+        this.profile.CandidateSkills.SoftSkills = [];
+        this.profile.CandidateSkills.SoftSkills = SkillInput;
     }
-    addLanguageSkill(SkillInput:any){
-            this.profile.CandidateSkills.LanguageSkills = [];
-            this.profile.CandidateSkills.LanguageSkills=SkillInput;
+    addLanguageSkill(SkillInput: any) {
+        this.profile.CandidateSkills.LanguageSkills = [];
+        this.profile.CandidateSkills.LanguageSkills = SkillInput;
     }
     getSkills(): void {
         this._mastersService.getSkills()
@@ -212,10 +220,10 @@ export class MyProfilesAddComponent implements OnActivate {
                 if (this.profile.CandidateSkills.AnyFunctionalExpFlag === true) {
                     this.FunctionalExp = true;
                 }
-                if(this.profile.CandidateOtherDetails.HasVisa === true) {
+                if (this.profile.CandidateOtherDetails.HasVisa === true) {
                     this.haveVisa = false;
                 }
-                if(this.profile.CandidateOtherDetails.HasVisa === false) {
+                if (this.profile.CandidateOtherDetails.HasVisa === false) {
                     this.haveVisa = true;
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
@@ -290,7 +298,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this.selectedQualification = parseInt(candidateQualification);
     }
     onSelectVisa(visaId: string) {
-       // this.profile.CandidateOtherDetails.Visa.Id = parseInt(visaId);
+        // this.profile.CandidateOtherDetails.Visa.Id = parseInt(visaId);
     }
 
     onSelectGrade(grade: string) {
@@ -362,7 +370,7 @@ export class MyProfilesAddComponent implements OnActivate {
                     //                 this.toastr.error('Please enter notice period');
                     //                 submitFlag = false;
                     //             } 
-                                
+
                     //         }
                     //     }
                     // }
@@ -374,7 +382,7 @@ export class MyProfilesAddComponent implements OnActivate {
     }
     onChangeResume(event: any) {
         // console.log(event.target.value)
-        if(event.target.value === 0) {
+        if (event.target.value === 0) {
             this.resumeTypeDisable = true;
             return;
         }
@@ -572,23 +580,23 @@ export class MyProfilesAddComponent implements OnActivate {
         this.CandidateExperiences.CandidateID = this.CandidateID;
         if (!this.isExist) {
             if (this.CandidateExperiences.TotalExperience >= this.CandidateExperiences.RelevantExperience) {
-            this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
-                        this.GetCandidateExperience(this.CandidateID);
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
+                this._profileBankService.editCandidateCareerDetails(this.CandidateExperiences)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
+                            this.GetCandidateExperience(this.CandidateID);
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.toastr.error(<any>error);
                     }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                }
-                );
+                    );
             }
-            else{
+            else {
                 this.toastr.error('Relavant Experience should not be more than total Experiece');
             }
         }
@@ -1093,37 +1101,59 @@ export class MyProfilesAddComponent implements OnActivate {
             this.profile.CandidateOtherDetails.VisaType = '';
         }
     }
-    totalMonths(date:any){
-        if(date !== undefined)
-        this.EmployersInformation.TimeSpentInCompany = this.monthDiff(new Date(date),new Date());
+    totalMonths(date: any) {
+        if (date !== undefined)
+            this.EmployersInformation.TimeSpentInCompany = this.monthDiff(new Date(date), new Date());
     }
-    monthDiff(d1:Date, d2:Date) {
+    monthDiff(d1: Date, d2: Date) {
         var d1Y = d1.getFullYear();
         var d2Y = d2.getFullYear();
         var d1M = d1.getMonth();
         var d2M = d2.getMonth();
-        let months = (d2M+12*d2Y)-(d1M+12*d1Y);
+        let months = (d2M + 12 * d2Y) - (d1M + 12 * d1Y);
         return months.toString();
     }
-    onNoticePeriod(id:any) {
+    onNoticePeriod(id: any) {
         this.profile.CandidateOtherDetails.NoticePeriod = id;
         this.onSavePrimaryInfo();
     }
-    onVerificationProofs(id:any){
-        if(id==='1'){
+    onVerificationProofs(id: any) {
+        if (id === '1') {
             this.showAadhar = true;
             this.showPan = false;
             this.showLiecence = false;
         }
-        if(id==='2'){
+        if (id === '2') {
             this.showAadhar = false;
             this.showPan = true;
             this.showLiecence = false;
         }
-        if(id==='3'){
+        if (id === '3') {
             this.showAadhar = false;
             this.showPan = false;
             this.showLiecence = true;
         }
+    }
+
+    initInHandOffer() {
+        this.inHandOffer = { Salary: '', Company: '', Designation: '' };
+    }
+    addEditInHandOffer() {
+        if (this.inHandOfferAction.action === 'Add') {
+            this.entries.push(this.inHandOffer);
+        } if (this.inHandOfferAction.action === 'Edit') {
+            let buff = this.inHandOffer;
+            this.entries[this.inHandOfferAction.index] = buff;
+            this.inHandOfferAction.action = 'Add';
+            this.inHandOfferAction.index = -999;
+        }
+        this.initInHandOffer();
+    }
+    removeFromList(index: any) {
+        this.entries.splice(index, 1);
+    }
+    editFromList(index: any) {
+        this.inHandOffer = this.entries[index];
+        this.inHandOfferAction = { action: 'Edit', index: index };
     }
 }
