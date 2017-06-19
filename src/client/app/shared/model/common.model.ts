@@ -51,3 +51,8 @@ export class Resume {
     public ResumeName: string;
     public BinaryResume: string;
 }
+export class InHandOffer {
+    public Company: string;
+    public Designation: string;
+    public Salary: string;
+}
