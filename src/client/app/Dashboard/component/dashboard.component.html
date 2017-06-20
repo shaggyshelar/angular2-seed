@@ -547,13 +547,13 @@
                                                     </div>
                                                     <div class="row">
                                                             <div class="col-md-4">
-                                                                <b>Designation : </b>Software Developer
+                                                                <b>Designation : </b>{{profile.Designation?profile.Designation.Value:"N/A"}}
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <b>Offered Date : </b>20-06-2017
+                                                                <b>Offered Date : </b>{{formatDate(profile.OfferedDate)}}
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <b>Department : </b>EBS
+                                                                <b>Department : </b>{{profile.Department?profile.Department.Value:"N/A"}}
                                                             </div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
