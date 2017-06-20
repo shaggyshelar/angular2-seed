@@ -372,7 +372,14 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+    deleteCarrerProfile(candidateCareerID: string) {
+        let url = Config.GetURL('/api/ProfileBank/DeleteCareerProfileDetails');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CareerProfileID:candidateCareerID })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     getStatusById(CandidateID: string) {
         let url = Config.GetURL('/api/ProfileBank/GetStatus?CandidateID=' + CandidateID);
         this._spinnerService.show();

@@ -183,6 +183,7 @@ export class OtherDetails {
   public Weekness: string;
   public IfExstingCompanyOffers: string;
   public NoticePeriodNotCompletedCount: string;
+  public ServingNoticePeriod: boolean;
   public LookingFor: string;
   public OfferInHand: any;
   public HaveOffer: any = true;

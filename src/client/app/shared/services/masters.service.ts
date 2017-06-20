@@ -64,6 +64,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    getReferenceEmployee() {
+        let authenticateUrl = Config.GetURL('/api/Masters/GetAllEmployeeLinkup');
+        return this.authHttp.get(authenticateUrl)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     getCloseReason(category:string) {
         let authenticateUrl = Config.GetURL('/api/Masters/GetAllReasons?Category='+category);
         return this.authHttp.get(authenticateUrl)

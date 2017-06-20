@@ -350,7 +350,7 @@
 														</div>
 													</div>
 													<div class="row" style="margin-left: 5px;">
-														<div class="col-md-4 inlineForm">
+														<div class="col-md-3 inlineForm">
 															<div class="form-group ">
 																<label>Contact Number</label>
 																<input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()"
@@ -369,7 +369,7 @@
 																<!--(keyup)="onKeyExperience($event)" />-->
 															</div>
 														</div>
-														<div class="col-md-2 inlineForm">
+														<!--<div class="col-md-2 inlineForm">
 															<div class="form-group">
 																<label>Notice</label>
 																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
@@ -377,8 +377,32 @@
 																 title="Enter notice period in Days Eg. 45" min="0" max="120" onKeyPress="if(this.value.length==2) return false;"
 																 required/>
 															</div>
-														</div>
-														<div class="col-md-4 inlineForm">
+														</div>-->
+														<div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Notice</label>
+                                                                    <div class="row ">
+                                                                        <div class="col-md-12">
+                                                                            <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)">
+                                                                            <option disabled selected>Select</option>
+                                                                            <option *ngFor="let notice of noticePeriod" [value]="notice.Id">{{notice.Value}}</option>
+                                                                        </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Serving NP</label>
+                                                                    <div class="row">
+                                                                        <div class="col-md-1">
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod"
+                                                                                tabindex="3" /> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+														<div class="col-md-3 inlineForm">
 															<div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume"
 															 tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
 																<input type="file" class="upload" (change)="uploadFile($event)" />

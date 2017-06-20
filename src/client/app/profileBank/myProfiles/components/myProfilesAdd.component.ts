@@ -80,11 +80,14 @@ export class MyProfilesAddComponent implements OnActivate {
     softSkills: MasterData[];
     languages: MasterData[];
     resumeSource: MasterData[];
+    employeeReference: MasterData[];
     public noticePeriod: any = [{ 'Id': 15, 'Value': "15" }, { 'Id': 30, 'Value': "30" }, { 'Id': 45, 'Value': "45" }, { 'Id': 60, 'Value': "60" }, { 'Id': 90, 'Value': "90" }];
     public varificationProof: any = [{ 'Id': 1, 'Value': "Aadhar Card" }, { 'Id': 2, 'Value': "Pan Card" }, { 'Id': 3, 'Value': "Passport" }];
     public showAadhar: boolean = false;
     public showPan: boolean = false;
     public showLiecence: boolean = false;
+    public showResource: boolean = true;
+    public showEmp: boolean = false;
     entries: InHandOffer[];
     inHandOffer: InHandOffer;
     inHandOfferAction: any = { action: 'Add', index: -999 };
@@ -188,6 +191,14 @@ export class MyProfilesAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+    getReferenceEmployee(): void {
+        this._mastersService.getReferenceEmployee()
+            .subscribe(
+            results => {
+                this.employeeReference = results;
+            },
+            error => this.errorMessage = <any>error);
+    }
     createQualificationObj() {
         this.qualification = new Qualification();
         this.qualification.Qualification = new MasterData();
@@ -225,6 +236,11 @@ export class MyProfilesAddComponent implements OnActivate {
                 }
                 if (this.profile.CandidateOtherDetails.HasVisa === false) {
                     this.haveVisa = true;
+                }
+                if (this.profile.ResumeSourceType.Id === 2) {
+                    this.showEmp = true;
+                    this.showResource = false;
+                    this.getReferenceEmployee();
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
@@ -386,12 +402,24 @@ export class MyProfilesAddComponent implements OnActivate {
             this.resumeTypeDisable = true;
             return;
         }
+        if(event.target.value === "2"){
+            this.showEmp = true;
+            this.showResource = false;
+            this.getReferenceEmployee()
+        }
+        else{
+             this.showEmp = false;
+            this.showResource = true;
+        }
         this.profile.ResumeSourceType = this.resumeSource.find(element => {
             return (element.Id === parseInt(event.target.value));
         });
         this.onSavePersonalDetails();
     }
-
+    onEmpRef(event: any){
+        this.profile.ResumeSource = event.target.value;
+        this.onSavePersonalDetails();
+    }
     onSavePersonalDetails(): void {
         if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
             this.profile.CommentsUpdated = true;
@@ -665,6 +693,16 @@ export class MyProfilesAddComponent implements OnActivate {
     EditEmployerInformation(careerProfileID: string) {
         this.GetEmployersInformation(careerProfileID);
         this.EmploymentDetailsAction = 'Update';
+    }
+    /**Get delete employer*/
+    deleteEmployerInformation(careerProfileID: string) {
+        this._profileBankService.deleteCarrerProfile(careerProfileID)
+            .subscribe(
+            (results: any) => {
+                setTimeout(() => { this.GetEmployersInformationList(this.CandidateID); }, 1000);
+                this.toastr.success('Data Deleted Successfully');
+            },
+            error => this.toastr.error(<any>error));
     }
     /**Save new employer related information*/
     UpdateEmployersInformation() {
