@@ -644,8 +644,9 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     saveOffer(joiningDate: Date) {
         joiningDate = moment(joiningDate).format('MM-DD-YYYY');
+        let OffredDate = moment(new Date()).format('MM-DD-YYYY');
         this._rrfCandidatesList.proceedForOfferGeneration(this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewID,
-            this.CandidateRoundHistory[0].CandidateID, this.RRFID, joiningDate)
+            this.CandidateRoundHistory[0].CandidateID, this.RRFID, joiningDate,OffredDate)
             .subscribe(
             (results: any) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

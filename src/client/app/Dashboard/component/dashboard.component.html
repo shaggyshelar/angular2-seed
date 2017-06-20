@@ -525,8 +525,8 @@
                                     <!--<div class="col-md-12 col-sm-12">-->
                                     <div *ngIf="IsProfile">
                                         <div *ngFor="let profile of IncompleteProfileList.Profiles" style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29); padding-left: 5px;">
-                                            <div class="dark bordered col-md-12" style="margin-top:-35px;">
-	                                            <div class="row" style="min-height: 115px">
+                                            <div class="dark bordered col-md-12">
+	                                            <div class="row" style="min-height: 95px;margin-top: -24px;">
 			                                        <div class="row">
                                                         <div class="col-md-6">
                                                             <h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CANDIDATECODE ?profile.CANDIDATECODE:""}} </small></h4>
@@ -550,7 +550,7 @@
                                                                 <b>Designation : </b>Software Developer
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <b>Offered Date : </b>20/06/2017
+                                                                <b>Offered Date : </b>20-06-2017
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <b>Department : </b>EBS
@@ -558,16 +558,17 @@
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
                                                             <div class="col-md-4">
-                                                                <b>Recruiter : </b>Diksha Sisodia
+                                                                <b>Recruiter : </b>{{profile.Owner?profile.Owner.Value : "N/A"}}
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <b>Joining Date: </b>22/06/2017
+                                                                <b>Joining Date: </b>{{formatDate(profile.ApproxDateOfJoining)}}
                                                             </div>
                                                             <div class="col-md-4">
-                                                                <b>RRFCode: </b>R000031
+                                                                <b>RRFCode: </b>{{profile.RRFAssigned.RRFCODE ? profile.RRFAssigned.RRFCODE  : "N/A"}}
                                                             </div>
                                                     </div>
                                                 </div>
+                                                <hr style="margin-top:-5px !important;">
                                             </div>
                                             
                                         </div>
