@@ -24,7 +24,7 @@
                 <div class="profile-content">
                     <div class="row">
                         <div class="col-md-14">
-                            <div class="portlet light bordered" style="padding-bottom: 45px">
+                            <div class="portlet light bordered">
                                 <div class="portlet-title tabbable-line">
                                     <div class="col-md-2 caption caption-md">
                                         <i class="icon-globe theme-font hide"></i>
@@ -366,32 +366,31 @@
                                                 </div>-->
                                                 <!-- END Profile Picture Option -->
                                                 <div class="row">
-                                                    <div class="col-md-3" style="margin-top: 17px;">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="text" id="txtFirstName" placeholder="First Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" (blur)="onSavePersonalDetails()" tabindex="1" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3" style="margin-top: 17px;">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="text" placeholder="Middle Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.MiddleName" (keyup)="removeWhiteSpaces($event.target.value)" (blur)="onSavePersonalDetails()" tabindex="2" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <br>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="text" placeholder="Last Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" (blur)="onSavePersonalDetails()" tabindex="3" />
                                                                 </div>
                                                             </div>
@@ -401,7 +400,7 @@
                                                         <div class="form-group">
                                                             <label>Email <span class="required"> * </span></label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (blur)="validate('Email', profile.Email)" tabindex="4" />
                                                                 </div>
                                                             </div>
@@ -442,7 +441,7 @@
                                                             <label class="control-label">Address</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Permanent Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress" required="" (blur)="onSavePersonalDetails()" tabindex="7"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress" required="" (blur)="onSavePersonalDetails()" tabindex="7"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -517,8 +516,39 @@
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Reasons To Relocate, Family Background, etc. " style="resize:vertical" [(ngModel)]="profile.CommentsAdditionalInformation" (blur)="onSavePersonalDetails()" tabindex="34"></textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Verification Proofs</label>
+                                                            <div class="col-md-14" style="margin-left: -15px;">
+                                                                <select class="form-control" (change)="onVerificationProofs($event.target.value)">
+                                                                        <option disabled selected>--Select--</option>
+                                                                        <option *ngFor="let varification of varificationProof" [value]="varification.Id">{{varification.Value}}</option>
+                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3" *ngIf="showAadhar">
+                                                        <div class="form-group">
+                                                            <label>Aadhaar Card No<small> (Eg. 123456789012)</small></label>
+                                                            <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo" title="Enter valid Aadhaar Card number For Eg. 123456789012"
+                                                                minlength="12" maxlength="12" (blur)="validate('Aadhar', profile.AadharCardNo)" tabindex="13" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3" *ngIf="showPan">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Pan Card No<small> (Eg. ABCDE1234F)</small></label>
+                                                            <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F" maxlength="10" (blur)="validate('Pan', profile.PANNumber)" tabindex="14" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3" *ngIf="showLiecence">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Passport No<small> (Eg. A1234567)</small></label>
+                                                            <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567" maxlength="8" (blur)="validate('Passport', profile.PassportNumber)" tabindex="15" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="portlet-title">
+                                                <!--<div class="portlet-title">
                                                     <div class="caption font-dark">
                                                         <span class="caption-subject bold uppercase">Verification Proofs</span>
                                                     </div>
@@ -556,7 +586,7 @@
                                                             <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567" maxlength="8" (blur)="validate('Passport', profile.PassportNumber)" tabindex="15" />
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
 
                                                 <!--<div class="portlet-title">
                                                     <div class="caption font-dark">
@@ -1415,7 +1445,7 @@
                                                             </div>
                                                         </div>
                                                     </div>-->
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Actual Current Salary <small>(In Lacs)</small><span class="required"> * </span> </label>
                                                             <div class="row ">
@@ -1425,7 +1455,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Expected Salary <small>  (In Lacs)</small><span class="required"> * </span> </label>
                                                             <div class="row ">
@@ -1435,12 +1465,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label class="control-label">Salary Related Comments</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control text-capitalize" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" (blur)='onSaveSalaryDetails()' tabindex="10"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="1" placeholder="" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" (blur)='onSaveSalaryDetails()' tabindex="10"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
