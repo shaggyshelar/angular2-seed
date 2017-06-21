@@ -96,6 +96,7 @@ export class MyProfilesListComponent implements OnActivate {
     IsDisable: boolean = true;
     FilterByList: Array<SortingMasterData> = new Array<SortingMasterData>();
     modelFilterBy: string = 'my';
+    candidateId: MasterData = new MasterData();
     modelFilterByProfile: string = 'all';
     cachedProfileList: any[] = [];
     showRrfFilter: boolean = false;
@@ -307,6 +308,7 @@ export class MyProfilesListComponent implements OnActivate {
             results => {
                 if ((<AddCandidateResponse>results).StatusCode === APIResult.Success) {
                     _candidateID = (<AddCandidateResponse>results).CandidateID;
+                    this.candidateId = _candidateID
                     /**upload resume of currently added canidate IFF AVAILABLE */
                     if (this.fileName !== '' || this.fileName !== undefined) {
                         this.uploadResume(_candidateID, this.psdTemplates[0]);
@@ -675,9 +677,9 @@ export class MyProfilesListComponent implements OnActivate {
                     //   chkStatus = true;
                     //    break;
                     //}
-                } else{
-                        chkTaggedResume = true;
-                        candidateName = this.myProfilesList.Profiles[index].Candidate;
+                } else {
+                    chkTaggedResume = true;
+                    candidateName = this.myProfilesList.Profiles[index].Candidate;
                 }
 
             }
@@ -689,9 +691,9 @@ export class MyProfilesListComponent implements OnActivate {
             this.toastr.warning('Candidate already assigned to RRF');
             this.selectedCandidates = new Array<CandidateProfile>();
         } else if (chkTaggedResume) {
-            this.toastr.warning('You can not tag '+candidateName +' to any RRF. Please upload resume first');
+            this.toastr.warning('You can not tag ' + candidateName + ' to any RRF. Please upload resume first');
             this.selectedCandidates = new Array<CandidateProfile>();
-        }else {
+        } else {
             sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
             sessionStorage.setItem('returnPathToSchedule', '/App/ProfileBank/MyProfiles');
             this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
@@ -721,13 +723,13 @@ export class MyProfilesListComponent implements OnActivate {
             if (chkStatus) {
                 this.toastr.warning('Candidate must be assigned to RRF. Only Open status candidates can be Assigned to RRF');
                 this.selectedCandidates = new Array<CandidateProfile>();
-            } else if(selectedCandidate.ResumeID !== '') {
+            } else if (selectedCandidate.ResumeID !== '') {
                 sessionStorage.setItem('Candidates', JSON.stringify(this.selectedCandidates));
                 sessionStorage.setItem('returnPath', 'App/ProfileBank/MyProfiles');
                 sessionStorage.setItem('returnPathToSchedule', 'App/ProfileBank/MyProfiles');
                 this._router.navigate(['/App/ProfileBank/MyProfiles/Assign']);
-            } else{
-                this.toastr.warning('You can not tag '+selectedCandidate.Candidate +' to any RRF. Please upload resume first');
+            } else {
+                this.toastr.warning('You can not tag ' + selectedCandidate.Candidate + ' to any RRF. Please upload resume first');
                 this.selectedCandidates = new Array<CandidateProfile>();
             }
 
@@ -937,18 +939,8 @@ export class MyProfilesListComponent implements OnActivate {
         }
     }
     enterFullDetails() {
-        // let buffProfiles: any;
-        // this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
-        //     .subscribe(
-        //     (results: any) => {
-        //         if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
-        //             buffProfiles = <any>results.Profiles;
-        //             this._router.navigate(["/App/ProfileBank/MyProfiles/Edit/" + buffProfiles[0].CandidateID.Value + "ID" +
-        //                 buffProfiles[0].CandidateID.Id]);
-        //         }
-        //     },
-        //     error => this.errorMessage = <any>error);
-        this._router.navigate(['/App/ProfileBank/MyProfiles/Edit/C6274522228ID28608']);
+        var completeProfileLink: string = '/App/ProfileBank/MyProfiles/Edit/' + this.candidateId.Value;
+        this._router.navigate([completeProfileLink]);
         let modl: any = $('#fullDetailsDialogue');
         modl.modal('hide');
     }

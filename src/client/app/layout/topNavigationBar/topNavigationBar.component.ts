@@ -47,6 +47,8 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
 
     logout() {
         this.loginService.logout();
+        window.location.replace('');
+        //window.history.forward();
         this._router.navigate(['/Login']);
     }
 
