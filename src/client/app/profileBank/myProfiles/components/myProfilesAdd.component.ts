@@ -941,10 +941,13 @@ export class MyProfilesAddComponent implements OnActivate {
     onOfferInHand(isChecked: any) {
         if (isChecked === false) {
             this.OfferInHand = true;
+            this.profile.CandidateOtherDetails.OfferInHand = true;
         } else {
             this.OfferInHand = false;
+            this.profile.CandidateOtherDetails.OfferInHand = false;
             this.profile.CandidateOtherDetails.OfferDetails = '';
         }
+        this.onSaveProfessionalDetails();
     }
     onAppliedEarlier(isChecked: any) {
         if (isChecked === false) {

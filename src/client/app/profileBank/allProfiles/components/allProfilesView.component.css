@@ -21,3 +21,11 @@
 .topmargin {
     margin-top: -40px;
 }
+.tooltip.customClass .tooltip-inner {
+  color: #880000;
+  background-color: #ffff66;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+.tooltip.customClass .tooltip-arrow {
+  display: none;
+}

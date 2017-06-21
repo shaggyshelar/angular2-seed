@@ -4,12 +4,13 @@ import { CandidateProfile } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 @Component({
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
     templateUrl: '../../shared/views/profileBankView.component.html',
 
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
     styleUrls: ['../../allProfiles/components/allProfilesView.component.css']
 })
 

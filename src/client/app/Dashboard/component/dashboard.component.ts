@@ -957,6 +957,7 @@ export class DashboardComponent implements OnInit {
     }
     /** Redirect user to view profiles page. */
     viewProfiles(CandidateID: MasterData) {
+        this.onCancelClick();
         sessionStorage.setItem('onProfilesReturnPath', '/App');
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
