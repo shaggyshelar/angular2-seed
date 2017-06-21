@@ -68,7 +68,17 @@ export class ProfileBankAssignRRFComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     }
+  //Format date in "yyyy-mm-dd" format
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
 
+        return [day, month, year].join('-');
+    }
     Back() {
         sessionStorage.removeItem('CandidateIDs');
         if (this.returnPathToSchedule.toLowerCase().includes('schedule')) {

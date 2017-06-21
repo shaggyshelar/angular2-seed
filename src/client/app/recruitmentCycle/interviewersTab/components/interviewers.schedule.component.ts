@@ -10,6 +10,7 @@ import { InterviewMode } from  '../../../shared/constantValue/index';
 import { iefModel} from '../../shared/model/ief';
 import { InterviewDetailsRowComponent } from '../../shared/component/InterviewDetailsRow/InterviewDetailsRow.component';
 import { GrdOptions } from '../../../shared/model/common.model';
+import { RRFFilters } from '../../../shared/model/common.model';
 import { IEFGridRowComponent } from '../../shared/component/IEFGridRow/IEFGridRow.component';
 import { MyScheduleInterview } from '../model/myScheduleInterview';
 import { ProfileBankService } from '../../../profileBank/index';
@@ -44,7 +45,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         center: 'title',
         right: 'month,agendaWeek,agendaDay'
     };
-
+RRFFilters:RRFFilters=new RRFFilters();
     RRFData: RRFDetails = new RRFDetails();
     isHover: boolean = false;
     RRFID: Array<Interview> = new Array<Interview>();
@@ -54,7 +55,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
     hideIEFText: string = 'Hide IEF';
     IEFButtonText: string = '';
     searchString: string;
-
+Status:string='';
     constructor(private _router: Router,
         private toastr: ToastsManager,
         private _interviewService: InterviewersScheduleService,
@@ -72,6 +73,8 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this.grdOptionsIntwHistory.PagingEvent = '';
         this.grdOptionsIntwHistory.NextButton = false;
         this.grdOptionsIntwHistory.PreviousButton = false;
+        this.grdOptionsIntwHistory.RRFFilters.Status = 'Selected';
+        this.grdOptionsIntwHistory.Order='desc';
     }
     /**Router method overrid from OnActivate class */
     routerOnActivate() {
@@ -175,6 +178,7 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
             .subscribe(
             (results: any) => {
                 this.grdOptionsIntwHistory = results.GrdOperations;
+                
                 if (results.AllInterviews) {
                     if (results.AllInterviews.length > 0) {
                         this.InterviewHistory = results.AllInterviews;
@@ -226,8 +230,13 @@ export class RecruitmentInterviewScheduleComponent implements OnActivate {
         this.grdOptionsIntwHistory.NextPageUrl = [];
         this.grdOptionsIntwHistory.ButtonClicked = 0;
         this.grdOptionsIntwHistory.CamlString = '';
+        
         this.GetMyAllConductedInerviewsHistory();
     }
+statusFilter(event:any){
+this.grdOptionsIntwHistory.RRFFilters.Status =event;
+this.bindGridData();
+}
 
     //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {

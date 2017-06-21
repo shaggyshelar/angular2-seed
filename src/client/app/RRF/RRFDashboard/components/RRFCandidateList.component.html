@@ -141,8 +141,8 @@
 																			 </span>
 <span class="mt-action-dot bg-green"></span>
 <span class="mt=action-time">
-																			<a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-																			 (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,"Selected")'>{{selectedcandidate.InterviewDetails.Status}}</a>
+																			<a data-toggle="tooltip" data-placement="top" tooltip="Interview Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
+																			 >{{selectedcandidate.InterviewDetails.Status}}</a>
 																			 </span>
 </div>
 
@@ -169,10 +169,16 @@
 </li>
 <li class="divider"> </li>
 <li>
+	<button class="btn btn-default btnLink " (click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,"Selected")'>
+																							<i class="fa fa-search"></i>View IEF Results
+																						</button>
+</li>
+<li>
 	<button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)' (click)='onCancelInterviewClick(selectedcandidate)'>
 																							<i class="fa fa-times"></i>Cancel Interview
 																						</button>
 </li>
+
 <li class="divider" *ngIf='!isOfferGenerationVisible(selectedcandidate.InterviewDetails.Round.Value , selectedcandidate.InterviewDetails.Status)'>
 </li>
 </ul>
@@ -231,7 +237,7 @@
 																				{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}
 																				</span>
 <span class="mt-action-dot bg-green"></span>
-<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
+<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Interview Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
 																			(click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>
 																			{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}</a>
 																			</span>
