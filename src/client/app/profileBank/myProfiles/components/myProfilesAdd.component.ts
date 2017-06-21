@@ -86,7 +86,7 @@ export class MyProfilesAddComponent implements OnActivate {
     public showAadhar: boolean = false;
     public showPan: boolean = false;
     public showLiecence: boolean = false;
-    public showResource: boolean = true;
+    public showResource: boolean = false;
     public showEmp: boolean = false;
     entries: InHandOffer[];
     inHandOffer: InHandOffer;
@@ -407,9 +407,12 @@ export class MyProfilesAddComponent implements OnActivate {
             this.showEmp = true;
             this.showResource = false;
             this.getReferenceEmployee();
-        } else {
+        }else if(event.target.value === '3') {
             this.showEmp = false;
             this.showResource = true;
+        } else {
+            this.showEmp = false;
+            this.showResource = false;
         }
         this.profile.ResumeSourceType = this.resumeSource.find(element => {
             return (element.Id === parseInt(event.target.value));
