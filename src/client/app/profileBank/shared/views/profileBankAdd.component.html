@@ -795,7 +795,7 @@
                                                                     [(ngModel)]="profile.ResumeSourceType.Id"
                                                                     -->
                                                                     <select class="form-control" (change)="onChangeResume($event)" tabindex="35" [(ngModel)]="profile.ResumeSourceType.Id">
-                                                                        <option disabled selected>Select</option>
+                                                                        <option [value]="0" disabled selected >--Select--</option>
                                                                         <option *ngFor="let resume of resumeSource" [value]="resume.Id">{{resume.Value}}</option>
                                                                     </select>
                                                                 </div>
@@ -804,7 +804,7 @@
                                                                 <div class="form-group">
                                                                     <label>Employees</label>
                                                                     <select class="form-control" (change)="onEmpRef($event)" tabindex="35" [(ngModel)]="profile.ResumeSource">
-                                                                        <option disabled selected>Select</option>
+                                                                        <option [value]="0" disabled selected >--Select--</option>
                                                                         <option *ngFor="let emp of employeeReference" [value]="emp.Value">{{emp.Value}}</option>
                                                                     </select>
                                                                 </div>
@@ -2292,7 +2292,7 @@
                                                                         <tbody>
                                                                             <tr *ngFor="let EmployersInformation of EmployersInformationList">
                                                                                 <td> {{EmployersInformation.Company}}</td>
-                                                                                <td> {{EmployersInformation.DesignationRole}}</td>                                                                               
+                                                                                <td> {{EmployersInformation.DesignationRole}}</td>
                                                                                 <td> {{EmployersInformation.Location}}</td>
                                                                                 <td class="text-center"> {{EmployersInformation.TimeSpentInCompany}}</td>
                                                                                 <td class="text-center"> {{EmployersInformation.IsCurrentCompany===true?"Current":"-"}}</td>
