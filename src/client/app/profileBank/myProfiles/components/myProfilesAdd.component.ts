@@ -146,6 +146,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this.getResumeSource();
         this.getSoftSkills();
         this.getLanguages();
+        this.getReferenceEmployee();
     }
     addTechnicalSkill(SkillInput: any) {
         this.profile.CandidateSkills.TechnicalSkills = [];
@@ -241,7 +242,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 if (this.profile.ResumeSourceType.Id === 2) {
                     this.showEmp = true;
                     this.showResource = false;
-                    this.getReferenceEmployee();
+                    //this.getReferenceEmployee();
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
@@ -406,7 +407,7 @@ export class MyProfilesAddComponent implements OnActivate {
         if (event.target.value === '2') {
             this.showEmp = true;
             this.showResource = false;
-            this.getReferenceEmployee();
+            //this.getReferenceEmployee();
         }else if(event.target.value === '3') {
             this.showEmp = false;
             this.showResource = true;
