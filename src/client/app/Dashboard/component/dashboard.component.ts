@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { ROUTER_DIRECTIVES} from '@angular/router';
+import { ROUTER_DIRECTIVES,Router} from '@angular/router';
 import { RecruitersDashboardService } from '../services/recruitersDashboard.service';
 import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
@@ -25,6 +25,7 @@ import { InterviewApproval } from '../../recruitmentCycle/shared/component/Inter
 import {
     InterviewApprovalGridRowComponent }
 from  '../../recruitmentCycle/shared/component/InterviewApprovalGridRow/InterviewApprovalGridRow.component';
+import { CommonService } from '../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'dashboard-component',
@@ -44,6 +45,7 @@ from  '../../recruitmentCycle/shared/component/InterviewApprovalGridRow/Intervie
         RRFGridRowComponent,
         InterviewApprovalGridRowComponent
     ],
+    styleUrls: ['../../profileBank/myProfiles/components/myProfiles.component.css'],
     providers: [RecruitersDashboardService, RRFCandidateListService]
 })
 
@@ -66,6 +68,8 @@ export class DashboardComponent implements OnInit {
     status: string;
     rrf: string;
     round: string;
+    loginflag: boolean = false;
+    CurrentUser: MasterData = new MasterData();
     public barChartLabels: string[] = new Array<string>();
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
@@ -300,8 +304,12 @@ export class DashboardComponent implements OnInit {
     /************END RECRUITER HEAD DASHBOARD properties */
 
     constructor(private dashboardService: RecruitersDashboardService,
-        private _rrfCandidatesList: RRFCandidateListService
-    ) { }
+        private _rrfCandidatesList: RRFCandidateListService,
+        private _commonService: CommonService,
+        private _router: Router,
+    ) { 
+        this.loginflag = this.getLoggedInUser();
+    }
 
     ngOnInit() {
 
@@ -922,5 +930,44 @@ export class DashboardComponent implements OnInit {
                 modl.modal({ 'backdrop': 'static' });
             },
             error => this.errorMessage = <any>error);
+    }
+    getLoggedInUser(): boolean {
+        this.CurrentUser = this._commonService.getLoggedInUser();
+        return this.CurrentUser ? true : false;
+    }
+    checkOwner(owner: string, isRRFAssigned: any) {
+        if (isRRFAssigned && owner !== null) {
+            if (this.loginflag) {
+                if (owner.toLowerCase() === this.CurrentUser.Value.toLowerCase()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+    onViewCandidateClick(rrfID: MasterData, status:string) {
+        sessionStorage.setItem('backToRRFDashboardList',sessionStorage.getItem('backToProfile'));
+        sessionStorage.setItem('StatusValue', status);
+        this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
+    }
+    /** Redirect user to view profiles page. */
+    viewProfiles(CandidateID: MasterData) {
+        sessionStorage.setItem('onProfilesReturnPath', '/App');
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
+    }
+     formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 }

@@ -163,7 +163,7 @@
 						<!-- END SHOW AND SEARCH -->
 
 
-						<div class="row " *ngIf="closeRRFID.Id != 0">
+						<div class="row " *ngIf="closeRRFID.Id != 0" style="margin-top:15px;">
 							<div class="col-lg-3 col-sm-3">
 								<div class="dataTables_length ">
 									<label>Reason
@@ -175,7 +175,7 @@
 							</div>
 							<div class="col-lg-6 ">
 								<textarea class="form-control " id="txtCloseComment " rows="1
-                                            " [(ngModel)]='closeComment' placeholder="close Comment " style="resize:vertical "
+                                            " [(ngModel)]='closeComment' placeholder="Reason for Closure " style="resize:vertical "
 								 required=" "></textarea>
 							</div>
 							<div class="col-lg-3 ">
@@ -209,7 +209,7 @@
 												</span>
 												<div class="actions pull-right">
 													<!--[ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "-->
-													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'
+													<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" (click)='redirectToEditRRF(rrf.RRFID , rrf.Status.Id)'  tooltip="Edit RRF"
 													 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Edit RRF"
 													 [disabled]='allowEditRRF(rrf.Status.Id , rrf.RaisedBy.Id)'>
                                                             <i class="fa fa-edit "></i><!-- Edit RRF-->

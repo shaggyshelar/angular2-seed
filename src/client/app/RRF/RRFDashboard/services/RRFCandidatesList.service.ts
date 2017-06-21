@@ -87,10 +87,10 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    proceedForOfferGeneration(InterviewID: MasterData, CandidateID: MasterData, RRFID: MasterData, JoiningDate: Date) {
+    proceedForOfferGeneration(InterviewID: MasterData, CandidateID: MasterData, RRFID: MasterData, JoiningDate: Date,OfferedDate:Date) {
         let url = Config.GetURL('/api/RecruitmentCycle/ProceedForOfferGeneration');
         this._spinnerService.show();
-        return this.authHttp.post(url, { CandidateID, RRFID, InterviewID, JoiningDate })
+        return this.authHttp.post(url, { CandidateID, RRFID, InterviewID, JoiningDate, OfferedDate })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
