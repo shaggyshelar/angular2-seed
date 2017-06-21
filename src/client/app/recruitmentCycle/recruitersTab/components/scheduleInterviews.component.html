@@ -75,12 +75,13 @@
 								<tr *ngFor="let interview of InterviewDetailsList.AllInterviews |AllScheduleInterviewPipe:searchString">
 									<td> <a (click)='redirect(interview.RRFID.Value,interview.RRFCode)'> {{interview.RRFCode}}</a></td>
 									<td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
-										<br/> Contact No : {{interview.CandidateDetails.Contact}}
+										<br/> Contact No : {{interview.CandidateDetails.Contact}} 
 									</td>
 									<td>
 										InterviewDate : {{formatDate(interview.InterviewDate)}} <span style="float: right;">Time: {{interview.InterviewFromTime}} - {{interview.InterviewToTime}}</span>
 										<br/> Round : {{interview.Round.Value}}
 										<span style="float: right;">Mode : {{interview.InterviewMode.Value}} </span>
+										<br/> Recruiter : {{interview.Recruiter.Value}}
 									</td>
 									<td>
 										<div>

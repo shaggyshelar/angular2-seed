@@ -282,19 +282,30 @@
                                             </label>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-sm-3">
+                                <!--<div class="col-lg-3 col-sm-3">
                                     <div class="dataTables_length ">
                                         <label>Sort By
                                                 <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.OrderBy" (ngModelChange)="bindGridData()">
-                                                    <!--<option *ngFor="let sortColumn of SortByList" [value]="sortColumn.Value">{{sortColumn.Id}}</option>-->
+                                                  
                                                     <option value="Modified">Modified</option>
+                                                </select>
+                                            </label>
+                                    </div>
+                                </div>-->
+                                 <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Status
+                                                <select class="form-control input-sm input-small input-inline" (change)="statusFilter($event.target.value)">
+                                                    <option value="Selected">Selected</option>
+                                                    <option value="Rejected">Rejected</option>
+                                                    <option value="On Hold">On Hold</option>
                                                 </select>
                                             </label>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-3">
                                     <div class="dataTables_length ">
-                                        <label>Order by
+                                        <label>Order
                                                 <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.Order" (ngModelChange)="bindGridData()">
                                                     <option value="asc">Ascending</option>
                                                     <option value="desc">Descending</option>
