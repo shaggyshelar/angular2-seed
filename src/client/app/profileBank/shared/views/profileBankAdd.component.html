@@ -1762,8 +1762,8 @@
                                                                     <label class="control-label">Total Experience<small>&nbsp;(In years)</small></label>
                                                                     <div class="row text-center">
                                                                         <div class="col-md-9">
-                                                                            <input type="number" step="any" placeholder="" min="1" max="50" class="form-control text-right" onKeyPress="if(this.value.length==2) return false;" [(ngModel)]="CandidateExperiences.TotalExperience" (blur)='onSaveCareerProfileDetails()' tabindex="20"
-                                                                            />
+                                                                            <input type="number" step="any" placeholder="" min="1" max="50" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.TotalExperience"
+                                                                                (blur)='onSaveCareerProfileDetails()' tabindex="20" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1773,7 +1773,8 @@
                                                                     <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                                     <div class="row text-center">
                                                                         <div class="col-md-6">
-                                                                            <input type="number" min="0" step="any" placeholder="" class="form-control text-right" onKeyPress="if(this.value.length==2) return false;" [(ngModel)]="CandidateExperiences.RelevantExperience" (blur)='onSaveCareerProfileDetails()' tabindex="21" />
+                                                                            <input type="number" min="0" step="any" placeholder="" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.RelevantExperience"
+                                                                                (blur)='onSaveCareerProfileDetails()' tabindex="21" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1832,8 +1833,7 @@
                                                                     </div>-->
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" tabindex="3" 
-                                                                            (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)" />
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" tabindex="3" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
