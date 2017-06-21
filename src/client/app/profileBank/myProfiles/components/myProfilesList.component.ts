@@ -939,17 +939,6 @@ export class MyProfilesListComponent implements OnActivate {
         }
     }
     enterFullDetails() {
-        // let buffProfiles: any;
-        // this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
-        //     .subscribe(
-        //     (results: any) => {
-        //         if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
-        //             buffProfiles = <any>results.Profiles;
-        //             this._router.navigate(["/App/ProfileBank/MyProfiles/Edit/" + buffProfiles[0].CandidateID.Value + "ID" +
-        //                 buffProfiles[0].CandidateID.Id]);
-        //         }
-        //     },
-        //     error => this.errorMessage = <any>error);
         var completeProfileLink: string = '/App/ProfileBank/MyProfiles/Edit/' + this.candidateId.Value;
         this._router.navigate([completeProfileLink]);
         let modl: any = $('#fullDetailsDialogue');
