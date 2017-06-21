@@ -408,7 +408,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.showEmp = true;
             this.showResource = false;
             //this.getReferenceEmployee();
-        }else if(event.target.value === '3') {
+        } else if (event.target.value === '3') {
             this.showEmp = false;
             this.showResource = true;
         } else {
@@ -1151,11 +1151,16 @@ export class MyProfilesAddComponent implements OnActivate {
             this.EmployersInformation.TimeSpentInCompany = this.monthDiff(new Date(date), new Date());
     }
     monthDiff(d1: Date, d2: Date) {
-        var d1Y = d1.getFullYear();
-        var d2Y = d2.getFullYear();
+        
         var d1M = d1.getMonth();
         var d2M = d2.getMonth();
-        let months = (d2M + 12 * d2Y) - (d1M + 12 * d1Y);
+        
+
+        var d1y = d1.getTime();
+        var d2y = d2.getTime();
+        var diff: number = ((d2y - d1y) / 31536000000);
+
+        let months = diff.toFixed(1);
         return months.toString();
     }
     onNoticePeriod(id: any) {

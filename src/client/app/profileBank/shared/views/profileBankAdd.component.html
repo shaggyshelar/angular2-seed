@@ -2198,7 +2198,7 @@
                                                                                     <label class="control-label"></label>
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
-                                                                                            <input type="number" min="0" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany" title="Please enter experience for current job" required="" tooltip="Please enter experience for current job"
+                                                                                            <input style="width: 120px" type="number" step="0.1" min="0" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany" title="Please enter experience for current job" required="" tooltip="Please enter experience for current job"
                                                                                                 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.TimeSpentInCompany" onKeyPress="if(this.value.length==3) return false;"
                                                                                             />
                                                                                         </div>
@@ -2283,7 +2283,7 @@
                                                                                 <th> Employer Name </th>
                                                                                 <th> Designation </th>
                                                                                 <th> Location</th>
-                                                                                <th> Time Spent <small>(In Months)</small> </th>
+                                                                                <th> Time Spent <small>(In Years)</small> </th>
                                                                                 <th> Current </th>
                                                                                 <th> Edit </th>
                                                                                 <th> Delete </th>
