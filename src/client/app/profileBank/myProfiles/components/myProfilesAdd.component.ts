@@ -188,6 +188,7 @@ export class MyProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.resumeSource = results;
+                this.resumeSource = this.resumeSource.sort();
             },
             error => this.errorMessage = <any>error);
     }
@@ -402,13 +403,12 @@ export class MyProfilesAddComponent implements OnActivate {
             this.resumeTypeDisable = true;
             return;
         }
-        if(event.target.value === "2"){
+        if (event.target.value === '2') {
             this.showEmp = true;
             this.showResource = false;
-            this.getReferenceEmployee()
-        }
-        else{
-             this.showEmp = false;
+            this.getReferenceEmployee();
+        } else {
+            this.showEmp = false;
             this.showResource = true;
         }
         this.profile.ResumeSourceType = this.resumeSource.find(element => {
@@ -416,7 +416,7 @@ export class MyProfilesAddComponent implements OnActivate {
         });
         this.onSavePersonalDetails();
     }
-    onEmpRef(event: any){
+    onEmpRef(event: any) {
         this.profile.ResumeSource = event.target.value;
         this.onSavePersonalDetails();
     }
