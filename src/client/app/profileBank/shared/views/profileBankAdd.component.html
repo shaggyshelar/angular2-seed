@@ -24,7 +24,7 @@
                 <div class="profile-content">
                     <div class="row">
                         <div class="col-md-14">
-                            <div class="portlet light bordered" style="padding-bottom: 45px">
+                            <div class="portlet light bordered">
                                 <div class="portlet-title tabbable-line">
                                     <div class="col-md-2 caption caption-md">
                                         <i class="icon-globe theme-font hide"></i>
@@ -366,32 +366,31 @@
                                                 </div>-->
                                                 <!-- END Profile Picture Option -->
                                                 <div class="row">
-                                                    <div class="col-md-3" style="margin-top: 17px;">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="text" id="txtFirstName" placeholder="First Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" (blur)="onSavePersonalDetails()" tabindex="1" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3" style="margin-top: 17px;">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="text" placeholder="Middle Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.MiddleName" (keyup)="removeWhiteSpaces($event.target.value)" (blur)="onSavePersonalDetails()" tabindex="2" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <br>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="text" placeholder="Last Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" (blur)="onSavePersonalDetails()" tabindex="3" />
                                                                 </div>
                                                             </div>
@@ -401,7 +400,7 @@
                                                         <div class="form-group">
                                                             <label>Email <span class="required"> * </span></label>
                                                             <div class="row ">
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-12">
                                                                     <input type="email" class="form-control " placeholder="Email Address" [(ngModel)]="profile.Email" required="" (blur)="validate('Email', profile.Email)" tabindex="4" />
                                                                 </div>
                                                             </div>
@@ -431,8 +430,8 @@
                                                             <label class="control-label">Alternate Contact</label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <input type="number" placeholder="Contact Number" class="form-control" onKeyPress="if(this.value.length==10) return false;" title="Contact Number" maxlength="10" minlength="10" [(ngModel)]="profile.SecondaryContact" (blur)="onSavePersonalDetails()" tabindex="6"
-                                                                    />
+                                                                    <input type="number" min="0" placeholder="Contact Number" class="form-control" onKeyPress="if(this.value.length==10) return false;" title="Contact Number" maxlength="10" minlength="10" [(ngModel)]="profile.SecondaryContact" (blur)="onSavePersonalDetails()"
+                                                                        tabindex="6" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -442,7 +441,7 @@
                                                             <label class="control-label">Address</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Permanent Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress" required="" (blur)="onSavePersonalDetails()" tabindex="7"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Address" style="resize:vertical" [(ngModel)]="profile.PermanentAddress" required="" (blur)="onSavePersonalDetails()" tabindex="7"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -517,8 +516,39 @@
                                                             <textarea class="form-control text-capitalize" rows="2" placeholder="Reasons To Relocate, Family Background, etc. " style="resize:vertical" [(ngModel)]="profile.CommentsAdditionalInformation" (blur)="onSavePersonalDetails()" tabindex="34"></textarea>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <label>Verification Proofs</label>
+                                                            <div class="col-md-14" style="margin-left: -15px;">
+                                                                <select class="form-control" (change)="onVerificationProofs($event.target.value)">
+                                                                        <option disabled selected>--Select--</option>
+                                                                        <option *ngFor="let varification of varificationProof" [value]="varification.Id">{{varification.Value}}</option>
+                                                                    </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3" *ngIf="showAadhar">
+                                                        <div class="form-group">
+                                                            <label>Aadhaar Card No<small> (Eg. 123456789012)</small></label>
+                                                            <input type="text" placeholder="Aadhar Card No" class="form-control" [(ngModel)]="profile.AadharCardNo" tooltip="Aadhar Card Number" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.AadharCardNo" title="Enter valid Aadhaar Card number For Eg. 123456789012"
+                                                                minlength="12" maxlength="12" (blur)="validate('Aadhar', profile.AadharCardNo)" tabindex="13" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-3" *ngIf="showPan">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Pan Card No<small> (Eg. ABCDE1234F)</small></label>
+                                                            <input type="text" placeholder="Pan Card No" class="form-control" [(ngModel)]="profile.PANNumber" title="Enter Valid PAN No. For E.g. ABCDE1234F" maxlength="10" (blur)="validate('Pan', profile.PANNumber)" tabindex="14" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3" *ngIf="showLiecence">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Passport No<small> (Eg. A1234567)</small></label>
+                                                            <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567" maxlength="8" (blur)="validate('Passport', profile.PassportNumber)" tabindex="15" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="portlet-title">
+                                                <!--<div class="portlet-title">
                                                     <div class="caption font-dark">
                                                         <span class="caption-subject bold uppercase">Verification Proofs</span>
                                                     </div>
@@ -556,7 +586,7 @@
                                                             <input type="text" placeholder="Passport No" class="form-control" [(ngModel)]="profile.PassportNumber" title="Enter Valid Passport No. For E.g. A1234567" maxlength="8" (blur)="validate('Passport', profile.PassportNumber)" tabindex="15" />
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
 
                                                 <!--<div class="portlet-title">
                                                     <div class="caption font-dark">
@@ -861,7 +891,7 @@
                                                                                 <!--<select (change)='onSelectYear($event.target.value)' class="form-control" [(ngModel)]="qualification.YearofPassing.Id">
                                                                                     <option *ngFor="let year of years" [value]="year.Id">{{year.Value}}</option>
                                                                                 </select>-->
-                                                                                <input type="number" placeholder="YYYY" class="form-control" max="{{CurrentYear}}" maxlength="4" min="1950" [(ngModel)]="qualification.YearofPassing" required="" />
+                                                                                <input type="number" min="0" placeholder="YYYY" class="form-control" max="{{CurrentYear}}" maxlength="4" min="1950" [(ngModel)]="qualification.YearofPassing" required="" />
 
                                                                             </div>
                                                                         </div>
@@ -1112,7 +1142,7 @@
                                                             <label class="control-label">Total Experience<small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                    <input type="number" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience" (blur)='onSaveCareerProfileDetails()' />
+                                                                    <input type="number" min="0" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience" (blur)='onSaveCareerProfileDetails()' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1122,7 +1152,7 @@
                                                             <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                    <input type="number" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience" (blur)='onSaveCareerProfileDetails()' />
+                                                                    <input type="number" min="0" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience" (blur)='onSaveCareerProfileDetails()' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1415,7 +1445,7 @@
                                                             </div>
                                                         </div>
                                                     </div>-->
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Actual Current Salary <small>(In Lacs)</small><span class="required"> * </span> </label>
                                                             <div class="row ">
@@ -1425,7 +1455,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <div class="form-group">
                                                             <label class="control-label">Expected Salary <small>  (In Lacs)</small><span class="required"> * </span> </label>
                                                             <div class="row ">
@@ -1435,12 +1465,12 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label class="control-label">Salary Related Comments</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <textarea class="form-control text-capitalize" rows="1" placeholder="" style="resize:vertical" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" (blur)='onSaveSalaryDetails()' tabindex="10"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="1" placeholder="" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" (blur)='onSaveSalaryDetails()' tabindex="10"></textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1732,8 +1762,8 @@
                                                                     <label class="control-label">Total Experience<small>&nbsp;(In years)</small></label>
                                                                     <div class="row text-center">
                                                                         <div class="col-md-9">
-                                                                            <input type="number" step="any" placeholder="" min="1" max="50" class="form-control text-right" onKeyPress="if(this.value.length==2) return false;" [(ngModel)]="CandidateExperiences.TotalExperience" (blur)='onSaveCareerProfileDetails()' tabindex="20"
-                                                                            />
+                                                                            <input type="number" step="any" placeholder="" min="1" max="50" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.TotalExperience"
+                                                                                (blur)='onSaveCareerProfileDetails()' tabindex="20" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1743,7 +1773,8 @@
                                                                     <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                                     <div class="row text-center">
                                                                         <div class="col-md-6">
-                                                                            <input type="number" step="any" placeholder="" class="form-control text-right" onKeyPress="if(this.value.length==2) return false;" [(ngModel)]="CandidateExperiences.RelevantExperience" (blur)='onSaveCareerProfileDetails()' tabindex="21" />
+                                                                            <input type="number" min="0" step="any" placeholder="" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.RelevantExperience"
+                                                                                (blur)='onSaveCareerProfileDetails()' tabindex="21" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1802,8 +1833,7 @@
                                                                     </div>-->
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" tabindex="3" 
-                                                                            (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)" />
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" tabindex="3" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1897,7 +1927,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Salary <span class="required"> * </span></label>
-                                                                                    <input type="number" placeholder="Salary" class="form-control text-capitalize" title="Please enter salary offered" tooltip="Company Name" required tooltipPlacement="top" step="0.1" [(ngModel)]="inHandOffer.Salary" />
+                                                                                    <input type="number" min="0" placeholder="Salary" class="form-control text-capitalize" title="Please enter salary offered" tooltip="Company Name" required tooltipPlacement="top" step="0.1" [(ngModel)]="inHandOffer.Salary" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-3">
@@ -2168,8 +2198,9 @@
                                                                                     <label class="control-label"></label>
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
-                                                                                            <input type="number" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany" title="Please enter experience for current job" required="" tooltip="Please enter experience for current job" tooltipPlacement="top"
-                                                                                                tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.TimeSpentInCompany" onKeyPress="if(this.value.length==3) return false;" />
+                                                                                            <input type="number" min="0" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany" title="Please enter experience for current job" required="" tooltip="Please enter experience for current job"
+                                                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.TimeSpentInCompany" onKeyPress="if(this.value.length==3) return false;"
+                                                                                            />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>

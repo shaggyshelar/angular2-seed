@@ -313,10 +313,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
 
-        // $('.counter').counterUp({
-        //     delay: 10,
-        //     time: 1000
-        // });
+       
         //Recruiters
         this.GetAssignedOpenRRFCount();
         this.GetAllOpenRRFCount();
