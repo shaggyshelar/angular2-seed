@@ -33,7 +33,7 @@ export class CandidateProfile {
   public IsChecked: boolean;
   public url: any;
   public RRFID: MasterData = new MasterData();
-
+public TotalExperience: number;
 
 
   //Properties of Personal Information

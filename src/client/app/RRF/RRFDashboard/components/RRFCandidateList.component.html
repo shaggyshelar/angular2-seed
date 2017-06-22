@@ -140,9 +140,8 @@
 																			 selectedcandidate.InterviewDetails.InterviewToTime}}
 																			 </span>
 <span class="mt-action-dot bg-green"></span>
-<span class="mt=action-time">
-																			<a data-toggle="tooltip" data-placement="top" tooltip="Interview Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"
-																			 >{{selectedcandidate.InterviewDetails.Status}}</a>
+<span class="mt=action-time" style="color: #337ab7">
+																		{{selectedcandidate.InterviewDetails.Status}}
 																			 </span>
 </div>
 
@@ -173,6 +172,7 @@
 																							<i class="fa fa-search"></i>View IEF Results
 																						</button>
 </li>
+<li class="divider"> </li>
 <li>
 	<button class="btn btn-default btnLink " [disabled]='canCancelInterview(selectedcandidate.InterviewDetails.Status)' (click)='onCancelInterviewClick(selectedcandidate)'>
 																							<i class="fa fa-times"></i>Cancel Interview

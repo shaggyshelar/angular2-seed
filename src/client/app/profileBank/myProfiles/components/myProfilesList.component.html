@@ -340,7 +340,7 @@
                                                         <div class="col-md-2 inlineForm">
                                                             <div class="form-group ">
                                                                 <label>Experience</label>
-                                                                <input type="number" step="any" class="form-control" [(ngModel)]="profile.CandidateCareerProfile.TotalExperience" tooltip="Total Experience (In years)" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
+                                                                <input type="number" step="any" class="form-control" [(ngModel)]="profile.TotalExperience" tooltip="Total Experience (In years)" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
                                                                     title="Enter total experience in years Eg. 02" min="0" max="60" step="0.01" style="padding: 6px;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57"
                                                                     required/>
                                                                 <!--(keyup)="onKeyExperience($event)" />-->
