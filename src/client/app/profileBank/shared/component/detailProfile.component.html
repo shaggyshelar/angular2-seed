@@ -49,7 +49,7 @@
 					</li>
 				</ul>
 				<div class="col-md-12 centered profile-info">
-					<h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> </h4>
+					<h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate ? profile.Candidate : "N/A"}}</a> </h4>
 					<h6 class="sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> As {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}}
 						{{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?" at "+profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}}
 						</h6>

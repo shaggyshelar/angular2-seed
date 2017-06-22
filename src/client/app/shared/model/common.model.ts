@@ -29,11 +29,13 @@ export class GrdOptions {
     public PerPageCount: number = 50;
     public OrderBy: string = 'Modified';
     public Order: string = 'desc';
+    public FilterBy:string ;
     public NextPageUrl: string[] = [];
     public CamlString:string ;
     public NextPageID:number ;
     public PreviousPageID:number ;
     public PagingEvent:string ;
+    public Filter:string;
     public RRFFilters:RRFFilters=new RRFFilters();
 }
 export class RRFFilters {
@@ -42,6 +44,7 @@ export class RRFFilters {
         public Priority  : string;
         public Status  : string;
         public Designation  : string;
+        public Filter : string;
 }
 export class SortingMasterData {
     public Id: string;
