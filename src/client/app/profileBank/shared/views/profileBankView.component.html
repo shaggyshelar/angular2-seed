@@ -838,7 +838,7 @@
 							                </li>
 							                <li>
 								                <div tooltip="NoticePeriod" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
-									            <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod}}
+									            <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
 									            </div>
                                             </li>
 							                <li>
@@ -913,23 +913,23 @@
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"><b> Offer in hand:</b> </span>
-                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.OfferInHand}} </span>
+                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.OfferInHand?profile.CandidateOtherDetails.OfferInHand:"N/A"}} </span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"> <b>Offer in hand details:</b> </span>
-                                                        <span class="sale-num"> {{profile.OfferDetails}} </span>
+                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.OfferDetails?profile.CandidateOtherDetails.OfferDetails:"N/A"}} </span>
                                                     </li>
                                                        <li>
                                                         <span class="sale-info"><b> Role Expected  :</b>
                                                        
                                                         </span>
-                                                        <span class="sale-num">   {{profile.CandidateOtherDetails.RoleExpected}} </span>
+                                                        <span class="sale-num">   {{profile.CandidateOtherDetails.RoleExpected?profile.CandidateOtherDetails.RoleExpected:"N/A"}} </span>
                                                     </li>
                                                      <li>
                                                         <span class="sale-info"> <b>Any Appraisal / Bond :</b>
                                                        
                                                         </span>
-                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.AppraisalBondContractDetails}} </span>
+                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.AppraisalBondContractDetails?profile.CandidateOtherDetails.AppraisalBondContractDetails:"N/A"}} </span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -949,31 +949,31 @@
                                                         <span class="sale-info"> <b>Current Salary(CTC) :</b>
                                                         
                                                         </span>
-                                                        <span class="sale-num">  {{profile.CandidateSalaryDetails.CurrentSalary}} </span>
+                                                        <span class="sale-num">  {{profile.CandidateSalaryDetails.CurrentSalary?profile.CandidateSalaryDetails.CurrentSalary:"N/A"}} </span>
                                                         </li>
                                                         <li>
                                                         <span class="sale-info"><b> Expected Salary : </b></span>
-                                                        <span class="sale-num"> {{profile.CandidateSalaryDetails.ExpectedSalary}} </span>
+                                                        <span class="sale-num"> {{profile.CandidateSalaryDetails.ExpectedSalary?profile.CandidateSalaryDetails.ExpectedSalary:"N/A"}} </span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"> <b>Does your CTC include variable salary?</b> </span>
-                                                        <span class="sale-num"> {{profile.CandidateSalaryDetails.CTCIncludeVariable}}</span>
+                                                        <span class="sale-num"> {{profile.CandidateSalaryDetails.CTCIncludeVariable?profile.CandidateSalaryDetails.CTCIncludeVariable:"N/A"}}</span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"><b> If yes, then how much : </b></span>
-                                                        <span class="sale-num"> {{profile.HowMuchVariable?profile.HowMuchVariable:"N/A"}} </span>
+                                                        <span class="sale-num"> {{profile.CandidateSalaryDetails.HowMuchVariable?profile.CandidateSalaryDetails.HowMuchVariable:"N/A"}} </span>
                                                     </li>
                                                        <li>
                                                         <span class="sale-info"> <b>Allowances :</b>
                                                         <i class="fa fa-img-up"></i>
                                                         </span>
-                                                        <span class="sale-num"> {{profile.AllowanceInHand?profile.AllowanceInHand:"N/A"}}</span>
+                                                        <span class="sale-num"> {{profile.CandidateSalaryDetails.AllowanceInHand?profile.CandidateSalaryDetails.AllowanceInHand:"N/A"}}</span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"> <b>Incentives :</b>
                                                         <i class="fa fa-img-up"></i>
                                                         </span>
-                                                        <span class="sale-num"> {{profile.IncentiveInHand?profile.IncentiveInHand:"N/A"}} </span>
+                                                        <span class="sale-num"> {{profile.CandidateSalaryDetails.IncentiveInHand?profile.CandidateSalaryDetails.IncentiveInHand:"N/A"}} </span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -990,33 +990,33 @@
                                                 <ul class="list-unstyled">
                                                  <li>
                                                         <span class="sale-info"> <b>Outstationed Candidate : </b></span>
-                                                        <span class="sale-num"> {{profile.OutstationedCandidate}} </span>
+                                                        <span class="sale-num"> {{profile.OutstationedCandidate?profile.OutstationedCandidate:"N/A"}} </span>
                                                     </li>
                                                        <li>
                                                         <span class="sale-info"><b> Are you ready to relocate :</b>
                                                       
                                                         </span>
-                                                        <span class="sale-num"> {{profile.ReadyToRelocate}}</span>
+                                                        <span class="sale-num"> {{profile.ReadyToRelocate?profile.ReadyToRelocate:"N/A"}}</span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"><b> Specify the reason to relocate:</b>
                                                    
                                                         </span>
-                                                        <span class="sale-num"> {{profile.ReasonToRelocate}} </span>
+                                                        <span class="sale-num"> {{profile.ReasonToRelocate?profile.ReasonToRelocate:"N/A"}} </span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"> <b>Linkedin :</b>
                                                       
                                                         </span>
-                                                        <span class="sale-num">  {{profile.CandidateSocialInformation.LinkedinID}} </span>
+                                                        <span class="sale-num">  {{profile.CandidateSocialInformation.LinkedinID?profile.CandidateSocialInformation.LinkedinID:"N/A"}} </span>
                                                         </li>
                                                         <li>
                                                         <span class="sale-info"> <b>Resume Source Type :</b> </span>
-                                                        <span class="sale-num"> {{profile.ResumeSourceType.Value}} </span>
+                                                        <span class="sale-num"> {{profile.ResumeSourceType.Value?profile.ResumeSourceType.Value:"N/A"}} </span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"> <b>Resume Source :</b></span>
-                                                        <span class="sale-num"> {{profile.ResumeSource}}</span>
+                                                        <span class="sale-num"> {{profile.ResumeSource?profile.ResumeSource:"N/A"}}</span>
                                                     </li>
                                                     
                                                 </ul>

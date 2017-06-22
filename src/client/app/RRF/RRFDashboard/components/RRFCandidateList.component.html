@@ -237,9 +237,8 @@
 																				{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}
 																				</span>
 <span class="mt-action-dot bg-green"></span>
-<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Interview Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
-																			(click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>
-																			{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}</a>
+<span class="mt=action-time" style="color: #337ab7">
+																			{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}
 																			</span>
 </div>
 <div class="mt-action-buttons ">
@@ -300,9 +299,8 @@
 																				{{selectedcandidate.InterviewDetails.InterviewFromTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewFromTime}}-{{selectedcandidate.InterviewDetails.InterviewToTime === null ?"NA" : selectedcandidate.InterviewDetails.InterviewToTime}}
 																				</span>
 <span class="mt-action-dot bg-green"></span>
-<span class="mt=action-time"><a data-toggle="tooltip" data-placement="top" tooltip="Click to view interview rounds history" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" 
-																			(click)='getCandidatesRoundHistory(selectedcandidate.CandidateID,selectedcandidate.Candidate,selectedcandidate.Status.Value)'>
-																			{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}</a>
+<span class="mt=action-time" style="color: #337ab7">
+																			{{selectedcandidate.Status.Value ? selectedcandidate.Status.Value : "NA"}}
 																			</span>
 </div>
 <div class="mt-action-buttons ">
