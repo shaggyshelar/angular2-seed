@@ -1,6 +1,6 @@
 import { MasterData } from  '../../../shared/model/index';
 import { CandidateProfile } from  '../../../profileBank/shared/model/myProfilesInfo';
-import { Interview, InterviewAvailability, IEFTransactionDetails } from  './interview';
+import { Interview, InterviewAvailability, IEFTransactionDetails, IEFtransactionData } from  './interview';
 
 export class IEFDetails {
     public DetailRRFID: MasterData = new MasterData();
@@ -19,6 +19,7 @@ export class IEFFunction {
     FunctionValue: string;
     isLabel: boolean = true;
     isRating: boolean = true;
+    public IEFtransactionData: IEFtransactionData = new IEFtransactionData(); 
 }
 
 //Used to show candidate basic information 

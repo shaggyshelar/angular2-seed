@@ -14,9 +14,12 @@
         <div class="col-lg-7">
             <b>Remark</b>
         </div>
+     
     </div>
+    
 
     <div class="col-lg-12" *ngFor="let IEFData of IEFDetails" style="background-color: #f5f6fa;">
+        
         <div class="col-lg-4">
             {{IEFData.FunctionLabel}}
         </div>
@@ -26,6 +29,14 @@
         <div class="col-lg-7">
             {{IEFData.FunctionValue}}
         </div>
+      
     </div>
-
+    <div class="col-lg-12" style="background-color: #f5f6fa;">
+            <div class="col-lg-4">
+            Comments
+        </div>
+        <div class="col-lg-5">
+            {{IEFValue}}
+        </div>
+        </div>
 </div>

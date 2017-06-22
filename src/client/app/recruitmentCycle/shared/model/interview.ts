@@ -60,7 +60,12 @@ export class IEFTransactionDetails {
     public InterviewID: MasterData = new MasterData();;
     public Ratings: string;
     public Remarks: string;
-    public FunctionName: MasterData = new MasterData();
+    public FunctionName: MasterData = new MasterData();  
+}
+
+export class IEFtransactionData {
+    public IEFTransactions : Array<IEFFunction> = new Array<IEFFunction>();
+    public GeneralComments : string;
 }
 export class AwaitedInterview {
     public InterviewID: MasterData = new MasterData();
