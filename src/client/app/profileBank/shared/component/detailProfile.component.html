@@ -54,7 +54,7 @@
 						{{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?" at "+profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}}
 						</h6>
 					<a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline" href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
-					<a *ngIf="profile.ResumeID" style="float: right;" href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeID}}"
+					<a *ngIf="profile.ResumeID" style="float: right;" (click)='getResume(profile.CandidateID)'
 						class="btn green mt-ladda-btn ladda-button btn-circle btn-outline reload" data-original-title="" title="">
 						<i style="margin-right: 5px;" aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  
 					</a>
