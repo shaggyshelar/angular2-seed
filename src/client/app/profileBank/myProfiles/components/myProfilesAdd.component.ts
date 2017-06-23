@@ -93,7 +93,7 @@ export class MyProfilesAddComponent implements OnActivate {
     inHandOfferAction: any = { action: 'Add', index: -999 };
 
     onNotify(SkillInput: any): void {
-        console.log(SkillInput);
+        //console.log(SkillInput);
         switch (SkillInput.input) {
             case 'Technical': this.addTechnicalSkill(SkillInput.skills);
                 break;
@@ -408,7 +408,7 @@ export class MyProfilesAddComponent implements OnActivate {
             this.showEmp = true;
             this.showResource = false;
             //this.getReferenceEmployee();
-        }else if(event.target.value === '3') {
+        } else if (event.target.value === '3') {
             this.showEmp = false;
             this.showResource = true;
         } else {
@@ -1089,6 +1089,13 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.toastr.error('Enter valid passport number. For Eg. A1234567');
             }
                 break;
+                 case 'Linkedin': if (number.match('^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$')) {
+                this.onSaveSocialInfo();
+            } else {
+                this.profile.CandidateSocialInformation.LinkedinID = '';
+                this.toastr.error('Enter valid Linkedin number. For Eg. https://www.linkedin.com/');
+            }
+                break;
             case 'Email': if (number.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')) {
                 this.IsExist();
             } else {
@@ -1149,13 +1156,19 @@ export class MyProfilesAddComponent implements OnActivate {
     totalMonths(date: any) {
         if (date !== undefined)
             this.EmployersInformation.TimeSpentInCompany = this.monthDiff(new Date(date), new Date());
-    }
+        }
     monthDiff(d1: Date, d2: Date) {
-        var d1Y = d1.getFullYear();
-        var d2Y = d2.getFullYear();
+        var d1Date = d1.getDate() + '-' + d1.getMonth() + '-' + d1.getFullYear();
+       // this.EmployersInformation.FromDate=d1Date;
         var d1M = d1.getMonth();
         var d2M = d2.getMonth();
-        let months = (d2M + 12 * d2Y) - (d1M + 12 * d1Y);
+        
+
+        var d1y = d1.getTime();
+        var d2y = d2.getTime();
+        var diff: number = ((d2y - d1y) / 31536000000);
+
+        let months = diff.toFixed(1);
         return months.toString();
     }
     onNoticePeriod(id: any) {

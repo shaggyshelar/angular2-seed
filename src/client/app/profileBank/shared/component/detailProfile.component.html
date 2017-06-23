@@ -49,12 +49,12 @@
 					</li>
 				</ul>
 				<div class="col-md-12 centered profile-info">
-					<h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> </h4>
+					<h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate ? profile.Candidate : "N/A"}}</a> </h4>
 					<h6 class="sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> As {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}}
 						{{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?" at "+profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}}
 						</h6>
 					<a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline" href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
-					<a *ngIf="profile.ResumeID" style="float: right;" href="data:application/octet-stream;charset=utf-8;base64,{{profile.BinaryResume}}" download="{{profile.ResumeID}}"
+					<a *ngIf="profile.ResumeID" style="float: right;" (click)='getResume(profile.CandidateID)'
 						class="btn green mt-ladda-btn ladda-button btn-circle btn-outline reload" data-original-title="" title="">
 						<i style="margin-right: 5px;" aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  
 					</a>
@@ -124,7 +124,7 @@
 						<ul class="list-inline sbold" style="color:#f16e50">
 							<li>
 								<div class="uppercase" tooltip="Location" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-									<i class="fa fa-map-marker"></i> {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Location?profile.CandidateCurrentCompanyProfile.Location:"N/A":"N/A"}}
+									<i class="fa fa-map-marker"></i> {{profile.City?profile.City?profile.City:"N/A":"N/A"}}
 								</div>
 							</li>
 							<li>

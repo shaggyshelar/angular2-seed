@@ -82,6 +82,31 @@ export class RRFDashboardListComponent implements OnActivate {
         private _mastersService: MastersService) {
         this.currentView = 'myRRF';
         this.hideRrfDetails = true;
+        this.grdOptions = {
+            'PerPageCount': 50,
+            'ButtonClicked': 0,
+            'NextButton': true,
+            'PreviousButton': false,
+            'OrderBy': 'Modified',
+            'Order': 'desc',
+            'FilterBy': null,
+            'NextPageUrl': [
+
+            ],
+            'CamlString': null,
+            'NextPageID': 0,
+            'PreviousPageID': 0,
+            'PagingEvent': null,
+            'Filter': null,
+            'RRFFilters': {
+                'RaisedBy': null,
+                'Practice': null,
+                'Priority': null,
+                'Status': null,
+                'Designation': null,
+                'Filter': null
+            }
+        };
     }
     routerOnActivate() {
         this.logedInUser = this.getLoggedInUser();
@@ -99,15 +124,15 @@ export class RRFDashboardListComponent implements OnActivate {
         this.getRaisedBy()
         this.getDesigntaions()
         this.RRfFiltersList = {
-            Practice: [{Id:'EBS',Value:'EBS'},{Id:'ECS',Value:'ECS'} ],
-            Priority: [{Id:'High',Value:'High'},{Id:'Medium',Value:'Medium'},{Id:'Low',Value:'Low'}],
-            Status: [{Id:'Open',Value:'Open'},{Id:'Closed',Value:'Closed'} ,{Id:'Rejected',Value:'Rejected'} ,{Id:'Pending Approval',Value:'Pending Approval'} ],
+            Practice: [{ Id: 'EBS', Value: 'EBS' }, { Id: 'ECS', Value: 'ECS' }],
+            Priority: [{ Id: 'High', Value: 'High' }, { Id: 'Medium', Value: 'Medium' }, { Id: 'Low', Value: 'Low' }],
+            Status: [{ Id: 'Open', Value: 'Open' }, { Id: 'Closed', Value: 'Closed' }, { Id: 'Rejected', Value: 'Rejected' }, { Id: 'Pending Approval', Value: 'Pending Approval' }],
             RaisedBy: [],
-            Designation:[]
+            Designation: []
         }
         this.getCloseReason();
     }
-    getCloseReason(){
+    getCloseReason() {
         this._mastersService.getCloseReason('CloseRRF')
             .subscribe(
             results => {
@@ -115,29 +140,29 @@ export class RRFDashboardListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    getDesigntaions(){
+    getDesigntaions() {
         this._mastersService.GetDesignations()
-        .subscribe(
+            .subscribe(
             (results: any) => {
-                if (results!== undefined && results.length > 0) {
-                    for (let i=0;i<results.length;i++) {
-                        this.RRfFiltersList.Designation=results;
+                if (results !== undefined && results.length > 0) {
+                    for (let i = 0; i < results.length; i++) {
+                        this.RRfFiltersList.Designation = results;
                     }
                 }
             },
-            error => this.errorMessage = <any>error); 
+            error => this.errorMessage = <any>error);
     }
-    getRaisedBy(){
-       this._rrfDashboardService.getRaisedBy()
-         .subscribe(
+    getRaisedBy() {
+        this._rrfDashboardService.getRaisedBy()
+            .subscribe(
             (results: any) => {
-                if (results!== undefined && results.length > 0) {
-                    for (let i=0;i<results.length;i++) {
-                        this.RRfFiltersList.RaisedBy=results;
+                if (results !== undefined && results.length > 0) {
+                    for (let i = 0; i < results.length; i++) {
+                        this.RRfFiltersList.RaisedBy = results;
                     }
                 }
             },
-            error => this.errorMessage = <any>error); 
+            error => this.errorMessage = <any>error);
     }
     getMyRRFData() {
         this.getMyRRF();
@@ -351,7 +376,7 @@ export class RRFDashboardListComponent implements OnActivate {
         this.resetToDefaultGridOptions();
         this.grdOptions.OrderBy = 'Modified';
         this.grdOptions.Order = 'desc';
-        this.grdOptions.PerPageCount = 5;
+        this.grdOptions.PerPageCount = 50;
         //Clear RRF List
         this.rrfList = new Array<RRFDetails>();
 
@@ -385,7 +410,7 @@ export class RRFDashboardListComponent implements OnActivate {
     }
 
     onbtnCloseRRF() {
-        this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment,this.reason)
+        this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment, this.reason)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -574,7 +599,15 @@ export class RRFDashboardListComponent implements OnActivate {
         this.rrfSubFilter = this.RRfFiltersList[item]
     }
     onSubFilterChange(item: string) {
-        this.grdOptions.RRFFilters = new RRFFilters();
+        // this.grdOptions.RRFFilters = new RRFFilters();
+        this.grdOptions.RRFFilters = {
+            'RaisedBy': null,
+            'Practice': null,
+            'Priority': null,
+            'Status': null,
+            'Designation': null,
+            'Filter': null
+        };
         if (this.subFilter1 === 'Practice') {
             this.grdOptions.RRFFilters.Practice = this.subFilter2;
         } else if (this.subFilter1 === 'Priority') {

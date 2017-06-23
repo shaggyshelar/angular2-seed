@@ -11,19 +11,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
     public errorMessage: string;
+    public IsValidLoggedIn: boolean = false;
     private model: AuthInfo;
     private LoginFailed: boolean = false;
     constructor(private _loginService: LoginService, private _router: Router) {
         this.model = new AuthInfo('password', '', '');
     }
     doLogin(): void {
+        this.IsValidLoggedIn = true;
         this._loginService.authenticate(this.model)
             .subscribe(
             results => {
                 this.getLoggedInUserPermission();
                 this.getLoggedInUser();
+                
             },
             error => {
+                this.IsValidLoggedIn = false;
                 this.errorMessage = <any>error;
                 this.LoginFailed = true;
             });
@@ -32,14 +36,21 @@ export class LoginComponent {
         this._loginService.getLoggedInUserPermission()
             .subscribe(
             results => {
+                this.IsValidLoggedIn = false;
                 this._router.navigate(['/App']);
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.IsValidLoggedIn = false;
+                this.errorMessage = <any>error;
+            });
     }
     getLoggedInUser(): void {
         this._loginService.getCurrentLoggedInUser()
             .subscribe(
-            error => this.errorMessage = <any>error);
+            error => {
+                this.IsValidLoggedIn = false;
+                this.errorMessage = <any>error;
+            });
     }
     closeAlert() {
         this.LoginFailed = false;
