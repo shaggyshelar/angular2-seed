@@ -1089,6 +1089,13 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.toastr.error('Enter valid passport number. For Eg. A1234567');
             }
                 break;
+                 case 'Linkedin': if (number.match('^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$')) {
+                this.onSaveSocialInfo();
+            } else {
+                this.profile.CandidateSocialInformation.LinkedinID = '';
+                this.toastr.error('Enter valid Linkedin number. For Eg. https://www.linkedin.com/');
+            }
+                break;
             case 'Email': if (number.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')) {
                 this.IsExist();
             } else {
@@ -1149,9 +1156,10 @@ export class MyProfilesAddComponent implements OnActivate {
     totalMonths(date: any) {
         if (date !== undefined)
             this.EmployersInformation.TimeSpentInCompany = this.monthDiff(new Date(date), new Date());
-    }
+        }
     monthDiff(d1: Date, d2: Date) {
-        
+        var d1Date = d1.getDate() + '-' + d1.getMonth() + '-' + d1.getFullYear();
+       // this.EmployersInformation.FromDate=d1Date;
         var d1M = d1.getMonth();
         var d2M = d2.getMonth();
         
