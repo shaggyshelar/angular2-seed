@@ -2285,8 +2285,8 @@
                                                                                 <th> Location</th>
                                                                                 <th> Time Spent <small>(In Years)</small> </th>
                                                                                 <th> Current </th>
-                                                                                <th> Edit </th>
-                                                                                <th> Delete </th>
+                                                                                <th> Action </th>
+                                                                                <!--<th> Delete </th>-->
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -2296,12 +2296,16 @@
                                                                                 <td> {{EmployersInformation.Location}}</td>
                                                                                 <td class="text-center"> {{EmployersInformation.TimeSpentInCompany}}</td>
                                                                                 <td class="text-center"> {{EmployersInformation.IsCurrentCompany===true?"Current":"-"}}</td>
-                                                                                <td>
+                                                                                <td colspan="2">
+                                                                                    <button class="btn btn-circle btn-icon-only blue" (click)='EditEmployerInformation(EmployersInformation.CareerProfileID)'> <i class="fa fa-edit "></i> </button>
+                                                                                    <button class="btn btn-circle btn-icon-only red" (click)='deleteEmployerInformation(EmployersInformation.CareerProfileID)'> <i class="fa fa-trash "></i> </button>
+                                                                                </td>
+                                                                                <!--<td>
                                                                                     <a class="edit" (click)='EditEmployerInformation(EmployersInformation.CareerProfileID)'> Edit </a>
-                                                                                </td>
-                                                                                <td>
+                                                                                </td>-->
+                                                                                <!--<td>
                                                                                     <a style="color:red" (click)='deleteEmployerInformation(EmployersInformation.CareerProfileID)'> Delete </a>
-                                                                                </td>
+                                                                                </td>-->
                                                                             </tr>
 
 

@@ -93,7 +93,7 @@ export class MyProfilesAddComponent implements OnActivate {
     inHandOfferAction: any = { action: 'Add', index: -999 };
 
     onNotify(SkillInput: any): void {
-        console.log(SkillInput);
+        //console.log(SkillInput);
         switch (SkillInput.input) {
             case 'Technical': this.addTechnicalSkill(SkillInput.skills);
                 break;
