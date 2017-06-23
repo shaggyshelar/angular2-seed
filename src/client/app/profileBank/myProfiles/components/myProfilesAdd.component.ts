@@ -88,6 +88,7 @@ export class MyProfilesAddComponent implements OnActivate {
     public showLiecence: boolean = false;
     public showResource: boolean = false;
     public showEmp: boolean = false;
+    public NPdays:number = 0;
     entries: InHandOffer[];
     inHandOffer: InHandOffer;
     inHandOfferAction: any = { action: 'Add', index: -999 };
@@ -1213,5 +1214,15 @@ export class MyProfilesAddComponent implements OnActivate {
     editFromList(index: any) {
         this.inHandOffer = this.entries[index];
         this.inHandOfferAction = { action: 'Edit', index: index };
+    }
+    totalDaysCount(d1: Date, d2: Date) {
+        var timeDiff = Math.abs(d2.getTime() - d1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+        return diffDays;
+    }
+    totalDays(date: any){
+        if (date !== undefined)
+           this.NPdays = this.totalDaysCount(new Date(date), new Date());
+        }
     }
 }
