@@ -1,173 +1,169 @@
 <div class="rms-box-heading rms-box-heading-3">
-	<span class="rrf-code-heading">RRF Code :{{RRFData.RRFCODE }}</span>
+    <span class="rrf-code-heading">RRF Code :{{RRFData.RRFCODE }}</span>
 
-	<button class="rrf-code-btn"><i class="fa fa-refresh fa-1x fa-fw"></i></button>
+    <button class="rrf-code-btn"><i class="fa fa-refresh fa-1x fa-fw"></i></button>
 
-	<div class="row rrf-joining-date-row">
-		<span class="rrf-joining-date">Date of Joining : <b>{{RRFData.ExpDateOfJoining }}</b></span>
-		<br class="line-separator" />
-		<span class="rrf-joining-date rrf-openings-span">Openings : <b>{{RRFData.NoOfOpenings}}</b></span>
-	</div>
+    <div class="row rrf-joining-date-row">
+        <span class="rrf-joining-date">Expected Date of Joining : <b>{{RRFData.ExpDateOfJoining }}</b></span>
+        <br class="line-separator" />
+        <span class="rrf-joining-date rrf-openings-span">Openings : <b>{{RRFData.NoOfOpenings}}</b></span>
+    </div>
 </div>
 <div class="Scrollbox3">
-	<div class="rrf-profile-descr-box">
-		<h5 class="rrf-expr-req-label">
-			Experience Required: {{RRFData.MinExp }} - {{RRFData.MaxExp }} yrs
-		</h5>
+    <div class="rrf-profile-descr-box">
+        <h5 class="rrf-expr-req-label">
+            Experience Required: {{RRFData.MinExp }} - {{RRFData.MaxExp }} yrs
+        </h5>
 
-		<h4 class="rrf-designation-label">{{RRFData.Designation.Value }}</h4>
+        <h4 class="rrf-designation-label">{{RRFData.Designation.Value }}</h4>
 
-		<!-- Skills required -->
-		<div class="rrf-skills-box">
-			<h3>Skills:</h3>
-			<label *ngFor="let skill of RRFData.SkillsRequired ">{{skill.Value}} &#44;&nbsp;</label>
-		</div>
-		<!-- Skills required Ends -->
+        <!-- Skills required -->
+        <div class="rrf-skills-box">
+            <h3>Skills:</h3>
+            <label *ngFor="let skill of RRFData.SkillsRequired ">{{skill.Value}} &#44;&nbsp;</label>
+        </div>
+        <!-- Skills required Ends -->
 
-		<!-- Job Description -->
-		<div class="rrf-job-descr-box">
-			<h3>Job Description:</h3>
-			<p>
-				{{RRFData.Description}}
-			</p>
-		</div>
-		<!-- Job Description Ends -->
+        <!-- Job Description -->
+        <div class="rrf-job-descr-box">
+            <h3>Job Description:</h3>
+            <p>
+                {{RRFData.Description}}
+            </p>
+        </div>
+        <!-- Job Description Ends -->
 
-		<!-- ***************Hidden Profile Content *************************-->
-		<div class="rrf-profile-hidden-content" *ngIf="hiddenFieldFlag">
-			<!-- hidden Field -->
-			<div class="rrf-job-descr-box">
-				<h3>Hidden Field 1:</h3>
-				<p>
-					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-					ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-					quia voluptas.
-				</p>
-			</div>
+        <!-- ***************Hidden Profile Content *************************-->
+        <div class="rrf-profile-hidden-content" *ngIf="hiddenFieldFlag">
+            <!-- hidden Field -->
+            <div class="rrf-job-descr-box">
+                <h3>Hidden Field 1:</h3>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas.
+                </p>
+            </div>
 
-			<!-- hidden Field -->
-			<div class="rrf-job-descr-box">
-				<h3>Hidden Field 2:</h3>
-				<p>
-					Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
-					ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-					quia voluptas.
-				</p>
-			</div>
-		</div>
-		<!-- **************Hidden Profile Content Ends ********************-->
+            <!-- hidden Field -->
+            <div class="rrf-job-descr-box">
+                <h3>Hidden Field 2:</h3>
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas.
+                </p>
+            </div>
+        </div>
+        <!-- **************Hidden Profile Content Ends ********************-->
 
-		<!-- Show More Button Box -->
-		<div class="rrf-show-more-box">
-			<button class="rrf-show-more-btn" (click)='showHide();'>{{showHideButtonText}}</button>
-		</div>
-		<!-- Show More Button Box Ends -->
+        <!-- Show More Button Box -->
+        <div class="rrf-show-more-box">
+            <button class="rrf-show-more-btn" (click)='showHide();'>{{showHideButtonText}}</button>
+        </div>
+        <!-- Show More Button Box Ends -->
 
-	</div>
-	<div class="show-more-separator"></div>
+    </div>
+    <div class="show-more-separator"></div>
 
-	<div class="rrf-selected-candidate-box">
+    <div class="rrf-selected-candidate-box">
 
-				<h5>Selected Candidate</h5>
+        <h5>Selected Candidate</h5>
 
-				<!-- Total candisate selected number span -->
-				<span class="rrf-selected-candidate-span">
+        <!-- Total candisate selected number span -->
+        <span class="rrf-selected-candidate-span">
 							<span>2</span> / 10
-				</span>
+        </span>
 
-				<!-- Selected Candidate 1 -->
-				<div class="rrf-selected-candidate-div">
-					<div class="row">
-						<div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
-							<img src="img/user.jpg" class="rrf-selected-candidate-img" />
+        <!-- Selected Candidate 1 -->
+        <div class="rrf-selected-candidate-div">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
+                    <img src="img/user.jpg" class="rrf-selected-candidate-img" />
 
-							<h4>John Doe</h4>
-							<h6>Sr. Java Developer</h6>
-						</div>
-						<div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
-							<div class="rating">
-								<span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span>
-							</div>
-						</div>
-					</div>
-				</div>
+                    <h4>John Doe</h4>
+                    <h6>Sr. Java Developer</h6>
+                </div>
+                <div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
+                    <div class="rating">
+                        <span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-				<!-- Selected Candidate 2 -->
-				<div class="rrf-selected-candidate-div">
-					<div class="row">
-						<div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
-							<img src="img/user.jpg" class="rrf-selected-candidate-img" />
+        <!-- Selected Candidate 2 -->
+        <div class="rrf-selected-candidate-div">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
+                    <img src="img/user.jpg" class="rrf-selected-candidate-img" />
 
-							<h4>Paul Jackson</h4>
-							<h6>Salesforce solution Architect</h6>
-						</div>
-						<div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
-							<div class="rating">
-								<span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="rrf-selected-candidate-box rrf-shortlisted-candidate-box">
+                    <h4>Paul Jackson</h4>
+                    <h6>Salesforce solution Architect</h6>
+                </div>
+                <div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
+                    <div class="rating">
+                        <span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span><span>&#9734;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rrf-selected-candidate-box rrf-shortlisted-candidate-box">
 
-				<h5>Shortlisted Candidate</h5>
+        <h5>Shortlisted Candidate</h5>
 
-				<!-- Total candisate selected number span -->
-				<span class="rrf-selected-candidate-span">
+        <!-- Total candisate selected number span -->
+        <span class="rrf-selected-candidate-span">
 							60
 						</span>
 
-				<!-- Shortlisted Candidate 1 -->
-				<div class="rrf-selected-candidate-div">
-					<div class="row">
-						<div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
-							<img src="img/user.jpg" class="rrf-selected-candidate-img" />
+        <!-- Shortlisted Candidate 1 -->
+        <div class="rrf-selected-candidate-div">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
+                    <img src="img/user.jpg" class="rrf-selected-candidate-img" />
 
-							<h4>Brad Delson</h4>
-							<h6>Lead Project Manager</h6>
-						</div>
-						<div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
-							<div class="shortlisted-round-name">
-								HR1
-							</div>
-						</div>
-					</div>
-				</div>
+                    <h4>Brad Delson</h4>
+                    <h6>Lead Project Manager</h6>
+                </div>
+                <div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
+                    <div class="shortlisted-round-name">
+                        HR1
+                    </div>
+                </div>
+            </div>
+        </div>
 
-				<!-- Shortlisted Candidate 2 -->
-				<div class="rrf-selected-candidate-div">
-					<div class="row">
-						<div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
-							<img src="img/user.jpg" class="rrf-selected-candidate-img" />
+        <!-- Shortlisted Candidate 2 -->
+        <div class="rrf-selected-candidate-div">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
+                    <img src="img/user.jpg" class="rrf-selected-candidate-img" />
 
-							<h4>Rob Burdon</h4>
-							<h6>Salesforce Technical Lead</h6>
-						</div>
-						<div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
-							<div class="shortlisted-round-name">
-								Technical 3
-							</div>
-						</div>
-					</div>
-				</div>
+                    <h4>Rob Burdon</h4>
+                    <h6>Salesforce Technical Lead</h6>
+                </div>
+                <div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
+                    <div class="shortlisted-round-name">
+                        Technical 3
+                    </div>
+                </div>
+            </div>
+        </div>
 
-				<!-- Shortlisted Candidate 3 -->
-				<div class="rrf-selected-candidate-div">
-					<div class="row">
-						<div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
-							<img src="img/user.jpg" class="rrf-selected-candidate-img" />
+        <!-- Shortlisted Candidate 3 -->
+        <div class="rrf-selected-candidate-div">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 rrf-selected-candidate-right">
+                    <img src="img/user.jpg" class="rrf-selected-candidate-img" />
 
-							<h4>Mark Anderson</h4>
-							<h6>IOS Developer</h6>
-						</div>
-						<div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
-							<div class="shortlisted-round-name">
-								Technical 2
-							</div>
-						</div>
-					</div>
-				</div>
+                    <h4>Mark Anderson</h4>
+                    <h6>IOS Developer</h6>
+                </div>
+                <div class="col-md-4 col-sm-4 rrf-selected-candidate-left">
+                    <div class="shortlisted-round-name">
+                        Technical 2
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			</div>
+    </div>
 </div>
