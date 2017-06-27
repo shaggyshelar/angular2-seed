@@ -21,6 +21,7 @@ export class RRFGridRowComponent implements OnInit {
     @Input() displayFeedBackStatus: boolean = true;
     // @Input() hideRRFDetails: boolean;
     @Input() hideRRFDetails: boolean = false;
+    @Input() showCompleteDetails: boolean = true;
 
     AssignStatus: RRFAssignStatus = RRFAssignStatus;
     ngOnInit() {

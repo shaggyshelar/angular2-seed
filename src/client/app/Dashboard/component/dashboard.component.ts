@@ -951,6 +951,7 @@ export class DashboardComponent implements OnInit {
         }
     }
     onViewCandidateClick(rrfID: MasterData, status:string) {
+        this.onCancelClick();
         sessionStorage.setItem('backToRRFDashboardList',sessionStorage.getItem('backToProfile'));
         sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);

@@ -24,3 +24,7 @@ input.select2-search__field{
     border-style: solid;
     border-color: transparent black transparent transparent;
 }
+
+select2-results__group{
+    background-color: coral !important;
+}
