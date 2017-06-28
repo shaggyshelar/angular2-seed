@@ -24,6 +24,7 @@ import {AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 })
 
 export class MyProfilesAddComponent implements OnActivate {
+    currentDate:string;
     binaryResume: Resume;
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
@@ -131,6 +132,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this.entries = [];
         this.initInHandOffer();
         this.psdTemplates = new Array<File>();
+             this.setMinDateToCalender();
 
     }
 
@@ -1322,7 +1324,12 @@ export class MyProfilesAddComponent implements OnActivate {
         var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
         return diffDays;
     }
-    totalDays(date: any){
+    
+      setMinDateToCalender() {
+        var todayDate = new Date();
+        this.currentDate = (<any>this.formatDate(todayDate));
+    }
+    totalDays(date: any){ 
         if (date !== undefined)
            this.NPdays = this.totalDaysCount(new Date(date), new Date());
         }
