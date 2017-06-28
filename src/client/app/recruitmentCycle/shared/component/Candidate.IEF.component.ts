@@ -134,7 +134,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
         this._candidateIEFService.getIEFByInterviewID(interviewID)
             .subscribe(
             (results: any) => {
-                this.functions = results;
+                this.functions = results.IEFTransactions;
             },
             error => {
                 this.errorMessage = <any>error;
