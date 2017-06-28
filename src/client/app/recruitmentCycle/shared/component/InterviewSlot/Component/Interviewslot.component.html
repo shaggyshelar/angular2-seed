@@ -31,14 +31,9 @@
                             <td> {{slotindex + 1}} </td>
                             <!--<td> {{slot.ID}} </td>-->
                             <td>
-                                <input type="text"  [(ngModel)]='slot.Title' [disabled]="slot.ID != undefined ? isDisable: false" id="slotTitle" class="form-control" placeholder="Slot Title"
+                                <input type="text"  maxlength="50"  [(ngModel)]='slot.Title' [disabled]="slot.ID != undefined ? isDisable: false" id="slotTitle" class="form-control" placeholder="Slot Title"
                                 autocomplete="off" />
-                                <div class="">
-                                      <label type="time" required='' name="" id="" *ngIf="slot.ID" required="" step="900">Scheduled</label>
-                                    </div>
-                                      <div class="">
-                                      <label type="time" required='' name="" id="" *ngIf="!slot.ID" required="" step="900">New Slot</label>
-                                    </div>
+                               
                             </td>
                             <td>
                                 <div>
@@ -53,7 +48,7 @@
                             </td>
                             <!--Time field-->
                             <td>
-
+<div class="col-md-6">
                                 <div class="">
                                     <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined ? isDisable: false" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].StartTime"
                                     />
@@ -62,7 +57,15 @@
                                     <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined ? isDisable: false" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].EndTime"
                                     />
                                 </div>
-                                
+</div>
+<div class="col-md-6">
+     <div >
+                                      <span  class="green" *ngIf="slot.ID" > <small> <span class="fa fa-check-circle" style="color: #26C281"></span><strong> Allotted</strong></small></span>
+                                    </div>
+                                      <div class="">
+                                      <span *ngIf="!slot.ID" ><small><span class="fa fa-plus-circle" style="color: #e7505a"></span> <strong>New Slot</strong></small></span>
+                                    </div>
+    </div>                          
                             </td>
                             <td>
                                 	
