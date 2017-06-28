@@ -428,14 +428,6 @@ export class MyProfilesListComponent implements OnActivate {
     closeUpdateStatus() {
         this.isUpdateStatusCollapsed = false;
     }
-// onStateChange1(e: any): void{
-//     this.selectAllId=e.target.checked;
-// this.myProfilesList.Profiles.forEach(function(item){
-//     item.IsChecked=e.target.checked;
-// //item.Profiles.checked=e.target.checked;
-// })
-//  //this.allChecked = true;
-// }
  selectAll() {
     for (var i = 0; i < this.myProfilesList.Profiles.length; i++) {
         this.myProfilesList.Profiles[i].IsChecked=!this.selectedAll;
@@ -445,7 +437,6 @@ export class MyProfilesListComponent implements OnActivate {
         else{
             this.selectedRowCount=null;
         }
-
     }
   }
 
@@ -458,8 +449,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this.selectedAll=false;
             }
         }
-
-        if (this.selectedRowCount === this.myProfilesList.Profiles.length) {
+       if (this.selectedRowCount === this.myProfilesList.Profiles.length) {
             this.allChecked = true;
         } else {
             this.allChecked = false;

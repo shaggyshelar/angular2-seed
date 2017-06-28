@@ -95,9 +95,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
             });
 
     }
-// updatedis(){
-//   this.updateEnable=false;
-// }
+
     addNewSlot() {
         var calenderSlot: CalenderSlot = new CalenderSlot();
         calenderSlot.RRFID = this.RRFID;
