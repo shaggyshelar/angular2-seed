@@ -55,7 +55,7 @@ export class MyProfilesListComponent implements OnActivate {
     currentStatus: number;
     currentCandidate: string;
     selectedRowCount: number = 0;
-    selectedAll:boolean;
+    selectedAll: boolean;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
     isUpdateStatusCollapsed: boolean = false;
@@ -428,28 +428,28 @@ export class MyProfilesListComponent implements OnActivate {
     closeUpdateStatus() {
         this.isUpdateStatusCollapsed = false;
     }
- selectAll() {
-    for (var i = 0; i < this.myProfilesList.Profiles.length; i++) {
-        this.myProfilesList.Profiles[i].IsChecked=!this.selectedAll;
-        if(!this.selectedAll){
-  this.selectedRowCount = this.myProfilesList.Profiles.length;
-        }
-        else{
-            this.selectedRowCount=null;
+    selectAll() {
+        for (var i = 0; i < this.myProfilesList.Profiles.length; i++) {
+            this.myProfilesList.Profiles[i].IsChecked = !this.selectedAll;
+            if (!this.selectedAll) {
+                this.selectedRowCount = this.myProfilesList.Profiles.length;
+            }
+            else {
+                this.selectedRowCount = null;
+            }
         }
     }
-  }
 
     onStateChange(e: any): void {
         if (e.target.checked) {
             this.selectedRowCount++;
         } else {
             this.selectedRowCount--;
-            if(this.selectedRowCount==0){
-                this.selectedAll=false;
+            if (this.selectedRowCount == 0) {
+                this.selectedAll = false;
             }
         }
-       if (this.selectedRowCount === this.myProfilesList.Profiles.length) {
+        if (this.selectedRowCount === this.myProfilesList.Profiles.length) {
             this.allChecked = true;
         } else {
             this.allChecked = false;
@@ -807,7 +807,9 @@ export class MyProfilesListComponent implements OnActivate {
                         this.NORECORDSFOUND = true;
                     }
                 },
-                error => this.errorMessage = <any>error);
+                error => {
+                    this.errorMessage = <any>error; this.toastr.error(this.errorMessage);
+                });
         }
 
     }
@@ -873,9 +875,19 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.filterByProfile();
-                } else { this.NORECORDSFOUND = true; }
+                } else {
+                    this.NORECORDSFOUND = true;
+                    this.myProfilesList = new AllCandidateProfiles();
+                    this.cachedProfileList = [];
+                }
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(this.errorMessage);
+                //this.NORECORDSFOUND = true;
+                this.myProfilesList = new AllCandidateProfiles();
+                this.cachedProfileList = [];
+            });
     }
     getIncompleteProfiles() {
         this._allProfilesService.getIncompleteProfiles(this.myProfilesList.GrdOperations)
@@ -887,9 +899,17 @@ export class MyProfilesListComponent implements OnActivate {
                     this.filterByProfile();
                 } else {
                     this.NORECORDSFOUND = true;
+                    this.myProfilesList = new AllCandidateProfiles();
+                    this.cachedProfileList = [];
                 }
             },
-            error => this.errorMessage = <any>error);
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(this.errorMessage);
+                this.NORECORDSFOUND = true;
+                this.myProfilesList = new AllCandidateProfiles();
+                this.cachedProfileList = [];
+            });
     }
     getBlacklistedProfiles() {
         this._blacklistedProfilesService.getBlackListedProfiles(this.myProfilesList.GrdOperations)
@@ -899,10 +919,18 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.filterByProfile();
-                } else { this.NORECORDSFOUND = true; }
+                } else {
+                    //this.NORECORDSFOUND = true;
+                    this.myProfilesList = new AllCandidateProfiles();
+                    this.cachedProfileList = [];
+                }
             },
             error => {
                 this.errorMessage = <any>error;
+                this.toastr.error(this.errorMessage);
+                //this.NORECORDSFOUND = true;
+                this.myProfilesList = new AllCandidateProfiles();
+                this.cachedProfileList = [];
             });
     }
 
