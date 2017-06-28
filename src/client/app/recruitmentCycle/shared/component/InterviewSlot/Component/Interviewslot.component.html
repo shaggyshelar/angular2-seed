@@ -4,6 +4,8 @@
             <span class="caption-subject bold uppercase">Availability slots for : {{RRFCode}}</span>
         </div>
         <div class="tools">
+            <button class="btn btn-sm yellow btn-outline filter-cancel" (click)="updateSlot()">
+                                    <i class="fa fa-edit"></i> Update</button>
             <button class="btn btn-sm green table-group-action-submit pull-right" (click)="addNewSlot()">Add New Slot</button>
         </div>
     </div>
@@ -29,17 +31,23 @@
                             <td> {{slotindex + 1}} </td>
                             <!--<td> {{slot.ID}} </td>-->
                             <td>
-                                <input type="text"  [(ngModel)]='slot.Title' [disabled]="slot.ID != undefined" id="slotTitle" class="form-control" placeholder="Slot Title"
+                                <input type="text"  [(ngModel)]='slot.Title' [disabled]="slot.ID != undefined ? isDisable: false" id="slotTitle" class="form-control" placeholder="Slot Title"
                                 autocomplete="off" />
+                                <div class="">
+                                      <label type="time" required='' name="" id="" *ngIf="slot.ID" required="" step="900">Scheduled</label>
+                                    </div>
+                                      <div class="">
+                                      <label type="time" required='' name="" id="" *ngIf="!slot.ID" required="" step="900">New Slot</label>
+                                    </div>
                             </td>
                             <td>
                                 <div>
-                                    <input type="date" [min]="mindate" required='' [(ngModel)]='slot.StartDate' [disabled]="slot.ID != undefined" tooltip="Start Date" tooltipPlacement="top"
+                                    <input type="date" [min]="mindate" required='' [(ngModel)]='slot.StartDate' [disabled]="slot.ID != undefined ? isDisable: false" tooltip="Start Date" tooltipPlacement="top"
                                     tooltipTrigger="mouseenter" tooltipEnable="!slot.StartDate" />
                                 </div>
 
                                 <div>
-                                    <input type="date" [min]="mindate" required='' [(ngModel)]='slot.EndDate' [disabled]="slot.ID != undefined" tooltip="End Date" tooltipPlacement="top"
+                                    <input type="date" [min]="mindate" required='' [(ngModel)]='slot.EndDate' [disabled]="slot.ID != undefined ? isDisable: false" tooltip="End Date" tooltipPlacement="top"
                                     tooltipTrigger="mouseenter" tooltipEnable="!slot.EndDate" />
                                 </div>
                             </td>
@@ -47,17 +55,28 @@
                             <td>
 
                                 <div class="">
-                                    <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].StartTime"
+                                    <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined ? isDisable: false" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].StartTime"
                                     />
                                 </div>
                                 <div class="">
-                                    <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].EndTime"
+                                    <input type="time" required='' name="" id="" [disabled]="slot.ID != undefined ? isDisable: false" required="" step="900" [(ngModel)]="slot.CalendarDetails[0].EndTime"
                                     />
                                 </div>
+                                
                             </td>
                             <td>
+                                	<!--<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow" 
+														data-toggle="tooltip" data-placement="top" tooltip="Edit" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='updateSlot(slot.ID)'>
+                                                            <i class="fa fa-edit "></i><!-- Edit Profile
+                                                        </button>-->
+                                                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='removeSlot(slot.ID)'
+															tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Remove">
+                                                            <i class="fa fa-times "></i><!-- Edit Profile
+                                                        </button>-->
                                 <button class="btn btn-sm red btn-outline filter-cancel" (click)="removeSlot(slot.ID)">
                                     <i class="fa fa-times"></i> Remove</button>
+                                     <!--<button class="btn btn-sm red btn-outline filter-cancel" (click)="updateSlot(slot.ID)">
+                                    <i class="fa fa-edit"></i> Update</button>-->
                             </td>
                         </tr>
                     </tbody>

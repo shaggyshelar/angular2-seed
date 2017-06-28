@@ -114,9 +114,9 @@
                                 </div>
                                 <div class="col-md-2">
                                     <select style=" margin-bottom : 10px;" class="form-control" [(ngModel)]='iefStatus' required (ngModelChange)="ifRejected($event)">
-                                        <option>Selected</option>
-                                        <option>Rejected</option>
-                                        <option *ngIf='!isChangeStatusReq'>On Hold</option>
+                                        <option value="Selected">Select</option>
+                                        <option value="Rejected">Reject</option>
+                                        <option value="On Hold" *ngIf='!isChangeStatusReq'>On Hold</option>
                                     </select>
                                     <select *ngIf="showRejectReasons" class="form-control" required (change)="rejectReasonSet($event)">
                                         <option *ngFor="let reason of rejectReasons; let i = index" [value]="reason.Value">{{reason.Value}}</option>
