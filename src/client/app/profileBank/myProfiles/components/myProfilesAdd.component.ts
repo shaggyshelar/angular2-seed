@@ -25,6 +25,7 @@ import {AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 
 export class MyProfilesAddComponent implements OnActivate {
     currentDate:string;
+    currentMonthDate:string;
     binaryResume: Resume;
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
@@ -1328,10 +1329,21 @@ export class MyProfilesAddComponent implements OnActivate {
       setMinDateToCalender() {
         var todayDate = new Date();
         this.currentDate = (<any>this.formatDate(todayDate));
+        this.currentMonthDate =(<any>this.formatDateByMonth(todayDate));
+    }
+      formatDateByMonth(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+    
+        return [year,month].join('-');
     }
     totalDays(date: any){ 
         if (date !== undefined)
            this.NPdays = this.totalDaysCount(new Date(date), new Date());
         }
+
+
     }
 }

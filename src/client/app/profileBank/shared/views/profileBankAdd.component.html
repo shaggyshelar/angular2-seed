@@ -2221,7 +2221,7 @@
                                                                                     <label class="control-label">Working Since <span class="required"> * </span></label>
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
-                                                                                            <input type="month" [max]="currentDate"  name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" (change)="totalMonths($event.target.value)" tabindex="24" />
+                                                                                            <input type="month" [max]="currentMonthDate" name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" (change)="totalMonths($event.target.value)" tabindex="24" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2231,8 +2231,8 @@
                                                                                     <label class="control-label"></label>
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
-                                                                                            <input style="width: 100px; margin-left: 20px" type="number" step="0.1" min="0" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany" title="Please enter experience for current job" required="" tooltip="Please enter experience for current job" tabindex="25"
-                                                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.TimeSpentInCompany" onKeyPress="if(this.value.length==3) return false;"
+                                                                                            <input readonly style="width: 100px; margin-left: 20px" type="number" step="0.1" min="0" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany" title="Please enter experience for current job" required="" tooltip="Please enter experience for current job" tabindex="25"
+                                                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.TimeSpentInCompany" onKeyPress="if(this.value.length==3) return false;" 
                                                                                             />
                                                                                         </div>
                                                                                     </div>
