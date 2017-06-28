@@ -569,24 +569,24 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                            <div class="col-md-4">
-                                                                <b>Designation : </b>{{profile.Designation?profile.Designation.Value:"N/A"}}
+                                                            <div class="col-md-5">
+                                                                <b>Designation : </b>{{profile.RRFDetails.Designation?profile.RRFDetails.Designation.Value:"N/A"}}
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <b>Offered Date : </b>{{formatDate(profile.OfferedDate)}}
                                                             </div>
-                                                            <div class="col-md-4">
-                                                                <b>Department : </b>{{profile.Department?profile.Department.Value:"N/A"}}
+                                                            <div class="col-md-3">
+                                                                <b>Department : </b>{{profile.RRFDetails.Department?profile.RRFDetails.Department.Value:"N/A"}}
                                                             </div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-5">
                                                                 <b>Recruiter : </b>{{profile.Owner?profile.Owner.Value : "N/A"}}
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <b>Joining Date: </b>{{formatDate(profile.ApproxDateOfJoining)}}
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-3">
                                                                 <b>RRFCode: </b>{{profile.RRFAssigned.RRFCODE ? profile.RRFAssigned.RRFCODE  : "N/A"}}
                                                             </div>
                                                     </div>
