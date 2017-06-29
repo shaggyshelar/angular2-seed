@@ -22,6 +22,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     errorMessage: string = '';
     mindate: Date;
     isDisable : boolean=true;
+    isSaved : boolean = true;
     constructor(private _router: Router,
         private _interviewSlotService: InterviewSlotService,
         public toastr: ToastsManager) {
@@ -64,9 +65,11 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
                 .subscribe(
                 results => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.isSaved = true;
                         this.getRRFSlot();
                         this.toastr.success((<ResponseFromAPI>results).Message);
                     } else {
+                        this.isSaved = false;
                         this.toastr.error((<ResponseFromAPI>results).Message);
                     }
                 },
@@ -97,6 +100,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     }
 
     addNewSlot() {
+        this.isSaved = false;
         var calenderSlot: CalenderSlot = new CalenderSlot();
         calenderSlot.RRFID = this.RRFID;
         var calendarDtls: CalenderDetails = new CalenderDetails();
