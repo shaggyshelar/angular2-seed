@@ -65,7 +65,7 @@
                             </div>
                             <div>
 
-                                <div class="row" *ngIf="!NORECORDSFOUND">
+                                <div class="row">
                                     <div class="col-md-2 col-sm-2" style="margin-top: 16px;">
                                         <div class="dataTables_length" id="sample_1_length">
                                             <label>Show :
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="portlet-body">
+                    <div class="portlet-body" *ngIf="!NORECORDSFOUND">
 
                         <!-- FollowUP Comments-->
                         <div id="CommentsRow" *ngIf='isCommentsPanelCollapsed'>
@@ -506,8 +506,13 @@
                                 </div>
                             </div>
                             <!-- START Delete Confirmation Model dailog -->
+                            
                         </div>
+                       
                     </div>
+                     <div class="portlet-body" *ngIf="!NORECORDS">
+                         <strong>   No records found....!</strong>
+                            </div>
                     <!-- Test data -->
 
                     <!-- My Profile Grid Starts-->

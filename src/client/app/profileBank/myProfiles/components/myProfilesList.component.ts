@@ -78,6 +78,7 @@ export class MyProfilesListComponent implements OnActivate {
     Candidate: Candidate;
     selectedCandidates: Array<Candidate>;
     NORECORDSFOUND: boolean = false;
+     NORECORDS: boolean = true;
     ColumnList: Array<SortingMasterData> = new Array<SortingMasterData>();
     CandidateName: string;
     /***variables for Upload photo */
@@ -260,8 +261,10 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.NORECORDSFOUND = false;
+                    this.NORECORDS = true;
                     this.filterByProfile();
-                } else { this.NORECORDSFOUND = true; }
+                } else { this.NORECORDSFOUND = true;     
+                      this.NORECORDS = false; }
             },
             error => this.errorMessage = <any>error);
     }
@@ -798,6 +801,7 @@ export class MyProfilesListComponent implements OnActivate {
             this.viewDetailsRRFId = '';
             this.getMyProfiles();
             this.NORECORDSFOUND = false;
+            this.NORECORDS = true;
         } else {
             this.viewDetailsRRFId = rrfID;
             this._rrfCandidatesList.getCandidateProfilesByRRF(rrfID)
@@ -806,9 +810,11 @@ export class MyProfilesListComponent implements OnActivate {
                     if (results.length > 0) {
                         this.myProfilesList.GrdOperations = new GrdOptions();
                         this.myProfilesList.Profiles = <any>results;
-                        this.NORECORDSFOUND = false;;
+                        this.NORECORDSFOUND = false;
+                        this.NORECORDS = true;
                     } else {
                         //If No data present
+                            this.NORECORDS = false;
                         this.NORECORDSFOUND = true;
                     }
                 },
@@ -882,6 +888,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.filterByProfile();
                 } else {
                     this.NORECORDSFOUND = true;
+                     this.NORECORDS = false;
                     this.myProfilesList = new AllCandidateProfiles();
                     this.cachedProfileList = [];
                 }
@@ -906,6 +913,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.NORECORDSFOUND = true;
                     this.myProfilesList = new AllCandidateProfiles();
                     this.cachedProfileList = [];
+                    this.NORECORDS = false;
                 }
             },
             error => {
@@ -926,6 +934,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.filterByProfile();
                 } else {
                     //this.NORECORDSFOUND = true;
+                    this.NORECORDSFOUND = true; 
+                           this.NORECORDS = false;
                     this.myProfilesList = new AllCandidateProfiles();
                     this.cachedProfileList = [];
                 }

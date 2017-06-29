@@ -29,7 +29,7 @@
                                     <div class="col-md-2 caption caption-md">
                                         <i class="icon-globe theme-font hide"></i>
                                         <!--<span class="caption-subject font-blue-madison bold uppercase">Edit Profile</span>-->
-                                        <a class="btn green" (click)='Back()'>
+                                        <a class="btn green" (click)='Back()'> 
                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back </a>
                                         <!--<span>{{profile.CANDIDATECODE ? profile.CANDIDATECODE : ""}}</span>-->
                                     </div>
@@ -1710,6 +1710,7 @@
                                                             <div class="form-group col-md-3">
                                                                 <div class="row">
                                                                     <label>Technical Skills</label>
+                                                                    <a class="blue" (click)="getLinkUpSkills()" style="margin-left: 5px;" data-toggle="tooltip" data-placement="top" tooltip="Sync With Linkup Skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"><i class="fa fa-refresh" aria-hidden="true"></i></a>
                                                                 </div>
                                                                 <div class="row">
                                                                     <multiselect-dropdown placeholder="Select Technical Skills" [dataToBind]='skills' inputString='Technical' [selected]='profile.CandidateSkills.TechnicalSkills' (saveSkills)='onNotify($event)' tabindex="3"></multiselect-dropdown>

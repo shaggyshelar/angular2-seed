@@ -214,6 +214,17 @@ export class MyProfilesAddComponent implements OnActivate {
             },
             (error: any) => this.errorMessage = <any>error);
     }
+    getLinkUpSkills(){
+        this._myProfilesService.getLinkUpSkills()
+            .subscribe(
+            (results: any) => {
+             this.toastr.success((<ResponseFromAPI>results).Message);
+             this.getSkills();
+             this.getSoftSkills();
+             this.getLanguages();
+            },
+            error => this.errorMessage = <any>error);
+    }
         getMyProfiles() {
         this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
             .subscribe(
@@ -1175,7 +1186,6 @@ export class MyProfilesAddComponent implements OnActivate {
         this.setFocus();
     }
     onPersonalInfoTabClick() {
-
         $('#txtFirstName').focus();
 
     }
