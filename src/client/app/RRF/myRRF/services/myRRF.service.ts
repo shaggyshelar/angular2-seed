@@ -22,7 +22,14 @@ export class MyRRFService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+getLinkUpSkills() {
+        let url = Config.GetURL('/api/Masters/AddUpdateLinkupSkills');
+        this._spinnerService.show();
+        return this.authHttp.post(url, {})
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     //Get details of RRF from RRFID
     getRRFDetails(rrfId: string) {
         let url = Config.GetURL('/api/RRF/ViewRRF?RRFID=' + rrfId);

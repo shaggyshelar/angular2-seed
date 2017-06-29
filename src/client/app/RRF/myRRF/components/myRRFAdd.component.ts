@@ -451,7 +451,15 @@ export class MyRRFAddComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-
+getFromLinkUpSkills(){
+        this._myRRFService.getLinkUpSkills()
+            .subscribe(
+            (results: any) => {
+             this.toastr.success((<ResponseFromAPI>results).Message);
+             this.getSkills();
+            },
+            error => this.errorMessage = <any>error);
+    }
     formatDate(date: any) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),

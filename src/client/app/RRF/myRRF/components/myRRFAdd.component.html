@@ -26,7 +26,6 @@
                     <div class="row">
                         <div class="col-md-4" *ngIf="currentRaiseRRFStatus == raiseRRFStatus.newRRF ">
                             <h4>New RRF</h4>
-
                         </div>
                         <div class="col-md-4" *ngIf="currentRaiseRRFStatus == raiseRRFStatus.updateRRF ">
                             <h4>Update RRF</h4>
@@ -172,14 +171,17 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-8">
+                                <div class="form-group col-lg-7">
                                     <div class="row">
-                                        <label>Skills<span class="required"> * </span></label>
+                                        <label>Skills<span class="required"> * </span></label> 
                                     </div>
                                     <div class="row" style="margin-top:-30px;">
                                         <multiselect-dropdown [isReadOnly]="isDisabled" placeholder="Select Skills" [dataToBind]='skills' [selected]='newRRF.SkillsRequired' isAddButtonVisible='true'></multiselect-dropdown>
                                     </div>
                                 </div>
+                                <div class="col-md-1">
+                                      <a class="blue" (click)="getFromLinkUpSkills()" style="margin-left:-936%;" data-toggle="tooltip" data-placement="top" tooltip="Sync With Linkup Skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                                    </div>
                             </div>
                             <!--<div class="row">
                                 <div class="form-group col-lg-12">
