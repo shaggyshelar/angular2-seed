@@ -949,6 +949,10 @@ export class MyProfilesListComponent implements OnActivate {
             });
     }
     // commmited
+    // showNewProfileModal() {
+    //     let modl1: any = $('#CountDetails');
+    //     modl1.modal({ 'backdrop': 'static' });
+    // }
     showNewProfileModal() {
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });
