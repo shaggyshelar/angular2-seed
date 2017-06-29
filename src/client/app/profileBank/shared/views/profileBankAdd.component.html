@@ -1837,7 +1837,7 @@
                                                                     <label class="control-label">Resigning Date</label>
                                                                     <div class="row">
                                                                         <div class="col-md-12">
-                                                                            <input type="date" [min]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" (change)="totalDays(profile.CandidateOtherDetails.ResigningDate)" tabindex="24" />
+                                                                            <input type="date" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" (change)="totalDays($event.target.value)" tabindex="24" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1962,7 +1962,7 @@
                                                                             </div>
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
-                                                                                    <label class="control-label">Salary <span class="required"> * </span></label>
+                                                                                    <label class="control-label">Salary <small>(In Lakhs)</small><span class="required"> * </span></label>
                                                                                     <input type="number" min="0" placeholder="Salary" class="form-control text-capitalize" title="Please enter salary offered" tooltip="Salary" required tooltipPlacement="top" step="0.1" [(ngModel)]="inHandOffer.Salary" tabindex="19" />
                                                                                 </div>
                                                                             </div>

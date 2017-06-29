@@ -364,7 +364,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 }
                  if (this.profile.CandidateOtherDetails.ServingNoticePeriod === true) {
                     this.regDateShow = true;
-                    this.totalDayscount(this.profile.CandidateOtherDetails.ResigningDate);
+                    this.totalDayscountNO(this.profile.CandidateOtherDetails.ResigningDate);
                     this.profile.CandidateOtherDetails.ResigningDate = this.formatDate(this.profile.CandidateOtherDetails.ResigningDate);
 
                 }
@@ -1357,6 +1357,7 @@ export class MyProfilesAddComponent implements OnActivate {
         var todayDate = new Date();
         this.currentDate = (<any>this.formatDate(todayDate));
         this.currentMonthDate =(<any>this.formatDateByMonth(todayDate));
+       
     }
       formatDateByMonth(date: any) {
         var d = new Date(date),
@@ -1372,24 +1373,14 @@ export class MyProfilesAddComponent implements OnActivate {
            this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
            this.profile.CandidateOtherDetails.ResigningDate = date;
            this.onSavePrimaryInfo();
-        }
     }
-    totalDayscount(date: any) {
+    }
+    totalDayscountNO(date: any) {
         if (date !== null){
         this.NPdays = this.totalDaysCount(new Date(date), new Date());
         this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
         }
     }
-    formatDate(date: any) {
-        var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
-
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-
-        return [year, month, day].join('-');
-    }
+ 
     }
 }
