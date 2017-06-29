@@ -36,7 +36,9 @@ box-shadow: 4px 3px 10px -2px rgba(0,0,0,0.39);">
                         <span></span>
                     </label>
             <button type="submit" class="btn green pull-right"> Login </button>
+            <div class="overlay" *ngIf="visible" ><div class="spinner" > <i class="fa fa-spinner fa-spin" style="font-size:75px"></i></div></div>
         </div>
+        
         <!--<div class="login-options">
             <h4>Like us On</h4>
             <ul class="social-icons">

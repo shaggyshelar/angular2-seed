@@ -1837,7 +1837,7 @@
                                                                     <label class="control-label">Resigning Date</label>
                                                                     <div class="row">
                                                                         <div class="col-md-12">
-                                                                            <input type="date" [min]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" (change)="totalDays($event.target.value)" tabindex="24" />
+                                                                            <input type="date" [min]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" (change)="totalDays(profile.CandidateOtherDetails.ResigningDate)" tabindex="24" />
                                                                         </div>
                                                                     </div>
                                                                 </div>

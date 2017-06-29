@@ -364,7 +364,8 @@ export class MyProfilesAddComponent implements OnActivate {
                 }
                  if (this.profile.CandidateOtherDetails.ServingNoticePeriod === true) {
                     this.regDateShow = true;
-                    this.totalDays(this.CandidateOtherDetails.ResigningDate);
+                    this.totalDayscount(this.profile.CandidateOtherDetails.ResigningDate);
+                    this.profile.CandidateOtherDetails.ResigningDate = this.formatDate(this.profile.CandidateOtherDetails.ResigningDate);
 
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
@@ -1366,13 +1367,29 @@ export class MyProfilesAddComponent implements OnActivate {
         return [year,month].join('-');
     }
     totalDays(date: any){ 
-        if (date !== undefined)
+        if (date !== undefined){
            this.NPdays = this.totalDaysCount(new Date(date), new Date());
            this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
            this.profile.CandidateOtherDetails.ResigningDate = date;
            this.onSavePrimaryInfo();
+        }
     }
+    totalDayscount(date: any) {
+        if (date !== null){
+        this.NPdays = this.totalDaysCount(new Date(date), new Date());
+        this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
+        }
+    }
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
 
+        return [year, month, day].join('-');
+    }
     }
 }

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
     public errorMessage: string;
     public IsValidLoggedIn: boolean = false;
+    public visible: boolean = false;
     private model: AuthInfo;
     private LoginFailed: boolean = false;
     constructor(private _loginService: LoginService, private _router: Router) {
@@ -19,6 +20,7 @@ export class LoginComponent {
     }
     doLogin(): void {
         this.IsValidLoggedIn = true;
+        this.visible = true;
         this._loginService.authenticate(this.model)
             .subscribe(
             results => {
@@ -28,6 +30,7 @@ export class LoginComponent {
             },
             error => {
                 this.IsValidLoggedIn = false;
+                this.visible = false;
                 this.errorMessage = <any>error;
                 this.LoginFailed = true;
             });
@@ -37,10 +40,12 @@ export class LoginComponent {
             .subscribe(
             results => {
                 this.IsValidLoggedIn = false;
+                this.visible = false;
                 this._router.navigate(['/App']);
             },
             error => {
                 this.IsValidLoggedIn = false;
+                this.visible = false;
                 this.errorMessage = <any>error;
             });
     }
@@ -49,6 +54,7 @@ export class LoginComponent {
             .subscribe(
             error => {
                 this.IsValidLoggedIn = false;
+                this.visible = false;
                 this.errorMessage = <any>error;
             });
     }
