@@ -113,7 +113,14 @@ export class RRFDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+    deleteRRF(rrfId: MasterData) {
+        let url = Config.GetURL('/api/RRF/DeleteRRF');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { RRFID: rrfId })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     GetRRFAssignedToRecruiter(recruiter: MasterData, grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetRRFAssignedToRecruiter');
         this._spinnerService.show();

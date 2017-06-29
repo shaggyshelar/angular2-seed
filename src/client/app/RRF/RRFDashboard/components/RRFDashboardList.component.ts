@@ -425,9 +425,8 @@ export class RRFDashboardListComponent implements OnActivate {
         this.setDefaultcloseRRFID();
         this.closeComment = '';
     }
-    onCloseRRFClick(RRFID:MasterData) {
-        //To Do: Need to change API
-        this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment, this.reason)
+    onDeleteRRFClick(RRFID:MasterData) {
+        this._rrfDashboardService.deleteRRF(RRFID)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
