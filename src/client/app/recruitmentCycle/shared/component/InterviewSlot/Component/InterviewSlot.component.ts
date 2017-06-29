@@ -54,9 +54,9 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
                      this.meta[index].InterviewerCalendarID.Id = 0;
                      this.meta[index].InterviewerCalendarID.Value = '';
                  }
-                       }
+                    
                 newAddedCalenderSlot.push(this.meta[index]);
-      
+         }
           // }
         }
         if (newAddedCalenderSlot.length > 0) {
