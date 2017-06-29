@@ -128,7 +128,8 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
             });
         }
         if (e.event.title === '') {
-            let fromTimeLabel: string = e.event.title + ' From :' + StartTime + ' To ' + EndTime;
+            var providedTitle = "No Slot Title";
+            let fromTimeLabel: string = providedTitle +' '+ '|' +' From :' + StartTime + ' To ' + EndTime;
             element.tooltip({
                 title: fromTimeLabel
             });

@@ -315,10 +315,12 @@ export class RRFCandidateListComponent implements OnActivate {
                             this.IsOffered = false;
                             this.IsHRConducted = false;
                         }
-                    } else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted' ||
-                        status.toLowerCase() === 'joined') {
+                    }else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted') {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
+                    }else if(status.toLowerCase() === 'joined'){
+                        this.IsOffered = false;
+                            this.IsHRConducted = false;
                     } else {
                         this.IsOffered = false;
                         this.IsHRConducted = false;
