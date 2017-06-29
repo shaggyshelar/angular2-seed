@@ -369,26 +369,41 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-1">
                                                             <div class="form-group">
                                                                 <label class="control-label">Serving NP</label>
                                                                 <div class="row">
                                                                     <div class="col-md-1">
-                                                                        <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="3" />
+                                                                        <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="3" 
+                                                                        (change)="onServingNP(profile.CandidateOtherDetails.ServingNoticePeriod)"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-3 inlineForm">
+                                                        <div class="col-md-3" *ngIf="regDateShow">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Resigning Date</label>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <input type="date" [min]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" tabindex="24" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <div class="col-md-1 inlineForm">
                                                             <div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
                                                                 <input type="file" class="upload" (change)="uploadFile($event)" />
                                                                 <i class="fa fa-file-text"></i><span> </span>
                                                             </div>
-                                                            <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 66%" [disabled]="IsDisable"> Save</button>
-                                                            <br>
+                                                            <!--<button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 66%" [disabled]="IsDisable"> Save</button>
+                                                            <br>-->
                                                             <span class="row" *ngIf='fileUploaded' style="word-wrap: break-word;"> {{fileName}}</span>
 
                                                         </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;" [disabled]="IsDisable"> Save</button>
+                                                            <br>
                                                     </div>
                                                     <!--</div>
 																		</div>-->

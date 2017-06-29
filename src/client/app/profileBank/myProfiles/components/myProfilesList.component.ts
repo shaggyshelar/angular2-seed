@@ -6,7 +6,8 @@ import {
     AddCandidateResponse,
     AllCandidateProfiles,
     CareerProfile,
-    MailDetails
+    MailDetails,
+    OtherDetails
 } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { BlackListedProfilesService } from '../../blackListedProfiles/services/blacklistedProfiles.service';
@@ -101,6 +102,8 @@ export class MyProfilesListComponent implements OnActivate {
     modelFilterByProfile: string = 'all';
     cachedProfileList: any[] = [];
     showRrfFilter: boolean = false;
+    regDateShow: boolean = false;
+    
     public noticePeriod: any = [{ 'Id': 15, 'Value': "15" }, { 'Id': 30, 'Value': "30" }, { 'Id': 45, 'Value': "45" }, { 'Id': 60, 'Value': "60" }, { 'Id': 90, 'Value': "90" }];
     constructor(private _myProfilesService: MyProfilesService,
         private _blacklistedProfilesService: BlackListedProfilesService,
@@ -116,6 +119,8 @@ export class MyProfilesListComponent implements OnActivate {
         this.resumeFiles = new Array<File>();
         this.profile = new CandidateProfile();
         this.profile.CandidateCareerProfile = new CareerProfile();
+        this.profile.CandidateOtherDetails = new OtherDetails();
+        this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
         this.resumeMeta = new ResumeMeta();
         this.selectedCandidates = new Array<Candidate>();
         this.Candidate = new Candidate();
@@ -988,6 +993,15 @@ export class MyProfilesListComponent implements OnActivate {
     }
     onNoticePeriod(id: any) {
         this.profile.CandidateOtherDetails.NoticePeriod = id;
+    }
+    onServingNP(isChecked: any) {
+        if (isChecked === false) {
+            this.regDateShow = true;
+            this.profile.CandidateOtherDetails.ServingNoticePeriod = true;
+        } else {
+            this.regDateShow = false;
+             this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
+        }
     }
 }
 

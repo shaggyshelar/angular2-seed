@@ -354,7 +354,6 @@ export class MyProfilesAddComponent implements OnActivate {
                  if (this.profile.CandidateOtherDetails.ServingNoticePeriod === true) {
                     this.regDateShow = true;
                     this.totalDays(this.CandidateOtherDetails.ResigningDate);
-                    this.CandidateOtherDetails.ResigningDate = new Date(this.CandidateOtherDetails.ResigningDate);
 
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
@@ -1360,6 +1359,7 @@ export class MyProfilesAddComponent implements OnActivate {
         if (date !== undefined)
            this.NPdays = this.totalDaysCount(new Date(date), new Date());
            this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
+           this.profile.CandidateOtherDetails.ResigningDate = date;
            this.onSavePrimaryInfo();
     }
 
