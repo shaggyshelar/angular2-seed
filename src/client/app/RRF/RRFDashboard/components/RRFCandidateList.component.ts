@@ -18,6 +18,8 @@ import { Interview} from '../../../recruitmentCycle/shared/model/interview';
 import { RRFDetails } from '../../myRRF/models/rrfDetails';
 import { ProfileBankService} from  '../../../profileBank/shared/services/profileBank.service';
 import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.directive';
+import { MyScheduleInterview } from '../../../recruitmentCycle/interviewersTab/model/myScheduleInterview';
+import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/IEFGridRow/IEFGridRow.component';
 @Component({
     moduleId: module.id,
     selector: 'rrf-candidate-list',
@@ -28,7 +30,8 @@ import { IfAuthorizeDirective} from '../../../shared/directives/ifAuthorize.dire
         CHART_DIRECTIVES,
         CAROUSEL_DIRECTIVES,
         BUTTON_DIRECTIVES,
-        IfAuthorizeDirective
+        IfAuthorizeDirective,
+        IEFGridRowComponent
     ],
     styleUrls: ['RRFDashboard.component.css'],
     providers: [ProfileBankService, ToastsManager]
@@ -50,8 +53,12 @@ export class RRFCandidateListComponent implements OnActivate {
     TransferInterviewID: MasterData = new MasterData();
     TransferInterviewDetails: TransferInterview = new TransferInterview();
     /**---------END Transfer Candidate--------------- */
-
+ InterviewHistory: MyScheduleInterview[] = [];
+ viewIEFText: string = 'View IEF';
+    hideIEFText: string = 'Hide IEF';
+    IEFButtonText: string = '';
     isNull: boolean = false;
+    interviewId:string='';
     Candidate: string = 'Jhone DEF';
     doughnutChartLabels: string[] = [];
     doughnutChartData: number[] = [];
@@ -129,7 +136,7 @@ export class RRFCandidateListComponent implements OnActivate {
     routerOnActivate(segment: RouteSegment) {
         this.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
         this.RRFID.Value = (segment.getParam('id')).split('ID')[0];
-
+this.IEFButtonText = this.viewIEFText;
         this.doughnutChartLabels = ['Technical 1', 'HR'];
         this.doughnutChartData = [50, 50];
         this.doughnutChartColors = [{ backgroundColor: ['#E9EF0B', '#32c5d2'] }];
@@ -266,6 +273,18 @@ export class RRFCandidateListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
+    
+    onIEFClick(myScheduleInterview: MyScheduleInterview) {
+        myScheduleInterview.showIEF = !myScheduleInterview.showIEF;
+        this.setIEFButtonText(myScheduleInterview);
+    }
+     setIEFButtonText(myScheduleInterview: MyScheduleInterview) {
+        if (myScheduleInterview.showIEF) {
+            myScheduleInterview.IEFButtonText = this.hideIEFText;
+        } else {
+            myScheduleInterview.IEFButtonText = this.viewIEFText;
+        }
+    }
      getInProcessCanidatesForRRF() {
         this.CandidateRoundHistory = new Array<Interview>();
         this.IsBarchartDataShow = false;
@@ -290,6 +309,7 @@ export class RRFCandidateListComponent implements OnActivate {
     }
 
     getCandidatesRoundHistory(CandidateID: MasterData, CandidateName: string, status: string) {
+         this.IEFButtonText = this.viewIEFText;
         this.IsOfferGenerate = false;
         this.IsUpdateStatus = false;
         this.showChangeStatus = false;
@@ -315,7 +335,7 @@ export class RRFCandidateListComponent implements OnActivate {
                             this.IsOffered = false;
                             this.IsHRConducted = false;
                         }
-                    }else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted') {
+                    } else if (status.toLowerCase() === 'offered' || status.toLowerCase() === 'offer accepted') {
                         this.IsOffered = true;
                         this.IsHRConducted = false;
                     }else if(status.toLowerCase() === 'joined'){

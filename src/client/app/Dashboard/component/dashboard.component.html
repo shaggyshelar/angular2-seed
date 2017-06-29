@@ -570,13 +570,13 @@
                                                     </div>
                                                     <div class="row">
                                                             <div class="col-md-5">
-                                                                <b>Designation : </b>{{profile.RRFDetails.Designation?profile.RRFDetails.Designation.Value:"N/A"}}
+                                                                <b>Designation : </b>{{profile.RRFDetails?profile.RRFDetails.Designation?profile.RRFDetails.Designation.Value:"N/A":"N/A"}}
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <b>Offered Date : </b>{{formatDate(profile.OfferedDate)}}
                                                             </div>
                                                             <div class="col-md-3">
-                                                                <b>Department : </b>{{profile.RRFDetails.Department?profile.RRFDetails.Department.Value:"N/A"}}
+                                                                <b>Department : </b>{{profile.RRFDetails?profile.RRFDetails.Department?profile.RRFDetails.Department.Value:"N/A":"N/A"}}
                                                             </div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
