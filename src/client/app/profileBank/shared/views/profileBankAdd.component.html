@@ -1825,26 +1825,28 @@
                                                                     </div>-->
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="12" (change)="onSavePrimaryInfo()" />
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="12" 
+                                                                            (change)="onServingNP(profile.CandidateOtherDetails.ServingNoticePeriod)" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-2" *ngIf="regDateShow">
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Resigning Date <span class="required"> * </span></label>
+                                                                    <label class="control-label">Resigning Date</label>
                                                                     <div class="row">
                                                                         <div class="col-md-12">
-                                                                            <input type="date" [min]="currentDate" name="bday" id="fromDate" (change)="totalDays($event.target.value)" tabindex="24" />
+                                                                            <input type="date" [min]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" (change)="totalDays($event.target.value)" tabindex="24" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-2" *ngIf="regDateShow">
                                                                 <div class="form-group">
                                                                     <label class="control-label"></label>
                                                                     <div class="row">
                                                                         <div class="col-md-12">
+                                                                            <!--[(ngModel)]="profile.CandidateOtherDetails.CanJoinIn"-->
                                                                             <span>Can Join In : {{NPdays}} days</span>
                                                                         </div>
                                                                     </div>

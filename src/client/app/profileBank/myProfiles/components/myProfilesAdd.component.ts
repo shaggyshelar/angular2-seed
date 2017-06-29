@@ -82,6 +82,7 @@ export class MyProfilesAddComponent implements OnActivate {
     readyToRelocateFlag: boolean = false;
     reasonToRelocateFlag: boolean = false;
     OfferInHand: boolean = false;
+    regDateShow: boolean = false;
     VariableCTC: boolean = false;
     AllowanceFlag: boolean = false;
     IncentiveFlag: boolean = false;
@@ -349,6 +350,12 @@ export class MyProfilesAddComponent implements OnActivate {
                     this.showEmp = true;
                     this.showResource = false;
                     //this.getReferenceEmployee();
+                }
+                 if (this.profile.CandidateOtherDetails.ServingNoticePeriod === true) {
+                    this.regDateShow = true;
+                    this.totalDays(this.CandidateOtherDetails.ResigningDate);
+                    this.CandidateOtherDetails.ResigningDate = new Date(this.CandidateOtherDetails.ResigningDate);
+
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
@@ -1056,6 +1063,16 @@ export class MyProfilesAddComponent implements OnActivate {
         }
         this.onSaveProfessionalDetails();
     }
+    onServingNP(isChecked: any) {
+        if (isChecked === false) {
+            this.regDateShow = true;
+            this.profile.CandidateOtherDetails.ServingNoticePeriod = true;
+        } else {
+            this.regDateShow = false;
+             this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
+        }
+        this.onSavePrimaryInfo();
+    }
     onAppliedEarlier(isChecked: any) {
         if (isChecked === false) {
             this.profile.CandidateOtherDetails.AppliedEarlier = true;
@@ -1342,7 +1359,9 @@ export class MyProfilesAddComponent implements OnActivate {
     totalDays(date: any){ 
         if (date !== undefined)
            this.NPdays = this.totalDaysCount(new Date(date), new Date());
-        }
+           this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
+           this.onSavePrimaryInfo();
+    }
 
 
     }

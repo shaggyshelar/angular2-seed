@@ -236,6 +236,10 @@
 													 tooltipPlacement="top" tooltipTrigger="mouseenter" title="Close RRF" tooltipEnable="true" [disabled]='getCloseRRFAccess(rrf.RaisedBy,rrf.Status.Id)'>
                                                             <i class="fa fa-times "></i> <!--Close RRF  [disabled]='allowCloseRRF(rrf.Status.Id)'-->
                                                         </button>
+														<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='onDeleteRRFClick(rrf.RRFID)' tooltip="Delete RRF"
+													 tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete RRF" tooltipEnable="true" [disabled]='getDeleteRRFAccess(rrf.RaisedBy,rrf.Status.Id)'>
+                                                            <i class="fa fa-trash"></i> <!--Close RRF  [disabled]='allowCloseRRF(rrf.Status.Id)'-->
+                                                        </button>
 												</div>
 											</div>
 											<!--<RRFGridRow [RRFData]=rrf [displayApproval]='displayApproval' [displayAssignedTo]='displayAssignedTo' ></RRFGridRow>-->

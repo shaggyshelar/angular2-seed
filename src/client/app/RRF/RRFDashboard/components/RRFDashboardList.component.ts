@@ -425,6 +425,21 @@ export class RRFDashboardListComponent implements OnActivate {
         this.setDefaultcloseRRFID();
         this.closeComment = '';
     }
+    onCloseRRFClick(RRFID:MasterData) {
+        //To Do: Need to change API
+        this._rrfDashboardService.closeRRF(this.closeRRFID, this.closeComment, this.reason)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.rrfStatusCount = <any>results;
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.showListOfRRF();
+            },
+            error => this.errorMessage = <any>error);
+    }
 
     setDefaultcloseRRFID() {
         this.closeRRFID.Id = 0;
@@ -587,6 +602,17 @@ export class RRFDashboardListComponent implements OnActivate {
     getCloseRRFAccess(Owner: MasterData, statusId: number) {
         try {
             if (Owner.Id === this.logedInUser.Id && (statusId === RRFStatus.Open || statusId === RRFStatus.Assigned)) {
+                return false;
+            } else { return true; }
+        } catch (error) {
+            this.toastr.error(error);
+            return false;
+        }
+
+    }
+    getDeleteRRFAccess(Owner: MasterData, statusId: number) {
+        try {
+            if (Owner.Id === this.logedInUser.Id && (statusId === RRFStatus.PendingApproval)) {
                 return false;
             } else { return true; }
         } catch (error) {
