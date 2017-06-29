@@ -948,7 +948,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this.cachedProfileList = [];
             });
     }
-
+    // commmited
     showNewProfileModal() {
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });
