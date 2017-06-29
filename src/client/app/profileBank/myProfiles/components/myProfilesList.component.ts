@@ -55,6 +55,7 @@ export class MyProfilesListComponent implements OnActivate {
     currentStatus: number;
     currentCandidate: string;
     selectedRowCount: number = 0;
+    selectedAll:boolean;
     allChecked: boolean = false;
     isCollapsed: boolean = false;
     isUpdateStatusCollapsed: boolean = false;
@@ -427,15 +428,28 @@ export class MyProfilesListComponent implements OnActivate {
     closeUpdateStatus() {
         this.isUpdateStatusCollapsed = false;
     }
+ selectAll() {
+    for (var i = 0; i < this.myProfilesList.Profiles.length; i++) {
+        this.myProfilesList.Profiles[i].IsChecked=!this.selectedAll;
+        if(!this.selectedAll){
+  this.selectedRowCount = this.myProfilesList.Profiles.length;
+        }
+        else{
+            this.selectedRowCount=null;
+        }
+    }
+  }
 
     onStateChange(e: any): void {
         if (e.target.checked) {
             this.selectedRowCount++;
         } else {
             this.selectedRowCount--;
+            if(this.selectedRowCount==0){
+                this.selectedAll=false;
+            }
         }
-
-        if (this.selectedRowCount === this.myProfilesList.Profiles.length) {
+       if (this.selectedRowCount === this.myProfilesList.Profiles.length) {
             this.allChecked = true;
         } else {
             this.allChecked = false;

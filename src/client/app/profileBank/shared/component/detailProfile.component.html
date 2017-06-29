@@ -55,8 +55,9 @@
 						</h6>
 					<a class="btn red mt-ladda-btn ladda-button btn-circle btn-outline" href="tel:{{profile.PrimaryContact}}"><i class="fa fa-phone"></i> {{profile.PrimaryContact?profile.PrimaryContact:"N/A"}}</a>
 					<a *ngIf="profile.ResumeID" style="float: right;" (click)='getResume(profile.CandidateID)'
-						class="btn green mt-ladda-btn ladda-button btn-circle btn-outline reload" data-original-title="" title="">
-						<i style="margin-right: 5px;" aria-hidden="true" class="fa fa-download"></i>Download Resume {{profile.Resume_ID}}  
+						class="btn green mt-ladda-btn ladda-button btn-circle btn-outline reload" data-original-title="" title="" tooltip="Download Resume"
+							tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+						<i style="margin-right: 5px;" aria-hidden="true" class="fa fa-download"></i>Resume
 					</a>
 					<!--<p>
 						<a class="sbold" href="mailto:{{profile.Email}}">{{profile.Email?profile.Email:"N/A"}} </a>

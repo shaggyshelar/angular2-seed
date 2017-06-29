@@ -42,7 +42,7 @@
             </div>
             <div class="col-lg-4">
                 Openings : {{RRFData.NoOfOpenings}}
-                <br>Expected Date of Joining : {{formatDate(RRFData.ExpDateOfJoining) }}
+                <br>Expected DOJ : {{formatDate(RRFData.ExpDateOfJoining) }}
             </div>
         </div>
 
@@ -76,12 +76,12 @@
 </div>->
     </div>-->
 
-    <div style="margin-top: 7px;">
+    <div *ngIf="showCompleteDetails" style="margin-top: 7px;">
         <b>Skills</b>:
         <label *ngFor="let skill of RRFData.SkillsRequired ">{{skill.Value}} &#44;&nbsp;</label>
     </div>
 
-    <div class="row" style="margin-top: 7px;">
+    <div *ngIf="showCompleteDetails" class="row" style="margin-top: 7px;">
         <!--<div>-->
         <!--<b style="margin-left: 15px;">Job Description</b>: {{RRFData.Description}}-->
         <label style="margin-left: 15px; margin-right:20px;"><b>Job Description</b>: {{RRFData.Description}}</label>

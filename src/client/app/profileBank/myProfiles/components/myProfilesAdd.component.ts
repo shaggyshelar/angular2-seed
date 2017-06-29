@@ -8,12 +8,13 @@ import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI, InHandOffer } from '../../../shared/model/index';
+import { Resume } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult } from '../../../shared/constantValue/index';
 import { ProfileBankService } from '../../shared/services/profileBank.service';
 import { DropdownMultiSelectComponent } from '../../../shared/components/dropdownMultiSelect/dropdownMultiSelect.component';
 import { Location } from '@angular/common';
-
+import {AllCandidateProfiles} from '../../shared/model/myProfilesInfo';
 @Component({
     moduleId: module.id,
     selector: 'rrf-myprofiles-add',
@@ -23,6 +24,9 @@ import { Location } from '@angular/common';
 })
 
 export class MyProfilesAddComponent implements OnActivate {
+    currentDate:string;
+    currentMonthDate:string;
+    binaryResume: Resume;
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
     qualification: Qualification;
@@ -64,6 +68,15 @@ export class MyProfilesAddComponent implements OnActivate {
     fileName: string;
     resumeMeta: ResumeMeta;
     profilePhoto: string;
+    psdTemplates: any;
+    seletedCandidateIDForUpload: MasterData = new MasterData();
+    myProfilesList: AllCandidateProfiles = new AllCandidateProfiles();
+    isUploadPanelCollapsed: boolean = false;
+    isCollapsed: boolean = false;
+    isCommentsPanelCollapsed: boolean = false;
+    isUpdateStatusCollapsed: boolean = false;
+    cachedProfileList: any[] = [];
+    NORECORDSFOUND: boolean = false;
     /** For profile picture */
     profilePic: any;
     readyToRelocateFlag: boolean = false;
@@ -88,6 +101,7 @@ export class MyProfilesAddComponent implements OnActivate {
     public showLiecence: boolean = false;
     public showResource: boolean = false;
     public showEmp: boolean = false;
+    public NPdays:number = 0;
     entries: InHandOffer[];
     inHandOffer: InHandOffer;
     inHandOfferAction: any = { action: 'Add', index: -999 };
@@ -118,6 +132,8 @@ export class MyProfilesAddComponent implements OnActivate {
         this.uploadedPhoto = new Array<File>();
         this.entries = [];
         this.initInHandOffer();
+        this.psdTemplates = new Array<File>();
+             this.setMinDateToCalender();
 
     }
 
@@ -151,6 +167,96 @@ export class MyProfilesAddComponent implements OnActivate {
     addTechnicalSkill(SkillInput: any) {
         this.profile.CandidateSkills.TechnicalSkills = [];
         this.profile.CandidateSkills.TechnicalSkills = SkillInput;
+    }
+      uploadFile(inputValue: any): void {
+        try {
+            let FileList: FileList = inputValue.target.files;
+            if (inputValue.target.files[0].size < 2000000) {
+                if (inputValue.target.files[0].type === 'application/pdf'
+                    || inputValue.target.files[0].name.split('.')[1] === 'docx' ||
+                    inputValue.target.files[0].name.split('.')[1] === 'doc') {
+                    this.psdTemplates.length = 0;
+                    for (let i = 0, length = FileList.length; i < length; i++) {
+                        this.psdTemplates.push(FileList.item(i));
+                        this.fileUploaded = true;
+                        this.fileName = FileList.item(i).name;
+                    }
+                     if (this.fileName !== '' || this.fileName !== undefined) {
+                        this.uploadResume(this.CandidateID, this.psdTemplates[0]);
+                    }
+                } else {
+                    this.toastr.error('Please upload document of type .doc, .docx, .pdf');
+                }
+            } else {
+                this.toastr.error('Please upload document of size less than 2 MB');
+            }
+        } catch (error) {
+            document.write(error);
+        }
+
+    }
+    
+    uploadResume(CandidateLookupId: MasterData, File: any) {
+        this.resumeMeta.CandidateID = CandidateLookupId;
+        this.resumeMeta.Overwrite = false;
+        this.resumeMeta.Profile = File;
+        this._myProfilesService.upload(this.resumeMeta).then(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.fileUploaded = false;
+                    this.fileName = '';
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            (error: any) => this.errorMessage = <any>error);
+    }
+        getMyProfiles() {
+        this._myProfilesService.getMyProfiles(this.myProfilesList.GrdOperations)
+            .subscribe(
+            (results: any) => {
+                if (results.Profiles !== null && results.Profiles !== undefined && results.Profiles.length > 0) {
+                    this.myProfilesList = <any>results;
+                    this.cachedProfileList = <any>results.Profiles;
+                    this.NORECORDSFOUND = false;
+                } else { this.NORECORDSFOUND = true; }
+            },
+            error => this.errorMessage = <any>error);
+    }
+      getResume(candidateID: MasterData) {
+        this._profileBankService.getResume(candidateID)
+            .subscribe(
+            results => {
+                this.binaryResume = <any>results;
+                if (this.binaryResume) {
+                    this.Download(this.binaryResume.BinaryResume, this.binaryResume.ResumeName);
+                } else { alert('Resume not available!'); }
+            },
+            error => this.errorMessage = <any>error);
+    }
+    Download(binaryResume: string, ResumeName: string) {
+        var link = document.createElement('a');
+        link.download = ResumeName;
+        link.href = 'data:application/octet-stream;charset=utf-8;base64,' + binaryResume;
+        link.click();
+    }
+     onClickUploadResume(CandidateId: MasterData) {
+        window.scrollTo(0, 40);
+        this.seletedCandidateIDForUpload = CandidateId;
+        var index = _.findIndex(this.myProfilesList.Profiles, { CandidateID: this.seletedCandidateIDForUpload });
+        this.profile.Candidate = this.myProfilesList.Profiles[index].Candidate;
+        if (this.isUploadPanelCollapsed === false)
+            this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
+        //Close Other Panel
+        if (this.isCollapsed === true)
+            this.isCollapsed = !this.isCollapsed;
+        if (this.isCommentsPanelCollapsed === true)
+            this.isCommentsPanelCollapsed = !this.isCommentsPanelCollapsed;
+        if (this.isUpdateStatusCollapsed === true)
+            this.isUpdateStatusCollapsed = !this.isUpdateStatusCollapsed;
+
     }
     addSoftSkill(SkillInput: any) {
         this.profile.CandidateSkills.SoftSkills = [];
@@ -1213,5 +1319,31 @@ export class MyProfilesAddComponent implements OnActivate {
     editFromList(index: any) {
         this.inHandOffer = this.entries[index];
         this.inHandOfferAction = { action: 'Edit', index: index };
+    }
+    totalDaysCount(d1: Date, d2: Date) {
+        var timeDiff = Math.abs(d2.getTime() - d1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+        return diffDays;
+    }
+    
+      setMinDateToCalender() {
+        var todayDate = new Date();
+        this.currentDate = (<any>this.formatDate(todayDate));
+        this.currentMonthDate =(<any>this.formatDateByMonth(todayDate));
+    }
+      formatDateByMonth(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+    
+        return [year,month].join('-');
+    }
+    totalDays(date: any){ 
+        if (date !== undefined)
+           this.NPdays = this.totalDaysCount(new Date(date), new Date());
+        }
+
+
     }
 }

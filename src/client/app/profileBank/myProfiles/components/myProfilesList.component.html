@@ -28,7 +28,9 @@
 
                                 <div class="col-md-8">
                                     <div class="dt-buttons pull-right toolbar-actions toolbar-spacing">
-
+                                    
+                                        <span *ngIf="selectedRowCount > 0" style="font-size: 14px; margin-left: 20px !important;"> Selected Count : <strong>{{selectedRowCount}}</strong></span>
+                                    
                                         <button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing blue' : 'btn btn-default btn-circle btnLink toolbar-spacing' " (click)='openMailWindow()' [disabled]='!selectedRowCount' data-toggle="tooltip" data-placement="bottom"
                                             title="Send Mails " tooltip="Send Mails " tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false" style="border-radius: 5px !important;">
 													<i class="fa fa-envelope-o"></i>   
@@ -138,12 +140,11 @@
 											</label>
                                         </div>
                                     </div>
-
-                                    <div style="margin-top: 25px !important;">
-                                        <span *ngIf="selectedRowCount > 0" style="font-size: 14px;"> Selected Profile Count : <strong>{{selectedRowCount}}</strong></span>
-                                    </div>
-
-
+   <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px; margin-top: 25px !important; ">
+                                        <input type="checkbox" value="1" class="checkboxes" [(ngModel)]="selectedAll" (change)="selectAll();" data-toggle="tooltip" data-placement="bottom" title="Select All" tooltip="Select All" tooltipPlacement="bottom"
+                                            tooltipTrigger="mouseenter" tooltipEnable="false" title="Select All"/>
+                                            <span style="margin-left: 4px !important;"> </span>Select All
+                                            </label>
                                 </div>
                             </div>
                         </div>

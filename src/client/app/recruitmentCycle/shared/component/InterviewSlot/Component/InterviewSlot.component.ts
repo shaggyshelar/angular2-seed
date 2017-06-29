@@ -21,7 +21,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
     meta: CalenderSlot[] = [];
     errorMessage: string = '';
     mindate: Date;
-
+    isDisable : boolean=true;
     constructor(private _router: Router,
         private _interviewSlotService: InterviewSlotService,
         public toastr: ToastsManager) {
@@ -45,17 +45,19 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
             this.toastr.error('From date should be less than To date');
             return;
         }
-
+ this.isDisable=true;
         var newAddedCalenderSlot: CalenderSlot[] = [];
         for (var index = 0; index < this.meta.length; index++) {
             if (this.meta[index].ID === undefined) {
 
                 for (var i = 0; i < this.meta[index].CalendarDetails.length; i++) {
-                    this.meta[index].CalendarDetails[i].Status = 'Available';
-                }
+                     this.meta[index].InterviewerCalendarID.Id = 0;
+                     this.meta[index].InterviewerCalendarID.Value = '';
+                 }
+                       }
                 newAddedCalenderSlot.push(this.meta[index]);
-
-            }
+      
+          // }
         }
         if (newAddedCalenderSlot.length > 0) {
             this._interviewSlotService.SaveCalenderSlot(newAddedCalenderSlot)
@@ -70,6 +72,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
                 },
                 error => this.errorMessage = <any>error);
         }
+        
     }
 
     getRRFSlot() {
@@ -99,6 +102,11 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
         var calendarDtls: CalenderDetails = new CalenderDetails();
         calenderSlot.CalendarDetails.push(calendarDtls);
         this.meta.push(calenderSlot);
+    }
+    updateSlot(){
+       
+       this.isDisable=false;
+       
     }
     removeSlot(slotTobeRemove: number) {
         for (var index = 0; index < this.meta.length; index++) {

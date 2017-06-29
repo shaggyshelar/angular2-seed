@@ -118,6 +118,7 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
     }
     //Shows Tooltip on calendar
     showDetails(e: any) {
+        if(e.event.end != null){
         var StartTime = e.event.start.format('hh:mm A');
         var EndTime = e.event.end.format('hh:mm A');
         let element: any = $(e.element);
@@ -127,10 +128,12 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
             });
         }
         if (e.event.title === '') {
-            let fromTimeLabel: string = e.event.title + ' From :' + StartTime + ' To ' + EndTime;
+            var providedTitle = "No Slot Title";
+            let fromTimeLabel: string = providedTitle +' '+ '|' +' From :' + StartTime + ' To ' + EndTime;
             element.tooltip({
                 title: fromTimeLabel
             });
+        }
         }
     }
 

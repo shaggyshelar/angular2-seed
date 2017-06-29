@@ -24,7 +24,7 @@ export class PanelsAvailabilityService {
         //TODO: Change URL after discussion with backend
         //let url = '';
         //let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewersAvalabilityForRRF');
-        let url = Config.GetURL('/api/RecruitmentCycle/ScheduleCandidateInterview');
+        let url = Config.GetURL('/api/RecruitmentCycle/InterviewerAvailability');
         this._spinnerService.show();
         return this.authHttp.post(url, { Interviewer: Interviewer })
             .map(this.extractData)

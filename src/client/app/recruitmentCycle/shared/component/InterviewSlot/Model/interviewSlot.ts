@@ -3,7 +3,7 @@ import { MasterData  } from '../../../../../shared/model/common.model';
 export class CalenderSlot {
     public ID :number;
     public RRFID: MasterData = new MasterData();
-    public InterviewCalendarID :  MasterData = new MasterData();
+    public InterviewerCalendarID :  MasterData = new MasterData();
     public Title: string;
     public StartDate: Date;
     public EndDate: Date;

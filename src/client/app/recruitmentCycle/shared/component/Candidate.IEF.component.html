@@ -114,9 +114,9 @@
                                 </div>
                                 <div class="col-md-2">
                                     <select style=" margin-bottom : 10px;" class="form-control" [(ngModel)]='iefStatus' required (ngModelChange)="ifRejected($event)">
-                                        <option>Selected</option>
-                                        <option>Rejected</option>
-                                        <option *ngIf='!isChangeStatusReq'>On Hold</option>
+                                        <option value="Selected">Select</option>
+                                        <option value="Rejected">Reject</option>
+                                        <option value="On Hold" *ngIf='!isChangeStatusReq'>On Hold</option>
                                     </select>
                                     <select *ngIf="showRejectReasons" class="form-control" required (change)="rejectReasonSet($event)">
                                         <option *ngFor="let reason of rejectReasons; let i = index" [value]="reason.Value">{{reason.Value}}</option>
@@ -124,7 +124,7 @@
                                 </div>
                                 <label class="control-label col-md-2">General Comments<span class="required">*</span>:</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control" required id="txtComment" rows="3" minlength="50" maxlength="500" placeholder="Enter comment (Max 500 characters)..." style="resize:vertical" [(ngModel)]='iefComments'></textarea>
+                                    <textarea class="form-control" required id="txtComment" rows="3" minlength="50" maxlength="500" placeholder="Enter comment (Min 50 and Max 500 characters)..." style="resize:vertical" [(ngModel)]='iefComments'></textarea>
                                 </div>
                             </div>
                             <!--</form>-->
