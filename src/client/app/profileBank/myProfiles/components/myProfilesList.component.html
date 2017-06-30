@@ -254,6 +254,32 @@
                         </div>
 
                         <!-- Black List Profile END-->
+
+                        <!-- BEGIN status update form-->
+                            <div class="row" *ngIf='isUpdateStatusCollapsed'>
+                            <span class="header">Update Status</span>
+                            <hr style="margin:10px 0px !important" />
+                            <form (submit)="onUpdateStauts();">
+                            	<div class="form-group col-md-3">
+                            		<div class="dataTables_length" id="sample_1_length">
+                                        <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
+                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus" style="width: 159px!important;">
+                                                   <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
+                                                </select>
+
+                            </div>
+                            </div>
+
+                            <div class="col-md-5">
+                            	<div>
+                            		<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+                            		<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button> &nbsp;
+                            	</div>
+                            </div>
+                            </form>
+                            </div>
+                        <!-- END status update form-->
+
                         <!--commited-->
                         <!-- Modal Start -->
                         <!--Begin Count Details box-->
@@ -362,7 +388,7 @@
 														</div>-->
                                                         <div class="col-md-2">
                                                             <div class="form-group">
-                                                                <label class="control-label">Notice</label>
+                                                                <label class="control-label">Notice Period</label>
                                                                 <div class="row ">
                                                                     <div class="col-md-12">
                                                                         <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)">

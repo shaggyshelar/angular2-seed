@@ -392,6 +392,9 @@ export class MyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
         this.isCollapsed = false;
     }
+    onCancelStatus () {
+        this.isUpdateStatusCollapsed = false;
+    }    
     onBlackListProfile() {
         this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
             .subscribe(
