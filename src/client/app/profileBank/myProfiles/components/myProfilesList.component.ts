@@ -886,6 +886,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.filterByProfile();
+                      this.NORECORDSFOUND =false;
+                     this.NORECORDS = true;
                 } else {
                     this.NORECORDSFOUND = true;
                      this.NORECORDS = false;
@@ -909,6 +911,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.filterByProfile();
+                    this.NORECORDSFOUND = false;
+                      this.NORECORDS = true;
                 } else {
                     this.NORECORDSFOUND = true;
                     this.myProfilesList = new AllCandidateProfiles();
@@ -920,6 +924,7 @@ export class MyProfilesListComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(this.errorMessage);
                 this.NORECORDSFOUND = true;
+                      this.NORECORDS = false;
                 this.myProfilesList = new AllCandidateProfiles();
                 this.cachedProfileList = [];
             });
@@ -932,6 +937,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.filterByProfile();
+                        this.NORECORDSFOUND = false; 
+                           this.NORECORDS = true;
                 } else {
                     //this.NORECORDSFOUND = true;
                     this.NORECORDSFOUND = true; 

@@ -15,6 +15,6 @@ export class CalenderDetails {
     CalendarDate: Date;
     StartTime: string;
     EndTime: string;
-    Status: string;
+    Status: string = "Available";
 }
 

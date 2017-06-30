@@ -1837,7 +1837,7 @@
                                                                     <label class="control-label">Resigning Date</label>
                                                                     <div class="row">
                                                                         <div class="col-md-12">
-                                                                            <input type="date" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" (change)="totalDays($event.target.value)" tabindex="24" />
+                                                                            <input type="date" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" (change)="totalDays($event.target.value)" tabindex="13" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1869,7 +1869,7 @@
                                                                     </div>-->
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" tabindex="13" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)" />
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" tabindex="14" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1894,13 +1894,13 @@
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Role Expected </label>
-                                                                    <input type="text" placeholder="Role Expected" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.RoleExpected" (blur)="onSaveProfessionalDetails()" tabindex="14" />
+                                                                    <input type="text" placeholder="Role Expected" class="form-control text-capitalize" [(ngModel)]="profile.CandidateOtherDetails.RoleExpected" (blur)="onSaveProfessionalDetails()" tabindex="15" />
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Comments</label>
-                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Team management, Bond/Contract" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience" (blur)='onSaveTeamManagementDetails()' tabindex="15"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Team management, Bond/Contract" style="resize:vertical" [(ngModel)]="profile.CandidateTeamManagement.TeamHandlingExperience" (blur)='onSaveTeamManagementDetails()' tabindex="16"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -1930,7 +1930,7 @@
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Appraisal</label>
-                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Appraisal Details" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails" (blur)="onSaveProfessionalDetails()" tabindex="16"></textarea>
+                                                                    <textarea class="form-control text-capitalize" rows="2" placeholder="Appraisal Details" style="resize:vertical" [(ngModel)]="profile.CandidateOtherDetails.AppraisalBondContractDetails" (blur)="onSaveProfessionalDetails()" tabindex="17"></textarea>
                                                                 </div>
                                                             </div>
 
@@ -1951,24 +1951,24 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Company Name <span class="required"> * </span></label>
-                                                                                    <input type="Text" placeholder="Company Name" class="form-control text-capitalize" title="Please enter company name" tooltip="Company Name" required tooltipPlacement="top" [(ngModel)]="inHandOffer.Company" tabindex="17" />
+                                                                                    <input type="Text" placeholder="Company Name" class="form-control text-capitalize" title="Please enter company name" tooltip="Company Name" required tooltipPlacement="top" [(ngModel)]="inHandOffer.Company" tabindex="18" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Designation <span class="required"> * </span></label>
-                                                                                    <input type="Text" placeholder="Designation" class="form-control text-capitalize" title="Please enter designation offered" required tooltip="Designation" tooltipPlacement="top" [(ngModel)]="inHandOffer.Designation" tabindex="18" />
+                                                                                    <input type="Text" placeholder="Designation" class="form-control text-capitalize" title="Please enter designation offered" required tooltip="Designation" tooltipPlacement="top" [(ngModel)]="inHandOffer.Designation" tabindex="19" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Salary <small>(In Lakhs)</small><span class="required"> * </span></label>
-                                                                                    <input type="number" min="0" placeholder="Salary" class="form-control text-capitalize" title="Please enter salary offered" tooltip="Salary" required tooltipPlacement="top" step="0.1" [(ngModel)]="inHandOffer.Salary" tabindex="19" />
+                                                                                    <input type="number" min="0" placeholder="Salary" class="form-control text-capitalize" title="Please enter salary offered" tooltip="Salary" required tooltipPlacement="top" step="0.1" [(ngModel)]="inHandOffer.Salary" tabindex="20" />
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-3">
-                                                                                <button type="submit" *ngIf="inHandOfferAction.action === 'Edit'" class="btn green" style="margin-top: 25px;" tabindex="20">Update</button>
-                                                                                <button type="submit" *ngIf="inHandOfferAction.action === 'Add'" class="btn green" style="margin-top: 25px;" tabindex="20">Add</button>
+                                                                                <button type="submit" *ngIf="inHandOfferAction.action === 'Edit'" class="btn green" style="margin-top: 25px;" tabindex="21">Update</button>
+                                                                                <button type="submit" *ngIf="inHandOfferAction.action === 'Add'" class="btn green" style="margin-top: 25px;" tabindex="21">Add</button>
                                                                             </div>
                                                                         </div>
                                                                     </form>
@@ -2190,7 +2190,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
                                                                                             <input type="Text" placeholder="Employer Name" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.Company" title="Please enter Employer name" required="" tooltip="Employer Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.Company"
-                                                                                                tabindex="21" />
+                                                                                                tabindex="22" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2202,7 +2202,7 @@
                                                                                         <div class="col-md-12">
                                                                                             <div>
                                                                                                 <input type="Text" placeholder="Designation" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.DesignationRole" title="Please enter Designation in specified company" required="" tooltip="Please enter Designation in specified company"
-                                                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.DesignationRole" tabindex="22" />
+                                                                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.DesignationRole" tabindex="23" />
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -2214,7 +2214,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
                                                                                             <input type="Text" placeholder="Location" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.Location" title="Please enter working location for specified company" required="" tooltip="Please enter working location for specified company"
-                                                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.Location" tabindex="23" />
+                                                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.Location" tabindex="24" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2224,7 +2224,7 @@
                                                                                     <label class="control-label">Working Since <span class="required"> * </span></label>
                                                                                     <div class="row">
                                                                                         <div class="col-md-12">
-                                                                                            <input type="month" [max]="currentMonthDate" name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" (change)="totalMonths($event.target.value)" tabindex="24" />
+                                                                                            <input type="month" [max]="currentMonthDate" name="bday" id="fromDate" required="" [(ngModel)]="EmployersInformation.FromDate" (change)="totalMonths($event.target.value)" tabindex="25" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2235,7 +2235,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-6">
                                                                                             <input readonly style="width: 100px; margin-left: 20px" type="number" step="0.1" min="0" placeholder="Experience" class="form-control text-capitalize" [(ngModel)]="EmployersInformation.TimeSpentInCompany" title="Please enter experience for current job"
-                                                                                                required="" tooltip="Please enter experience for current job" tabindex="25" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.TimeSpentInCompany"
+                                                                                                required="" tooltip="Please enter experience for current job" tabindex="26" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.TimeSpentInCompany"
                                                                                                 onKeyPress="if(this.value.length==3) return false;" />
                                                                                         </div>
                                                                                     </div>
@@ -2283,7 +2283,7 @@
                                                                                     <div class="row">
                                                                                         <div class="col-md-1">
                                                                                             <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" [(ngModel)]="EmployersInformation.IsCurrentCompany" (change)="onCurrent(EmployersInformation.IsCurrentCompany)" tooltip="Check for Adding filled details as current employer/employment Details"
-                                                                                                tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.IsCurrentCompany" tabindex="26" />
+                                                                                                tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!EmployersInformation.IsCurrentCompany" tabindex="27" />
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -2303,7 +2303,7 @@
                                                                                     <br/>
                                                                                     <div class="row">
                                                                                         <div class="col-md-2">
-                                                                                            <button type="submit" class="btn green" style="padding-top: 5px;" tabindex="27"> {{EmploymentDetailsAction}} </button>
+                                                                                            <button type="submit" class="btn green" style="padding-top: 5px;" tabindex="28"> {{EmploymentDetailsAction}} </button>
                                                                                             <!--<button type="submit" class="btn green" style="padding-top: 5px;">Update </button>-->
                                                                                         </div>
                                                                                     </div>
