@@ -541,6 +541,24 @@
                        
                     </div>
                      <div class="portlet-body" *ngIf="NORECORDSFOUND">
+                         <!-- START DETAILS DIALOGUE -->
+                        <div id="fullDetailsDialogue" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div id="modalHeader" class="modal-header">
+                                    </div>
+                                    <div id="modalBody" class="modal-body">
+                                        <strong>Do you want to continue to Edit Profile?</strong>
+                                    </div>
+                                    <div id="modalFooter" class="modal-footer">
+                                        <button class="btn" (click)="enterFullDetails()">Yes</button>
+                                        <button class="btn" data-dismiss="modal">No</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END DETAILS DIALOGUE -->
+                        
                          <!--Begin Count Details box-->
                         <div id="CountDetails" class="modal fade">
                             <div class="modal-dialog" style="width: 50%;">

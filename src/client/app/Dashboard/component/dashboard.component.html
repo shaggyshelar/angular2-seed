@@ -419,12 +419,15 @@
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
                                             <i class="icon-bar-chart font-dark hide"></i>
-                                            <span class="caption-subject font-green-steel bold uppercase">Recruitment Statistics <small style="font-weight:500;">yearly</small>
+                                            <span class="caption-subject font-green-steel bold uppercase">RRF Statistics
 </span>
                                         </div>
                                     </div>
                                     <div class="portlet-body">
-                                        <animated-pie-chart [chartData]='chartDataForAnimatedPie'></animated-pie-chart>
+                                        <!--<stackedcol-chart [chartData]='ChartDataForStackedColChartTest'></stackedcol-chart>-->
+                                        <stackedcol-chart [chartData]='ChartDataForStackedColChart' *ngIf="IsStackColChart" (amChartInput)='onNotify($event)'></stackedcol-chart>
+                                        <span *ngIf="!IsStackColChart"><center>No Data Found for {{status?status:""}} status</center></span>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -437,7 +440,7 @@
                         <!--[ifAuthorize]="['DB.GRAPH.1.READ']"-->
                         <div [ifAuthorize]="['DB.GRAPH.1.READ']" class="row">
                             <!--BEGIN HEAD OPEN RRF CHART 1.2-->
-                            <div class="col-md-6 col-sm-6" style="margin-top:-5px; margin-right: inherit;">
+                            <!--<div class="col-md-6 col-sm-6" style="margin-top:-5px; margin-right: inherit;">
                                 <div class="portlet light ">
                                     <div class="portlet-title">
                                         <div class="caption caption-md">
@@ -447,16 +450,14 @@
                                         </div>
                                     </div>
                                     <div class="portlet-body">
-
-                                        <!--<stackedcol-chart [chartData]='ChartDataForStackedColChartTest'></stackedcol-chart>-->
                                         <stackedcol-chart [chartData]='ChartDataForStackedColChart' *ngIf="IsStackColChart" (amChartInput)='onNotify($event)'></stackedcol-chart>
                                         <span *ngIf="!IsStackColChart"><center>No Data Found for {{status?status:""}} status</center></span>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                             <!--END HEAD OPEN RRF CHART 1.2-->
                             <!--BEGIN HEAD SELECTED CANDIDATE CHART 1.1-->
-                            <div class="col-md-6 col-sm-6" style="margin-top:-5px;">
+                            <div class="col-md-12 col-sm-12" style="margin-top:-5px;">
                                 <div class="portlet light tasks-widget ">
                                     <div class="portlet-title">
                                         <div class="caption">
