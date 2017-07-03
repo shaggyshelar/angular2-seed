@@ -18,6 +18,7 @@ export class PanelsAvailablityComponent implements OnInit, OnChanges {
     errorMessage: any;
     _strr: Array<string> = new Array<string>();
     _availability: Array<PanelAvailability> = new Array<PanelAvailability>();
+     ShowErrormsg: boolean = false;
     //Get profiles data
 
     //Now it will show Interviewers availablity irrespective of RRF 
@@ -42,7 +43,14 @@ export class PanelsAvailablityComponent implements OnInit, OnChanges {
         this._panelsAvailability.getAvailabilityForRRF()
             .subscribe(
             (results: any) => {
-                this._availability = results;
+                if(results.length == 0){
+                    this.ShowErrormsg=true;
+                }
+                else{
+                     this.ShowErrormsg=false;
+                this._availability = results;        
+                }
+               
             },
             error => this.errorMessage = <any>error);
     }
