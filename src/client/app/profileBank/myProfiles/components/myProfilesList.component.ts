@@ -1015,7 +1015,7 @@ export class MyProfilesListComponent implements OnActivate {
         }
     }
     enterFullDetails() {
-        var completeProfileLink: string = '/App/ProfileBank/MyProfiles/Edit/' + this.candidateId.Value;
+     var completeProfileLink: string = '/App/ProfileBank/MyProfiles/Edit/'+ this.candidateId.Value +'ID'+ this.candidateId.Id;
         this._router.navigate([completeProfileLink]);
         let modl: any = $('#fullDetailsDialogue');
         modl.modal('hide');
