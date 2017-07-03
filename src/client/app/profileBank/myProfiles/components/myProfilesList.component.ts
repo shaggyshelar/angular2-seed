@@ -295,7 +295,7 @@ export class MyProfilesListComponent implements OnActivate {
         this._profileBankService.deleteProfile(CandidateID)
             .subscribe(
             (results: any) => {
-                setTimeout(() => { this.getMyProfiles(); }, 1000);
+                setTimeout(() => { this.filterBy(); }, 1000);
                 this.toastr.success((<ResponseFromAPI>results).Message);
             },
             error => this.toastr.error(<any>error));
