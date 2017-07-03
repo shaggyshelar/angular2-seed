@@ -104,7 +104,7 @@ export class MyProfilesListComponent implements OnActivate {
     cachedProfileList: any[] = [];
     showRrfFilter: boolean = false;
     regDateShow: boolean = false;
-    
+    currentDate:string;
     public noticePeriod: any = [{ 'Id': 15, 'Value': "15" }, { 'Id': 30, 'Value': "30" }, { 'Id': 45, 'Value': "45" }, { 'Id': 60, 'Value': "60" }, { 'Id': 90, 'Value': "90" }];
     constructor(private _myProfilesService: MyProfilesService,
         private _blacklistedProfilesService: BlackListedProfilesService,
@@ -131,6 +131,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        this.setMinDateToCalender();
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
         };
@@ -153,6 +154,10 @@ export class MyProfilesListComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+    }
+    setMinDateToCalender() {
+        var todayDate = new Date();
+        this.currentDate = (<any>this.formatDate(todayDate));
     }
     SaveCandidateID(id: MasterData) {
         this.seletedCandidateID = id;
@@ -1026,6 +1031,17 @@ export class MyProfilesListComponent implements OnActivate {
             this.regDateShow = false;
              this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
         }
+    }
+    formatDate(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
     }
 }
 
