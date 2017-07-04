@@ -105,6 +105,8 @@ export class MyProfilesListComponent implements OnActivate {
     showRrfFilter: boolean = false;
     regDateShow: boolean = false;
     currentDate:string;
+    rejectReason:string;
+    IsRejectReason:boolean = false;
     public noticePeriod: any = [{ 'Id': 15, 'Value': "15" }, { 'Id': 30, 'Value': "30" }, { 'Id': 45, 'Value': "45" }, { 'Id': 60, 'Value': "60" }, { 'Id': 90, 'Value': "90" }];
     constructor(private _myProfilesService: MyProfilesService,
         private _blacklistedProfilesService: BlackListedProfilesService,
@@ -374,19 +376,33 @@ export class MyProfilesListComponent implements OnActivate {
             error => this.errorMessage = <any>error);
     }
 
-    onSelectStatus(statusId: string) {
-        this.selectedStatus.Id = parseInt(statusId);
-        this.selectedStatus.Value = null;
+    onSelectStatus(status: string) {
+         if(status === '7'){
+            this.IsRejectReason = true;
+            this.selectedStatus.Id = parseInt(status);
+            this.selectedStatus.Value = null;
+        }
+        else{
+            this.IsRejectReason = false;
+            this.rejectReason = '';
+            this.rejectDate='';
+            this.selectedStatus.Id = parseInt(status);
+            this.selectedStatus.Value = null;
+        }
     }
 
     onUpdateStauts() {
-        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.profile.Comments)
+        let abc=this.rejectDate;
+        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.rejectReason)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.isUpdateStatusCollapsed = false;
                     this.profile.Status = new MasterData();
+                    this.IsRejectReason = false;
+                    this.rejectReason = '';
+                    this.rejectDate = '';
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     setTimeout(() => { this.getMyProfiles(); }, 1000);
                 } else {

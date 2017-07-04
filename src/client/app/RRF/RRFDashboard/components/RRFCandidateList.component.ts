@@ -93,6 +93,7 @@ export class RRFCandidateListComponent implements OnActivate {
     IsHRConducted: boolean = false;
     IsOffered: boolean = false;
     ExpDateOfJoining: Date;
+    rejectDate:Date;
     IsOfferGenerate: boolean = false;
     IsReject : boolean = false;
     IsUpdateStatus: boolean = false;
@@ -118,6 +119,8 @@ export class RRFCandidateListComponent implements OnActivate {
     finalStatus = new MasterData();
     public finalStatusComment:any='';
     public candidateInterviewId :MasterData = new MasterData();
+    rejectReason:string;
+    IsRejectReason:boolean = false;
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private location: Location,
@@ -136,7 +139,7 @@ export class RRFCandidateListComponent implements OnActivate {
     routerOnActivate(segment: RouteSegment) {
         this.RRFID.Id = parseInt((segment.getParam('id')).split('ID')[1]);
         this.RRFID.Value = (segment.getParam('id')).split('ID')[0];
-this.IEFButtonText = this.viewIEFText;
+        this.IEFButtonText = this.viewIEFText;
         this.doughnutChartLabels = ['Technical 1', 'HR'];
         this.doughnutChartData = [50, 50];
         this.doughnutChartColors = [{ backgroundColor: ['#E9EF0B', '#32c5d2'] }];
@@ -683,13 +686,17 @@ this.IEFButtonText = this.viewIEFText;
             error => this.errorMessage = <any>error);
     }
     saveUpdateStatus() {
-        this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, '')
+        let abc=this.rejectDate;
+        this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
                     this.IsOffered = false;
+                    this.IsRejectReason = false;
+                    this.rejectReason = '';
+                    this.rejectDate = '';
                     this.getOfferedCanidatesForRRF();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
@@ -728,6 +735,20 @@ this.IEFButtonText = this.viewIEFText;
     }
     onCancelReject(){
         this.IsReject = false;
+    }
+    onSelectStatus(status: string) {
+        if(status === '7'){
+            this.IsRejectReason = true;
+            this.selectedStatus.Id = parseInt(status);
+            this.selectedStatus.Value = null;
+        }
+        else{
+            this.IsRejectReason = false;
+            this.rejectReason = '';
+            this.rejectDate='';
+            this.selectedStatus.Id = parseInt(status);
+            this.selectedStatus.Value = null;
+        }
     }
     UpdateFinalStatus(comment:string){
         this.finalStatus.Id= parseInt(this.finalStatus.Id);

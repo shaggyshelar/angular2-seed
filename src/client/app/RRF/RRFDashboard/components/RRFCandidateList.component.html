@@ -407,23 +407,33 @@
 <!-- BEGIN status update form-->
 <div class="row" style="margin-top:20px;" *ngIf="IsUpdateStatus">
 <form (submit)="saveUpdateStatus();">
-	<div class="form-group col-md-7">
+	<div class="row" style="margin-left:5px;">
+	<div class="form-group col-md-5">
 		<div class="dataTables_length" id="sample_1_length">
 			<label>Status <span class="required">*</span></label>
-			<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" [(ngModel)]="selectedStatus"
+			<select name="sample_1_length" aria-controls="sample_1" (change)='onSelectStatus($event.target.value)' class="form-control input-sm input-xsmall input-inline" [(ngModel)]="selectedStatus.Id"
 				required="" style="width: 159px!important;">
-<option *ngFor="let status of CandidateUpdatedStatus" [ngValue]="status">{{status.Value}}</option>
-</select>
+				<option *ngFor="let status of CandidateUpdatedStatus" [value]="status.Id">{{status.Value}}</option>
+			</select>
 
-</div>
-</div>
-
-<div class="col-md-5">
-	<div class="pull-right">
-		<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
-		<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button> &nbsp;
+		</div>
 	</div>
-</div>
+	<div class="col-md-7" *ngIf="IsRejectReason">
+		<label>Reason </label>
+           <textarea  placeholder="Reason" [(ngModel)]="rejectReason" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!rejectReason" style="width:100%;"></textarea>
+    </div>
+	</div>
+	<div class="row" style="margin-left:5px;">
+	<div class="col-md-6">
+		<input type="date" name="bday"  [(ngModel)]="rejectDate" *ngIf="IsRejectReason"/>
+	</div>
+	<div class="col-md-6">
+		<div class="pull-right">
+			<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+			<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button> &nbsp;
+		</div>
+	</div>
+	</div>
 </form>
 </div>
 <hr *ngIf="IsUpdateStatus">
