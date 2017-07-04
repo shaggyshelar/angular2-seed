@@ -333,7 +333,7 @@ export class DashboardComponent implements OnInit {
         //Head
         this.GetAllRrfStatusCount();
         this.GetAllOfferedCandidateCount();
-        this.GetUnAssignedRRF();
+     //   this.GetUnAssignedRRF();
     }
 
     /************BEGIN RECRUITER'S DATA************/
@@ -714,21 +714,21 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
 
-    GetUnAssignedRRF():void{
-         this.dashboardService.GetAllUnAssignedRRF()
-            .subscribe(
-            results => {
-                this.UnassignedRRFCandidate = <any>results;
-                // if (this.OfferedCandidate.length > 0) {
-                //     for (var index = 0; index < this.UnassignedRRFCandidate.length; index++) {
-                //         if (this.UnassignedRRFCandidate[index].title.toLowerCase() === 'offered') {
-                //             this.UnassignedRRFCandidateCount = this.UnassignedRRFCandidate[index].value;
-                //         }
-                //     }
-                // }
-            },
-            error => this.errorMessage = <any>error);
-    }
+    // GetUnAssignedRRF():void{
+    //      this.dashboardService.GetAllUnAssignedRRF()
+    //         .subscribe(
+    //         results => {
+    //             this.UnassignedRRFCandidate = <any>results;
+    //             // if (this.OfferedCandidate.length > 0) {
+    //             //     for (var index = 0; index < this.UnassignedRRFCandidate.length; index++) {
+    //             //         if (this.UnassignedRRFCandidate[index].title.toLowerCase() === 'offered') {
+    //             //             this.UnassignedRRFCandidateCount = this.UnassignedRRFCandidate[index].value;
+    //             //         }
+    //             //     }
+    //             // }
+    //         },
+    //         error => this.errorMessage = <any>error);
+    // }
     // get imcomplete profiles for count
     GetIncompletesProfiles() {
         this.IncompleteProfileList = new AllCandidateProfiles();
