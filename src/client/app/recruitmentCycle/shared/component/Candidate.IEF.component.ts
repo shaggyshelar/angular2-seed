@@ -26,7 +26,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
     candidateIEFDetails: IEFInformation = new IEFInformation();
     functions: Array<IEFFunction> = new Array<IEFFunction>();
     iefStatus: string = 'Selected';
-    iefComments: string;
+    iefComments: string = '';
     isChangeStatusReq: boolean = false;
     rejectReason: any = null;
     rejectReasons: any[] = [];
@@ -71,10 +71,36 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
             });
     }
 
-
+    validateIEF(updatedIefFunctions: IEFFunction[]){
+        let submitIEFForm = true;
+        for(let i=0;i<updatedIefFunctions.length;i++){
+            if(updatedIefFunctions[i].Rating === null){
+                this.toastr.error('Please select Rating for '+updatedIefFunctions[i].FunctionLabel);
+                submitIEFForm = true;
+                break;
+            }
+            else{
+                submitIEFForm = false;
+            }
+            if(updatedIefFunctions[i].FunctionValue === null || updatedIefFunctions[i].FunctionValue.length < 50){
+                this.toastr.error('Please add min 50 characters for '+updatedIefFunctions[i].FunctionLabel);
+                submitIEFForm = true;
+                break;
+            }
+            else{
+                submitIEFForm = false;
+            }
+        }
+        return submitIEFForm;
+    }
     submitIEFDetails(updatedIefFunctions: IEFFunction[]) {
         if (this.isChangeStatusReq) {
-            this._candidateIEFService.UpdateCandidateIEFStatus(this.requestedIef.InterviewID, this.iefStatus, this.iefComments)
+            if(!this.validateIEF(updatedIefFunctions)){
+            if(this.iefComments === '' || this.iefComments.length < 50){
+                this.toastr.error('Please add min 50 characters for Genearal comments');
+            }
+            else{
+                this._candidateIEFService.UpdateCandidateIEFStatus(this.requestedIef.InterviewID, this.iefStatus, this.iefComments)
                 .subscribe(
                 (results: any) => {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -85,25 +111,35 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
                     }
                 },
                 error => this.errorMessage = <any>error);
-
+            }
+            }
         } else {
-            var currentIefDetails: IEFSubmission = new IEFSubmission();
-            currentIefDetails = this.createIEF(updatedIefFunctions);
-            this._candidateIEFService.saveCurrentIEFDetails(currentIefDetails)
-                .subscribe(
-                results => {
-                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                        this.toastr.success((<ResponseFromAPI>results).Message);
+            if(!this.validateIEF(updatedIefFunctions)){
+                 if(this.iefComments === '' || this.iefComments.length < 50){
+                this.toastr.error('Please add min 50 characters for Genearal comments');
+                }
+                else{
+                    var currentIefDetails: IEFSubmission = new IEFSubmission();
+                    currentIefDetails = this.createIEF(updatedIefFunctions);
+                this._candidateIEFService.saveCurrentIEFDetails(currentIefDetails)
+                    .subscribe(
+                    results => {
+                        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                            this.toastr.success((<ResponseFromAPI>results).Message);
 
-                        this.Back();
-                    } else {
-                        this.toastr.error((<ResponseFromAPI>results).Message);
-                    }
-                },
-                error => {
-                    this.errorMessage = <any>error;
-                    this.toastr.error(<any>error);
-                });
+                            this.Back();
+                        } else {
+                            this.toastr.error((<ResponseFromAPI>results).Message);
+                        }
+                    },
+                    error => {
+                        this.errorMessage = <any>error;
+                        this.toastr.error(<any>error);
+                    });
+
+                }
+                
+                }
         }
     }
     getIEFHistory(objIEFid: iefModel) {

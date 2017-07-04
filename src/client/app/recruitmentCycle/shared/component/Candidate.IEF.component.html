@@ -15,7 +15,7 @@
         <!--End Breadcrumb>-->
         <div class="row">
             <div class="col-md-12">
-                <form class="form-horizontal form-bordered" (submit)="submitIEFDetails(functions)">
+                <form class="form-horizontal form-bordered">
                     <div class="portlet light bordered">
                         <div class="portlet-title">
                             <div class="caption font-dark">
@@ -124,7 +124,7 @@
                                 </div>
                                 <label class="control-label col-md-2">General Comments<span class="required">*</span>:</label>
                                 <div class="col-md-6">
-                                    <textarea class="form-control" required id="txtComment" rows="3" minlength="50" maxlength="500" placeholder="Enter comment (Min 50 and Max 500 characters)..." style="resize:vertical" [(ngModel)]='iefComments'></textarea>
+                                    <textarea class="form-control" id="txtComment" rows="3" placeholder="Enter comment (Min 50 and Max 500 characters)..." style="resize:vertical" [(ngModel)]='iefComments'></textarea>
                                 </div>
                             </div>
                             <!--</form>-->
@@ -132,7 +132,7 @@
                         </div>
                         <div>
                             <!--<button type="submit" class="btn green" (click)="submitIEFDetails(functions)"> Save </button>-->
-                            <button type="submit" class="btn green" form="formID">
+                            <button type="submit" class="btn green" form="formID" (click)="submitIEFDetails(functions)">
                                 <span *ngIf='!isChangeStatusReq'> Save</span>
                                 <span *ngIf='isChangeStatusReq'> Change Status</span>
                             </button>

@@ -6,17 +6,17 @@
             <label class="control-label col-md-2">{{functionsCollection[recordCount].FunctionLabel}}</label>
             <div class="col-md-3" [hidden]="!functionsCollection[recordCount].isLabel" (change)="onUpdate()">
                 <textarea class="form-control" placeholder="Enter function namesss..." style="resize:vertical" [(ngModel)]='functionsCollection[recordCount].FunctionLabel'
-                    required="" [disabled]='isDisabled' minlength="50" maxlength="500"></textarea>
+                    [disabled]='isDisabled' minlength="50" maxlength="500"></textarea>
             </div>
 
             <div class="col-md-2" [hidden]="!functionsCollection[recordCount].isRating">
-                <select class="form-control" [(ngModel)]="functionsCollection[recordCount].Rating" (change)="onUpdate()"  [disabled]='isDisabled'  required="">
+                <select class="form-control" [(ngModel)]="functionsCollection[recordCount].Rating" (change)="onUpdate()"  [disabled]='isDisabled'>
 	                <option *ngFor="let rating of ratings" value={{rating}}>{{rating}}</option>
                 </select>
             </div>
 
             <div class="col-md-8">
-<textarea type="text" class="form-control" (change)="onUpdate()" rows="3"  minlength="50" maxlength="500" placeholder="Enter comment (Min 50 and Max 500 characters)" style="resize:vertical" [(ngModel)]='functionsCollection[recordCount].FunctionValue'  [disabled]='isDisabled' required></textarea>
+<textarea type="text" class="form-control" (change)="onUpdate()" rows="3" placeholder="Enter comment (Min 50 and Max 500 characters)" style="resize:vertical" [(ngModel)]='functionsCollection[recordCount].FunctionValue'  [disabled]='isDisabled'></textarea>
                 
             </div>
             <!-- /ng2 Binding -->
