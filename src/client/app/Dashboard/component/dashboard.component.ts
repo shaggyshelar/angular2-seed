@@ -61,6 +61,7 @@ export class DashboardComponent implements OnInit {
     isNull: boolean = false;
     IsBarchartDataShow: boolean = false;
     IsStackColChart: boolean = false;
+     IsStackTimeColChart: boolean = false;
     IsAmchart: boolean = false;
     IsPieChart: boolean = false;
     CandidateRoundHistory: Array<Interview>;
@@ -102,6 +103,8 @@ export class DashboardComponent implements OnInit {
     offeredCandidateCount: any;
     rrfTimeline: any;
     OfferedCandidate: any;
+    UnassignedRRFCandidate:any;
+    UnassignedRRFCandidateCount:any;
     public chartDataForPie: any = [];
     public chartDataForColumnChart: any[];
     public rrfCode: any;
@@ -330,6 +333,7 @@ export class DashboardComponent implements OnInit {
         //Head
         this.GetAllRrfStatusCount();
         this.GetAllOfferedCandidateCount();
+        this.GetUnAssignedRRF();
     }
 
     /************BEGIN RECRUITER'S DATA************/
@@ -553,6 +557,7 @@ export class DashboardComponent implements OnInit {
                 } else {
                     this.IsPieChart = false;
                     this.IsStackColChart = false;
+                    this.IsStackTimeColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;
                     this.IsBarchartDataShow = false;
@@ -605,6 +610,7 @@ export class DashboardComponent implements OnInit {
                     //this.GetTaggedCandidateStatusCount(_rrfid, this.ChartDataForStackedColChart[0].status);
                 } else {
                     this.IsStackColChart = false;
+                    this.IsStackTimeColChart = false;
                     this.IsAmchart = false;
                     this.isNull = false;
                     this.IsBarchartDataShow = false;
@@ -620,6 +626,7 @@ export class DashboardComponent implements OnInit {
         this.dashboardService.getRrfTimeline()
             .subscribe(
             results => {
+                this.IsStackTimeColChart = true;
                 this.rrfTimeline = <any>results;
             },
             error => this.errorMessage = <any>error);
@@ -703,6 +710,22 @@ export class DashboardComponent implements OnInit {
                         }
                     }
                 }
+            },
+            error => this.errorMessage = <any>error);
+    }
+
+    GetUnAssignedRRF():void{
+         this.dashboardService.GetAllUnAssignedRRF()
+            .subscribe(
+            results => {
+                this.UnassignedRRFCandidate = <any>results;
+                // if (this.OfferedCandidate.length > 0) {
+                //     for (var index = 0; index < this.UnassignedRRFCandidate.length; index++) {
+                //         if (this.UnassignedRRFCandidate[index].title.toLowerCase() === 'offered') {
+                //             this.UnassignedRRFCandidateCount = this.UnassignedRRFCandidate[index].value;
+                //         }
+                //     }
+                // }
             },
             error => this.errorMessage = <any>error);
     }
