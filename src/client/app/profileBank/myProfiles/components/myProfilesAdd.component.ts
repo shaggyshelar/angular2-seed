@@ -1078,6 +1078,11 @@ export class MyProfilesAddComponent implements OnActivate {
         if (isChecked === false) {
             this.regDateShow = true;
             this.profile.CandidateOtherDetails.ServingNoticePeriod = true;
+             if(this.profile.CandidateOtherDetails.ResigningDate == null){
+        var todayDate = new Date();
+        this.currentDate = (<any>this.formatDate(todayDate));   
+        this.profile.CandidateOtherDetails.ResigningDate = this.currentDate;
+        }
         } else {
             this.regDateShow = false;
              this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
@@ -1367,15 +1372,15 @@ export class MyProfilesAddComponent implements OnActivate {
     
         return [year,month].join('-');
     }
-    totalDays(date: any){ 
+    totalDays(date:Date){ 
         if (date !== undefined){
            this.NPdays = this.totalDaysCount(new Date(date), new Date());
            this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
-           this.profile.CandidateOtherDetails.ResigningDate = date;
+         this.profile.CandidateOtherDetails.ResigningDate = date;
            this.onSavePrimaryInfo();
     }
     }
-    totalDayscountNO(date: any) {
+    totalDayscountNO(date:Date) {
         if (date !== null){
         this.NPdays = this.totalDaysCount(new Date(date), new Date());
         this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;

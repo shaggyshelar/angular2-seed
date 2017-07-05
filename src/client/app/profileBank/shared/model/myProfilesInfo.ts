@@ -172,6 +172,8 @@ export class OtherDetails {
   public AppraisalBondContractDetails: string;
   public BondContractDetails: string;
   //public Visa: MasterData = new MasterData();
+  public ResigningDate:any;
+  public CanJoinIn:any;
   public VisaType: any ;
   public HasVisa:boolean;
   public NoticePeriod: string = '';
