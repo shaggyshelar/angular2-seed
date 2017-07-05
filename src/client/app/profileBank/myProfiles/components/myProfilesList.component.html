@@ -487,11 +487,11 @@
 
 																<i class="fa fa-search-plus "></i> 
 															</button>
-                                    <a style="border-radius: 5px !important;" class="btn btn-xs yellow" [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                        tooltip="Edit Profile">
+                                    <button style="border-radius: 5px !important;" class="btn btn-xs yellow" (click)="onEditClick(myprofile.CandidateID.Value,myprofile.CandidateID.Id)" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
+                                        tooltip="Edit Profile" [disabled]="getEditProfileAccess(myprofile.Owner)">
                                         <i class="fa fa-edit " style="margin-top: 25%;"></i>
                                         <!-- Edit Profile-->
-                                    </a>
+                                    </button>
                                     <button style="border-radius: 5px !important;" class="btn btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value === 'Open'" tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                         title="Schedule Interview" tooltipEnable="true">
 																<i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->

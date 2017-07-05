@@ -28,6 +28,7 @@ import { RRFDetails } from '../../../RRF/myRRF/index';
 import { AssignRRFService } from '../../shared/services/assignRRF.service';
 import { RRFCandidateListService } from '../../../RRF/RRFDashboard/services/RRFCandidatesList.service';
 import { ViewRRFComponent } from '../../../RRF/shared/components/viewRRF/viewRRF.component';
+import { CommonService } from '../../../shared/index';
 
 @Component({
     moduleId: module.id,
@@ -107,6 +108,7 @@ export class MyProfilesListComponent implements OnActivate {
     currentDate:string;
     rejectReason:string;
     IsRejectReason:boolean = false;
+    CurrentUser: MasterData = new MasterData();
     public noticePeriod: any = [{ 'Id': 15, 'Value': "15" }, { 'Id': 30, 'Value': "30" }, { 'Id': 45, 'Value': "45" }, { 'Id': 60, 'Value': "60" }, { 'Id': 90, 'Value': "90" }];
     constructor(private _myProfilesService: MyProfilesService,
         private _blacklistedProfilesService: BlackListedProfilesService,
@@ -117,7 +119,8 @@ export class MyProfilesListComponent implements OnActivate {
         public toastr: ToastsManager,
         private _masterService: MastersService,
         private _assignRRFService: AssignRRFService,
-        private _rrfCandidatesList: RRFCandidateListService) {
+        private _rrfCandidatesList: RRFCandidateListService,
+        private _commonService: CommonService,) {
         this.psdTemplates = new Array<File>();
         this.resumeFiles = new Array<File>();
         this.profile = new CandidateProfile();
@@ -134,7 +137,13 @@ export class MyProfilesListComponent implements OnActivate {
 
     routerOnActivate() {
         let filterVal = sessionStorage.getItem('Filter');
-        this.modelFilterBy = filterVal !== "null" ? filterVal : 'my';
+        if(filterVal !== null){
+            this.modelFilterBy = filterVal !== "null" ? filterVal : 'my';
+        }
+        else{
+            this.modelFilterBy = 'my';
+        }
+        this.CurrentUser = this._commonService.getLoggedInUser();
         this.setMinDateToCalender();
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
@@ -1085,6 +1094,17 @@ export class MyProfilesListComponent implements OnActivate {
         if (day.length < 2) day = '0' + day;
 
         return [year, month, day].join('-');
+    }
+    getEditProfileAccess(owner:MasterData){
+        if(owner.Id === this.CurrentUser.Id){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    onEditClick(candidateValue:any,candidateID:any){
+        this._router.navigate(['/App/ProfileBank/MyProfiles/Edit/'+ candidateValue +'ID'+ candidateID]);
     }
 }
 
