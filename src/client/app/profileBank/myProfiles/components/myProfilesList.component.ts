@@ -133,6 +133,8 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     routerOnActivate() {
+        let filterVal = sessionStorage.getItem('Filter');
+        this.modelFilterBy = filterVal !== "null" ? filterVal : 'my';
         this.setMinDateToCalender();
         window.onbeforeunload = function () {
             return 'Data will be lost if you leave the page, are you sure?';
@@ -142,7 +144,7 @@ export class MyProfilesListComponent implements OnActivate {
         this.initFilterBy();
         this.getMyOpenAssignedRRF();
         this.myProfilesList.GrdOperations = new GrdOptions();
-        setTimeout(() => { this.getMyProfiles(); }, 300);
+        setTimeout(() => { this.filterBy(); }, 300);
         this.getCandidateStatuses();
         this.getEmail('RMS.RRF.NEEDAPPROVAL');
     }
@@ -901,6 +903,7 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     filterBy() {
+        sessionStorage.setItem('Filter', this.modelFilterBy);
         switch (this.modelFilterBy) {
             case 'all':
                 this.getAllProfiles();
