@@ -205,7 +205,7 @@
                                             </div>-->
 											<div class="row portlet-title" style="width:100%">
 												<span *ngIf="!hideRRFDetails">
-													<b><label style="color: #26a1ab;">RRF Code : {{rrf.RRFCODE }}</label></b> Raised by <b> {{rrf.RaisedBy.Value }}</b>            On {{rrf.CreatedDate}} with <b> {{rrf.Priority.Value}}</b> priority.
+													<b><label style="color: #26a1ab;">RRF Code : {{rrf.RRFCODE }}</label></b> Raised by <b> {{rrf.RaisedBy.Value }}</b>            On {{formatDate(rrf.CreatedDate)}} with <b> {{rrf.Priority.Value}}</b> priority.
 												</span>
 												<div class="actions pull-right">
 													<!--[ifAuthorize]="[ 'RRF.EDITRRF.MANAGE'] "-->
