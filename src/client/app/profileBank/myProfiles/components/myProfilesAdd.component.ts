@@ -1234,6 +1234,12 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.toastr.error('Enter valid Linkedin number. For Eg. https://www.linkedin.com/');
             }
                 break;
+                  case 'Name': if (number.match('^[a-zA-Z ]+[_]*$')) {
+                this.onSavePersonalDetails();
+            } else {
+                this.toastr.error('Enter valid details. No digits allowed');
+            }
+                break;
             case 'Email': if (number.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')) {
                 this.IsExist();
             } else {

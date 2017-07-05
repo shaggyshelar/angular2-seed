@@ -371,7 +371,7 @@
                                                             <label class="control-label">First Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <input type="text" id="txtFirstName" placeholder="First Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" (blur)="onSavePersonalDetails()" tabindex="1" />
+                                                                <input type="text" id="txtFirstName" placeholder="First Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" (blur)="validate('Name', profile.FirstName)" tabindex="1"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -381,7 +381,7 @@
                                                             <label class="control-label">Middle Name</label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <input type="text" placeholder="Middle Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.MiddleName" (keyup)="removeWhiteSpaces($event.target.value)" (blur)="onSavePersonalDetails()" tabindex="2" />
+                                                            <input type="text" placeholder="Middle Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.MiddleName" (keyup)="removeWhiteSpaces($event.target.value)" (blur)="validate('Name', profile.MiddleName)"  tabindex="2" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -391,7 +391,7 @@
                                                             <label class="control-label">Last Name<span class="required"> * </span></label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <input type="text" placeholder="Last Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" (blur)="onSavePersonalDetails()" tabindex="3" />
+                                                                    <input type="text" placeholder="Last Name" maxlength="30" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" (blur)="validate('Name', profile.LastName)" tabindex="3" />
                                                                 </div>
                                                             </div>
                                                         </div>
