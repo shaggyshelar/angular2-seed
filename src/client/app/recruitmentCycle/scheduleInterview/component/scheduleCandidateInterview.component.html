@@ -86,7 +86,7 @@
                                         <div *ngIf="selectSkypeID">
                                             <label class="col-md-2 control-label align">Skype ID <span class="required"> * </span></label>
                                             <div class="col-md-3">
-                                                <select class="form-control" [(ngModel)]="ScheduleInterView.SkypeID">
+                                                <select class="form-control" [(ngModel)]="ScheduleInterView.SkypeID" required="">
                                                     <option *ngFor="let skypeid of InterviewSkypeId" [ngValue]="skypeid">{{skypeid.Value}}</option>
                                             </select>
                                             </div>

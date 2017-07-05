@@ -139,7 +139,7 @@
                         <!--BEGIN HEAD Top TILES -->
                         <!--[ifAuthorize]="['DB.COUNTERS.1.READ']"-->
                         <div [ifAuthorize]="['DB.COUNTERS.1.READ']" class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="padding-right:inherit;">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-right:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
                                         <div class="number">
@@ -162,7 +162,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
                                         <div class="number">
@@ -185,15 +185,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
                                         <div class="number">
                                             <h3 class="font-purple-soft">
                                                 <!--<span class="counter" data-counter="counterup" data-value="134">134</span>-->
-                                                <!--{{offeredCandidateCount ? offeredCandidateCount : 0}}
+                                                {{UnassignedRRFCandidateCount ? UnassignedRRFCandidateCount : 0}}
                                             </h3>
-                                            <a (click)="GetOfferedCandidate();"><small>UnAssigned RRF</small></a>
+                                            <a (click)='GetUnassignedRRF();'><small>UnAssigned RRF</small></a>
                                         </div>
                                         <div class="icon">
                                             <i class=" icon-users"></i>
@@ -207,8 +207,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>-->
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="margin-left:inherit;">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="margin-left:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
                                         <div class="number">

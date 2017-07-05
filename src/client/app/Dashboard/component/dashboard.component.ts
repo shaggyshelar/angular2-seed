@@ -333,7 +333,7 @@ export class DashboardComponent implements OnInit {
         //Head
         this.GetAllRrfStatusCount();
         this.GetAllOfferedCandidateCount();
-     //   this.GetUnAssignedRRF();
+       this.GetUnAssignedRRF();
     }
 
     /************BEGIN RECRUITER'S DATA************/
@@ -714,21 +714,19 @@ export class DashboardComponent implements OnInit {
             error => this.errorMessage = <any>error);
     }
 
-    // GetUnAssignedRRF():void{
-    //      this.dashboardService.GetAllUnAssignedRRF()
-    //         .subscribe(
-    //         results => {
-    //             this.UnassignedRRFCandidate = <any>results;
-    //             // if (this.OfferedCandidate.length > 0) {
-    //             //     for (var index = 0; index < this.UnassignedRRFCandidate.length; index++) {
-    //             //         if (this.UnassignedRRFCandidate[index].title.toLowerCase() === 'offered') {
-    //             //             this.UnassignedRRFCandidateCount = this.UnassignedRRFCandidate[index].value;
-    //             //         }
-    //             //     }
-    //             // }
-    //         },
-    //         error => this.errorMessage = <any>error);
-    // }
+    GetUnAssignedRRF():void{
+        this.grdOptionsIncompeteProfiles.RRFFilters.Filter="unAssignRRF";
+         this.dashboardService.GetAllUnAssignedRRF(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                this.UnassignedRRFCandidate = <any>results;
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.rrfList = (<any>(results)).RRFs;
+                this.UnassignedRRFCandidateCount=this.rrfList.length;
+                    }
+            },
+            error => this.errorMessage = <any>error);
+    }
     // get imcomplete profiles for count
     GetIncompletesProfiles() {
         this.IncompleteProfileList = new AllCandidateProfiles();
@@ -845,6 +843,30 @@ export class DashboardComponent implements OnInit {
             },
             error => this.errorMessage = <any>error);
     }
+ GetUnassignedRRF() {
+        this.rrfList = [];
+        this.grdOptionsIncompeteProfiles.RRFFilters.Filter="unAssignRRF";
+         this.dashboardService.GetAllUnAssignedRRF(this.grdOptionsIncompeteProfiles)
+            .subscribe(
+            (results: any) => {
+                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.IsRRF = true;
+                    this.NoDataFound = false;
+                    this.rrfList = (<any>(results)).RRFs;
+                } else {
+                    this.IsProfile = false;
+                    this.IsInterview = false;
+                    this.NoDataFound = true;
+                }
+                this.Title = 'Unassigned RRF';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => this.errorMessage = <any>error);
+    }
+
     GetOpenRRF() {
         this.rrfList = [];
         this.dashboardService.getAllRRF(this.grdOptionsIncompeteProfiles)

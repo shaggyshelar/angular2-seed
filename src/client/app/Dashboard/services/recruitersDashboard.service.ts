@@ -5,7 +5,7 @@ import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
 import { SpinnerService } from '../../shared/components/spinner/spinner';
 import { GrdOptions } from  '../../shared/model/index';
-
+import { MasterData } from '../../shared/model/common.model';
 @Injectable()
 
 export class RecruitersDashboardService {
@@ -193,6 +193,7 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+     
     /**Get All RRF wise candidate status for Initiator*/
     getRrfStatusForGuage() {
         let url = Config.GetURL('/api/Dashboards/GetRRFwiseCandidateStatusForInitiator');
@@ -221,6 +222,14 @@ export class RecruitersDashboardService {
             .finally(() => this._spinnerService.hide());
     }
 
+       GetAllUnAssignedRRF(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RRF/GetRRFUnAssignedToRecruiter');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     //Get List of RRF waiting for Freeze or feedback
     getFeedbackPendingRRF(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RRF/GetFeedbackRRFs');
