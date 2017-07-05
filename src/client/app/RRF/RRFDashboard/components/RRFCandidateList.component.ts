@@ -687,7 +687,8 @@ export class RRFCandidateListComponent implements OnActivate {
     }
     saveUpdateStatus() {
         let abc=this.rejectDate;
-        this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason)
+        if(this.rejectReason === '' && this.rejectDate === ''){
+            this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -703,6 +704,25 @@ export class RRFCandidateListComponent implements OnActivate {
                 }
             },
             error => this.errorMessage = <any>error);
+        }
+        if(this.rejectReason !== '' && this.rejectDate !== ''){
+             this._profileBankService.updateJoinedStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason,this.rejectDate)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.IsUpdateStatus = false;
+                    this.IsOffered = false;
+                    this.IsRejectReason = false;
+                    this.rejectReason = '';
+                    this.rejectDate = '';
+                    this.getOfferedCanidatesForRRF();
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+            },
+            error => this.errorMessage = <any>error);
+        }
     }
     Back() {
         // this._router.navigate([this.ReturnPath]);

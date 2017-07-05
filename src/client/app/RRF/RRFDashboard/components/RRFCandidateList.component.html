@@ -420,12 +420,12 @@
 	</div>
 	<div class="col-md-7" *ngIf="IsRejectReason">
 		<label>Reason </label>
-           <textarea  placeholder="Reason" [(ngModel)]="rejectReason" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!rejectReason" style="width:100%;"></textarea>
+           <textarea  placeholder="Reason" [(ngModel)]="rejectReason" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!rejectReason" style="width:100%;" required></textarea>
     </div>
 	</div>
 	<div class="row" style="margin-left:5px;">
 	<div class="col-md-6">
-		<input type="date" name="bday"  [(ngModel)]="rejectDate" *ngIf="IsRejectReason"/>
+		<input type="date" name="bday"  [(ngModel)]="rejectDate" *ngIf="IsRejectReason" required/>
 	</div>
 	<div class="col-md-6">
 		<div class="pull-right">

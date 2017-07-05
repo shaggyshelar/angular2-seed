@@ -74,7 +74,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
     validateIEF(updatedIefFunctions: IEFFunction[]){
         let submitIEFForm = true;
         for(let i=0;i<updatedIefFunctions.length;i++){
-            if(updatedIefFunctions[i].Rating === null){
+            if(updatedIefFunctions[i].Rating === null && updatedIefFunctions[i].isRating === true){
                 this.toastr.error('Please select Rating for '+updatedIefFunctions[i].FunctionLabel);
                 submitIEFForm = true;
                 break;
@@ -95,7 +95,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
     }
     submitIEFDetails(updatedIefFunctions: IEFFunction[]) {
         if (this.isChangeStatusReq) {
-            if(!this.validateIEF(updatedIefFunctions)){
+            //if(!this.validateIEF(updatedIefFunctions)){
             if(this.iefComments === '' || this.iefComments.length < 50){
                 this.toastr.error('Please add min 50 characters for Genearal comments');
             }
@@ -112,7 +112,7 @@ export class RecruitmentIEFComponent implements OnActivate, OnInit {
                 },
                 error => this.errorMessage = <any>error);
             }
-            }
+           // }
         } else {
             if(!this.validateIEF(updatedIefFunctions)){
                  if(this.iefComments === '' || this.iefComments.length < 50){

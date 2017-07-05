@@ -270,10 +270,10 @@
                                 </div>
                             </div>
                             <div class="col-md-2" *ngIf="IsRejectReason">
-		                        <input type="date" name="bday"  [(ngModel)]="rejectDate"/>
+		                        <input type="date" name="bday"  [(ngModel)]="rejectDate" required/>
 	                        </div>
                             <div class="col-md-5" *ngIf="IsRejectReason">
-                                <textarea  placeholder="Reason" [(ngModel)]="rejectReason" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!rejectReason" style="width:100%;"></textarea>
+                                <textarea  placeholder="Reason" [(ngModel)]="rejectReason" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!rejectReason" style="width:100%;" required></textarea>
                             </div>
                             <div class="col-md-2">
                             	<div>

@@ -393,7 +393,8 @@ export class MyProfilesListComponent implements OnActivate {
 
     onUpdateStauts() {
         let abc=this.rejectDate;
-        this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.rejectReason)
+        if(this.rejectReason === '' && this.rejectDate === ''){
+            this._profileBankService.updateCandidateStatus(this.seletedCandidateID, this.selectedStatus, this.rejectReason)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -412,6 +413,29 @@ export class MyProfilesListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
         this.isCollapsed = false;
+        }
+        if(this.rejectReason !== '' && this.rejectDate !== ''){
+            this._profileBankService.updateJoinedStatus(this.seletedCandidateID, this.selectedStatus, this.rejectReason,this.rejectDate)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                    this.isUpdateStatusCollapsed = false;
+                    this.profile.Status = new MasterData();
+                    this.IsRejectReason = false;
+                    this.rejectReason = '';
+                    this.rejectDate = '';
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    setTimeout(() => { this.getMyProfiles(); }, 1000);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                }
+                this.profile.Status = new MasterData();
+            },
+            error => this.errorMessage = <any>error);
+        this.isCollapsed = false;
+        }
+        
     }
     onCancelStatus () {
         this.isUpdateStatusCollapsed = false;
