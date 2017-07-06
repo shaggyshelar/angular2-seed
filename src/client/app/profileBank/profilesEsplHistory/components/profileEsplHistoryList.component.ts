@@ -7,7 +7,7 @@ import { ProfileInterviewHistory, AllInterviewsHistory }from '../models/profileE
 import { MasterData } from  '../../../shared/model/index';
 import { ProfileEsplHistoryService } from '../services/profileEsplHistory.service';
 import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/IEFGridRow/IEFGridRow.component';
-
+import { MyScheduleInterview } from '../../../recruitmentCycle/interviewersTab/model/myScheduleInterview';
 @Component({
     moduleId: module.id,
     selector: 'profile-esplhistory-list',
@@ -19,6 +19,8 @@ import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/
 })
 
 export class ProfileEsplHistoryListComponent implements OnActivate {
+     viewIEFText: string = 'View';
+    hideIEFText: string = 'Hide';
     allInterviewsHistory: AllInterviewsHistory = new AllInterviewsHistory();
     profileHistory: ProfileInterviewHistory;
     profileHistoryCollection: Array<ProfileInterviewHistory> = new Array<ProfileInterviewHistory>();
@@ -54,13 +56,23 @@ export class ProfileEsplHistoryListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-
+  onIEFClick(myScheduleInterview: MyScheduleInterview) {
+        myScheduleInterview.showIEF = !myScheduleInterview.showIEF;
+        this.setIEFButtonText(myScheduleInterview);
+    }
+     setIEFButtonText(myScheduleInterview: MyScheduleInterview) {
+        if (myScheduleInterview.showIEF) {
+            myScheduleInterview.IEFButtonText = this.hideIEFText;
+        } else {
+            myScheduleInterview.IEFButtonText = this.viewIEFText;
+        }
+    }
     /**Get data from session */
     getSessionOf<T>(variableName: string, isJson: Boolean): T {
         var _requestedIef = sessionStorage.getItem(variableName);
         if (_requestedIef !== null) {
             var response = isJson ? JSON.parse(_requestedIef) : _requestedIef;
-            sessionStorage.setItem(variableName, '');
+           // sessionStorage.setItem(variableName, '');
         } else {
             /** If no information found from Session then it will redirected to existing page */
             this.toastr.error('Somthing went wrong..!');
