@@ -185,7 +185,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="margin-left:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
                                         <div class="number">
@@ -208,7 +208,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="margin-left:inherit;">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="padding-left:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
                                         <div class="number">
@@ -305,7 +305,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"  style="margin-left:inherit;">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" style="margin-left:inherit;">
                                 <div class="dashboard-stat2 bordered">
                                     <div class="display">
                                         <div class="number">
@@ -451,7 +451,7 @@
                                         <!--<stackedcol-chart [chartData]='ChartDataForStackedColChartTest'></stackedcol-chart>-->
                                         <stackedcol-chart [chartData]='ChartDataForStackedColChart' *ngIf="IsStackColChart" (amChartInput)='onNotify($event)'></stackedcol-chart>
                                         <span *ngIf="!IsStackColChart"><center>No Data Found for {{status?status:""}} status</center></span>
-                                    
+
                                     </div>
                                 </div>
                             </div>
@@ -520,9 +520,8 @@
                                             </div>
                                             <!--<div class="row">-->
                                             <div class="col-md-6 col-sm-6">
-                                                <base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-                                                    [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"
-                                                    (chartClick)="chartClicked($event)" style="display: block; width: 100% !important;"></base-chart>
+                                                <base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"
+                                                    style="display: block; width: 100% !important;"></base-chart>
                                                 <span *ngIf="!IsBarchartDataShow"><center>No Data Found</center></span>
                                             </div>
                                             <!--</div>-->
@@ -574,51 +573,50 @@
                                     <div *ngIf="IsProfile">
                                         <div *ngFor="let profile of IncompleteProfileList.Profiles" style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29); padding-left: 5px;">
                                             <div class="dark bordered col-md-12">
-	                                            <div class="row" style="min-height: 95px;margin-top: -24px;">
-			                                        <div class="row">
+                                                <div class="row" style="min-height: 95px;margin-top: -24px;">
+                                                    <div class="row">
                                                         <div class="col-md-6">
                                                             <h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate}}</a> <small> {{profile.CANDIDATECODE ?profile.CANDIDATECODE:""}} </small></h4>
                                                         </div>
                                                         <div class="col-md-6" style="text-align:right; margin-top:10px;">
                                                             <span *ngIf='!checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)' style=" padding-top:3px; padding-bottom:3px;">
 					                                        		<span class="mt-action-dot color{{profile.Status.Id}}"> </span>
-					                                        	<strong>{{profile.Status.Value?profile.Status.Value:"N/A"}}</strong>
-					                                        	</span>
-					                                        	<a *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)' style="color:black; padding-top:3px; padding-bottom:3px;"
-					                                        		(click)='onViewCandidateClick(profile.RRFAssigned.RRFID,profile.Status.Value)' tooltip="Click to check associated RRF"
-					                                        		tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-					                                        			<span class="mt-action-dot color{{profile.Status.Id}}"> </span>
-					                                        			<strong>{{profile.Status.Value ? profile.Status.Value : "N/A"}}</strong>
-					                                        			<small> with <i class="fa fa-external-link"></i></small>
-					                                        	</a>
+                                                            <strong>{{profile.Status.Value?profile.Status.Value:"N/A"}}</strong>
+                                                            </span>
+                                                            <a *ngIf='checkOwner(profile.Owner.Value, profile.RRFAssigned.IsRRFAssigned)' style="color:black; padding-top:3px; padding-bottom:3px;" (click)='onViewCandidateClick(profile.RRFAssigned.RRFID,profile.Status.Value)' tooltip="Click to check associated RRF"
+                                                                tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                                <span class="mt-action-dot color{{profile.Status.Id}}"> </span>
+                                                                <strong>{{profile.Status.Value ? profile.Status.Value : "N/A"}}</strong>
+                                                                <small> with <i class="fa fa-external-link"></i></small>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                            <div class="col-md-5">
-                                                                <b>Designation : </b>{{profile.RRFDetails?profile.RRFDetails.Designation?profile.RRFDetails.Designation.Value:"N/A":"N/A"}}
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <b>Offered Date : </b>{{formatDate(profile.OfferedDate)}}
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <b>Dept : </b>{{profile.RRFDetails?profile.RRFDetails.Department?profile.RRFDetails.Department.Value:"N/A":"N/A"}}
-                                                            </div>
+                                                        <div class="col-md-5">
+                                                            <b>Designation : </b>{{profile.RRFDetails?profile.RRFDetails.Designation?profile.RRFDetails.Designation.Value:"N/A":"N/A"}}
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <b>Offered Date : </b>{{formatDate(profile.OfferedDate)}}
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <b>Dept : </b>{{profile.RRFDetails?profile.RRFDetails.Department?profile.RRFDetails.Department.Value:"N/A":"N/A"}}
+                                                        </div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
-                                                            <div class="col-md-5">
-                                                                <b>Recruiter : </b>{{profile.Owner?profile.Owner.Value : "N/A"}}
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                <b>Joining Date: </b>{{formatDate(profile.ApproxDateOfJoining)}}
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <b>RRFCode: </b>{{profile.RRFDetails.RRFCode ? profile.RRFDetails.RRFCode  : "N/A"}}
-                                                            </div>
+                                                        <div class="col-md-5">
+                                                            <b>Recruiter : </b>{{profile.Owner?profile.Owner.Value : "N/A"}}
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <b>Joining Date: </b>{{formatDate(profile.ApproxDateOfJoining)}}
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <b>RRFCode: </b>{{profile.RRFDetails.RRFCode ? profile.RRFDetails.RRFCode : "N/A"}}
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <hr style="margin-top:-5px !important;">
                                             </div>
-                                            
+
                                         </div>
                                         <hr>
                                     </div>
