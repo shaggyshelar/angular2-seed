@@ -1241,7 +1241,7 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.toastr.error('Enter valid details. No digits allowed');
             }
                 break;
-                 case 'MiddleName': if (number.match('^[a-zA-Z ]+[_]*$')) {
+                 case 'MiddleName': if (number.length === 0 || number.match('^[a-zA-Z ]+[_]*$')) {
                 this.onSavePersonalDetails();
             } else {
                 this.profile.MiddleName='';

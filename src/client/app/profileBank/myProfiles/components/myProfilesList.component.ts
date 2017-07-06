@@ -50,6 +50,7 @@ export class MyProfilesListComponent implements OnActivate {
     status: number;
     psdTemplates: any;
     resumeFiles: any;
+    Title: string;
     statusList: Array<MasterData>;
     seletedCandidateID: MasterData = new MasterData();
     selectedStatus = new MasterData();
@@ -359,8 +360,14 @@ export class MyProfilesListComponent implements OnActivate {
             },
             error => { this.errorMessage = <any>error; this.toastr.error(this.errorMessage); });
     }
+    OnCancelModal():void{
+        let modl: any = $('#CountDetails');
+    //    modl.modal('reset');
+        modl.modal('hide');
 
-    uploadResume(CandidateLookupId: MasterData, File: any) {
+     //   modl.modal({ 'backdrop': 'static' });
+    }   
+        uploadResume(CandidateLookupId: MasterData, File: any) {
         this.resumeMeta.CandidateID = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
         this.resumeMeta.Profile = File;
@@ -1021,6 +1028,7 @@ export class MyProfilesListComponent implements OnActivate {
     //     modl1.modal({ 'backdrop': 'static' });
     // }
     showNewProfileModal() {
+        this.Title ="New Candidate Profile"
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });
     }

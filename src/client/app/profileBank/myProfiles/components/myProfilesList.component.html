@@ -157,23 +157,23 @@
 
                         <!-- FollowUP Comments-->
                         <div id="CommentsRow" *ngIf='isCommentsPanelCollapsed'>
-                            <span class="header">Add/Update FollowUp Comments</span>
+                            <span class="header">Add/Update FollowUp Comments for <strong>{{profile.Candidate}}</strong></span>
                             <hr style="margin:0px 0px !important" />
                             <form role="form" (submit)="onSubmitFollowupComment()">
                                 <div class="row" style="margin-top: 10px">
-                                    <div class="col-md-3">
+                                    <!--<div class="col-md-3">
                                         <div class="form-group" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                             <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{profile.Candidate}}</span>
                                         </div>
-                                    </div>
-                                    <div class="col-md-7">
+                                    </div>-->
+                                    <div class="col-md-9">
                                         <div class="form-group">
                                             <div class="edit-content"></div>
-                                            <textarea class="form-control" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments" required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments">
+                                            <textarea class="form-control red" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments" required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments">
                                                 </textarea>
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <button type="submit" class="btn btn-info "> Save </button> &nbsp;
                                         <a class="btn btn-info " (click)='closeCommentsPanel()'> Cancel </a>
                                     </div>
@@ -184,18 +184,18 @@
 
                         <!-- Upload Resume -->
                         <div id="UploadResume" *ngIf='isUploadPanelCollapsed'>
-                            <span class="header">Upload Resume</span>
+                            <span class="header">Upload Resume of <strong>{{profile.Candidate}}</strong></span>
                             <hr style="margin:0px 0px !important" />
                             <form role="form" (submit)="onSubmitUploadResume()">
                                 <div class="row" style="margin-top: 10px">
-                                    <div class="col-md-3">
+                                    <!--<div class="col-md-3">
                                         <div class="form-group" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                             <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{profile.Candidate}}</span>
                                         </div>
-                                    </div>
-                                    <div class="col-md-5">
+                                    </div>-->
+                                    <div class="col-md-7">
                                         <div class="form-group">
-                                            <span *ngIf='!resumeUploaded' class="form-control"> No file Choosen </span>
+                                            <span *ngIf='!resumeUploaded' class="form-control red"> No file Choosen </span>
                                             <span class="form-control" tooltip="Resume Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate" *ngIf='resumeUploaded'> {{resumeName}}</span>
                                         </div>
                                     </div>
@@ -208,7 +208,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <span style="float: right;">
+                                        <span style="margin-left: -21px;">
 										<button type="submit" class="btn btn-info "> Upload Resume </button> &nbsp;
 										<a class="btn btn-info " (click)='closeUploadPanel()'> Cancel </a>
 										</span>
@@ -437,6 +437,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
+                                                             <button type="reset" (click)="OnCancelModal()" class="btn red" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;">Cancel</button> 
                                                         <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;" [disabled]="IsDisable"> Save</button>
                                                             <br>
                                                     </div>
@@ -714,7 +715,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
+                                                        <a type="reset" (click)="OnCancelModal()" class="btn red" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;">Cancel</a> 
                                                         <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;" [disabled]="IsDisable"> Save</button>
+                                                             
                                                             <br>
                                                     </div>
                                                     <!--</div>
