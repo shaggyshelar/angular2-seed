@@ -5,6 +5,7 @@ import { CandidateProfile } from '../model/myProfilesInfo';
 export class ProfileBankPipe implements PipeTransform {
     transform(value: CandidateProfile[], stringToSearh: string): CandidateProfile[] {
         return stringToSearh ? value.filter(profile =>
+
             (
                 profile.Candidate.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 profile.Status.Value.search(new RegExp(stringToSearh, 'i')) !== -1 ||
@@ -13,6 +14,10 @@ export class ProfileBankPipe implements PipeTransform {
                 profile.PrimaryContact.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 profile.CandidateOtherDetails.NoticePeriod.search(new RegExp(stringToSearh, 'i')) !== -1 ||
                 profile.CandidateSalaryDetails.ExpectedSalary.search(new RegExp(stringToSearh, 'i')) !== -1 ||
+                (profile.CandidateSkills.TechnicalSkills !== null ?
+
+                    (this.getSkillAsString(profile).search(new RegExp(stringToSearh, 'i')) !== -1)
+                    : false) ||
                 (profile.CandidateSkills.PrimarySkills !== null ?
                     (profile.CandidateSkills.PrimarySkills.search(new RegExp(stringToSearh, 'i')) !== -1)
                     : false) ||
@@ -30,6 +35,13 @@ export class ProfileBankPipe implements PipeTransform {
                 // this.checkForSkill(profile, stringToSearh)
             )
         ) : value;
+    }
+
+
+    getSkillAsString(profile: CandidateProfile): String {
+        var str: string="";
+        profile.CandidateSkills.TechnicalSkills.forEach(skill => str += skill.Value + ";");
+        return str;
     }
 
     // checkForSkill(value: RRFDetails, stringToSearh: string) {
