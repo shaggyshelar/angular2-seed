@@ -12,7 +12,7 @@
                 <div class="mt-comments">
                     <div class="mt-comment">
                         <div class="mt-comment-img">
-                            <img src="../assets/pages/media/users/avatar4.jpg"> </div>
+                            <img src="../assets/layouts/layout4/img/default-user.jpg" style="height: 60px;"> </div>
                         <div class="mt-comment-body ">
                             <div class="mt-comment-info">
                                 <span class="mt-comment-author">{{availability.Interviewer.Value}}</span>
@@ -20,7 +20,7 @@
                                     <ul class="mt-comment-actions">
                                         <li>
                                             <div tooltip="Send availablity request Email" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                                <a (click)="sendrequest(availability.Interviewer)" class="font-green" ><i class="fa fa-envelope-square"></i> Request</a>
+                                                <a (click)="sendrequest(availability.Interviewer)" class="font-green"><i class="fa fa-envelope-square"></i> Request</a>
                                             </div>
                                         </li>
                                     </ul>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row"  *ngIf="ShowErrormsg">
+            <div class="row" *ngIf="ShowErrormsg">
                 <strong>No Records found</strong>
             </div>
             <!-- END: Comments -->
