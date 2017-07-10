@@ -224,7 +224,9 @@ export class RRFDashboardListComponent implements OnActivate {
                 if (results.RRFs !== undefined && results.RRFs.length > 0) {
                     this.grdOptions = (<any>(results)).GrdOperations;
                     this.rrfList = (<any>(results)).RRFs;
-                } else { this.NORECORDSFOUND = true; }
+                } else { 
+                           this.rrfList =[];
+                    this.NORECORDSFOUND = true; }
             },
             error => this.errorMessage = <any>error);
     }
@@ -389,7 +391,8 @@ export class RRFDashboardListComponent implements OnActivate {
         } else if (viewMode === 'unAssignRRF') {
             this.currentView = 'unAssignRRF';
             this.getUnAssignedRRFData();
-        } else {
+        } 
+        else {
             this.currentView = 'assignRRF';
             this.setDefaultValueToRecrCmb();
             this.getAssignedRRFData();
