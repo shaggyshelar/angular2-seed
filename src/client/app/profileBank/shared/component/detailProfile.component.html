@@ -49,7 +49,8 @@
 					</li>
 				</ul>
 				<div class="col-md-12 centered profile-info">
-					<h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a (click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate ? profile.Candidate : "N/A"}}</a> </h4>
+					<h4 class="green uppercase sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> <a tooltip="{{profile.Candidate}}"
+							tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"(click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate ? profile.Candidate : "N/A"}}</a> </h4>
 					<h6 class="sbold" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"> As {{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.DesignationRole?profile.CandidateCurrentCompanyProfile.DesignationRole:"N/A":"N/A"}}
 						{{profile.CandidateCurrentCompanyProfile?profile.CandidateCurrentCompanyProfile.Company?" at "+profile.CandidateCurrentCompanyProfile.Company:"N/A":"N/A"}}
 						</h6>
@@ -80,14 +81,15 @@
 					<div class="row profile-desc-text">
 						<ul class="list-unstyled">
 							<li>
-								<div class="col-md-12" style="height: 40px;overflow: hidden; text-overflow: ellipsis;">
-									<label class="control-label"><small><b>Skills :</b> {{technicalSkills ? technicalSkills:"N/A"}}</small></label>
-
-									<!--<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>-->
-									<!--<div class="col-md-12" style="height: 60px;overflow: hidden; text-overflow: ellipsis;">
-									<label class="control-label"><small>Skills : {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}}</small></label>
-									<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>
-								</div>-->
+								<div class="col-md-12" style="height: 40px; overflow: hidden; text-overflow: ellipsis;">
+									<label class="control-label"><small><b>Skills :</b><span id="round{{profile.CandidateID.Id}}" (mouseover)='showPopOver(technicalSkills,profile.CandidateID.Id)'>{{technicalSkills ? technicalSkills:"N/A"}}</span></small></label>
+										<!--<a tooltip="{{profile.Candidate}}"
+											tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true"(click)='viewProfiles(profile.CandidateID)'>{{profile.Candidate ? profile.Candidate : "N/A"}}</a>-->
+											<!--<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>-->
+												<!--<div class="col-md-12" style="height: 60px;overflow: hidden; text-overflow: ellipsis;">
+											<label class="control-label"><small>Skills : {{profile.CandidateSkills.PrimarySkills?profile.CandidateSkills.PrimarySkills:"N/A"}} {{profile.CandidateSkills.SecondarySkills}} {{profile.CandidateSkills.OtherSkills}}</small></label>
+											<label class="control-label"><small>Skills : C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF C#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPFC#, JAVA, SharePoint, WCF, WPF,C#, JAVA, SharePoint, WCF, WPF</small></label>
+										</div>-->
 								</div>
 							</li>
 							<li>

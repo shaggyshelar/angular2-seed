@@ -21,6 +21,7 @@ export class DetailProfileComponent implements OnInit {
     emailDetails: any;
     viewDetailsRRFId: MasterData = new MasterData();
     errorMessage: string;
+    showPop:any;
     //Get profiles data
     @Input() selectedProfile: CandidateProfile;
     @Input() rrfID: string;
@@ -55,6 +56,20 @@ export class DetailProfileComponent implements OnInit {
         sessionStorage.setItem('backToRRFDashboardList',sessionStorage.getItem('backToProfile'));
         sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
+    }
+
+    showPopOver(Comments: string, index: string) {
+        let rowId: any = 'round' + index;
+        let row: any = $('#' + rowId);
+        row.popover({
+          container:"body",
+            placement: 'top',
+            toggle: 'popover',
+            title: 'Skills',
+            html: true,
+            trigger: 'hover',
+            content: Comments?Comments:'No data found'
+        });
     }
 
     /**Get resume by candidate code */

@@ -1144,7 +1144,7 @@
                                                             <label class="control-label">Total Experience<small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                    <input type="number" min="0" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience" (blur)='onSaveCareerProfileDetails()' />
+                                                                    <input type="number" min="0" max="50" onKeyPress="if(this.value.length==2) return false;" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.TotalExperience" (blur)='onSaveCareerProfileDetails()' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1154,7 +1154,7 @@
                                                             <label class="control-label">Relevant Experience <small>&nbsp;(In years)</small></label>
                                                             <div class="row text-center">
                                                                 <div class="col-md-12">
-                                                                    <input type="number" min="0" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience" (blur)='onSaveCareerProfileDetails()' />
+                                                                    <input type="number" min="0" max="50" onKeyPress="if(this.value.length==2) return false;" step="any" placeholder="" class="form-control text-right" [(ngModel)]="CandidateExperiences.RelevantExperience" (blur)='onSaveCareerProfileDetails()' />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1452,7 +1452,7 @@
                                                             <label class="control-label">Actual Current Salary <small>(In Lacs)</small><span class="required"> * </span> </label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <input type="number" placeholder="" class="form-control" min="0" onKeyPress="if(this.value.length==5) return false;" [(ngModel)]="profile.CandidateSalaryDetails.CurrentSalary" required="" (blur)="onSavePrimaryInfo()" tabindex="2" />
+                                                                    <input type="number" placeholder="" class="form-control" min="0" max="99" onKeyPress="if(this.value.length==2) return false;" [(ngModel)]="profile.CandidateSalaryDetails.CurrentSalary" required="" (blur)="onSavePrimaryInfo()" tabindex="2" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1462,7 +1462,7 @@
                                                             <label class="control-label">Expected Salary <small>  (In Lacs)</small><span class="required"> * </span> </label>
                                                             <div class="row ">
                                                                 <div class="col-md-12">
-                                                                    <input type="number" placeholder="" class="form-control" min="0" onKeyPress="if(this.value.length==5) return false;" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary" required (blur)="onSavePrimaryInfo()" tabindex="3" />
+                                                                    <input type="number" placeholder="" class="form-control" min="0" max="99" onKeyPress="if(this.value.length==2) return false;" [(ngModel)]="profile.CandidateSalaryDetails.ExpectedSalary" required (blur)="onSavePrimaryInfo()" tabindex="3" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1777,7 +1777,7 @@
                                                                     <label class="control-label">Total Exp<small>&nbsp;(In years)</small></label>
                                                                     <div class="row text-center">
                                                                         <div class="col-md-10">
-                                                                            <input type="number" step="any" placeholder="" min="1" max="50" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.TotalExperience"
+                                                                            <input type="number" step="any" placeholder="" min="1" max="50" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==2)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.TotalExperience"
                                                                                 (blur)='onSaveCareerProfileDetails()' tabindex="9" />
                                                                         </div>
                                                                     </div>
@@ -1788,7 +1788,7 @@
                                                                     <label class="control-label">Relevant Exp <small>&nbsp;(In years)</small></label>
                                                                     <div class="row text-center">
                                                                         <div class="col-md-10">
-                                                                            <input type="number" min="0" step="any" placeholder="" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.RelevantExperience"
+                                                                            <input type="number" min="0" max="50" step="any" placeholder="" class="form-control text-right" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==2)? false: event.charCode >= 48 && event.charCode <= 57" [(ngModel)]="CandidateExperiences.RelevantExperience"
                                                                                 (blur)='onSaveCareerProfileDetails()' tabindex="10" />
                                                                         </div>
                                                                     </div>
