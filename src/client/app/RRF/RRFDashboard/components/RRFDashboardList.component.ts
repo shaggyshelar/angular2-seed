@@ -425,19 +425,26 @@ export class RRFDashboardListComponent implements OnActivate {
         this.setDefaultcloseRRFID();
         this.closeComment = '';
     }
-    onDeleteRRFClick(RRFID:MasterData) {
-        this._rrfDashboardService.deleteRRF(RRFID)
-            .subscribe(
-            results => {
-                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-                    this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.rrfStatusCount = <any>results;
-                } else {
-                    this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
-                }
-                this.showListOfRRF();
-            },
-            error => this.errorMessage = <any>error);
+    onDeleteRRFClick(RRFID: MasterData, RRFCODE: string): boolean {
+        if (confirm('ALERT !!!\nAre you sure you want to delete  '+ RRFCODE +'?')) {
+            // delete RRF
+            this._rrfDashboardService.deleteRRF(RRFID)
+                .subscribe(
+                results => {
+                    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                        this.toastr.success((<ResponseFromAPI>results).Message);
+                        this.rrfStatusCount = <any>results;
+                    } else {
+                        this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
+                    }
+                    this.showListOfRRF();
+                },
+                error => this.errorMessage = <any>error);
+            return true;
+        } else {
+            // Do nothing!
+            return false;
+        }
     }
 
     setDefaultcloseRRFID() {
@@ -646,7 +653,7 @@ export class RRFDashboardListComponent implements OnActivate {
         }
         this.onViewChanged(this.currentView)
     }
-     //Format date in "yyyy-mm-dd" format
+    //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
