@@ -31,7 +31,7 @@ export class FullCalendarComponent implements AfterViewInit, OnDestroy, DoCheck 
 
     @Input() businessHours: any;
 
-    @Input() height: any;
+    @Input() height: 350px;
 
     @Input() contentHeight: any;
 

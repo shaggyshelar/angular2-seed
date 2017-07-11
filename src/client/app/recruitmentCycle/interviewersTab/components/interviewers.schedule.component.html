@@ -1,7 +1,7 @@
 <style>
 .scroll{
-overflow-y: scroll;
-height: 300px;
+max-height:412px; 
+overflow:auto;
 }
 
 </style>
@@ -167,7 +167,7 @@ height: 300px;
         <div class="row">
             <div class="col-md-8">
                 <!-- MY SCHEDULE INTERVIEWS-->
-                <div class="portlet light bordered" style="min-height: 385px;">
+                <div class="portlet light bordered" style="min-height: 505px;">
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <span class="caption-subject bold uppercase"><i class="fa fa-calendar-check-o"></i> My Schedule</span>
@@ -190,7 +190,8 @@ height: 300px;
                                 <tbody> 
                                     <!-- NgBinding-->
                                     <tr class="gradeX" *ngFor="let _myInterview of InterviewInformation; let index = index " 
-                                    id=""  >
+                                    id="">
+                                    
                                         <td> {{_myInterview.CandidatePrimaryDetails.FullName}}
                                         </td>
                                         <td class="center"> {{_myInterview.CandidatePrimaryDetails.Contact}} </td>
@@ -229,6 +230,7 @@ height: 300px;
                                                 </ul>
                                             </div>
                                         </td>
+                                      
                                     </tr>
                                     <!-- /NgBinding-->
 
@@ -247,7 +249,7 @@ height: 300px;
             </div>
             <div class="col-md-4">
                 <!-- /MY SCHEDULE INTERVIEWS CALENDAR-->
-                <div class="portlet light bordered">
+                <div class="portlet light bordered" style="height: 505px;">
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <i class="icon-calendar font-dark"></i>
@@ -255,9 +257,9 @@ height: 300px;
                         </div>
                     </div>
                     <div class="portlet-body">
-                        <div style=" text-align-last: center;">
+                        <div style=" text-align-last: center; margin-top:10px;">
                             <full-calendar [resources]="InterviewerCalendarDetails.Resources" (onEventRender)="showDetails($event)" [events]="InterviewerCalendarDetails.Events"
-                                [header]="header"  [defaultDate]="currentDate" [eventLimit]="4" [editable]="true">
+                                [header]="header"  [defaultDate]="currentDate" [eventLimit]="6" [editable]="true">
                             </full-calendar>
                         </div>
                     </div>
@@ -303,7 +305,7 @@ height: 300px;
                                  <div class="col-lg-3 col-sm-3">
                                     <div class="dataTables_length ">
                                         <label>Status
-                                                <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.RRFFilters.Status" (change)="statusFilter($event.target.value)">
+                                                <select class="form-control input-sm input-small input-inline" (change)="statusFilter($event.target.value)">
                                                     <option value="Selected">Selected</option>
                                                     <option value="Rejected">Rejected</option>
                                                     <option value="On Hold">On Hold</option>
