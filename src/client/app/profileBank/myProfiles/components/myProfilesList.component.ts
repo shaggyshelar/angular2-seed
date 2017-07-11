@@ -352,7 +352,8 @@ export class MyProfilesListComponent implements OnActivate {
                     modl = $('#fullDetailsDialogue');
                     modl.modal({ 'backdrop': 'static' });
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    setTimeout(() => { this.getMyProfiles(); }, 1000);
+                    setTimeout(() => { this.getMyProfiles(); }, 5000);
+                
                     this.profile = new CandidateProfile();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);

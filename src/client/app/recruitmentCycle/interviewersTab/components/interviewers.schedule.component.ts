@@ -74,6 +74,7 @@ Status:string='';
         this.grdOptionsIntwHistory.NextButton = false;
         this.grdOptionsIntwHistory.PreviousButton = false;
         this.grdOptionsIntwHistory.RRFFilters.Status = 'Selected';
+        this.statuss='Selected';
         this.grdOptionsIntwHistory.Order='desc';
     }
     /**Router method overrid from OnActivate class */
@@ -157,7 +158,9 @@ Status:string='';
     //Shows Tooltip on calendar
     showDetails(e: any) {
         var StartTime = e.event.start.format('hh:mm A');
-        var EndTime = e.event.end.format('hh:mm A');
+        if(e.event.end != null){
+            var EndTime = e.event.end.format('hh:mm A');
+        }
         let element: any = $(e.element);
         if (e.event.title !== '') {
             element.tooltip({
@@ -230,11 +233,12 @@ Status:string='';
         this.grdOptionsIntwHistory.NextPageUrl = [];
         this.grdOptionsIntwHistory.ButtonClicked = 0;
         this.grdOptionsIntwHistory.CamlString = '';
-        
+        this.grdOptionsIntwHistory.RRFFilters.Status=this.statuss;
         this.GetMyAllConductedInerviewsHistory();
     }
 statusFilter(event:any){
 this.grdOptionsIntwHistory.RRFFilters.Status =event;
+this.statuss=this.grdOptionsIntwHistory.RRFFilters.Status;
 this.bindGridData();
 }
 

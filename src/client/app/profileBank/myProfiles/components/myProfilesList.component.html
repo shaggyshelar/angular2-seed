@@ -674,7 +674,7 @@
                                                                 <label class="control-label">Notice Period</label>
                                                                 <div class="row ">
                                                                     <div class="col-md-12">
-                                                                        <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)">
+                                                                        <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)" required>
                                                                             <option disabled selected>Select</option>
                                                                             <option *ngFor="let notice of noticePeriod" [value]="notice.Id">{{notice.Value}}</option>
                                                                         </select>
@@ -698,7 +698,7 @@
                                                                     <label class="control-label">Resigning Date</label>
                                                                     <div class="row">
                                                                         <div class="col-md-12">
-                                                                            <input type="date" [max]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" tabindex="24" />
+                                                                            <input type="date" [max]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" tabindex="24" required/>
                                                                         </div>
                                                                     </div>
                                                                 </div>
