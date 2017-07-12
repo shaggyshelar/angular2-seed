@@ -378,7 +378,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.fileUploaded = false;
                     this.fileName = '';
-                    setTimeout(() => { this.getMyProfiles(); }, 1000);
+                    this.myProfilesList.GrdOperations = new GrdOptions();
+                    setTimeout(() => { this.filterBy(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -424,7 +425,7 @@ export class MyProfilesListComponent implements OnActivate {
                     this.rejectReason = '';
                     this.rejectDate = '';
                     this.myProfilesList.GrdOperations = new GrdOptions();
-                    setTimeout(() => { this.getMyProfiles(); }, 1000);
+                    setTimeout(() => { this.filterBy(); }, 1000);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -652,7 +653,7 @@ export class MyProfilesListComponent implements OnActivate {
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.toastr.success((<ResponseFromAPI>results).Message);
                         this.myProfilesList.GrdOperations = new GrdOptions();
-                        setTimeout(() => { this.getMyProfiles(); }, 1000);
+                        setTimeout(() => { this.filterBy(); }, 1000);
                         this.profile = new CandidateProfile();
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
