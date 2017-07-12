@@ -74,8 +74,9 @@ Status:string='';
         this.grdOptionsIntwHistory.NextButton = false;
         this.grdOptionsIntwHistory.PreviousButton = false;
         this.grdOptionsIntwHistory.RRFFilters.Status = 'Selected';
-        this.statuss='Selected';
         this.grdOptionsIntwHistory.Order='desc';
+        this.grdOptionsIntwHistory.PerPageCount= 5;
+        this.statuss='Selected';
     }
     /**Router method overrid from OnActivate class */
     routerOnActivate() {
@@ -180,7 +181,7 @@ Status:string='';
         this._interviewService.GetMyAllConductedInerviews(this.grdOptionsIntwHistory)
             .subscribe(
             (results: any) => {
-                this.grdOptionsIntwHistory = results.GrdOperations;
+                this.grdOptionsIntwHistory = results.GrdOperations != null?results.GrdOperations:new GrdOptions();
                 
                 if (results.AllInterviews) {
                     if (results.AllInterviews.length > 0) {
