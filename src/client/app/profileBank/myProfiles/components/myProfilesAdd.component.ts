@@ -872,7 +872,7 @@ export class MyProfilesAddComponent implements OnActivate {
             .subscribe(
             results => {
                 this.EmployersInformation = <any>results;
-                this.EmployersInformation.FromDate = this.formatDate(this.EmployersInformation.FromDate);
+                this.EmployersInformation.FromDate = this.formatDate1(this.EmployersInformation.FromDate);
                 if (this.EmployersInformation.IsCurrentCompany === true) {
                     this.EmployersInformation.ToDate = this.formatDate(new Date());
                 } else {
@@ -1135,6 +1135,16 @@ export class MyProfilesAddComponent implements OnActivate {
         } else {
             this.EmployersInformation.ToDate = ' ';
         }
+    }
+       formatDate1(date: any) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year,month].join('-');
     }
     //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {
