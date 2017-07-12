@@ -282,8 +282,11 @@ export class MyProfilesListComponent implements OnActivate {
                     this.NORECORDSFOUND = false;
                     this.NORECORDS = true;
                     this.filterByProfile();
-                } else { this.NORECORDSFOUND = true;     
-                      this.NORECORDS = false; }
+                } else { 
+                     this.myProfilesList = <any>results;
+                    this.NORECORDSFOUND = true;     
+                      this.NORECORDS = false;
+                          this.selectedRowCount = null; }
             },
             error => this.errorMessage = <any>error);
     }
@@ -521,6 +524,7 @@ export class MyProfilesListComponent implements OnActivate {
             this.selectedRowCount++;
         } else {
             this.selectedRowCount--;
+             this.selectedAll = false;
             if (this.selectedRowCount == 0) {
                 this.selectedAll = false;
             }
@@ -921,6 +925,8 @@ export class MyProfilesListComponent implements OnActivate {
     }
 
     filterBy() {
+         this.selectedAll = false;
+         this.selectedRowCount = null;
         sessionStorage.setItem('Filter', this.modelFilterBy);
         switch (this.modelFilterBy) {
             case 'all':
