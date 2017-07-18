@@ -22,10 +22,10 @@ export class RRFApprovalService {
             .finally(() => this._spinnerService.hide());
     }
 
-    ActionOnRaisedRRF(rrfID: string, status: number, comment: string) {
+    ActionOnRaisedRRF(rrfID: string, status: number, comment: string, rrfCode:number,Position_title:string) {
         let url = Config.GetURL('/api/RRF/ActionOnRaisedRRF');
         this._spinnerService.show();
-        return this.authHttp.post(url, { RRFID: rrfID, Status: status, Comments: comment })
+        return this.authHttp.post(url, { RRFID: rrfID, Status: status, Comments: comment,RRFCODE:rrfCode,PositionTitle:Position_title })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

@@ -28,7 +28,9 @@
 		<div class="col-md-12">
 			<div class="row message">
 				<ul class="list-inline">
-					<li style="float:left"><small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></li>
+					<li style="float:left; margin-left:14px;" tooltip="Profile Source Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"><small><b>{{profile.CandidateOtherDetails.SourceDate?profile.CandidateOtherDetails.SourceDate:"N/A"}} </b>|</small></li>
+				
+					<li style="float:left;margin-left:-7px;" tooltip="Candidate Code" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"><small> {{profile.CANDIDATECODE ? profile.CANDIDATECODE:""}} </small></li>
 					<li style="float:right">
 						<!--<span class="mt-action-dot color{{profile.Status.Id}}"> </span>-->
 
@@ -119,7 +121,7 @@
 
 						</ul>
 					</div>
-					<p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+					<p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;margin-top:0px;">
 						<a class="sbold text-lowercase" href="mailto:{{profile.Email}}?cc={{profile.CandidateMailDetails?profile.CandidateMailDetails.Cc:''}}&amp;subject={{profile.CandidateMailDetails?profile.CandidateMailDetails.Subject:''}}&amp;body={{profile.CandidateMailDetails?profile.CandidateMailDetails.Body:''}}"><i class="fa fa-envelope-o"></i> {{profile.Email?profile.Email:"N/A"}} </a>
 					</p>
 					<div class="row" style="margin-left:-3px;height: 44px; overflow: hidden; text-overflow: ellipsis;">

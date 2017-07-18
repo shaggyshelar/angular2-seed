@@ -22,6 +22,7 @@ export class DetailProfileComponent implements OnInit {
     viewDetailsRRFId: MasterData = new MasterData();
     errorMessage: string;
     showPop:any;
+    SourceDate:string;
     //Get profiles data
     @Input() selectedProfile: CandidateProfile;
     @Input() rrfID: string;
@@ -48,6 +49,7 @@ export class DetailProfileComponent implements OnInit {
         }
         this.technicalSkills =this.tSkills? this.tSkills.substring(1) : this.tSkills;
         this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('MMMM D, YYYY h:mm a');
+        this.profile.CandidateOtherDetails.SourceDate = moment(this.profile.CandidateOtherDetails.SourceDate).format('D-MMM-YYYY');
         if (this.profile) {
             this.profile.CandidateMailDetails = this.profile ? this.CandidateRecruitmentMailDetails : new MailDetails();
         }
@@ -57,7 +59,6 @@ export class DetailProfileComponent implements OnInit {
         sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
-
     showPopOver(Comments: string, index: string) {
         let rowId: any = 'round' + index;
         let row: any = $('#' + rowId);

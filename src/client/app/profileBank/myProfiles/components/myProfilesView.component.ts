@@ -82,6 +82,7 @@ export class MyProfilesViewComponent implements OnActivate {
                 this.languageSkills=this.lSkills? this.lSkills.substring(1) : this.lSkills;
                 this.count = results.CandidateQualification.length;
                 this.convertCheckboxesValues();
+                 this.profile.CandidateOtherDetails.SourceDate = moment(this.profile.CandidateOtherDetails.SourceDate).format('D-MMM-YYYY');
             },
             error => this.errorMessage = <any>error);
     }

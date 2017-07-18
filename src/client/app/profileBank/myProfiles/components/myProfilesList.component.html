@@ -1,3 +1,16 @@
+<style>
+.align{
+    margin-left:-5px !important;
+}
+.button{
+    width: 4px !important;
+    height: 30px !important;
+}
+.divTop{
+    margin-top:18px !important;
+}
+</style>
+
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper" style="margin-top: -26px !important;">
     <!-- BEGIN CONTENT BODY -->
@@ -70,10 +83,10 @@
                             <div>
 
                                 <div class="row">
-                                    <div class="col-md-2 col-sm-2" style="margin-top: 16px;">
+                                    <div class="col-md-1 col-sm-1">
                                         <div class="dataTables_length" id="sample_1_length">
                                             <label>Show :
-												<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
+												<select name="sample_1_length" style="width: 68px!important;" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
 												[(ngModel)]="myProfilesList.GrdOperations.PerPageCount"  (ngModelChange)="onChange()" >
 													<option value="50">50</option>
 													<option value="100">100</option>
@@ -84,7 +97,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2 col-sm-3">
+                                    <div class="col-md-2 col-sm-2">
                                         <label>Filter By :
 											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
 												[(ngModel)]="modelFilterBy"
@@ -95,7 +108,7 @@
 										</label>
                                     </div>
 
-                                    <div class="col-md-2 col-sm-3" *ngIf="!showRrfFilter">
+                                    <div class="col-md-2 col-sm-2" *ngIf="!showRrfFilter">
                                         <label> Profiles :
 											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
 												(change)='modelFilterByProfileChanged($event)'>
@@ -107,20 +120,25 @@
 											</select>
 										</label>
                                     </div>
-                                    <div class="col-md-2 col-sm-3" *ngIf="showRrfFilter && RRFList.length > 0">
+                                    <div class="col-md-2 col-sm-2" *ngIf="showRrfFilter">
                                         <label> All My Profiles :
-											<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
+											<select *ngIf="RRFList.length > 0" name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
 												required (change)='onSelectRRF($event.target.value)'>
 												<!--[(ngModel)]="modelFilterByProfile"-->
 													<option [value]="-1" >All My Profiles</option>
 												<option *ngFor="let rrf of RRFList" [value]="rrf.RRFID.Value">{{rrf.RRFCODE}} - {{rrf.PositionTitle}}</option> 
 													<!--<option value="referenced">Referenced</option>-->
 											</select>
+                                            <select *ngIf="RRFList.length == 0" name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline">
+												<!--[(ngModel)]="modelFilterByProfile"-->
+													<option [value]="-1" disabled>No RRF Profiles</option>
+													<!--<option value="referenced">Referenced</option>-->
+											</select>
 										</label>
                                     </div>
 
 
-                                    <div class="col-md-2 col-sm-3">
+                                    <div class="col-md-2 col-sm-2">
                                         <div style="display: inline-flex">
                                             <label>Sort By :
 												<select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-small input-inline"
@@ -137,22 +155,29 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2 col-sm-3">
+                                    <div class="col-md-2 col-sm-2">
                                         <div id="sample_1_filter" class="form-group">
                                             <label>Search :
 											<input type="search" placeholder="" class="form-control input-sm input-small input-inline " [(ngModel)]="searchString" aria-controls="sample_1">
 											</label>
                                         </div>
                                     </div>
-   <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px; margin-top: 25px !important; ">
+                                    <div class="col-md-2 col-sm-2">
+                                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px; margin-top: 25px !important; ">
                                         <input type="checkbox" value="1" class="checkboxes" [(ngModel)]="selectedAll" (change)="selectAll();" data-toggle="tooltip" data-placement="bottom" title="Select All" tooltip="Select All" tooltipPlacement="bottom"
                                             tooltipTrigger="mouseenter" tooltipEnable="false" title="Select All"/>
                                             <span style="margin-left: 4px !important;"> </span>Select All
                                             </label>
+                                    </div>    
+                                    <div class="divTop" *ngIf="!NORECORDSFOUND">
+                                    <button type="button" class="btn btn-default button" tooltip="Previous Page" title="Previous Page" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" [disabled]="!myProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                            <span class="fa fa-arrow-left align"></span></button> &nbsp;&nbsp;
+                                        <button type="button" class="btn btn-default button" tooltip="Next Page" title="Next Page" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" [disabled]="!myProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+										    <span class="fa fa-arrow-right align"></span></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <div class="portlet-body" *ngIf="!NORECORDSFOUND">
 
                         <!-- FollowUP Comments-->

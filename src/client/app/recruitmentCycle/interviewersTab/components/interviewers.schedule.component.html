@@ -1,7 +1,9 @@
 <style>
 .scroll{
-max-height:412px; 
-overflow:auto;
+min-height:400px !important; 
+max-height:400px !important; 
+overflow-y:auto;
+overflow-x:hidden;
 }
 .input-small {
     width: 179px!important;
@@ -169,14 +171,15 @@ overflow:auto;
         <div class="row">
             <div class="col-md-8">
                 <!-- MY SCHEDULE INTERVIEWS-->
-                <div class="portlet light bordered" style="min-height: 505px;">
+                <div class="portlet light bordered" style="min-height: 505px; max-height: 505px;">
                     <div class="portlet-title">
                         <div class="caption font-dark">
                             <span class="caption-subject bold uppercase"><i class="fa fa-calendar-check-o"></i> My Schedule</span>
                         </div>
                     </div>
+                    <div class="scroll">
                     <div class="portlet-body" >
-                        <div class="scroll">
+                        
                             <table  class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
                                 <thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
                                     <tr>
@@ -211,10 +214,10 @@ overflow:auto;
                                         </td>
                                         <td>
                                             <div class="btn-group">
-                                                <button class="btn btn-xs green dropdown-toggle" style="container:body" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
+                                                <button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"> Actions
                                                     <i class="fa fa-angle-down"></i>
                                                 </button>
-                                                <ul class="dropdown-menu pull-right" role="menu"  style="margin-left: -145%;">
+                                                <ul class="dropdown-menu pull-right" role="menu">
                                                     <li>
                                                         <a href="javascript:;" *ngIf="_myInterview.CandidatePrimaryDetails.ResumeID !== ''" (click)='getResume(_myInterview.CandidateID)'>
                                                             <i class="icon-download"></i> Download Resume </a>

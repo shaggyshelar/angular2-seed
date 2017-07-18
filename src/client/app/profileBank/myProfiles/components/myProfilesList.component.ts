@@ -1049,11 +1049,14 @@ export class MyProfilesListComponent implements OnActivate {
     filterByProfile() {
         let profUntagged: any[] = ['Open', 'Rejected', 'Absconded'];
         let profTagged: any[] = ['In Process', 'Offered', 'Joined', 'Accepted'];
+         this.selectedAll = false;
+         this.selectedRowCount = null;
         this.myProfilesList.Profiles = [];
         let temp: any = this.cachedProfileList;
         switch (this.modelFilterByProfile) {
             case 'all':
                 this.myProfilesList.Profiles = this.cachedProfileList;
+              this.displayFilterData();
                 break;
             case 'tagged':
                 this.myProfilesList.Profiles = temp.filter((element: any) => {
@@ -1066,6 +1069,7 @@ export class MyProfilesListComponent implements OnActivate {
                     }
                     return retVal;
                 });
+            this.displayFilterData();
                 break;
             case 'untagged':
                 this.myProfilesList.Profiles = temp.filter((element: any) => {
@@ -1077,10 +1081,22 @@ export class MyProfilesListComponent implements OnActivate {
                     }
                     return retVal;
                 });
+                this.displayFilterData();
                 break;
             default:
                 break;
         }
+    }
+    displayFilterData(){
+        if(this.myProfilesList.Profiles.length == 0){
+                    this.NORECORDSFOUND = true;   
+                }
+                else{
+                     this.NORECORDSFOUND = false; 
+                     for (var i = 0; i < this.myProfilesList.Profiles.length; i++) {
+                        this.myProfilesList.Profiles[i].IsChecked = this.selectedAll;
+                      } 
+                }
     }
     enterFullDetails() {
      var completeProfileLink: string = '/App/ProfileBank/MyProfiles/Edit/'+ this.candidateId.Value +'ID'+ this.candidateId.Id;

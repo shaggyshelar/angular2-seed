@@ -7,6 +7,7 @@ export class AllCandidateProfiles {
 
 export class CandidateProfile {
   //public CandidateID: string;
+
   public CandidateID: MasterData = new MasterData();
   public Candidate: string;//Candidate prop holds Full name of candidate
   public CANDIDATECODE: string;
@@ -78,7 +79,6 @@ public TotalExperience: number;
   public ResumeName: string = 'TestResume.doc';
   /**Propety to get profiles last updated date */
   public ModifiedOn: string;
-
 }
 
 export class Qualification {
@@ -167,6 +167,7 @@ export class SalaryDetails {
 }
 
 export class OtherDetails {
+  public SourceDate: string;
   public CandidateID: MasterData = new MasterData();
   public AppliedEarlier: any;
   public AppraisalBondContractDetails: string;

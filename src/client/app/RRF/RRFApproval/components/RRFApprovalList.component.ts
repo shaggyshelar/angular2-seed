@@ -121,6 +121,9 @@ export class RRFApprovalListComponent implements OnActivate {
                 //:: Create object of RRF details and send object to api
                 var _rrfDetails: RRFDetails = new RRFDetails();
                 _rrfDetails.RRFID = this.rrfApprovalList[index].RRFID;
+                _rrfDetails.RRFCODE = this.rrfApprovalList[index].RRFCODE;
+                _rrfDetails.PositionTitle = this.rrfApprovalList[index].PositionTitle;
+                
                 _rrfDetails.RaisedBy = this.rrfApprovalList[index].RaisedBy;
                 //:: Created Approval list object
                 var _rrfApprovalList: RRFApproval = new RRFApproval();
@@ -165,8 +168,10 @@ export class RRFApprovalListComponent implements OnActivate {
     //Raised RRF single approval service call
     ActionOnRaisedRRF(rrfID: string,
         status: number,
-        comment: string): void {
-        this._rrfApprovalService.ActionOnRaisedRRF(rrfID, status, comment)
+        comment: string,
+        rrfCode:number,
+        Position_title:string): void {
+        this._rrfApprovalService.ActionOnRaisedRRF(rrfID, status, comment,rrfCode,Position_title)
             .subscribe(
             results => {
                 if (+ (<ResponseFromAPI>results).StatusCode === APIResult.Success) {

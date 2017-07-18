@@ -821,7 +821,7 @@
 								                </div>
 							                </li>
                                              <li>
-								                <div tooltip="Current Designation & Role" tooltipPlacement="right" tooltipTrigger="mouseenter" tooltipEnable="true">
+								                <div tooltip="Current Designation & Role" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
                                                 <i class="fa fa-user"></i>{{Designation ? Designation: "N/A"}}
 								                </div>
 							                </li>
@@ -832,21 +832,25 @@
 							                </li>-->
                                            
                                              <li>
-								                <div tooltip="TimeSpent" tooltipPlacement="right" tooltipTrigger="mouseenter" tooltipEnable="true">
+								                <div tooltip="TimeSpent" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
                                                 <i class="fa fa-safari"></i>{{TimeSpent ? TimeSpent : "N/A"}}
 								                </div>
 							                </li>
 							                <li>
-								                <div tooltip="NoticePeriod" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
+								                <div tooltip="NoticePeriod" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
 									            <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
 									            </div>
                                             </li>
 							                <li>
-								                <div tooltip="Owner" tooltipPlacement="right" tooltipTrigger="mouseenter" tooltipEnable="true">
+								                <div tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
                                                     <i class="fa fa-user"></i>{{profile.Owner?profile.Owner.Value:"N/A"}}
 								                </div>
                                             </li>
-                                        
+                                            <li>
+								                <div tooltip="Profile Source Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                    <i class="fa fa-calendar"></i>{{profile.CandidateOtherDetails.SourceDate?profile.CandidateOtherDetails.SourceDate:"N/A"}}
+								                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                                 <!--end col-md-8-->
@@ -863,8 +867,15 @@
                                                         <span class="sale-info"><b> Permanent Address:</b>
                                                
                                                         </span>
-                                                        <span class="sale-num"> {{profile.PermanentAddress}} </span>
+                                                        <span class="sale-num"> {{profile.PermanentAddress?profile.PermanentAddress:"N/A"}} </span>
                                                         </li>
+                                                        <li *ngIf="profile.SecondaryContact">
+                                                        <span class="sale-info"><b> Alternate Contact:</b>
+                                               
+                                                        </span>
+                                                        <span class="sale-num"> {{profile.SecondaryContact?profile.SecondaryContact:"N/A"}} </span>
+                                                        </li>
+                                                        
                                                         <li *ngIf="profile.AadharCardNo">
                                                         <span class="sale-info"> <b>Adhaar card No:</b> </span>
                                                         <span class="sale-num"> {{profile.AadharCardNo}} </span>
