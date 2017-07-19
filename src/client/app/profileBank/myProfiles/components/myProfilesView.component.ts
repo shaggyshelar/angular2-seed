@@ -5,6 +5,7 @@ import { ProfileBankService} from  '../../shared/services/profileBank.service';
 import { MasterData } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { CommonService } from '../../../shared/index';
 @Component({
     moduleId: module.id,
     selector: 'rrf-blacklistedprofiles-view',
@@ -15,6 +16,7 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 })
 
 export class MyProfilesViewComponent implements OnActivate {
+    CurrentUser: MasterData = new MasterData();
     params: string;
     CandidateID: MasterData = new MasterData();
     profile: CandidateProfile;
@@ -29,6 +31,7 @@ export class MyProfilesViewComponent implements OnActivate {
     IsResumeShow: boolean = false;
     ShowResume: boolean = false;
     Resume: string;
+    ShowEditButton:boolean=true;
     public technicalSkills : string = '';
     public softSkills : string = '';
     public languageSkills : string = '';
@@ -37,7 +40,8 @@ export class MyProfilesViewComponent implements OnActivate {
     public lSkills : string = '';
     constructor(private _profileBankService: ProfileBankService,
         private _router: Router,
-        public toastr: ToastsManager) {
+        public toastr: ToastsManager,
+        private _commonService: CommonService) {
         this.profile = new CandidateProfile();
     }
     routerOnActivate(segment: RouteSegment) {
@@ -45,6 +49,7 @@ export class MyProfilesViewComponent implements OnActivate {
         this.CandidateID.Id = parseInt(this.params.split('ID')[1]);
         this.CandidateID.Value = this.params.split('ID')[0];
         this.returnPath = this.getSessionOf<string>('onProfilesReturnPath', false);
+        this.CurrentUser = this._commonService.getLoggedInUser();
         this.getCandidateProfile();
     }
     /**Get Candidate Profiles */
@@ -78,12 +83,14 @@ export class MyProfilesViewComponent implements OnActivate {
                     })
                 }
                 this.technicalSkills =this.tSkills? this.tSkills.substring(1) : this.tSkills;
-                this.softSkills = this.sSkills? this.sSkills.substring(1) : this.tSkills;
+                this.softSkills = this.sSkills? this.sSkills.substring(1) : this.sSkills;
                 this.languageSkills=this.lSkills? this.lSkills.substring(1) : this.lSkills;
                 this.count = results.CandidateQualification.length;
                 this.convertCheckboxesValues();
                  this.profile.CandidateOtherDetails.SourceDate = moment(this.profile.CandidateOtherDetails.SourceDate).format('D-MMM-YYYY');
-            },
+                 this.profile.ModifiedOn = moment(this.profile.ModifiedOn).format('D-MMM-YYYY');
+                this.getEditProfileAccess(this.profile.Owner);    
+        },
             error => this.errorMessage = <any>error);
     }
     /**Get data from session */
@@ -180,5 +187,16 @@ export class MyProfilesViewComponent implements OnActivate {
                 }
             },
             error => this.errorMessage = <any>error);
+    }
+     getEditProfileAccess(owner:MasterData){
+        if(owner.Id === this.CurrentUser.Id){
+            this.ShowEditButton = true;
+        }
+        else{
+            this.ShowEditButton = false;
+        }
+    }
+    onEditClick(candidateValue:any,candidateID:any){
+        this._router.navigate(['/App/ProfileBank/MyProfiles/Edit/'+ candidateValue +'ID'+ candidateID]);
     }
 }

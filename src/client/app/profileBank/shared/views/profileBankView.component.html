@@ -20,10 +20,13 @@
                 <div class="portlet light bordered">
 
                     <a class="btn green" (click)='Back()'> <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back</a>
+          
                     <div class="pull-right" style="margin-right:30px;">
+                                  <a *ngIf="ShowEditButton" class="btn yellow" (click)='onEditClick(CandidateID.Value,CandidateID.Id)' data-toggle="tooltip" data-placement="top" title="Edit Profile" tooltip="Edit Profile"
+                            tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false"> <i class="fa fa-edit" aria-hidden="true"></i></a>
                         <a href="#ResumeId" class="btn blue" data-toggle="tooltip" data-placement="top" title="Candidate Resume" tooltip="Candidate Resume"
                             tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="false">
-                            <i class="fa fa-file-o"></i> Resume
+                            <i class="fa fa-file-o"></i>
                         </a>
                         <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="bottom" 
                             tooltip="View Interview History" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false"
@@ -851,6 +854,11 @@
                                                     <i class="fa fa-calendar"></i>{{profile.CandidateOtherDetails.SourceDate?profile.CandidateOtherDetails.SourceDate:"N/A"}}
 								                </div>
                                             </li>
+                                               <li>
+								                <div tooltip="Profile Updated Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                    <i class="fa fa-calendar-plus-o"></i>{{profile.ModifiedOn?profile.ModifiedOn:"N/A"}}
+								                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                                 <!--end col-md-8-->
@@ -867,7 +875,7 @@
                                                         <span class="sale-info"><b> Permanent Address:</b>
                                                
                                                         </span>
-                                                        <span class="sale-num"> {{profile.PermanentAddress?profile.PermanentAddress:"N/A"}} </span>
+                                                        <span class="sale-num"> {{profile.City?profile.City + "," +" ":""}}{{profile.State?profile.State.Value + "," +" ":""}}{{profile.Country?profile.Country.Value:""}}</span>
                                                         </li>
                                                         <li *ngIf="profile.SecondaryContact">
                                                         <span class="sale-info"><b> Alternate Contact:</b>

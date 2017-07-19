@@ -1417,6 +1417,8 @@ export class MyProfilesAddComponent implements OnActivate {
         this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
         }
     }
- 
+    redirectToView(candidateValue:any,candidateID:any) {
+        this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + candidateValue + 'ID' + candidateID]);
+    }
     }
 }
