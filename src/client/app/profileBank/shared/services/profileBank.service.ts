@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { CandidateExperience, CandidateProfile, EmploymentHistory, ResumeMeta, SalaryDetails, Qualification, TeamManagement, CareerProfile,
-    OtherDetails, Skills, TransferOwnershipMeta, SocialInformation} from '../model/myProfilesInfo';
+    OtherDetails, Skills, TransferOwnershipMeta, SocialInformation,CandidateCompanyObject} from '../model/myProfilesInfo';
 import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
@@ -183,11 +183,51 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+      getHolidayData() {
+        let url = Config.GetURL('/api/Masters/GetAllHolidaysLinkup');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     /**Save candidate's all employement information' */
     addCandidateEmploymentDetails(CandidateCareerProfile: EmploymentHistory) {
         let url = Config.GetURL('/api/ProfileBank/AddCareerProfileDetails');
         this._spinnerService.show();
         return this.authHttp.post(url, { CandidateCareerProfile })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+     AddInHandOffer(CandidateCompanyObject: CandidateCompanyObject) {
+        let url = Config.GetURL('/api/ProfileBank/AddCandidateCompanyDetails');
+       this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateCompanyObject })
+            .map(this.extractData)
+            .catch(this.handleError)
+             .finally(() => this._spinnerService.hide());
+    }
+    EditInHandOffer(CandidateCompanyObject: CandidateCompanyObject) {
+        let url = Config.GetURL('/api/ProfileBank/UpdateCandidateCompanyDetails');
+       this._spinnerService.show();
+        return this.authHttp.post(url, { CandidateCompanyObject })
+            .map(this.extractData)
+            .catch(this.handleError)
+             .finally(() => this._spinnerService.hide());
+    }
+     getInHandOffer(CandidateId: string) {
+        let url = Config.GetURL('/api/ProfileBank/GetCandidateCompanyDetails?ID=' + CandidateId);
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+     deleteInHandOffer(OfferID: string) {
+        let url = Config.GetURL('/api/ProfileBank/DeleteCandidateCompanyDetails');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { CareerProfileID:OfferID })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

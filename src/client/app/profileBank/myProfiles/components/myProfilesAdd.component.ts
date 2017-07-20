@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, OnActivate, RouteSegment } from '@angular/router';
 import {
     CandidateProfile, ResumeMeta, Qualification, CandidateExperience,
-    EmploymentHistory, Skills, SalaryDetails, SocialInformation
+    EmploymentHistory, Skills, SalaryDetails, SocialInformation, CandidateCompanyObject
 } from '../../shared/model/myProfilesInfo';
 import { MyProfilesService } from '../services/myProfiles.service';
 import { MastersService } from '../../../shared/services/masters.service';
@@ -52,6 +52,8 @@ export class MyProfilesAddComponent implements OnActivate {
     resumeTypeDisable: boolean;
     /*Candidate Salary Details */
     CandidateSalaryDetails: SalaryDetails = new SalaryDetails();
+    OfferId:any;
+    CandidateCompanyObject:CandidateCompanyObject=new CandidateCompanyObject();
     /*Candidate Skills */
     CandidateSkills: Skills = new Skills();
     /**Candidate Experience */
@@ -164,6 +166,7 @@ export class MyProfilesAddComponent implements OnActivate {
         this.getSoftSkills();
         this.getLanguages();
         this.getReferenceEmployee();
+        this.GetInHandOffer(this.CandidateID.Value);
     }
     addTechnicalSkill(SkillInput: any) {
         this.profile.CandidateSkills.TechnicalSkills = [];
@@ -1368,16 +1371,79 @@ export class MyProfilesAddComponent implements OnActivate {
     addEditInHandOffer() {
         if (this.inHandOfferAction.action === 'Add') {
             this.entries.push(this.inHandOffer);
+            this.AddInHandOffer();
         } if (this.inHandOfferAction.action === 'Edit') {
             let buff = this.inHandOffer;
             this.entries[this.inHandOfferAction.index] = buff;
             this.inHandOfferAction.action = 'Add';
             this.inHandOfferAction.index = -999;
+            this.EditInHandOffer(this.inHandOffer);
         }
         this.initInHandOffer();
     }
+AddInHandOffer() {
+        var _candidateID = this.CandidateID;
+        this.CandidateCompanyObject.CandidateID = _candidateID;
+         this.CandidateCompanyObject.Designation=this.inHandOffer.Designation;
+          this.CandidateCompanyObject.Salary=this.inHandOffer.Salary;
+          this.CandidateCompanyObject.Company=this.inHandOffer.Company;
+          this.CandidateCompanyObject.ID="0";
+        this._profileBankService.AddInHandOffer(this.CandidateCompanyObject)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+    EditInHandOffer(updateDetails:any) {
+        this.CandidateCompanyObject=updateDetails;
+        this._profileBankService.EditInHandOffer(this.CandidateCompanyObject)
+            .subscribe(
+            results => {
+                if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.toastr.success((<ResponseFromAPI>results).Message);
+                } else {
+                    this.toastr.error((<ResponseFromAPI>results).Message);
+                }
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
+ GetInHandOffer(candidateIdValue : string) {
+        this._profileBankService.getInHandOffer(candidateIdValue)
+            .subscribe(
+            results => {
+                this.entries = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
+    }
+       deleteInHandOffer(OfferID: string) {
+        this._profileBankService.deleteInHandOffer(OfferID)
+            .subscribe(
+            (results: any) => {
+                setTimeout(() => { this.GetInHandOffer(this.CandidateID.Value); }, 1000);
+                this.toastr.success('Data Deleted Successfully');
+            },
+            error => this.toastr.error(<any>error));
+    }
+
     removeFromList(index: any) {
+        this.OfferId=this.entries[index];
         this.entries.splice(index, 1);
+       this.deleteInHandOffer(this.OfferId.ID);
     }
     editFromList(index: any) {
         this.inHandOffer = this.entries[index];

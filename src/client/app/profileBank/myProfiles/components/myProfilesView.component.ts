@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import { ROUTER_DIRECTIVES, RouteSegment, Router, OnActivate} from '@angular/router';
-import { CandidateProfile } from '../../shared/model/myProfilesInfo';
+import { CandidateProfile, EmploymentHistory,CandidateCompanyObject } from '../../shared/model/myProfilesInfo';
 import { ProfileBankService} from  '../../shared/services/profileBank.service';
-import { MasterData } from  '../../../shared/model/index';
+import { MasterData, Resume } from  '../../../shared/model/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { CommonService } from '../../../shared/index';
@@ -16,20 +16,24 @@ import { CommonService } from '../../../shared/index';
 })
 
 export class MyProfilesViewComponent implements OnActivate {
+    entries:CandidateCompanyObject=new CandidateCompanyObject();
     CurrentUser: MasterData = new MasterData();
     params: string;
     CandidateID: MasterData = new MasterData();
+    EmployersInformationList: Array<EmploymentHistory> = new Array<EmploymentHistory>();
     profile: CandidateProfile;
     errorMessage: string;
     returnPath: string;
     TITLE: string = 'Profiles';
     count: number = 0;
+    binaryResume: Resume;
     CurrentCompony: string;
     Designation: string;
     TimeSpent: string;
     ResumeText: string = 'Show Resume';
     IsResumeShow: boolean = false;
     ShowResume: boolean = false;
+    showDownloadBtn :boolean=false;
     Resume: string;
     ShowEditButton:boolean=true;
     public technicalSkills : string = '';
@@ -51,6 +55,8 @@ export class MyProfilesViewComponent implements OnActivate {
         this.returnPath = this.getSessionOf<string>('onProfilesReturnPath', false);
         this.CurrentUser = this._commonService.getLoggedInUser();
         this.getCandidateProfile();
+        this.GetEmployersInformationList(this.CandidateID);
+        this.GetInHandOffer(this.CandidateID.Value);
     }
     /**Get Candidate Profiles */
     getCandidateProfile() {
@@ -81,6 +87,12 @@ export class MyProfilesViewComponent implements OnActivate {
                     this.profile.CandidateSkills.LanguageSkills.forEach(data=>{
                         this.lSkills = this.lSkills + ',' + data.Value;
                     })
+                }
+                 if(this.profile.ResumeId !== ""){
+                   this.showDownloadBtn=true;
+                }
+                else{
+                     this.showDownloadBtn=false;
                 }
                 this.technicalSkills =this.tSkills? this.tSkills.substring(1) : this.tSkills;
                 this.softSkills = this.sSkills? this.sSkills.substring(1) : this.sSkills;
@@ -160,6 +172,36 @@ export class MyProfilesViewComponent implements OnActivate {
         sessionStorage.setItem('onReturnPath', '/App/ProfileBank/MyProfiles');
         this._router.navigate(['/App/ProfileBank/MyProfiles/History']);
     }
+    getResume(candidateID: MasterData) {
+        this._profileBankService.getResume(candidateID)
+            .subscribe(
+            results => {
+                this.binaryResume = <any>results;
+                if (this.binaryResume) {
+                    this.Download(this.binaryResume.BinaryResume, this.binaryResume.ResumeName);
+                } else { alert('Resume not available!'); }
+            },
+            error => this.errorMessage = <any>error);
+    }
+       /** Download crate file form binary and download in given fyle type */
+    Download(binaryResume: string, ResumeName: string) {
+        var link = document.createElement('a');
+        link.download = ResumeName;
+        link.href = 'data:application/octet-stream;charset=utf-8;base64,' + binaryResume;
+        link.click();
+    }
+     GetInHandOffer(candidateIdValue : string) {
+        this._profileBankService.getInHandOffer(candidateIdValue)
+            .subscribe(
+            results => {
+                this.entries = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
+    }
     showResume() {
         if (this.ResumeText === 'Show Resume') {
             this.ResumeText = 'Hide Resume';
@@ -198,5 +240,17 @@ export class MyProfilesViewComponent implements OnActivate {
     }
     onEditClick(candidateValue:any,candidateID:any){
         this._router.navigate(['/App/ProfileBank/MyProfiles/Edit/'+ candidateValue +'ID'+ candidateID]);
+    }
+      GetEmployersInformationList(_candidateID: MasterData) {
+        this._profileBankService.getCandidateEmploymentHistory(_candidateID)
+            .subscribe(
+            results => {
+                this.EmployersInformationList = <any>results;
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+
     }
 }

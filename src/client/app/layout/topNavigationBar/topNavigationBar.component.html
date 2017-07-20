@@ -320,6 +320,36 @@
             </ul>
         </li>-->
             <!-- END TODO DROPDOWN -->
+             <!-- START Calendar DROPDOWN -->
+                <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar" >
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
+                        <i (click)="getHolidayData()" class="icon-calendar" data-toggle="tooltip" data-placement="top" title="Holidays" tooltip="Holidays" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"></i>
+                    </a>
+                    <ul class="dropdown-menu extended tasks">
+                        <li class="external">
+                            <h3>We have
+                                <span class="bold">{{festival.length}} Upcoming</span> Holidays</h3>
+                                <!--<a href="app_todo.html">view all</a>-->
+                        </li>
+                        <li class="dropdown-menu-list scroller" style="height: 275px; overflow: auto; width: auto;" data-handle-color="#637283" data-initialized="1">
+                            <div>
+                                <div class="col-lg-12" style="background-color: #f5f6fa; padding: 8px;">
+                                    <div class="col-md-6 col-sm-6"><b>Holiday Title</b></div>
+                                    <div class="col-md-6 col-sm-6"><b>Date</b></div>
+                                </div>
+                                <div class="col-lg-12" *ngFor="let fest of festival" style="background-color: #f5f6fa; padding: 8px;">
+                                    <div class="col-md-7 col-sm-7">{{fest.Descroption}}</div>
+                                    <div class="col-md-5 col-sm-5" style="padding-right: 9px !important;">{{fest.Date}}</div>
+                                </div>
+                                <div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 147.994px;">
+                                </div>
+                                <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            <!-- END Calendar DROPDOWN -->
             <!-- BEGIN USER LOGIN DROPDOWN -->
             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
             <li class="dropdown dropdown-user dropdown-dark">
@@ -369,6 +399,8 @@
                 </ul>
             </li>
             <!-- END USER LOGIN DROPDOWN -->
+           
+
             <!-- BEGIN QUICK SIDEBAR TOGGLER -->
             <li class="dropdown dropdown-extended quick-sidebar-toggler">
                 <span class="sr-only">Toggle Quick Sidebar</span>

@@ -24,8 +24,8 @@
                     <div class="pull-right" style="margin-right:30px;">
                                   <a *ngIf="ShowEditButton" class="btn yellow" (click)='onEditClick(CandidateID.Value,CandidateID.Id)' data-toggle="tooltip" data-placement="top" title="Edit Profile" tooltip="Edit Profile"
                             tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false"> <i class="fa fa-edit" aria-hidden="true"></i></a>
-                        <a href="#ResumeId" class="btn blue" data-toggle="tooltip" data-placement="top" title="Candidate Resume" tooltip="Candidate Resume"
-                            tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="false">
+                        <a href="#ResumeId" class="btn blue" data-toggle="tooltip" data-placement="bottom" title="Candidate Resume" tooltip="Candidate Resume"
+                            tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false">
                             <i class="fa fa-file-o"></i>
                         </a>
                         <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="bottom" 
@@ -33,6 +33,10 @@
                             (click)='getCandidateHistory(CandidateID)'>
                             <i class="fa fa-history"> </i>
                         </a>
+                        <a *ngIf="showDownloadBtn" style="margin-left:1px;" class="btn btn-icon-only green" (click)='getResume(profile.CandidateID)' data-original-title="" title="" tooltip="Download Resume"
+							tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
+						<i class="fa fa-download"></i>
+					</a>
                     </div>
 
 
@@ -1044,6 +1048,116 @@
                                     </div>
                                  </div>
                         </div>
+ <div class="col-md-4">
+                        <!-- Candidate Resume -->
+                        <div class="portlet light nopadding topmargin" id="ResumeId">
+                            <div class="portlet-title  custom-portlet">
+
+                               <div >
+                                                                <table class="table table-striped table-hover table-bordered" id="InHandOffer_Table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th> In Hand Details</th>
+                                            
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody *ngIf="entries.length > 0">
+                                                                        <tr>
+                                                                            <td> Company Name </td>
+                                                                            <td> Designation</td>
+                                                                            <td> Salary </td>
+                                                                        </tr>
+                                                                        <tr *ngFor="let record of entries; let i = index">
+                                                                            <td> {{record.Company}} </td>
+                                                                            <td> {{record.Designation}}</td>
+                                                                            <td> {{record.Salary}} </td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                    <tbody *ngIf="entries.length === 0">
+                                                                        <tr>
+                                                                            <td colspan="5">
+                                                                                <strong>No entries </strong>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+         </div>
+                                 </div>
+                        </div>
+
+<div class="col-md-8">
+                        <!-- Candidate Resume -->
+                        <div class="portlet light nopadding topmargin" id="ResumeId">
+                            <div class="portlet-title  custom-portlet">
+
+                                      <div>
+                                                                    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th class="col-md-4"> Employer's Information </th>
+                                                                            
+                                                                            
+                                                                          
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <!--<tr>
+                                                                                <td class="col-md-8">Employer's Information</td>
+                                                                                </tr>-->
+                                                                            <tr>
+                                                                                 <td> Employer Name </td>
+                                                                                <td> Designation </td>
+                                                                                <td> Location</td>
+                                                                                <td> Time Spent <small>(In Years)</small> </td>
+                                                                                <td> Current </td>
+                                                                            </tr>
+                                                                            <tr *ngFor="let EmployersInformation of EmployersInformationList">
+                                                                                <td>{{EmployersInformation.Company}}</td>
+                                                                                <td> {{EmployersInformation.DesignationRole}}</td>
+                                                                                <td>{{EmployersInformation.Location}}</td>
+                                                                                <td> {{EmployersInformation.TimeSpentInCompany}}</td>
+                                                                                <td>  {{EmployersInformation.IsCurrentCompany===true?"Current":"-"}}</td>
+                                                                            </tr>
+
+
+                                                                        </tbody>
+                                                                        <tbody *ngIf="EmployersInformationList.length === 0">
+                                                                            <tr>
+                                                                                <td colspan="6">
+                                                                                    <strong>No entries </strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                 <div>
+                                                                    <table>
+                                                                        <tr *ngIf="EmployersInformationList===undefined">
+                                                                            <td>
+                                                                                No Employment history..!
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+
+
+         </div>
+                                 </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
                      <div class="col-md-12">
                         <!-- Candidate Resume -->
                         <div class="portlet light nopadding topmargin" id="ResumeId">

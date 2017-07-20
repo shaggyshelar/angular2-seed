@@ -4,6 +4,13 @@ export class AllCandidateProfiles {
   public GrdOperations = new GrdOptions();
   public Profiles: Array<CandidateProfile> = new Array<CandidateProfile>();
 }
+export class CandidateCompanyObject {
+    public CandidateID: MasterData = new MasterData();
+    public Designation: string;
+    public Salary: string;
+    public Company: string;
+    public ID:string;
+}
 
 export class CandidateProfile {
   //public CandidateID: string;
@@ -35,7 +42,7 @@ export class CandidateProfile {
   public url: any;
   public RRFID: MasterData = new MasterData();
 public TotalExperience: number;
-
+  public ResumeId: string;
 
   //Properties of Personal Information
   public SecondaryContact: number;
