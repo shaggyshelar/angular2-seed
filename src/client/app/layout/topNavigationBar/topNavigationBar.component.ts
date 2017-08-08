@@ -35,7 +35,6 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
         this.subscription = this.loginService.getAuthEmitter()
             .subscribe((value: boolean) => { this.isAuthenticated = value; });
         this.getLoggedInUser();
-        this.getHolidayData();
         if (!this.currentUser) {
             this.logout();
         }
@@ -47,57 +46,14 @@ export class TopNavigationBarComponent implements OnInit, OnDestroy {
             .subscribe(
             results => {
                 this.festival = <any>results;
-                     if(this.festival.length > 0){
-            // this.festival.forEach(data, index=>{
-            //    this.festival.Date
-            // })
-            // var test[] = [];
-            this.festival.forEach((data, idx) => {
-                data.Date = moment(data.Date).format('D-MMM-YYYY');
-                this.festival[idx].Date = moment(data.Date).format('D-MMM-YYYY');
-            });
-        }
-        
-            },
-            error => this.errorMessage = <any>error);
-        // this.festival = [
-        //     {
-        //         title: 'Lakshmi Puja(Diwali) /Muharram',
-        //         date: '10/01/2017'
-        //     }
-        //     , {
-        //         title: 'Holi',
-        //         date: '10/01/2017'
-        //     }
-        //     , {
-        //         title: 'Dussehra(Vijaya Dashmi)',
-        //         date: '10/01/2017'
-        //     }
-        //     , {
-        //         title: 'Christmas',
-        //         date: '10/01/2017'
-        //     }
-        //     , {
-        //         title: 'Indian Independence day',
-        //         date: '10/01/2017'
-        //     }
-        //      , {
-        //         title: 'MakarSankranti',
-        //         date: '10/01/2017'
-        //     }
-        //      , {
-        //         title: 'New Year',
-        //         date: '10/01/2017'
-        //     }
-        //      , {
-        //         title: 'Gandhi jayanti',
-        //         date: '10/01/2017'
-        //     }
-        //      , {
-        //         title: 'Ganesh Visarjan',
-        //         date: '10/01/2017'
-        //     }
-        // ];
+                if(this.festival.length > 0){
+                    this.festival.forEach((data, idx) => {
+                    data.Date = moment(data.Date).format('D-MMM-YYYY');
+                    this.festival[idx].Date = moment(data.Date).format('D-MMM-YYYY');
+                });
+            }
+        },
+        error => this.errorMessage = <any>error); 
     }
     getLoggedInUser() {
         this.currentUser = this._commonService.getLoggedInUser();

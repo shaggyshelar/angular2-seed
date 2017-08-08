@@ -875,11 +875,11 @@
                                             <div class="portlet-body">
                                                 <ul class="list-unstyled">
                                                  
-                                                    <li>
+                                                    <li *ngIf="profile.City || profile.State.Value || profile.Country.Value ">
                                                         <span class="sale-info"><b> Permanent Address:</b>
                                                
                                                         </span>
-                                                        <span class="sale-num"> {{profile.City?profile.City + "," +" ":""}}{{profile.State?profile.State.Value + "," +" ":""}}{{profile.Country?profile.Country.Value:""}}</span>
+                                                        <span class="sale-num"> {{profile.City?profile.City + "," +" ":""}}{{profile.State.Value?profile.State.Value + "," +" ":""}}{{profile.Country?profile.Country.Value:""}}</span>
                                                         </li>
                                                         <li *ngIf="profile.SecondaryContact">
                                                         <span class="sale-info"><b> Alternate Contact:</b>
@@ -935,14 +935,33 @@
                                                         <span class="sale-num"> {{profile.RelevantExperience?profile.RelevantExperience:"N/A"}} </span>
                                                     </li>
                                                     <li>
+                                                        <span class="sale-info"><b> Serving Notice Period:</b> </span>
+                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.ServingNoticePeriod?profile.CandidateOtherDetails.ServingNoticePeriod:"N/A"}} </span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="sale-info"> <b>Resigning Date</b> </span>
+                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.ResigningDate?profile.CandidateOtherDetails.ResigningDate:"N/A"}}
+						                                </span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="sale-info"> <b>Can Join In :</b> </span>
+                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.CanJoinIn?profile.CandidateOtherDetails.CanJoinIn:"N/A"}}
+						                                </span>
+                                                    </li>
+
+
+
+                                                    <!--<li>
                                                         <span class="sale-info"><b> Offer in hand:</b> </span>
                                                         <span class="sale-num"> {{profile.CandidateOtherDetails.OfferInHand?profile.CandidateOtherDetails.OfferInHand:"N/A"}} </span>
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"> <b>Offer in hand details:</b> </span>
                                                         <span class="sale-num">As {{Designation?Designation:"N/A"}} at {{CurrentCompony?CurrentCompony:"N/A"}}
-						 </span>
-                                                    </li>
+						                                </span>
+                                                    </li>-->
+
+
                                                        <li>
                                                         <span class="sale-info"><b> Role Expected  :</b>
                                                        
@@ -1048,117 +1067,90 @@
                                     </div>
                                  </div>
                         </div>
- <div class="col-md-4">
+                        <div class="col-md-4">
+                        <!-- Candidate Resume -->
+                            <div class="portlet light nopadding topmargin" id="ResumeId">
+                                <div class="portlet-title  custom-portlet">
+                                    <div >
+                                        <table class="table table-striped table-hover table-bordered" id="InHandOffer_Table">
+                                            <thead>
+                                                <tr>
+                                                    <th> In Hand Details</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngIf="entries.length > 0">
+                                                <tr>
+                                                    <td> Company Name </td>
+                                                    <td> Designation</td>
+                                                    <td> Salary </td>
+                                                </tr>
+                                                <tr *ngFor="let record of entries; let i = index">
+                                                    <td> {{record.Company}} </td>
+                                                    <td> {{record.Designation}}</td>
+                                                    <td> {{record.Salary}} </td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody *ngIf="entries.length === 0">
+                                                <tr>
+                                                    <td colspan="5">
+                                                        <strong>No entries </strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
                         <!-- Candidate Resume -->
                         <div class="portlet light nopadding topmargin" id="ResumeId">
                             <div class="portlet-title  custom-portlet">
-
-                               <div >
-                                                                <table class="table table-striped table-hover table-bordered" id="InHandOffer_Table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th> In Hand Details</th>
-                                            
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody *ngIf="entries.length > 0">
-                                                                        <tr>
-                                                                            <td> Company Name </td>
-                                                                            <td> Designation</td>
-                                                                            <td> Salary </td>
-                                                                        </tr>
-                                                                        <tr *ngFor="let record of entries; let i = index">
-                                                                            <td> {{record.Company}} </td>
-                                                                            <td> {{record.Designation}}</td>
-                                                                            <td> {{record.Salary}} </td>
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                    <tbody *ngIf="entries.length === 0">
-                                                                        <tr>
-                                                                            <td colspan="5">
-                                                                                <strong>No entries </strong>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-
-         </div>
-                                 </div>
+                                <div>
+                                    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                        <thead>
+                                            <tr>
+                                                <th class="col-md-4"> Employer's Information </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngIf="EmployersInformationList.length > 0">
+                                            <tr>
+                                                <td> Employer Name </td>
+                                                <td> Designation </td>
+                                                <td> Location</td>
+                                                <td> Time Spent <small>(In Years)</small> </td>
+                                                <td> Current </td>
+                                            </tr>
+                                            <tr *ngFor="let EmployersInformation of EmployersInformationList">
+                                                <td>{{EmployersInformation.Company}}</td>
+                                                <td> {{EmployersInformation.DesignationRole}}</td>
+                                                <td>{{EmployersInformation.Location}}</td>
+                                                <td> {{EmployersInformation.TimeSpentInCompany}}</td>
+                                                <td>  {{EmployersInformation.IsCurrentCompany===true?"Current":"-"}}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody *ngIf="EmployersInformationList.length === 0">
+                                            <tr>
+                                                <td colspan="6">
+                                                    <strong>No entries </strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <table>
+                                        <tr *ngIf="EmployersInformationList===undefined">
+                                            <td>
+                                                No Employment history..!
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-
-<div class="col-md-8">
-                        <!-- Candidate Resume -->
-                        <div class="portlet light nopadding topmargin" id="ResumeId">
-                            <div class="portlet-title  custom-portlet">
-
-                                      <div>
-                                                                    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th class="col-md-4"> Employer's Information </th>
-                                                                            
-                                                                            
-                                                                          
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <!--<tr>
-                                                                                <td class="col-md-8">Employer's Information</td>
-                                                                                </tr>-->
-                                                                            <tr>
-                                                                                 <td> Employer Name </td>
-                                                                                <td> Designation </td>
-                                                                                <td> Location</td>
-                                                                                <td> Time Spent <small>(In Years)</small> </td>
-                                                                                <td> Current </td>
-                                                                            </tr>
-                                                                            <tr *ngFor="let EmployersInformation of EmployersInformationList">
-                                                                                <td>{{EmployersInformation.Company}}</td>
-                                                                                <td> {{EmployersInformation.DesignationRole}}</td>
-                                                                                <td>{{EmployersInformation.Location}}</td>
-                                                                                <td> {{EmployersInformation.TimeSpentInCompany}}</td>
-                                                                                <td>  {{EmployersInformation.IsCurrentCompany===true?"Current":"-"}}</td>
-                                                                            </tr>
-
-
-                                                                        </tbody>
-                                                                        <tbody *ngIf="EmployersInformationList.length === 0">
-                                                                            <tr>
-                                                                                <td colspan="6">
-                                                                                    <strong>No entries </strong>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                                 <div>
-                                                                    <table>
-                                                                        <tr *ngIf="EmployersInformationList===undefined">
-                                                                            <td>
-                                                                                No Employment history..!
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-
-
-         </div>
-                                 </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-
-
-                     <div class="col-md-12">
+                    </div>
+                    <div class="col-md-12">
                         <!-- Candidate Resume -->
                         <div class="portlet light nopadding topmargin" id="ResumeId">
                             <div class="portlet-title  custom-portlet">
@@ -1188,7 +1180,7 @@
                         </div>
                         </div>
                         <!-- Camdidate Resume End-->
-                        </div>
+                    </div>
                 </div>
                 <!-- END CONTENT BODY -->
             </div>

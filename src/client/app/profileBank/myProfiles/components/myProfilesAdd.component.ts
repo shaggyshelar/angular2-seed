@@ -85,6 +85,8 @@ export class MyProfilesAddComponent implements OnActivate {
     reasonToRelocateFlag: boolean = false;
     OfferInHand: boolean = false;
     regDateShow: boolean = false;
+    regDaysShow: boolean = false;
+    regDaysShowNeg: boolean =false;
     VariableCTC: boolean = false;
     AllowanceFlag: boolean = false;
     IncentiveFlag: boolean = false;
@@ -367,9 +369,20 @@ export class MyProfilesAddComponent implements OnActivate {
                 }
                  if (this.profile.CandidateOtherDetails.ServingNoticePeriod === true) {
                     this.regDateShow = true;
-                    this.totalDayscountNO(this.profile.CandidateOtherDetails.ResigningDate);
+                  //  this.totalDayscountNO(this.profile.CandidateOtherDetails.ResigningDate);
                     this.profile.CandidateOtherDetails.ResigningDate = this.formatDate(this.profile.CandidateOtherDetails.ResigningDate);
-
+                    if(this.profile.CandidateOtherDetails.CanJoinIn < 0){
+                        var string=this.profile.CandidateOtherDetails.CanJoinIn;
+                        var abc=string.replace(/\-/g,'');
+                        this.profile.CandidateOtherDetails.CanJoinIn=abc;
+                        this.regDaysShowNeg=true;
+                         this.regDaysShow=false;
+                    }
+                    else{
+                        this.regDaysShow=true;
+                        this.regDaysShowNeg=false;
+                        this.profile.CandidateOtherDetails.CanJoinIn=this.profile.CandidateOtherDetails.CanJoinIn;
+                    }
                 }
                 this.profile.PreviousFollowupComments = this.profile.FollowUpComments;
                 if (results.Country.Id !== 0)
@@ -460,13 +473,20 @@ export class MyProfilesAddComponent implements OnActivate {
     onSavePrimaryInfo(): void {
 
         if (!this.isExist) {
-            if (this.validatePrimaryInfo()) {
-                if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
+            if (this.validatePrimaryInfo()) 
+            {
+                if(this.profile.FollowUpComments !== null){
+                    if (this.profile.PreviousFollowupComments !== this.profile.FollowUpComments.trim().replace(/ +/g, ' ')) {
                     this.profile.CommentsUpdated = true;
                     this.profile.PreviousFollowupComments = this.profile.FollowUpComments.trim();
-                } else {
-                    this.profile.CommentsUpdated = false;
+                    } else {
+                         this.profile.CommentsUpdated = false;
+                    }
                 }
+                else{
+                     this.profile.CommentsUpdated = false;
+                }
+                
                 this._profileBankService.editCandidateProfile(this.profile)
                     .subscribe(
                     results => {
@@ -1085,9 +1105,11 @@ export class MyProfilesAddComponent implements OnActivate {
         var todayDate = new Date();
         this.currentDate = (<any>this.formatDate(todayDate));   
         this.profile.CandidateOtherDetails.ResigningDate = this.currentDate;
+         this.regDaysShow = true;
         }
         } else {
             this.regDateShow = false;
+             this.regDaysShow = false;
              this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
         }
         this.onSavePrimaryInfo();
@@ -1217,8 +1239,94 @@ export class MyProfilesAddComponent implements OnActivate {
     onSalaryTabClick() {
         $('#txtFolloUpForSal').focus();
     }
+    check(number: string){
+
+    }
     validate(type: string, number: string) {
         switch (type) {
+              case 'rrf': if (number.indexOf('\'') >= 0 || number.indexOf('"') >= 0) {
+                this.toastr.error('Single quotes and double quotes are not allowed');
+
+            } else {
+            
+               this.onSaveSalaryDetails();
+            }
+                break;     
+            case 'OfferInHandSalary': if(number.length > 0){
+            if (number.match('^[0-9]{0,2}$') ) {
+                this.inHandOffer.Salary=this.inHandOffer.Salary;
+            }
+            else if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+                 this.inHandOffer.Salary=this.inHandOffer.Salary;
+                }
+                else {
+                  this.inHandOffer.Salary = '';
+                    this.toastr.error('Enter valid Experiece. Eg:2/2.2/22.22');
+                }
+            }
+                break; 
+             case 'TotalExp': if(number.length > 0){
+            if (number.match('^[0-9]{0,2}$') ) {
+                this.onSaveCareerProfileDetails();
+            }
+            else if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+                  this.onSaveCareerProfileDetails();
+                }
+                else {
+                   this.CandidateExperiences.TotalExperience = '';
+                    this.toastr.error('Enter valid Experiece. Eg:2/2.2/22.22');
+                }
+            }
+                break; 
+             case 'RelevantExp': if(number.length > 0){
+            if (number.match('^[0-9]{0,2}$') ) {
+                this.onSaveCareerProfileDetails();
+            }
+            else if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+                  this.onSaveCareerProfileDetails();
+                }
+                else {
+                   this.CandidateExperiences.RelevantExperience = '';
+                    this.toastr.error('Enter valid Experiece. Eg:2/2.2/22.22');
+                }
+            }
+                break;    
+             case 'Salary': if(number.length > 0){
+            if (number.match('^[0-9]{0,2}$') ) {
+                this.onSavePrimaryInfo();
+            }
+            else if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+                  this.onSavePrimaryInfo();
+                }
+                else {
+                   this.profile.CandidateSalaryDetails.CurrentSalary = '';
+                    this.toastr.error('Enter valid salary amount. Eg:2/2.2/22.22');
+                }
+            }
+                break;     
+                    case 'ExpectedSalary': if(number.length > 0){
+            if (number.match('^[0-9]{0,2}$') ) {
+                this.onSavePrimaryInfo();
+            }
+            else if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+                  this.onSavePrimaryInfo();
+                }
+                else {
+                   this.profile.CandidateSalaryDetails.ExpectedSalary ='';
+                    this.toastr.error('Enter valid salary amount. Eg:2/2.2/22.22');
+                }
+            }
+                break; 
+            //  case 'Salary': if(number.length > 0){
+            //     if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+            //         this.onSavePrimaryInfo();
+            //     }
+            //     else {
+            //        this.profile.CandidateSalaryDetails.CurrentSalary = '';
+            //         this.toastr.error('Enter valid salary amount. Eg: 2/2.2/22.22');
+            //     }
+            // }
+            //     break;             
             case 'Aadhar': if (number.match('^[0-9\-\+]{9,15}$') && number.length === 12) {
                 this.IsExist();
             } else {
@@ -1471,10 +1579,22 @@ AddInHandOffer() {
     }
     totalDays(date:Date){ 
         if (date !== undefined){
-           this.NPdays = this.totalDaysCount(new Date(date), new Date());
-           this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
+         //  this.NPdays = this.totalDaysCount(new Date(date), new Date());
+         //  this.profile.CandidateOtherDetails.CanJoinIn = this.NPdays;
          this.profile.CandidateOtherDetails.ResigningDate = date;
            this.onSavePrimaryInfo();
+           if(this.profile.CandidateOtherDetails.CanJoinIn < 0){
+            var string=this.profile.CandidateOtherDetails.CanJoinIn;
+            var abc=string.replace(/\-/g,'');
+            this.profile.CandidateOtherDetails.CanJoinIn=abc;
+            this.regDaysShowNeg=true;
+            this.regDaysShow=false;
+       }
+       else{      
+           this.profile.CandidateOtherDetails.CanJoinIn=this.profile.CandidateOtherDetails.CanJoinIn;
+           this.regDaysShow=true;
+           this.regDaysShowNeg=false;
+       }
     }
     }
     totalDayscountNO(date:Date) {
