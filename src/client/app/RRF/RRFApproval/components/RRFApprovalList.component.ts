@@ -126,6 +126,7 @@ export class RRFApprovalListComponent implements OnActivate {
                 
                 _rrfDetails.RaisedBy = this.rrfApprovalList[index].RaisedBy;
                 //:: Created Approval list object
+                _rrfDetails.Panel=this.rrfApprovalList[index].Panel;
                 var _rrfApprovalList: RRFApproval = new RRFApproval();
                 _rrfApprovalList.Status = status;
                 _rrfApprovalList.Comments = this.comment;

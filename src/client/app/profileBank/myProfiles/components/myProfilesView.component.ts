@@ -30,6 +30,8 @@ export class MyProfilesViewComponent implements OnActivate {
     CurrentCompony: string;
     Designation: string;
     TimeSpent: string;
+    regDaysShow: boolean = false;
+    regDaysShowNeg: boolean =false;
     ResumeText: string = 'Show Resume';
     IsResumeShow: boolean = false;
     ShowResume: boolean = false;
@@ -93,6 +95,15 @@ export class MyProfilesViewComponent implements OnActivate {
                 }
                 else{
                      this.showDownloadBtn=false;
+                }
+                 if(this.profile.CandidateOtherDetails.CanJoinIn < 0){
+                    var string=this.profile.CandidateOtherDetails.CanJoinIn;
+                    var abc=string.replace(/\-/g,'');
+                    this.profile.CandidateOtherDetails.CanJoinIn=abc;
+                    this.regDaysShowNeg=true;
+                }
+                else{
+                     this.regDaysShow=true;
                 }
                 this.technicalSkills =this.tSkills? this.tSkills.substring(1) : this.tSkills;
                 this.softSkills = this.sSkills? this.sSkills.substring(1) : this.sSkills;

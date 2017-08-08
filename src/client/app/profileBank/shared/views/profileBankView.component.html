@@ -821,49 +821,6 @@
                             &nbsp;
                                             <a  *ngIf="profile.CandidateSocialInformation.LinkedinID" class="sbold text-lowercase" href="{{profile.CandidateSocialInformation.LinkedinID}}"><i class="fa fa-linkedin-square"></i> {{profile.CandidateSocialInformation.LinkedinID? profile.CandidateSocialInformation.LinkedinID : "N/A"}} </a>
                                         </p>
-                                        <ul class="list-inline sbold" style="color:#f16e50">
-						                    <li>
-								                <div class="uppercase" tooltip="CurrentCompony" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-									                <i class="fa fa-map-marker"></i> {{CurrentCompony ? CurrentCompony : "N/A"}}
-								                </div>
-							                </li>
-                                             <li>
-								                <div tooltip="Current Designation & Role" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                                <i class="fa fa-user"></i>{{Designation ? Designation: "N/A"}}
-								                </div>
-							                </li>
-							                <!--<li>
-								                <div tooltip="TotalExperience" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
-									            <i class="fa fa-black-tie"></i>{{profile.TotalExperience?profile.TotalExperience:"N/A"}}
-								                </div>
-							                </li>-->
-                                           
-                                             <li>
-								                <div tooltip="TimeSpent" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                                <i class="fa fa-safari"></i>{{TimeSpent ? TimeSpent : "N/A"}}
-								                </div>
-							                </li>
-							                <li>
-								                <div tooltip="NoticePeriod" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-									            <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
-									            </div>
-                                            </li>
-							                <li>
-								                <div tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                                    <i class="fa fa-user"></i>{{profile.Owner?profile.Owner.Value:"N/A"}}
-								                </div>
-                                            </li>
-                                            <li>
-								                <div tooltip="Profile Source Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                                    <i class="fa fa-calendar"></i>{{profile.CandidateOtherDetails.SourceDate?profile.CandidateOtherDetails.SourceDate:"N/A"}}
-								                </div>
-                                            </li>
-                                               <li>
-								                <div tooltip="Profile Updated Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
-                                                    <i class="fa fa-calendar-plus-o"></i>{{profile.ModifiedOn?profile.ModifiedOn:"N/A"}}
-								                </div>
-                                            </li>
-                                        </ul>
                                     </div>
                                                 <!--end col-md-8-->
                                     <div class="col-md-4">
@@ -910,6 +867,51 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                     <ul class="list-inline sbold" style="color:#f16e50">
+						                    <li>
+								                <div class="uppercase" tooltip="CurrentCompony" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+									                <i class="fa fa-map-marker"></i> {{CurrentCompony ? CurrentCompony : "N/A"}}
+								                </div>
+							                </li>
+                                             <li>
+								                <div tooltip="Current Designation & Role" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                <i class="fa fa-user"></i>{{Designation ? Designation: "N/A"}}
+								                </div>
+							                </li>
+							                <!--<li>
+								                <div tooltip="TotalExperience" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true">
+									            <i class="fa fa-black-tie"></i>{{profile.TotalExperience?profile.TotalExperience:"N/A"}}
+								                </div>
+							                </li>-->
+                                           
+                                             <li>
+								                <div tooltip="TimeSpent" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                <i class="fa fa-safari"></i>{{TimeSpent ? TimeSpent : "N/A"}}
+								                </div>
+							                </li>
+							                <li>
+								                <div tooltip="NoticePeriod" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+									            <i class="fa fa-hourglass-half"></i> {{profile.CandidateOtherDetails.NoticePeriod?profile.CandidateOtherDetails.NoticePeriod:"N/A"}}
+									            </div>
+                                            </li>
+							                <li>
+								                <div tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                    <i class="fa fa-user"></i>{{profile.Owner?profile.Owner.Value:"N/A"}}
+								                </div>
+                                            </li>
+                                            <li>
+								                <div tooltip="Profile Source Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                    <i class="fa fa-calendar"></i>{{profile.CandidateOtherDetails.SourceDate?profile.CandidateOtherDetails.SourceDate:"N/A"}}
+								                </div>
+                                            </li>
+                                               <li>
+								                <div tooltip="Profile Updated Date" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                                                    <i class="fa fa-calendar-plus-o"></i>{{profile.ModifiedOn?profile.ModifiedOn:"N/A"}}
+								                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                                 <!--end col-md-4-->
                                 </div>
                                 <!--end row-->
@@ -945,7 +947,9 @@
                                                     </li>
                                                     <li>
                                                         <span class="sale-info"> <b>Can Join In :</b> </span>
-                                                        <span class="sale-num"> {{profile.CandidateOtherDetails.CanJoinIn?profile.CandidateOtherDetails.CanJoinIn:"N/A"}}
+                                                        <span *ngIf="regDaysShow" class="sale-num"> {{profile.CandidateOtherDetails.CanJoinIn?profile.CandidateOtherDetails.CanJoinIn:"N/A"}} days
+						                                </span>
+                                                        <span *ngIf="regDaysShowNeg" class="sale-num">Serving Period Completed Before {{profile.CandidateOtherDetails.CanJoinIn?profile.CandidateOtherDetails.CanJoinIn:"N/A"}} days
 						                                </span>
                                                     </li>
 
