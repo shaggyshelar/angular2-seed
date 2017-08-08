@@ -154,7 +154,21 @@ export class MyRRFAddComponent implements OnActivate {
         }
         return true;
     }
-
+validate(type: string, number: string) :boolean{
+  var result = false;
+        switch (type) {
+              case 'rrf': if (number.indexOf('\'') >= 0 || number.indexOf('"') >= 0) {
+                this.toastr.error('Single quotes and double quotes are not allowed');
+              //  this.newRRF.AdditionalRoles='';
+              result= false;
+            } else {
+result = true;
+             //  this.onSaveSalaryDetails();
+            }
+                break;
+        }
+              return result;
+    }
     raiseRRF(): void {
         if (!this.validateForm()) {
             return;
@@ -479,7 +493,12 @@ getFromLinkUpSkills(){
 
     submitForm() {
         if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.newRRF) {
-            this.raiseRRF();
+
+          if(this.validate('rrf',this.newRRF.AdditionalRoles) && this.validate('rrf',this.newRRF.PreferredSkills) && this.validate('rrf',this.newRRF.QualCertRquired) )
+            {
+              this.raiseRRF();
+            }
+
         } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.updateRRF) {
             this.onUpdateClick();
         } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateRejectedRRF) {

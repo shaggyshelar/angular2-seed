@@ -29,7 +29,7 @@
                                     <div class="col-md-2 caption caption-md">
                                         <i class="icon-globe theme-font hide"></i>
                                         <!--<span class="caption-subject font-blue-madison bold uppercase">Edit Profile</span>-->
-                                        <a class="btn green" (click)='Back()'> 
+                                        <a class="btn green" (click)='Back()'>
                                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back </a>
                                             <a class="btn yellow" (click)='redirectToView(CandidateID.Value,CandidateID.Id)' data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile"
                             tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
@@ -93,7 +93,7 @@
                                                     <hr style="margin-top:1px;">
                                                     <div class="col-md-10">
                                                         <div class="row" style="margin-top:-9px; border:solid; border-color:red; margin-left:155px; text-align:center; border-width:2px; height:35px;">
-                                                           
+
                                                             <div class="col-md-3 inlineForm">
                                                                 <div class="form-group">
                                                                     <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter"
@@ -347,7 +347,7 @@
                                                 </div>
                                                 <!-- Profile Picture Option -->
                                                 <!--<div class="col-md-3 col-md-3 portlet light profile-sidebar-portlet bordered" style="margin-top:8px;">
-                                                   
+
                                                     <div class="profile-userpic">
 
                                                         <img class="img-responsive pic-bordered" style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
@@ -355,9 +355,9 @@
                                                         <img src="../assets/layouts/layout4/img/default-user.jpg" *ngIf="profilePic===null" class="img-responsive pic-bordered" style="border-radius: 20%!important;height:150px;box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);"
                                                             alt="">
                                                     </div>
-                                                    
+
                                                     <div class="profile-userbuttons text-center">
-                                                        
+
                                                         <div class="fileUpload btn btn-circle green btn-sm" data-toggle="tooltip" data-placement="top" title="Upload Photo">
                                                             <input type="file" class="upload" (change)="uploadPhoto($event)" /><span>Upload</span>
                                                         </div>
@@ -365,7 +365,7 @@
                                                         <button type="button" style="display:none" (click)="removePhoto(profile.CandidateID)" class="btn btn-circle red btn-sm">Remove</button>
                                                         <br/>
                                                     </div>
-                                                   
+
                                                 </div>-->
                                                 <!-- END Profile Picture Option -->
                                                 <div class="row">
@@ -635,7 +635,7 @@
                                                                             <label class="control-label">Grade <span class="required"> * </span></label>
                                                                             <div class="row">
                                                                                 <div class="col-md-12">
-                                                                                    
+
                                                                                     <select (change)='onSelectGrade($event.target.value)' class="form-control" required [(ngModel)]="qualification.Grade.Id"
                                                                                         tabindex="25">
                                                                                     <option *ngFor="let grade of grades" [value]="grade.Id">{{grade.Value}}</option>
@@ -1430,7 +1430,7 @@
                                                             <label class="control-label">Current CTC</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    
+
                                                                     <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.CurrentSalary" tabindex="2">{{profile.CandidateSalaryDetails.CurrentSalary}}</span>
                                                                 </div>
@@ -1442,7 +1442,7 @@
                                                             <label class="control-label">Expected Salary</label>
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    
+
                                                                     <span class="form-control" tooltip="You can change this value from Primary Info Tab" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                                                         tooltipEnable="!profile.ExpectedSalary" tabindex="3">{{profile.CandidateSalaryDetails.ExpectedSalary}}
                                                                     </span>
@@ -1476,8 +1476,6 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <textarea class="form-control text-capitalize" rows="1" placeholder="" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" (blur)='onSaveSalaryDetails()' tabindex="4"></textarea>
-                                                                    <!--<textarea class="form-control text-capitalize" rows="1" placeholder="" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true"  (blur)="validate('rrf', profile.CandidateSalaryDetails.AnyPerks)" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" tabindex="4"></textarea>-->
-                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1766,7 +1764,7 @@
                                                                     <!--<div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline" tabindex="2">
                                                                             <input type="checkbox" id="chkAppliedEarlier" [(ngModel)]="profile.CandidateOtherDetails.AppliedEarlier">
-                                                                            
+
                                                                             <span></span>
                                                                         </label>
                                                                     </div>-->
@@ -1826,13 +1824,13 @@
                                                                     <!--<div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline" tabindex="3">
                                                                             <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)">
-                                                                            
+
                                                                             <span></span>
                                                                         </label>
                                                                     </div>-->
                                                                     <div class="row">
                                                                         <div class="col-md-1">
-                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="12" 
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="12"
                                                                             (change)="onServingNP(profile.CandidateOtherDetails.ServingNoticePeriod)" />
                                                                         </div>
                                                                     </div>
@@ -1870,7 +1868,7 @@
                                                                     <!--<div class="mt-checkbox-inline ">
                                                                         <label class="mt-checkbox  mt-checkbox-outline" tabindex="3">
                                                                             <input type="checkbox" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.OfferInHand" (change)="onOfferInHand(profile.CandidateOtherDetails.OfferInHand)">
-                                                                            
+
                                                                             <span></span>
                                                                         </label>
                                                                     </div>-->
@@ -2389,7 +2387,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-2">
                                                                     <div class="form-group">
-                                                                        
+
                                                                         <label class="control-label">Team Management </label>
                                                                         <div class="row">
                                                                             <div class="col-md-1">

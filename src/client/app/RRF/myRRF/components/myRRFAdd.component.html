@@ -173,7 +173,7 @@
                                 </div>
                                 <div class="form-group col-lg-7">
                                     <div class="row">
-                                        <label>Skills<span class="required"> * </span></label> 
+                                        <label>Skills<span class="required"> * </span></label>
                                     </div>
                                     <div class="row" style="margin-top:-30px;">
                                         <multiselect-dropdown [isReadOnly]="isDisabled" placeholder="Select Skills" [dataToBind]='skills' [selected]='newRRF.SkillsRequired'></multiselect-dropdown>
@@ -198,15 +198,16 @@
                                 </div>
                                 <div class="form-group col-lg-12">
                                     <label>Additional Roles<small> (Max 1200 chars)</small></label>
-                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.AdditionalRoles' maxlength="1200" id="txtDescription" rows="2" tooltip="Additional Roles" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.AdditionalRoles" placeholder="Additional Roles"
+                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.AdditionalRoles)" [(ngModel)]='newRRF.AdditionalRoles' maxlength="1200" id="txtDescription" rows="2" tooltip="Additional Roles" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.AdditionalRoles" placeholder="Additional Roles"
                                         style="resize:vertical"></textarea>
+                                          <!--<textarea class="form-control text-capitalize" rows="1" placeholder="" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true"  (blur)="validate('rrf', profile.CandidateSalaryDetails.AnyPerks)" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" tabindex="4"></textarea>-->
                                     <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Additional skills<small> (Max 250 chars)</small><span class="required"> * </span></label>
-                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.PreferredSkills' [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Preferred skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
+                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.PreferredSkills)" [(ngModel)]='newRRF.PreferredSkills' [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Preferred skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
                                         placeholder="Preferred skills" required="" style="resize:vertical"></textarea>
                                 </div>
                             </div>
@@ -227,7 +228,7 @@
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Qualification/ Certifications required<small> (Max 250 chars)</small><span class="required"> * </span></label>
-                                    <textarea class="form-control text-capitalize" [(ngModel)]='newRRF.QualCertRquired' [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Qualification/ Certifications required" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.QualCertRquired)" [(ngModel)]='newRRF.QualCertRquired' [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Qualification/ Certifications required" tooltipPlacement="top" tooltipTrigger="mouseenter"
                                         tooltipEnable="!newRRF.Description" placeholder="Qualification/ Certifications required" required="" style="resize:vertical"></textarea>
                                 </div>
                             </div>
@@ -258,7 +259,7 @@
                                                             <option *ngFor="let interviewer of interviewers " [value]="interviewer.Id ">{{interviewer.Value}}</option>
                                                         </select>
                                                         <span class="input-group-btn ">
-                                           
+
                                                         </span>
                                                     </div>
                                                 </div>
