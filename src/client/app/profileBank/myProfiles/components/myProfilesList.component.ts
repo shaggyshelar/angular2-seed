@@ -358,6 +358,8 @@ export class MyProfilesListComponent implements OnActivate {
                     setTimeout(() => { this.getMyProfiles(); }, 5000);
                 
                     this.profile = new CandidateProfile();
+                    this.regDateShow = false;
+                    this.fileName='';
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -368,7 +370,7 @@ export class MyProfilesListComponent implements OnActivate {
         let modl: any = $('#CountDetails');
     //    modl.modal('reset');
         modl.modal('hide');
-
+this.regDateShow = false;
      //   modl.modal({ 'backdrop': 'static' });
     }   
         uploadResume(CandidateLookupId: MasterData, File: any) {
@@ -659,6 +661,7 @@ export class MyProfilesListComponent implements OnActivate {
                         this.myProfilesList.GrdOperations = new GrdOptions();
                         setTimeout(() => { this.filterBy(); }, 1000);
                         this.profile = new CandidateProfile();
+                        this.regDateShow = false;
                     } else {
                         this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                     }
@@ -680,8 +683,8 @@ export class MyProfilesListComponent implements OnActivate {
                     this.psdTemplates.length = 0;
                     for (let i = 0, length = FileList.length; i < length; i++) {
                         this.psdTemplates.push(FileList.item(i));
-                        this.fileUploaded = true;
                         this.fileName = FileList.item(i).name;
+                        this.fileUploaded = true;
                     }
                 } else {
                     this.toastr.error('Please upload document of type .doc, .docx, .pdf');
@@ -1036,6 +1039,8 @@ export class MyProfilesListComponent implements OnActivate {
     //     modl1.modal({ 'backdrop': 'static' });
     // }
     showNewProfileModal() {
+       // this.regDateShow = false;
+       this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
         this.Title ="New Candidate Profile"
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });

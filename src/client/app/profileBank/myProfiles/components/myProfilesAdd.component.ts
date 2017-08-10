@@ -1376,7 +1376,8 @@ export class MyProfilesAddComponent implements OnActivate {
                 this.toastr.error('Enter valid details. No digits allowed');
             }
                 break;
-            case 'Email': if (number.match('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')) {
+              
+            case 'Email': if (number.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
                 this.IsExist();
             } else {
                 this.profile.Email = '';

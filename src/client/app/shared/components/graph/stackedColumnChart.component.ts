@@ -100,12 +100,17 @@ export class StackedColumnComponent implements OnChanges {
                 'gridPosition': 'start',
                 'axisAlpha': 0,
                 'gridAlpha': 0,
-                'position': 'left'
+                'position': 'left',
+                'labelRotation' : 45
             },
             'export': {
                 'enabled': true
             }
-
+//    var categoryAxis = this.chart.categoryAxis;
+//         categoryAxis.gridPosition = 'start';
+//         categoryAxis.gridAlpha = 0.1;
+//         categoryAxis.axisAlpha = 0;
+//         categoryAxis.labelRotation = 45;
         });
         this.chart.addListener('clickGraphItem', handleClick);
 
