@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy, EventEmitter} from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { LoginService } from '../../shared/services/login.service';
+import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 //import { ProfileBankService } from '../../profilebank/shared/services/profileBank.service';
 import { ProfileBankService } from '../../profileBank/shared/services/profileBank.service';
 import { MasterData,festival } from  '../../shared/model/index';
@@ -15,7 +16,7 @@ import { Interview} from '../../recruitmentCycle/shared/model/interview';
     moduleId: module.id,
     selector: 'top-navigation-bar',
     templateUrl: 'topNavigationBar.component.html',
-    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective],
+    directives: [ROUTER_DIRECTIVES, IfAuthorizeDirective, TOOLTIP_DIRECTIVES],
     providers: [ProfileBankService,RecruiterScheduleInterviewService,InterviewersScheduleService]
 })
 

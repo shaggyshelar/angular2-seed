@@ -58,6 +58,7 @@ overflow: hidden;
     background-color: #777 !important;
     border-radius: 10px !important;
 }
+.tooltip-wide {min-width:200px;}
 </style>
 <!-- BEGIN TOP NAVIGATION MENU -->
 <div class="page-top">
@@ -91,8 +92,8 @@ overflow: hidden;
        
              <!-- START Calendar DROPDOWN -->
                 <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar" >
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
-                        <i (click)="getHolidayData()" class="icon-calendar" data-toggle="tooltip" data-placement="bottom" title="Holidays" tooltip="Holidays" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"></i>
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-ng-click="dropdown" data-close-others="true" aria-expanded="false" >
+                        <i (click)="getHolidayData()" class="icon-calendar" data-toggle="tooltip" data-placement="bottom" title="Holidays" tooltip="Holidays" tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="true"></i>
                     </a>
                     <ul class="dropdown-menu extended tasks">
                         <li class="external">
@@ -148,9 +149,9 @@ overflow: hidden;
                     </ul>
                 </li>-->
 
-                <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar" [ifAuthorize]="['RRF.MANAGE']">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
-                        <i (click)="onRecruiterInterviews()" class="fa fa-group" style="font-size: 18px;color: white;background-color: grey;height: 17px;width:22px;padding-top: 4px;" data-toggle="tooltip" data-placement="bottom" title="Scheduled Interviews for all interviewers" tooltip="Scheduled Interviews for all interviewers" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true"></i>
+                <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-ng-click="dropdown" data-close-others="true" aria-expanded="false" >
+                        <i (click)="onRecruiterInterviews()" class="fa fa-group" data-toggle="tooltip" data-placement="bottom" title="Scheduled Interviews of all Interviewers" tooltip="Scheduled Interviews of all Interviewers" tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="true" style="font-size: 18px;color: white;background-color: grey;height: 17px;width:22px;padding-top: 4px;" tooltip-wide></i>
                                     <!--<span class="badge badge-default"> 4 </span>-->
                     </a>
                     <ul class="dropdown-menu">
@@ -169,8 +170,8 @@ overflow: hidden;
                                             <span class="message">With <b *ngFor="let interviewers of interview.InterviewerAvailability">{{interviewers.Interviewer.Value?interviewers.Interviewer.Value:''}}</b> at <b>{{interview.InterviewFromTime?interview.InterviewFromTime:''}}</b> by mode of <b>{{interview.InterviewMode.Value?interview.InterviewMode.Value:''}}</b>
                                             </span>
                                         </div>
-                                        <div *ngIf="NOInterviewsFOUND">
-                                            No Interviews Scheduled
+                                        <div *ngIf="NOInterviewsFOUND" class="col-lg-12 holiday">                                           
+                                            <b>No Interviews Scheduled</b>                                         
                                         </div>
                                     </li>
                                 </ul>
@@ -182,9 +183,11 @@ overflow: hidden;
                 </li>
 
                 <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar" [ifAuthorize]="['RC.INTERVIEWERACTIONS.MANAGE']">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="false">
-                        <i (click)="getMyInterviews()" class="fa fa-bell-o" data-toggle="tooltip" data-placement="bottom" title="Scheduled Interviews" tooltip="Scheduled Interviews" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"></i>
-                        <!--<span class="badge badge-default">{{InterviewDetailsList.AllInterviews.length}}</span>-->
+                    <!--<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-ng-click="dropdown" data-close-others="true" aria-expanded="false" >
+                        <i (click)="getMyInterviews()" class="fa fa-bell-o" data-toggle="tooltip" data-placement="bottom" title="Scheduled Interviews" tooltip="Scheduled Interviews" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="true"></i>  
+                    </a>-->
+                      <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-ng-click="dropdown" data-close-others="true" aria-expanded="false" >
+                        <i (click)="getMyInterviews()" class="fa fa-bell-o" data-toggle="tooltip" data-placement="bottom" title="My Scheduled Interviews" tooltip="My Scheduled Interviews" tooltipPlacement="left" tooltipTrigger="mouseenter" tooltipEnable="true"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="external">
@@ -202,8 +205,8 @@ overflow: hidden;
                                             <span class="message">Interview at <b>{{myInterview.InterviewFromTime?getTime(myInterview.InterviewFromTime):''}}</b> by <b> {{myInterview.InterviewMode.Value?myInterview.InterviewMode.Value:''}} </b> mode.
                                             </span>
                                         </div>
-                                         <div *ngIf="NOInterviewersInterviewFOUND">
-                                            No Interviews Scheduled
+                                         <div *ngIf="NOInterviewersInterviewFOUND"  class="col-lg-12 holiday">                                                                 
+                                            <b>No Interviews Scheduled</b>                                         
                                         </div>
                                     </li>
                                 </ul>
