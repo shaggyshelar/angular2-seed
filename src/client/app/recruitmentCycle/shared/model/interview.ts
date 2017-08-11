@@ -22,6 +22,7 @@ export class Interview {
     public ProceedOfferGeneration: boolean;
     public RRFID: MasterData = new MasterData();
     public RRFCODE: string;
+    public RRFCode: string;
     public Round: MasterData = new MasterData();
     public InterviewAvailabilityComments: InterviewAvailability = new InterviewAvailability();
     public InterviewerAvailability: Array<InterviewAvailability> = new Array<InterviewAvailability>();

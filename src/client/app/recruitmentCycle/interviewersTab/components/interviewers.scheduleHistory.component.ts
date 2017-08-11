@@ -22,13 +22,13 @@ import { InterviewersSchedule }from '../../shared/filter/interviewersSchedule.pi
 @Component({
     moduleId: module.id,
     selector: 'interviewers-shedule',
-    templateUrl: 'interviewers.schedule.component.html',
+    templateUrl: 'interviewers.scheduleHistory.component.html',
     directives: [ROUTER_DIRECTIVES, FullCalendarComponent, InterviewDetailsRowComponent, IEFGridRowComponent, RRFGridRowComponent],
     providers: [Interview, ToastsManager, ProfileBankService, InterviewersScheduleService, MyRRFService],
     pipes: [InterviewersSchedule]
 })
 
-export class RecruitmentInterviewScheduleComponent implements OnActivate {
+export class RecruitmentInterviewScheduleHistoryComponent implements OnActivate {
     returnPath: string;
     Title: string;
     errorMessage: string;
@@ -80,10 +80,10 @@ Status:string='';
     }
     /**Router method overrid from OnActivate class */
     routerOnActivate() {
-        this.getMyInterviews();
+//this.getMyInterviews();
         this.InterviewerCalendarDetails.Resources = <any>this._interviewService.getResources();
-        this.getMyAllInterviewsDetailsOfCalendar();
-      //  this.GetMyAllConductedInerviewsHistory();
+       // this.getMyAllInterviewsDetailsOfCalendar();
+        this.GetMyAllConductedInerviewsHistory();
         this.IEFButtonText = this.viewIEFText;
     }
     Back() {
@@ -227,7 +227,7 @@ Status:string='';
         if (pageClicked === -1) {
             this.grdOptionsIntwHistory.PagingEvent = 'Previous';
         }
-      //  this.GetMyAllConductedInerviewsHistory();
+        this.GetMyAllConductedInerviewsHistory();
     }
 
     bindGridData() {
@@ -235,7 +235,7 @@ Status:string='';
         this.grdOptionsIntwHistory.ButtonClicked = 0;
         this.grdOptionsIntwHistory.CamlString = '';
         this.grdOptionsIntwHistory.RRFFilters.Status=this.statuss;
-       // this.GetMyAllConductedInerviewsHistory();
+        this.GetMyAllConductedInerviewsHistory();
     }
 statusFilter(event:any){
 this.grdOptionsIntwHistory.RRFFilters.Status =event;

@@ -167,7 +167,7 @@ overflow: hidden;
                                                 <span class="from">{{interview.CandidateDetails.FullName?interview.CandidateDetails.FullName:''}}</span>
                                                 <span class="time">{{interview.InterviewDate?formatDate(interview.InterviewDate):''}}</span>
                                             </span>
-                                            <span class="message">With <b *ngFor="let interviewers of interview.InterviewerAvailability">{{interviewers.Interviewer.Value?interviewers.Interviewer.Value:''}}</b> at <b>{{interview.InterviewFromTime?interview.InterviewFromTime:''}}</b> by mode of <b>{{interview.InterviewMode.Value?interview.InterviewMode.Value:''}}</b>
+                                            <span class="message">With <b *ngFor="let interviewers of interview.InterviewerAvailability">{{interviewers.Interviewer.Value?interviewers.Interviewer.Value:''}}, </b> at <b>{{interview.InterviewFromTime?interview.InterviewFromTime:''}}</b> by mode of <b>{{interview.InterviewMode.Value?interview.InterviewMode.Value:''}}</b>
                                             </span>
                                         </div>
                                         <div *ngIf="NOInterviewsFOUND" class="col-lg-12 holiday">                                           

@@ -136,6 +136,13 @@
                             <span class="title">All Schedule Interviews</span>
                         </a>
                     </li>
+                     <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviewstoDelivery')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/AllInterviews/showInterviewstoDelivery']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">All Interviews</span>
+                        </a>
+                    </li>
                     <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/RRF/InterviewsAvailability')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
                         <a [routerLink]="['/App/RRF/InterviewsAvailability']" class="nav-link ">
                             <i class="fa fa-signal"></i>
@@ -169,6 +176,12 @@
                             <a [routerLink]="['/App/Recruitment Cycle/Interviewers/schedule']" class="nav-link ">
                                 <i class="fa fa-calendar-check-o"></i>
                                 <span class="title">My Schedule</span>
+                            </a>
+                        </li>
+                           <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/scheduleHistory')}">
+                            <a [routerLink]="['/App/Recruitment Cycle/Interviewers/scheduleHistory']" class="nav-link ">
+                                <i class="fa fa-list-alt"></i>
+                                <span class="title">Interview History</span>
                             </a>
                         </li>
                         <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/mycalendar')}" >

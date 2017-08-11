@@ -1,0 +1,134 @@
+<style>
+.scroll{
+min-height:400px !important; 
+max-height:400px !important; 
+overflow-y:auto;
+overflow-x:hidden;
+}
+.input-small {
+    width: 179px!important;
+}
+</style>
+<!-- BEGIN CONTENT -->
+<div class="page-content-wrapper" style="margin-top: -26px !important;">
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" style="margin-left: 203px;overflow-x: hidden !important;margin-right: -15px;">
+        <!--BEGIN breadcrumb -->
+        <ul style="display:none" class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Interview History</span>
+            </li>
+        </ul>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portlet light bordered" style="min-height: 480px;">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <span class="caption-subject bold uppercase"><i class="fa fa-list-alt"></i> Interview History</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <!-- BEGIN SHOW AND SEARCH  -->
+                        <div class="dataTables_wrapper no-footer">
+                            <div class="row">
+                            <!--<div class="row" *ngIf="!HISTORYRECORDSNOTFOUND">-->
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>show
+                                                <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.PerPageCount" (ngModelChange)="bindGridData()">
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="20">20</option>
+                                                    <option value="50">50</option>
+                                                </select>
+                                            </label>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Status
+                                                <select class="form-control input-sm input-small input-inline" (change)="statusFilter($event.target.value)">
+                                                    <option value="Selected">Selected</option>
+                                                    <option value="Rejected">Rejected</option>
+                                                    <option value="On Hold">On Hold</option>
+                                                </select>
+                                            </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-3">
+                                    <div class="dataTables_length ">
+                                        <label>Order
+                                                <select class="form-control input-sm input-small input-inline" [(ngModel)]="grdOptionsIntwHistory.Order" (ngModelChange)="bindGridData()">
+                                                    <option value="asc">Ascending</option>
+                                                    <option value="desc">Descending</option>
+                                                </select>
+                                            </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+									<div id="sample_1_filter" class="dataTables_filter">
+										<label>Search :
+                                            <input type="search" class="form-control input-sm input-small input-inline " [(ngModel)] = "searchString"
+                                            placeholder="" aria-controls="sample_1">
+                                            </label>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                        <!-- END SHOW AND SEARCH -->
+                        <div class="table-scrollable">
+                            <table class="table table-striped table-bordered table-checkable order-column" id="sample_1">
+                                <!--<thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
+                                    <tr>
+                                        <th> Interview Details </th>
+                                        <th> Actions </th>
+                                    </tr>
+                                </thead>-->
+                                <tbody>
+                                    <!-- NgBinding-->
+                                    <tr class="gradeX" *ngFor="let _myInterview of InterviewHistory |InterviewersSchedule:searchString">
+                                        <td>
+                                            <intwDetailsRow [InterviewRecord]=_myInterview></intwDetailsRow>
+                                            <br>
+                                            <br>
+                                            <IEFGridRow [InterviewID]=_myInterview.InterviewID *ngIf=_myInterview.showIEF></IEFGridRow>
+
+                                        </td>
+                                        <td style="width:80px">
+                                            <div class="btn-group">
+                                                <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(_myInterview)" type="button" data-toggle="dropdown"
+                                                    aria-expanded="false"> {{_myInterview.IEFButtonText}}
+                                                    </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- /NgBinding-->
+
+
+                                </tbody>
+                            </table>
+                            <span style="margin-top:5px;margin-left:15px" *ngIf='HISTORYRECORDSNOTFOUND'>No Records Found</span>
+                        </div>
+
+                        <div class="table-toolbar" *ngIf="!HISTORYRECORDSNOTFOUND">
+                            <div class="pull-right ">
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.PreviousButton
+                                  " (click)="OnPaginationClick(-1) ">
+                                        &laquo; Prev</button> &nbsp;&nbsp;
+                                <button type="button " class="btn btn-default " [disabled]="!grdOptionsIntwHistory.NextButton
+                                  " (click)="OnPaginationClick(1) ">
+                                        Next &raquo;</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END CONTENT BODY -->
+</div>
+<!-- END CONTENT -->

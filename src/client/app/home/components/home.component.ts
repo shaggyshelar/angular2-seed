@@ -32,6 +32,7 @@ import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '.
 import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
+import {RecruitersScheduleInterviewsComponent} from '../../recruitmentCycle/DeliveryManager/components/DeliveryScheduledInterview.component';
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
 import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
 import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
@@ -67,8 +68,9 @@ import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.direct
     { path: '/RRF/MyRRF', component: MyRRFComponent },
     { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
     { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
-    //{ path: '/RRF/PendingRequest', component: PendingRequestComponent },
+    //{ path: '/RRF/PendingRequest', component: PendingRequestComponent },ScheduleInterviewsForRecruitersComponent
     { path: '/AllInterviews/showInterviews', component: ShowScheduleInterviewsComponent },
+    { path: '/AllInterviews/showInterviewstoDelivery', component: RecruitersScheduleInterviewsComponent },
     { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
     { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
     { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
