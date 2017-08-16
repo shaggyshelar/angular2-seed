@@ -37,6 +37,8 @@ export class MyRRFAddComponent implements OnActivate {
     interviewers: MasterData[];
     isNewRRF: boolean = true;
     comment: string;
+    IntRoundValue:string;
+    practiceSelected : string;
     IntwRound: number = 0;
     priorities: MasterData[];
     updatePanel: boolean = false;
@@ -54,7 +56,7 @@ export class MyRRFAddComponent implements OnActivate {
     feedbackComment: string = '';
     previousExpectedDateValue: Date;
     navagateBackPath: string = '';
-
+    RoundNDepartment:any={};
     constructor(private _myRRFService: MyRRFService,
         private _router: Router,
         private _mastersService: MastersService,
@@ -117,7 +119,7 @@ export class MyRRFAddComponent implements OnActivate {
         this.getTechnologies();
         this.getSkills();
         this.getInterviewRound();
-        this.getInterviewers();
+        //this.getInterviewers();
         this.GetPriority();
         this.getInterviewSeq();
     }
@@ -310,8 +312,8 @@ result = true;
             error => this.errorMessage = <any>error);
     }
 
-    getInterviewers(): void {
-        this._mastersService.getInterviewers()
+    getInterviewers(roundDepartment:any): void {
+        this._mastersService.getInterviewerslist(roundDepartment)
             .subscribe(
             results => {
                 this.interviewers = results;
@@ -380,6 +382,7 @@ result = true;
         this.IntwRound = panelData.RoundNumber.Id;
         this.updatePanel = true;
         this.editPanelData = panelData;
+        this.getList();
     }
 
     onPanelCancel() {
@@ -508,7 +511,41 @@ getFromLinkUpSkills(){
         }
     }
 
+    getList(){
+ for(var i = 0; i < this.interviewRound.length; i++){
+        if(this.IntwRound == this.interviewRound[i].Id){
+            this.IntRoundValue=this.interviewRound[i].Value;
+        }
+      }
+      for(var j=0;j<this.practices.length;j++){
+        var abc=this.newRRF.Practice.Id ;
+        if(abc == this.practices[j].Id){
+            this.practiceSelected =this.practices[j].Value;
+        }
+      }
+      if(this.IntRoundValue !== null && this.practiceSelected !== null && this.practiceSelected !== undefined){
+        this.RoundNDepartment.Round=this.IntRoundValue;
+        this.RoundNDepartment.Department=this.practiceSelected;
+        // {"RoundNDepartment":{"Round":"additional","Department":"EGS"}}
+       this.getInterviewers(this.RoundNDepartment);
+        console.log(this.RoundNDepartment);
+      }
+      else{
+        if(this.practiceSelected !== null){
+          this.IntwRound=null;
+          alert("Please Select Practice to get related Panel list.");
+        }
+        else{
+        alert("Please Select Interview Round to get related Panel list.");
+        }
+
+      }
+    }
     InterviewRoundSelected() {
+
+this.getList();
+
+
         //Get Interview Type and Sequence of selected Round
         var intType: number = 0;
         var seq: number = 0;

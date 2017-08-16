@@ -148,6 +148,12 @@ export class MastersService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    getInterviewerslist(rountDepartment:any) {
+        let url = Config.GetURL('/api/Masters/GetInterviewPanelByDepartment');
+               return this.authHttp.post(url, { 'RoundNDepartment':rountDepartment })
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
     GetInterviewRounds(candidateID: string, rrfId: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetIterviewRoundsForScheduling?CandidateID=' + candidateID
             + '&RRFID=' + rrfId);
