@@ -282,9 +282,9 @@ export class MyProfilesListComponent implements OnActivate {
                     this.NORECORDSFOUND = false;
                     this.NORECORDS = true;
                     this.filterByProfile();
-                } else { 
+                } else {
                      this.myProfilesList = <any>results;
-                    this.NORECORDSFOUND = true;     
+                    this.NORECORDSFOUND = true;
                       this.NORECORDS = false;
                           this.selectedRowCount = null; }
             },
@@ -341,7 +341,7 @@ export class MyProfilesListComponent implements OnActivate {
                     _candidateID = (<AddCandidateResponse>results).CandidateID;
                     this.candidateId = _candidateID
                     /**upload resume of currently added canidate IFF AVAILABLE */
-                    if (this.fileName !== '' || this.fileName !== undefined) {
+                    if (this.fileName !== '') {
                         this.uploadResume(_candidateID, this.psdTemplates[0]);
                     }
                     /**upload photo of currently added canidate IFF AVAILABLE */
@@ -356,7 +356,7 @@ export class MyProfilesListComponent implements OnActivate {
                     modl.modal({ 'backdrop': 'static' });
                     this.myProfilesList.GrdOperations = new GrdOptions();
                     setTimeout(() => { this.getMyProfiles(); }, 5000);
-                
+
                     this.profile = new CandidateProfile();
                     this.regDateShow = false;
                     this.fileName='';
@@ -371,8 +371,12 @@ export class MyProfilesListComponent implements OnActivate {
     //    modl.modal('reset');
         modl.modal('hide');
 this.regDateShow = false;
+FileList=null;
+ this.fileName = '';
+  this.fileUploaded = false;
+  this.psdTemplates=null;
      //   modl.modal({ 'backdrop': 'static' });
-    }   
+    }
         uploadResume(CandidateLookupId: MasterData, File: any) {
         this.resumeMeta.CandidateID = CandidateLookupId;
         this.resumeMeta.Overwrite = false;
@@ -460,11 +464,11 @@ this.regDateShow = false;
             error => this.errorMessage = <any>error);
         this.isCollapsed = false;
         }
-        
+
     }
     onCancelStatus () {
         this.isUpdateStatusCollapsed = false;
-    }    
+    }
     onBlackListProfile() {
         this._profileBankService.blackListCandidate(this.seletedCandidateID, this.profile.Comments)
             .subscribe(
@@ -751,7 +755,7 @@ this.regDateShow = false;
         this.isUploadPanelCollapsed = !this.isUploadPanelCollapsed;
     }
 
-    //Assign RRf 
+    //Assign RRf
     AssignRRFClick() {
         let chkStatus = false;
         let chkRRFAssigned = false;
@@ -853,7 +857,7 @@ this.regDateShow = false;
         }
     }
     OnPaginationClick(ButtonClicked: string) {
-        /* ButtonClicked 
+        /* ButtonClicked
                 i. Initial - 0
                 ii.Next - 1
                 iii.Prev - (-1)
@@ -1015,11 +1019,11 @@ this.regDateShow = false;
                     this.myProfilesList = <any>results;
                     this.cachedProfileList = <any>results.Profiles;
                     this.filterByProfile();
-                        this.NORECORDSFOUND = false; 
+                        this.NORECORDSFOUND = false;
                            this.NORECORDS = true;
                 } else {
                     //this.NORECORDSFOUND = true;
-                    this.NORECORDSFOUND = true; 
+                    this.NORECORDSFOUND = true;
                            this.NORECORDS = false;
                     this.myProfilesList = new AllCandidateProfiles();
                     this.cachedProfileList = [];
@@ -1094,13 +1098,13 @@ this.regDateShow = false;
     }
     displayFilterData(){
         if(this.myProfilesList.Profiles.length == 0){
-                    this.NORECORDSFOUND = true;   
+                    this.NORECORDSFOUND = true;
                 }
                 else{
-                     this.NORECORDSFOUND = false; 
+                     this.NORECORDSFOUND = false;
                      for (var i = 0; i < this.myProfilesList.Profiles.length; i++) {
                         this.myProfilesList.Profiles[i].IsChecked = this.selectedAll;
-                      } 
+                      }
                 }
     }
     enterFullDetails() {
