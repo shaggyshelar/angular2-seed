@@ -24,12 +24,12 @@
                 <div class="portlet-body">
 
                     <div class="row">
-                        <div class="col-md-2 col-sm-2">
+                        <div class="col-md-6 col-sm-6">
                             <div class="dataTables_length" id="sample_1_length">
                                 <label>Show :
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline" 
-                                            [(ngModel)]="InterviewDetailsList.GrdOperations.PerPageCount" 
-                                            (ngModelChange)="onChange()">
+                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"
+                                            [(ngModel)]="InterviewDetailsList.GrdOperations.PerPageCount"
+                                            (ngModelChange)="onChange()" style="width:179px!important;">
                                                 <option value="5">5</option>
                                                 <option value="10">10</option>
                                                 <option value="20">20</option>
@@ -46,10 +46,10 @@
                                             </select>
                                         </label>
                         </div>-->
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-6 col-sm-6">
                             <div id="sample_1_filter" class="dataTables_filter pull-right">
-                                <label>Search 
-                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                <label>Search
+                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1" style="width:179px!important;">
                                             </label>
                             </div>
                         </div>

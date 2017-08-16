@@ -35,7 +35,7 @@ export class GraphComponent implements OnChanges {
         // this single line makes the chart a bar chart
         this.chart.rotate = false;
 
-        // add click listener    
+        // add click listener
         this.chart.addListener('clickGraphItem', function (event: any) {
             if (event.target.title === 'FitmentIssue') {
                 event.target.title = 'Fitment Issue';
@@ -100,15 +100,15 @@ export class GraphComponent implements OnChanges {
         this.chart.addGraph(graph3);
 
         // four graph
-        var graph4 = new AmCharts.AmGraph();
-        graph4.type = 'column';
-        graph4.title = 'FitmentIssue';
-        graph4.valueField = 'fitmentIssueVal';
-        graph4.balloonText = 'In Fitment :[[value]]';
-        graph4.lineAlpha = 0;
-        graph4.fillColors = '#67b7dc';
-        graph4.fillAlphas = 1;
-        this.chart.addGraph(graph4);
+        // var graph4 = new AmCharts.AmGraph();
+        // graph4.type = 'column';
+        // graph4.title = 'FitmentIssue';
+        // graph4.valueField = 'fitmentIssueVal';
+        // graph4.balloonText = 'In Fitment :[[value]]';
+        // graph4.lineAlpha = 0;
+        // graph4.fillColors = '#67b7dc';
+        // graph4.fillAlphas = 1;
+        // this.chart.addGraph(graph4);
 
         // five graph
         var graph5 = new AmCharts.AmGraph();

@@ -310,13 +310,13 @@ export class DashboardComponent implements OnInit {
         private _rrfCandidatesList: RRFCandidateListService,
         private _commonService: CommonService,
         private _router: Router,
-    ) { 
+    ) {
         this.loginflag = this.getLoggedInUser();
     }
 
     ngOnInit() {
 
-       
+
         //Recruiters
         this.GetAssignedOpenRRFCount();
         this.GetAllOpenRRFCount();
@@ -642,12 +642,12 @@ export class DashboardComponent implements OnInit {
                     this.chartDataForColumnChart = <any>results;
                     this.IsAmchart = true;
                     for (var index = 0; index < this.chartDataForColumnChart.length; index++) {
-                        if (this.chartDataForColumnChart[index].fitmentIssueVal > 0) {
-                            var round = this.chartDataForColumnChart[index].status !== null ?
-                                this.chartDataForColumnChart[index].status : '';
-                            var status = 'Fitment Issue';
-                            break;
-                        }
+                        // if (this.chartDataForColumnChart[index].fitmentIssueVal > 0) {
+                        //     var round = this.chartDataForColumnChart[index].status !== null ?
+                        //         this.chartDataForColumnChart[index].status : '';
+                        //     var status = 'Fitment Issue';
+                        //     break;
+                        // }
                         if (this.chartDataForColumnChart[index].onholdVal > 0) {
                             var round = this.chartDataForColumnChart[index].status !== null ?
                                 this.chartDataForColumnChart[index].status : '';

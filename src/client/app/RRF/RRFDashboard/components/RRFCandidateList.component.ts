@@ -209,7 +209,7 @@ export class RRFCandidateListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    //Get All Canidate List Along with Interview Data 
+    //Get All Canidate List Along with Interview Data
     getCanidatesForRRF() {
         this._rrfCandidatesList.getCandidatesForRRF(this.RRFID.Value)
             .subscribe(
@@ -276,7 +276,7 @@ export class RRFCandidateListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
     }
-    
+
     onIEFClick(myScheduleInterview: MyScheduleInterview) {
         myScheduleInterview.showIEF = !myScheduleInterview.showIEF;
         this.setIEFButtonText(myScheduleInterview);
@@ -725,8 +725,8 @@ export class RRFCandidateListComponent implements OnActivate {
         }
     }
     Back() {
-        // this._router.navigate([this.ReturnPath]);
-        this.location.back();
+        this._router.navigate([this.ReturnPath]);
+        //this.location.back();
     }
     //Format date in "yyyy-mm-dd" format
     formatDate(date: any) {
