@@ -1044,8 +1044,10 @@ FileList=null;
     // }
     showNewProfileModal() {
        // this.regDateShow = false;
+          this.fileName = '';
+        this.fileUploaded = false;
        this.profile.CandidateOtherDetails.ServingNoticePeriod = false;
-        this.Title ="New Candidate Profile"
+        this.Title ="New Candidate Profile";
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });
     }

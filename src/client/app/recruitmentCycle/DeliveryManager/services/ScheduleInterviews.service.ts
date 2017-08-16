@@ -12,7 +12,7 @@ export class DeliveryManagerScheduleInterviewService {
         private authHttp: AuthHttp,
         private _spinnerService: SpinnerService) { }
 
-    //Get all interviews schedule by current logged in user (recruiter). 
+    //Get all interviews schedule by current logged in user (recruiter).
     getMyInterviews(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetMyScheduledInterviews');
         this._spinnerService.show();
@@ -21,11 +21,11 @@ export class DeliveryManagerScheduleInterviewService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    //Get all interviews schedule. 
+    //Get all interviews schedule.
     getAllInterviews(grdOptions: GrdOptions) {
         let url = Config.GetURL('/api/RecruitmentCycle/RecruiterGetScheduledInterviewsByPractice');
         this._spinnerService.show();
-        return this.authHttp.get(url, { grdOptions })
+        return this.authHttp.post(url, { grdOptions })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

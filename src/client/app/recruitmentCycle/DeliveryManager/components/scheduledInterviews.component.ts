@@ -45,16 +45,16 @@ export class RecruitersInterviewsComponent implements OnActivate {
     // }
     resetToDefaultGridOptions() {
         this.InterviewDetailsList.GrdOperations = new GrdOptions();
+        this.InterviewDetailsList = new InterviewsList();
         this.InterviewDetailsList.GrdOperations.ButtonClicked = 0;
         this.InterviewDetailsList.GrdOperations.NextPageUrl = [];
-        this.InterviewDetailsList.GrdOperations.OrderBy = 'Modified';
+        this.InterviewDetailsList.GrdOperations.OrderBy = 'Interview_x0020_Date';
         this.InterviewDetailsList.GrdOperations.Order = 'desc';
-        this.InterviewDetailsList.GrdOperations.PerPageCount = 5;
-        this.InterviewDetailsList = new InterviewsList();
+
     }
 
     getAllScheduleInterviewsData() {
-         this.resetToDefaultGridOptions();
+         //this.resetToDefaultGridOptions();
         this.NORECORDSFOUND = false;
         this._DeliveryManagerScheduleInterviewService.getAllInterviews(this.InterviewDetailsList.GrdOperations)
             .subscribe(
@@ -73,14 +73,15 @@ export class RecruitersInterviewsComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     }
-    
-    onChange() {
+
+    onChange(no:number) {
+        this.InterviewDetailsList.GrdOperations.PerPageCount = no;
         this.InterviewDetailsList.GrdOperations.ButtonClicked = 0;
         this.InterviewDetailsList.GrdOperations.NextPageUrl = new Array<string>();
           this.getAllScheduleInterviewsData();
     }
     OnPaginationClick(ButtonClicked: string) {
-        /* ButtonClicked 
+        /* ButtonClicked
                 i. Initial - 0
                 ii.Next - 1
                 iii.Prev - (-1)

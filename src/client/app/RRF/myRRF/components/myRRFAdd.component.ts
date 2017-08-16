@@ -510,7 +510,10 @@ getFromLinkUpSkills(){
             this.updateForFeedback();
         }
     }
-
+ClearInterviewer(){
+   this.IntwRound=null;
+   this.interviewers=null;
+}
     getList(){
  for(var i = 0; i < this.interviewRound.length; i++){
         if(this.IntwRound == this.interviewRound[i].Id){
@@ -528,11 +531,12 @@ getFromLinkUpSkills(){
         this.RoundNDepartment.Department=this.practiceSelected;
         // {"RoundNDepartment":{"Round":"additional","Department":"EGS"}}
        this.getInterviewers(this.RoundNDepartment);
-        console.log(this.RoundNDepartment);
+      //  console.log(this.RoundNDepartment);
       }
       else{
         if(this.practiceSelected !== null){
           this.IntwRound=null;
+          this.interviewers=null;
           alert("Please Select Practice to get related Panel list.");
         }
         else{
