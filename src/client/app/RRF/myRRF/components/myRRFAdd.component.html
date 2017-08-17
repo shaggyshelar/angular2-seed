@@ -162,12 +162,12 @@
                                         <div class="col-lg-6">
                                             <label>Min Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMinExp" [(ngModel)]='newRRF.MinExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" [(ngModel)]='newRRF.MinExp' [disabled]='isDisabled' required id="txtMinExp" min="0" tooltip="Min Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp">
+                                            <input type="number" [(ngModel)]='newRRF.MinExp' [disabled]='isDisabled' required id="txtMinExp" min="0" max="60" tooltip="Min Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Max Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMaxExp" [(ngModel)]='newRRF.MaxExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp' [disabled]='isDisabled' id="txtMaxExp" min="0" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp">
+                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp' [disabled]='isDisabled' id="txtMaxExp" min="0" max="60" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp">
                                         </div>
                                     </div>
                                 </div>

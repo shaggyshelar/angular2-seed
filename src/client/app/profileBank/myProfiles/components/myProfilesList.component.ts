@@ -359,7 +359,10 @@ export class MyProfilesListComponent implements OnActivate {
 
                     this.profile = new CandidateProfile();
                     this.regDateShow = false;
-                    this.fileName='';
+                              FileList=null;
+ this.fileName = '';
+  this.fileUploaded = false;
+                    // this.fileName='';
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -374,7 +377,7 @@ this.regDateShow = false;
 FileList=null;
  this.fileName = '';
   this.fileUploaded = false;
-  this.psdTemplates=null;
+ // this.psdTemplates=null;
      //   modl.modal({ 'backdrop': 'static' });
     }
         uploadResume(CandidateLookupId: MasterData, File: any) {
@@ -1050,6 +1053,9 @@ FileList=null;
         this.Title ="New Candidate Profile";
         let modl: any = $('#CountDetails');
         modl.modal({ 'backdrop': 'static' });
+        FileList=null;
+        this.fileName = '';
+        this.fileUploaded = false;
     }
 
     modelFilterByProfileChanged(event: any) {

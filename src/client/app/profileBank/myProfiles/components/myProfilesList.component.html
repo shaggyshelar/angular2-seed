@@ -175,6 +175,13 @@
                                         <button type="button" class="btn btn-default button" tooltip="Next Page" title="Next Page" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" [disabled]="!myProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
 										    <span class="fa fa-arrow-right align"></span></button>
                                     </div>
+
+ <!--<div>
+                                            <label>Max Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
+                                            
+                                            <input type="number" required="" onKeyPress="if(this.value > 60) return false;"  id="txtMaxExp" min="0" max="60" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter">
+                                        </div>-->
+
                                 </div>
                             </div>
                         </div>
@@ -395,7 +402,7 @@
                                                             <div class="form-group ">
                                                                 <label>Contact Number</label>
                                                                 <input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
-                                                                    tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="if(this.value.length==10) return false;" required/>
+                                                                    tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==10)? false: event.charCode >= 48 && event.charCode <= 57;" required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 inlineForm">
@@ -673,7 +680,7 @@
                                                             <div class="form-group ">
                                                                 <label>Contact Number</label>
                                                                 <input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
-                                                                    tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="if(this.value.length==10) return false;" required/>
+                                                                    tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==10)? false: event.charCode >= 48 && event.charCode <= 57;"event.charCode ==46 required/>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2 inlineForm">

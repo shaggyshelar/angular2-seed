@@ -1267,10 +1267,23 @@ export class MyProfilesAddComponent implements OnActivate {
                 break; 
              case 'TotalExp': if(number.length > 0){
             if (number.match('^[0-9]{0,2}$') ) {
-                this.onSaveCareerProfileDetails();
+                if(number <= '60'){
+                    this.onSaveCareerProfileDetails();
+                }
+                else{
+                    this.CandidateExperiences.TotalExperience = '';
+                    this.toastr.error('Experiece must be less than 60');
+                }
+                
             }
             else if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+                 if(number <= '60'){
                   this.onSaveCareerProfileDetails();
+                   }
+                   else{
+                    this.CandidateExperiences.TotalExperience = '';
+                    this.toastr.error('Experiece must be less than 60');
+                }
                 }
                 else {
                    this.CandidateExperiences.TotalExperience = '';
@@ -1280,10 +1293,22 @@ export class MyProfilesAddComponent implements OnActivate {
                 break; 
              case 'RelevantExp': if(number.length > 0){
             if (number.match('^[0-9]{0,2}$') ) {
-                this.onSaveCareerProfileDetails();
+                 if(number <= '60'){
+                  this.onSaveCareerProfileDetails();
+                   }
+                   else{
+                    this.CandidateExperiences.RelevantExperience = '';
+                    this.toastr.error('Experiece must be less than 60');
+                }
             }
             else if(number.match(/^[0-9]{0,2}\.[0-9]{1,2}$/)){
+                   if(number <= '60'){
                   this.onSaveCareerProfileDetails();
+                   }
+                   else{
+                    this.CandidateExperiences.RelevantExperience = '';
+                    this.toastr.error('Experiece must be less than 60');
+                }
                 }
                 else {
                    this.CandidateExperiences.RelevantExperience = '';

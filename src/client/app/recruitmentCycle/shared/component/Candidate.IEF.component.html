@@ -154,8 +154,9 @@
                             <thead>
                                 <tr>
                                     <th> Interviewers </th>
-                                    <th> Interview Mode </th>
-                                    <th> Interview Date </th>
+                                    <th> Interview </th>
+                                     <!--<th> Interview Round </th>-->
+                                    <th> Date </th>
                                     <th> Status </th>
                                     <th> Feedback </th>
                                 </tr>
@@ -169,14 +170,19 @@
                                         </p>
                                         <!--</ul>-->
                                     </td>
-                                    <td> {{_IEFHistory.InterviewMode.Value}} </td>
-                                    <td class="center"> {{_IEFHistory.InterviewDate}} </td>
                                     <td>
-                                        <span class="label label-sm label-success"> {{_IEFHistory.Status}} </span>
+                                        <b>{{_IEFHistory.Round.Value}}</b>
+                                        <br>
+                                       {{_IEFHistory.InterviewMode.Value}} 
+                                    </td>
+                                    <td class="center" style="width: 80px;"> {{formatDate(_IEFHistory.InterviewDate)}} At {{getTime(_IEFHistory.InterviewDate)}} </td>
+                                    <td>
+                                        <span *ngIf="_IEFHistory.Status==='Rejected'" class="label label-sm label-danger"> {{_IEFHistory.Status}} </span>
+                                        <span *ngIf="_IEFHistory.Status==='Selected'" class="label label-sm label-success"> {{_IEFHistory.Status}} </span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <ul>
+                                            <ul style="margin-left: -20px;">
                                                 <li *ngFor="let _iefRecord of _IEFHistory.IEFTransactionDetails">
                                                     <strong> {{_iefRecord.FunctionLabel}} : </strong>{{_iefRecord.FunctionValue}}
                                                     <span *ngIf="_iefRecord.isRating" class="badge badge-danger">{{_iefRecord.Rating}}</span>

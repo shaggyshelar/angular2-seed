@@ -3,7 +3,7 @@ import { Router, OnActivate, ROUTER_DIRECTIVES, RouteSegment } from '@angular/ro
 import {RRFDetails, Panel, IntwRoundSeqData, RRFFeedback } from '../models/rrfDetails';
 import { MyRRFService } from '../services/myRRF.service';
 import { MastersService } from '../../../shared/services/masters.service';
-import {SELECT_DIRECTIVES} from 'ng2-select/ng2-select';
+import {SelectModule} from 'ng2-select/ng2-select';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { APIResult, RRFStatus, RaiseRRFStatus } from  '../../../shared/constantValue/index';
 import { MasterData, ResponseFromAPI } from '../../../shared/model/common.model';
@@ -18,7 +18,7 @@ import {BUTTON_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
     moduleId: module.id,
     selector: 'rrf-myrrf-add',
     templateUrl: 'myRRFAdd.component.html',
-    directives: [ROUTER_DIRECTIVES, SELECT_DIRECTIVES, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES,
+    directives: [ROUTER_DIRECTIVES, SelectModule, NgClass, CORE_DIRECTIVES, FORM_DIRECTIVES,
         BUTTON_DIRECTIVES, TOOLTIP_DIRECTIVES, DropdownMultiSelectComponent],
     providers: [ToastsManager]
 })

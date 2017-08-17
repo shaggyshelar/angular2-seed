@@ -20,7 +20,7 @@ export class InterviewDetailsRowComponent implements OnActivate {
         //time:string = interviewTime;
         var intTime :Array<string> =new Array<string>();
         intTime = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
-        if (intTime.length > 1) { // If time format correct
+        if (intTime.length >= 1) { // If time format correct
             intTime = intTime.slice(1);  // Remove full string match value
             intTime[5] = +intTime[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
             var adjustHr = +intTime[0] % 12 || 12; // Adjust hours
