@@ -162,12 +162,12 @@
                                         <div class="col-lg-6">
                                             <label>Min Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMinExp" [(ngModel)]='newRRF.MinExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" [(ngModel)]='newRRF.MinExp' [disabled]='isDisabled' required id="txtMinExp" min="0" max="60" tooltip="Min Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp">
+                                            <input type="number" [(ngModel)]='newRRF.MinExp' [disabled]='isDisabled' required id="txtMinExp" min="0" max='newRRF.MaxExp' tooltip="Min Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp" style="width: 145px;">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Max Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMaxExp" [(ngModel)]='newRRF.MaxExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp' [disabled]='isDisabled' id="txtMaxExp" min="0" max="60" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp">
+                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp' (blur)="validate('MaxExp', newRRF.MaxExp)" [disabled]='isDisabled' id="txtMaxExp" min="0" max="60" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp" style="width: 145px;">
                                         </div>
                                     </div>
                                 </div>
@@ -254,7 +254,7 @@
                                                 </div>
                                                 <div class="form-group col-lg-5 ">
                                                     <label>Panel<span class="required"> * </span></label>
-                                                    <div class="input-group select2-bootstrap-append " style="width:300px">
+                                                    <div class="input-group" style="width:300px">
                                                         <select id="cmbInterviewer" class="form-control " required="" multiple tooltip="Select Interviewers" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!0">
                                                             <option *ngFor="let interviewer of interviewers " [value]="interviewer.Id ">{{interviewer.Value}}</option>
                                                         </select>

@@ -109,13 +109,13 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
 
         this.setMinDateToCalender();
         this.getResources();
-        //Get All Interviewers     
+        //Get All Interviewers
         this.getOtherInterviewers();
         //Get Nominated Interviewers and other Interviewwers
         this.getNominatedInterviewers();
         //Get  Interview Types
         this.getInterviewTypes();
-        //Get  Interview Modes       
+        //Get  Interview Modes
         this.getInterviewModes();
         //Get Skype Id
         this.getInterviewSkypeId();
@@ -222,12 +222,14 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                             /**Checking in case of overlaping of slots */
                             let cnfrmBox: any = $('#confirmSlot');
                             cnfrmBox.modal('toggle');
-                        } else if (this.InterviewerCalendarDetails.Events === null
-                            || this.InterviewerCalendarDetails.Events.length === 0) {
-                            /**Checking In case of there are no Availability for interviewrs */
-                            let cnfrmBox: any = $('#confirmSlot');
-                            cnfrmBox.modal('toggle');
-                        } else {
+                        }
+                        //   else if (this.InterviewerCalendarDetails.Events === null
+                        //     || this.InterviewerCalendarDetails.Events.length === 0) {
+                        //     /**Checking In case of there are no Availability for interviewrs */
+                        //     let cnfrmBox: any = $('#confirmSlot');
+                        //     cnfrmBox.modal('toggle');
+                        // }
+                          else {
                             this.toastr.warning('You can not schedule interview in booked slot');
                         }
                     } else { this.toastr.warning('Please fill atleast one interviewer'); }
@@ -259,12 +261,14 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                         /**Checking in case of overlaping of slots */
                         let cnfrmBox: any = $('#confirmSlot');
                         cnfrmBox.modal('toggle');
-                    } else if (this.InterviewerCalendarDetails.Events === null
-                        || this.InterviewerCalendarDetails.Events.length === 0) {
-                        /**Checking In case of there are no Availability for interviewrs */
-                        let cnfrmBox: any = $('#confirmSlot');
-                        cnfrmBox.modal('toggle');
-                    } else {
+                    }
+                    //    else if (this.InterviewerCalendarDetails.Events === null
+                    //     || this.InterviewerCalendarDetails.Events.length === 0) {
+                    //     /**Checking In case of there are no Availability for interviewrs */
+                    //     let cnfrmBox: any = $('#confirmSlot');
+                    //     cnfrmBox.modal('toggle');
+                    // }
+                      else {
                         this.toastr.warning('You can not schedule interview in booked slot');
                     }
                     //this.ScheduleCandidateInterView();
@@ -290,7 +294,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         }
 
         if (this.ScheduleInterView.InterviewID.Id === undefined) {
-            /**Schedule interview in Following cases 
+            /**Schedule interview in Following cases
              * 1- Scheduling new interview
              * 2- Scheduling interview (Only if interviewer and interview date is changed) [considering it as Re-schedule]
              */
@@ -309,7 +313,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                     this.toastr.error(<any>error);
                 });
         } else {
-            /**Schedule interview in Following cases 
+            /**Schedule interview in Following cases
              * 1- Update interview (Only if interviewer and interview date is NOT changed) [considering it Update interview]
              */
             this._ScheduleInterviewService.UpdateScheduleInterviewForCandidate(this.ScheduleInterView)
@@ -435,7 +439,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         }
     }
 
-    //Shows Availability of Selected Nominated interviewers On Calendar 
+    //Shows Availability of Selected Nominated interviewers On Calendar
     ShowAvailabilityOnCalendar() {
 
         let cmb: any = $('#cmbInterviewers');
@@ -715,7 +719,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         var i = _.findIndex(this.InterviewTypes, { Id: parseInt(TypeID) });
         if (i >= 0)
             this.ScheduleInterView.InterviewType = this.InterviewTypes[i];
-        //this.ScheduleInterView.InterviewType.Value 
+        //this.ScheduleInterView.InterviewType.Value
         this._mastersService.GetRoundsByInterviewType(parseInt(TypeID))
             .subscribe(
             (results: any) => {
