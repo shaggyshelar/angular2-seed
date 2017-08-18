@@ -532,8 +532,8 @@ getFromLinkUpSkills(){
 
     submitForm() {
         if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.newRRF) {
-
-          if(this.validate('rrf',this.newRRF.AdditionalRoles) && this.validate('rrf',this.newRRF.PreferredSkills) && this.validate('rrf',this.newRRF.QualCertRquired) && this.validate('CheckExp','this.newRRF.MinExp') )
+          var minexp=this.newRRF.MinExp.toString();
+          if(this.validate('rrf',this.newRRF.AdditionalRoles) && this.validate('rrf',this.newRRF.PreferredSkills) && this.validate('rrf',this.newRRF.QualCertRquired) && this.validate('CheckExp',minexp) )
             {
               this.raiseRRF();
             }
@@ -544,7 +544,7 @@ getFromLinkUpSkills(){
             {
               this.onUpdateClick();
             }
-            
+
         } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateRejectedRRF) {
             this.reRaiseRRF();
         } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {
