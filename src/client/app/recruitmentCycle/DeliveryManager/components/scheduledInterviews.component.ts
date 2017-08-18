@@ -6,13 +6,15 @@ import { DeliveryManagerScheduleInterviewService } from '../services/ScheduleInt
 import { InterviewsList} from '../../recruitersTab/model/interviewDetails';
 import { GrdOptions } from  '../../../shared/model/index';
 // import { AllScheduleInterviewPipeforDelivery } from  '../filter/scheduledInterviews.pipe';
-import { CollapseDirective, TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
+import { ViewRRFComponent } from '../../../RRF/shared/components/viewRRF/viewRRF.component';
+import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { AllScheduleInterviewPipe } from  '../../recruitersTab/filter/scheduleInterviews.pipe';
+import { MasterData } from '../../../shared/model/common.model';
 @Component({
     moduleId: module.id,
     selector: 'show-schedule-interviews-delivery',
     templateUrl: 'scheduledInterviews.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES,ViewRRFComponent],
     pipes: [AllScheduleInterviewPipe]
 })
 
@@ -24,6 +26,9 @@ export class RecruitersInterviewsComponent implements OnActivate {
     NORECORDSFOUND: boolean = false;
     mode: string;
     errorMessage: string;
+    isListVisible: boolean = true;
+    isChartVisible: boolean = false;
+    viewDetailsRRFId: MasterData = new MasterData();
     InterviewDetailsList: InterviewsList = new InterviewsList();
     constructor(private _DeliveryManagerScheduleInterviewService: DeliveryManagerScheduleInterviewService,
         private toastr: ToastsManager,
@@ -109,6 +114,14 @@ export class RecruitersInterviewsComponent implements OnActivate {
         return [day, month, year].join('-');
     }
 
+  showRRFDetails(rrfId: MasterData) {
+        this.viewDetailsRRFId = rrfId;
+        this.isListVisible = false;
+        this.isChartVisible = false;
+    }
+showListOfRRF() {
+        this.isListVisible = true;
+    }
         redirect(rrfID:any, rrfCode:any) {
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID + 'ID' + rrfCode]);
     }

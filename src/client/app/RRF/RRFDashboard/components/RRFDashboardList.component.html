@@ -1,13 +1,12 @@
 <style>
-
-	.btn-icon-only {
-		height: 28px importent;
-		width: 28px importent;
-	}
-	.allfiter{
-		margin-left: -5px; 
-	}
-
+    .btn-icon-only {
+        height: 28px importent;
+        width: 28px importent;
+    }
+    
+    .allfiter {
+        margin-left: -5px;
+    }
 </style>
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper" style="margin-top: -26px !important;">
@@ -154,24 +153,24 @@
                                             </select>
                                         </label>
 
-									</div>
-								</div>
-								<div class="col-lg-2 col-sm-2 ">
-									<div class="dataTables_filter">
-										<label>Search:
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-2 ">
+                                    <div class="dataTables_filter">
+                                        <label>Search:
                                             <input class="form-control input-sm input-small input-inline " [(ngModel)]='searchText' />
                                         </label>
-									</div>
-								</div>
-									<div class="col-lg-2 col-sm-2 allfiter" *ngIf="currentView =='assignRRF'">
-										<label>Recruiter:
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-2 allfiter" *ngIf="currentView =='assignRRF'">
+                                    <label>Recruiter:
 									<select id="cmbAssignedTo" class="form-control input-sm input-small input-inline" [(ngModel)]="selectedRecruiter.Id" (change)="onRecChange($event.target.value)">
                                         <option value="0">All</option>
                                         <option *ngFor="let recruiter of recruiterList" [value]="recruiter.Id">{{recruiter.Value}}</option>
                                     </select>
 									   </label>
-								</div>
-							</div>
+                                </div>
+                            </div>
 
 
                         </div>

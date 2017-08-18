@@ -168,30 +168,18 @@ validate(type: string, number: string) :boolean{
              //  this.onSaveSalaryDetails();
             }
               break;
-            //   case 'MaxExp':
-            //   if(number !== null){
-            //     if(number <= '60'){
-            //       let abc =this.newRRF.MinExp;
-            //       if(abc !== null){
-            //         let no=abc.toString();
-            //         if(number < no){
-            //           result = true;
-            //         }
-            //         else{
-            //           this.newRRF.MaxExp=null;
-            //       this.toastr.error('Max Experiece must be greater than 60');
-            //       result= false;
-            //         }
-            //       }
-
-            //     }
-            //     else{
-            //       this.newRRF.MaxExp=null;
-            //       this.toastr.error('Experiece must be less than 60');
-            //       result= false;
-            //       }
-            // }
-            //   break;
+      case 'MaxExp':
+              if(number !== null){
+                if(number <= '60'){
+                  result = true;
+                  }
+                  else{
+                    this.newRRF.MaxExp=null;
+                    result= false;
+                    this.toastr.error('Experiece must be less than 60');
+                }
+              }
+              break;
               case 'MinExp':
               if(number !== null){
                 if(number <= '60'){
@@ -201,6 +189,18 @@ validate(type: string, number: string) :boolean{
                     this.newRRF.MinExp=null;
                     result= false;
                     this.toastr.error('Experiece must be less than 60');
+                }
+              }
+              break;
+                  case 'CheckExp':
+              if(number.length > 0 && this.newRRF.MaxExp !==null){
+                  let abc=this.newRRF.MaxExp.toString();
+                if(number <= abc){
+                  result = true;
+                  }
+                  else{
+                    result= false;
+                    this.toastr.error('Min Experiece must be less than Max Experience');
                 }
               }
               break;
@@ -533,13 +533,18 @@ getFromLinkUpSkills(){
     submitForm() {
         if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.newRRF) {
 
-          if(this.validate('rrf',this.newRRF.AdditionalRoles) && this.validate('rrf',this.newRRF.PreferredSkills) && this.validate('rrf',this.newRRF.QualCertRquired) )
+          if(this.validate('rrf',this.newRRF.AdditionalRoles) && this.validate('rrf',this.newRRF.PreferredSkills) && this.validate('rrf',this.newRRF.QualCertRquired) && this.validate('CheckExp','this.newRRF.MinExp') )
             {
               this.raiseRRF();
             }
 
         } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.updateRRF) {
-            this.onUpdateClick();
+            var minexp=this.newRRF.MinExp.toString();
+            if(this.validate('rrf',this.newRRF.PreferredSkills) && this.validate('rrf',this.newRRF.QualCertRquired) && this.validate('CheckExp',minexp) )
+            {
+              this.onUpdateClick();
+            }
+            
         } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateRejectedRRF) {
             this.reRaiseRRF();
         } else if (+this.currentRaiseRRFStatus === +RaiseRRFStatus.UpdateForFeedback) {

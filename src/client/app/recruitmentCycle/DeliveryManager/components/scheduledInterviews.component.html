@@ -14,7 +14,7 @@
         </ul>
         <!--End Breadcrumb>-->
         <div class="row">
-            <div class="portlet light bordered">
+            <div class="portlet light bordered" *ngIf="isListVisible">
                 <div class="portlet-title">
                     <!--<div class="row">-->
                     <div class="col-md-5">
@@ -68,7 +68,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let interview of InterviewDetailsList.AllInterviews | AllScheduleInterviewPipe:searchString">
-                                    <td> <a (click)='redirect(interview.RRFID.Value,interview.RRFCode)'> {{interview.RRFCode}}</a></td>
+                                    <td> <a (click)='showRRFDetails(interview.RRFID)'> {{interview.RRFCode}}</a></td>
                                     <td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
                                         <br/> Contact No : {{interview.CandidateDetails.Contact}}
                                     </td>
@@ -110,6 +110,25 @@
                     </div>
                 </div>
             </div>
+
+            <div class=" col-lg-12 " id="divTimeLine " *ngIf="!isListVisible ">
+
+                <div class="portlet light bordered col-lg-11 col-md-12 col-sm-12 col-xs-12 ">
+                    <div class="table-toolbar ">
+                        <div class="row ">
+                            <div class="col-md-6 ">
+                                <div class="btn-group ">
+                                    <a class="btn green" (click)='showListOfRRF()'>Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <view-RRF [RRFID]='viewDetailsRRFId'></view-RRF>
+                </div>
+            </div>
+
+
+
         </div>
         <!-- END PAGE BASE CONTENT -->
     </div>
