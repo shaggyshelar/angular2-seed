@@ -6,37 +6,41 @@ import { MyMasterDataService } from '../services/masterData.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'skype-master',
-    templateUrl: 'skypeMaster.component.html',
+    selector: 'reasons-master',
+    templateUrl: 'reasonsMaster.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
 })
 
 
 
-export class SkypeMasterComponent implements OnActivate {
+export class ReasonsMasterComponent implements OnActivate {
     errorMessage: string;
-    skypeData: {};
+    reasonsData: {};
     constructor(private _MyMasterDataService: MyMasterDataService,
         private toastr: ToastsManager,
         private _router: Router) {
     }
 
     routerOnActivate() {
-        this.getSkypeData();
+        this.getReasonsData();
     }
-    /** GET SKYPE CREDENTIALS FOR THE INTERVIEWERS */
-    getSkypeData() {
-        this._MyMasterDataService.getSkypeData()
+    /** GET REASONS DETAILS FOR "IEF REJECT" AND "RRF CLOSE" */
+    getReasonsData() {
+        this._MyMasterDataService.getResonsData()
             .subscribe(
             (results: any) => {
                 if (results !== null && results.length > 0) {
-                    this.skypeData = results;
+                    this.reasonsData = results;
                 }
             },
             error => {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+    }
+     /** Cancel action to reset fields */
+    OnCancel() {
+        this.reasonsData = null;
     }
 }
 

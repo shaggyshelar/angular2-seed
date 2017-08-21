@@ -1,8 +1,13 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
-import { SkypeMasterComponent} from './skypeMaster.component';
-import { MyMasterDataService } from '../services/masterData.service';
+import {
+    MyMasterDataService,
+    SkypeMasterComponent,
+    VisaMasterComponent,
+    ReasonsMasterComponent
+} from '../index';
+
 @Component({
     selector: 'schedule-interview-delivery-component',
     template: '<router-outlet></router-outlet>',
@@ -11,7 +16,9 @@ import { MyMasterDataService } from '../services/masterData.service';
 })
 
 @Routes([
-    { path: '/', component: SkypeMasterComponent }
+    { path: '/skype', component: SkypeMasterComponent },
+    { path: '/Visa', component: VisaMasterComponent },
+    { path: '/Reasons', component: ReasonsMasterComponent }
 ])
 export class MasterPageComponent {
 }

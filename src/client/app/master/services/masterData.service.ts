@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
 import { SpinnerService } from '../../shared/components/spinner/spinner';
-import { GrdOptions } from  '../../shared/model/index';
+import { GrdOptions } from '../../shared/model/index';
 
 @Injectable()
 export class MyMasterDataService {
@@ -12,7 +12,25 @@ export class MyMasterDataService {
     constructor(private http: Http, private authHttp: AuthHttp, private _spinnerService: SpinnerService) { }
 
 
-     getSkypeData() {
+    getSkypeData() {
+        let url = Config.GetURL('/api/Masters/GetSkypeIDsMaster');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /** GET VISA DETAILS FOR THE CANDIDATE PROFILES FROM BACKEND*/
+    getVisaDetails() {
+        let url = Config.GetURL('/api/Masters/GetSkypeIDsMaster');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    /** GET REASONS DETAILS FOR 'IEF REJECT' AND 'RRF CLOSE' FROM BACKEND*/
+    getResonsData() {
         let url = Config.GetURL('/api/Masters/GetSkypeIDsMaster');
         this._spinnerService.show();
         return this.authHttp.get(url)
@@ -29,8 +47,8 @@ export class MyMasterDataService {
     //         .finally(() => this._spinnerService.hide());
     // }
 
-  
-  private extractData(res: Response) {
+
+    private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
         }

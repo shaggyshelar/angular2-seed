@@ -6,37 +6,41 @@ import { MyMasterDataService } from '../services/masterData.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'skype-master',
-    templateUrl: 'skypeMaster.component.html',
+    selector: 'visa-master',
+    templateUrl: 'visaMaster.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
 })
 
 
 
-export class SkypeMasterComponent implements OnActivate {
+export class VisaMasterComponent implements OnActivate {
     errorMessage: string;
-    skypeData: {};
+    visaDetails: {};
     constructor(private _MyMasterDataService: MyMasterDataService,
         private toastr: ToastsManager,
         private _router: Router) {
     }
 
     routerOnActivate() {
-        this.getSkypeData();
+        this.getVisaDetails();
     }
-    /** GET SKYPE CREDENTIALS FOR THE INTERVIEWERS */
-    getSkypeData() {
-        this._MyMasterDataService.getSkypeData()
+    /** GET VISA DETAILS FOR THE CANDIDATE PROFILES */
+    getVisaDetails() {
+        this._MyMasterDataService.getVisaDetails()
             .subscribe(
             (results: any) => {
                 if (results !== null && results.length > 0) {
-                    this.skypeData = results;
+                    this.visaDetails = results;
                 }
             },
             error => {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+    }
+    /** Cancel action to reset fields */
+    OnCancel() {
+        this.visaDetails = null;
     }
 }
 

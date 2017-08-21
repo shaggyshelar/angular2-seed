@@ -166,21 +166,36 @@
             <li class="nav-item start " [ifAuthorize]="['RRF.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-edit"></i>
-                    <span class="title">Update Master Data</span>
+                    <span class="title">Masters</span>
                     <span class="arrow"></span>
                 </a>
 
                 <ul class="sub-menu always-open">
 
 
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/skype')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
-                        <a [routerLink]="['/App/Master/Update']" class="nav-link ">
+                        <a [routerLink]="['/App/Master/Update/skype']" class="nav-link ">
                             <i class="icon-calendar"></i>
                             <span class="title">skype Data</span>
                         </a>
                     </li>
 
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Visa')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/Master/Update/Visa']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">Visa Details</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Reasons')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/Master/Update/Reasons']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">IEF and RRF Resons</span>
+                        </a>
+                    </li>
 
                 </ul>
             </li>
