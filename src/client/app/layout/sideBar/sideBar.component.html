@@ -11,14 +11,13 @@
         <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
         <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-        <ul class="page-sidebar-menu" aria-expanded="true" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200"
-            style="margin-bottom: 40%;">
-            <li class="nav-item start "  [ngClass]="{'active':checkRouterActive('/App')}">
+        <ul class="page-sidebar-menu" aria-expanded="true" data-keep-expanded="true" data-auto-scroll="false" data-slide-speed="200" style="margin-bottom: 40%;">
+            <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App')}">
                 <!--<a [routerLink]="['/App/Dashboard']" class="nav-link">
                     <i class="icon-graph"></i>
                     <span class="title">Dashboard</span>
                 </a>-->
-                <a [routerLink]="['/App']" class="nav-link"  >
+                <a [routerLink]="['/App']" class="nav-link">
                     <i class="fa fa-pie-chart"></i>
                     <span class="title"> Dashboard</span>
                     <!--<span class="arrow"></span>-->
@@ -92,7 +91,7 @@
                 </ul>-->
             </li>
             <li class="nav-item start " [ifAuthorize]="['RRF.MANAGE']">
-                <a href="javascript:;"  class="nav-link nav-toggle">
+                <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-users"></i>
                     <span class="title">Requisition Requests</span>
                     <span class="arrow"></span>
@@ -105,8 +104,8 @@
                             <span class="title">My RRF</span>
                         </a>
                     </li>-->
-                    <li class="nav-item start "  [ngClass]="{'active':checkRouterActive('/App/RRF/RRFDashboard')}" [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
-                        <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link "  >
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/RRF/RRFDashboard')}" [ifAuthorize]="['RRF.DASHBOARD.MANAGE']">
+                        <a [routerLink]="['/App/RRF/RRFDashboard/']" class="nav-link ">
                             <i class="icon-book-open"></i>
                             <span class="title">RRF (Requisition List)</span>
                         </a>
@@ -117,14 +116,14 @@
                             <span class="title">Reqruiter's Dashboard</span>
                         </a>
                     </li>-->
-                    <li class="nav-item start "  [ngClass]="{'active':checkRouterActive('/App/RRF/PendingRequest')}" [ifAuthorize]="['RRF.DdashASHBOARD.MANAGE']">
-                        <a [routerLink]="['/App/RRF/PendingRequest/']" class="nav-link "  >
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/RRF/PendingRequest')}" [ifAuthorize]="['RRF.DdashASHBOARD.MANAGE']">
+                        <a [routerLink]="['/App/RRF/PendingRequest/']" class="nav-link ">
                             <i class="fa fa-dashboard"></i>
                             <span class="title">Pending Requests</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/RRF/RRFApproval')}" [ifAuthorize]="['RRF.APPROVAL.MANAGE']">
-                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link "  >
+                        <a [routerLink]="['/App/RRF/RRFApproval/']" class="nav-link ">
                             <i class="fa fa-check-square"></i>
                             <span class="title">Approval Requests</span>
                         </a>
@@ -136,7 +135,7 @@
                             <span class="title">All Schedule Interviews</span>
                         </a>
                     </li>
-                     <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviewstoDelivery')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviewstoDelivery')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/AllInterviews/showInterviewstoDelivery']" class="nav-link ">
                             <i class="icon-calendar"></i>
@@ -163,6 +162,29 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-item start " [ifAuthorize]="['RRF.MANAGE']">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-edit"></i>
+                    <span class="title">Update Master Data</span>
+                    <span class="arrow"></span>
+                </a>
+
+                <ul class="sub-menu always-open">
+
+
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/Master/Update']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">skype Data</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </li>
+
             <!--<li class="nav-item start " [ifAuthorize]="['RCIC.MANAGE']">-->
             <li class="nav-item start " [ifAuthorize]="['RC.INTERVIEWERACTIONS.MANAGE']">
                 <a href="javascript:;" class="nav-link nav-toggle">
@@ -178,13 +200,13 @@
                                 <span class="title">My Schedule</span>
                             </a>
                         </li>
-                           <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/scheduleHistory')}">
+                        <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/scheduleHistory')}">
                             <a [routerLink]="['/App/Recruitment Cycle/Interviewers/scheduleHistory']" class="nav-link ">
                                 <i class="fa fa-list-alt"></i>
                                 <span class="title">Interview History</span>
                             </a>
                         </li>
-                        <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/mycalendar')}" >
+                        <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Recruitment Cycle/Interviewers/mycalendar')}">
                             <a [routerLink]="['/App/Recruitment Cycle/Interviewers/mycalendar']" class="nav-link ">
                                 <i class="fa fa-calendar"></i>
                                 <span class="title">My Calendar</span>
@@ -196,7 +218,7 @@
                                 <span class="title">Assignment & Availability</span>
                             </a>
                         </li>
-                        <li class="nav-item start "  [ifAuthorize]="['RCIC.IEF.READ']">
+                        <li class="nav-item start " [ifAuthorize]="['RCIC.IEF.READ']">
                             <a class="nav-link ">
                                 <i class="icon-graph"></i>
                                 <span class="title">IEF</span>
