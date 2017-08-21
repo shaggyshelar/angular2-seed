@@ -194,8 +194,9 @@ validate(type: string, number: string) :boolean{
               break;
                   case 'CheckExp':
               if(number.length > 0 && this.newRRF.MaxExp !==null){
-                  let abc=this.newRRF.MaxExp.toString();
-                if(number <= abc){
+                let MaxNo=parseInt(this.newRRF.MaxExp.toString());
+                let MinNo=parseInt(this.newRRF.MinExp.toString());
+                if(MinNo <= MaxNo){
                   result = true;
                   }
                   else{
