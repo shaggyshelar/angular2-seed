@@ -14,7 +14,7 @@
         </ul>
         <!--End Breadcrumb>-->
         <div class="row">
-            <div class="portlet light bordered" style="min-height: 505px; max-height: 505px;">
+            <div class="portlet light bordered" style="min-height: 505px;">
                 <div class="portlet-title">
                     <!--<div class="row">-->
                     <div class="col-md-5">
@@ -26,25 +26,25 @@
                         <div class="col-md-3 col-sm-3">
                             <div id="sample_1_filter" class="dataTables_filter">
 
-                                <form role="form" (submit)="OnSubmitCandidate()">
+                                <form role="form">
                                     <div class="row" style="margin-left: 5px;">
                                         <div>
                                             <div class="form-group">
                                                 <label>Skype Id  <span class="required"> * </span></label>
-                                                <input type="text" class="form-control text-capitalize" required="" maxlength="30" />
+                                                <input type="text" class="form-control text-capitalize" required="" maxlength="30" [(ngModel)]="data.Value" />
                                             </div>
                                         </div>
                                         <div>
                                             <div class="form-group ">
                                                 <label>Password <span class="required"> * </span></label>
-                                                <input type="text" class="form-control text-capitalize" required="" maxlength="30" />
+                                                <input type="text" class="form-control text-capitalize" required="" maxlength="30" [(ngModel)]="data.Password" />
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="row" style="float:right">
-                                        <button type="submit" class="btn green" [disabled]="IsDisable"> Save</button>
-                                        <button type="reset" (click)="OnCancelModal()" class="btn red">Cancel</button>
+                                        <button class="btn green" [disabled]="IsDisable" (click)="AddEditData()">{{Action}}</button>
+                                        <button type="reset" (click)="OnCancel()" class="btn red">Cancel</button>
 
                                         <br>
                                     </div>
@@ -69,14 +69,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let data of skypeData">
+                                            <tr *ngFor="let data1 of skypeData">
                                                 <!--<tr>-->
-                                                <td>{{data.Value}}</td>
-                                                <td>{{data.Password}}</td>
+                                                <td>{{data1.Value}}</td>
+                                                <td>{{data1.Password}}</td>
                                                 <!--<td>user 1</td>-->
                                                 <td style="width:15%">
-                                                    <button class="btn btn-circle btn-icon-only blue" (click)='EditEmployerInformation(EmployersInformation.CareerProfileID)'> <i class="fa fa-edit "></i> </button>
-                                                    <button class="btn btn-circle btn-icon-only red" (click)='deleteEmployerInformation(EmployersInformation.CareerProfileID)'> <i class="fa fa-trash "></i> </button>
+                                                    <button class="btn btn-circle btn-icon-only blue" (click)='EditData(data1)'> <i class="fa fa-edit "></i> </button>
+                                                    <button class="btn btn-circle btn-icon-only red" (click)='deleteData(data1)'> <i class="fa fa-trash "></i> </button>
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MyMasterDataService } from '../services/masterData.service';
+import { MyMasterDataService } from '../index';
 
 @Component({
     moduleId: module.id,
