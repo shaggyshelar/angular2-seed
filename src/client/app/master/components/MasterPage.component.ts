@@ -5,7 +5,11 @@ import {
     MyMasterDataService,
     SkypeMasterComponent,
     VisaMasterComponent,
-    ReasonsMasterComponent
+    ReasonsMasterComponent,
+    InterviewModeComponent,
+    InterviewTypeComponent,
+    PracticeMasterComponent,
+    IEFFunctionMasterComponent
 } from '../index';
 
 @Component({
@@ -18,7 +22,11 @@ import {
 @Routes([
     { path: '/skype', component: SkypeMasterComponent },
     { path: '/Visa', component: VisaMasterComponent },
-    { path: '/Reasons', component: ReasonsMasterComponent }
+    { path: '/Reasons', component: ReasonsMasterComponent },
+    { path: '/InterviewMode', component: InterviewModeComponent },
+    { path: '/InterviewType', component: InterviewTypeComponent },
+    { path: '/Practice', component: PracticeMasterComponent },
+    { path: '/IEF', component: IEFFunctionMasterComponent }
 ])
 export class MasterPageComponent {
 }

@@ -70,18 +70,18 @@
                                     <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                         <thead>
                                             <tr>
-                                                <th> skype ID</th>
-                                                <th> Password </th>
-                                                <!--<th> Title </th>-->
+                                                <th>Function NAme</th>
+                                                <th> Display Ratings</th>
+                                                <th> Interview Type </th>
                                                 <th> Action </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let data1 of skypeData">
+                                            <tr *ngFor="let data1 of iefData">
                                                 <!--<tr>-->
-                                                <td>{{data1.Value}}</td>
-                                                <td>{{data1.Password}}</td>
-                                                <!--<td>user 1</td>-->
+                                                <td>{{data1.FunctionName}}</td>
+                                                <td>{{data1.DisplayRatings}}</td>
+                                                <td>{{data1.InterviewType.Value}}</td>
                                                 <td style="width:15%">
                                                     <button class="btn btn-circle btn-icon-only blue" (click)='EditData(data1)'> <i class="fa fa-edit "></i> </button>
                                                     <button class="btn btn-circle btn-icon-only red" (click)='deleteData(data1)'> <i class="fa fa-trash "></i> </button>

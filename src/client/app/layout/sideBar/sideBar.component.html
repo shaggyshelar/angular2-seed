@@ -177,7 +177,35 @@
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/Master/Update/skype']" class="nav-link ">
                             <i class="icon-calendar"></i>
-                            <span class="title">skype Data</span>
+                            <span class="title">Skype Data</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/InterviewMode')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/Master/Update/InterviewMode']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">Interview Mode</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/InterviewType')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/Master/Update/InterviewType']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">Interview Type</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Practice')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/Master/Update/Practice']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">Practice</span>
+                        </a>
+                    </li>
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/IEF')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                        <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                        <a [routerLink]="['/App/Master/Update/IEF']" class="nav-link ">
+                            <i class="icon-calendar"></i>
+                            <span class="title">IEF</span>
                         </a>
                     </li>
 
