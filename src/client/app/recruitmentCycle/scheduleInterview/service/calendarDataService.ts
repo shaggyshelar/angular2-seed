@@ -34,7 +34,7 @@ export class CalendarDataService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    //Get All InterViewer's All Events Available And Booked Slots 
+    //Get All InterViewer's All Events Available And Booked Slots
     GetInterviewerCalendarDetail(Interviewers: Array<Interviewers>) {
         let url = Config.GetURL('/api/RecruitmentCycle/CalendarViewGetInterviewCalendarByMultipleInterviewers');
         this._spinnerService.show();

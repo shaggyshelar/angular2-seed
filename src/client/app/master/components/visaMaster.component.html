@@ -1,102 +1,102 @@
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper" style="margin-top: -26px !important;">
-    <!-- BEGIN CONTENT BODY -->
-    <div class="page-content" style="margin-left: 219px;margin-right: 0px;">
-        <!--BEGIN breadcrumb -->
-        <ul style="display:none" class="page-breadcrumb breadcrumb">
-            <li>
-                <a [routerLink]="['/App']"> Home </a>
-                <i class="fa fa-circle"></i>
-            </li>
-            <li>
-                <span class="active">Master Page</span>
-            </li>
-        </ul>
-        <!--End Breadcrumb>-->
-        <div class="row">
-            <div class="portlet light bordered" style="min-height: 505px; max-height: 505px;">
-                <div class="portlet-title">
-                    <!--<div class="row">-->
-                    <div class="col-md-5">
-                        <h4><i class="icon-calendar"></i> Visa Details</h4>
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-3">
-                            <div id="sample_1_filter" class="dataTables_filter">
+  <!-- BEGIN CONTENT BODY -->
+  <div class="page-content" style="margin-left: 219px;margin-right: 0px;">
+    <!--BEGIN breadcrumb -->
+    <ul style="display:none" class="page-breadcrumb breadcrumb">
+      <li>
+        <a [routerLink]="['/App']"> Home </a>
+        <i class="fa fa-circle"></i>
+      </li>
+      <li>
+        <span class="active">Master Page</span>
+      </li>
+    </ul>
+    <!--End Breadcrumb>-->
+    <div class="row">
+      <div class="portlet light bordered" style="min-height: 505px; max-height: 505px;">
+        <div class="portlet-title">
+          <!--<div class="row">-->
+          <div class="col-md-5">
+            <h4><i class="icon-calendar"></i> Visa Details</h4>
+          </div>
+        </div>
+        <div class="portlet-body">
+          <div class="row">
+            <div class="col-md-3 col-sm-3">
+              <div id="sample_1_filter" class="dataTables_filter">
 
-                                <form role="form" (submit)="OnSubmitCandidate()">
-                                    <div class="row" style="margin-left: 5px;">
-                                        <!--<div>
+                <form role="form" (submit)="OnSubmitVisaDetails()">
+                  <div class="row" style="margin-left: 5px;">
+                    <!--<div>
                                             <div class="form-group">
                                                 <label> ID </label>
                                                 <input type="text" class="form-control text-capitalize" required="" maxlength="30" />
                                             </div>
                                         </div>-->
-                                        <div>
-                                            <div class="form-group ">
-                                                <label>Visa Name <span class="required"> * </span></label>
-                                                <input type="text" class="form-control text-capitalize" required="" maxlength="30" />
-                                            </div>
-                                        </div>
+                    <div>
+                      <div class="form-group ">
+                        <label>Visa Name <span class="required"> * </span></label>
+                        <input type="text" class="form-control text-capitalize" required="" [(ngModel)]="selectedVisa.Value" maxlength="30" />
+                      </div>
+                    </div>
 
-                                    </div>
-                                    <div class="row" style="float:right">
-                                        <button type="submit" class="btn green" [disabled]="IsDisable"> Save</button>
-                                        <button type="reset" (click)="OnCancel()" class="btn red">Cancel</button>
+                  </div>
+                  <div class="row" style="float:right">
+                    <button type="submit" class="btn green" [disabled]="IsDisable"> {{action}}</button>
+                    <button type="reset" (click)="OnCancel()" class="btn red">Cancel</button>
 
-                                        <br>
-                                    </div>
+                    <br>
+                  </div>
 
-                                </form>
+                </form>
 
 
-                            </div>
+              </div>
 
-                        </div>
+            </div>
 
-                        <div class="col-md-9 col-sm-9">
-                            <div class="dataTables_length" id="sample_1_length">
-                                <div>
-                                    <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                                        <thead>
-                                            <tr>
-                                                <th> Visa Name</th>
+            <div class="col-md-9 col-sm-9">
+              <div class="dataTables_length" id="sample_1_length">
+                <div>
+                  <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                    <thead>
+                      <tr>
+                        <th> Visa Name</th>
 
-                                                <!--<th> Title </th>-->
-                                                <th> Actions </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let data of visaDetails">
-                                                <!--<tr>-->
-                                                <td>{{data.Value}}</td>
-                                                <!--<td>{{data.Password}}</td>-->
-                                                <!--<td>user 1</td>-->
-                                                <td style="width:15%">
-                                                    <button class="btn btn-circle btn-icon-only blue" (click)='EditEmployerInformation(EmployersInformation.CareerProfileID)'> <i class="fa fa-edit "></i> </button>
-                                                    <button class="btn btn-circle btn-icon-only red" (click)='deleteEmployerInformation(EmployersInformation.CareerProfileID)'> <i class="fa fa-trash "></i> </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                        <!--<tbody *ngIf="EmployersInformationList.length === 0">
+                        <!--<th> Title </th>-->
+                        <th> Actions </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of visaDetails">
+                        <!--<tr>-->
+                        <td>{{data.Value}}</td>
+                        <!--<td>{{data.Password}}</td>-->
+                        <!--<td>user 1</td>-->
+                        <td style="width:15%">
+                          <button class="btn btn-circle btn-icon-only blue" (click)='edit(data)'> <i class="fa fa-edit "></i> </button>
+                          <button class="btn btn-circle btn-icon-only red" (click)='delete(data)'> <i class="fa fa-trash "></i> </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <!--<tbody *ngIf="EmployersInformationList.length === 0">
                                             <tr>
                                                 <td colspan="6">
                                                     <strong>No entries </strong>
                                                 </td>
                                             </tr>
                                         </tbody>-->
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
+                  </table>
                 </div>
-                <!-- END PAGE BASE CONTENT -->
+              </div>
             </div>
-            <!-- END CONTENT BODY -->
+
+
+          </div>
         </div>
-        <!-- END CONTENT -->
+        <!-- END PAGE BASE CONTENT -->
+      </div>
+      <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->

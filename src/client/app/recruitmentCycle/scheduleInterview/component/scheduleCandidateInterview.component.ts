@@ -152,6 +152,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             /******END Get Modified Interiews */
 
             this.getInterviewDetailsByID(this.ScheduleInterView.InterviewID);
+
         } else {
             //Get Modified Rounds
             if (_isRescheduled || this.ScheduleInterView.Status.toLowerCase() === 'cancelled') {
@@ -203,14 +204,18 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                     //Get Events Data if "Show Availability"
                     if (this.InterviewerCalendarDetails.Events === null
                         || this.InterviewerCalendarDetails.Events.length === 0)
+
                         this.ShowAvailabilityOnCalendar();
+                        //this.timeout(function() { vm.loaded = true; },500);
+
+
+                        setTimeout(() => {
                     if (value !== null) {
                         /**Get All Other selected Interviewers from multiselect Dropdown */
                         this.getOtherSelectedInterviewers(value);
                         /**Change Status According to Interview Schedule */
                         /**Check For Valid And Invalid Slots while scheduling interview */
                         var CheckOverlapping = this.checkAvailability();
-
                         if (!CheckOverlapping && this.showConfirmation === true) {
                             let cnfrmBox: any = $('#confirmSlot');
                             cnfrmBox.modal('toggle');
@@ -222,18 +227,16 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                             /**Checking in case of overlaping of slots */
                             let cnfrmBox: any = $('#confirmSlot');
                             cnfrmBox.modal('toggle');
-                        }
-                        //   else if (this.InterviewerCalendarDetails.Events === null
-                        //     || this.InterviewerCalendarDetails.Events.length === 0) {
-                        //     /**Checking In case of there are no Availability for interviewrs */
-                        //     let cnfrmBox: any = $('#confirmSlot');
-                        //     cnfrmBox.modal('toggle');
-                        // }
-                          else {
+                        } else if (this.InterviewerCalendarDetails.Events === null
+                            || this.InterviewerCalendarDetails.Events.length === 0) {
+                            /**Checking In case of there are no Availability for interviewrs */
+                            let cnfrmBox: any = $('#confirmSlot');
+                            cnfrmBox.modal('toggle');
+                        } else {
                             this.toastr.warning('You can not schedule interview in booked slot');
                         }
                     } else { this.toastr.warning('Please fill atleast one interviewer'); }
-
+                  }, 5000);
                 } else {
                     //if Invalid Send for Approval
                     if (this.isRejectedCandidate) {
@@ -262,12 +265,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                         let cnfrmBox: any = $('#confirmSlot');
                         cnfrmBox.modal('toggle');
                     }
-                    //    else if (this.InterviewerCalendarDetails.Events === null
-                    //     || this.InterviewerCalendarDetails.Events.length === 0) {
-                    //     /**Checking In case of there are no Availability for interviewrs */
-                    //     let cnfrmBox: any = $('#confirmSlot');
-                    //     cnfrmBox.modal('toggle');
-                    // }
+                       else if (this.InterviewerCalendarDetails.Events === null
+                        || this.InterviewerCalendarDetails.Events.length === 0) {
+                        /**Checking In case of there are no Availability for interviewrs */
+                        let cnfrmBox: any = $('#confirmSlot');
+                        cnfrmBox.modal('toggle');
+                    }
                       else {
                         this.toastr.warning('You can not schedule interview in booked slot');
                     }
@@ -645,6 +648,9 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         //Set selected Nominated Interviewers
         if (this.ScheduleInterView.Round.Id !== 0) {
             this.getNominatedInterviewersByRound(this.ScheduleInterView.Round.Id.toString());
+        }
+        if(this.ScheduleInterView.SkypeID !== null){
+          this.selectSkypeID=true;
         }
     }
 
