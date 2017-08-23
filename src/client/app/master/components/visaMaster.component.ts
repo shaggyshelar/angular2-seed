@@ -106,7 +106,12 @@ export class VisaMasterComponent implements OnActivate {
       this._MyMasterDataService.deleteVisaType(visaId)
         .subscribe(
         (results: any) => {
-          this.getVisaDetails();
+          if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+            this.getVisaDetails();
+            this.toastr.success((<ResponseFromAPI>results).Message);
+          } else {
+            this.toastr.error((<ResponseFromAPI>results).Message);
+          }
         },
         error => this.toastr.error(<any>error));
     } else {

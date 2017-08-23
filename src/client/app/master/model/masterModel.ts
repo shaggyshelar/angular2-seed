@@ -42,7 +42,7 @@ export class InterviewType {
 }
 
 export class ReasonsMaster {
-    public Id: string;
+    public ID: number;
     public Reason: string;
-    public Categary: string;
+    public Category: string;
 }
