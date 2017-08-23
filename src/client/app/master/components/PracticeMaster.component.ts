@@ -28,7 +28,7 @@ export class PracticeMasterComponent implements OnActivate {
         this.getPracticeData();
         this.Action='Add';
     }
-    /** GET SKYPE CREDENTIALS FOR THE INTERVIEWERS */
+    /** GET Practice Data FOR THE INTERVIEWERS */
     getPracticeData() {
         this._MyMasterDataService.getPracticeData()
             .subscribe(
@@ -103,7 +103,7 @@ export class PracticeMasterComponent implements OnActivate {
     deleteData(DelData:any){
         
     var deleteData = confirm("Are you sure you want to delete it?");
-    if (deleteData == true) {
+    if (deleteData === true) {
        this._MyMasterDataService.deletePracticeData(DelData)
             .subscribe(
             results => {

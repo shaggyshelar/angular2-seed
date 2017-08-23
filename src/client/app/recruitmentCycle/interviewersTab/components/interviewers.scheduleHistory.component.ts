@@ -55,6 +55,8 @@ RRFFilters:RRFFilters=new RRFFilters();
     hideIEFText: string = 'Hide IEF';
     IEFButtonText: string = '';
     searchString: string;
+    // nextPage:string;
+    // prevPage:string;
 Status:string='';
     constructor(private _router: Router,
         private toastr: ToastsManager,
@@ -76,6 +78,7 @@ Status:string='';
         this.grdOptionsIntwHistory.RRFFilters.Status = 'Selected';
         this.grdOptionsIntwHistory.Order='desc';
         this.grdOptionsIntwHistory.PerPageCount= 5;
+        // this.grdOptionsIntwHistory.NextPageDatetime='';
         this.statuss='Selected';
     }
     /**Router method overrid from OnActivate class */
@@ -182,7 +185,8 @@ Status:string='';
             .subscribe(
             (results: any) => {
                 this.grdOptionsIntwHistory = results.GrdOperations != null?results.GrdOperations:new GrdOptions();
-                
+                // this.nextPage = this.grdOptionsIntwHistory.NextPageDatetime;
+                // this.prevPage=this.grdOptionsIntwHistory.PreviousPageDatetime;
                 if (results.AllInterviews) {
                     if (results.AllInterviews.length > 0) {
                         this.InterviewHistory = results.AllInterviews;
@@ -223,9 +227,13 @@ Status:string='';
         this.grdOptionsIntwHistory.ButtonClicked = pageClicked;
         if (pageClicked === 1) {
             this.grdOptionsIntwHistory.PagingEvent = 'Next';
+            // this.grdOptionsIntwHistory.NextPageDatetime=this.nextPage;
+            // this.grdOptionsIntwHistory.PreviousPageDatetime=this.prevPage;
         }
         if (pageClicked === -1) {
             this.grdOptionsIntwHistory.PagingEvent = 'Previous';
+            // this.grdOptionsIntwHistory.NextPageDatetime=this.nextPage;
+            // this.grdOptionsIntwHistory.PreviousPageDatetime=this.prevPage;
         }
         this.GetMyAllConductedInerviewsHistory();
     }

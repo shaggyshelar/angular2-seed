@@ -11,7 +11,8 @@ import {
   PracticeMasterComponent,
   FeatureMasterComponent,
   RoleMasterComponent,
-  IEFFunctionMasterComponent
+  IEFFunctionMasterComponent,
+  RRFApproverMasterComponent
 } from '../index';
 
 @Component({
@@ -30,7 +31,8 @@ import {
   { path: '/Practice', component: PracticeMasterComponent },
   { path: '/Features', component: FeatureMasterComponent },
   { path: '/Roles', component: RoleMasterComponent },
-  { path: '/IEF', component: IEFFunctionMasterComponent }
+  { path: '/IEF', component: IEFFunctionMasterComponent },
+  { path: '/RRFApprover', component: RRFApproverMasterComponent }
 ])
 export class MasterPageComponent {
 }

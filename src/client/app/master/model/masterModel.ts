@@ -40,7 +40,17 @@ export class InterviewType {
   public Value: string;
   public Sequence: string;
 }
-
+export class RRFApprover{
+    public Id: string;
+    public Approver:Approver=new Approver();
+    public Year: string;
+    public DepartmentText:string;
+    public Department:Practice=new Practice();
+}
+export class Approver {
+  public Id: string;
+  public Value: string;
+}
 export class ReasonsMaster {
   public ID: number;
   public Reason: string;

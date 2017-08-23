@@ -5,7 +5,8 @@ import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
 import { SpinnerService } from '../../shared/components/spinner/spinner';
 import { GrdOptions } from '../../shared/model/index';
-import { VisaMaster, SkypeMaster, RolesMaster, FeatureMaster, ReasonsMaster, InterviewMode, Practice, InterviewType } from '../index';
+import { VisaMaster, SkypeMaster, RolesMaster, FeatureMaster, ReasonsMaster, InterviewMode, Practice, InterviewType,IEFFunctions, RRFApprover } from '../index';
+
 
 
 @Injectable()
@@ -51,7 +52,6 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
-
 
   /** */
   /** ADD NEW VISA TYPE IN THE SYSTEM */
@@ -225,15 +225,6 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
-  /** GET Practice DETAILS  FROM BACKEND*/
-  getIEFData() {
-    let url = Config.GetURL('/api/Masters/GetAllIEFFunctionsMaster');
-    this._spinnerService.show();
-    return this.authHttp.get(url)
-      .map(this.extractData)
-      .catch(this.handleError)
-      .finally(() => this._spinnerService.hide());
-  }
 
   /***** START FEATURE MASTER API */
   /** GET FEATURE DETAILS FROM BACKEND*/
@@ -273,7 +264,89 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
-  /***** END FEATURE MASTER API */
+ 
+/** GET IEF Function DETAILS  FROM BACKEND*/
+    getIEFData() {
+        let url = Config.GetURL('/api/Masters/GetAllIEFFunctionsMaster');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    addIEFData(IEFFunction: IEFFunctions) {
+        let url = Config.GetURL('/api/Masters/AddIEFFunction');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { IEFFunction })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    editIEFData(IEFFunction: IEFFunctions) {
+        let url = Config.GetURL('/api/Masters/UpdateIEFFunction');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { IEFFunction })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    deleteIEFData(IEFFunction: IEFFunctions) {
+        let url = Config.GetURL('/api/Masters/DeleteIEFFunction');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { IEFFunction })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+/** GET RRF Approver DETAILS  FROM BACKEND*/
+    getRRFAprroverData() {
+        let url = Config.GetURL('/api/Masters/GetRRFApprovers');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    addRRFAprroverData(Approver: RRFApprover) {
+        let url = Config.GetURL('/api/Masters/AddApprover');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { Approver })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    editRRFAprroverData(Approver: RRFApprover) {
+        let url = Config.GetURL('/api/Masters/UpdateApprover');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { Approver })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    deleteRRFAprroverData(Approver: RRFApprover) {
+        let url = Config.GetURL('/api/Masters/DeleteApprover');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { Approver })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    getApproverData() {
+        let url = Config.GetURL('/api/Masters/GetPeople');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+/***** Sayali Service start */
+
+
+
+/***** Sayali Service End */
+
 
   /***** START ROLE MASTER API */
   /** GET ROLE DETAILS FROM BACKEND*/
@@ -314,6 +387,11 @@ export class MyMasterDataService {
       .finally(() => this._spinnerService.hide());
   }
   /***** END ROLE MASTER API */
+/***** Shailesh Service start */
+
+
+
+/***** Shailesh Service End */
 
 
   private extractData(res: Response) {

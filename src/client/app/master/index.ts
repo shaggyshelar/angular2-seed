@@ -9,4 +9,5 @@ export * from './components/reasonsMaster.component';
 export * from './components/IEFFunctionMaster.component';
 export * from './components/roleMaster.component';
 export * from './components/featureMaster.component';
+export * from './components/RRFApprover.component';
 export * from './model/masterModel';

@@ -67,7 +67,6 @@ export class SkypeMasterComponent implements OnActivate {
                     this.data.Value='';
                     this.data.Password='';
                     this.Action='Add';
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -86,7 +85,6 @@ export class SkypeMasterComponent implements OnActivate {
                     this.getSkypeData();
                     this.data.Value='';
                     this.data.Password='';
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -98,17 +96,15 @@ export class SkypeMasterComponent implements OnActivate {
     }
 
     deleteData(skyDelData:any){
-        
-    var deleteData = confirm("Are you sure you want to delete it?");
-    if (deleteData == true) {
+    var deleteData = confirm('Are you sure you want to delete it?');
+    if (deleteData === true) {
        this._MyMasterDataService.deleteSkypeData(skyDelData)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getSkypeData();
-                    alert('Successfully Deleted Skype Id.');
-                    /**Bind new data to list */
+                    alert('Successfully Deleted.');
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -117,10 +113,9 @@ export class SkypeMasterComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
-    } else {
-        alert('Delete Skype Id Process Cancelled.');
-    }
-        
+        } else {
+            alert('Deletion Process Is Cancelled.');
+        }
     }
 
 }

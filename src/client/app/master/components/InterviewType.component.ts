@@ -28,7 +28,7 @@ export class InterviewTypeComponent implements OnActivate {
         this.getInterviewTypeData();
         this.Action='Add';
     }
-    /** GET SKYPE CREDENTIALS FOR THE INTERVIEWERS */
+    /** GET Interview Type FOR THE INTERVIEWERS */
     getInterviewTypeData() {
         this._MyMasterDataService.getInterviewTypeData()
             .subscribe(
@@ -66,7 +66,6 @@ export class InterviewTypeComponent implements OnActivate {
                     this.data.Value='';
                     this.data.Sequence='';
                     this.Action='Add';
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -85,7 +84,6 @@ export class InterviewTypeComponent implements OnActivate {
                     this.getInterviewTypeData();
                     this.data.Value='';
                     this.data.Sequence='';
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -97,17 +95,14 @@ export class InterviewTypeComponent implements OnActivate {
     }
 
     deleteData(skyDelData:any){
-        
-    var deleteData = confirm("Are you sure you want to delete it?");
-    if (deleteData == true) {
+    var deleteData = confirm('Are you sure you want to delete it?');
+    if (deleteData === true) {
        this._MyMasterDataService.deleteInterviewTypeData(skyDelData)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getInterviewTypeData();
-                    alert('Successfully Deleted Skype Id.');
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -117,9 +112,8 @@ export class InterviewTypeComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     } else {
-        alert('Delete Skype Id Process Cancelled.');
+        // alert('Delete Skype Id Process Cancelled.');
     }
-        
     }
 
 }
