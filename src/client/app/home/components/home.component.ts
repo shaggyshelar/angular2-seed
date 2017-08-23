@@ -33,67 +33,67 @@ import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleIntervi
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
 import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
 import {RecruitersScheduleInterviewsComponent} from '../../recruitmentCycle/DeliveryManager/components/DeliveryScheduledInterview.component';
-import {MasterPageComponent} from '../../master/components/MasterPage.component';
+import {MasterPageComponent} from '../../master/index';
 import { PushNotificationComponent } from '../../settings/pushNotification/pushNotification.component';
 import {InterviewerAvalabilityComponent } from '../../RRF/InterviewerAvalability/InterviewerAvalability.component';
 import { FeedbackPendingComponent } from '../../RRF/FeedBackPending/component/feedbackPending.component';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 @Component({
-    moduleId: module.id,
-    templateUrl: 'home.component.html',
-    styleUrls: ['home.component.css'],
-    directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
-        SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent, IfAuthorizeDirective],
-    providers: [SpinnerService],
+  moduleId: module.id,
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css'],
+  directives: [ROUTER_DIRECTIVES, FooterComponent, PageActionsComponent, TopNavigationBarComponent,
+    SideBarComponent, QuickSidebarComponent, SpinnerComponent, DashboardComponent, IfAuthorizeDirective],
+  providers: [SpinnerService],
 })
 @Routes([
-    { path: '/', component: DashboardComponent },
-    { path: '/Admin/Feature', component: FeatureComponent },
-    { path: '/Admin/Practice', component: PracticeComponent },
-    { path: '/Admin/Skill', component: SkillComponent },
-    { path: '/Admin/Role', component: RoleComponent },
-    { path: '/Admin/User', component: UserComponent },
-    { path: '/Admin/Technology', component: TechnologyComponent },
-    { path: '/Admin/Qualification', component: QualificationComponent },
-    { path: '/Admin/InterviewRounds', component: InterviewRoundComponent },
-    { path: '/Admin/Designation', component: DesignationComponent },
-    { path: '/Admin/OwnerType', component: OwnerTypeComponent },
-    { path: '/ProfileBank/AllProfiles', component: AllProfilesComponent },
-    { path: '/ProfileBank/BlackListedProfiles', component: BlackListedProfilesComponent },
-    { path: '/ProfileBank/MyProfiles', component: MyProfilesComponent },
-    { path: '/ProfileBank/CompanyProfiles', component: CompanyProfilesComponent },
-    { path: '/ProfileBank/RecentProfiles', component: RecentProfilesComponent },
-    { path: '/ProfileBank/IncompleteProfiles', component: IncompleteProfilesComponent },
-    { path: '/ProfileBank/AdvanceSearch', component: AdvanceSearchComponent },
-    { path: '/ProfileBank/AdvanceSearchInSidebar', component: AdvanceSearchInSidebarComponent },
-    { path: '/RRF/MyRRF', component: MyRRFComponent },
-    { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
-    { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
-    //{ path: '/RRF/PendingRequest', component: PendingRequestComponent },ScheduleInterviewsForRecruitersComponent
-    { path: '/AllInterviews/showInterviews', component: ShowScheduleInterviewsComponent },
-    { path: '/AllInterviews/showInterviewstoDelivery', component: RecruitersScheduleInterviewsComponent },
-    { path: '/Master/Update', component: MasterPageComponent },
-    { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
-    { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
-    { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
-    { path: '/NotificationSetting', component: PushNotificationComponent },
-    { path: '/RRF/InterviewsAvailability', component: InterviewerAvalabilityComponent },
-    { path: '/RRF/FeedbackPending', component: FeedbackPendingComponent },
-    { path: '/Dashboard', component: DashboardComponent }
+  { path: '/', component: DashboardComponent },
+  { path: '/Admin/Feature', component: FeatureComponent },
+  { path: '/Admin/Practice', component: PracticeComponent },
+  { path: '/Admin/Skill', component: SkillComponent },
+  { path: '/Admin/Role', component: RoleComponent },
+  { path: '/Admin/User', component: UserComponent },
+  { path: '/Admin/Technology', component: TechnologyComponent },
+  { path: '/Admin/Qualification', component: QualificationComponent },
+  { path: '/Admin/InterviewRounds', component: InterviewRoundComponent },
+  { path: '/Admin/Designation', component: DesignationComponent },
+  { path: '/Admin/OwnerType', component: OwnerTypeComponent },
+  { path: '/ProfileBank/AllProfiles', component: AllProfilesComponent },
+  { path: '/ProfileBank/BlackListedProfiles', component: BlackListedProfilesComponent },
+  { path: '/ProfileBank/MyProfiles', component: MyProfilesComponent },
+  { path: '/ProfileBank/CompanyProfiles', component: CompanyProfilesComponent },
+  { path: '/ProfileBank/RecentProfiles', component: RecentProfilesComponent },
+  { path: '/ProfileBank/IncompleteProfiles', component: IncompleteProfilesComponent },
+  { path: '/ProfileBank/AdvanceSearch', component: AdvanceSearchComponent },
+  { path: '/ProfileBank/AdvanceSearchInSidebar', component: AdvanceSearchInSidebarComponent },
+  { path: '/RRF/MyRRF', component: MyRRFComponent },
+  { path: '/RRF/RRFApproval', component: RRFApprovalComponent },
+  { path: '/RRF/RRFDashboard', component: RRFDashboardComponent },
+  //{ path: '/RRF/PendingRequest', component: PendingRequestComponent },ScheduleInterviewsForRecruitersComponent
+  { path: '/AllInterviews/showInterviews', component: ShowScheduleInterviewsComponent },
+  { path: '/AllInterviews/showInterviewstoDelivery', component: RecruitersScheduleInterviewsComponent },
+  { path: '/Master/Update', component: MasterPageComponent },
+  { path: '/Recruitment Cycle/Interviewers', component: InterviewrsComponent },
+  { path: '/Recruitment Cycle/Schedule', component: ScheduleInterviewComponent },
+  { path: '/Recruitment Cycle/mycalendar', component: RecruitmentInterviewerCalenderComponent },
+  { path: '/NotificationSetting', component: PushNotificationComponent },
+  { path: '/RRF/InterviewsAvailability', component: InterviewerAvalabilityComponent },
+  { path: '/RRF/FeedbackPending', component: FeedbackPendingComponent },
+  { path: '/Dashboard', component: DashboardComponent }
 
 
 ])
 export class HomeComponent implements OnInit {
-    constructor(private _router: Router) {
-    }
-    ngOnInit(): void {
-        //this._router.navigate(['/App/Dashboard']);
-        App.init();
-        Layout.init();
-        Demo.init();
-        QuickNav.init();
-    }
-    routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
-        console.info(segment);
-    }
+  constructor(private _router: Router) {
+  }
+  ngOnInit(): void {
+    //this._router.navigate(['/App/Dashboard']);
+    App.init();
+    Layout.init();
+    Demo.init();
+    QuickNav.init();
+  }
+  routerOnActivate(segment: RouteSegment, prev?: RouteSegment, currTree?: RouteTree, prevTree?: RouteTree) {
+    console.info(segment);
+  }
 }

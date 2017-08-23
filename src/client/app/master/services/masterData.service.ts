@@ -5,7 +5,7 @@ import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
 import { SpinnerService } from '../../shared/components/spinner/spinner';
 import { GrdOptions } from '../../shared/model/index';
-import { VisaMaster, SkypeMaster, ReasonsMaster, InterviewMode, Practice, InterviewType } from '../index';
+import { VisaMaster, SkypeMaster, RolesMaster, FeatureMaster, ReasonsMaster, InterviewMode, Practice, InterviewType } from '../index';
 
 
 @Injectable()
@@ -23,7 +23,7 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
-  /** ADD NEW VISA TYPE IN THE SYSTEM */
+  /** ADD NEW Reson  IN THE SYSTEM */
   addReasons(Reason: ReasonsMaster) {
     let url = Config.GetURL('/api/Masters/AddReason');
     this._spinnerService.show();
@@ -33,7 +33,7 @@ export class MyMasterDataService {
       .finally(() => this._spinnerService.hide());
   }
 
-  /** Update visa type */
+  /** Update REASON */
   updateReasons(Reason: ReasonsMaster) {
     let url = Config.GetURL('/api/Masters/UpdateReason');
     this._spinnerService.show();
@@ -42,7 +42,7 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
-  /**Delete the visa type */
+  /**Delete the reason type */
   deleteReasons(Reason: ReasonsMaster) {
     let url = Config.GetURL('/api/Masters/DeleteReason');
     this._spinnerService.show();
@@ -234,6 +234,88 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
+
+  /***** START FEATURE MASTER API */
+  /** GET FEATURE DETAILS FROM BACKEND*/
+  getFeatureData() {
+    let url = Config.GetURL('/api/Masters/GetFeatures');
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /** ADD NEW FEATURE IN THE SYSTEM */
+  addFeature(Feature: FeatureMaster) {
+    let url = Config.GetURL('/api/Masters/AddFeature');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Feature })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+
+  /** Update Feature */
+  updateFeature(Feature: FeatureMaster) {
+    let url = Config.GetURL('/api/Masters/UpdateFeature');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Feature })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /**Delete the feature */
+  deleteFeature(Feature: FeatureMaster) {
+    let url = Config.GetURL('/api/Masters/DeleteFeature');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Feature })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /***** END FEATURE MASTER API */
+
+  /***** START ROLE MASTER API */
+  /** GET ROLE DETAILS FROM BACKEND*/
+  getRoleData() {
+    let url = Config.GetURL('/api/Masters/GetRoles');
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /** ADD NEW ROLE IN THE SYSTEM */
+  addRole(Role: RolesMaster) {
+    let url = Config.GetURL('/api/Masters/AddRole');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Role })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+
+  /** Update Role */
+  updateRole(Role: RolesMaster) {
+    let url = Config.GetURL('/api/Masters/UpdateRole');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Role })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /**Delete the Role */
+  deleteRole(Role: RolesMaster) {
+    let url = Config.GetURL('/api/Masters/DeleteRole');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Role })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /***** END ROLE MASTER API */
+
+
   private extractData(res: Response) {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response status: ' + res.status);
@@ -246,4 +328,9 @@ export class MyMasterDataService {
     console.log(error);
     return Observable.throw(error.json().error || 'Server error');
   }
+
+
+
+
+
 }
