@@ -57,7 +57,9 @@ export class PracticeMasterComponent implements OnActivate {
         }
     }
     EditPracticeData(){
-        this._MyMasterDataService.editPracticeData(this.data)
+        var checkData=this.data.Value.trim();
+        if(checkData !== "") {
+            this._MyMasterDataService.editPracticeData(this.data)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -74,9 +76,13 @@ export class PracticeMasterComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+        } else {
+            this.toastr.error('Please Fill Data.');
+        }
     }
     AddPracticeData(){
-        if(this.data !== null){
+        var checkData=this.data.Value.trim();
+        if(checkData !== "") {
             this._MyMasterDataService.addPracticeData(this.data)
             .subscribe(
             results => {
@@ -94,15 +100,13 @@ export class PracticeMasterComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
         }
-        else{
+        else {
             this.toastr.error('Please Fill Data.');
         }
-         
     }
 
     deleteData(DelData:any){
-        
-    var deleteData = confirm("Are you sure you want to delete it?");
+    var deleteData = confirm('Are you sure you want to delete it?');
     if (deleteData === true) {
        this._MyMasterDataService.deletePracticeData(DelData)
             .subscribe(
@@ -110,8 +114,6 @@ export class PracticeMasterComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getPracticeData();
-                    alert('Successfully Deleted.');
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }

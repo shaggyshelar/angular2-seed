@@ -77,7 +77,8 @@ export class IEFFunctionMasterComponent implements OnActivate {
         }
     }
     EditIEFData(){
-        if(this.data.InterviewType.Id !== '-1'){
+        var checkData=this.data.FunctionName.trim();
+        if(this.data.InterviewType.Id !== '-1' && checkData !== ""){
             this._MyMasterDataService.editIEFData(this.data)
             .subscribe(
             results => {
@@ -97,14 +98,14 @@ export class IEFFunctionMasterComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
-        }
-        else{
-            this.toastr.error('Please Select Valid Interview Type');
+        } else{
+            this.toastr.error('Please Fill Proper Data.');
         }
         
     }
-    AddIEFData(){
-        if(this.data.InterviewType.Id !== '-1'){
+    AddIEFData() {
+        var checkData=this.data.FunctionName.trim();
+        if(this.data.InterviewType.Id !== '-1' && checkData !== ""){
          this._MyMasterDataService.addIEFData(this.data)
             .subscribe(
             results => {
@@ -123,24 +124,20 @@ export class IEFFunctionMasterComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
-             }
-        else{
-            this.toastr.error('Please Select Valid Interview Type');
+             } else {
+            this.toastr.error('Please Fill Proper Data.');
         }
     }
 
     deleteData(skyDelData:any){
-        
-    var deleteData = confirm("Are you sure you want to delete it?");
-    if (deleteData == true) {
+    var deleteData = confirm('Are you sure you want to delete it?');
+    if (deleteData === true) {
        this._MyMasterDataService.deleteIEFData(skyDelData)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getIEFData();
-                    alert('Successfully Deleted.');
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -152,7 +149,6 @@ export class IEFFunctionMasterComponent implements OnActivate {
     } else {
         alert('Deletion Process Is Cancelled.');
     }
-        
     }
 
 }

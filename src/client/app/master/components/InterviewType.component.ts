@@ -56,7 +56,9 @@ export class InterviewTypeComponent implements OnActivate {
            this.EditInterviewModeData();
         }
     }
-    EditInterviewModeData(){
+    EditInterviewModeData() {
+        var checkData=this.data.Value.trim();
+        if(checkData !== "") {
         this._MyMasterDataService.editInterviewTypeData(this.data)
             .subscribe(
             results => {
@@ -74,8 +76,13 @@ export class InterviewTypeComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+            } else {
+            this.toastr.error('Please Fill Data.');
+        }
     }
-    AddInterviewModeData(){
+    AddInterviewModeData() {
+        var checkData=this.data.Value.trim();
+        if(checkData !== "") {
          this._MyMasterDataService.addInterviewTypeData(this.data)
             .subscribe(
             results => {
@@ -92,6 +99,9 @@ export class InterviewTypeComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+            } else {
+            this.toastr.error('Please Fill Data.');
+        }
     }
 
     deleteData(skyDelData:any){
@@ -112,7 +122,7 @@ export class InterviewTypeComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     } else {
-        // alert('Delete Skype Id Process Cancelled.');
+         alert('Deletion Process Is Cancelled Successfully.');
     }
     }
 

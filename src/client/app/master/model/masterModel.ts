@@ -26,6 +26,7 @@ export class InterviewMode {
 }
 
 export class Practice {
+  public Isenable:boolean;
   public Id: string;
   public Value: string;
 }

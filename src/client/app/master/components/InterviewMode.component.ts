@@ -28,7 +28,7 @@ export class InterviewModeComponent implements OnActivate {
         this.getInterviewModeData();
         this.Action='Add';
     }
-    /** GET SKYPE CREDENTIALS FOR THE INTERVIEWERS */
+    /** GET Interview Mode FOR THE INTERVIEWERS */
     getInterviewModeData() {
         this._MyMasterDataService.getInterviewModeData()
             .subscribe(
@@ -56,7 +56,9 @@ export class InterviewModeComponent implements OnActivate {
            this.EditInterviewModeData();
         }
     }
-    EditInterviewModeData(){
+    EditInterviewModeData() {
+        var checkData=this.data.Value.trim();
+        if(checkData !== "") {
         this._MyMasterDataService.editInterviewModeData(this.data)
             .subscribe(
             results => {
@@ -74,8 +76,13 @@ export class InterviewModeComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+            } else {
+            this.toastr.error('Please Fill Data.');
+        }
     }
-    AddInterviewModeData(){
+    AddInterviewModeData() {
+        var checkData=this.data.Value.trim();
+        if(checkData !== "") {
          this._MyMasterDataService.addInterviewModeData(this.data)
             .subscribe(
             results => {
@@ -92,11 +99,14 @@ export class InterviewModeComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+        } else {
+            this.toastr.error('Please Fill Data.');
+        }
     }
 
     deleteData(skyDelData:any){
         
-    var deleteData = confirm("Are you sure you want to delete it?");
+    var deleteData = confirm('Are you sure you want to delete it?');
     if (deleteData == true) {
        this._MyMasterDataService.deleteInterviewModeData(skyDelData)
             .subscribe(
@@ -104,8 +114,6 @@ export class InterviewModeComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getInterviewModeData();
-                    alert('Successfully Deleted Skype Id.');
-                    /**Bind new data to list */
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -115,9 +123,8 @@ export class InterviewModeComponent implements OnActivate {
                 this.toastr.error(<any>error);
             });
     } else {
-        alert('Delete Skype Id Process Cancelled.');
+        alert('Deletion Process Is Cancelled Successfully.');
     }
-        
     }
 
 }

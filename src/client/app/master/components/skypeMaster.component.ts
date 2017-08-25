@@ -57,8 +57,9 @@ export class SkypeMasterComponent implements OnActivate {
            this.EditSkypeData();
         }
     }
-    EditSkypeData(){
-        this._MyMasterDataService.editSkypeData(this.data)
+    EditSkypeData() {
+        if(this.data.Value !== " " && this.data.Password !== " ") {
+            this._MyMasterDataService.editSkypeData(this.data)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -75,9 +76,13 @@ export class SkypeMasterComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+            } else {
+            this.toastr.error('Please Fill Data.');
+        }
     }
     AddSkypeData(){
-         this._MyMasterDataService.addSkypeData(this.data)
+        if(this.data.Value !== " " && this.data.Password !== " ") {
+            this._MyMasterDataService.addSkypeData(this.data)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -93,9 +98,12 @@ export class SkypeMasterComponent implements OnActivate {
                 this.errorMessage = <any>error;
                 this.toastr.error(<any>error);
             });
+        } else {
+            this.toastr.error('Please Fill Data.');
+        }
     }
 
-    deleteData(skyDelData:any){
+    deleteData(skyDelData:any) {
     var deleteData = confirm('Are you sure you want to delete it?');
     if (deleteData === true) {
        this._MyMasterDataService.deleteSkypeData(skyDelData)
@@ -104,7 +112,6 @@ export class SkypeMasterComponent implements OnActivate {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getSkypeData();
-                    alert('Successfully Deleted.');
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
