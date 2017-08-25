@@ -246,7 +246,13 @@
                             <span class="title">Features</span>
                         </a>
                     </li>
-
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Permissions')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
+                      <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
+                      <a [routerLink]="['/App/Master/Update/Permissions']" class="nav-link ">
+                          <i class="icon-calendar"></i>
+                          <span class="title">Permission Matrix</span>
+                      </a>
+                  </li>
                 </ul>
             </li>
 

@@ -10,4 +10,5 @@ export * from './components/IEFFunctionMaster.component';
 export * from './components/roleMaster.component';
 export * from './components/featureMaster.component';
 export * from './components/RRFApprover.component';
+export * from './components/permissionMatrix.component';
 export * from './model/masterModel';

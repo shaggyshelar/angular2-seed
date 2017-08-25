@@ -35,7 +35,7 @@ export class RoleMasterComponent implements OnActivate {
       .subscribe(
       (results: any) => {
         if (results !== null && results.length > 0) {
-          this.selectedRole = results;
+          this.Roles = results;
         }
       },
       error => {
@@ -95,6 +95,7 @@ export class RoleMasterComponent implements OnActivate {
   /** Cancel action to reset fields */
   OnCancel() {
     this.selectedRole = null;
+    this.action = 'Add';
   }
   /**Edit existing Record */
   edit(roleData: RolesMaster) {

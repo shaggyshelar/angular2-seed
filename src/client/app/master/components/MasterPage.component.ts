@@ -12,6 +12,7 @@ import {
   FeatureMasterComponent,
   RoleMasterComponent,
   IEFFunctionMasterComponent,
+  PermissionMatrixComponent,
   RRFApproverMasterComponent
 } from '../index';
 
@@ -32,6 +33,7 @@ import {
   { path: '/Features', component: FeatureMasterComponent },
   { path: '/Roles', component: RoleMasterComponent },
   { path: '/IEF', component: IEFFunctionMasterComponent },
+  { path: '/Permissions', component: PermissionMatrixComponent },
   { path: '/RRFApprover', component: RRFApproverMasterComponent }
 ])
 export class MasterPageComponent {

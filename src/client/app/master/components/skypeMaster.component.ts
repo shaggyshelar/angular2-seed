@@ -58,7 +58,9 @@ export class SkypeMasterComponent implements OnActivate {
         }
     }
     EditSkypeData() {
-        if(this.data.Value !== " " && this.data.Password !== " ") {
+      var checkData=this.data.Value.trim();
+      var checkPassword=this.data.Value.trim();
+      if(checkData !== "" && checkPassword !== "") {
             this._MyMasterDataService.editSkypeData(this.data)
             .subscribe(
             results => {
@@ -81,7 +83,9 @@ export class SkypeMasterComponent implements OnActivate {
         }
     }
     AddSkypeData(){
-        if(this.data.Value !== " " && this.data.Password !== " ") {
+        var checkData=this.data.Value.trim();
+        var checkPassword=this.data.Value.trim();
+        if(checkData !== "" && checkPassword !== "") {
             this._MyMasterDataService.addSkypeData(this.data)
             .subscribe(
             results => {

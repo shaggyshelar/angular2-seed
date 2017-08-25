@@ -41,12 +41,12 @@ export class InterviewType {
   public Value: string;
   public Sequence: string;
 }
-export class RRFApprover{
-    public Id: string;
-    public Approver:Approver=new Approver();
-    public Year: string;
-    public DepartmentText:string;
-    public Department:Practice=new Practice();
+export class RRFApprover {
+  public Id: string;
+  public Approver: Approver = new Approver();
+  public Year: string;
+  public DepartmentText: string;
+  public Department: Practice = new Practice();
 }
 export class Approver {
   public Id: string;
@@ -69,8 +69,17 @@ export class RolesMaster {
   public RoleId: string;
   public Role: string;
 }
-export class RolesLookup {
-  public Id: string;
-  public Value: string;
-}
 
+export class RolesLookup extends MasterData { }
+export class FeatureLookup extends MasterData { }
+
+export class Permission {
+  public Id: number;
+  public Feature: FeatureLookup;
+  public Role: RolesLookup;
+  public Delete: Boolean;
+  public Manage: Boolean;
+  public Add: Boolean;
+  public Read: Boolean;
+  public Update: Boolean;
+}

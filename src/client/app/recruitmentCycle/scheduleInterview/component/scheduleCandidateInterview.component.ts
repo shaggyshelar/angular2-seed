@@ -650,8 +650,16 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
             this.getNominatedInterviewersByRound(this.ScheduleInterView.Round.Id.toString());
         }
         if(this.ScheduleInterView.SkypeID !== null){
-          this.selectSkypeID=true;
-        }
+            if(this.ScheduleInterView.SkypeID.Value !== ""){
+                this.selectSkypeID=true;
+            }
+            else{
+                this.selectSkypeID=false;
+            }
+      }
+      else{
+        this.selectSkypeID=false;
+    }
     }
 
     onClearSelection() {
