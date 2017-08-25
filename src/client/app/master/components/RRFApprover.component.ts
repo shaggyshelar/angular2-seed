@@ -14,6 +14,7 @@ import { APIResult } from '../../shared/constantValue/index';
 })
 
 export class RRFApproverMasterComponent implements OnActivate {
+    ShowTable:boolean=false;
     errorMessage: string;
     approverName:string;
     approverID: string;
@@ -46,6 +47,11 @@ export class RRFApproverMasterComponent implements OnActivate {
             (results: any) => {
                 if (results !== null && results.length > 0) {
                     this.rrfApproverData = results;
+                    if(this.rrfApproverData.length > 0){
+                        this.ShowTable=true;
+                    } else {
+                        this.ShowTable=false;
+                    }
                     this.getPracticeData();
                 }
             },

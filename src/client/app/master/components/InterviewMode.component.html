@@ -76,7 +76,7 @@
                                                 <th> Action </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody *ngIf="ShowTable">
                                             <tr *ngFor="let data1 of modeData">
                                                 <!--<tr>-->
                                                 <td>{{data1.Value}}</td>
@@ -88,13 +88,13 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                        <!--<tbody *ngIf="EmployersInformationList.length === 0">
+                                        <tbody *ngIf="!ShowTable">
                                             <tr>
                                                 <td colspan="6">
-                                                    <strong>No entries </strong>
+                                                    <strong>No Entries For Interview Mode Found.</strong>
                                                 </td>
                                             </tr>
-                                        </tbody>-->
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

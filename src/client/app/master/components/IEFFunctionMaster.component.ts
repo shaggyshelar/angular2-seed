@@ -16,6 +16,7 @@ import { APIResult } from '../../shared/constantValue/index';
 
 export class IEFFunctionMasterComponent implements OnActivate {
     errorMessage: string;
+    ShowTable: boolean = false;
     iefData: Array<IEFFunctions> = new Array<IEFFunctions>();
     data:IEFFunctions = new IEFFunctions();
     typeData : Array<InterviewType> = new Array<InterviewType>();
@@ -39,6 +40,11 @@ export class IEFFunctionMasterComponent implements OnActivate {
             (results: any) => {
                 if (results !== null && results.length > 0) {
                     this.iefData = results;
+                    if(this.iefData.length > 0){
+                        this.ShowTable=true;
+                    } else {
+                        this.ShowTable=false;
+                    }
                 }
             },
             error => {

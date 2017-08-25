@@ -16,6 +16,7 @@ import { APIResult } from '../../shared/constantValue/index';
 
 export class InterviewModeComponent implements OnActivate {
     errorMessage: string;
+    ShowTable:boolean =false;
     data: InterviewMode = new InterviewMode();
     modeData : Array<InterviewMode> = new Array<InterviewMode>();
     Action:string='Add';
@@ -35,6 +36,11 @@ export class InterviewModeComponent implements OnActivate {
             (results: any) => {
                 if (results !== null && results.length > 0) {
                     this.modeData = results;
+                    if(this.modeData.length > 0){
+                        this.ShowTable=true;
+                    } else {
+                        this.ShowTable=false;
+                    }
                 }
             },
             error => {

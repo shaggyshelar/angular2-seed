@@ -92,7 +92,8 @@ export class VisaMasterComponent implements OnActivate {
   }
   /** Cancel action to reset fields */
   OnCancel() {
-    this.selectedVisa = null;
+    this.action = 'Add';
+    //this.selectedVisa = null;
   }
   /**Edit existing Record */
   edit(visaData: VisaMaster) {
