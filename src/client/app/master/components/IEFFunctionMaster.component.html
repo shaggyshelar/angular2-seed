@@ -39,13 +39,13 @@
                                         <div>
                                             <div class="form-group">
                                                 <label>IEF Function <span class="required"> * </span></label>
-                                                <input type="text" class="form-control text-capitalize" required="" maxlength="30" [(ngModel)]="data.FunctionName" />
+                                                <input autofocus type="text" class="form-control text-capitalize" required="" maxlength="30" [(ngModel)]="data.FunctionName" tabindex="1" />
                                             </div>
                                         </div>
                                         <div>
                                             <div class="form-group ">
                                                 <label>Interview Type <span class="required"> * </span></label>
-                                                <select class="form-control" [(ngModel)]="data.InterviewType.Id" required="">
+                                                <select class="form-control" [(ngModel)]="data.InterviewType.Id" required="" tabindex="2">
                                                     <option value='-1'>Select</option>
                                                     <option *ngFor="let type of typeData" [ngValue]="type.Id">{{type.Value}}</option>
                                                 </select>
@@ -54,7 +54,7 @@
                                         <div>
                                             <div class="form-group ">
                                                 <label>Display Ratings <span class="required"> * </span></label>
-                                                <input type="checkbox" class="form-control text-capitalize" style="margin-left: -105px;" [(ngModel)]="data.DisplayRatings" />
+                                                <input type="checkbox" class="form-control text-capitalize" style="margin-left: -105px;" [(ngModel)]="data.DisplayRatings" tabindex="3" />
                                             </div>
                                         </div>
                                     </div>

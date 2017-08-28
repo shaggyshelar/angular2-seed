@@ -692,13 +692,13 @@ export class RRFCandidateListComponent implements OnActivate {
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.getOfferedCanidatesForRRF();
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
                     this.IsOffered = false;
                     this.IsRejectReason = false;
                     this.rejectReason = '';
                     this.rejectDate = '';
-                    this.getOfferedCanidatesForRRF();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
@@ -710,13 +710,13 @@ export class RRFCandidateListComponent implements OnActivate {
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    this.getOfferedCanidatesForRRF();
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
                     this.IsOffered = false;
                     this.IsRejectReason = false;
                     this.rejectReason = '';
                     this.rejectDate = '';
-                    this.getOfferedCanidatesForRRF();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).ErrorMsg);
                 }
