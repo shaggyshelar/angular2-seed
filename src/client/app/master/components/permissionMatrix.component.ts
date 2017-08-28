@@ -130,7 +130,8 @@ getRoleDatabyId(Id:any){
   .subscribe(
   (results: any) => {
     if (results !== null && results.length > 0) {
-      this.RoleById = results[0];
+      this.RoleById.Id = results[0].Id;
+      this.RoleById.Value = results[0].Role;
       this.addPermissionsByRole();
     }
   },
@@ -156,6 +157,7 @@ getFeatureById(Id:any){
 addPermissionsByRole() {
   this.SaveFeaturedata.Feature=this.Feature;
   this.SaveFeaturedata.Role=this.RoleById;
+  //this.SaveFeaturedata.Role.Value=this.RoleById.Role;
   this._MyMasterDataService.addPermissionsByRole(this.SaveFeaturedata)
   .subscribe(
   results => {

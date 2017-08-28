@@ -45,6 +45,7 @@ export class SkypeMasterComponent implements OnActivate {
     }
     OnCancel(){
         this.Action = 'Add';
+        this.data=new SkypeMaster();
     }
     EditData(skydata:any) {
        this.data=skydata;

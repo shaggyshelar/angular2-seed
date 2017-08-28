@@ -92,7 +92,8 @@ export class FeatureMasterComponent implements OnActivate {
   }
   /** Cancel action to reset fields */
   OnCancel() {
-    this.selectedFeature = null;
+    this.action = 'Add';
+    this.selectedFeature = new FeatureMaster();
   }
   /**Edit existing Record */
   edit(featureData: FeatureMaster) {

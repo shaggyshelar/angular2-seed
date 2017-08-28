@@ -50,6 +50,7 @@ export class InterviewModeComponent implements OnActivate {
     }
     OnCancel(){
         this.Action = 'Add';
+        this.data=new InterviewMode();
     }
     EditData(modedetails:any) {
        this.data=modedetails;

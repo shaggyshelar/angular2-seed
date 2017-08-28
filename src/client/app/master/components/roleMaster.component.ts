@@ -94,7 +94,7 @@ export class RoleMasterComponent implements OnActivate {
   }
   /** Cancel action to reset fields */
   OnCancel() {
-    this.selectedRole = null;
+    this.selectedRole = new RolesMaster();
     this.action = 'Add';
   }
   /**Edit existing Record */

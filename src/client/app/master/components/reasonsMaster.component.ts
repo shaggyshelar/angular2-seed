@@ -42,7 +42,7 @@ export class ReasonsMasterComponent implements OnActivate {
   }
   /** Cancel action to reset fields */
   OnCancel() {
-    this.selectedReason = null;
+    this.selectedReason = new ReasonsMaster();
     this.action = 'Add';
   }
   /** On Form submit action */

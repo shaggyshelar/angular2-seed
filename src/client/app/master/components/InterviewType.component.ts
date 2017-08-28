@@ -50,6 +50,7 @@ export class InterviewTypeComponent implements OnActivate {
     }
     OnCancel(){
         this.Action = 'Add';
+        this.data=new InterviewType();
     }
     EditData(typedetails:any) {
        this.data=typedetails;

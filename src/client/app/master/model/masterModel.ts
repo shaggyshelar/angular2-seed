@@ -65,6 +65,7 @@ export class FeatureMaster {
 
 export class RolesMaster {
   public Id: number;
+  public Value: string;
   public SequenceNo: string;
   public RoleId: string;
   public Role: string;

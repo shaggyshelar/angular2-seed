@@ -44,6 +44,7 @@ export class PracticeMasterComponent implements OnActivate {
     }
     OnCancel(){
         this.Action = 'Add';
+        this.data=new Practice();
     }
     EditData(modedetails:any) {
        this.data=modedetails;

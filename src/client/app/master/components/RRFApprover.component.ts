@@ -98,6 +98,7 @@ export class RRFApproverMasterComponent implements OnActivate {
 
     OnCancel(){
         this.Action = 'Add';
+        this.data=new RRFApprover();
         this.selectDeptText = false;
         $('#cmbInterviewer').select2('val', '-1');
     }

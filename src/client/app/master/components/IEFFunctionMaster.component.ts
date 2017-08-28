@@ -68,6 +68,7 @@ export class IEFFunctionMasterComponent implements OnActivate {
     }
     OnCancel(){
         this.Action = 'Add';
+        this.data=new IEFFunctions();
         this.data.DisplayRatings='false';
         // this.data.InterviewType.Id='-1';
     }
