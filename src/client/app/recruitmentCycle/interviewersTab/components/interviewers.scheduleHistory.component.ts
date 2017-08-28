@@ -77,7 +77,7 @@ Status:string='';
         this.grdOptionsIntwHistory.PreviousButton = false;
         this.grdOptionsIntwHistory.RRFFilters.Status = 'Selected';
         this.grdOptionsIntwHistory.Order='desc';
-        this.grdOptionsIntwHistory.PerPageCount= 5;
+        this.grdOptionsIntwHistory.PerPageCount= 50;
         // this.grdOptionsIntwHistory.NextPageDatetime='';
         this.statuss='Selected';
     }

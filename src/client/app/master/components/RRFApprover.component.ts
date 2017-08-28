@@ -234,8 +234,8 @@ export class RRFApproverMasterComponent implements OnActivate {
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getRRFAprroverData();
-                    alert('Successfully Deleted.');
+                    this.getRRFAprroverData();this.OnCancel();
+                    //alert('Successfully Deleted.');
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }

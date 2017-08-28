@@ -109,6 +109,7 @@ export class VisaMasterComponent implements OnActivate {
         (results: any) => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.getVisaDetails();
+            this.OnCancel();
             this.toastr.success((<ResponseFromAPI>results).Message);
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);

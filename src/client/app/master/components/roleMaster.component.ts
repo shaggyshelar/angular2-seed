@@ -110,7 +110,7 @@ export class RoleMasterComponent implements OnActivate {
         .subscribe(
         (results: any) => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-            this.getRolesDetails();
+            this.getRolesDetails(); this.OnCancel();
             this.toastr.success((<ResponseFromAPI>results).Message);
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);

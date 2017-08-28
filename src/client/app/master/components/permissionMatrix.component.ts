@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MyMasterDataService, VisaMaster, Permission, RolesLookup,FeatureLookup} from '../index';
+import { MyMasterDataService, VisaMaster, Permission, RolesLookup, FeatureLookup} from '../index';
 import { ResponseFromAPI } from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
 
@@ -20,17 +20,17 @@ export class PermissionMatrixComponent implements OnActivate {
   visaDetails: VisaMaster[];
   Permissions: Permission[];
   PermissionsList: Permission[];
-  RoleType:number;
-  FeatureId:number;
-  updatePermission : Permission = new Permission();
-  SaveFeaturedata:Permission=new Permission();
-  Feature:FeatureLookup=new FeatureLookup();
-  RoleById:RolesLookup=new RolesLookup();
+  RoleType: number;
+  FeatureId: number;
+  updatePermission: Permission = new Permission();
+  SaveFeaturedata: Permission = new Permission();
+  Feature: FeatureLookup = new FeatureLookup();
+  RoleById: RolesLookup = new RolesLookup();
   Roles: RolesLookup[];
   selectedVisa: VisaMaster = new VisaMaster();
   action: string = 'Add';
-  showFeature:boolean =false;
-  ShowTable:boolean =false;
+  showFeature: boolean = false;
+  ShowTable: boolean = false;
   constructor(private _MyMasterDataService: MyMasterDataService,
     private toastr: ToastsManager,
     private _router: Router) {
@@ -56,7 +56,7 @@ export class PermissionMatrixComponent implements OnActivate {
         this.toastr.error(<any>error);
       });
   }
-  /** GET VISA DETAILS FOR THE CANDIDATE PROFILES */
+  /** GET PERMISSIONS DETAILS FROM DB*/
   getPermissions() {
     this._MyMasterDataService.getPermissions()
       .subscribe(
@@ -64,10 +64,9 @@ export class PermissionMatrixComponent implements OnActivate {
         if (results !== null && results.length > 0) {
           this.Permissions = results;
           // this.FeatureId=this.Permissions[0].Feature.Id;
-          this.ShowTable=true;
-        }
-        else{
-          this.ShowTable=false;
+          this.ShowTable = true;
+        } else {
+          this.ShowTable = false;
         }
       },
       error => {
@@ -81,12 +80,12 @@ export class PermissionMatrixComponent implements OnActivate {
       .subscribe(
       (results: any) => {
         // if (results !== null && results.length > 0) {
-          this.Permissions = results;
-          if(this.Permissions.length > 0){
-            this.ShowTable=true;
-          } else {
-            this.ShowTable=false;
-          }
+        this.Permissions = results;
+        if (this.Permissions.length > 0) {
+          this.ShowTable = true;
+        } else {
+          this.ShowTable = false;
+        }
       },
       error => {
         this.errorMessage = <any>error;
@@ -94,122 +93,123 @@ export class PermissionMatrixComponent implements OnActivate {
       });
   }
   setSelectedRole(ModeId: any) {
-    this.RoleType=ModeId;
+    this.RoleType = ModeId;
     this.getPermissionsByRole(this.RoleType);
-}
-setSelectedFeature(featureId:any){
-  this.FeatureId=featureId;
-}
-addNewFeature() {
-  this.showFeature=true;
-  this.getFeatureData();
-}
-getFeatureData() {
-  this._MyMasterDataService.getFeatureData()
-  .subscribe(
-  (results: any) => {
-    if (results !== null && results.length > 0) {
-      this.PermissionsList = results;
-      this.FeatureId=this.PermissionsList[0].Id;
-      this.ShowTable=true;
-    }
-    else{
-      this.ShowTable=false;
-    }
-  },
-  error => {
-    this.errorMessage = <any>error;
-    this.toastr.error(<any>error);
-  });
-}
-cancelNewFeature(){
-  this.showFeature=false;
-}
-getRoleDatabyId(Id:any){
-  this._MyMasterDataService.getRoleDatabyId(Id)
-  .subscribe(
-  (results: any) => {
-    if (results !== null && results.length > 0) {
-      this.RoleById.Id = results[0].Id;
-      this.RoleById.Value = results[0].Role;
-      this.addPermissionsByRole();
-    }
-  },
-  error => {
-    this.errorMessage = <any>error;
-    this.toastr.error(<any>error);
-  });
-}
-getFeatureById(Id:any){
-  this._MyMasterDataService.getFeatureById(Id)
-  .subscribe(
-  (results: any) => {
-    if (results !== null && results.length > 0) {
-      this.Feature = results[0];
-      this.getRoleDatabyId(this.RoleType);
-    }
-  },
-  error => {
-    this.errorMessage = <any>error;
-    this.toastr.error(<any>error);
-  });
-}
-addPermissionsByRole() {
-  this.SaveFeaturedata.Feature=this.Feature;
-  this.SaveFeaturedata.Role=this.RoleById;
-  //this.SaveFeaturedata.Role.Value=this.RoleById.Role;
-  this._MyMasterDataService.addPermissionsByRole(this.SaveFeaturedata)
-  .subscribe(
-  results => {
-    if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-      this.toastr.success((<ResponseFromAPI>results).Message);
-      this.showFeature=false;
-      this.getPermissionsByRole(this.RoleType);
-    } else {
-      this.toastr.error((<ResponseFromAPI>results).Message);
-    }
-  },
-  error => {
-    this.errorMessage = <any>error;
-    this.toastr.error(<any>error);
-  });
-}
+  }
+  setSelectedFeature(featureId: any) {
+    this.FeatureId = featureId;
+  }
+  addNewFeature() {
+    this.showFeature = true;
+    this.getFeatureData();
+  }
+  getFeatureData() {
+    this._MyMasterDataService.getFeatureData()
+      .subscribe(
+      (results: any) => {
+        if (results !== null && results.length > 0) {
+          this.PermissionsList = results;
+          //TODO :: make available only those features which are not used earlier in permission matrix
+          // var res = this.PermissionsList.find(t => this.Permissions.every(e => e.Id !== t.Id));
+          this.FeatureId = this.PermissionsList[0].Id;
+          this.ShowTable = true;
+        } else {
+          this.ShowTable = false;
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        this.toastr.error(<any>error);
+      });
+  }
+  cancelNewFeature() {
+    this.showFeature = false;
+  }
+  getRoleDatabyId(Id: any) {
+    this._MyMasterDataService.getRoleDatabyId(Id)
+      .subscribe(
+      (results: any) => {
+        if (results !== null && results.length > 0) {
+          this.RoleById.Id = results[0].Id;
+          this.RoleById.Value = results[0].Role;
+          this.addPermissionsByRole();
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        this.toastr.error(<any>error);
+      });
+  }
+  getFeatureById(Id: any) {
+    this._MyMasterDataService.getFeatureById(Id)
+      .subscribe(
+      (results: any) => {
+        if (results !== null && results.length > 0) {
+          this.Feature = results[0];
+          this.getRoleDatabyId(this.RoleType);
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        this.toastr.error(<any>error);
+      });
+  }
+  addPermissionsByRole() {
+    this.SaveFeaturedata.Feature = this.Feature;
+    this.SaveFeaturedata.Role = this.RoleById;
+    //this.SaveFeaturedata.Role.Value=this.RoleById.Role;
+    this._MyMasterDataService.addPermissionsByRole(this.SaveFeaturedata)
+      .subscribe(
+      results => {
+        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+          this.toastr.success((<ResponseFromAPI>results).Message);
+          this.showFeature = false;
+          this.getPermissionsByRole(this.RoleType);
+        } else {
+          this.toastr.error((<ResponseFromAPI>results).Message);
+        }
+      },
+      error => {
+        this.errorMessage = <any>error;
+        this.toastr.error(<any>error);
+      });
+  }
 
-saveNewFeature(permissionData : Permission) {
-  this.getFeatureById(this.FeatureId);
-}
-  updateManage(e:any,data:any){
-    this.updatePermission=data;
-    this.updatePermission.Manage= e.target.checked;
+  saveNewFeature(permissionData: Permission) {
+    this.getFeatureById(this.FeatureId);
+  }
+  updateManage(e: any, data: any) {
+    this.updatePermission = data;
+    this.updatePermission.Manage = e.target.checked;
     this.Update(this.updatePermission);
     console.log(this.updatePermission);
-}
-  updateRead(e:any,data:any){
-  this.updatePermission=data;
-  this.updatePermission.Read= e.target.checked;
-  this.Update(this.updatePermission);
-  console.log(this.updatePermission);
-}
-  updateAdd(e:any,data:any){
-  this.updatePermission=data;
-  this.updatePermission.Add= e.target.checked;
-  this.Update(this.updatePermission);
-  console.log(this.updatePermission);
-}
-  updateUpdate(e:any,data:any){
-  this.updatePermission=data;
-  this.updatePermission.Update= e.target.checked;
-  this.Update(this.updatePermission);
-  console.log(this.updatePermission);
-}
-  updateDelete(e:any,data:any){
-  this.updatePermission=data;
-  this.updatePermission.Delete= e.target.checked;
-  this.Update(this.updatePermission);
-  console.log(this.updatePermission);
-}
+  }
+  updateRead(e: any, data: any) {
+    this.updatePermission = data;
+    this.updatePermission.Read = e.target.checked;
+    this.Update(this.updatePermission);
+    console.log(this.updatePermission);
+  }
+  updateAdd(e: any, data: any) {
+    this.updatePermission = data;
+    this.updatePermission.Add = e.target.checked;
+    this.Update(this.updatePermission);
+    console.log(this.updatePermission);
+  }
+  updateUpdate(e: any, data: any) {
+    this.updatePermission = data;
+    this.updatePermission.Update = e.target.checked;
+    this.Update(this.updatePermission);
+    console.log(this.updatePermission);
+  }
+  updateDelete(e: any, data: any) {
+    this.updatePermission = data;
+    this.updatePermission.Delete = e.target.checked;
+    this.Update(this.updatePermission);
+    console.log(this.updatePermission);
+  }
   /**Edit existing Record */
-  Update(permissionData : Permission) {
+  Update(permissionData: Permission) {
     this._MyMasterDataService.updatePermissionsByRole(permissionData)
       .subscribe(
       results => {
@@ -224,33 +224,33 @@ saveNewFeature(permissionData : Permission) {
         this.toastr.error(<any>error);
       });
   }
-  /**Add new Record */
-  add(visaDetails: VisaMaster) {
-    visaDetails.Id = 0;
-    this._MyMasterDataService.addVisaType(visaDetails)
-      .subscribe(
-      results => {
-        if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          //this.getVisaDetails();
-          this.toastr.success((<ResponseFromAPI>results).Message);
-          this.selectedVisa.Id = 0;
-          this.selectedVisa.Value = '';
-        } else {
-          this.toastr.error((<ResponseFromAPI>results).Message);
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
-        this.toastr.error(<any>error);
-      });
-  }
-  /** Cancel action to reset fields */
-  OnCancel() {
-    this.selectedVisa = null;
-    this.action = 'Add';
-  }
+  // /**Add new Record */
+  // add(visaDetails: VisaMaster) {
+  //   visaDetails.Id = 0;
+  //   this._MyMasterDataService.addVisaType(visaDetails)
+  //     .subscribe(
+  //     results => {
+  //       if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+  //         //this.getVisaDetails();
+  //         this.toastr.success((<ResponseFromAPI>results).Message);
+  //         this.selectedVisa.Id = 0;
+  //         this.selectedVisa.Value = '';
+  //       } else {
+  //         this.toastr.error((<ResponseFromAPI>results).Message);
+  //       }
+  //     },
+  //     error => {
+  //       this.errorMessage = <any>error;
+  //       this.toastr.error(<any>error);
+  //     });
+  // }
+  // /** Cancel action to reset fields */
+  // OnCancel() {
+  //   this.selectedVisa = null;
+  //   this.action = 'Add';
+  // }
   /**Delete existing Record */
-  delete(permissionData : Permission) {
+  delete(permissionData: Permission) {
     if (confirm('Are you sure you want to delete ?')) {
       this._MyMasterDataService.deletePermissionsByRole(permissionData)
         .subscribe(

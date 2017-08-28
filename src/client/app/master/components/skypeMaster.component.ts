@@ -94,7 +94,7 @@ export class SkypeMasterComponent implements OnActivate {
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getSkypeData();
                     this.data.Value='';
-                    this.data.Password='';
+                    this.data.Password='';this.OnCancel();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
