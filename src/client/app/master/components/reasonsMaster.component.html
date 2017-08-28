@@ -40,7 +40,7 @@
                                             <div class="form-group">
                                                 <label>Category <span class="required"> * </span></label>
                                                 <!--<input type="text" class="form-control text-capitalize" required="" maxlength="30" />-->
-                                                <select class="form-control" [(ngModel)]='selectedReason.Category' name="selectReson" id="selectReson" required>
+                                                <select autofocus class="form-control" [(ngModel)]='selectedReason.Category' name="selectReson" id="selectReson" required tabindex="1">
                                                     <option selected [disabled]=true value="0">-Select-</option>
                                                     <option value="IEF">IEF</option>
                                                     <option value="CloseRRF">Close RRF</option>
@@ -51,7 +51,7 @@
                                             <div class="form-group ">
                                                 <label>Reason <span class="required"> * </span></label>
                                                 <textarea class="form-control text-capitalize" [(ngModel)]='selectedReason.Reason' onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" maxlength="250" id="txtReason" rows="2"
-                                                    placeholder="Add Reason" style="resize:vertical"></textarea>
+                                                    placeholder="Add Reason" style="resize:vertical" tabindex="2"></textarea>
                                             </div>
                                         </div>
 

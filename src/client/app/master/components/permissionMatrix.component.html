@@ -1,169 +1,169 @@
 <style>
-  input[type="checkbox"]:checked+label::after {
-    content: '';
-    position: absolute;
-    width: 1.2ex;
-    height: 0.4ex;
-    background: rgba(0, 0, 0, 0);
-    top: 0.9ex;
-    left: 0.4ex;
-    border: 3px solid red !important;
-    border-top: none;
-    border-right: none;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-  }
+    input[type="checkbox"]:checked+label::after {
+        content: '';
+        position: absolute;
+        width: 1.2ex;
+        height: 0.4ex;
+        background: rgba(0, 0, 0, 0);
+        top: 0.9ex;
+        left: 0.4ex;
+        border: 3px solid red !important;
+        border-top: none;
+        border-right: none;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+    }
 </style>
 
 <!-- BEGIN CONTENT -->
 <div class="page-content-wrapper" style="margin-top: -26px !important;">
-  <!-- BEGIN CONTENT BODY -->
-  <div class="page-content" style="margin-left: 219px;margin-right: 0px;">
-    <!--BEGIN breadcrumb -->
-    <ul style="display:none" class="page-breadcrumb breadcrumb">
-      <li>
-        <a [routerLink]="['/App']"> Home </a>
-        <i class="fa fa-circle"></i>
-      </li>
-      <li>
-        <span class="active">Master Page</span>
-      </li>
-    </ul>
-    <!--End Breadcrumb>-->
-    <div class="row">
-      <div class="portlet light bordered" style="min-height: 505px;">
-        <div class="portlet-title">
-          <!--<div class="row">-->
-          <div class="col-md-5">
-            <h4><i class="icon-calendar"></i> Permission Matrix</h4>
-          </div>
-        </div>
-        <div class="portlet-body">
-          <div class="row">
-            <div class="col-md-12 col-sm-12">
-              <div class="row">
-                <div class="col-md-4 col-sm-4">
-                  <div class="form-group ">
-                    <label>Role <span class="required"> * </span></label>
-                    <select class="form-control" required="" (change)='setSelectedRole($event.target.value)'>
+    <!-- BEGIN CONTENT BODY -->
+    <div class="page-content" style="margin-left: 219px;margin-right: 0px;">
+        <!--BEGIN breadcrumb -->
+        <ul style="display:none" class="page-breadcrumb breadcrumb">
+            <li>
+                <a [routerLink]="['/App']"> Home </a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span class="active">Master Page</span>
+            </li>
+        </ul>
+        <!--End Breadcrumb>-->
+        <div class="row">
+            <div class="portlet light bordered" style="min-height: 505px;">
+                <div class="portlet-title">
+                    <!--<div class="row">-->
+                    <div class="col-md-5">
+                        <h4><i class="icon-calendar"></i> Permission Matrix</h4>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group ">
+                                        <label>Role <span class="required"> * </span></label>
+                                        <select autofocus class="form-control" required="" (change)='setSelectedRole($event.target.value)' tabindex="1">
                           <option *ngFor="let type of Roles" [value]="type.Id">{{type.Value}}</option>
                       </select>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                  <div class="form-group " *ngIf="showFeature">
-                    <label>Feature <span class="required"> * </span></label>
-                    <select class="form-control" required="" (change)='setSelectedFeature($event.target.value)'>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group " *ngIf="showFeature">
+                                        <label>Feature <span class="required"> * </span></label>
+                                        <select class="form-control" required="" (change)='setSelectedFeature($event.target.value)' tabindex="2">
                               <option *ngFor="let data1 of PermissionsList" [value]="data1.Id">{{data1.Value}}</option>
                           </select>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-4">
-                  <div style="margin-top: 25px; float: right;">
-                    <div class="form-group " *ngIf="!showFeature">
-                      <button type="submit" class="btn green" (click)='addNewFeature()'>Add New Feature</button>
-                    </div>
-                    <div class="form-group " *ngIf="showFeature">
-                      <button type="submit" class="btn green" (click)='saveNewFeature()'>Save</button>
-                      <button type="submit" class="btn red" (click)='cancelNewFeature()'>Cancel</button>
-                    </div>
-                    <!-- <div class="form-group " *ngIf="showFeature">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div style="margin-top: 25px; float: right;">
+                                        <div class="form-group " *ngIf="!showFeature">
+                                            <button type="submit" class="btn green" (click)='addNewFeature()'>Add New Feature</button>
+                                        </div>
+                                        <div class="form-group " *ngIf="showFeature">
+                                            <button type="submit" class="btn green" (click)='saveNewFeature()'>Save</button>
+                                            <button type="submit" class="btn red" (click)='cancelNewFeature()'>Cancel</button>
+                                        </div>
+                                        <!-- <div class="form-group " *ngIf="showFeature">
                               <button type="submit" class="btn red" (click)='addNewFeature()'>Cancel</button>
                           </div> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="dataTables_length" id="sample_1_length">
-              <div *ngIf="ShowTable">
-                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                  <thead>
-                    <tr>
-                      <th>Feature</th>
-                      <th>Manage</th>
-                      <th>Read</th>
-                      <th>Add</th>
-                      <th>Update</th>
-                      <th>Delete</th>
-                      <th> Actions </th>
-                      <!--<th> Title </th>-->
-                      <!-- <th> Actions </th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let data of Permissions">
-                      <!--<tr>-->
-                      <td class="uppercase">{{data.Feature.Value}}</td>
-                      <!-- <td>{{data1.Feature}}</td> -->
-                      <td>
-                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dataTables_length" id="sample_1_length">
+                            <div *ngIf="ShowTable">
+                                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                    <thead>
+                                        <tr>
+                                            <th>Feature</th>
+                                            <th>Manage</th>
+                                            <th>Read</th>
+                                            <th>Add</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                            <th> Actions </th>
+                                            <!--<th> Title </th>-->
+                                            <!-- <th> Actions </th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let data of Permissions">
+                                            <!--<tr>-->
+                                            <td class="uppercase">{{data.Feature.Value}}</td>
+                                            <!-- <td>{{data1.Feature}}</td> -->
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                             <input type="checkbox" class="checkboxes red" [(ngModel)]='data.Manage'  data-md-icheck (change)="updateManage($event,data)" />
                             <span></span>
                                 </label>
-                      </td>
-                      <td>
-                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            </td>
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                             <input type="checkbox" class="checkboxes red"  [(ngModel)]='data.Read' data-md-icheck (change)="updateRead($event,data)"/>
                             <span></span>
                         </label>
-                      </td>
-                      <td>
-                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            </td>
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                             <input type="checkbox" class="checkboxes red"  [(ngModel)]='data.Add' data-md-icheck (change)="updateAdd($event,data)"/>
                             <span></span>
                         </label>
-                      </td>
-                      <td>
-                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            </td>
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                             <input type="checkbox" class="checkboxes red" [(ngModel)]='data.Update' data-md-icheck (change)="updateUpdate($event,data)"/>
                             <span></span>
                         </label>
-                      </td>
-                      <td>
-                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            </td>
+                                            <td>
+                                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
                             <input type="checkbox" class="checkboxes red"  [(ngModel)]='data.Delete' data-md-icheck (change)="updateDelete($event,data)"/>
                             <span></span>
                         </label>
-                      </td>
-                      <td style="width:15%">
-                        <button class="btn btn-circle btn-icon-only red" (click)='delete(data)'> <i class="fa fa-trash "></i> </button>
-                      </td>
-                      <!--<td>{{data.Password}}</td>-->
-                      <!--<td>user 1</td>-->
-                      <!-- <td style="width:15%">
+                                            </td>
+                                            <td style="width:15%">
+                                                <button class="btn btn-circle btn-icon-only red" (click)='delete(data)'> <i class="fa fa-trash "></i> </button>
+                                            </td>
+                                            <!--<td>{{data.Password}}</td>-->
+                                            <!--<td>user 1</td>-->
+                                            <!-- <td style="width:15%">
                           <button class="btn btn-circle btn-icon-only blue" (click)='edit(data)'> <i class="fa fa-edit "></i> </button>
                           <button class="btn btn-circle btn-icon-only red" (click)='delete(data)'> <i class="fa fa-trash "></i> </button>
                         </td> -->
-                    </tr>
-                  </tbody>
-                  <!--<tbody *ngIf="EmployersInformationList.length === 0">
+                                        </tr>
+                                    </tbody>
+                                    <!--<tbody *ngIf="EmployersInformationList.length === 0">
                                             <tr>
                                                 <td colspan="6">
                                                     <strong>No entries </strong>
                                                 </td>
                                             </tr>
                                         </tbody>-->
-                </table>
-              </div>
-              <div *ngIf="!ShowTable">
-                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                  <thead>
-                    <tr>
-                      <th>No Features Assigned To Selected Role.</th>
-                    </tr>
-                  </thead>
-                </table>
-              </div>
-            </div>
-          </div>
+                                </table>
+                            </div>
+                            <div *ngIf="!ShowTable">
+                                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                    <thead>
+                                        <tr>
+                                            <th>No Features Assigned To Selected Role.</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
+            <!-- END PAGE BASE CONTENT -->
         </div>
-      </div>
-      <!-- END PAGE BASE CONTENT -->
+        <!-- END CONTENT BODY -->
     </div>
-    <!-- END CONTENT BODY -->
-  </div>
-  <!-- END CONTENT -->
+    <!-- END CONTENT -->
