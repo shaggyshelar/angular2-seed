@@ -2,25 +2,27 @@ import { Component } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { InterviewType, IEFFunctions, MyMasterDataService} from '../index';
+import { CountryMaster, StateMaster, MyMasterDataService,State} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
 @Component({
   moduleId: module.id,
-  selector: 'IEFFunctionMaster-master',
-  templateUrl: 'IEFFunctionMaster.component.html',
+  selector: 'statemaster-master',
+  templateUrl: 'StateMaster.component.html',
   directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
 })
 
 
 
-export class IEFFunctionMasterComponent implements OnActivate {
+export class StateMasterComponent implements OnActivate {
   errorMessage: string;
   ShowTable: boolean = false;
-  iefData: Array<IEFFunctions> = new Array<IEFFunctions>();
-  data: IEFFunctions = new IEFFunctions();
-  typeData: Array<InterviewType> = new Array<InterviewType>();
-  // editData:SkypeMaster = new SkypeMaster();
+  CountryId:number;
+  stateData: Array<StateMaster> = new Array<StateMaster>();
+  data: State = new State();
+  addStateData: StateMaster = new StateMaster();
+  countryData: Array<CountryMaster> = new Array<CountryMaster>();
+  selectedCountry:CountryMaster =new CountryMaster();
   Action: string = 'Add';
   constructor(private _MyMasterDataService: MyMasterDataService,
     private toastr: ToastsManager,
@@ -28,23 +30,22 @@ export class IEFFunctionMasterComponent implements OnActivate {
   }
 
   routerOnActivate() {
-    this.getIEFData();
-    this.getInterviewTypeData();
+    this.getCountryData();
     this.Action = 'Add';
-    this.data.InterviewType.Id = '-1';
   }
   /** GET SKYPE CREDENTIALS FOR THE INTERVIEWERS */
-  getIEFData() {
-    this._MyMasterDataService.getIEFData()
+ setSelectedCountry(ModeId: any) {
+    this.CountryId = ModeId;
+    this.getStatebyCountryId(this.CountryId);
+    this.getCountrybyId(this.CountryId);
+  }
+  /** GET Country details by ID FOR THE CANDIDATE PROFILES */
+  getCountrybyId(roleId: number) {
+    this._MyMasterDataService.getCountrybyId(roleId)
       .subscribe(
       (results: any) => {
         if (results !== null && results.length > 0) {
-          this.iefData = results;
-          if (this.iefData.length > 0) {
-            this.ShowTable = true;
-          } else {
-            this.ShowTable = false;
-          }
+        this.selectedCountry = results[0];
         }
       },
       error => {
@@ -52,15 +53,34 @@ export class IEFFunctionMasterComponent implements OnActivate {
         this.toastr.error(<any>error);
       });
   }
-
-  getInterviewTypeData() {
-    this._MyMasterDataService.getInterviewTypeData()
+  getCountryData() {
+    this._MyMasterDataService.getCountryData()
       .subscribe(
       (results: any) => {
         if (results !== null && results.length > 0) {
-          this.typeData = results;
+          this.countryData = results;
+          this.getStatebyCountryId(parseInt(this.countryData[0].Id));
+          this.getCountrybyId(parseInt(this.countryData[0].Id));
         }
       },
+      error => {
+        this.errorMessage = <any>error;
+        this.toastr.error(<any>error);
+      });
+  }
+  getStatebyCountryId(contryId:number){
+     this._MyMasterDataService.getStatebyCountryId(contryId)
+      .subscribe(
+      (results: any) => {
+        // if (results !== null && results.length > 0) {
+          this.stateData = results;
+          if (this.stateData.length > 0) {
+            this.ShowTable = true;
+          } else {
+            this.ShowTable = false;
+          }
+      //  }
+     },
       error => {
         this.errorMessage = <any>error;
         this.toastr.error(<any>error);
@@ -68,33 +88,31 @@ export class IEFFunctionMasterComponent implements OnActivate {
   }
   OnCancel() {
     this.Action = 'Add';
-    this.data = new IEFFunctions();
-    this.data.DisplayRatings = 'false';
-    this.getIEFData();
-    // this.data.InterviewType.Id='-1';
+    this.getStatebyCountryId(parseInt(this.selectedCountry.Id));
+    this.data = new State();
   }
-  EditData(iefdata: any) {
-    this.data = iefdata;
+  EditData(details: State) {
+    this.data = details;
     this.Action = 'Update';
   }
   AddEditData() {
     if (this.Action === 'Add') {
-      this.AddIEFData();
+      this.AddStateData();
     } else if (this.Action === 'Update') {
-      this.EditIEFData();
+      this.EditStateData();
     }
   }
-  EditIEFData() {
-    var checkData = this.data.FunctionName.trim();
-    if (this.data.InterviewType.Id !== '-1' && checkData !== "") {
-      this._MyMasterDataService.editIEFData(this.data)
+  EditStateData() {
+    this.addStateData.Country=this.selectedCountry;
+    this.addStateData.State=this.data;
+    var checkData = this.addStateData.State.Value.trim();
+    if (this.addStateData.Country.Id !== '-1' && checkData !== "") {
+      this._MyMasterDataService.editStateData(this.addStateData)
         .subscribe(
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
-            this.getIEFData();
             this.OnCancel();
-            /**Bind new data to list */
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }
@@ -108,16 +126,17 @@ export class IEFFunctionMasterComponent implements OnActivate {
     }
 
   }
-  AddIEFData() {
-    var checkData = this.data.FunctionName.trim();
-    if (this.data.InterviewType.Id !== '-1' && checkData !== "") {
-      this._MyMasterDataService.addIEFData(this.data)
+  AddStateData() {
+    this.addStateData.Country=this.selectedCountry;
+    this.addStateData.State=this.data;
+    var checkData = this.addStateData.State.Value.trim();
+    if (this.addStateData.Country.Id !== '-1' && checkData !== "") {
+      this._MyMasterDataService.addStateData(this.addStateData)
         .subscribe(
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
             this.OnCancel();
-            /**Bind new data to list */
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }
@@ -131,10 +150,10 @@ export class IEFFunctionMasterComponent implements OnActivate {
     }
   }
 
-  deleteData(skyDelData: any) {
+  deleteData(DelData: any) {
     var deleteData = confirm('Are you sure you want to delete it?');
     if (deleteData === true) {
-      this._MyMasterDataService.deleteIEFData(skyDelData)
+      this._MyMasterDataService.deleteStateData(DelData)
         .subscribe(
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

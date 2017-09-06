@@ -101,6 +101,7 @@ export class RRFApproverMasterComponent implements OnActivate {
         this.data=new RRFApprover();
         this.selectDeptText = false;
         $('#cmbInterviewer').select2('val', '-1');
+        this.getRRFAprroverData();
     }
     EditData(rrfapprodata:any) {
         this.data=rrfapprodata;

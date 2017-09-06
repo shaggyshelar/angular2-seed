@@ -57,9 +57,7 @@ export class FeatureMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getFeatureDetails();
-          this.selectedFeature = new FeatureMaster();
-          this.action = 'Add';
+          this.OnCancel();
           this.toastr.success((<ResponseFromAPI>results).Message);
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
@@ -77,10 +75,8 @@ export class FeatureMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getFeatureDetails();
           this.toastr.success((<ResponseFromAPI>results).Message);
-          this.selectedFeature.Id = 0;
-          this.selectedFeature.Value = '';
+          this.OnCancel();
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
         }
@@ -93,6 +89,7 @@ export class FeatureMasterComponent implements OnActivate {
   /** Cancel action to reset fields */
   OnCancel() {
     this.action = 'Add';
+    this.getFeatureDetails();
     this.selectedFeature = new FeatureMaster();
   }
   /**Edit existing Record */
@@ -108,7 +105,7 @@ export class FeatureMasterComponent implements OnActivate {
         .subscribe(
         (results: any) => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-            this.getFeatureDetails(); this.OnCancel();
+            this.OnCancel();
             this.toastr.success((<ResponseFromAPI>results).Message);
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);

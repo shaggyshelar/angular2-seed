@@ -44,6 +44,7 @@ export class ReasonsMasterComponent implements OnActivate {
   OnCancel() {
     this.selectedReason = new ReasonsMaster();
     this.action = 'Add';
+    this.getReasonsData();
   }
   /** On Form submit action */
   OnSubmitReason() {
@@ -59,9 +60,7 @@ export class ReasonsMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getReasonsData();
-          this.selectedReason = new ReasonsMaster();
-          this.action = 'Add';
+          this.OnCancel();
           this.toastr.success((<ResponseFromAPI>results).Message);
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
@@ -79,11 +78,8 @@ export class ReasonsMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getReasonsData();
           this.toastr.success((<ResponseFromAPI>results).Message);
-          this.selectedReason.ID = 0;
-          this.selectedReason.Reason = '';
-          this.selectedReason.Category = '';
+          this.OnCancel();
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
         }
@@ -106,7 +102,7 @@ export class ReasonsMasterComponent implements OnActivate {
         .subscribe(
         (results: any) => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-            this.getReasonsData(); this.OnCancel();
+            this.OnCancel();
             this.toastr.success((<ResponseFromAPI>results).Message);
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);

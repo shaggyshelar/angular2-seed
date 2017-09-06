@@ -2,23 +2,21 @@ import { Component } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import {   InterviewMode, MyMasterDataService} from '../index';
+import {   ResumeSource, MyMasterDataService} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
 @Component({
   moduleId: module.id,
-  selector: 'skype-master',
-  templateUrl: 'InterviewMode.component.html',
+  selector: 'resumesource-master',
+  templateUrl: 'resumeSource.component.html',
   directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
 })
 
-
-
-export class InterviewModeComponent implements OnActivate {
+export class ResumeSourceMasterComponent implements OnActivate {
   errorMessage: string;
   ShowTable: boolean = false;
-  data: InterviewMode = new InterviewMode();
-  modeData: Array<InterviewMode> = new Array<InterviewMode>();
+  data: ResumeSource = new ResumeSource();
+  ResumeSourceData: Array<ResumeSource> = new Array<ResumeSource>();
   Action: string = 'Add';
   constructor(private _MyMasterDataService: MyMasterDataService,
     private toastr: ToastsManager,
@@ -26,17 +24,17 @@ export class InterviewModeComponent implements OnActivate {
   }
 
   routerOnActivate() {
-    this.getInterviewModeData();
+    this.getResumeSourceData();
     this.Action = 'Add';
   }
   /** GET Interview Mode FOR THE INTERVIEWERS */
-  getInterviewModeData() {
-    this._MyMasterDataService.getInterviewModeData()
+  getResumeSourceData() {
+    this._MyMasterDataService.getResumeSourceData()
       .subscribe(
       (results: any) => {
         if (results !== null && results.length > 0) {
-          this.modeData = results;
-          if (this.modeData.length > 0) {
+          this.ResumeSourceData = results;
+          if (this.ResumeSourceData.length > 0) {
             this.ShowTable = true;
           } else {
             this.ShowTable = false;
@@ -50,30 +48,29 @@ export class InterviewModeComponent implements OnActivate {
   }
   OnCancel() {
     this.Action = 'Add';
-    this.data = new InterviewMode();
-    this.getInterviewModeData();
+    this.data = new ResumeSource();
+    this.getResumeSourceData();
   }
-  EditData(modedetails: any) {
-    this.data = modedetails;
+  EditData(details: any) {
+    this.data = details;
     this.Action = 'Update';
   }
   AddEditData() {
     if (this.Action === 'Add') {
-      this.AddInterviewModeData();
+      this.AddResumeSourceData();
     } else if (this.Action === 'Update') {
-      this.EditInterviewModeData();
+      this.EditResumeSourceData();
     }
   }
-  EditInterviewModeData() {
+  EditResumeSourceData() {
     var checkData = this.data.Value.trim();
     if (checkData !== "") {
-      this._MyMasterDataService.editInterviewModeData(this.data)
+      this._MyMasterDataService.editResumeSourceData(this.data)
         .subscribe(
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
             this.OnCancel();
-            /**Bind new data to list */
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }
@@ -86,16 +83,16 @@ export class InterviewModeComponent implements OnActivate {
       this.toastr.error('Please Fill Data.');
     }
   }
-  AddInterviewModeData() {
+  AddResumeSourceData() {
     var checkData = this.data.Value.trim();
     if (checkData !== '') {
-      this._MyMasterDataService.addInterviewModeData(this.data)
+      this._MyMasterDataService.addResumeSourceData(this.data)
         .subscribe(
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
             this.OnCancel();
-            /**Bind new data to list */
+            this.data.Value = '';
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }
@@ -109,11 +106,11 @@ export class InterviewModeComponent implements OnActivate {
     }
   }
 
-  deleteData(skyDelData: any) {
+  deleteData(DelData: any) {
 
     var deleteData = confirm('Are you sure you want to delete it?');
     if (deleteData === true) {
-      this._MyMasterDataService.deleteInterviewModeData(skyDelData)
+      this._MyMasterDataService.deleteResumeSourceData(DelData)
         .subscribe(
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {

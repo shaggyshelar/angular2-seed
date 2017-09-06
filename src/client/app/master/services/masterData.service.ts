@@ -5,7 +5,23 @@ import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
 import { SpinnerService } from '../../shared/components/spinner/spinner';
 import { GrdOptions } from '../../shared/model/index';
-import { VisaMaster, SkypeMaster, RolesMaster, FeatureMaster, ReasonsMaster, InterviewMode, Practice, InterviewType, IEFFunctions, RRFApprover,Permission } from '../index';
+import { VisaMaster,
+  SkypeMaster,
+  RolesMaster,
+  FeatureMaster,
+  ReasonsMaster,
+  InterviewMode,
+  Practice,
+  InterviewType,
+  IEFFunctions,
+  RRFApprover,
+  Permission,
+  CityMaster,
+  CountryMaster,
+  Technology,
+  ResumeSource,
+  StateMaster,
+  State } from '../index';
 
 
 
@@ -158,7 +174,204 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
+/** GET CITY DETAILS FOR THE CANDIDATE PROFILES FROM BACKEND*/
+  getCityData() {
+    let url = Config.GetURL('/api/Masters/GetCities');
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  getCitybyStateId(Id:number) {
+    let url = Config.GetURL('/api/Masters/GetCitiesByState?ID='+ Id);
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  addCityData(City: CityMaster) {
+    let url = Config.GetURL('/api/Masters/AddCityMaster');
+    this._spinnerService.show();
+    return this.authHttp.post(url,  City )
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  editCityData(City: CityMaster) {
+    let url = Config.GetURL('/api/Masters/UpdateCityMaster');
+    this._spinnerService.show();
+    return this.authHttp.post(url, City )
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  deleteCityData(City: CityMaster) {
+    let url = Config.GetURL('/api/Masters/DeleteCities');
+    this._spinnerService.show();
+    return this.authHttp.post(url, City )
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
 
+/** GET COUNTRY DETAILS FOR THE CANDIDATE PROFILES FROM BACKEND*/
+  getCountryData() {
+    let url = Config.GetURL('/api/Masters/GetCountries');
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  getCountrybyId(Id:number) {
+    let url = Config.GetURL('/api/Masters/GetCountries?ID='+ Id);
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  addCountryData(Country: CountryMaster) {
+    let url = Config.GetURL('/api/Masters/AddCountry');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Country })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  editCountryData(Country: CountryMaster) {
+    let url = Config.GetURL('/api/Masters/UpdateCountry');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Country })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  deleteCountryData(Country: CountryMaster) {
+    let url = Config.GetURL('/api/Masters/DeleteCountry');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Country })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+/** GET STATE DETAILS FOR THE CANDIDATE PROFILES FROM BACKEND*/
+  getStateData() {
+    let url = Config.GetURL('/api/Masters/GetStatesMaster');
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  getStateById(Id:number) {
+    let url = Config.GetURL('/api/Masters/GetStatesMaster?ID='+ Id);
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+   getStatebyCountryId(Id:number) {
+    let url = Config.GetURL('/api/Masters/GetStatesByCountry?CountryID='+ Id);
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  addStateData(State: StateMaster) {
+    let url = Config.GetURL('/api/Masters/AddStateMaster');
+    this._spinnerService.show();
+    return this.authHttp.post(url, State)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  editStateData(State: StateMaster) {
+    let url = Config.GetURL('/api/Masters/UpdateStateMaster');
+    this._spinnerService.show();
+    return this.authHttp.post(url, State )
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  deleteStateData(State: State) {
+    let url = Config.GetURL('/api/Masters/DeleteState');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { State })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /** GET RESUME SOURCE DATA FOR THE CANDIDATE PROFILES FROM BACKEND*/
+  getResumeSourceData() {
+    let url = Config.GetURL('/api/Masters/GetAllResumeSources');
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  addResumeSourceData(Source: ResumeSource) {
+    let url = Config.GetURL('/api/Masters/AddResumeSource');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Source })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  editResumeSourceData(Source: ResumeSource) {
+    let url = Config.GetURL('/api/Masters/UpdateResumeSource');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Source })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  deleteResumeSourceData(Source: ResumeSource) {
+    let url = Config.GetURL('/api/Masters/DeleteResumeSource');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Source  })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  /** GET TECHNOLOGY FOR THE CANDIDATE PROFILES FROM BACKEND*/
+  getTechnologyData() {
+    let url = Config.GetURL('/api/Masters/GetTechnologies');
+    this._spinnerService.show();
+    return this.authHttp.get(url)
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  addTechnologyData(Technology: Technology) {
+    let url = Config.GetURL('/api/Masters/AddTechnology');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Technology })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  editTechnologyData(Technology: Technology) {
+    let url = Config.GetURL('/api/Masters/UpdateTechnology');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Technology })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+  deleteTechnologyData(Technology: Technology) {
+    let url = Config.GetURL('/api/Masters/DeleteTechnology');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { Technology })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
   /** GET Interview Type DETAILS FOR THE CANDIDATE PROFILES FROM BACKEND*/
   getInterviewTypeData() {
     let url = Config.GetURL('/api/Masters/GetInterviewTypesMaster');
@@ -348,13 +561,6 @@ export class MyMasterDataService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
-
-  /***** Sayali Service start */
-
-
-
-  /***** Sayali Service End */
-
 
   /***** START ROLE MASTER API */
   /** GET ROLE DETAILS FROM BACKEND*/

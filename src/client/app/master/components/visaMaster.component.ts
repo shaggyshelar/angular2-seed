@@ -57,7 +57,7 @@ export class VisaMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getVisaDetails();
+          this.OnCancel();
           this.selectedVisa = new VisaMaster();
           this.action = 'Add';
           this.toastr.success((<ResponseFromAPI>results).Message);
@@ -77,7 +77,7 @@ export class VisaMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getVisaDetails();
+          this.OnCancel();
           this.toastr.success((<ResponseFromAPI>results).Message);
           this.selectedVisa.Id = 0;
           this.selectedVisa.Value = '';
@@ -94,6 +94,7 @@ export class VisaMasterComponent implements OnActivate {
   OnCancel() {
     this.action = 'Add';
     this.selectedVisa = new VisaMaster();
+    this.getVisaDetails();
   }
   /**Edit existing Record */
   edit(visaData: VisaMaster) {
@@ -108,7 +109,6 @@ export class VisaMasterComponent implements OnActivate {
         .subscribe(
         (results: any) => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-            this.getVisaDetails();
             this.OnCancel();
             this.toastr.success((<ResponseFromAPI>results).Message);
           } else {

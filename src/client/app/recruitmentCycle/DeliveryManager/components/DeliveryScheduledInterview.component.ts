@@ -1,6 +1,6 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
-import { RecruitersInterviewsComponent} from './scheduledInterviews.component';
+import { RecruitersInterviewsComponent, PracticeInterviewsComponent } from '../index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { DeliveryManagerScheduleInterviewService } from '../services/ScheduleInterviews.service';
 
@@ -12,7 +12,8 @@ import { DeliveryManagerScheduleInterviewService } from '../services/ScheduleInt
 })
 
 @Routes([
-    { path: '/', component: RecruitersInterviewsComponent }
+    { path: '/', component: RecruitersInterviewsComponent },
+    { path: '/history', component: PracticeInterviewsComponent }
 ])
 export class RecruitersScheduleInterviewsComponent {
 }

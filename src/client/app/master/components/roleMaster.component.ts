@@ -57,9 +57,7 @@ export class RoleMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getRolesDetails();
-          this.selectedRole = new RolesMaster();
-          this.action = 'Add';
+          this.OnCancel();
           this.toastr.success((<ResponseFromAPI>results).Message);
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
@@ -77,12 +75,12 @@ export class RoleMasterComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-          this.getRolesDetails();
+          this.OnCancel();
           this.toastr.success((<ResponseFromAPI>results).Message);
-          this.selectedRole.Id = 0;
-          this.selectedRole.SequenceNo = '';
-          this.selectedRole.RoleId = '';
-          this.selectedRole.Role = '';
+          // this.selectedRole.Id = 0;
+          // this.selectedRole.SequenceNo = '';
+          // this.selectedRole.RoleId = '';
+          // this.selectedRole.Role = '';
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);
         }
@@ -96,6 +94,7 @@ export class RoleMasterComponent implements OnActivate {
   OnCancel() {
     this.selectedRole = new RolesMaster();
     this.action = 'Add';
+    this.getRolesDetails();
   }
   /**Edit existing Record */
   edit(roleData: RolesMaster) {
@@ -110,7 +109,7 @@ export class RoleMasterComponent implements OnActivate {
         .subscribe(
         (results: any) => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
-            this.getRolesDetails(); this.OnCancel();
+            this.OnCancel();
             this.toastr.success((<ResponseFromAPI>results).Message);
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);

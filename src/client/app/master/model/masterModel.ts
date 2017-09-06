@@ -25,6 +25,35 @@ export class InterviewMode {
   public Value: string;
 }
 
+export class City {
+  public Id: string;
+  public Value: string;
+}
+export class CityMaster {
+  public City : City = new City();
+  public State: State = new State();
+}
+export class CountryMaster {
+  public Id: string;
+  public Value: string;
+}
+export class State {
+  public Id: string;
+  public Value: string;
+}
+export class StateMaster {
+  public State: State = new State();
+  public Country : CountryMaster = new CountryMaster();
+}
+export class Technology {
+  public Id: string;
+  public Value: string;
+}
+export class ResumeSource {
+  public Id: string;
+  public Value: string;
+}
+
 export class Practice {
   public Isenable:boolean;
   public Id: string;

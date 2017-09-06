@@ -13,7 +13,12 @@ import {
   RoleMasterComponent,
   IEFFunctionMasterComponent,
   PermissionMatrixComponent,
-  RRFApproverMasterComponent
+  RRFApproverMasterComponent,
+  CityMasterComponent,
+  CountryMasterComponent,
+  TechnologyMasterComponent,
+  ResumeSourceMasterComponent,
+  StateMasterComponent
 } from '../index';
 
 @Component({
@@ -34,7 +39,12 @@ import {
   { path: '/Roles', component: RoleMasterComponent },
   { path: '/IEF', component: IEFFunctionMasterComponent },
   { path: '/Permissions', component: PermissionMatrixComponent },
-  { path: '/RRFApprover', component: RRFApproverMasterComponent }
+  { path: '/RRFApprover', component: RRFApproverMasterComponent },
+  { path: '/City', component: CityMasterComponent },
+  { path: '/Technology', component: TechnologyMasterComponent },
+  { path: '/ResumeSource', component: ResumeSourceMasterComponent },
+  { path: '/Country', component: CountryMasterComponent },
+   { path: '/State', component: StateMasterComponent }
 ])
 export class MasterPageComponent {
 }

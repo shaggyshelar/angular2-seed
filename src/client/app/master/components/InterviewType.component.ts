@@ -51,6 +51,7 @@ export class InterviewTypeComponent implements OnActivate {
   OnCancel() {
     this.Action = 'Add';
     this.data = new InterviewType();
+    this.getInterviewTypeData();
   }
   EditData(typedetails: any) {
     this.data = typedetails;
@@ -71,10 +72,7 @@ export class InterviewTypeComponent implements OnActivate {
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
-            this.getInterviewTypeData();
-            this.data.Value = '';
-            this.data.Sequence = '';
-            this.Action = 'Add';
+            this.OnCancel();
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }
@@ -95,9 +93,7 @@ export class InterviewTypeComponent implements OnActivate {
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
-            this.getInterviewTypeData();
-            this.data.Value = '';
-            this.data.Sequence = '';
+            this.OnCancel();
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }
@@ -119,7 +115,7 @@ export class InterviewTypeComponent implements OnActivate {
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
-            this.getInterviewTypeData(); this.OnCancel();
+            this.OnCancel();
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }

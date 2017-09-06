@@ -46,6 +46,7 @@ export class SkypeMasterComponent implements OnActivate {
     OnCancel(){
         this.Action = 'Add';
         this.data=new SkypeMaster();
+        this.getSkypeData();
     }
     EditData(skydata:any) {
        this.data=skydata;
@@ -67,10 +68,7 @@ export class SkypeMasterComponent implements OnActivate {
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getSkypeData();
-                    this.data.Value='';
-                    this.data.Password='';
-                    this.Action='Add';
+                    this.OnCancel();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }
@@ -92,7 +90,6 @@ export class SkypeMasterComponent implements OnActivate {
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getSkypeData();
                     this.data.Value='';
                     this.data.Password='';this.OnCancel();
                 } else {
@@ -116,7 +113,7 @@ export class SkypeMasterComponent implements OnActivate {
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.toastr.success((<ResponseFromAPI>results).Message);
-                    this.getSkypeData();
+                    this.OnCancel();
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);
                 }

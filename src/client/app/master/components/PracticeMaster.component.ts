@@ -45,6 +45,7 @@ export class PracticeMasterComponent implements OnActivate {
   OnCancel() {
     this.Action = 'Add';
     this.data = new Practice();
+    this.getPracticeData();
   }
   EditData(modedetails: any) {
     this.data = modedetails;
@@ -65,9 +66,7 @@ export class PracticeMasterComponent implements OnActivate {
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
-            this.getPracticeData();
-            this.data.Value = '';
-            this.Action = 'Add';
+            this.OnCancel();
             /**Bind new data to list */
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
@@ -89,8 +88,7 @@ export class PracticeMasterComponent implements OnActivate {
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
-            this.getPracticeData();
-            this.data.Value = '';
+            this.OnCancel();
             /**Bind new data to list */
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
@@ -113,7 +111,7 @@ export class PracticeMasterComponent implements OnActivate {
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
             this.toastr.success((<ResponseFromAPI>results).Message);
-            this.getPracticeData(); this.OnCancel();
+            this.OnCancel();
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);
           }
