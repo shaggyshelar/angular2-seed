@@ -27,7 +27,7 @@
                         <div class="col-md-4 col-sm-4">
                             <div class="dataTables_length" id="sample_1_length">
                                 <label>Show :
-                                            <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"
+                                        <select name="sample_1_length" aria-controls="sample_1" class="form-control input-sm input-xsmall input-inline"
                                             [(ngModel)]="InterviewDetailsList.GrdOperations.PerPageCount"
                                             (ngModelChange)="onChange(InterviewDetailsList.GrdOperations.PerPageCount)" style="width:179px!important;">
                                                 <option value="5">5</option>
@@ -40,10 +40,10 @@
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label>Filter
-                                            <select class="form-control input-inline" [(ngModel)]="candidateStatus.Id"  (ngModelChange)="onViewChanged(currentView)">
-                                                <option *ngFor="let status of candidateStatus" [value]="status.Id">{{status.Value}}</option>
-                                            </select>
-                                        </label>
+                                <select class="form-control input-inline" [(ngModel)]="InterviewDetailsList.GrdOperations.RRFFilters.Status" (change)="onViewChanged($event.target.value)">
+                                    <option *ngFor="let status of candidateStatus" [value]="status.Id">{{status.Value}}</option>
+                                </select>
+                            </label>
                             <!--<select autofocus class="form-control" required="" (change)='setSelectedRole($event.target.value)' tabindex="1">
                           <option *ngFor="let type of Roles" [value]="type.Id">{{type.Value}}</option>
                       </select>-->
@@ -56,47 +56,59 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-scrollable " *ngIf="!NORECORDSFOUND">
+                    <div *ngIf="!NORECORDSFOUND">
                         <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
                                             no-footer " role="grid " aria-describedby="sample_1_info ">
                             <thead style="word-wrap: break-word; " class="thead">
                                 <tr>
-                                    <td> <b>RRF Details</b> </td>
-                                    <td> <b>Candidate Details</b> </td>
-                                    <td> <b>Interview Details </b></td>
-                                    <td> <b>Interviewers</b></td>
-                                    <td> <b>Interview Status </b></td>
-                                    <td> <b>Action </b></td>
+                                    <div class="row">
+                                        <div class="col-md-1 col-sm-1"> <b>RRF Details</b> </div>
+                                        <div class="col-md-2 col-sm-2"> <b>Candidate Details</b> </div>
+                                        <div class="col-md-4 col-sm-4"> <b><center>Interview Details</center> </b></div>
+                                        <div class="col-md-2 col-sm-2"> <b>Interviewers</b></div>
+                                        <div class="col-md-2 col-sm-2"> <b>Interview Status </b></div>
+                                        <div class="col-md-1 col-sm-1"> <b>Action </b></div>
+                                    </div>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let interview of InterviewDetailsList.AllInterviews | AllScheduleInterviewPipe:searchString">
-                                    <td> <a (click)='showRRFDetails(interview.RRFID)'> {{interview.RRFCode}}</a></td>
-                                    <td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
-                                        <br/> Contact No : {{interview.CandidateDetails.Contact}}
-                                    </td>
-                                    <td>
-                                        InterviewDate : {{formatDate(interview.InterviewDate)}} <span style="float: right;">Time: {{interview.InterviewFromTime}} - {{interview.InterviewToTime}}</span>
-                                        <br/> Round : {{interview.Round.Value}}
-                                        <span style="float: right;">Mode : {{interview.InterviewMode.Value}} </span>
-                                        <br/> Recruiter : {{interview.Recruiter.Value}}
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <div *ngFor="let interviewers of interview.InterviewerAvailability">
-                                                {{interviewers.Interviewer.Value}}
+                                    <div class="row" style=" padding: 8px;">
+                                        <div class="col-md-1 col-sm-1"> <a (click)='showRRFDetails(interview.RRFID)'> {{interview.RRFCode}}</a></div>
+                                        <div class="col-md-2 col-sm-2"> <b>Name :</b> {{interview.CandidateDetails.FullName}} <br/> <b>Email:</b>{{interview.CandidateDetails.Email}}
+                                            <br/> <b>Contact No:</b> {{interview.CandidateDetails.Contact}}
+                                        </div>
+                                        <div class="col-md-4 col-sm-4">
+                                            <b>InterviewDate :</b> {{formatDate(interview.InterviewDate)}} <span style="float: right;"><b>Time:</b> {{interview.InterviewFromTime}} - {{interview.InterviewToTime}}</span>
+                                            <br/> <b>Round :</b> {{interview.Round.Value}}
+                                            <span style="float: right;"><b>Mode :</b> {{interview.InterviewMode.Value}} </span>
+                                            <br/> <b>Recruiter :</b> {{interview.Recruiter.Value}}
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <div>
+                                                <div *ngFor="let interviewers of interview.InterviewerAvailability">
+                                                    {{interviewers.Interviewer.Value}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        {{interview.Status}}
-                                    </td>
-                                    <td>
-                                        <button> Show IEF</button>
-                                    </td>
+                                        <div class="col-md-2 col-sm-2">
+                                            {{interview.Status}}
+                                        </div>
+                                        <div class="col-md-1 col-sm-1">
+                                            <!--<button> Show IEF</button>-->
+                                            <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(interview,interview.InterviewID)" type="button" data-toggle="dropdown" aria-expanded="false"> 
+                                                {{interview.IEFButtonText?interview.IEFButtonText:"View IEF"}}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!--</div>-->
+                                    <div style="margin-top: -25px;">
+                                        <div>
+                                            <IEFGridRow [InterviewID]=interview.InterviewID *ngIf=interview.showIEF></IEFGridRow>
+                                        </div>
+                                    </div>
                                 </tr>
                             </tbody>
-
                         </table>
 
 

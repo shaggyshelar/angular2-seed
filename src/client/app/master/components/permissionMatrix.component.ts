@@ -49,6 +49,7 @@ export class PermissionMatrixComponent implements OnActivate {
           this.Roles = results;
           if (this.Roles.length > 0)
             this.getPermissionsByRole(this.Roles[0].Id);
+            this.RoleType=this.Roles[0].Id;
         }
       },
       error => {

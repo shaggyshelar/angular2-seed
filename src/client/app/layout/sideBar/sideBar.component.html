@@ -135,18 +135,18 @@
                             <span class="title">All Schedule Interviews</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviewstoDelivery')}">
-                        <!--[ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']"-->
+                    <!--<li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviewstoDelivery')}">
+                      
                         <a [routerLink]="['/App/AllInterviews/showInterviewstoDelivery']" class="nav-link ">
                             <i class="icon-calendar"></i>
                             <span class="title">All Interviews</span>
                         </a>
-                    </li>
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviewstoDelivery/history')}">
+                    </li>-->
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/AllInterviews/showInterviewstoDelivery/history')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']">
                         <!--[ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWSBYPRACTICE.MANAGE']"-->
                         <a [routerLink]="['/App/AllInterviews/showInterviewstoDelivery/history']" class="nav-link ">
                             <i class="icon-calendar"></i>
-                            <span class="title">All Interviews History</span>
+                            <span class="title">All Interviews</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/RRF/InterviewsAvailability')}" [ifAuthorize]="['RRF.ALLSCHEDULEDINTERVIEWS.MANAGE']">
@@ -236,7 +236,7 @@
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/Master/Update/Reasons']" class="nav-link ">
                             <i class="fa fa-edit"></i>
-                            <span class="title">IEF and RRF Resons</span>
+                            <span class="title">IEF and RRF Reasons</span>
                         </a>
                     </li>
                     <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Roles')}" [ifAuthorize]="['MASTERS.ROLES.MANAGE']">
@@ -260,35 +260,35 @@
                             <span class="title">Permission Matrix</span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/City')}" [ifAuthorize]="['MASTERS.PERMISSIONMATRIX.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/City')}" [ifAuthorize]="['MASTERS.CITY.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/Master/Update/City']" class="nav-link ">
                             <i class="fa fa-edit"></i>
                             <span class="title">City </span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Country')}" [ifAuthorize]="['MASTERS.PERMISSIONMATRIX.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Country')}" [ifAuthorize]="['MASTERS.COUNTRY.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/Master/Update/Country']" class="nav-link ">
                             <i class="fa fa-edit"></i>
                             <span class="title">Country </span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Technology')}" [ifAuthorize]="['MASTERS.PERMISSIONMATRIX.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/Technology')}" [ifAuthorize]="['MASTERS.TECHNOLOGY.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/Master/Update/Technology']" class="nav-link ">
                             <i class="fa fa-edit"></i>
                             <span class="title">Technology </span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/ResumeSource')}" [ifAuthorize]="['MASTERS.PERMISSIONMATRIX.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/ResumeSource')}" [ifAuthorize]="['MASTERS.RESUMESOURCE.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/Master/Update/ResumeSource']" class="nav-link ">
                             <i class="fa fa-edit"></i>
                             <span class="title">Resume Source </span>
                         </a>
                     </li>
-                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/State')}" [ifAuthorize]="['MASTERS.PERMISSIONMATRIX.MANAGE']">
+                    <li class="nav-item start " [ngClass]="{'active':checkRouterActive('/App/Master/Update/State')}" [ifAuthorize]="['MASTERS.STATE.MANAGE']">
                         <!--[ifAuthorize]="['RCIC.SHOWALLSCHEDULEINTERVIEWS.MANAGE']"-->
                         <a [routerLink]="['/App/Master/Update/State']" class="nav-link ">
                             <i class="fa fa-edit"></i>

@@ -30,6 +30,14 @@ export class DeliveryManagerScheduleInterviewService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+     getAllInterviewsByStatus(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RecruitmentCycle/RecruiterGetScheduledInterviewsByPracticeAndStatus');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
   getCandidateProfile(id: string) {
         let url = Config.GetURL('/api/ProfileBank/ViewCandidateInformation?CandidateID=' + id);
         this._spinnerService.show();

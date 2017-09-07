@@ -1,14 +1,16 @@
 <style>
-.align{
-    margin-left:-5px !important;
-}
-.button{
-    width: 4px !important;
-    height: 30px !important;
-}
-.divTop{
-    margin-top:18px !important;
-}
+    .align {
+        margin-left: -5px !important;
+    }
+    
+    .button {
+        width: 4px !important;
+        height: 30px !important;
+    }
+    
+    .divTop {
+        margin-top: 18px !important;
+    }
 </style>
 
 <!-- BEGIN CONTENT -->
@@ -41,9 +43,9 @@
 
                                 <div class="col-md-8">
                                     <div class="dt-buttons pull-right toolbar-actions toolbar-spacing">
-                                    
+
                                         <span *ngIf="selectedRowCount > 0" style="font-size: 14px; margin-left: 20px !important;"> Selected Count : <strong>{{selectedRowCount}}</strong></span>
-                                    
+
                                         <button [attr.class]="selectedRowCount > 0 ? 'btn btn-default btn-circle btnLink toolbar-spacing blue' : 'btn btn-default btn-circle btnLink toolbar-spacing' " (click)='openMailWindow()' [disabled]='!selectedRowCount' data-toggle="tooltip" data-placement="bottom"
                                             title="Send Mails " tooltip="Send Mails " tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="false" style="border-radius: 5px !important;">
 													<i class="fa fa-envelope-o"></i>   
@@ -163,20 +165,20 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-sm-2">
-                                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px; margin-top: 25px !important; ">
+                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px; margin-top: 25px !important; ">
                                         <input type="checkbox" value="1" class="checkboxes" [(ngModel)]="selectedAll" (change)="selectAll();" data-toggle="tooltip" data-placement="bottom" title="Select All" tooltip="Select All" tooltipPlacement="bottom"
                                             tooltipTrigger="mouseenter" tooltipEnable="false" title="Select All"/>
                                             <span style="margin-left: 4px !important;"> </span>Select All
                                             </label>
-                                    </div>    
+                                    </div>
                                     <div class="divTop" *ngIf="!NORECORDSFOUND">
-                                    <button type="button" class="btn btn-default button" tooltip="Previous Page" title="Previous Page" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" [disabled]="!myProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                                        <button type="button" class="btn btn-default button" tooltip="Previous Page" title="Previous Page" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" [disabled]="!myProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
                                             <span class="fa fa-arrow-left align"></span></button> &nbsp;&nbsp;
                                         <button type="button" class="btn btn-default button" tooltip="Next Page" title="Next Page" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" [disabled]="!myProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
 										    <span class="fa fa-arrow-right align"></span></button>
                                     </div>
 
- <!--<div>
+                                    <!--<div>
                                             <label>Max Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             
                                             <input type="number" required="" onKeyPress="if(this.value > 60) return false;"  id="txtMaxExp" min="0" max="60" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter">
@@ -185,84 +187,84 @@
                                 </div>
                             </div>
                         </div>
-                    <div class="portlet-body" *ngIf="!NORECORDSFOUND">
+                        <div class="portlet-body" *ngIf="!NORECORDSFOUND">
 
-                        <!-- FollowUP Comments-->
-                        <div id="CommentsRow" *ngIf='isCommentsPanelCollapsed'>
-                            <span class="header">Add/Update FollowUp Comments for <strong>{{profile.Candidate}}</strong></span>
-                            <hr style="margin:0px 0px !important" />
-                            <form role="form" (submit)="onSubmitFollowupComment()">
-                                <div class="row" style="margin-top: 10px">
-                                    <!--<div class="col-md-3">
+                            <!-- FollowUP Comments-->
+                            <div id="CommentsRow" *ngIf='isCommentsPanelCollapsed'>
+                                <span class="header">Add/Update FollowUp Comments for <strong>{{profile.Candidate}}</strong></span>
+                                <hr style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onSubmitFollowupComment()">
+                                    <div class="row" style="margin-top: 10px">
+                                        <!--<div class="col-md-3">
                                         <div class="form-group" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                             <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{profile.Candidate}}</span>
                                         </div>
                                     </div>-->
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <div class="edit-content"></div>
-                                            <textarea class="form-control red" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments" required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <div class="edit-content"></div>
+                                                <textarea class="form-control red" rows="1" placeholder="Comments" style="resize:vertical" [(ngModel)]="profile.FollowUpComments" required="" tooltip="Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.FollowUpComments">
                                                 </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-info "> Save </button> &nbsp;
+                                            <a class="btn btn-info " (click)='closeCommentsPanel()'> Cancel </a>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <button type="submit" class="btn btn-info "> Save </button> &nbsp;
-                                        <a class="btn btn-info " (click)='closeCommentsPanel()'> Cancel </a>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- FollowUP Comments END-->
+                                </form>
+                            </div>
+                            <!-- FollowUP Comments END-->
 
-                        <!-- Upload Resume -->
-                        <div id="UploadResume" *ngIf='isUploadPanelCollapsed'>
-                            <span class="header">Upload Resume of <strong>{{profile.Candidate}}</strong></span>
-                            <hr style="margin:0px 0px !important" />
-                            <form role="form" (submit)="onSubmitUploadResume()">
-                                <div class="row" style="margin-top: 10px">
-                                    <!--<div class="col-md-3">
+                            <!-- Upload Resume -->
+                            <div id="UploadResume" *ngIf='isUploadPanelCollapsed'>
+                                <span class="header">Upload Resume of <strong>{{profile.Candidate}}</strong></span>
+                                <hr style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onSubmitUploadResume()">
+                                    <div class="row" style="margin-top: 10px">
+                                        <!--<div class="col-md-3">
                                         <div class="form-group" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                             <span class="form-control" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate"> {{profile.Candidate}}</span>
                                         </div>
                                     </div>-->
-                                    <div class="col-md-7">
-                                        <div class="form-group">
-                                            <span *ngIf='!resumeUploaded' class="form-control red"> No file Choosen </span>
-                                            <span class="form-control" tooltip="Resume Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate" *ngIf='resumeUploaded'> {{resumeName}}</span>
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <span *ngIf='!resumeUploaded' class="form-control red"> No file Choosen </span>
+                                                <span class="form-control" tooltip="Resume Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentCandidate" *ngIf='resumeUploaded'> {{resumeName}}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-1 inlineForm">
-                                        <div class="form-group">
-                                            <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
-                                                <input type="file" class="upload" (change)="postFile($event)" /><span>Browse</span>
-                                            </div><br/>
+                                        <div class="col-md-1 inlineForm">
+                                            <div class="form-group">
+                                                <div class="fileUpload btn btn-info" data-toggle="tooltip" data-placement="top" title="Upload Resume">
+                                                    <input type="file" class="upload" (change)="postFile($event)" /><span>Browse</span>
+                                                </div><br/>
 
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span style="margin-left: -21px;">
+                                        <div class="col-md-3">
+                                            <span style="margin-left: -21px;">
 										<button type="submit" class="btn btn-info "> Upload Resume </button> &nbsp;
 										<a class="btn btn-info " (click)='closeUploadPanel()'> Cancel </a>
 										</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!-- Upload Resume END-->
+                                </form>
+                            </div>
+                            <!-- Upload Resume END-->
 
-                        <!-- Blacklist profile-->
+                            <!-- Blacklist profile-->
 
-                        <div id="updateRow" *ngIf='isCollapsed'>
-                            <span class="header sbold">You are blacklisting <span class="font-red uppercase">{{currentCandidate}}</span> !</span>
-                            <hr class="red" style="margin:0px 0px !important" />
-                            <form role="form" (submit)="onBlackListProfile()">
-                                <div class="row" style="margin-top: 10px;margin-left: 0px;">
-                                    <!--<div class="col-md-2">
+                            <div id="updateRow" *ngIf='isCollapsed'>
+                                <span class="header sbold">You are blacklisting <span class="font-red uppercase">{{currentCandidate}}</span> !</span>
+                                <hr class="red" style="margin:0px 0px !important" />
+                                <form role="form" (submit)="onBlackListProfile()">
+                                    <div class="row" style="margin-top: 10px;margin-left: 0px;">
+                                        <!--<div class="col-md-2">
                                             <div class="form-group">
                                                 <label class="sbold uppercase"> {{currentCandidate}}</label>
                                             </div>
                                         </div>-->
-                                    <!-- <div class="col-md-2">
+                                        <!-- <div class="col-md-2">
                                             <div class="form-group">
                                                 <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
                                                     tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus">
@@ -270,429 +272,151 @@
                                                 </select>
                                             </div>
                                         </div> -->
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <div class="edit-content"></div>
-                                            <textarea class="form-control red sbold statusComments" rows="1" placeholder="Enter reason" style="resize:vertical; width:100%" [(ngModel)]="profile.Comments" required="" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
+                                        <div class="col-md-9">
+                                            <div class="form-group">
+                                                <div class="edit-content"></div>
+                                                <textarea class="form-control red sbold statusComments" rows="1" placeholder="Enter reason" style="resize:vertical; width:100%" [(ngModel)]="profile.Comments" required="" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.Comments">
                                                 </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-info updatebtn"> Update </button> <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <button type="submit" class="btn btn-info updatebtn"> Update </button> <a class="btn btn-info " (click)='closeUpdatePanel()'> Cancel </a>
-                                    </div>
-                                </div>
-                            </form>
-                            <hr class="red" style="margin:8px 0px !important" />
-                        </div>
+                                </form>
+                                <hr class="red" style="margin:8px 0px !important" />
+                            </div>
 
-                        <!-- Black List Profile END-->
+                            <!-- Black List Profile END-->
 
-                        <!-- BEGIN status update form-->
+                            <!-- BEGIN status update form-->
                             <div class="row" *ngIf='isUpdateStatusCollapsed'>
-                            <span class="header">Update Status</span>
-                            <hr style="margin:10px 0px !important" />
-                            <form (submit)="onUpdateStauts();">
-                            	<div class="form-group col-md-2">
-                            		<div class="dataTables_length" id="sample_1_length">
-                                        <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status"
-                                                    tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus" style="width: 159px!important;">
+                                <span class="header">Update Status</span>
+                                <hr style="margin:10px 0px !important" />
+                                <form (submit)="onUpdateStauts();">
+                                    <div class="form-group col-md-2">
+                                        <div class="dataTables_length" id="sample_1_length">
+                                            <select class="form-control" (change)='onSelectStatus($event.target.value)' [(ngModel)]="profile.Status.Id" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!currentStatus" style="width: 159px!important;">
                                                    <option *ngFor="let status of statusList" [value]="status.Id">{{status.Value}}</option>
                                                 </select>
 
-                                </div>
-                            </div>
-                            <div class="col-md-2" *ngIf="IsRejectReason">
-		                        <input type="date" name="bday"  [(ngModel)]="rejectDate" required/>
-	                        </div>
-                            <div class="col-md-5" *ngIf="IsRejectReason">
-                                <textarea  placeholder="Reason" [(ngModel)]="rejectReason" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!rejectReason" style="width:100%;" required></textarea>
-                            </div>
-                            <div class="col-md-2">
-                            	<div>
-                            		<button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
-                            		<button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button> &nbsp;
-                            	</div>
-                            </div>
-                            </form>
-                            </div>
-                        <!-- END status update form-->
-
-                        <!--commited-->
-                        <!-- Modal Start -->
-                        <!--Begin Count Details box-->
-                        <div id="CountDetails" class="modal fade">
-                            <div class="modal-dialog" style="width: 55%;">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <b>{{Title}} </b>
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                    </div>
-                                    <div id="modalBody" class="modal-body">
-                                        <!-- Modal Body Start -->
-                                        <div class="row ">
-                                            <div class="col-md-12">
-
-                                                <!-- Existing Candidate Check Begin -->
-                                                <div class="container-fluid">
-                                                    <div class="row" style="margin-top:34px;" *ngIf="isExist">
-                                                        <!--*ngIf="existedProfile.length != 0"-->
-                                                        <div class="col-md-2 inlineForm">
-                                                            <div class="form-group">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 inlineForm">
-                                                            <div class="form-group ">
-                                                                <div class="col-md-7 inlineForm">
-                                                                    <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Status.Value}}</label>
-                                                                </div>
-
-                                                                <a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(existedProfile.CandidateID)'>
-                                                                    <i class="glyphicon glyphicon-user"> </i>
-                                                                </a>
-
-
-                                                                <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History" tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidateHistory(existedProfile.CandidateID)'>
-                                                                    <i class="fa fa-history"> </i>
-                                                                </a>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Existing Candidate Check End -->
-
-                                                <form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px;">
-                                                    <!--<div class="container-fluid">
-																			<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
-                                                    <div class="row" style="margin-left: 5px;">
-                                                        <div class="col-md-4 inlineForm">
-                                                            <div class="form-group">
-                                                                <label>First Name</label>
-                                                                <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$"
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Last Name</label>
-                                                                <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Email Address</label>
-                                                                <input type="email" class="form-control" [(ngModel)]="profile.Email" required="" tooltip="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
-                                                                    tooltipEnable="!profile.Email" maxlength="255" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-left: 5px;">
-                                                        <div class="col-md-3 inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Contact Number</label>
-                                                                <input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
-                                                                    tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==10)? false: event.charCode >= 48 && event.charCode <= 57;" required/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Experience</label>
-                                                                <input type="number" step="any" class="form-control" [(ngModel)]="profile.TotalExperience" tooltip="Total Experience (In years)" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
-                                                                    title="Enter total experience in years Eg. 02" min="0" max="60" step="0.01" style="padding: 6px;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57"
-                                                                    required/>
-                                                                <!--(keyup)="onKeyExperience($event)" />-->
-                                                            </div>
-                                                        </div>
-                                                        <!--<div class="col-md-2 inlineForm">
-															<div class="form-group">
-																<label>Notice</label>
-																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
-																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
-																 title="Enter notice period in Days Eg. 45" min="0" max="120" onKeyPress="if(this.value.length==2) return false;"
-																 required/>
-															</div>
-														</div>-->
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Notice Period</label>
-                                                                <div class="row ">
-                                                                    <div class="col-md-12">
-                                                                        <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)" required>
-                                                                            <option disabled selected>Select</option>
-                                                                            <option *ngFor="let notice of noticePeriod" [value]="notice.Id">{{notice.Value}}</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Serving NP</label>
-                                                                <div class="row">
-                                                                    <div class="col-md-1">
-                                                                        <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="3" 
-                                                                        (change)="onServingNP(profile.CandidateOtherDetails.ServingNoticePeriod)"/>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3" *ngIf="regDateShow">
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Resigning Date</label>
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-                                                                            <input type="date" [max]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" tabindex="24" required/>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        <div class="col-md-1 inlineForm">
-                                                            <div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
-                                                                <input type="file" class="upload" (change)="uploadFile($event)" />
-                                                                <i class="fa fa-file-text"></i><span> </span>
-                                                            </div>
-                                                            <!--<button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 66%" [disabled]="IsDisable"> Save</button>
-                                                            <br>-->
-                                                            <span class="row" *ngIf='fileUploaded' style="word-wrap: break-word;"> {{fileName}}</span>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                             <button type="reset" (click)="OnCancelModal()" class="btn red" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;">Cancel</button> 
-                                                        <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;" [disabled]="IsDisable"> Save</button>
-                                                            <br>
-                                                    </div>
-                                                    <!--</div>
-																		</div>-->
-                                                </form>
-                                            </div>
                                         </div>
-                                        <!-- Modal Body End -->
-                                        <!--<div class="modal-footer">
-												<button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Save</button>
-											</div>-->
                                     </div>
-                                </div>
+                                    <div class="col-md-2" *ngIf="IsRejectReason">
+                                        <input type="date" name="bday" [(ngModel)]="rejectDate" required/>
+                                    </div>
+                                    <div class="col-md-5" *ngIf="IsRejectReason">
+                                        <textarea placeholder="Reason" [(ngModel)]="rejectReason" tooltip="Reason" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!rejectReason" style="width:100%;" required></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>
+                                            <button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+                                            <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button> &nbsp;
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-                        <!--END Count Details Box-->
-                        <!-- Modal End -->
+                            <!-- END status update form-->
 
-                        <!-- START DETAILS DIALOGUE -->
-                        <div id="fullDetailsDialogue" class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div id="modalHeader" class="modal-header">
-                                    </div>
-                                    <div id="modalBody" class="modal-body">
-                                        <strong>Do you want to continue to Edit Profile?</strong>
-                                    </div>
-                                    <div id="modalFooter" class="modal-footer">
-                                        <button class="btn" (click)="enterFullDetails()">Yes</button>
-                                        <button class="btn" data-dismiss="modal">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END DETAILS DIALOGUE -->
-
-                        <!-- Test data -->
-                        <div style="box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.29);" class="col-md-4" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
-                            <div class="row portlet-title" style="padding-top: 5px;padding-bottom: 10px;">
-                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px;">
-														<input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
-														<span></span>
-													</label>
-                                <div class="actions pull-right" style="margin-right:7px;">
-                                    <!--btn btn-circle btn-icon-only btn-default btn-xs-->
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
-
-																<i class="fa fa-search-plus "></i> 
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs yellow" (click)="onEditClick(myprofile.CandidateID.Value,myprofile.CandidateID.Id)" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true"
-                                        tooltip="Edit Profile" [disabled]="getEditProfileAccess(myprofile.Owner)">
-                                        <i class="fa fa-edit " style="margin-top: 25%;"></i>
-                                        <!-- Edit Profile-->
-                                    </button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value === 'Open'" tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                        title="Schedule Interview" tooltipEnable="true">
-																<i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs green-jungle" (click)='onClickFollowUpComments(myprofile.CandidateID)' tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Follow Up Comments" tooltipEnable="true">
-																<i class="fa fa-comments "></i> <!--Follow Up Comments-->
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs blue" (click)='onClickUploadResume(myprofile.CandidateID)' tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Upload Resume" tooltipEnable="true">
-																<i class="fa fa-upload"></i> <!--Upload Resume-->
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs green" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile" tooltipEnable="true">
-																<i class="fa fa-search"></i> <!--View Profile-->
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs yellow-soft" (click)='getCandidateHistory(myprofile.CandidateID)' tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History" tooltipEnable="true">
-																<i class="fa fa-history"></i> <!--View Interview History-->
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs blue-dark" (click)='onUpdateStatusClick(myprofile.CandidateID)' tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" *ngIf='!getUpdateStatusAccess(myprofile.Status)'>
-																<i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs dark" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile">
-																<i class="icon-flag"></i> <!--Blacklist Profile-->
-															</button>
-                                    <button style="border-radius: 5px !important;" class="btn btn-xs red" (click)='confirmDelete(myprofile.CandidateID)' tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true" [disabled]="disableDelete(myprofile.Status)"
-                                        [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']">
-																<i class="fa fa-remove "></i> <!--Delete Profile-->
-															</button>
-                                </div>
-                            </div>
-                            <detail-profile [selectedProfile]="myprofile" [CandidateRecruitmentMailDetails]="candidateMailDetails" [rrfID]="viewDetailsRRFId"></detail-profile>
-                            <!-- START Delete Confirmation Model dailog -->
-                            <div id="deleteProfile{{myprofile.CandidateID.Value}}" class="modal fade">
-                                <div class="modal-dialog">
+                            <!--commited-->
+                            <!-- Modal Start -->
+                            <!--Begin Count Details box-->
+                            <div id="CountDetails" class="modal fade">
+                                <div class="modal-dialog" style="width: 55%;">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <b>Delete Profile </b>
+                                            <b>{{Title}} </b>
                                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
                                         </div>
                                         <div id="modalBody" class="modal-body">
-                                            Are you sure you want to delete {{myprofile.Candidate}} profile ?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" icon="fa-check" class="btn btn-info" (click)="deleteCandidate(myprofile.CandidateID)" label="">Yes</button>
-                                            <button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection(myprofile.CandidateID)" label="">No</button>
+                                            <!-- Modal Body Start -->
+                                            <div class="row ">
+                                                <div class="col-md-12">
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- START Delete Confirmation Model dailog -->
-                            
-                        </div>
-                       
-                    </div>
-                     <div class="portlet-body" *ngIf="NORECORDSFOUND">
-                         <!-- START DETAILS DIALOGUE -->
-                        <div id="fullDetailsDialogue" class="modal fade">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div id="modalHeader" class="modal-header">
-                                    </div>
-                                    <div id="modalBody" class="modal-body">
-                                        <strong>Do you want to continue to Edit Profile?</strong>
-                                    </div>
-                                    <div id="modalFooter" class="modal-footer">
-                                        <button class="btn" (click)="enterFullDetails()">Yes</button>
-                                        <button class="btn" data-dismiss="modal">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END DETAILS DIALOGUE -->
-                        
-                         <!--Begin Count Details box-->
-                        <div id="CountDetails" class="modal fade">
-                            <div class="modal-dialog" style="width: 55%;">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <b>{{Title}} </b>
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
-                                    </div>
-                                    <div id="modalBody" class="modal-body">
-                                        <!-- Modal Body Start -->
-                                        <div class="row ">
-                                            <div class="col-md-12">
-
-                                                <!-- Existing Candidate Check Begin -->
-                                                <div class="container-fluid">
-                                                    <div class="row" style="margin-top:34px;" *ngIf="isExist">
-                                                        <!--*ngIf="existedProfile.length != 0"-->
-                                                        <div class="col-md-2 inlineForm">
-                                                            <div class="form-group">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-4 inlineForm">
-                                                            <div class="form-group ">
-                                                                <div class="col-md-7 inlineForm">
-                                                                    <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                    <!-- Existing Candidate Check Begin -->
+                                                    <div class="container-fluid">
+                                                        <div class="row" style="margin-top:34px;" *ngIf="isExist">
+                                                            <!--*ngIf="existedProfile.length != 0"-->
+                                                            <div class="col-md-2 inlineForm">
+                                                                <div class="form-group">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
                                                                 </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <div class="col-md-7 inlineForm">
+                                                                        <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                                    </div>
 
-                                                                <a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(existedProfile.CandidateID)'>
-                                                                    <i class="glyphicon glyphicon-user"> </i>
-                                                                </a>
+                                                                    <a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(existedProfile.CandidateID)'>
+                                                                        <i class="glyphicon glyphicon-user"> </i>
+                                                                    </a>
 
 
-                                                                <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History" tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidateHistory(existedProfile.CandidateID)'>
-                                                                    <i class="fa fa-history"> </i>
-                                                                </a>
+                                                                    <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History" tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidateHistory(existedProfile.CandidateID)'>
+                                                                        <i class="fa fa-history"> </i>
+                                                                    </a>
 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!-- Existing Candidate Check End -->
+                                                    <!-- Existing Candidate Check End -->
 
-                                                <form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px;">
-                                                    <!--<div class="container-fluid">
+                                                    <form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px;">
+                                                        <!--<div class="container-fluid">
 																			<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
-                                                    <div class="row" style="margin-left: 5px;">
-                                                        <div class="col-md-4 inlineForm">
-                                                            <div class="form-group">
-                                                                <label>First Name</label>
-                                                                <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$"
-                                                                />
+                                                        <div class="row" style="margin-left: 5px;">
+                                                            <div class="col-md-4 inlineForm">
+                                                                <div class="form-group">
+                                                                    <label>First Name</label>
+                                                                    <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Last Name</label>
+                                                                    <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Email Address</label>
+                                                                    <input type="email" class="form-control" [(ngModel)]="profile.Email" required="" tooltip="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.Email" maxlength="255" />
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Last Name</label>
-                                                                <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$" />
+                                                        <div class="row" style="margin-left: 5px;">
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Contact Number</label>
+                                                                    <input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
+                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==10)? false: event.charCode >= 48 && event.charCode <= 57;"
+                                                                        required/>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-4  inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Email Address</label>
-                                                                <input type="email" class="form-control" [(ngModel)]="profile.Email" required="" tooltip="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
-                                                                    tooltipEnable="!profile.Email" maxlength="255" />
+                                                            <div class="col-md-2 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Experience</label>
+                                                                    <input type="number" step="any" class="form-control" [(ngModel)]="profile.TotalExperience" tooltip="Total Experience (In years)" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience" title="Enter total experience in years Eg. 02"
+                                                                        min="0" max="60" step="0.01" style="padding: 6px;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57"
+                                                                        required/>
+                                                                    <!--(keyup)="onKeyExperience($event)" />-->
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row" style="margin-left: 5px;">
-                                                        <div class="col-md-3 inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Contact Number</label>
-                                                                <input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
-                                                                    tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==10)? false: event.charCode >= 48 && event.charCode <= 57;"event.charCode ==46 required/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2 inlineForm">
-                                                            <div class="form-group ">
-                                                                <label>Experience</label>
-                                                                <input type="number" step="any" class="form-control" [(ngModel)]="profile.TotalExperience" tooltip="Total Experience (In years)" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience"
-                                                                    title="Enter total experience in years Eg. 02" min="0" max="60" step="0.01" style="padding: 6px;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57"
-                                                                    required/>
-                                                                <!--(keyup)="onKeyExperience($event)" />-->
-                                                            </div>
-                                                        </div>
-                                                        <!--<div class="col-md-2 inlineForm">
+                                                            <!--<div class="col-md-2 inlineForm">
 															<div class="form-group">
 																<label>Notice</label>
 																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
@@ -701,31 +425,30 @@
 																 required/>
 															</div>
 														</div>-->
-                                                        <div class="col-md-2">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Notice Period</label>
-                                                                <div class="row ">
-                                                                    <div class="col-md-12">
-                                                                        <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)" required>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Notice Period</label>
+                                                                    <div class="row ">
+                                                                        <div class="col-md-12">
+                                                                            <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)" required>
                                                                             <option disabled selected>Select</option>
                                                                             <option *ngFor="let notice of noticePeriod" [value]="notice.Id">{{notice.Value}}</option>
                                                                         </select>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            <div class="form-group">
-                                                                <label class="control-label">Serving NP</label>
-                                                                <div class="row">
-                                                                    <div class="col-md-1">
-                                                                        <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="3" 
-                                                                        (change)="onServingNP(profile.CandidateOtherDetails.ServingNoticePeriod)"/>
+                                                            <div class="col-md-1">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Serving NP</label>
+                                                                    <div class="row">
+                                                                        <div class="col-md-1">
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="3" (change)="onServingNP(profile.CandidateOtherDetails.ServingNoticePeriod)" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-3" *ngIf="regDateShow">
+                                                            <div class="col-md-3" *ngIf="regDateShow">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Resigning Date</label>
                                                                     <div class="row">
@@ -735,45 +458,322 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        <div class="col-md-1 inlineForm">
-                                                            <div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
-                                                                <input type="file" class="upload" (change)="uploadFile($event)" />
-                                                                <i class="fa fa-file-text"></i><span> </span>
-                                                            </div>
-                                                            <!--<button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 66%" [disabled]="IsDisable"> Save</button>
+                                                            <div class="col-md-1 inlineForm">
+                                                                <div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+                                                                    <input type="file" class="upload" (change)="uploadFile($event)" />
+                                                                    <i class="fa fa-file-text"></i><span> </span>
+                                                                </div>
+                                                                <!--<button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 66%" [disabled]="IsDisable"> Save</button>
                                                             <br>-->
-                                                            <span class="row" *ngIf='fileUploaded' style="word-wrap: break-word;"> {{fileName}}</span>
+                                                                <span class="row" *ngIf='fileUploaded' style="word-wrap: break-word;"> {{fileName}}</span>
 
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <a type="reset" (click)="OnCancelModal()" class="btn red" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;">Cancel</a> 
-                                                        <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;" [disabled]="IsDisable"> Save</button>
-                                                             
+                                                        <div class="row">
+                                                            <button type="reset" (click)="OnCancelModal()" class="btn red" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;">Cancel</button>
+                                                            <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;" [disabled]="IsDisable"> Save</button>
                                                             <br>
-                                                    </div>
-                                                    <!--</div>
+                                                        </div>
+                                                        <!--</div>
 																		</div>-->
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <!-- Modal Body End -->
-                                        <!--<div class="modal-footer">
+                                            <!-- Modal Body End -->
+                                            <!--<div class="modal-footer">
 												<button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Save</button>
 											</div>-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--END Count Details Box-->
-                         <strong>   No records found....!</strong>
-                            </div>
-                    <!-- Test data -->
+                            <!--END Count Details Box-->
+                            <!-- Modal End -->
 
-                    <!-- My Profile Grid Starts-->
-                    <!--<div class="table">-->
-                    <!--table-bordered-->
-                    <!--<table class="table  table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info"
+                            <!-- START DETAILS DIALOGUE -->
+                            <div id="fullDetailsDialogue" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div id="modalHeader" class="modal-header">
+                                        </div>
+                                        <div id="modalBody" class="modal-body">
+                                            <strong>Do you want to continue to Edit Profile?</strong>
+                                        </div>
+                                        <div id="modalFooter" class="modal-footer">
+                                            <button class="btn" (click)="enterFullDetails()">Yes</button>
+                                            <button class="btn" data-dismiss="modal">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END DETAILS DIALOGUE -->
+
+                            <!-- Test data -->
+                            <div style="box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.29);" class="col-md-4" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
+                                <div class="row portlet-title" style="padding-top: 5px;padding-bottom: 10px;">
+                                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline" style="margin-left: 10px;">
+														<input type="checkbox" class="checkboxes" value="1" [id]='myprofile.CandidateID' [(ngModel)]='myprofile.IsChecked' (change)="onStateChange($event)"/>
+														<span></span>
+													</label>
+                                    <div class="actions pull-right" style="margin-right:7px;">
+                                        <!--btn btn-circle btn-icon-only btn-default btn-xs-->
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs blue" *ngIf="viewDetailsRRFId !=''" (click)='showRRFDetails(viewDetailsRRFId)' tooltip="View RRF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="View RRF">
+
+																<i class="fa fa-search-plus "></i> 
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs yellow" (click)="onEditClick(myprofile.CandidateID.Value,myprofile.CandidateID.Id)" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile" [disabled]="getEditProfileAccess(myprofile.Owner)">
+                                        <i class="fa fa-edit " style="margin-top: 25%;"></i>
+                                        <!-- Edit Profile-->
+                                    </button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value === 'Open'" tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter"
+                                            title="Schedule Interview" tooltipEnable="true">
+																<i class="fa fa-calendar-check-o"></i> <!--Schedule Interview-->
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs green-jungle" (click)='onClickFollowUpComments(myprofile.CandidateID)' tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Follow Up Comments" tooltipEnable="true">
+																<i class="fa fa-comments "></i> <!--Follow Up Comments-->
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs blue" (click)='onClickUploadResume(myprofile.CandidateID)' tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Upload Resume" tooltipEnable="true">
+																<i class="fa fa-upload"></i> <!--Upload Resume-->
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs green" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile" tooltipEnable="true">
+																<i class="fa fa-search"></i> <!--View Profile-->
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs yellow-soft" (click)='getCandidateHistory(myprofile.CandidateID)' tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History" tooltipEnable="true">
+																<i class="fa fa-history"></i> <!--View Interview History-->
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs blue-dark" (click)='onUpdateStatusClick(myprofile.CandidateID)' tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true" *ngIf='!getUpdateStatusAccess(myprofile.Status)'>
+																<i class="glyphicon glyphicon-pencil"></i> <!--Update Status-->
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs dark" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile">
+																<i class="icon-flag"></i> <!--Blacklist Profile-->
+															</button>
+                                        <button style="border-radius: 5px !important;" class="btn btn-xs red" (click)='confirmDelete(myprofile.CandidateID)' tooltip="Delete Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true" [disabled]="disableDelete(myprofile.Status)"
+                                            [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']">
+																<i class="fa fa-remove "></i> <!--Delete Profile-->
+															</button>
+                                    </div>
+                                </div>
+                                <detail-profile [selectedProfile]="myprofile" [CandidateRecruitmentMailDetails]="candidateMailDetails" [rrfID]="viewDetailsRRFId"></detail-profile>
+                                <!-- START Delete Confirmation Model dailog -->
+                                <div id="deleteProfile{{myprofile.CandidateID.Value}}" class="modal fade">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <b>Delete Profile </b>
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                            </div>
+                                            <div id="modalBody" class="modal-body">
+                                                Are you sure you want to delete {{myprofile.Candidate}} profile ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" icon="fa-check" class="btn btn-info" (click)="deleteCandidate(myprofile.CandidateID)" label="">Yes</button>
+                                                <button type="button" icon="fa-check" class="btn btn-default" (click)="onClearSelection(myprofile.CandidateID)" label="">No</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- START Delete Confirmation Model dailog -->
+
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" *ngIf="NORECORDSFOUND">
+                            <!-- START DETAILS DIALOGUE -->
+                            <div id="fullDetailsDialogue" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div id="modalHeader" class="modal-header">
+                                        </div>
+                                        <div id="modalBody" class="modal-body">
+                                            <strong>Do you want to continue to Edit Profile?</strong>
+                                        </div>
+                                        <div id="modalFooter" class="modal-footer">
+                                            <button class="btn" (click)="enterFullDetails()">Yes</button>
+                                            <button class="btn" data-dismiss="modal">No</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END DETAILS DIALOGUE -->
+
+                            <!--Begin Count Details box-->
+                            <div id="CountDetails" class="modal fade">
+                                <div class="modal-dialog" style="width: 55%;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <b>{{Title}} </b>
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
+                                        </div>
+                                        <div id="modalBody" class="modal-body">
+                                            <!-- Modal Body Start -->
+                                            <div class="row ">
+                                                <div class="col-md-12">
+
+                                                    <!-- Existing Candidate Check Begin -->
+                                                    <div class="container-fluid">
+                                                        <div class="row" style="margin-top:34px;" *ngIf="isExist">
+                                                            <!--*ngIf="existedProfile.length != 0"-->
+                                                            <div class="col-md-2 inlineForm">
+                                                                <div class="form-group">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Id" tooltip="Candidate Id" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.CandidateID.Value}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Candidate Name" tooltip="Candidate Name" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Candidate}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label data-toggle="tooltip" data-placement="top" title="Owner" tooltip="Owner" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Owner.Value}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <div class="col-md-7 inlineForm">
+                                                                        <label data-toggle="tooltip" data-placement="top" title="Status" tooltip="Status" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">{{existedProfile.Status.Value}}</label>
+                                                                    </div>
+
+                                                                    <a href="javascript:;" class="btn btn-icon-only green" data-toggle="tooltip" data-placement="top" title="View Profile" tooltip="View Profile" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='redirectToView(existedProfile.CandidateID)'>
+                                                                        <i class="glyphicon glyphicon-user"> </i>
+                                                                    </a>
+
+
+                                                                    <a href="javascript:;" class="btn btn-icon-only purple" data-toggle="tooltip" data-placement="top" title="View Interview History" tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false" (click)='getCandidateHistory(existedProfile.CandidateID)'>
+                                                                        <i class="fa fa-history"> </i>
+                                                                    </a>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Existing Candidate Check End -->
+
+                                                    <form role="form" (submit)="OnSubmitCandidate()" style="padding-left: 8px;">
+                                                        <!--<div class="container-fluid">
+																			<div class="row" style="margin-top:34px;" *ngIf="isExist">-->
+                                                        <div class="row" style="margin-left: 5px;">
+                                                            <div class="col-md-4 inlineForm">
+                                                                <div class="form-group">
+                                                                    <label>First Name</label>
+                                                                    <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.FirstName" required="" tooltip="First Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.FirstName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$"
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Last Name</label>
+                                                                    <input type="text" class="form-control text-capitalize" [(ngModel)]="profile.LastName" required="" tooltip="Last Name" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.LastName" maxlength="30" pattern="^[a-zA-Z ]+[_]*$" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4  inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Email Address</label>
+                                                                    <input type="email" class="form-control" [(ngModel)]="profile.Email" required="" tooltip="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" tooltipPlacement="bottom" tooltipTrigger="mouseenter"
+                                                                        tooltipEnable="!profile.Email" maxlength="255" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" style="margin-left: 5px;">
+                                                            <div class="col-md-3 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Contact Number</label>
+                                                                    <input type="number" class="form-control" maxlength="10" minlength="10" [(ngModel)]="profile.PrimaryContact" (blur)="IsExist()" (focus)="focusIn()" (focusout)="focusOut()" required="" pattern="^[0-9\-\+]{9,15}$" tooltip="Contact No" title="Enter 10 digits"
+                                                                        tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.PrimaryContact" onKeyPress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==10)? false: event.charCode >= 48 && event.charCode <= 57;"
+                                                                        required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2 inlineForm">
+                                                                <div class="form-group ">
+                                                                    <label>Experience</label>
+                                                                    <input type="number" step="any" class="form-control" [(ngModel)]="profile.TotalExperience" tooltip="Total Experience (In years)" tooltipPlacement="bottom" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateCareerProfile.TotalExperience" title="Enter total experience in years Eg. 02"
+                                                                        min="0" max="60" step="0.01" style="padding: 6px;" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(this.value.length==4)? false: event.charCode >= 48 && event.charCode <= 57"
+                                                                        required/>
+                                                                    <!--(keyup)="onKeyExperience($event)" />-->
+                                                                </div>
+                                                            </div>
+                                                            <!--<div class="col-md-2 inlineForm">
+															<div class="form-group">
+																<label>Notice</label>
+																<input type="number" class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" tooltip="Notice Period (In days)"
+																 tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!profile.CandidateOtherDetails.NoticePeriod"
+																 title="Enter notice period in Days Eg. 45" min="0" max="120" onKeyPress="if(this.value.length==2) return false;"
+																 required/>
+															</div>
+														</div>-->
+                                                            <div class="col-md-2">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Notice Period</label>
+                                                                    <div class="row ">
+                                                                        <div class="col-md-12">
+                                                                            <select class="form-control" [(ngModel)]="profile.CandidateOtherDetails.NoticePeriod" (change)="onNoticePeriod($event.target.value)" required>
+                                                                            <option disabled selected>Select</option>
+                                                                            <option *ngFor="let notice of noticePeriod" [value]="notice.Id">{{notice.Value}}</option>
+                                                                        </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Serving NP</label>
+                                                                    <div class="row">
+                                                                        <div class="col-md-1">
+                                                                            <input type="checkbox" class="checkboxes ng-untouched ng-pristine ng-valid" id="inlineCheckbox1" [(ngModel)]="profile.CandidateOtherDetails.ServingNoticePeriod" tabindex="3" (change)="onServingNP(profile.CandidateOtherDetails.ServingNoticePeriod)" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3" *ngIf="regDateShow">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Resigning Date</label>
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <input type="date" [max]="currentDate" name="bday" id="fromDate" [(ngModel)]="profile.CandidateOtherDetails.ResigningDate" tabindex="24" required/>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-1 inlineForm">
+                                                                <div class="fileUpload btn btn-info" style="margin-top: 23px;" data-toggle="tooltip" data-placement="top" title="Upload Resume" tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false">
+                                                                    <input type="file" class="upload" (change)="uploadFile($event)" />
+                                                                    <i class="fa fa-file-text"></i><span> </span>
+                                                                </div>
+                                                                <!--<button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 66%" [disabled]="IsDisable"> Save</button>
+                                                            <br>-->
+                                                                <span class="row" *ngIf='fileUploaded' style="word-wrap: break-word;"> {{fileName}}</span>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <a type="reset" (click)="OnCancelModal()" class="btn red" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;">Cancel</a>
+                                                            <button type="submit" class="btn green" style="float: right; margin-top: 23px; width: 15%; margin-right:15px;" [disabled]="IsDisable"> Save</button>
+
+                                                            <br>
+                                                        </div>
+                                                        <!--</div>
+																		</div>-->
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- Modal Body End -->
+                                            <!--<div class="modal-footer">
+												<button type="button" icon="fa-check" class="btn btn-info" (click)="onCancelClick()" label="">Save</button>
+											</div>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--END Count Details Box-->
+                            <strong>   No records found....!</strong>
+                        </div>
+                        <!-- Test data -->
+
+                        <!-- My Profile Grid Starts-->
+                        <!--<div class="table">-->
+                        <!--table-bordered-->
+                        <!--<table class="table  table-hover table-checkable order-column dataTable no-footer" id="sample_1" role="grid" aria-describedby="sample_1_info"
 								*ngIf="!NORECORDSFOUND">
 								<thead class="thead">
 									<tr>
@@ -784,13 +784,13 @@
 												</label>
 										</td>
 										<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Candidates</th>-->
-                    <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
+                        <!--<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Tag </th>
 										<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Professional Details </th>
 										<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Status </th>
 										<th class="sorting" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Resume </th>-->
-                    <!--<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>-->
+                        <!--<th class="" tabindex="0" aria-controls="sample_1" rowspan="1" colspan="1">Actions </th>-->
 
-                    <!--</tr>
+                        <!--</tr>
 								</thead>
 								<tbody>
 									<tr style="box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.29);" class="" *ngFor="let myprofile of myProfilesList.Profiles |ProfileBankPipe:searchString">
@@ -810,48 +810,48 @@
 													<a class="btn btn-circle btn-icon-only btn-default btn-xs yellow" [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" tooltip="Edit Profile">
 														<i class="fa fa-edit " style="margin-top: 25%;"></i>-->
-                    <!-- Edit Profile-->
-                    <!--</a>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value.toLowerCase() === 'open'"
+                        <!-- Edit Profile-->
+                        <!--</a>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs purple" (click)='onClickScheduleInterview(myprofile.CandidateID)' *ngIf="myprofile.Status.Value.toLowerCase() === 'open'"
 														tooltip="Schedule Interview" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Schedule Interview" tooltipEnable="true">-->
-                    <!--<i class="fa fa-calendar-check-o"></i> <!-Schedule Interview-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs green-jungle" (click)='onClickFollowUpComments(myprofile.CandidateID)'
+                        <!--<i class="fa fa-calendar-check-o"></i> <!-Schedule Interview-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs green-jungle" (click)='onClickFollowUpComments(myprofile.CandidateID)'
 														tooltip="Follow Up Comments" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Follow Up Comments" tooltipEnable="true">-->
-                    <!--<i class="fa fa-comments "></i> <!-Follow Up Comments-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='onClickUploadResume(myprofile.CandidateID)'
+                        <!--<i class="fa fa-comments "></i> <!-Follow Up Comments-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs blue" (click)='onClickUploadResume(myprofile.CandidateID)'
 														tooltip="Upload Resume" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Upload Resume" tooltipEnable="true">-->
-                    <!--<i class="fa fa-upload"></i> <!-Upload Resume-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile"
+                        <!--<i class="fa fa-upload"></i> <!-Upload Resume-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs green" (click)='redirectToView(myprofile.CandidateID)' tooltip="View Profile"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Profile" tooltipEnable="true">-->
-                    <!--<i class="fa fa-search"></i> <!-View Profile-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow-soft" (click)='getCandidateHistory(myprofile.CandidateID)'
+                        <!--<i class="fa fa-search"></i> <!-View Profile-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs yellow-soft" (click)='getCandidateHistory(myprofile.CandidateID)'
 														tooltip="View Interview History" tooltipPlacement="top" tooltipTrigger="mouseenter" title="View Interview History"
 														tooltipEnable="true">-->
-                    <!--<i class="fa fa-history"></i> <!-View Interview History-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='onUpdateStatusClick(myprofile.CandidateID)'
+                        <!--<i class="fa fa-history"></i> <!-View Interview History-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs blue-dark" (click)='onUpdateStatusClick(myprofile.CandidateID)'
 														tooltip="Update Status" tooltipPlacement="top" tooltipTrigger="mouseenter" title="Update Status" tooltipEnable="true"
 														*ngIf='!getUpdateStatusAccess(myprofile.Status)'>-->
-                    <!--<i class="glyphicon glyphicon-pencil"></i> <!-Update Status-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile"
+                        <!--<i class="glyphicon glyphicon-pencil"></i> <!-Update Status-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs dark" (click)='SaveCandidateID(myprofile.CandidateID)' tooltip="Blacklist Profile"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true" title="Blacklist Profile">-->
-                    <!--<i class="icon-flag"></i> <!-Blacklist Profile-->
-                    <!--</button>-->
-                    <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='confirmDelete(myprofile.CandidateID)' tooltip="Delete Profile"
+                        <!--<i class="icon-flag"></i> <!-Blacklist Profile-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-circle btn-icon-only btn-default btn-xs red" (click)='confirmDelete(myprofile.CandidateID)' tooltip="Delete Profile"
 														tooltipPlacement="top" tooltipTrigger="mouseenter" title="Delete Profile" tooltipEnable="true" [disabled]="disableDelete(myprofile.Status)"
 														[ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE']">-->
-                    <!--<i class="fa fa-remove "></i> <!-Delete Profile-->
-                    <!--</button>-->
-                    <!--</div>
+                        <!--<i class="fa fa-remove "></i> <!-Delete Profile-->
+                        <!--</button>-->
+                        <!--</div>
 											</div>
 											<detail-profile [selectedProfile]="myprofile" [CandidateRecruitmentMailDetails]="candidateMailDetails" [rrfID]="viewDetailsRRFId"></detail-profile>-->
-                    <!-- START Delete Confirmation Model dailog -->
-                    <!--<div id="deleteProfile{{myprofile.CandidateID.Value}}" class="modal fade">
+                        <!-- START Delete Confirmation Model dailog -->
+                        <!--<div id="deleteProfile{{myprofile.CandidateID.Value}}" class="modal fade">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -869,9 +869,9 @@
 													</div>
 												</div>
 											</div>-->
-                    <!-- START Delete Confirmation Model dailog -->
-                    <!--</td>-->
-                    <!--<td>
+                        <!-- START Delete Confirmation Model dailog -->
+                        <!--</td>-->
+                        <!--<td>
 											<tr>
 												<td style="float: left;">&nbsp; {{myprofile.Candidate}}</td>
 											</tr>
@@ -900,7 +900,7 @@
 										<td class="text-center">
 											<a href="" download tooltip="Download Resume" tooltipPlacement="top" tooltipTrigger="mouseenter"><i class="fa fa-download" aria-hidden="true"></i></a>
 										</td>-->
-                    <!--<td style="width=3%;" *ngIf="viewDetailsRRFId !=''">
+                        <!--<td style="width=3%;" *ngIf="viewDetailsRRFId !=''">
 											<a href="javascript:;" class="btn btn-xs grey-cascade" (click)='showRRFDetails(viewDetailsRRFId)'> View RRF
 																		<i class="fa fa-link"></i>
 											 </a>
@@ -908,11 +908,11 @@
 											
 
 										</td>-->
-                    <!--<td style="width:8%; Display:none;">
+                        <!--<td style="width:8%; Display:none;">
 											<div class="btn-group">
 												<button class="btn btn-xs green dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Actions <i class="fa fa-angle-down"></i>-->
-                    <!--<i class="fa fa-angle-down"></i>-->
-                    <!--</button>
+                        <!--<i class="fa fa-angle-down"></i>-->
+                        <!--</button>
 												<ul class="dropdown-menu pull-right" role="menu">
 													<li>
 														<a [routerLink]="['/App/ProfileBank/MyProfiles/Edit/'+ myprofile.CandidateID.Value +'ID'+ myprofile.CandidateID.Id]">
@@ -949,8 +949,8 @@
 														</a>
 													</li>
 													<li class="divider" [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] "> </li>-->
-                    <!-- TODO:: update Delete Permission once recive from backend -->
-                    <!--<li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
+                        <!-- TODO:: update Delete Permission once recive from backend -->
+                        <!--<li [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
 														<a (click)='deleteCandidate(myprofile.CandidateID)' [ifAuthorize]="[ 'PROFILEBANK.TRANSFEROWNERSHIP.MANAGE'] ">
 															<i class="fa fa-remove"></i>Delete Profile</a>
 													</li>
@@ -967,46 +967,46 @@
 							</table>
 							<span style="margin-top:5px;margin-left:15px" *ngIf='NORECORDSFOUND'>No Candidates Found</span>
 						</div>-->
-                    <!--  My Profile Grid  END-->
-                    <!--  My Profile pagination Start-->
-                    <div class="row" *ngIf="!NORECORDSFOUND">
-                        <div class="col-md-10">
-                        </div>
-                        <div class="col-md-2 " style="margin-top: 20px;">
-                            <button type="button" class="btn btn-default" [disabled]="!myProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
+                        <!--  My Profile Grid  END-->
+                        <!--  My Profile pagination Start-->
+                        <div class="row" *ngIf="!NORECORDSFOUND">
+                            <div class="col-md-10">
+                            </div>
+                            <div class="col-md-2 " style="margin-top: 20px;">
+                                <button type="button" class="btn btn-default" [disabled]="!myProfilesList.GrdOperations.PreviousButton" (click)="OnPaginationClick(-1)">
 										&laquo; Prev</button> &nbsp;&nbsp;
-                            <button type="button" class="btn btn-default" [disabled]="!myProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
+                                <button type="button" class="btn btn-default" [disabled]="!myProfilesList.GrdOperations.NextButton" (click)="OnPaginationClick(1)">
 										Next &raquo;</button>
+                            </div>
                         </div>
+                        <!--  My Profile pagination END-->
+
+
+
                     </div>
-                    <!--  My Profile pagination END-->
-
-
-
                 </div>
-            </div>
-            <!--VIEW RRF START-->
-            <div class="portlet-body">
-                <div class=" col-lg-12 " id="divTimeLine " *ngIf="isViewRFF">
+                <!--VIEW RRF START-->
+                <div class="portlet-body">
+                    <div class=" col-lg-12 " id="divTimeLine " *ngIf="isViewRFF">
 
-                    <div class="portlet light bordered col-lg-11 col-md-12 col-sm-12 col-xs-12 ">
-                        <div class="table-toolbar ">
-                            <div class="row ">
-                                <div class="col-md-6 ">
-                                    <div class="btn-group ">
-                                        <a class="btn green" (click)='showListOfRRF()'>Back</a>
+                        <div class="portlet light bordered col-lg-11 col-md-12 col-sm-12 col-xs-12 ">
+                            <div class="table-toolbar ">
+                                <div class="row ">
+                                    <div class="col-md-6 ">
+                                        <div class="btn-group ">
+                                            <a class="btn green" (click)='showListOfRRF()'>Back</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <view-RRF [RRFID]='viewRRFDetails'></view-RRF>
                         </div>
-                        <view-RRF [RRFID]='viewRRFDetails'></view-RRF>
                     </div>
                 </div>
+                <!--VIEW RRF END-->
             </div>
-            <!--VIEW RRF END-->
+            <!-- END PAGE BASE CONTENT -->
         </div>
-        <!-- END PAGE BASE CONTENT -->
+        <!-- END CONTENT BODY -->
     </div>
-    <!-- END CONTENT BODY -->
-</div>
-<!-- END CONTENT -->
+    <!-- END CONTENT -->

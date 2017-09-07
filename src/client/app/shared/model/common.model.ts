@@ -14,6 +14,10 @@ export class MasterData {
   public Id: number;
   public Value: string;
 }
+export class CandidateStatus {
+  public Id: string;
+  public Value: string;
+}
 export class festival {
   public Date: any;
   public Descroption: string;

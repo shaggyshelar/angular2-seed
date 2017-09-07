@@ -21,3 +21,8 @@ export class CandidateRRFID {
 export class GrdOperations {
   public GrdOperations: GrdOptions = new GrdOptions();
 }
+
+export class PracticeInterviewList extends InterviewsList{
+  public showIEF: boolean = false;
+  public IEFButtonText : string = 'View IEF';
+}
