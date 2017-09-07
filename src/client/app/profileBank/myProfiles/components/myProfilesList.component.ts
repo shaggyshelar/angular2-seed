@@ -86,6 +86,7 @@ export class MyProfilesListComponent implements OnActivate {
   /***variables for Upload photo */
   uploadedPhoto: any;
   photoUploaded: boolean = false;
+  exitButton: boolean = false;
   photoName: string;
   photoMeta: ResumeMeta;
   profilePhoto: string;
@@ -257,6 +258,7 @@ export class MyProfilesListComponent implements OnActivate {
         if (results.isExist) {
           if (results.profileBankObjects !== null && results.profileBankObjects !== undefined) {
             this.existedProfile = <any>results.profileBankObjects;
+            this.exitButton=true;
             this.isExist = <any>results.isExist;
             this.toastr.error('Profile already exist');
           }
@@ -380,8 +382,7 @@ export class MyProfilesListComponent implements OnActivate {
     FileList = null;
     this.fileName = '';
     this.fileUploaded = false;
-    // this.psdTemplates=null;
-    //   modl.modal({ 'backdrop': 'static' });
+    this.isExist=false;
   }
   uploadResume(CandidateLookupId: MasterData, File: any) {
     this.resumeMeta.CandidateID = CandidateLookupId;

@@ -120,7 +120,7 @@
                                         <option value="Rejected">Reject</option>
                                         <option value="On Hold" *ngIf='!isChangeStatusReq'>On Hold</option>
                                     </select>
-                                    <select *ngIf="showRejectReasons" class="form-control uppercase" required (change)="rejectReasonSet($event)">
+                                    <select *ngIf="showRejectReasons" class="form-control" style="text-transform:capitalize;" required (change)="rejectReasonSet($event)">
                                         <option *ngFor="let reason of rejectReasons; let i = index" [value]="reason.Value">{{reason.Value}}</option>
                                     </select>
                                 </div>
