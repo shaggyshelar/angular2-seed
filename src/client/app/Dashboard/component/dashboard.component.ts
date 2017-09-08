@@ -77,17 +77,7 @@ export class DashboardComponent implements OnInit {
     public barChartData: any[] = new Array<string>();
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
-        responsive: true,
-        scales : {
-    yAxes: [{
-       ticks: {
-          steps : 1,
-          stepValue : 1,
-          max : 5,
-          min : 0,
-        }
-    }] 
-  }
+        responsive: true
     };
     RRFID: MasterData = new MasterData();
     grdOptionsIncompeteProfiles: GrdOptions = new GrdOptions();
