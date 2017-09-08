@@ -5,6 +5,7 @@ import { AuthHttp } from '../../shared/services/authHttp.service';
 import { Config } from '../../shared/config/config';
 import { SpinnerService } from '../../shared/components/spinner/spinner';
 import { GrdOptions } from  '../../shared/model/index';
+import { DashboardFilters } from  '../../Dashboard/index';
 import { MasterData } from '../../shared/model/common.model';
 @Injectable()
 
@@ -270,6 +271,43 @@ export class RecruitersDashboardService {
             .catch(this.handleError);
     }*/
 
+    // GetOpenAndAssignedRRFsByFilters
+ GetOpenAndAssignedRRFsByFilters(dashboardFilters: DashboardFilters) {
+        let url = Config.GetURL('/api/Dashboards/GetOpenAndAssignedRRFsByFilters');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { dashboardFilters })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+
+    // GetUserInterviewDetailsWithFilter
+ GetUserInterviewDetailsWithFilter(dashboardFilters: DashboardFilters) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetUserInterviewDetailsWithFilter');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { dashboardFilters })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+        // GetInterviewCompletedCandidatesByFilters
+ GetInterviewCompletedCandidatesByFilters(dashboardFilters: DashboardFilters) {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewCompletedCandidatesByFilters');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { dashboardFilters })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+        // GetDetailsOfCandidatesJoiningByFilter
+ GetDetailsOfCandidatesJoiningByFilter(dashboardFilters: DashboardFilters) {
+        let url = Config.GetURL('/api/Dashboards/GetDetailsOfCandidatesJoiningByFilter');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { dashboardFilters })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);
