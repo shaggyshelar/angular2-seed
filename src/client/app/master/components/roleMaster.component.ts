@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -15,7 +15,7 @@ import { APIResult } from '../../shared/constantValue/index';
 
 
 
-export class RoleMasterComponent implements OnActivate {
+export class RoleMasterComponent implements OnActivate, AfterViewInit {
   errorMessage: string;
   Roles: RolesMaster[];
   selectedRole: RolesMaster = new RolesMaster();
@@ -24,7 +24,10 @@ export class RoleMasterComponent implements OnActivate {
     private toastr: ToastsManager,
     private _router: Router) {
   }
-
+  @ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
   routerOnActivate() {
     this.getRolesDetails();
   }
@@ -36,6 +39,7 @@ export class RoleMasterComponent implements OnActivate {
       (results: any) => {
         if (results !== null && results.length > 0) {
           this.Roles = results;
+          this.Roles.sort(function(a:any, b:any){return a.SequenceNo-b.SequenceNo;});
         }
       },
       error => {
@@ -120,6 +124,7 @@ export class RoleMasterComponent implements OnActivate {
     this.selectedRole = new RolesMaster();
     this.action = 'Add';
     this.getRolesDetails();
+    this.ngAfterViewInit();
   }
   /**Edit existing Record */
   edit(roleData: RolesMaster) {

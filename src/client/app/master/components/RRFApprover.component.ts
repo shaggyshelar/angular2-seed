@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -13,7 +13,7 @@ import { APIResult } from '../../shared/constantValue/index';
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
 })
 
-export class RRFApproverMasterComponent implements OnActivate {
+export class RRFApproverMasterComponent implements OnActivate, AfterViewInit {
     ShowTable:boolean=false;
     errorMessage: string;
     approverName:string;
@@ -30,7 +30,10 @@ export class RRFApproverMasterComponent implements OnActivate {
         private toastr: ToastsManager,
         private _router: Router) {
     }
-
+  @ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
     routerOnActivate() {
         this.getRRFAprroverData();
         this.getApproverData();
@@ -102,6 +105,7 @@ export class RRFApproverMasterComponent implements OnActivate {
         this.selectDeptText = false;
         $('#cmbInterviewer').select2('val', '-1');
         this.getRRFAprroverData();
+        this.ngAfterViewInit();
     }
     EditData(rrfapprodata:any) {
         this.data=rrfapprodata;

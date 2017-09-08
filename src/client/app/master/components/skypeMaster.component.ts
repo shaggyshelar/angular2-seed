@@ -5,16 +5,18 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import {   SkypeMaster, MyMasterDataService} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: 'skype-master',
     templateUrl: 'skypeMaster.component.html',
     directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
 })
+// @Directive({
+//     selector: '[autofocus]'
+// })
 
-
-
-export class SkypeMasterComponent implements OnActivate {
+export class SkypeMasterComponent implements OnActivate, AfterViewInit{
     errorMessage: string;
     skypeData: Array<SkypeMaster> = new Array<SkypeMaster>();
     data:SkypeMaster = new SkypeMaster();
@@ -22,9 +24,12 @@ export class SkypeMasterComponent implements OnActivate {
     Action:string='Add';
     constructor(private _MyMasterDataService: MyMasterDataService,
         private toastr: ToastsManager,
-        private _router: Router) {
+        private _router: Router,private elementRef: ElementRef) {
     }
-
+    @ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
     routerOnActivate() {
         this.getSkypeData();
         this.Action='Add';
@@ -36,6 +41,7 @@ export class SkypeMasterComponent implements OnActivate {
             (results: any) => {
                 if (results !== null && results.length > 0) {
                     this.skypeData = results;
+                    this.ngAfterViewInit();
                 }
             },
             error => {

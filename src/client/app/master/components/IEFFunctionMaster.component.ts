@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -14,7 +14,7 @@ import { APIResult } from '../../shared/constantValue/index';
 
 
 
-export class IEFFunctionMasterComponent implements OnActivate {
+export class IEFFunctionMasterComponent implements OnActivate, AfterViewInit {
   errorMessage: string;
   ShowTable: boolean = false;
   iefData: Array<IEFFunctions> = new Array<IEFFunctions>();
@@ -26,7 +26,10 @@ export class IEFFunctionMasterComponent implements OnActivate {
     private toastr: ToastsManager,
     private _router: Router) {
   }
-
+ @ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
   routerOnActivate() {
     this.getIEFData();
     this.getInterviewTypeData();
@@ -71,6 +74,7 @@ export class IEFFunctionMasterComponent implements OnActivate {
     this.data = new IEFFunctions();
     this.data.DisplayRatings = 'false';
     this.getIEFData();
+    this.ngAfterViewInit();
     // this.data.InterviewType.Id='-1';
   }
   EditData(iefdata: any) {

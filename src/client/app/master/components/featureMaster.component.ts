@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -15,7 +15,7 @@ import { APIResult } from '../../shared/constantValue/index';
 
 
 
-export class FeatureMasterComponent implements OnActivate {
+export class FeatureMasterComponent implements OnActivate, AfterViewInit {
   errorMessage: string;
   Features: FeatureMaster[];
   selectedFeature: FeatureMaster = new FeatureMaster();
@@ -28,7 +28,10 @@ export class FeatureMasterComponent implements OnActivate {
   routerOnActivate() {
     this.getFeatureDetails();
   }
-
+  @ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
   /** GET FEATURES INFORMATION OF PERMISSION */
   getFeatureDetails() {
     this._MyMasterDataService.getFeatureData()
@@ -116,6 +119,7 @@ export class FeatureMasterComponent implements OnActivate {
     this.action = 'Add';
     this.getFeatureDetails();
     this.selectedFeature = new FeatureMaster();
+    this.ngAfterViewInit();
   }
   /**Edit existing Record */
   edit(featureData: FeatureMaster) {

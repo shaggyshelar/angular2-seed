@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -14,17 +14,22 @@ import { APIResult } from '../../shared/constantValue/index';
 
 
 
-export class InterviewTypeComponent implements OnActivate {
+export class InterviewTypeComponent implements OnActivate, AfterViewInit {
   errorMessage: string;
   ShowTable: boolean = false;
+  idFound: boolean = false;
   data: InterviewType = new InterviewType();
   typeData: Array<InterviewType> = new Array<InterviewType>();
+   checkDetails: Array<InterviewType> = new Array<InterviewType>();
   Action: string = 'Add';
   constructor(private _MyMasterDataService: MyMasterDataService,
     private toastr: ToastsManager,
     private _router: Router) {
   }
-
+  @ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
   routerOnActivate() {
     this.getInterviewTypeData();
     this.Action = 'Add';
@@ -36,7 +41,9 @@ export class InterviewTypeComponent implements OnActivate {
       (results: any) => {
         if (results !== null && results.length > 0) {
           this.typeData = results;
+          this.checkDetails = results;
           if (this.typeData.length > 0) {
+            this.typeData.sort(function(a:any, b:any){return a.Sequence-b.Sequence;});
             this.ShowTable = true;
           } else {
             this.ShowTable = false;
@@ -52,6 +59,7 @@ export class InterviewTypeComponent implements OnActivate {
     this.Action = 'Add';
     this.data = new InterviewType();
     this.getInterviewTypeData();
+    this.ngAfterViewInit();
   }
   EditData(typedetails: any) {
     this.data = typedetails;
@@ -78,6 +86,12 @@ export class InterviewTypeComponent implements OnActivate {
         return txt;
     };
   EditInterviewModeData() {
+// for(var i=0;i<this.checkDetails.length;i++) {
+//       if(this.checkDetails[i].Value===this.data.Value) {
+//         this.idFound=true;
+//       }
+//     }
+//     if(this.idFound === false) {
     var checkData = this.data.Value.trim();
     if (checkData !== "") {
       this.data.Value=this.UpperCasefunction(checkData);
@@ -98,12 +112,21 @@ export class InterviewTypeComponent implements OnActivate {
     } else {
       this.toastr.error('Please Fill Data.');
     }
+    // } else {
+    //   this.toastr.error('Value Already Exists.');
+    // }
   }
   AddInterviewModeData() {
-    var checkData = this.data.Value.trim();
-    if (checkData !== "") {
-      this.data.Value=this.UpperCasefunction(checkData);
-      this._MyMasterDataService.addInterviewTypeData(this.data)
+    // for(var i=0;i<this.typeData1.length;i++) {
+    //   if(parseInt(this.typeData1[i].Sequence)=== parseInt(this.data.Sequence)) {
+    //     this.idFound=true;
+    //   }
+    // }
+    // if(this.idFound === false) {
+      var checkData = this.data.Value.trim();
+      if (checkData !== "") {
+        this.data.Value=this.UpperCasefunction(checkData);
+        this._MyMasterDataService.addInterviewTypeData(this.data)
         .subscribe(
         results => {
           if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
@@ -120,6 +143,9 @@ export class InterviewTypeComponent implements OnActivate {
     } else {
       this.toastr.error('Please Fill Data.');
     }
+    // } else {
+    //   this.toastr.error('Sequence No Already Exists.');
+    // }
   }
 
   deleteData(skyDelData: any) {

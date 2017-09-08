@@ -183,31 +183,26 @@ export class PermissionMatrixComponent implements OnActivate {
     this.updatePermission = data;
     this.updatePermission.Manage = e.target.checked;
     this.Update(this.updatePermission);
-    console.log(this.updatePermission);
   }
   updateRead(e: any, data: any) {
     this.updatePermission = data;
     this.updatePermission.Read = e.target.checked;
     this.Update(this.updatePermission);
-    console.log(this.updatePermission);
   }
   updateAdd(e: any, data: any) {
     this.updatePermission = data;
     this.updatePermission.Add = e.target.checked;
     this.Update(this.updatePermission);
-    console.log(this.updatePermission);
   }
   updateUpdate(e: any, data: any) {
     this.updatePermission = data;
     this.updatePermission.Update = e.target.checked;
     this.Update(this.updatePermission);
-    console.log(this.updatePermission);
   }
   updateDelete(e: any, data: any) {
     this.updatePermission = data;
     this.updatePermission.Delete = e.target.checked;
     this.Update(this.updatePermission);
-    console.log(this.updatePermission);
   }
   /**Edit existing Record */
   Update(permissionData: Permission) {
@@ -215,6 +210,7 @@ export class PermissionMatrixComponent implements OnActivate {
       .subscribe(
       results => {
         if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+          this.getPermissionsByRole(this.RoleType);
           this.toastr.success((<ResponseFromAPI>results).Message);
         } else {
           this.toastr.error((<ResponseFromAPI>results).Message);

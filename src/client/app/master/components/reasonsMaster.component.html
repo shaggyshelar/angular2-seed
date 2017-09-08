@@ -40,7 +40,7 @@
                                             <div class="form-group">
                                                 <label>Category <span class="required"> * </span></label>
                                                 <!--<input type="text" class="form-control text-capitalize" required="" maxlength="30" />-->
-                                                <select autofocus class="form-control" [(ngModel)]='selectedReason.Category' name="selectReson" id="selectReson" required tabindex="1">
+                                                <select #focus autofocus class="form-control" [(ngModel)]='selectedReason.Category' name="selectReson" id="selectReson" required tabindex="1">
                                                     <option selected [disabled]=true value="0">-Select-</option>
                                                     <option value="IEF">IEF</option>
                                                     <option value="CloseRRF">Close RRF</option>

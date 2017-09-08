@@ -107,7 +107,17 @@ export class RRFCandidateListComponent implements OnActivate {
     mindate: Date;
     public barChartOptions: any = {
         scaleShowVerticalLines: false,
-        responsive: true
+        responsive: true,
+        scales : {
+    yAxes: [{
+       ticks: {
+          steps : 1,
+          stepValue : 1,
+          max : 5,
+          min : 0,
+        }
+    }] 
+  }
     };
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;

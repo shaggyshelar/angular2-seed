@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -15,7 +15,7 @@ import { APIResult } from '../../shared/constantValue/index';
 
 
 
-export class VisaMasterComponent implements OnActivate {
+export class VisaMasterComponent implements OnActivate, AfterViewInit {
   errorMessage: string;
   visaDetails: VisaMaster[];
   selectedVisa: VisaMaster = new VisaMaster();
@@ -24,7 +24,10 @@ export class VisaMasterComponent implements OnActivate {
     private toastr: ToastsManager,
     private _router: Router) {
   }
-
+@ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
   routerOnActivate() {
     this.getVisaDetails();
   }
@@ -120,6 +123,7 @@ export class VisaMasterComponent implements OnActivate {
     this.action = 'Add';
     this.selectedVisa = new VisaMaster();
     this.getVisaDetails();
+    this.ngAfterViewInit();
   }
   /**Edit existing Record */
   edit(visaData: VisaMaster) {

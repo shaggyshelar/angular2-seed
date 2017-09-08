@@ -57,7 +57,7 @@
                                                 <label>Approver <span class="required"> * </span></label>
 
                                                 <!--<input type="text" class="form-control text-capitalize" required="" maxlength="30" [(ngModel)]="data.Approver.Id" />-->
-                                                <select id="cmbInterviewer" class="form-control" [(ngModel)]="data.Approver.Id" required="" tabindex="2">
+                                                <select #focus id="cmbInterviewer" class="form-control" [(ngModel)]="data.Approver.Id" required="" tabindex="2">
                                                     <option *ngFor="let type of approverData" [value]="type.Id">{{type.Value}}</option>
                                                 </select>
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
@@ -14,7 +14,7 @@ import { APIResult } from '../../shared/constantValue/index';
 
 
 
-export class CountryMasterComponent implements OnActivate {
+export class CountryMasterComponent implements OnActivate, AfterViewInit {
   errorMessage: string;
   ShowTable: boolean = false;
   data: CountryMaster = new CountryMaster();
@@ -24,7 +24,10 @@ export class CountryMasterComponent implements OnActivate {
     private toastr: ToastsManager,
     private _router: Router) {
   }
-
+ @ViewChild('focus') firstNameElement: ElementRef;
+    ngAfterViewInit() {
+        this.firstNameElement.nativeElement.focus();
+    }
   routerOnActivate() {
     this.getCountryData();
     this.Action = 'Add';
@@ -52,6 +55,7 @@ export class CountryMasterComponent implements OnActivate {
     this.Action = 'Add';
     this.getCountryData();
     this.data = new CountryMaster();
+    this.ngAfterViewInit();
   }
   EditData(modedetails: any) {
     this.data = modedetails;
