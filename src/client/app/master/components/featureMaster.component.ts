@@ -53,6 +53,9 @@ export class FeatureMasterComponent implements OnActivate {
   }
   /**Edit existing Record */
   Update(featureData: FeatureMaster) {
+    var checkData = featureData.Value.trim();
+    if (checkData !== '') {
+    featureData.Value=this.UpperCasefunction(checkData);
     this._MyMasterDataService.updateFeature(featureData)
       .subscribe(
       results => {
@@ -67,10 +70,29 @@ export class FeatureMasterComponent implements OnActivate {
         this.errorMessage = <any>error;
         this.toastr.error(<any>error);
       });
+      } else {
+      this.toastr.error('Please Fill Data.');
+    }
   }
+     UpperCasefunction (x:any) {
+            var i,txt = '';
+            for (i = 0; i < x.length; i++) {
+                if (x[i] === ' ') {
+                    i++;
+                    txt += ' '+x[i].toUpperCase();
+                } else {
+                    txt += x[i];
+                }
+            }
+            txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+            return txt;
+        };
   /**Add new Record */
   add(featureDetails: FeatureMaster) {
     featureDetails.Id = 0;
+    var checkData = featureDetails.Value.trim();
+    if (checkData !== '') {
+    featureDetails.Value=this.UpperCasefunction(checkData);
     this._MyMasterDataService.addFeature(featureDetails)
       .subscribe(
       results => {
@@ -85,6 +107,9 @@ export class FeatureMasterComponent implements OnActivate {
         this.errorMessage = <any>error;
         this.toastr.error(<any>error);
       });
+      } else {
+      this.toastr.error('Please Fill Data.');
+    }
   }
   /** Cancel action to reset fields */
   OnCancel() {

@@ -64,9 +64,23 @@ export class InterviewModeComponent implements OnActivate {
       this.EditInterviewModeData();
     }
   }
+  UpperCasefunction (x:any) {
+      var i,txt = '';
+        for (i = 0; i < x.length; i++) {
+          if (x[i] === ' ') {
+             i++;
+             txt += ' '+x[i].toUpperCase();
+          } else {
+              txt += x[i];
+          }
+        }
+        txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+        return txt;
+    };
   EditInterviewModeData() {
     var checkData = this.data.Value.trim();
     if (checkData !== "") {
+      this.data.Value=this.UpperCasefunction(checkData);
       this._MyMasterDataService.editInterviewModeData(this.data)
         .subscribe(
         results => {
@@ -89,6 +103,7 @@ export class InterviewModeComponent implements OnActivate {
   AddInterviewModeData() {
     var checkData = this.data.Value.trim();
     if (checkData !== '') {
+      this.data.Value=this.UpperCasefunction(checkData);
       this._MyMasterDataService.addInterviewModeData(this.data)
         .subscribe(
         results => {

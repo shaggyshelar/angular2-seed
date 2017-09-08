@@ -51,8 +51,24 @@ export class RoleMasterComponent implements OnActivate {
       this.add(this.selectedRole);
     }
   }
+    UpperCasefunction (x:any) {
+      var i,txt = '';
+        for (i = 0; i < x.length; i++) {
+          if (x[i] === ' ') {
+             i++;
+             txt += ' '+x[i].toUpperCase();
+          } else {
+              txt += x[i];
+          }
+        }
+        txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+        return txt;
+    };
   /**Edit existing Record */
   Update(roleData: RolesMaster) {
+    var checkData = roleData.Role.trim();
+    if (checkData !== "") {
+    roleData.Role=this.UpperCasefunction(checkData);
     this._MyMasterDataService.updateRole(roleData)
       .subscribe(
       results => {
@@ -67,9 +83,15 @@ export class RoleMasterComponent implements OnActivate {
         this.errorMessage = <any>error;
         this.toastr.error(<any>error);
       });
+      } else {
+      this.toastr.error('Please Fill Data.');
+    }
   }
   /**Add new Record */
   add(roleDetails: RolesMaster) {
+    var checkData = roleDetails.Role.trim();
+    if (checkData !== "") {
+    roleDetails.Role=this.UpperCasefunction(checkData);
     roleDetails.Id = 0;
     this._MyMasterDataService.addRole(roleDetails)
       .subscribe(
@@ -89,6 +111,9 @@ export class RoleMasterComponent implements OnActivate {
         this.errorMessage = <any>error;
         this.toastr.error(<any>error);
       });
+      } else {
+      this.toastr.error('Please Fill Data.');
+    }
   }
   /** Cancel action to reset fields */
   OnCancel() {

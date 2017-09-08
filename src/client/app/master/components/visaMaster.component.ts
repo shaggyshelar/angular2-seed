@@ -51,8 +51,24 @@ export class VisaMasterComponent implements OnActivate {
       this.add(this.selectedVisa);
     }
   }
+  UpperCasefunction (x:any) {
+      var i,txt = '';
+        for (i = 0; i < x.length; i++) {
+          if (x[i] === ' ') {
+             i++;
+             txt += ' '+x[i].toUpperCase();
+          } else {
+              txt += x[i];
+          }
+        }
+        txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+        return txt;
+    };
   /**Edit existing Record */
   Update(visaData: VisaMaster) {
+    var checkData = visaData.Value.trim();
+    if (checkData !== "") {
+    visaData.Value=this.UpperCasefunction(checkData);
     this._MyMasterDataService.updateVisaType(visaData)
       .subscribe(
       results => {
@@ -69,10 +85,16 @@ export class VisaMasterComponent implements OnActivate {
         this.errorMessage = <any>error;
         this.toastr.error(<any>error);
       });
+       } else {
+      this.toastr.error('Please Fill Data.');
+    }
   }
   /**Add new Record */
   add(visaDetails: VisaMaster) {
     visaDetails.Id = 0;
+    var checkData = visaDetails.Value.trim();
+    if (checkData !== "") {
+    visaDetails.Value=this.UpperCasefunction(checkData);
     this._MyMasterDataService.addVisaType(visaDetails)
       .subscribe(
       results => {
@@ -89,6 +111,9 @@ export class VisaMasterComponent implements OnActivate {
         this.errorMessage = <any>error;
         this.toastr.error(<any>error);
       });
+      } else {
+      this.toastr.error('Please Fill Data.');
+    }
   }
   /** Cancel action to reset fields */
   OnCancel() {

@@ -102,11 +102,25 @@ export class StateMasterComponent implements OnActivate {
       this.EditStateData();
     }
   }
+      UpperCasefunction (x:any) {
+      var i,txt = '';
+        for (i = 0; i < x.length; i++) {
+          if (x[i] === ' ') {
+             i++;
+             txt += ' '+x[i].toUpperCase();
+          } else {
+              txt += x[i];
+          }
+        }
+        txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+        return txt;
+    };
   EditStateData() {
     this.addStateData.Country=this.selectedCountry;
     this.addStateData.State=this.data;
     var checkData = this.addStateData.State.Value.trim();
     if (this.addStateData.Country.Id !== '-1' && checkData !== "") {
+      this.addStateData.State.Value=this.UpperCasefunction(checkData);
       this._MyMasterDataService.editStateData(this.addStateData)
         .subscribe(
         results => {
@@ -131,6 +145,7 @@ export class StateMasterComponent implements OnActivate {
     this.addStateData.State=this.data;
     var checkData = this.addStateData.State.Value.trim();
     if (this.addStateData.Country.Id !== '-1' && checkData !== "") {
+      this.addStateData.State.Value=this.UpperCasefunction(checkData);
       this._MyMasterDataService.addStateData(this.addStateData)
         .subscribe(
         results => {

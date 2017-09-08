@@ -62,9 +62,23 @@ export class TechnologyMasterComponent implements OnActivate {
       this.EditTechnologyData();
     }
   }
+     UpperCasefunction (x:any) {
+      var i,txt = '';
+        for (i = 0; i < x.length; i++) {
+          if (x[i] === ' ') {
+             i++;
+             txt += ' '+x[i].toUpperCase();
+          } else {
+              txt += x[i];
+          }
+        }
+        txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+        return txt;
+    };
   EditTechnologyData() {
     var checkData = this.data.Value.trim();
     if (checkData !== "") {
+      this.data.Value=this.UpperCasefunction(checkData);
       this._MyMasterDataService.editTechnologyData(this.data)
         .subscribe(
         results => {
@@ -86,6 +100,7 @@ export class TechnologyMasterComponent implements OnActivate {
   AddTechnologyData() {
     var checkData = this.data.Value.trim();
     if (checkData !== '') {
+      this.data.Value=this.UpperCasefunction(checkData);
       this._MyMasterDataService.addTechnologyData(this.data)
         .subscribe(
         results => {

@@ -153,6 +153,7 @@ export class CityMasterComponent implements OnActivate {
     this.StateId=parseInt(this.selectedState.Id);
     this.addCitydata.City=this.data;
     var checkData = this.data.Value.trim();
+    this.addCitydata.City.Value=this.UpperCasefunction(checkData);
     if (checkData !== "") {
       this._MyMasterDataService.editCityData(this.addCitydata)
         .subscribe(
@@ -173,11 +174,25 @@ export class CityMasterComponent implements OnActivate {
       this.toastr.error('Please Fill Data.');
     }
   }
+    UpperCasefunction (x:any) {
+            var i,txt = '';
+            for (i = 0; i < x.length; i++) {
+                if (x[i] === ' ') {
+                    i++;
+                    txt += ' '+x[i].toUpperCase();
+                } else {
+                    txt += x[i];
+                }
+            }
+            txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+            return txt;
+        };
   AddCityData() {
     this.addCitydata.State =this.selectedState;
     this.StateId=parseInt(this.selectedState.Id);
     this.addCitydata.City=this.data;
     var checkData = this.data.Value.trim();
+    this.addCitydata.City.Value=this.UpperCasefunction(checkData);
     if (checkData !== '') {
       this._MyMasterDataService.addCityData(this.addCitydata)
         .subscribe(

@@ -84,9 +84,23 @@ export class IEFFunctionMasterComponent implements OnActivate {
       this.EditIEFData();
     }
   }
+  UpperCasefunction (x:any) {
+      var i,txt = '';
+        for (i = 0; i < x.length; i++) {
+          if (x[i] === ' ') {
+             i++;
+             txt += ' '+x[i].toUpperCase();
+          } else {
+              txt += x[i];
+          }
+        }
+        txt = txt.substring(0, 1).toUpperCase() + txt.substring(1);
+        return txt;
+    };
   EditIEFData() {
     var checkData = this.data.FunctionName.trim();
     if (this.data.InterviewType.Id !== '-1' && checkData !== "") {
+      this.data.FunctionName=this.UpperCasefunction(checkData);
       this._MyMasterDataService.editIEFData(this.data)
         .subscribe(
         results => {
@@ -111,6 +125,7 @@ export class IEFFunctionMasterComponent implements OnActivate {
   AddIEFData() {
     var checkData = this.data.FunctionName.trim();
     if (this.data.InterviewType.Id !== '-1' && checkData !== "") {
+      this.data.FunctionName=this.UpperCasefunction(checkData);
       this._MyMasterDataService.addIEFData(this.data)
         .subscribe(
         results => {
