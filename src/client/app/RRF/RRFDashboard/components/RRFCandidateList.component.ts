@@ -38,6 +38,7 @@ import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/
 })
 
 export class RRFCandidateListComponent implements OnActivate {
+    designations: MasterData[];
     RRFID: MasterData = new MasterData();
     selectedRRF: RRFDetails;
     /**---------BEGING Transfer Candidate--------------- */
@@ -93,6 +94,7 @@ export class RRFCandidateListComponent implements OnActivate {
     IsHRConducted: boolean = false;
     IsOffered: boolean = false;
     ExpDateOfJoining: Date;
+    Designation:string;
     rejectDate:Date;
     IsOfferGenerate: boolean = false;
     IsReject : boolean = false;
@@ -116,7 +118,7 @@ export class RRFCandidateListComponent implements OnActivate {
           max : 5,
           min : 0,
         }
-    }] 
+    }]
   }
     };
     public barChartType: string = 'bar';
@@ -173,6 +175,8 @@ export class RRFCandidateListComponent implements OnActivate {
         this.setMinDateToCalender();
         this.getCanidatesForRRF();
         this.getRRFDetails();
+        this.getDesignation();
+        this.Designation='0';
     }
     /**Bind candidtes rating in chart */
     BindRatingChart(candidateID: MasterData, rrfID: MasterData) {
@@ -202,7 +206,14 @@ export class RRFCandidateListComponent implements OnActivate {
         sessionStorage.setItem('returnPath', '/App/RRF/RRFDashboard/Candidates/' + this.RRFID.Value + 'ID' + this.RRFID.Id);
         this._router.navigate(['/App/Recruitment Cycle/Schedule/New']);
     }
-
+  getDesignation(): void {
+    this._mastersService.GetDesignations()
+      .subscribe(
+      results => {
+        this.designations = results;
+      },
+      error => this.errorMessage = <any>error);
+  }
     chartClicked(e: any): void {
         //console.log(e);
     }
@@ -311,6 +322,14 @@ export class RRFCandidateListComponent implements OnActivate {
         this.IsAllowTransfer = false;
         this.selectedCandidate = '';
     }
+    setStyles(statuscolor:any) {
+        let styles = {
+            // CSS property names
+            'background-color':  statuscolor==='Cancelled' ? 'black' : statuscolor==='Rescheduled' ? 'Darkgreen' : statuscolor==='Rejected' ? 'Red' : statuscolor==='Offered' ? '#26C281' : statuscolor ==='Asked to Leave' ? '#b50e22' : statuscolor ==='Absconded' ? '#4d060e' : statuscolor ==='Offer Declined' ? '#3b1a9c' : statuscolor ==='Drop Out' ? '#9c3a19' : statuscolor ==='Joined' ? '#8b9c19' : statuscolor ==='Offer Accepted' ? '#199c20' : statuscolor ==='Pending Screening' ? '#ff99ee' :  statuscolor ==='Not Scheduled' ? '#630005' :  statuscolor ==='Scheduled' ? '#9A12B3' : statuscolor ==='Selected' ? '#2b67ff' : '#337ab7',
+        };
+        return styles;
+    }
+
     getRRFDetails() {
         //this.RRFID
         this._rrfCandidatesList.getRRFByID(this.RRFID.Value)
