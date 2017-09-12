@@ -250,10 +250,13 @@ export class ProfileBankService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
     updateCandidateStatus(CandidateID: MasterData, Status: MasterData, Comments: string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateStatus');
         this._spinnerService.show();
+        this.delay(5000);
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments })
             .map(this.extractData)
             .catch(this.handleError)
@@ -263,6 +266,7 @@ export class ProfileBankService {
     updateJoinedStatus(CandidateID: MasterData, Status: MasterData, Comments: string,joiningDate:string) {
         let url = Config.GetURL('/api/ProfileBank/UpdateJoinedStatus');
         this._spinnerService.show();
+        this.delay(5000);
         return this.authHttp.post(url, { CandidateID: CandidateID, Status: Status, Comments: Comments,JoinDate: joiningDate})
             .map(this.extractData)
             .catch(this.handleError)

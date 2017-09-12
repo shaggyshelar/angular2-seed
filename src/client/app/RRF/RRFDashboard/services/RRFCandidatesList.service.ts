@@ -10,7 +10,8 @@ import { TransferInterview} from '../model/RRFCandidateList';
 @Injectable()
 export class RRFCandidateListService {
     constructor(private authHttp: AuthHttp,
-        private _spinnerService: SpinnerService) { }
+        private _spinnerService: SpinnerService,
+         private _spinnerService1: SpinnerService) { }
 
     //Get RRf Specific Candidates by RRFID - API will return list of Candidates
     getCandidateProfilesByRRF(RRFID: string) {
@@ -35,11 +36,11 @@ export class RRFCandidateListService {
     getOfferedCandidatesForRRF(RRFID: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewCompletedCandidatesForRRF?RRFID=' + RRFID);
         //let url = Config.GetURL('/api/RecruitmentCycle/GetCandidatesForRRF');
-        this._spinnerService.show();
+        this._spinnerService1.show();
         return this.authHttp.get(url)
             .map(this.extractData)
             .catch(this.handleError)
-            .finally(() => this._spinnerService.hide());
+            .finally(() => this._spinnerService1.hide());
     }
     getOtherCandidatesForRRF(RRFID: string) {
         let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewRejectedCandidatesForRRF?RRFID=' + RRFID);
@@ -87,10 +88,14 @@ export class RRFCandidateListService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-    proceedForOfferGeneration(InterviewID: MasterData, CandidateID: MasterData, RRFID: MasterData, JoiningDate: Date,OfferedDate:Date) {
+    delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+    proceedForOfferGeneration(InterviewID: MasterData, CandidateID: MasterData, RRFID: MasterData,Designation:MasterData, JoiningDate: Date,OfferedDate:Date) {
         let url = Config.GetURL('/api/RecruitmentCycle/ProceedForOfferGeneration');
         this._spinnerService.show();
-        return this.authHttp.post(url, { CandidateID, RRFID, InterviewID, JoiningDate, OfferedDate })
+        this.delay(5000);
+        return this.authHttp.post(url, { CandidateID, RRFID, InterviewID, Designation, JoiningDate, OfferedDate })
             .map(this.extractData)
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());

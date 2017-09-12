@@ -332,7 +332,7 @@
                                         <base-chart class="chart" *ngIf="IsBarchartDataShow" [datasets]="barChartData " [labels]="barChartLabels " [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></base-chart>
                                     </div>
                                     <span class="caption-subject bold" style="font-size : 14px" *ngIf="IsHRConducted">{{selectedCandidate}} Final Status</span>
-                                    <div *ngIf="IsHRConducted">
+                                    <div *ngIf="IsHRConducted" class="pull-right">
                                         <select style="width: 120px;" class="form-control col-lg-2 col-sm-2" [(ngModel)]="finalStatus.Id" (change)='onFinalOperation($event.target.value)' *ngIf="IsHRConducted">
         										<option *ngFor="let status of FinalStatus" [value]="status.Id">{{status.Value}}</option>
 		 								</select>
@@ -341,25 +341,25 @@
                                     <hr *ngIf="IsHRConducted">
                                     <!-- BEGIN offer generation form-->
                                     <div class="row" style="margin-top:20px;" *ngIf="IsOfferGenerate">
-                                        <form (submit)="saveOffer(ExpDateOfJoining);">
-                                            <div class="form-group col-md-8">
+                                        <form (submit)="saveOffer(ExpDateOfJoining,Designation);">
+                                            <div class="form-group col-md-9">
                                                 <label class="col-md-6 control-label align" style="margin-left:-12px;">Joining Date <span class="required">*</span> </label>
                                                 <div class="col-md-2">
-                                                    <input type="date" class="form-control" [min]="mindate" name="bday" id="ExpDateOfJoining" required="" [(ngModel)]="ExpDateOfJoining" style="margin-left: -20px;width: 132px;" />
+                                                    <input type="date" class="form-control" [min]="mindate" name="bday" id="ExpDateOfJoining" required="" [(ngModel)]="ExpDateOfJoining" style="margin-left:-38px;width: 145px;" />
                                                 </div>
                                             </div>
-                                            <!--<div class="form-group col-md-8">
+                                            <div class="form-group col-md-9">
                                                 <label class="col-md-6 control-label align" style="margin-left:-12px;">Designation <span class="required">*</span> </label>
-                                                <div class="col-md-7" style="margin-left: -18px; width:160px;">
+                                                <div class="col-md-9" style="margin-left: -38px;width: 173px;">
                                                     <select id="cmbDesignation" class="form-control" [disabled]='isDisabled' [(ngModel)]="Designation" required tooltip="Select Designation" tooltipPlacement="top" tooltipTrigger="mouseenter">
-                                        <option value="0" selected [disabled]=true>Select Designation</option>
-                                        <option *ngFor="let designation of designations" [value]="designation.Id">{{designation.Value}}</option>
+                                            <option *ngFor="let select of Select" [ngValue]="select" selected [disabled]=true>{{select.Value}}</option>
+                                        <option *ngFor="let designation of designations" [ngValue]="designation">{{designation.Value}}</option>
                                     </select>
                                                 </div>
-                                            </div>-->
-                                            <div class="col-md-4">
+                                            </div>
+                                            <div class="col-md-3">
                                                 <div class="pull-right">
-                                                    <button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
+                                                    <button type="submit " class="btn blue " id="btnChangeStatus" style="margin-left: -44px">Save</button>
                                                     <button type="button " style="width: 61px;padding-left: 8px;" class="btn default " id="btnCancelChangeStatus" (click)='onCancelOffer()'>Cancel</button> &nbsp;
 
                                                 </div>
@@ -410,7 +410,7 @@
                                                 <div class="form-group col-md-5">
                                                     <div class="dataTables_length" id="sample_1_length">
                                                         <label>Status <span class="required">*</span></label>
-                                                        <select name="sample_1_length" aria-controls="sample_1" (change)='onSelectStatus($event.target.value)' class="form-control input-sm input-xsmall input-inline" [(ngModel)]="selectedStatus.Id" required="" style="width: 159px!important;">
+                                                        <select name="sample_1_length1" aria-controls="sample_1" (change)='onSelectStatus($event.target.value)' class="form-control input-sm input-xsmall input-inline" [(ngModel)]="selectedStatus.Id" required="" style="width: 159px!important;">
 				<option *ngFor="let status of CandidateUpdatedStatus" [value]="status.Id">{{status.Value}}</option>
 			</select>
 
@@ -429,6 +429,8 @@
                                                     <div class="pull-right">
                                                         <button type="submit " class="btn blue " id="btnChangeStatus">Save</button>
                                                         <button type="button " class="btn default " id="btnCancelChangeStatus" (click)='onCancelStatus()'>Cancel</button> &nbsp;
+
+                                                        <!--<button type="button " style="width: 61px;padding-left: 8px;" class="btn default " id="btnCancelChangeStatus" (click)='onCancelOffer()'>Cancel</button> &nbsp;-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -482,7 +484,7 @@
                                         </tbody>
                                     </table>
                                     <span *ngIf='isRoundHistoryPresent'>No Candidates Round History Found</span>
-                                    <hr/>
+                                    <hr>
                                     <!-- END Show interview round history -->
 
                                     <!-- BEGIN set actual time -->

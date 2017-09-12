@@ -38,6 +38,7 @@ import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/
 })
 
 export class RRFCandidateListComponent implements OnActivate {
+    Select:MasterData[];
     designations: MasterData[];
     RRFID: MasterData = new MasterData();
     selectedRRF: RRFDetails;
@@ -94,7 +95,7 @@ export class RRFCandidateListComponent implements OnActivate {
     IsHRConducted: boolean = false;
     IsOffered: boolean = false;
     ExpDateOfJoining: Date;
-    Designation:string;
+    Designation: MasterData= new  MasterData();
     rejectDate:Date;
     IsOfferGenerate: boolean = false;
     IsReject : boolean = false;
@@ -158,6 +159,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.selectedRRF = new RRFDetails();
         this.ReturnPath = sessionStorage.getItem('backToRRFDashboardList');
         this.candidateStatus = sessionStorage.getItem('StatusValue');
+        this.Select = [{ Id:-1, Value: 'Select'}];
         if (this.candidateStatus !== null) {
             if (this.candidateStatus.toLowerCase() === 'offered' || this.candidateStatus.toLowerCase() === 'offer accepted'
                 || this.candidateStatus.toLowerCase() === 'joined') {
@@ -176,7 +178,7 @@ export class RRFCandidateListComponent implements OnActivate {
         this.getCanidatesForRRF();
         this.getRRFDetails();
         this.getDesignation();
-        this.Designation='0';
+        this.Designation.Id=-1;
     }
     /**Bind candidtes rating in chart */
     BindRatingChart(candidateID: MasterData, rrfID: MasterData) {
@@ -696,14 +698,15 @@ export class RRFCandidateListComponent implements OnActivate {
     onCancelOffer() {
         this.IsOfferGenerate = false;
     }
-    saveOffer(joiningDate: Date) {
+    saveOffer(joiningDate: Date,designation:any) {
         joiningDate = moment(joiningDate).format('MM-DD-YYYY');
         let OffredDate = moment(new Date()).format('MM-DD-YYYY');
         this._rrfCandidatesList.proceedForOfferGeneration(this.CandidateRoundHistory[this.CandidateRoundHistory.length - 1].InterviewID,
-            this.CandidateRoundHistory[0].CandidateID, this.RRFID, joiningDate,OffredDate)
+            this.CandidateRoundHistory[0].CandidateID, this.RRFID,designation, joiningDate,OffredDate)
             .subscribe(
             (results: any) => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    setTimeout(() => { this.getOfferedCanidatesForRRF(); }, 5000);
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.getCanidatesForRRF();
                     this.getOfferedCanidatesForRRF();
@@ -717,10 +720,11 @@ export class RRFCandidateListComponent implements OnActivate {
     saveUpdateStatus() {
         let abc=this.rejectDate;
         if(this.rejectReason === '' && this.rejectDate === ''){
-            this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason)
+        this._profileBankService.updateCandidateStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    setTimeout(() => { this.getOfferedCanidatesForRRF(); }, 5000);
                     this.getOfferedCanidatesForRRF();
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
@@ -734,11 +738,12 @@ export class RRFCandidateListComponent implements OnActivate {
             },
             error => this.errorMessage = <any>error);
         }
-        if(this.rejectReason !== '' && this.rejectDate !== ''){
-             this._profileBankService.updateJoinedStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason,this.rejectDate)
+        if(this.rejectReason !== '' && this.rejectDate !== '') {
+    this._profileBankService.updateJoinedStatus(this.CandidateRoundHistory[0].CandidateID, this.selectedStatus, this.rejectReason,this.rejectDate)
             .subscribe(
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
+                    setTimeout(() => { this.getOfferedCanidatesForRRF(); }, 5000);
                     this.getOfferedCanidatesForRRF();
                     this.toastr.success((<ResponseFromAPI>results).Message);
                     this.IsUpdateStatus = false;
