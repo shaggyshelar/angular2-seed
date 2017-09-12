@@ -31,6 +31,7 @@ import { SpinnerComponent, SpinnerService } from '../../shared/components/spinne
 import { InterviewrsComponent, RecruitmentInterviewerCalenderComponent } from '../../recruitmentCycle/interviewersTab/index';
 import {ScheduleInterviewComponent} from '../../recruitmentCycle/scheduleInterview/index';
 import {DashboardComponent} from '../../Dashboard/component/dashboard.component';
+import { CommonDashboardComponent} from '../../Dashboard/index';
 import {ShowScheduleInterviewsComponent} from '../../recruitmentCycle/recruitersTab/components/interviews.component';
 import {RecruitersScheduleInterviewsComponent} from '../../recruitmentCycle/DeliveryManager/components/DeliveryScheduledInterview.component';
 import {MasterPageComponent} from '../../master/components/MasterPage.component';
@@ -48,6 +49,7 @@ import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.direct
 })
 @Routes([
   { path: '/', component: DashboardComponent },
+  { path: '/Dashboard', component: CommonDashboardComponent },
   { path: '/Admin/Feature', component: FeatureComponent },
   { path: '/Admin/Practice', component: PracticeComponent },
   { path: '/Admin/Skill', component: SkillComponent },
