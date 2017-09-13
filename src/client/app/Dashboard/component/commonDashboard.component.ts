@@ -7,7 +7,7 @@ import { RRFGridRowComponent} from '../../RRF/shared/components/RRFGridRow/RRFGr
 import { AllCandidateProfiles } from  '../../profileBank/shared/model/myProfilesInfo';
 import { DetailProfileComponent } from '../../profileBank/shared/component/detailProfile.component';
 import { CommonService } from '../../shared/index';
-import { InterviewApproval } from '../../recruitmentCycle/shared/component/InterviewApproval/model/interviewApproval';
+import { InterviewsList} from '../../recruitmentCycle/recruiterstab/model/interviewDetails';
 // import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 // import {
 //   GraphComponent,
@@ -27,7 +27,7 @@ import { InterviewApproval } from '../../recruitmentCycle/shared/component/Inter
 // import { DetailProfileComponent } from '../../profileBank/shared/component/detailProfile.component';
 // import { RRFDetails } from '../../RRF/myRRF/models/rrfDetails';
 // import { RRFGridRowComponent} from '../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
-// import { InterviewApproval } from '../../recruitmentCycle/shared/component/InterviewApproval/model/interviewApproval';
+ import { InterviewApproval } from '../../recruitmentCycle/shared/component/InterviewApproval/model/interviewApproval';
 // import { CommonService } from '../../shared/index';
 
 @Component({
@@ -44,6 +44,7 @@ import { InterviewApproval } from '../../recruitmentCycle/shared/component/Inter
 })
 
 export class CommonDashboardComponent implements OnInit {
+    InterviewDetailsList: InterviewsList = new InterviewsList();
   errorMessage: string;
   //grdOptions: GrdOptions = new GrdOptions();
   _dashboardFilters: DashboardFilters = new DashboardFilters();
@@ -74,6 +75,7 @@ export class CommonDashboardComponent implements OnInit {
 
     this.GetAllOpenRRF(this._dashboardFilters);
     this.GetScheduledInterviews(this._dashboardFilters);
+   // this.getAllScheduleInterviewsData();
     this.GetOfferedCandidate(this._dashboardFilters);
     this.GetAllJoinings(this._dashboardFilters);
   }
@@ -85,6 +87,13 @@ export class CommonDashboardComponent implements OnInit {
       this._dashboardFilters.TimeDuration=timePeriod;
       this.getData();
     }
+     setStyles(practice:any) {
+        let styles = {
+            // CSS property names
+            'color':  practice==='EBS' ? '#2b67ff' : practice==='ECS' ? '#ed2ded' : practice==='EGS' ? '#F7CA18' : practice==='ESS' ? '#5ecc2f' : practice ==='Other' ? '#ff6161' : '#ff6161',
+        };
+        return styles;
+    }
 getData(){
   this.GetAllOpenRRF(this._dashboardFilters);
     this.GetScheduledInterviews(this._dashboardFilters);
@@ -95,7 +104,33 @@ getData(){
         this.CurrentUser = this._commonService.getLoggedInUser();
         return this.CurrentUser ? true : false;
     }
+       getAllScheduleInterviewsData() {
+        this.dashboardService.getAllInterviews(this.InterviewDetailsList.GrdOperations)
+            .subscribe(
+            (results: any) => {
+                if (results.AllInterviews !== null && results.AllInterviews.length > 0) {
+                    this.InterviewDetailsList = results;
+                    this.IsInterview = true;
+                    this.NoDataFound = false;
+                    this.IsProfile = false;
+                    this.IsRRF = false;
+
+                } else {
+                    this.InterviewDetailsList.AllInterviews = [];
+                    this.InterviewDetailsList.GrdOperations = results.GrdOperations;
+                    this.NoDataFound = true;
+                }
+                 this.Title = 'Scheduled Interviews';
+                let modl: any = $('#CountDetails');
+                modl.modal({ 'backdrop': 'static' });
+            },
+            error => {
+                this.errorMessage = <any>error;
+
+            });
+    }
   GetAllOpenRRF(dashboardFilters: DashboardFilters): void {
+      this._detailsRRF= new Array<DetailsRRF>();
     this.dashboardService.GetOpenAndAssignedRRFsByFilters(dashboardFilters)
       .subscribe(
       results => {
@@ -108,6 +143,7 @@ getData(){
       error => this.errorMessage = <any>error);
   }
   GetAllJoinings(dashboardFilters: DashboardFilters): void {
+     this.joiningCandidate = new Array<CanidateInformation>();
     this.dashboardService.GetDetailsOfCandidatesJoiningByFilter(dashboardFilters)
       .subscribe(
       results => {
@@ -229,6 +265,7 @@ getData(){
             error => this.errorMessage = <any>error);
     }
   GetOfferedCandidate(dashboardFilters: DashboardFilters): void {
+      this.offeredCandidate = new Array<CanidateInformation>();
     this.dashboardService.GetInterviewCompletedCandidatesByFilters(dashboardFilters)
       .subscribe(
       results => {
@@ -240,13 +277,13 @@ getData(){
   }
     onViewCandidateClick(rrfID: MasterData, status:string) {
         this.onCancelClick();
-        sessionStorage.setItem('backToRRFDashboardList',sessionStorage.getItem('backToProfile'));
+        sessionStorage.setItem('backToRRFDashboardList','/App/Dashboard');
         sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
      viewProfiles(CandidateID: MasterData) {
         this.onCancelClick();
-        sessionStorage.setItem('onProfilesReturnPath', '/App');
+        sessionStorage.setItem('onProfilesReturnPath', '/App/Dashboard');
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
      checkOwner(owner: string, isRRFAssigned: any) {

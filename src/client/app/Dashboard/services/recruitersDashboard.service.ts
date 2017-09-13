@@ -168,6 +168,15 @@ export class RecruitersDashboardService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
+   //Get all interviews schedule. 
+    getAllInterviews(grdOptions: GrdOptions) {
+        let url = Config.GetURL('/api/RecruitmentCycle/RecruiterGetScheduledInterviews');
+        this._spinnerService.show();
+        return this.authHttp.post(url, { grdOptions })
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
   /**Get Get Pending RRF Approval by role*/
   getPendingRRFApproval(grdOptions: GrdOptions, status: string) {
     let url = Config.GetURL('/api/RRF/GetMyRaisedRRFWithCurrentStatus');
