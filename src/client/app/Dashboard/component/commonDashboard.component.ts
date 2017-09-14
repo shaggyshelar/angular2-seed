@@ -127,8 +127,6 @@ export class CommonDashboardComponent implements OnInit {
         if (results.RRFs !== null && results.RRFs.length>0) {
           this._detailsRRF = <any>results.RRFs;
             this.NoRecordsFound=false;
-          console.log('Open RRF');
-          console.log(this._detailsRRF);
         } else {
             this.NoRecordsFound=true;
         }
@@ -142,8 +140,6 @@ export class CommonDashboardComponent implements OnInit {
       results => {
         if (results !== null) {
           this.joiningCandidate = <any>results.Profiles;
-          console.log('Joinings');
-          console.log(this.joiningCandidate);
         }
       },
       error => this.errorMessage = <any>error);
