@@ -159,13 +159,17 @@ export class MyRRFAddComponent implements OnActivate {
   validate(type: string, number: string): boolean {
     var result = false;
     switch (type) {
-      case 'rrf': if (number.indexOf('\'') >= 0 || number.indexOf('"') >= 0) {
+      case 'rrf': if(number !== undefined) {
+        if (number.indexOf('\'') >= 0 || number.indexOf('"') >= 0) {
         this.toastr.error('Single quotes and double quotes are not allowed');
         //  this.newRRF.AdditionalRoles='';
         result = false;
-      } else {
+        } else {
         result = true;
         //  this.onSaveSalaryDetails();
+      }
+    } else {
+        this.toastr.error('Please insert Value.');
       }
         break;
       case 'MaxExp':

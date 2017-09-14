@@ -162,12 +162,14 @@
                                         <div class="col-lg-6">
                                             <label>Min Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMinExp" [(ngModel)]='newRRF.MinExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" [(ngModel)]='newRRF.MinExp' (blur)="validate('MinExp', newRRF.MinExp)" [disabled]='isDisabled' required id="txtMinExp" min="0" max='newRRF.MaxExp' tooltip="Min Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp" style="width: 145px;">
+                                            <input type="number" [(ngModel)]='newRRF.MinExp' (blur)="validate('MinExp', newRRF.MinExp)" [disabled]='isDisabled' required id="txtMinExp" min="0" max='newRRF.MaxExp' tooltip="Min Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MinExp"
+                                                style="width: 145px;">
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Max Exp.<small>&nbsp;(In years)</small><span class="required"> * </span></label>
                                             <!--<input id="txtMaxExp" [(ngModel)]='newRRF.MaxExp' type="text" value="" name="demo_vertical" />-->
-                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp' (blur)="validate('MaxExp', newRRF.MaxExp)" [disabled]='isDisabled' id="txtMaxExp" min="0" max="60" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp" style="width: 145px;">
+                                            <input type="number" required="" [(ngModel)]='newRRF.MaxExp' (blur)="validate('MaxExp', newRRF.MaxExp)" [disabled]='isDisabled' id="txtMaxExp" min="0" max="60" tooltip="Max Exp." tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.MaxExp"
+                                                style="width: 145px;">
                                         </div>
                                     </div>
                                 </div>
@@ -180,8 +182,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-1">
-                                      <a class="blue" (click)="getFromLinkUpSkills()" style="margin-left:-936%;" data-toggle="tooltip" data-placement="top" tooltip="Sync With Linkup Skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"><i class="fa fa-refresh" aria-hidden="true"></i></a>
-                                    </div>
+                                    <a class="blue" (click)="getFromLinkUpSkills()" style="margin-left:-936%;" data-toggle="tooltip" data-placement="top" tooltip="Sync With Linkup Skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="false"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                                </div>
                             </div>
                             <!--<div class="row">
                                 <div class="form-group col-lg-12">
@@ -197,18 +199,20 @@
                                     <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
                                 </div>
                                 <div class="form-group col-lg-12">
-                                    <label>Additional Roles<small> (Max 1200 chars)</small></label>
-                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.AdditionalRoles)" [(ngModel)]='newRRF.AdditionalRoles' [disabled]='isDisabled' maxlength="1200" id="txtDescription" rows="2" tooltip="Additional Roles" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.AdditionalRoles" placeholder="Additional Roles"
+                                    <label>Additional Roles<small> (Max 1200 chars)</small><span class="required"> * </span></label>
+                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.AdditionalRoles)" [(ngModel)]='newRRF.AdditionalRoles'
+                                        [disabled]='isDisabled' maxlength="1200" id="txtDescription" rows="2" tooltip="Additional Roles" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.AdditionalRoles" placeholder="Additional Roles"
                                         style="resize:vertical"></textarea>
-                                          <!--<textarea class="form-control text-capitalize" rows="1" placeholder="" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true"  (blur)="validate('rrf', profile.CandidateSalaryDetails.AnyPerks)" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" tabindex="4"></textarea>-->
+                                    <!--<textarea class="form-control text-capitalize" rows="1" placeholder="" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true"  (blur)="validate('rrf', profile.CandidateSalaryDetails.AnyPerks)" [(ngModel)]="profile.CandidateSalaryDetails.AnyPerks" tabindex="4"></textarea>-->
                                     <!--<input type="text" [(ngModel)]='newRRF.Description' id="txtDescription" class="form-control" placeholder="Description"/>-->
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Additional skills<small> (Max 250 chars)</small><span class="required"> * </span></label>
-                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.PreferredSkills)" [(ngModel)]='newRRF.PreferredSkills' [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Preferred skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description"
-                                        placeholder="Preferred skills" required="" style="resize:vertical"></textarea>
+                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.PreferredSkills)" [(ngModel)]='newRRF.PreferredSkills'
+                                        [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Preferred skills" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description" placeholder="Preferred skills" required=""
+                                        style="resize:vertical"></textarea>
                                 </div>
                             </div>
                             <!--<div class="row">
@@ -228,8 +232,9 @@
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label>Qualification/ Certifications required<small> (Max 250 chars)</small><span class="required"> * </span></label>
-                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.QualCertRquired)" [(ngModel)]='newRRF.QualCertRquired' [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Qualification/ Certifications required" tooltipPlacement="top" tooltipTrigger="mouseenter"
-                                        tooltipEnable="!newRRF.Description" placeholder="Qualification/ Certifications required" required="" style="resize:vertical"></textarea>
+                                    <textarea class="form-control text-capitalize" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null :(event.charCode==34 || event.charCode==39)? false: true" (blur)="validate('rrf', newRRF.QualCertRquired)" [(ngModel)]='newRRF.QualCertRquired'
+                                        [disabled]='isDisabled' maxlength="250" id="txtDescription" rows="2" tooltip="Qualification/ Certifications required" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="!newRRF.Description" placeholder="Qualification/ Certifications required"
+                                        required="" style="resize:vertical"></textarea>
                                 </div>
                             </div>
 

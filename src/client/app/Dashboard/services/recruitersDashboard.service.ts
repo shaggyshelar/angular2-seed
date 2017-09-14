@@ -177,6 +177,15 @@ export class RecruitersDashboardService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    getMyInterviews() {
+        let url = Config.GetURL('/api/RecruitmentCycle/GetUserInterviewDetails');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
+    
   /**Get Get Pending RRF Approval by role*/
   getPendingRRFApproval(grdOptions: GrdOptions, status: string) {
     let url = Config.GetURL('/api/RRF/GetMyRaisedRRFWithCurrentStatus');
@@ -301,9 +310,25 @@ export class RecruitersDashboardService {
       .catch(this.handleError)
       .finally(() => this._spinnerService.hide());
   }
+   DashboardGetScheduledInterviewsByFilter(dashboardFilters: DashboardFilters) {
+    let url = Config.GetURL('/api/RecruitmentCycle/DashboardGetScheduledInterviewsByFilter');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { dashboardFilters })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
   // GetInterviewCompletedCandidatesByFilters
   GetInterviewCompletedCandidatesByFilters(dashboardFilters: DashboardFilters) {
     let url = Config.GetURL('/api/RecruitmentCycle/GetInterviewCompletedCandidatesByFilters');
+    this._spinnerService.show();
+    return this.authHttp.post(url, { dashboardFilters })
+      .map(this.extractData)
+      .catch(this.handleError)
+      .finally(() => this._spinnerService.hide());
+  }
+    GetAllCandidatesByFilter(dashboardFilters: DashboardFilters) {
+    let url = Config.GetURL('/api/ProfileBank/GetAllCandidatesByFilter');
     this._spinnerService.show();
     return this.authHttp.post(url, { dashboardFilters })
       .map(this.extractData)

@@ -77,7 +77,7 @@
                                                         <li *ngFor="let _rrf of _detailsRRF"><i class="icon-graduation check" [ngStyle]="setStyles(_rrf.Practice.Value)" aria-hidden="true"></i>
                                                             <b>{{_rrf.RRFCODE}}</b> :: {{_rrf.Practice.Value}} :: <b>{{_rrf.Designation.Value}}</b> :: {{_rrf.Technology.Value}}
                                                         </li>
-                                                        <li *ngIf="_detailsRRF.length === 0">
+                                                        <li *ngIf="NoRecordsFound === true">
                                                             <b>No Records Found</b>
                                                         </li>
                                                         <!-- <li><i class="fa fa-check-circle-o check" aria-hidden="true"></i> elit, sed do eiusmod tempor incididunt 
@@ -115,13 +115,13 @@
                                                 </div>
                                                 <div class="dashboardBoxBody">
                                                     <ul>
-                                                        <li *ngFor="let interview of _interviewInformation"><i class="icon-user-following check" aria-hidden="true"></i> <b>{{interview.Candidate}}</b> will interview by {{interview.Candidate}} on <i>{{interview.InterviewDate}}</i>.
-                                                        </li>
-                                                        <!--<li *ngFor="let interview of InterviewDetailsList.AllInterviews"><i class="icon-user-following check" aria-hidden="true"></i> <b> {{interview.CandidateDetails.FullName}}</b> will interviewed by<b *ngFor="let interviewers of interview.InterviewerAvailability">
+                                                        <!--<li *ngFor="let interview of _interviewInformation"><i class="icon-user-following check" aria-hidden="true"></i> <b>{{interview.Candidate}}</b> will interview by {{interview.Candidate}} on <i>{{interview.InterviewDate}}</i>.
+                                                        </li>-->
+                                                        <li *ngFor="let interview of InterviewDetailsList.AllInterviews"><i class="icon-user-following check" style="color:#9A12B3;font-weight: bold" aria-hidden="true"></i> <b> {{interview.CandidateDetails.FullName}}</b> will interviewed by<b *ngFor="let interviewers of interview.InterviewerAvailability">
                                                                     {{interviewers.Interviewer.Value}}
                                                                 </b> on <i>{{formatDate(interview.InterviewDate)}}</i>.
-                                                        </li>-->
-                                                        <li *ngIf="_interviewInformation.length === 0">
+                                                        </li>
+                                                        <li *ngIf=" InterviewDetailsList.AllInterviews.length === 0">
                                                             <b>No Records Found</b>
                                                         </li>
                                                         <!-- <li><i class="fa fa-check-circle-o check" aria-hidden="true"></i> elit, sed do eiusmod tempor incididunt
@@ -199,7 +199,7 @@
                                                     <ul>
                                                         <!--<li *ngFor="let oCandidate of offeredCandidate"><i class="fa fa-check-circle-o check" aria-hidden="true"></i> <b>{{oCandidate.Candidate}}</b> is offered under <b>N/A</b>.
                                                         </li>-->
-                                                        <li *ngFor="let oCandidate of offeredCandidate"><i class="icon-star check" aria-hidden="true"></i> <b>{{oCandidate.Candidate}}</b> is offered under <b>{{oCandidate.RRFDetails?oCandidate.RRFDetails.RRFCode:"N/A"}}</b>.
+                                                        <li *ngFor="let oCandidate of offeredCandidate"><i class="icon-star check" [ngStyle]="setStyles(oCandidate.RRFDetails.Department.Value)" aria-hidden="true"></i> <b>{{oCandidate.Candidate}}</b> is Offered under <b>{{oCandidate.RRFDetails?oCandidate.RRFDetails.RRFCode:"N/A"}}</b>.
                                                         </li>
                                                         <li *ngIf="offeredCandidate.length === 0">
                                                             <b>No Records Found</b>
@@ -327,7 +327,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr *ngFor="let interview of InterviewDetailsList.AllInterviews">
+                                                    <tr *ngFor="let interview of InterviewInformation.AllInterviews">
                                                         <td> <a (click)='redirect(interview.RRFID.Value,interview.RRFCode)'> {{interview.RRFCode}}</a></td>
                                                         <td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
                                                             <br/> Contact No : {{interview.CandidateDetails.Contact}}

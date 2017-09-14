@@ -48,8 +48,8 @@ import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.direct
   providers: [SpinnerService],
 })
 @Routes([
-  { path: '/', component: DashboardComponent },
-  { path: '/Dashboard', component: CommonDashboardComponent },
+  { path: '/', component: CommonDashboardComponent },
+  // { path: '/Dashboard', component: CommonDashboardComponent },
   { path: '/Admin/Feature', component: FeatureComponent },
   { path: '/Admin/Practice', component: PracticeComponent },
   { path: '/Admin/Skill', component: SkillComponent },

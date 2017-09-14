@@ -18,7 +18,7 @@ export class InterviewInformation extends Interview {
 export class DashboardFilters {
   AllorMy: string = 'All';
   TimeDuration: string = 'Year';
-  CountOfList: number = 5;
+  CountOfList: number = 15;
 }
 
 /**

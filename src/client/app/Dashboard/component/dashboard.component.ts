@@ -770,7 +770,7 @@ export class DashboardComponent implements OnInit {
         this.dashboardService.getOverdueRRF(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
-                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                if (results.RRFs !== null && results.RRFs.length > 0 && results.RRFs !== undefined) {
                     this.IsProfile = false;
                     this.IsInterview = false;
                     this.IsRRF = true;
@@ -969,7 +969,7 @@ export class DashboardComponent implements OnInit {
         this.dashboardService.getAssignedOpenRRF(this.grdOptionsIncompeteProfiles)
             .subscribe(
             (results: any) => {
-                if (results.RRFs !== undefined && results.RRFs.length > 0) {
+                if (results.RRFs !== null && results.RRFs.length > 0 && results.RRFs !== undefined) {
                     this.IsProfile = false;
                     this.IsInterview = false;
                     this.IsRRF = true;
