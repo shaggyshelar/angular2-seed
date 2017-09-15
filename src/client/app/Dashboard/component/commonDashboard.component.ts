@@ -9,6 +9,7 @@ import { DetailProfileComponent } from '../../profileBank/shared/component/detai
 import { CommonService } from '../../shared/index';
 import { InterviewsList} from '../../recruitmentCycle/recruiterstab/model/interviewDetails';
 import { Interview} from '../../recruitmentCycle/shared/model/interview';
+import { InterviewMode } from  '../../shared/constantValue/index';
 // import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 // import {
 //   GraphComponent,
@@ -55,6 +56,7 @@ export class CommonDashboardComponent implements OnInit {
   interviewApproval: InterviewApproval[] = [];
   NoDataFound: boolean = false;
   NoRecordsFound: boolean = false;
+  NOScheduledRECORDSFOUND: boolean = false;
   Title: string;
   IsRRF: boolean = false;
   IsProfile: boolean = false;
@@ -69,6 +71,7 @@ export class CommonDashboardComponent implements OnInit {
   _interviewInformation: Array<InterviewInformation> = new Array<InterviewInformation>();
   ScheduleInterviewInformation: Array<Interview> = new Array<Interview>();
   InterviewInformation: Array<Interview> = new Array<Interview>();
+  modeConstant: InterviewMode = InterviewMode;
   constructor(private dashboardService: RecruitersDashboardService,
     private _router: Router,private _commonService: CommonService
   ) {
@@ -104,7 +107,7 @@ export class CommonDashboardComponent implements OnInit {
             (results: any) => {
                 if (results.length !== undefined && results.length > 0) {
                     this.ScheduleInterviewInformation = results;
-                } 
+                } else { this.NOScheduledRECORDSFOUND = true; }
             },
             error => {
                 this.errorMessage = <any>error;
@@ -321,6 +324,18 @@ export class CommonDashboardComponent implements OnInit {
         if (day.length < 2) day = '0' + day;
 
         return [day, month, year].join('-');
+    }
+    getTime(time: string) {
+        //time:string = interviewTime;
+        var intTime: Array<string> = new Array<string>();
+        intTime = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+        if (intTime.length > 1) { // If time format correct
+            intTime = intTime.slice(1);  // Remove full string match value
+            intTime[5] = +intTime[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+            var adjustHr = +intTime[0] % 12 || 12; // Adjust hours
+            intTime[0] = adjustHr.toString();
+        }
+        return intTime.join('');
     }
     redirect(rrfID:any, rrfCode:any) {
         sessionStorage.setItem('backToRRFDashboardList','/App');

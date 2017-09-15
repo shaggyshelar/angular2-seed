@@ -1,3 +1,11 @@
+<style>
+    .scrollTable {
+        min-height: 300px !important;
+        max-height: 300px !important;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+</style>
 <!-- BEGIN CONTENT -->
 <div style="height:500px; margin-top:-40px;" ng-cloak="true">
     <div class="page-content-wrapper">
@@ -29,7 +37,7 @@
                     <!--_____END COMMAN SECTION -->
 
                     <!--_____BEGIN COMMAN DASHBOARD SECTION -->
-                    <section>
+                    <section [ifAuthorize]="['DB.GRAPH.2.READ']">
                         <div>
                             <div class="content-box">
                                 <!--*****************************************************-->
@@ -64,6 +72,7 @@
                                         <i class="fa fa-angle-down" aria-hidden="true"></i>
                                     </div>
                                 </div>
+
 
 
                                 <div class="boxContainer">
@@ -240,6 +249,58 @@
                         </div>
                     </section>
                     <!--_____END COMMAN DASHBOARD SECTION -->
+                    <!--_____START MY SCHEDULE COMMAN DASHBOARD SECTION -->
+                    <!--<section>
+                        <div class="boxContainer">
+                            <div class="row" style="padding: 15px;max-height: 500px;min-height: 490px;">
+                                <div class="dashboardBox">
+                                    <div class="portlet light bordered" style="min-height: 400px; max-height: 400px;">
+                                        <div class="portlet-title">
+                                            <div class="caption font-dark">
+                                                <span class="caption-subject bold uppercase"><i class="fa fa-calendar-check-o"></i> My Schedule</span>
+                                            </div>
+                                        </div>
+                                        <div class="scrollTable">
+                                            <div class="portlet-body">
+
+                                                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                                                    <thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
+                                                        <tr>
+                                                            <th> Name </th>
+                                                            <th> Contact No. </th>
+                                                            <th> RRF Code </th>
+                                                            <th> Interview Mode </th>
+                                                            <th> Interview Time </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr class="gradeX" *ngFor="let _myInterview of ScheduleInterviewInformation; let index = index " id="">
+
+                                                            <td> {{_myInterview.CandidatePrimaryDetails.FullName}}
+                                                            </td>
+                                                            <td class="center"> {{_myInterview.CandidatePrimaryDetails.Contact}} </td>
+                                                            <td>
+                                                                <a>{{_myInterview.RRFCODE}}</a>
+                                                            </td>
+                                                            <td>
+                                                                <div> {{_myInterview.InterviewMode.Value}}</div>
+                                                                <div *ngIf="_myInterview.InterviewMode.Id == modeConstant.SkypeInterview"> Skype ID: {{_myInterview.SkypeID.Value ? _myInterview.SkypeID.Value : "N/A"}}</div>
+                                                                <div *ngIf="_myInterview.InterviewMode.Id == modeConstant.SkypeInterview"> Password: {{_myInterview.SkypePassword ? _myInterview.SkypePassword : "N/A"}}</div>
+                                                            </td>
+                                                            <td class="center"> {{formatDate(_myInterview.InterviewDate)}} At {{getTime(_myInterview.InterviewFromTime)}} </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <span style="margin-top:5px;margin-left:15px" *ngIf='NOScheduledRECORDSFOUND'>No Records Found</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>-->
+                    <!--_____END MY SCHEDULE COMMAN DASHBOARD SECTION -->
 
                     <!--Begin Count Details box-->
                     <div id="CountDetails" class="modal fade">
