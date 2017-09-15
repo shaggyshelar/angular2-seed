@@ -189,9 +189,12 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
         }
 
     }
-
+    CancelConfirmModel(){
+      this.ifInterviewScheduled=false;
+    }
     onScheduleInterviewClick() {
         try {
+          this.ifInterviewScheduled=true;
             var starttime = moment(this.ScheduleInterView.InterviewFromTime, 'h:mm');
             var endtime = moment(this.ScheduleInterView.InterviewToTime, 'h:mm');
             //check for To time and from time should not be same
@@ -234,6 +237,7 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                             cnfrmBox.modal('toggle');
                         } else {
                             this.toastr.warning('You can not schedule interview in booked slot');
+                            this.ifInterviewScheduled=false;
                         }
                     } else { this.toastr.warning('Please fill atleast one interviewer'); }
                   }, 5000);
@@ -273,11 +277,13 @@ export class ScheduleCandidateInterviewComponent implements OnActivate {
                     }
                       else {
                         this.toastr.warning('You can not schedule interview in booked slot');
+                        this.ifInterviewScheduled=false;
                     }
                     //this.ScheduleCandidateInterView();
                 }
             } else {
                 this.toastr.error('Interview To time must be greater than interview From time');
+                this.ifInterviewScheduled=false;
             }
 
         } catch (error) {
