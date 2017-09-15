@@ -72,7 +72,7 @@ export class IEFFunctionMasterComponent implements OnActivate, AfterViewInit {
   OnCancel() {
     this.Action = 'Add';
     this.data = new IEFFunctions();
-    this.data.DisplayRatings = 'false';
+    this.data.DisplayRatings = false;
     this.getIEFData();
     this.ngAfterViewInit();
     // this.data.InterviewType.Id='-1';
@@ -112,6 +112,7 @@ export class IEFFunctionMasterComponent implements OnActivate, AfterViewInit {
             this.toastr.success((<ResponseFromAPI>results).Message);
             this.getIEFData();
             this.OnCancel();
+            this.data.DisplayRatings = false;
             /**Bind new data to list */
           } else {
             this.toastr.error((<ResponseFromAPI>results).Message);

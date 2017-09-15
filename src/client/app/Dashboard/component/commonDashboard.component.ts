@@ -67,6 +67,7 @@ export class CommonDashboardComponent implements OnInit {
   offeredCandidate: Array<CanidateInformation> = new Array<CanidateInformation>();
   joiningCandidate: Array<CanidateInformation> = new Array<CanidateInformation>();
   _interviewInformation: Array<InterviewInformation> = new Array<InterviewInformation>();
+  ScheduleInterviewInformation: Array<Interview> = new Array<Interview>();
   InterviewInformation: Array<Interview> = new Array<Interview>();
   constructor(private dashboardService: RecruitersDashboardService,
     private _router: Router,private _commonService: CommonService
@@ -79,6 +80,7 @@ export class CommonDashboardComponent implements OnInit {
     this.GetScheduledInterviews(this._dashboardFilters);
     this.GetOfferedCandidate(this._dashboardFilters);
     this.GetAllJoinings(this._dashboardFilters);
+    this.getMyInterviews();
   }
    onSelectStatus(status:any) {
       this._dashboardFilters.AllorMy=status;
@@ -95,6 +97,18 @@ export class CommonDashboardComponent implements OnInit {
             'font-weight':'bold',
         };
         return styles;
+    }
+     getMyInterviews() {
+        this.dashboardService.getMyInterviews()
+            .subscribe(
+            (results: any) => {
+                if (results.length !== undefined && results.length > 0) {
+                    this.ScheduleInterviewInformation = results;
+                } 
+            },
+            error => {
+                this.errorMessage = <any>error;
+            });
     }
     getData() {
         this.GetAllOpenRRF(this._dashboardFilters);
@@ -274,13 +288,13 @@ export class CommonDashboardComponent implements OnInit {
  
     onViewCandidateClick(rrfID: MasterData, status:string) {
         this.onCancelClick();
-        sessionStorage.setItem('backToRRFDashboardList','/App/Dashboard');
+        sessionStorage.setItem('backToRRFDashboardList','/App');
         sessionStorage.setItem('StatusValue', status);
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID.Value + 'ID' + rrfID.Id]);
     }
      viewProfiles(CandidateID: MasterData) {
         this.onCancelClick();
-        sessionStorage.setItem('onProfilesReturnPath', '/App/Dashboard');
+        sessionStorage.setItem('onProfilesReturnPath', '/App');
         this._router.navigate(['/App/ProfileBank/MyProfiles/View/' + CandidateID.Value + 'ID' + CandidateID.Id]);
     }
      checkOwner(owner: string, isRRFAssigned: any) {
@@ -309,7 +323,7 @@ export class CommonDashboardComponent implements OnInit {
         return [day, month, year].join('-');
     }
     redirect(rrfID:any, rrfCode:any) {
-        sessionStorage.setItem('backToRRFDashboardList','/App/Dashboard');
+        sessionStorage.setItem('backToRRFDashboardList','/App');
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID + 'ID' + rrfCode]);
         this.onCancelClick();
     }

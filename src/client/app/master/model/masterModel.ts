@@ -61,7 +61,7 @@ export class Practice {
 }
 export class IEFFunctions {
   public FunctionName: string;
-  public DisplayRatings: string;
+  public DisplayRatings: boolean;
   public Id: string;
   public InterviewType: InterviewType = new InterviewType();
 }
