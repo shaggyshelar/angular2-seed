@@ -68,6 +68,9 @@
                         <div class="col-md-9 col-sm-9">
                             <div class="dataTables_length" id="sample_1_length">
                                 <div class="scroll">
+                                    <label class="pull-right" *ngIf="ShowTable">Search :
+                                        <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                    </label>
                                     <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                         <thead>
                                             <tr>
@@ -78,7 +81,7 @@
                                             </tr>
                                         </thead>
                                         <tbody *ngIf="ShowTable">
-                                            <tr *ngFor="let data1 of modeData">
+                                            <tr *ngFor="let data1 of modeData|InterviewModeMasterFilterPipe:searchString">
                                                 <!--<tr>-->
                                                 <td>{{data1.Value}}</td>
                                                 <!--<td>{{data1.Password}}</td>-->

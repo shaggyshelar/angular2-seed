@@ -5,12 +5,14 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MyMasterDataService, VisaMaster, Permission, RolesLookup, FeatureLookup} from '../index';
 import { ResponseFromAPI } from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { PermissionMasterFilterPipe } from  '../filter/PermissionMatrixFilter.pipe';
 
 @Component({
   moduleId: module.id,
   selector: 'permission-matrix',
   templateUrl: 'permissionMatrix.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes:[PermissionMasterFilterPipe]
 })
 
 

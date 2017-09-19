@@ -44,9 +44,6 @@
                                     <option *ngFor="let status of candidateStatus" [value]="status.Id">{{status.Value}}</option>
                                 </select>
                             </label>
-                            <!--<select autofocus class="form-control" required="" (change)='setSelectedRole($event.target.value)' tabindex="1">
-                          <option *ngFor="let type of Roles" [value]="type.Id">{{type.Value}}</option>
-                      </select>-->
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <div id="sample_1_filter" class="dataTables_filter pull-right">
@@ -56,56 +53,118 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div *ngIf="!NORECORDSFOUND">
                         <table class="table table-striped table-bordered table-hover table-checkable order-column dataTable
                                             no-footer " role="grid " aria-describedby="sample_1_info ">
                             <thead style="word-wrap: break-word; " class="thead">
                                 <tr>
                                     <div class="row">
-                                        <div class="col-md-1 col-sm-1"> <b>RRF Details</b> </div>
-                                        <div class="col-md-2 col-sm-2"> <b>Candidate Details</b> </div>
-                                        <div class="col-md-4 col-sm-4"> <b><center>Interview Details</center> </b></div>
-                                        <div class="col-md-2 col-sm-2"> <b>Interviewers</b></div>
-                                        <div class="col-md-2 col-sm-2"> <b>Interview Status </b></div>
-                                        <div class="col-md-1 col-sm-1"> <b>Action </b></div>
+                                        <div class="col-md-2 col-sm-2"> <b>RRF Code</b> </div>
+                                        <div class="col-md-3 col-sm-3" style="float: left;"> <b>Candidate Name</b> </div>
+                                        <div class="col-md-3 col-sm-3"> <b>Email</b></div>
+                                        <div class="col-md-2 col-sm-2"> <b>Contact No</b></div>
+                                        <div class="col-md-2 col-sm-2"> <b>Action </b></div>
                                     </div>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let interview of InterviewDetailsList.AllInterviews | AllScheduleInterviewPipe:searchString">
+                                <tr *ngFor="let interview of InterviewDetailsList.AllInterviews | AllScheduleInterviewPipe:searchString;let i = index">
                                     <div class="row" style=" padding: 8px;">
-                                        <div class="col-md-1 col-sm-1"> <a (click)='showRRFDetails(interview.RRFID)'> {{interview.RRFCode}}</a></div>
-                                        <div class="col-md-2 col-sm-2"> <b>Name :</b> {{interview.CandidateDetails.FullName}} <br/> <b>Email:</b>{{interview.CandidateDetails.Email}}
-                                            <br/> <b>Contact No:</b> {{interview.CandidateDetails.Contact}}
+                                        <div class="col-md-2 col-sm-2"> <a (click)='showRRFDetails(interview.RRFID)'> 
+                                            {{interview.RRFCode}}</a>
                                         </div>
-                                        <div class="col-md-4 col-sm-4">
-                                            <b>InterviewDate :</b> {{formatDate(interview.InterviewDate)}} <span style="float: right;"><b>Time:</b> {{interview.InterviewFromTime}} - {{interview.InterviewToTime}}</span>
-                                            <br/> <b>Round :</b> {{interview.Round.Value}}
-                                            <span style="float: right;"><b>Mode :</b> {{interview.InterviewMode.Value}} </span>
-                                            <br/> <b>Recruiter :</b> {{interview.Recruiter.Value}}
+                                        <div class="col-md-3 col-sm-3">
+                                            {{interview.CandidateDetails.FullName}}
+                                        </div>
+                                        <div class="col-md-3 col-sm-3">
+                                            {{interview.CandidateDetails.Email}}
                                         </div>
                                         <div class="col-md-2 col-sm-2">
                                             <div>
-                                                <div *ngFor="let interviewers of interview.InterviewerAvailability">
-                                                    {{interviewers.Interviewer.Value}}
-                                                </div>
+                                                {{interview.CandidateDetails.Contact}}
                                             </div>
                                         </div>
-                                        <div class="col-md-2 col-sm-2">
-                                            {{interview.Status}}
-                                        </div>
-                                        <div class="col-md-1 col-sm-1">
-                                            <!--<button> Show IEF</button>-->
-                                            <button class="btn btn-xs green dropdown-toggle" (click)="onIEFClick(interview,interview.InterviewID)" type="button" data-toggle="dropdown" aria-expanded="false"> 
-                                                {{interview.IEFButtonText?interview.IEFButtonText:"View IEF"}}
+                                        <div class="col-md-2 col-sm-2" style="float:left">
+                                            <button class="btn btn-xs green dropdown-toggle" (click)="current = i;onIEFClick(interview,interview.RRFID,interview.CandidateID,interview.DisplayCandidateInfo,interview.InterviewType,interview.InterviewID)" type="button" data-toggle="dropdown" aria-expanded="false"
+                                                [disabled]="interview.IsDisable"> 
+                                                <i class='glyphicon' [class.glyphicon-chevron-right] = "i != current" [class.glyphicon-chevron-down] = "i == current" >
+                                                    <!--{{interview.IEFButtonText?interview.IEFButtonText:"View IEF"}}-->IEF Details
+                                                </i> 
                                             </button>
                                         </div>
                                     </div>
-                                    <!--</div>-->
-                                    <div style="margin-top: -25px;">
-                                        <div>
-                                            <IEFGridRow [InterviewID]=interview.InterviewID *ngIf=interview.showIEF></IEFGridRow>
+                                    <div>
+                                        <div id="collapse1" class="panel-collapse collapse" [class.collapse]='current != i'>
+                                            <div *ngIf=interview.showIEF>
+                                                <div class="panel-body">
+                                                    <div class="portlet light bordered" *ngIf="candidateIEFHistory.length > 0">
+                                                        <div class="portlet-title">
+                                                            <div class="caption font-dark">
+                                                                <span class="caption-subject bold uppercase">IEF history </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="portlet-body form">
+                                                            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th> Interviewers </th>
+                                                                        <th> Interview </th>
+                                                                        <th> Date </th>
+                                                                        <th> Status </th>
+                                                                        <th> Feedback </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr class="gradeX odd " *ngFor="let _IEFHistory of candidateIEFHistory">
+                                                                        <td>
+                                                                            <p *ngFor="let _interviewers of _IEFHistory.InterviewerAvailability">
+                                                                                {{_interviewers.Interviewer.Value}}
+                                                                            </p>
+                                                                        </td>
+                                                                        <td>
+                                                                            <b>{{_IEFHistory.Round.Value}}</b>
+                                                                            <br> {{_IEFHistory.InterviewMode.Value}}
+                                                                        </td>
+                                                                        <td class="center" style="width: 80px;"> {{formatDate(_IEFHistory.InterviewDate)}} At {{getTime(_IEFHistory.InterviewDate)}} </td>
+                                                                        <td>
+                                                                            <span *ngIf="_IEFHistory.Status==='Rejected'" class="label label-sm label-danger"> {{_IEFHistory.Status}} </span>
+                                                                            <span *ngIf="_IEFHistory.Status==='Selected'" class="label label-sm label-success"> {{_IEFHistory.Status}} </span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <ul style="margin-left: -20px;">
+                                                                                    <li *ngFor="let _iefRecord of _IEFHistory.IEFTransactionDetails">
+                                                                                        <strong> {{_iefRecord.FunctionLabel}} : </strong>{{_iefRecord.FunctionValue}}
+                                                                                        <span *ngIf="_iefRecord.isRating" class="badge badge-danger">{{_iefRecord.Rating}}</span>
+                                                                                    </li>
+                                                                                </ul>
+
+                                                                                <br>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="portlet light bordered" *ngIf="candidateIEFHistory.length == 0">
+                                                        <div class="portlet-title">
+                                                            <div class="caption font-dark">
+                                                                <span class="caption-subject bold uppercase">Candidate recruitment history </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="portlet-body form">
+                                                            <b>No Candidate history found.</b>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
+
                                     </div>
                                 </tr>
                             </tbody>

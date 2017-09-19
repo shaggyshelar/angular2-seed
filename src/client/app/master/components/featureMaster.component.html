@@ -68,6 +68,9 @@
                         <div class="col-md-9 col-sm-9">
                             <div class="dataTables_length" id="sample_1_length">
                                 <div class="scroll">
+                                    <label class="pull-right" *ngIf="ShowTable">Search :
+                                        <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-small input-inline " placeholder="" aria-controls="sample_1">
+                                    </label>
                                     <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                         <thead>
                                             <tr>
@@ -77,8 +80,8 @@
                                                 <th> Actions </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr *ngFor="let data of Features">
+                                        <tbody *ngIf="ShowTable">
+                                            <tr *ngFor="let data of Features|FeatureMasterFilterPipe:searchString">
                                                 <!--<tr>-->
                                                 <td>{{data.Value}}</td>
                                                 <!--<td>{{data.Password}}</td>-->
@@ -89,13 +92,13 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                        <!--<tbody *ngIf="EmployersInformationList.length === 0">
+                                        <tbody *ngIf="!ShowTable">
                                             <tr>
                                                 <td colspan="6">
-                                                    <strong>No entries </strong>
+                                                    <strong>No entries for feature data found</strong>
                                                 </td>
                                             </tr>
-                                        </tbody>-->
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

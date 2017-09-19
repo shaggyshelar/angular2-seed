@@ -5,12 +5,15 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MyMasterDataService, FeatureMaster} from '../index';
 import { MasterData, ResponseFromAPI } from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { FeatureMasterFilterPipe } from  '../filter/FeaturesFilter.pipe';
+
 
 @Component({
   moduleId: module.id,
   selector: 'feature-master',
   templateUrl: 'featureMaster.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes:[FeatureMasterFilterPipe]
 })
 
 
@@ -20,6 +23,7 @@ export class FeatureMasterComponent implements OnActivate, AfterViewInit {
   Features: FeatureMaster[];
   selectedFeature: FeatureMaster = new FeatureMaster();
   action: string = 'Add';
+  ShowTable:boolean=false;
   constructor(private _MyMasterDataService: MyMasterDataService,
     private toastr: ToastsManager,
     private _router: Router) {
@@ -39,6 +43,9 @@ export class FeatureMasterComponent implements OnActivate, AfterViewInit {
       (results: any) => {
         if (results !== null && results.length > 0) {
           this.Features = results;
+          this.ShowTable=true;
+        } else {
+          this.ShowTable=false;
         }
       },
       error => {
@@ -123,7 +130,7 @@ export class FeatureMasterComponent implements OnActivate, AfterViewInit {
   }
   /**Edit existing Record */
   edit(featureData: FeatureMaster) {
-    console.log('ID - ' + featureData.Id);
+    //console.log('ID - ' + featureData.Id);
     this.selectedFeature = featureData;
     this.action = 'Update';
   }

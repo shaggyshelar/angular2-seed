@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div class="row">
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-3 col-sm-3">
                                     <div class="form-group ">
                                         <label>Role <span class="required"> * </span></label>
                                         <select autofocus class="form-control" required="" (change)='setSelectedRole($event.target.value)' tabindex="1">
@@ -53,7 +53,7 @@
                       </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-3 col-sm-3">
                                     <div class="form-group " *ngIf="showFeature">
                                         <label>Feature <span class="required"> * </span></label>
                                         <select class="form-control" required="" (change)='setSelectedFeature($event.target.value)' tabindex="2">
@@ -61,7 +61,7 @@
                           </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4">
+                                <div class="col-md-3 col-sm-3">
                                     <div style="margin-top: 25px; float: right;">
                                         <div class="form-group " *ngIf="!showFeature">
                                             <button type="submit" class="btn green" (click)='addNewFeature()'>Add New Feature</button>
@@ -74,6 +74,11 @@
                               <button type="submit" class="btn red" (click)='addNewFeature()'>Cancel</button>
                           </div> -->
                                     </div>
+                                </div>
+                                <div class="col-md-3 col-sm-3" style="margin-top: 28px; float: right;">
+                                    <label class="pull-right" *ngIf="ShowTable">Search : 
+                                            <input type="search" [(ngModel)]="searchString" class="form-control input-sm input-inline " placeholder="" aria-controls="sample_1" style="width: 186px;">
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +99,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let data of Permissions">
+                                        <tr *ngFor="let data of Permissions|PermissionMasterFilterPipe:searchString">
                                             <!--<tr>-->
                                             <td class="uppercase">{{data.Feature.Value}}</td>
                                             <!-- <td>{{data1.Feature}}</td> -->

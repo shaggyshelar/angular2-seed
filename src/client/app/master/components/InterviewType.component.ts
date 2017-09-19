@@ -5,11 +5,13 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import {   InterviewType, MyMasterDataService} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { InterviewTypeMasterFilterPipe } from  '../filter/InterviewTypeFilter.pipe';
 @Component({
   moduleId: module.id,
   selector: 'skype-master',
   templateUrl: 'InterviewType.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes:[InterviewTypeMasterFilterPipe]
 })
 
 

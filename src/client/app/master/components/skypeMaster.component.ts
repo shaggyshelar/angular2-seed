@@ -6,20 +6,23 @@ import {   SkypeMaster, MyMasterDataService} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
 import { AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { SkypeMasterFilterPipe } from  '../filter/SkypeMasterFilter.pipe';
 @Component({
     moduleId: module.id,
     selector: 'skype-master',
     templateUrl: 'skypeMaster.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    pipes: [SkypeMasterFilterPipe]
 })
 // @Directive({
 //     selector: '[autofocus]'
-// })
+// }) 
 
 export class SkypeMasterComponent implements OnActivate, AfterViewInit{
     errorMessage: string;
     skypeData: Array<SkypeMaster> = new Array<SkypeMaster>();
     data:SkypeMaster = new SkypeMaster();
+    ShowTable =false;
     // editData:SkypeMaster = new SkypeMaster();
     Action:string='Add';
     constructor(private _MyMasterDataService: MyMasterDataService,
@@ -41,7 +44,10 @@ export class SkypeMasterComponent implements OnActivate, AfterViewInit{
             (results: any) => {
                 if (results !== null && results.length > 0) {
                     this.skypeData = results;
+                    this.ShowTable = true;
                     this.ngAfterViewInit();
+                } else {
+                    this.ShowTable = false;
                 }
             },
             error => {

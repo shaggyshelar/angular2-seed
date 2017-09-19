@@ -5,11 +5,13 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { CityMaster, MyMasterDataService,State,CountryMaster,City} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { CityMasterFilterPipe } from  '../filter/CityFilter.pipe';
 @Component({
   moduleId: module.id,
   selector: 'city-master',
   templateUrl: 'cityMaster.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes:[CityMasterFilterPipe]
 })
 
 

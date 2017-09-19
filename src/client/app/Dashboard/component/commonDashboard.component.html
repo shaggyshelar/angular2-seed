@@ -37,7 +37,7 @@
                     <!--_____END COMMAN SECTION -->
 
                     <!--_____BEGIN COMMAN DASHBOARD SECTION -->
-                    <section [ifAuthorize]="['DB.GRAPH.2.READ']">
+                    <section [ifAuthorize]="['DB.GRAPH.2.READ']" style="margin-bottom: -50px;">
                         <div>
                             <div class="content-box">
                                 <!--*****************************************************-->
@@ -250,9 +250,9 @@
                     </section>
                     <!--_____END COMMAN DASHBOARD SECTION -->
                     <!--_____START MY SCHEDULE COMMAN DASHBOARD SECTION -->
-                    <!--<section>
+                    <section>
                         <div class="boxContainer">
-                            <div class="row" style="padding: 15px;max-height: 500px;min-height: 490px;">
+                            <div class="row" style="padding: 15px;max-height: 500px;min-height: 490px;margin-top: -30px;">
                                 <div class="dashboardBox">
                                     <div class="portlet light bordered" style="min-height: 400px; max-height: 400px;">
                                         <div class="portlet-title">
@@ -265,7 +265,7 @@
 
                                                 <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
                                                     <thead style="border-bottom:solid 1px rgb(231, 236, 241) !important;">
-                                                        <tr>
+                                                        <tr *ngIf='!NOScheduledRECORDSFOUND'>
                                                             <th> Name </th>
                                                             <th> Contact No. </th>
                                                             <th> RRF Code </th>
@@ -280,7 +280,7 @@
                                                             </td>
                                                             <td class="center"> {{_myInterview.CandidatePrimaryDetails.Contact}} </td>
                                                             <td>
-                                                                <a>{{_myInterview.RRFCODE}}</a>
+                                                                {{_myInterview.RRFCODE}}
                                                             </td>
                                                             <td>
                                                                 <div> {{_myInterview.InterviewMode.Value}}</div>
@@ -291,7 +291,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <span style="margin-top:5px;margin-left:15px" *ngIf='NOScheduledRECORDSFOUND'>No Records Found</span>
+                                                <span style="margin-top:5px;margin-left:15px" *ngIf='NOScheduledRECORDSFOUND'><b>You Do Not Have Any Scheduled Interview.</b></span>
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +299,7 @@
                             </div>
                         </div>
 
-                    </section>-->
+                    </section>
                     <!--_____END MY SCHEDULE COMMAN DASHBOARD SECTION -->
 
                     <!--Begin Count Details box-->
@@ -348,7 +348,7 @@
                                                             <b>Recruiter : </b>{{profile.Owner?profile.Owner.Value : "N/A"}}
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <b>Joining Date: </b>{{profile.ApproxDateOfJoinin?formatDate(profile.ApproxDateOfJoining):"N/A"}}
+                                                            <b>Joining Date: </b>{{profile.ApproxDateOfJoining?formatDate(profile.ApproxDateOfJoining):"N/A"}}
                                                         </div>
                                                         <div class="col-md-3">
                                                             <b>RRFCode: </b>{{profile.RRFDetails ? profile.RRFDetails.RRFCode : "N/A"}}

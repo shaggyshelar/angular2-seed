@@ -5,11 +5,13 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import {   Practice, MyMasterDataService} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { PracticeMasterFilterPipe } from  '../filter/PracticeMasterFilter.pipe';
 @Component({
   moduleId: module.id,
   selector: 'practice-master',
   templateUrl: 'PracticeMaster.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes:[PracticeMasterFilterPipe]
 })
 
 

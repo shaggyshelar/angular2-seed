@@ -109,6 +109,7 @@ export class MyProfilesListComponent implements OnActivate {
   regDateShow: boolean = false;
   currentDate: string;
   rejectReason: string;
+  count:any;
   IsRejectReason: boolean = false;
   CurrentUser: MasterData = new MasterData();
   public noticePeriod: any = [{ 'Id': 15, 'Value': "15" }, { 'Id': 30, 'Value': "30" }, { 'Id': 45, 'Value': "45" }, { 'Id': 60, 'Value': "60" }, { 'Id': 90, 'Value': "90" }];
@@ -289,6 +290,19 @@ export class MyProfilesListComponent implements OnActivate {
           this.NORECORDSFOUND = true;
           this.NORECORDS = false;
           this.selectedRowCount = null;
+        }
+        this.getCount();
+      },
+      error => this.errorMessage = <any>error);
+  }
+  getCount() {
+    this._myProfilesService.getCount()
+      .subscribe(
+      results => {
+        if (results !== null && results !== undefined && results > 0) {
+          this.count = <any>results;
+        } else {
+          this.count = 0;
         }
       },
       error => this.errorMessage = <any>error);

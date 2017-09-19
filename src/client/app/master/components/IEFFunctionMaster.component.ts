@@ -5,11 +5,13 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { InterviewType, IEFFunctions, MyMasterDataService} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { IEFFunctionsMasterFilterPipe } from  '../filter/IEFFuntionsFilter.pipe';
 @Component({
   moduleId: module.id,
   selector: 'IEFFunctionMaster-master',
   templateUrl: 'IEFFunctionMaster.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes:[IEFFunctionsMasterFilterPipe]
 })
 
 

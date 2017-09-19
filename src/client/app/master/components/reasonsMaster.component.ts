@@ -5,12 +5,13 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { MasterData, ResponseFromAPI } from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
 import { MyMasterDataService, ReasonsMaster } from '../index';
-
+import { ReasonsMasterMasterFilterPipe } from  '../filter/ReasonsFilter.pipe';
 @Component({
   moduleId: module.id,
   selector: 'reasons-master',
   templateUrl: 'reasonsMaster.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes: [ReasonsMasterMasterFilterPipe]
 })
 
 export class ReasonsMasterComponent implements OnActivate, AfterViewInit {
@@ -18,6 +19,7 @@ export class ReasonsMasterComponent implements OnActivate, AfterViewInit {
   reasonsData: ReasonsMaster[];
   selectedReason: ReasonsMaster = new ReasonsMaster();
   action: string = 'Add';
+  ShowTable:boolean=false;
   constructor(private _MyMasterDataService: MyMasterDataService,
     private toastr: ToastsManager,
     private _router: Router) {
@@ -36,6 +38,9 @@ export class ReasonsMasterComponent implements OnActivate, AfterViewInit {
       (results: any) => {
         if (results !== null && results.length > 0) {
           this.reasonsData = results;
+          this.ShowTable=true;
+        } else {
+          this.ShowTable=false;
         }
       },
       error => {

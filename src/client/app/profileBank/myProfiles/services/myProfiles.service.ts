@@ -54,6 +54,14 @@ export class MyProfilesService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
+    getCount() {
+        let url = Config.GetURL('/api/Profiles/Count');
+        this._spinnerService.show();
+        return this.authHttp.get(url)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
       getLinkUpSkills() {
         let url = Config.GetURL('/api/Masters/AddUpdateLinkupSkills');
         this._spinnerService.show();

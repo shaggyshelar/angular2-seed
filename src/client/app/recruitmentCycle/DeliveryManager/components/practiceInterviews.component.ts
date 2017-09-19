@@ -11,7 +11,9 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { AllScheduleInterviewPipe } from '../../recruitersTab/filter/scheduleInterviews.pipe';
 import { MasterData,CandidateStatus } from '../../../shared/model/common.model';
 import { MastersService } from '../../../shared/index';
+import { Interview } from '../../shared/model/interview';
 import { MyScheduleInterview } from '../../../recruitmentCycle/interviewersTab/model/myScheduleInterview';
+import { iefModel} from '../../shared/model/ief';
 import { IEFGridRowComponent } from '../../../recruitmentCycle/shared/component/IEFGridRow/IEFGridRow.component';
 @Component({
     moduleId: module.id,
@@ -32,6 +34,7 @@ export class PracticeInterviewsComponent implements OnActivate {
     hideIEFText: string = 'Hide IEF';
     showIEF:boolean=false;
     candidateStatus: CandidateStatus[];
+    candidateIEFHistory: Array<Interview> = new Array<Interview>();
     NORECORDSFOUND: boolean = false;
     mode: string;
     errorMessage: string;
@@ -177,12 +180,26 @@ export class PracticeInterviewsComponent implements OnActivate {
     showListOfRRF() {
         this.isListVisible = true;
     }
-     onIEFClick(myScheduleInterview: PracticeInterviewList) {
-        myScheduleInterview.showIEF = !myScheduleInterview.showIEF;
-        this.setIEFButtonText(myScheduleInterview);
+     onIEFClick(myScheduleInterview: PracticeInterviewList,
+        _rrfId: MasterData,
+        _candidateId: MasterData,
+        _displayCandidateInfo: boolean,
+        _interviewType: MasterData,
+        _interviewId: MasterData,
+        _interviewStatus: string) {
+                var _iefParameters: iefModel = new iefModel();
+                _iefParameters.RRFID = _rrfId;
+                _iefParameters.CandidateID = _candidateId;
+                _iefParameters.DisplayCandidateInfo = _displayCandidateInfo;
+                _iefParameters.InterviewType = _interviewType;
+                _iefParameters.InterviewID = _interviewId;
+                this.getIEFHistory(_iefParameters);
+                myScheduleInterview.showIEF = !myScheduleInterview.showIEF;
+                this.setIEFButtonText(myScheduleInterview);
     }
      setIEFButtonText(myScheduleInterview: PracticeInterviewList) {
         if (myScheduleInterview.showIEF) {
+            myScheduleInterview.IsDisable=false;
             myScheduleInterview.IEFButtonText = this.hideIEFText;
         } else {
             myScheduleInterview.IEFButtonText = this.viewIEFText;
@@ -191,6 +208,43 @@ export class PracticeInterviewsComponent implements OnActivate {
     redirect(rrfID: any, rrfCode: any) {
         this._router.navigate(['/App/RRF/RRFDashboard/Candidates/' + rrfID + 'ID' + rrfCode]);
     }
+//     getIEF(_rrfId: MasterData,
+//         _candidateId: MasterData,
+//         _displayCandidateInfo: boolean,
+//         _interviewType: MasterData,
+//         _interviewId: MasterData,
+//         _interviewStatus: string){
+// var _iefParameters: iefModel = new iefModel();
+//         _iefParameters.RRFID = _rrfId;
+//         _iefParameters.CandidateID = _candidateId;
+//         _iefParameters.DisplayCandidateInfo = _displayCandidateInfo;
+//         _iefParameters.InterviewType = _interviewType;
+//         _iefParameters.InterviewID = _interviewId;
+//         this.getIEFHistory(_iefParameters);
+//     }
+    getIEFHistory(objIEFid: iefModel) {
+    this._DeliveryManagerScheduleInterviewService.getIEFHistory(objIEFid)
+      .subscribe(
+      (results: any) => {
+        this.candidateIEFHistory = results;
+      },
+      error => {
+        this.errorMessage = <any>error;
+        this.toastr.error(<any>error);
+      });
+  }
+   getTime(time: string) {
+    //time:string = interviewTime;
+    var intTime: Array<string> = new Array<string>();
+    intTime = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+    // If time format correct
+    intTime = intTime.slice(1);  // Remove full string match value
+    intTime[5] = +intTime[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+    var adjustHr = +intTime[0] % 12 || 12; // Adjust hours
+    intTime[0] = adjustHr.toString();
+
+    return intTime.join('');
+  }
 }
 
 

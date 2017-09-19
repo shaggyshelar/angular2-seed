@@ -24,5 +24,6 @@ export class GrdOperations {
 
 export class PracticeInterviewList extends InterviewsList{
   public showIEF: boolean = false;
+  public IsDisable: boolean = false;
   public IEFButtonText : string = 'View IEF';
 }

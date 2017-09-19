@@ -5,14 +5,14 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { CountryMaster, StateMaster, MyMasterDataService,State} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { StateMasterFilterPipe } from  '../filter/StateMasterFilter.pipe';
 @Component({
   moduleId: module.id,
   selector: 'statemaster-master',
   templateUrl: 'StateMaster.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes:[StateMasterFilterPipe]
 })
-
-
 
 export class StateMasterComponent implements OnActivate, AfterViewInit {
   errorMessage: string;

@@ -5,6 +5,7 @@ import { AuthHttp } from '../../../shared/services/authHttp.service';
 import { Config } from '../../../shared/config/config';
 import { SpinnerService } from '../../../shared/components/spinner/spinner';
 import { GrdOptions } from  '../../../shared/model/index';
+import { iefModel} from '../../shared/model/ief';
 @Injectable()
 
 export class DeliveryManagerScheduleInterviewService {
@@ -46,7 +47,14 @@ export class DeliveryManagerScheduleInterviewService {
             .catch(this.handleError)
             .finally(() => this._spinnerService.hide());
     }
-
+  getIEFHistory(_interviewID: iefModel) {
+        let url = Config.GetURL('/api/RecruitmentCycle/ViewCandidateAllInterviewDetails');
+        this._spinnerService.show();
+        return this.authHttp.post(url, _interviewID)
+            .map(this.extractData)
+            .catch(this.handleError)
+            .finally(() => this._spinnerService.hide());
+    }
     private extractData(res: Response) {
         if (res.status < 200 || res.status >= 300) {
             throw new Error('Bad response status: ' + res.status);

@@ -2,15 +2,17 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { OnActivate, ROUTER_DIRECTIVES, Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
-import { MyMasterDataService, RolesMaster, } from '../index';
+import { MyMasterDataService, RolesMaster } from '../index';
 import { MasterData, ResponseFromAPI } from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { RoleMasterMasterFilterPipe } from  '../filter/RoleFilter.pipe';
 
 @Component({
   moduleId: module.id,
   selector: 'role-master',
   templateUrl: 'roleMaster.component.html',
-  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+  directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+  pipes : [RoleMasterMasterFilterPipe]
 })
 
 
@@ -20,6 +22,7 @@ export class RoleMasterComponent implements OnActivate, AfterViewInit {
   Roles: RolesMaster[];
   selectedRole: RolesMaster = new RolesMaster();
   action: string = 'Add';
+  ShowTable = false;
   constructor(private _MyMasterDataService: MyMasterDataService,
     private toastr: ToastsManager,
     private _router: Router) {
@@ -39,7 +42,10 @@ export class RoleMasterComponent implements OnActivate, AfterViewInit {
       (results: any) => {
         if (results !== null && results.length > 0) {
           this.Roles = results;
+          this.ShowTable = true;
           this.Roles.sort(function(a:any, b:any){return a.SequenceNo-b.SequenceNo;});
+        } else {
+          this.ShowTable = false;
         }
       },
       error => {

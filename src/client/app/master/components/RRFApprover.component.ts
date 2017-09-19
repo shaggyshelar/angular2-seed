@@ -5,12 +5,14 @@ import { TOOLTIP_DIRECTIVES } from 'ng2-bootstrap';
 import { Approver,RRFApprover,Practice,MyMasterDataService} from '../index';
 import { ResponseFromAPI} from '../../shared/model/index';
 import { APIResult } from '../../shared/constantValue/index';
+import { RRFApproverMasterFilterPipe } from  '../filter/RRFApproverFilter.pipe';
 
 @Component({
     moduleId: module.id,
     selector: 'RRFApprover-master',
     templateUrl: 'RRFApprover.component.html',
-    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, TOOLTIP_DIRECTIVES],
+    pipes: [RRFApproverMasterFilterPipe]
 })
 
 export class RRFApproverMasterComponent implements OnActivate, AfterViewInit {
