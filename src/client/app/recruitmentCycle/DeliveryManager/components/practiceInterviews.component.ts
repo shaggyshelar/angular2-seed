@@ -37,6 +37,7 @@ export class PracticeInterviewsComponent implements OnActivate {
     candidateIEFHistory: Array<Interview> = new Array<Interview>();
     NORECORDSFOUND: boolean = false;
     mode: string;
+    current:any;
     errorMessage: string;
     isListVisible: boolean = true;
     isChartVisible: boolean = false;
@@ -202,6 +203,7 @@ export class PracticeInterviewsComponent implements OnActivate {
             myScheduleInterview.IsDisable=false;
             myScheduleInterview.IEFButtonText = this.hideIEFText;
         } else {
+            this.current=-1;
             myScheduleInterview.IEFButtonText = this.viewIEFText;
         }
     }

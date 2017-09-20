@@ -59,7 +59,9 @@ export class RecruitmentInterviewerCalenderComponent implements OnActivate, Afte
         if (this.returnPath !== undefined)
             this._router.navigate([this.returnPath]);
     }
-
+countChange(event:any) {
+    this._myCalendarDetails = event;
+  }
     getResources() {
         this._interviewService.GetResources()
             .subscribe(

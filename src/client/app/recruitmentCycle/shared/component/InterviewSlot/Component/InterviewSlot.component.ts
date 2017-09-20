@@ -1,30 +1,35 @@
-import {Component, AfterViewInit, OnChanges } from '@angular/core';
+import {Component, AfterViewInit, OnChanges,Input,Output,EventEmitter, ViewChild } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router, OnActivate } from '@angular/router';
 import {CalenderSlot, CalenderDetails} from '../Model/interviewSlot';
+import { CalendarDetails} from '../../../../scheduleInterview/model/calendarDetails';
 import {InterviewSlotService } from '../Service/InterviewSlot.service';
 import { ResponseFromAPI} from '../../../../../shared/model/common.model';
 import { APIResult} from  '../../../../../shared/constantValue/index';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { InterviewersCalendarService} from '../../../../../recruitmentCycle/interviewersTab/services/interviewers.calendar.service';
 
 @Component({
     moduleId: module.id,
     selector: 'interview-slot',
     templateUrl: 'Interviewslot.component.html',
     directives: [ROUTER_DIRECTIVES],
-    providers: [ToastsManager, InterviewSlotService]
+    providers: [ToastsManager, InterviewSlotService,InterviewersCalendarService]
 })
 
 export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChanges {
     // @Input() RRFID: MasterData = new MasterData();
     // @Input() RRFCode: string;
-
+    @Input() myCalendarDetails: CalendarDetails = new CalendarDetails();
+    @Output() change: EventEmitter<CalendarDetails> = new EventEmitter<CalendarDetails>();
     meta: CalenderSlot[] = [];
     errorMessage: string = '';
     mindate: Date;
     isDisable : boolean=true;
     isSaved : boolean = true;
+    _myCalendarDetails: CalendarDetails = new CalendarDetails();
     constructor(private _router: Router,
         private _interviewSlotService: InterviewSlotService,
+        private _interviewService: InterviewersCalendarService,
         public toastr: ToastsManager) {
         this.setMinDateToCalender();
         this.getRRFSlot();
@@ -55,10 +60,8 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
                      this.meta[index].InterviewerCalendarID.Id = 0;
                      this.meta[index].InterviewerCalendarID.Value = '';
                  }
-                    
                 newAddedCalenderSlot.push(this.meta[index]);
          }
-          // }
         }
         if (newAddedCalenderSlot.length > 0) {
             this._interviewSlotService.SaveCalenderSlot(newAddedCalenderSlot)
@@ -67,6 +70,9 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
                     if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                         this.isSaved = true;
                         this.getRRFSlot();
+                       // this.myEvent.emit(null);
+                        //this.myEvent.RecruitmentInterviewerCalenderComponent.getMyInterviews();
+                       this.getMyInterviews();
                         this.toastr.success((<ResponseFromAPI>results).Message);
                     } else {
                         this.isSaved = false;
@@ -75,9 +81,20 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
                 },
                 error => this.errorMessage = <any>error);
         }
-        
     }
-
+  getMyInterviews() {
+        /**Get Interviewers availability and booked slot information to display in calendar */
+        this._interviewService.getMyAvailability()
+            .subscribe(
+            (results: any) => {
+                this._myCalendarDetails = results;
+                this.change.emit(this._myCalendarDetails);
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.toastr.error(<any>error);
+            });
+    }
     getRRFSlot() {
         this._interviewSlotService.getSlotForRRF()
             .subscribe(
@@ -107,10 +124,8 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
         calenderSlot.CalendarDetails.push(calendarDtls);
         this.meta.push(calenderSlot);
     }
-    updateSlot(){
-       
+    updateSlot() {
        this.isDisable=false;
-       
     }
     removeSlot(slotTobeRemove: number) {
         for (var index = 0; index < this.meta.length; index++) {
@@ -131,6 +146,7 @@ export class InterviewSlotComponent implements OnActivate, AfterViewInit, OnChan
             results => {
                 if ((<ResponseFromAPI>results).StatusCode === APIResult.Success) {
                     this.getRRFSlot();
+                    this.getMyInterviews();
                     this.toastr.success((<ResponseFromAPI>results).Message);
                 } else {
                     this.toastr.error((<ResponseFromAPI>results).Message);

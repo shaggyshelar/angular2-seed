@@ -89,8 +89,9 @@
                                         <div class="col-md-2 col-sm-2" style="float:left">
                                             <button class="btn btn-xs green dropdown-toggle" (click)="current = i;onIEFClick(interview,interview.RRFID,interview.CandidateID,interview.DisplayCandidateInfo,interview.InterviewType,interview.InterviewID)" type="button" data-toggle="dropdown" aria-expanded="false"
                                                 [disabled]="interview.IsDisable"> 
-                                                <i class='glyphicon' [class.glyphicon-chevron-right] = "i != current" [class.glyphicon-chevron-down] = "i == current" >
-                                                    <!--{{interview.IEFButtonText?interview.IEFButtonText:"View IEF"}}-->IEF Details
+                                                <i class='glyphicon' [class.glyphicon-chevron-right] = "i != current" [class.glyphicon-chevron-down] = "i == current">
+                                                    <!--{{interview.IEFButtonText?interview.IEFButtonText:"View IEF"}}-->
+                                                    IEF Details
                                                 </i> 
                                             </button>
                                         </div>

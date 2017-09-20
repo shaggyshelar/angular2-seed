@@ -21,7 +21,7 @@
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="tools">
-                            <div class="canvas"><span class="btn btn-sm green">      </span> Available Slots <span class="btn btn-sm red">      </span>                                Scheduled Interview</div>
+                            <div class="canvas"><span class="btn btn-sm green">      </span> Available Slots <span class="btn btn-sm red">      </span> Scheduled Interview</div>
                             <br>
                             <button class="btn btn-sm green table-group-action-submit pull-right" (click)="addNewSlot()">{{AddNewSlotText}}</button>
                         </div>
@@ -43,15 +43,14 @@
                     </div>
 
                     <!--<interview-slot [RRFID]="RRFIdTOShowSlot" [RRFCode]="RRFCode" *ngIf="showSlotForRRF" (HideSlot)="hideSlot($event)"></interview-slot>-->
-                    <interview-slot *ngIf="showSlotForRRF" (HideSlot)="hideSlot($event)"></interview-slot>
+                    <interview-slot *ngIf="showSlotForRRF" [count]="_myCalendarDetails" (change)="countChange($event)" (HideSlot)="hideSlot($event)"></interview-slot>
 
                     <div class="portlet-body">
                         <div class="table-container">
 
                             <!--My Calendar Content-->
-                            <full-calendar draggable="false" [resources]="_myCalendarDetails.Resources" [events]="_myCalendarDetails.Events" [header]="header"
-                                [defaultDate]="currentDate" [eventLimit]="4" [editable]="true" (onEventClick)="handleEventClick($event)"
-                                [selectable]="true" [selectHelper]="true" (onEventRender)="showDetails($event)" (onSelect)="handleDayClick($event)"></full-calendar>
+                            <full-calendar draggable="false" [resources]="_myCalendarDetails.Resources" [events]="_myCalendarDetails.Events" [header]="header" [defaultDate]="currentDate" [eventLimit]="4" [editable]="true" (onEventClick)="handleEventClick($event)" [selectable]="true"
+                                [selectHelper]="true" (onEventRender)="showDetails($event)" (onSelect)="handleDayClick($event)"></full-calendar>
                             <!--/My Calendar Content-->
                         </div>
                     </div>
