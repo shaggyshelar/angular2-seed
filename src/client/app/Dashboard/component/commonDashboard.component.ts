@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { ROUTER_DIRECTIVES, Router} from '@angular/router';
-import { RecruitersDashboardService, DetailsRRF, DashboardFilters, CanidateInformation, InterviewInformation } from '../index';
+import { RecruitersDashboardService, DetailsRRF, DashboardFilters, CanidateInformation, InterviewInformation,
+    DashboardReport } from '../index';
 import { IfAuthorizeDirective } from '../../shared/directives/ifAuthorize.directive';
 import { MasterData } from '../../shared/model/common.model';
 import { RRFGridRowComponent} from '../../RRF/shared/components/RRFGridRow/RRFGridRow.component';
@@ -10,6 +11,7 @@ import { CommonService } from '../../shared/index';
 import { InterviewsList} from '../../recruitmentCycle/recruiterstab/model/interviewDetails';
 import { Interview} from '../../recruitmentCycle/shared/model/interview';
 import { InterviewMode } from  '../../shared/constantValue/index';
+import {DashboardReportComponent} from '../../DashboardReport/GenerateReport.component';
 // import { InterviewApprovalComponent} from '../../recruitmentCycle/shared/index';
 // import {
 //   GraphComponent,
@@ -39,13 +41,17 @@ import { InterviewMode } from  '../../shared/constantValue/index';
   directives: [ROUTER_DIRECTIVES,
     IfAuthorizeDirective,
     RRFGridRowComponent,
-    DetailProfileComponent
+    DetailProfileComponent,
+    DashboardReportComponent
   ],
   styleUrls: ['./commonDashboard.component.css'],
   providers: [RecruitersDashboardService]
 })
 
 export class CommonDashboardComponent implements OnInit {
+    ReportData:DashboardReport[];
+    countReportData:number;
+    ShowReport:boolean=false;
     InterviewDetailsList: InterviewsList = new InterviewsList();
   errorMessage: string;
   //grdOptions: GrdOptions = new GrdOptions();
@@ -84,6 +90,42 @@ export class CommonDashboardComponent implements OnInit {
     this.GetOfferedCandidate(this._dashboardFilters);
     this.GetAllJoinings(this._dashboardFilters);
     this.getMyInterviews();
+  }
+  GetReportData() {
+      
+    this.ReportData = [
+      {
+        RRFCode:'R1',
+        Dept:'EBS',
+       // Dept:'EBS',
+        Interviewer:'Diksha Sisodia',
+        Recruiter:'Diksha Sisodia',
+        year:'2017'
+      }
+      , {
+        RRFCode:'R2',
+        Dept:'ECS',
+        Interviewer:'Shailesh Sangekar',
+        Recruiter:'Diksha Sisodia',
+        year:'2017'
+      }
+      , {
+        RRFCode:'R3',
+        Dept:'ECS',
+        Interviewer:'Shirikant Mane',
+        Recruiter:'Richa Kararia',
+        year:'2017'
+      }
+      , {
+       RRFCode:'R4',
+        Dept:'ESS',
+        Interviewer:'Richa Kararia',
+        Recruiter:'Richa Kararia',
+        year:'2017'
+      }
+    ];
+    this.countReportData=this.ReportData.length;
+    this.ShowReport=true;
   }
    onSelectStatus(status:any) {
       this._dashboardFilters.AllorMy=status;

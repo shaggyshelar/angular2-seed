@@ -48,6 +48,9 @@
                     <li><a href="#menu3">Tab 3</a></li> -->
                                     </ul>
 
+                                    <button (click)="GetReportData()">Report
+                                        </button>
+
                                     <!-- Dropdowns -->
                                     <div class="dropdownBox">
                                         <select class="form-control" [(ngModel)]="_dashboardFilters.AllorMy" (change)='onSelectStatus($event.target.value)'>
@@ -248,6 +251,21 @@
                             </div>
                         </div>
                     </section>
+
+                    <!-- BEGIN Report HERe-->
+                    <section *ngIf='ShowReport'>
+                        <div class="boxContainer">
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption font-dark">
+                                        <span class="caption-subject bold uppercase"><i class="fa fa-calendar-check-o"></i> Generated Report</span>
+                                    </div>
+                                </div>
+                                <report-component [recordNo]="countReportData" [DataCollection]="ReportData"></report-component>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END Report Here-->
                     <!--_____END COMMAN DASHBOARD SECTION -->
                     <!--_____START MY SCHEDULE COMMAN DASHBOARD SECTION -->
                     <section>
@@ -413,7 +431,6 @@
                                                         </td>-->
                                                     </tr>
                                                 </tbody>
-
                                             </table>
 
 
@@ -431,6 +448,9 @@
                         </div>
                     </div>
                     <!--END Count Details Box-->
+
+
+
 
                 </div>
             </div>
