@@ -47,10 +47,6 @@
                     <li><a href="#menu2">Tab 2</a></li>
                     <li><a href="#menu3">Tab 3</a></li> -->
                                     </ul>
-
-                                    <button (click)="GetReportData()">Report
-                                        </button>
-
                                     <!-- Dropdowns -->
                                     <div class="dropdownBox">
                                         <select class="form-control" [(ngModel)]="_dashboardFilters.AllorMy" (change)='onSelectStatus($event.target.value)'>
@@ -91,7 +87,7 @@
                                                         <li *ngFor="let _rrf of _detailsRRF"><i class="icon-graduation check" [ngStyle]="setStyles(_rrf.Practice.Value)" aria-hidden="true"></i>
                                                             <b>{{_rrf.RRFCODE}}</b> :: {{_rrf.Practice.Value}} :: <b>{{_rrf.Designation.Value}}</b> :: {{_rrf.Technology.Value}}
                                                         </li>
-                                                        <li *ngIf="NoRecordsFound === true">
+                                                        <li *ngIf="NoRecordsFound === true || _detailsRRF.length === 0">
                                                             <b>No Records Found</b>
                                                         </li>
                                                         <!-- <li><i class="fa fa-check-circle-o check" aria-hidden="true"></i> elit, sed do eiusmod tempor incididunt 
@@ -253,7 +249,7 @@
                     </section>
 
                     <!-- BEGIN Report HERe-->
-                    <section *ngIf='ShowReport'>
+                    <!--<section *ngIf='ShowReport'>
                         <div class="boxContainer">
                             <div class="portlet light bordered">
                                 <div class="portlet-title">
@@ -264,7 +260,7 @@
                                 <report-component [recordNo]="countReportData" [DataCollection]="ReportData"></report-component>
                             </div>
                         </div>
-                    </section>
+                    </section>-->
                     <!-- END Report Here-->
                     <!--_____END COMMAN DASHBOARD SECTION -->
                     <!--_____START MY SCHEDULE COMMAN DASHBOARD SECTION -->

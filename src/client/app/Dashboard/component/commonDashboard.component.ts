@@ -90,9 +90,9 @@ export class CommonDashboardComponent implements OnInit {
     this.GetOfferedCandidate(this._dashboardFilters);
     this.GetAllJoinings(this._dashboardFilters);
     this.getMyInterviews();
+    this.GetReportData();
   }
   GetReportData() {
-      
     this.ReportData = [
       {
         RRFCode:'R1',

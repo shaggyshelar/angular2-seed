@@ -3,16 +3,23 @@
         <div class="form-group">
             <div class="dropdownBox" style="margin-top:-50px;margin-right: 15px;">
                 <span style="margin-right: 20px;">
-                    <a href="#" id="test1" (click)="demoFromHTML();">download to Pdf</a>
+                    <button (click)="convertToPDF();" style="width: 80px;border-radius: 3px!important;height: 31px;" class="btn btn-icon-only green" data-original-title="" title="Download to PDF" tooltip="Download to PDF" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                        <i class="fa fa-download" style="margin-left:0px;margin-top: 5px;"></i>
+                        <span style="margin-left:20px;">To Pdf</span>
+                </button>
                 </span>
-                <a href="#" id="test" (click)="fnExcelReport();">download</a>
-                <select class="form-control">
-        		    <option *ngFor="let practice of practiceData" [value]="practice.Value">{{practice.Value}}</option>
-		 	    </select>
+                <a href="#" id="test" class="btn btn-icon-only green" style="width: 90px;border-radius: 3px!important;height: 31px;" (click)="fnExcelReport();" title="Download to Excel" tooltip="Download to Excel" tooltipPlacement="top" tooltipTrigger="mouseenter" tooltipEnable="true">
+                    <i class="fa fa-download" style="margin-left:0px;margin-top: 5px;"></i>
+                    <span style="margin-left:20px;">To Excel</span>
+                </a>
+                <select class="form-control" (change)='onSelectPractice($event.target.value)'>
+                <option *ngFor="let practice of practiceData" [value]="practice.Value">{{practice.Value}}</option>
+                </select>
                 <i class="fa fa-angle-down" aria-hidden="true"></i>
-                <select class="form-control">
+                <select class="form-control" (change)='onSelectYear($event.target.value)'>
         		    <option *ngFor="let yearPeriod of Year" [value]="yearPeriod.Value">{{yearPeriod.Value}}</option>
 		 	    </select>
+                <i class="fa fa-angle-down" aria-hidden="true"></i>
             </div>
             <div style="margin-top: 15px;margin-left: 15px;margin-right: 15px;">
                 <div class="scrollTable">
@@ -20,30 +27,20 @@
                         <table id="myTable" class="table table-striped table-bordered table-hover table-checkable order-column dataTable no-footer " role="grid " aria-describedby="sample_1_info ">
                             <thead style="word-wrap: break-word; " class="thead">
                                 <tr>
-                                    <div class="row">
-                                        <div class="col-md-2 col-sm-2"><b>RRF Code</b></div>
-                                        <div class="col-md-2 col-sm-2"><b>Department</b></div>
-                                        <div class="col-md-3 col-sm-3"><b>Interviewer </b></div>
-                                        <div class="col-md-3 col-sm-3"><b>Recruiter</b></div>
-                                        <div class="col-md-2 col-sm-2"><b>Year</b></div>
-                                    </div>
+                                    <td><b>RRF Code</b></td>
+                                    <td><b>Department</b></td>
+                                    <td><b>Interviewer </b></td>
+                                    <td><b>Recruiter</b></td>
+                                    <td><b>Year</b></td>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--<tr *ngFor="let data of DataCollection">-->
-                                <tr>
-                                    <div class="row" style="font-size:12px; padding: 12px;">
-                                        <!--<div class="col-md-2 col-sm-2">dat</div>
-                                        <div class="col-md-2 col-sm-2">data</div>
-                                        <div class="col-md-3 col-sm-3">data</div>
-                                        <div class="col-md-3 col-sm-3">data.Recruiter</div>
-                                        <div class="col-md-2 col-sm-2">data</div>-->
-                                        <div class="col-md-2 col-sm-2">{{data.RRFCode}}</div>
-                                        <div class="col-md-2 col-sm-2">{{data.Dept}}</div>
-                                        <div class="col-md-3 col-sm-3">{{data.Interviewer}}</div>
-                                        <div class="col-md-3 col-sm-3">{{data.Recruiter}}</div>
-                                        <div class="col-md-2 col-sm-2">{{data.year}}</div>
-                                    </div>
+                                <tr *ngFor="let data of DataCollection">
+                                    <td>{{data.RRFCode}}</td>
+                                    <td>{{data.Dept}}</td>
+                                    <td>{{data.Interviewer}}</td>
+                                    <td>{{data.Recruiter}}</td>
+                                    <td>{{data.year}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -53,3 +50,6 @@
         </div>
     </div>
 </form>
+
+<!--<ng-table [rows]="DataCollection">
+</ng-table>-->
