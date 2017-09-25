@@ -406,8 +406,8 @@
                                                 <tbody>
                                                     <tr *ngFor="let interview of InterviewInformation.AllInterviews">
                                                         <td> <a (click)='redirect(interview.RRFID.Value,interview.RRFCode)'> {{interview.RRFCode}}</a></td>
-                                                        <td> Name : {{interview.CandidateDetails.FullName}} <br/> Email:{{interview.CandidateDetails.Email}}
-                                                            <br/> Contact No : {{interview.CandidateDetails.Contact}}
+                                                        <td> <i class="fa fa-user" style="color: #32c5d2;"></i><b> {{interview.CandidateDetails.FullName}}</b> <br/><i class="fa fa-envelope-o" style="color: rgb(94, 204, 47);;"></i> {{interview.CandidateDetails.Email}}
+                                                            <br/> <i class="fa fa-phone" style="color: #e7505a;"></i> {{interview.CandidateDetails.Contact}}
                                                         </td>
                                                         <td>
                                                             InterviewDate : {{formatDate(interview.InterviewDate)}} <span style="float: right;">Time: {{interview.InterviewFromTime}} - {{interview.InterviewToTime}}</span>
